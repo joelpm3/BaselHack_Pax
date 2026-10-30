@@ -1,1 +1,221 @@
-{}
+{
+  "metaTitle": "Vorsorge-Cockpit",
+  "title": "Ihr Vorsorge-Cockpit",
+  "greeting": "Guten Tag, {name}",
+  "greetingAnonymous": "Guten Tag",
+  "intro": "Alle Ihre Versicherungen und Vorsorgeunterlagen an einem Ort, bei Pax und anderswo.",
+  "header": {
+    "home": "Pax Vorsorge-Berater, Startseite",
+    "navigation": "Hauptnavigation",
+    "language": "Sprache",
+    "toAdvisor": "Zur Beratung"
+  },
+  "empty": {
+    "title": "Ihr Cockpit ist noch leer",
+    "body": "Starten Sie eine Beratung oder laden Sie Ihre Unterlagen hoch. Danach sehen Sie hier Ihre ganze Vorsorge auf einen Blick.",
+    "start": "Beratung starten"
+  },
+  "pillars": {
+    "pillar1": "1. Säule",
+    "pillar1Detail": "AHV und IV",
+    "pillar2": "2. Säule",
+    "pillar2Detail": "Pensionskasse",
+    "pillar3": "3. Säule",
+    "pillar3Detail": "Private Vorsorge",
+    "other": "Weitere",
+    "otherDetail": "Sach und Gesundheit",
+    "automatic": "Staatlich versichert",
+    "contracts": "{count, plural, =0 {Noch keine Verträge} one {# Vertrag} other {# Verträge}}",
+    "premium": "{amount} pro Jahr",
+    "legendPax": "Vertrag bei Pax",
+    "legendExternal": "Vertrag bei einem anderen Versicherer",
+    "legendState": "Staatliche Vorsorge"
+  },
+  "figures": {
+    "premiums": "Prämien pro Jahr",
+    "premiumsDetail": "davon {pax} bei Pax",
+    "perYear": "pro Jahr",
+    "death": "Todesfallkapital",
+    "deathNote": "aus allen Verträgen",
+    "disability": "Rente bei Erwerbsunfähigkeit",
+    "retirement": "Pensionskassenrente ab {age}",
+    "unknown": "Noch nicht bekannt"
+  },
+  "hints": {
+    "title": "Hinweise für Sie",
+    "loading": "Wir prüfen Ihre Verträge …",
+    "empty": "Im Moment sehen wir nichts, das Sie angehen müssten.",
+    "discuss": "Mit dem Berater besprechen",
+    "dismiss": "Ausblenden",
+    "restore": "Wieder anzeigen",
+    "dismissedCount": "{count, plural, one {# ausgeblendeter Hinweis} other {# ausgeblendete Hinweise}}",
+    "concerns": "Betrifft: {product}, {insurer}",
+    "severity": {
+      "warning": "Bitte prüfen",
+      "opportunity": "Möglichkeit",
+      "info": "Gut zu wissen"
+    },
+    "source": {
+      "quicksale": "Pax-Prämie gemäss aktuellem Tarif, unverbindlich. Ein Wechsel setzt eine Gesundheitsprüfung voraus.",
+      "estimate": "Pax-Prämie geschätzt, unverbindlich. Ein Wechsel setzt eine Gesundheitsprüfung voraus.",
+      "logismata": "Steuerersparnis berechnet mit Logismata, ohne Gewähr.",
+      "ruleOfThumb": "Faustregel: etwa drei Bruttojahreseinkommen. Die genaue Lücke berechnen wir im Gespräch.",
+      "ivMax": "Gerechnet mit der maximalen IV-Rente. Die tatsächliche Rente ist oft tiefer."
+    },
+    "fallback": {
+      "cheaper_equivalent": {
+        "title": "Gleicher Schutz ist günstiger möglich",
+        "body": "Für Ihre Police bei {insurer} zahlen Sie {externalPremium} pro Jahr. Der gleiche Schutz kostet nach Pax-Tarif rund {paxPremium}, also etwa {saving} weniger. Kündigen Sie erst, wenn der neue Schutz bestätigt ist."
+      },
+      "coverage_mismatch_death": {
+        "title": "Der Todesfallschutz ist knapp",
+        "body": "Im Todesfall wären heute {cover} versichert. Als Faustregel braucht eine Familie etwa drei Jahreseinkommen, hier rund {need}. Lassen Sie die Lücke im Gespräch genau berechnen."
+      },
+      "coverage_mismatch_death_without_dependants": {
+        "title": "Todesfallschutz ohne Angehörige",
+        "body": "Sie bezahlen für ein Todesfallkapital von {cover}, obwohl im Moment niemand finanziell von Ihnen abhängt. Prüfen Sie, ob Sie es noch brauchen, etwa für eine Hypothek."
+      },
+      "coverage_mismatch_disability": {
+        "title": "Lücke bei Erwerbsunfähigkeit",
+        "body": "Bei längerer Erwerbsunfähigkeit fehlen trotz IV und Pensionskasse rund {gap} pro Jahr bis zu 80 Prozent des heutigen Einkommens. Die IV-Rente ist dabei mit dem Maximum gerechnet."
+      },
+      "double_cover_indemnity": {
+        "title": "Doppelt versichert",
+        "body": "Zwei Verträge decken denselben Schaden ab, bezahlt wird aber nur einmal. Zusammen kosten sie {premiumTotal} pro Jahr. Prüfen Sie, welchen Vertrag Sie behalten."
+      },
+      "double_cover_personal": {
+        "title": "Zwei Verträge für dasselbe Risiko",
+        "body": "Für dieselbe Person bestehen zwei Verträge bei verschiedenen Versicherern ({premiumTotal} pro Jahr). Das kann gewollt sein. Ein Vertrag mit der ganzen Summe ist aber oft günstiger."
+      },
+      "pillar3a_not_maxed": {
+        "title": "Säule 3a nicht ausgeschöpft",
+        "body": "Sie zahlen {contribution} pro Jahr in die Säule 3a ein, erlaubt sind {limit}. Jeder Franken bis zum Maximum senkt Ihr steuerbares Einkommen und stärkt Ihre Altersvorsorge."
+      },
+      "pillar3a_not_maxed_unknown": {
+        "title": "Säule 3a: bis {limit} pro Jahr",
+        "body": "Sie können jedes Jahr bis {limit} in die Säule 3a einzahlen und vom steuerbaren Einkommen abziehen. Wir wissen noch nicht, ob Sie das bereits tun."
+      },
+      "pension_buyin": {
+        "title": "Ein Einkauf in die Pensionskasse spart Steuern",
+        "body": "Laut Vorsorgeausweis können Sie bis {maxBuyIn} in die Pensionskasse einzahlen. Verteilt auf {years} Jahre sparen Sie rund {taxSavings} Steuern. Nach einem Einkauf ist drei Jahre lang kein Kapitalbezug möglich."
+      },
+      "pension_buyin_no_tax": {
+        "title": "Einkauf in die Pensionskasse möglich",
+        "body": "Laut Vorsorgeausweis können Sie bis {maxBuyIn} in die Pensionskasse einzahlen. Der Einkauf ist vom steuerbaren Einkommen abziehbar und erhöht Ihre Leistungen im Alter."
+      },
+      "contract_ending_notice": {
+        "title": "Kündigungsfrist am {date}",
+        "body": "Bis {date} können Sie {product} bei {insurer} kündigen. Wenn Sie nichts tun, läuft der Vertrag weiter. Jetzt ist ein guter Moment zu prüfen, ob er noch passt."
+      },
+      "contract_ending_end": {
+        "title": "{product} endet am {date}",
+        "body": "Danach besteht dieser Schutz nicht mehr. Prüfen Sie, ob Sie ihn weiterhin brauchen."
+      }
+    }
+  },
+  "dates": {
+    "title": "Nächste Termine",
+    "empty": "In den nächsten zwei Jahren laufen keine Fristen ab.",
+    "notice": "Letzter Tag zum Kündigen",
+    "end": "Vertrag endet",
+    "contract": "{product}, {insurer}",
+    "inDays": "{days, plural, =0 {heute} one {in # Tag} other {in # Tagen}}"
+  },
+  "policies": {
+    "title": "Ihre Verträge",
+    "empty": "Noch keine Verträge. Laden Sie Ihre Policen hoch, dann erscheinen sie hier.",
+    "groups": {
+      "pillar2": "2. Säule: Pensionskasse",
+      "pillar3a": "Säule 3a: gebundene Vorsorge",
+      "pillar3b": "Säule 3b: freie Vorsorge und Risikoschutz",
+      "other": "Weitere Versicherungen"
+    },
+    "pax": "Pax",
+    "external": "Extern",
+    "insured": "Versichert: {name}",
+    "sumInsured": "Versicherungssumme",
+    "deathSum": "Todesfallkapital",
+    "annuity": "Rente pro Jahr",
+    "premium": "Prämie pro Jahr",
+    "term": "Laufzeit",
+    "until": "bis {date}",
+    "noticeBy": "Kündigen bis",
+    "capital": "Altersguthaben",
+    "projectedPension": "Altersrente pro Jahr",
+    "disabilityPension": "Invalidenrente pro Jahr",
+    "maxBuyIn": "Möglicher Einkauf",
+    "fromDocument": "Aus Ihrem Dokument",
+    "status": {
+      "offer": "Offerte",
+      "active": "Aktiv",
+      "ended": "Abgelaufen",
+      "cancelled": "Gekündigt"
+    }
+  },
+  "documents": {
+    "title": "Ihre Dokumente",
+    "empty": "Noch keine Dokumente. Laden Sie Vorsorgeausweis, Policen oder Lohnausweis hoch, dann müssen Sie in der Beratung weniger Fragen beantworten.",
+    "meta": "{filename}, hochgeladen am {date}",
+    "filed": "Abgelegt",
+    "waiting": "{count, plural, one {# Dokument wartet auf Ihre Bestätigung} other {# Dokumente warten auf Ihre Bestätigung}}",
+    "review": "Werte prüfen",
+    "showProblem": "Details anzeigen",
+    "viewNamed": "{filename} ansehen",
+    "deleteNamed": "{filename} löschen",
+    "deleteQuestion": "{filename} endgültig löschen? Bereits bestätigte Werte bleiben in Ihrem Profil.",
+    "deleteConfirm": "Ja, löschen",
+    "cancel": "Abbrechen",
+    "encrypted": "Verschlüsselt gespeichert. Öffnen können die Dokumente nur Sie und Ihre Pax-Beratung."
+  },
+  "conversations": {
+    "title": "Ihre Gespräche",
+    "empty": "Noch keine Gespräche.",
+    "new": "Neues Gespräch starten",
+    "continue": "Weiterführen",
+    "untitled": "Gespräch vom {date}",
+    "meta": "{stage}, zuletzt am {date}"
+  },
+  "profile": {
+    "title": "Das wissen wir über Sie",
+    "empty": "Noch keine Angaben. Im Gespräch oder mit Ihren Dokumenten füllt sich dieses Bild.",
+    "you": "Sie",
+    "partner": "Partnerin oder Partner",
+    "family": "Familie und Wohnort",
+    "firstName": "Vorname",
+    "birthYear": "Jahrgang",
+    "maritalStatusLabel": "Zivilstand",
+    "employmentLabel": "Erwerbssituation",
+    "workload": "Pensum",
+    "income": "Bruttoeinkommen pro Jahr",
+    "children": "Kinder",
+    "childrenValue": "{count, plural, one {# Kind} other {# Kinder}} (Jahrgang {years})",
+    "residence": "Wohnort",
+    "assets": "Vermögen",
+    "pensionFund": "Pensionskasse",
+    "insuredSalary": "Versicherter Lohn",
+    "currentCapital": "Altersguthaben",
+    "projectedPension": "Voraussichtliche Altersrente",
+    "maxBuyIn": "Möglicher Einkauf",
+    "pillar3a": "Säule 3a",
+    "contribution": "Einzahlung pro Jahr",
+    "balance": "Guthaben",
+    "fromDocument": "Aus einem bestätigten Dokument",
+    "fromDocumentLegend": "Wert aus einem Dokument, das Sie bestätigt haben",
+    "maritalStatus": {
+      "single": "Ledig",
+      "married": "Verheiratet",
+      "registered_partnership": "Eingetragene Partnerschaft",
+      "cohabiting": "Im Konkubinat",
+      "divorced": "Geschieden",
+      "widowed": "Verwitwet"
+    },
+    "employment": {
+      "employed": "Angestellt",
+      "self_employed": "Selbstständig",
+      "unemployed": "Ohne Erwerb",
+      "student": "In Ausbildung",
+      "homemaker": "Familienarbeit",
+      "retired": "Pensioniert"
+    }
+  }
+}

@@ -1,5 +1,28 @@
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+/**
+ * tailwind-merge must know the Pax type scale (globals.css `--text-*`): otherwise it reads
+ * `text-paragraph-xs` as a colour and drops `text-white` (or the size) when both are present.
+ */
+const twMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      text: [
+        "heading-xl",
+        "heading-l",
+        "heading-m",
+        "heading-s",
+        "paragraph-l",
+        "paragraph-m",
+        "paragraph-s",
+        "paragraph-xs",
+        "display-m",
+        "display-l",
+      ],
+    },
+  },
+});
 
 export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs));

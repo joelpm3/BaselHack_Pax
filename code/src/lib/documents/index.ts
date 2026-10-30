@@ -1,4 +1,5 @@
 import "server-only";
+import { extractDocument as runExtraction } from "./service";
 import type { ExtractionSummary } from "./types";
 
 export type { ExtractionSummary } from "./types";
@@ -9,5 +10,5 @@ export type { ExtractionSummary } from "./types";
  * failures; returns status "failed" with an error instead.
  */
 export async function extractDocument(documentId: string): Promise<ExtractionSummary> {
-  throw new Error(`extractDocument not implemented yet (${documentId})`);
+  return runExtraction(documentId);
 }

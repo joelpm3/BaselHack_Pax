@@ -1,1 +1,221 @@
-{}
+{
+  "metaTitle": "Pension cockpit",
+  "title": "Your pension cockpit",
+  "greeting": "Hello, {name}",
+  "greetingAnonymous": "Hello",
+  "intro": "All your insurance and pension documents in one place, at Pax and elsewhere.",
+  "header": {
+    "home": "Pax pension advisor, home page",
+    "navigation": "Main navigation",
+    "language": "Language",
+    "toAdvisor": "Talk to the advisor"
+  },
+  "empty": {
+    "title": "Your cockpit is still empty",
+    "body": "Start a conversation with the advisor or upload your documents. Then you'll see your whole pension picture here at a glance.",
+    "start": "Start your advice"
+  },
+  "pillars": {
+    "pillar1": "1st pillar",
+    "pillar1Detail": "AHV and IV",
+    "pillar2": "2nd pillar",
+    "pillar2Detail": "Pension fund",
+    "pillar3": "3rd pillar",
+    "pillar3Detail": "Private pension",
+    "other": "Other",
+    "otherDetail": "Property and health",
+    "automatic": "Covered by the state",
+    "contracts": "{count, plural, =0 {No contracts yet} one {# contract} other {# contracts}}",
+    "premium": "{amount} a year",
+    "legendPax": "Contract with Pax",
+    "legendExternal": "Contract with another insurer",
+    "legendState": "State pension"
+  },
+  "figures": {
+    "premiums": "Premiums per year",
+    "premiumsDetail": "of which {pax} with Pax",
+    "perYear": "per year",
+    "death": "Lump sum on death",
+    "deathNote": "from all contracts",
+    "disability": "Pension if unable to work",
+    "retirement": "Pension fund pension from {age}",
+    "unknown": "Not known yet"
+  },
+  "hints": {
+    "title": "Things to look at",
+    "loading": "We're checking your contracts …",
+    "empty": "Right now there's nothing that needs your attention.",
+    "discuss": "Discuss with the advisor",
+    "dismiss": "Hide",
+    "restore": "Show again",
+    "dismissedCount": "{count, plural, one {# hidden note} other {# hidden notes}}",
+    "concerns": "Concerns: {product}, {insurer}",
+    "severity": {
+      "warning": "Please check",
+      "opportunity": "Opportunity",
+      "info": "Good to know"
+    },
+    "source": {
+      "quicksale": "Pax premium according to the current tariff, non-binding. Switching requires a health check.",
+      "estimate": "Pax premium estimated, non-binding. Switching requires a health check.",
+      "logismata": "Tax saving calculated with Logismata, without guarantee.",
+      "ruleOfThumb": "Rule of thumb: about three gross annual incomes. We calculate the exact gap with you in a conversation.",
+      "ivMax": "Calculated with the maximum IV pension. The actual pension is often lower."
+    },
+    "fallback": {
+      "cheaper_equivalent": {
+        "title": "The same cover is available for less",
+        "body": "You pay {externalPremium} a year for your policy with {insurer}. The same cover costs about {paxPremium} at the Pax tariff, roughly {saving} less. Only cancel once the new cover is confirmed."
+      },
+      "coverage_mismatch_death": {
+        "title": "Death cover is on the low side",
+        "body": "Today {cover} would be paid out on death. As a rule of thumb, a family needs about three annual incomes, here around {need}. Have the gap calculated precisely in a conversation."
+      },
+      "coverage_mismatch_death_without_dependants": {
+        "title": "Death cover without dependants",
+        "body": "You pay for a lump sum on death of {cover}, although nobody currently depends on your income. Check whether you still need it, for example for a mortgage."
+      },
+      "coverage_mismatch_disability": {
+        "title": "Gap if you can no longer work",
+        "body": "If you were unable to work for a long time, about {gap} a year would be missing to reach 80 percent of today's income, even with the IV and the pension fund. The IV pension is calculated at its maximum."
+      },
+      "double_cover_indemnity": {
+        "title": "Insured twice",
+        "body": "Two contracts cover the same damage, but a loss is only paid once. Together they cost {premiumTotal} a year. Check which contract you want to keep."
+      },
+      "double_cover_personal": {
+        "title": "Two contracts for the same risk",
+        "body": "The same person has two contracts with different insurers ({premiumTotal} a year). That may be intended. One contract for the whole sum is often cheaper, though."
+      },
+      "pillar3a_not_maxed": {
+        "title": "Pillar 3a not used to the full",
+        "body": "You pay {contribution} a year into pillar 3a; {limit} is allowed. Every franc up to the maximum lowers your taxable income and strengthens your retirement savings."
+      },
+      "pillar3a_not_maxed_unknown": {
+        "title": "Pillar 3a: up to {limit} a year",
+        "body": "Every year you can pay up to {limit} into pillar 3a and deduct it from your taxable income. We don't know yet whether you already do."
+      },
+      "pension_buyin": {
+        "title": "A pension fund buy-in saves tax",
+        "body": "According to your pension certificate you can pay up to {maxBuyIn} into your pension fund. Spread over {years} years you save about {taxSavings} in tax. After a buy-in, no lump-sum withdrawal is possible for three years."
+      },
+      "pension_buyin_no_tax": {
+        "title": "Pension fund buy-in possible",
+        "body": "According to your pension certificate you can pay up to {maxBuyIn} into your pension fund. A buy-in is deductible from taxable income and increases your retirement benefits."
+      },
+      "contract_ending_notice": {
+        "title": "Notice deadline on {date}",
+        "body": "You can cancel {product} with {insurer} until {date}. If you do nothing, the contract continues. Now is a good moment to check whether it still fits."
+      },
+      "contract_ending_end": {
+        "title": "{product} ends on {date}",
+        "body": "After that this cover no longer exists. Check whether you still need it."
+      }
+    }
+  },
+  "dates": {
+    "title": "Upcoming dates",
+    "empty": "No deadlines in the next two years.",
+    "notice": "Last day to cancel",
+    "end": "Contract ends",
+    "contract": "{product}, {insurer}",
+    "inDays": "{days, plural, =0 {today} one {in # day} other {in # days}}"
+  },
+  "policies": {
+    "title": "Your contracts",
+    "empty": "No contracts yet. Upload your policies and they'll appear here.",
+    "groups": {
+      "pillar2": "2nd pillar: pension fund",
+      "pillar3a": "Pillar 3a: restricted pension",
+      "pillar3b": "Pillar 3b: flexible pension and risk cover",
+      "other": "Other insurance"
+    },
+    "pax": "Pax",
+    "external": "External",
+    "insured": "Insured: {name}",
+    "sumInsured": "Sum insured",
+    "deathSum": "Lump sum on death",
+    "annuity": "Pension per year",
+    "premium": "Premium per year",
+    "term": "Term",
+    "until": "until {date}",
+    "noticeBy": "Cancel by",
+    "capital": "Retirement savings",
+    "projectedPension": "Retirement pension per year",
+    "disabilityPension": "Disability pension per year",
+    "maxBuyIn": "Possible buy-in",
+    "fromDocument": "From your document",
+    "status": {
+      "offer": "Offer",
+      "active": "Active",
+      "ended": "Expired",
+      "cancelled": "Cancelled"
+    }
+  },
+  "documents": {
+    "title": "Your documents",
+    "empty": "No documents yet. Upload your pension certificate, policies or salary certificate and you'll have fewer questions to answer in the conversation.",
+    "meta": "{filename}, uploaded on {date}",
+    "filed": "Filed",
+    "waiting": "{count, plural, one {# document is waiting for your confirmation} other {# documents are waiting for your confirmation}}",
+    "review": "Check values",
+    "showProblem": "Show details",
+    "viewNamed": "View {filename}",
+    "deleteNamed": "Delete {filename}",
+    "deleteQuestion": "Delete {filename} for good? Values you already confirmed stay in your profile.",
+    "deleteConfirm": "Yes, delete",
+    "cancel": "Cancel",
+    "encrypted": "Stored encrypted. Only you and your Pax advisors can open your documents."
+  },
+  "conversations": {
+    "title": "Your conversations",
+    "empty": "No conversations yet.",
+    "new": "Start a new conversation",
+    "continue": "Continue",
+    "untitled": "Conversation of {date}",
+    "meta": "{stage}, last on {date}"
+  },
+  "profile": {
+    "title": "What we know about you",
+    "empty": "Nothing yet. This picture fills up through the conversation or with your documents.",
+    "you": "You",
+    "partner": "Partner",
+    "family": "Family and home",
+    "firstName": "First name",
+    "birthYear": "Year of birth",
+    "maritalStatusLabel": "Marital status",
+    "employmentLabel": "Employment",
+    "workload": "Workload",
+    "income": "Gross income per year",
+    "children": "Children",
+    "childrenValue": "{count, plural, one {# child} other {# children}} (born {years})",
+    "residence": "Place of residence",
+    "assets": "Assets",
+    "pensionFund": "Pension fund",
+    "insuredSalary": "Insured salary",
+    "currentCapital": "Retirement savings",
+    "projectedPension": "Expected retirement pension",
+    "maxBuyIn": "Possible buy-in",
+    "pillar3a": "Pillar 3a",
+    "contribution": "Contribution per year",
+    "balance": "Balance",
+    "fromDocument": "From a confirmed document",
+    "fromDocumentLegend": "Value from a document you confirmed",
+    "maritalStatus": {
+      "single": "Single",
+      "married": "Married",
+      "registered_partnership": "Registered partnership",
+      "cohabiting": "Living together",
+      "divorced": "Divorced",
+      "widowed": "Widowed"
+    },
+    "employment": {
+      "employed": "Employed",
+      "self_employed": "Self-employed",
+      "unemployed": "Not working",
+      "student": "In education",
+      "homemaker": "Family work",
+      "retired": "Retired"
+    }
+  }
+}
