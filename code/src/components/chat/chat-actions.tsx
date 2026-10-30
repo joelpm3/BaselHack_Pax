@@ -16,7 +16,13 @@ export interface ChatActions {
 
 const ChatActionsContext = createContext<ChatActions | null>(null);
 
-export function ChatActionsProvider({ value, children }: { value: ChatActions; children: ReactNode }) {
+export function ChatActionsProvider({
+  value,
+  children,
+}: {
+  value: ChatActions;
+  children: ReactNode;
+}) {
   return <ChatActionsContext value={value}>{children}</ChatActionsContext>;
 }
 
