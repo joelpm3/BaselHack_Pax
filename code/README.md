@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pax Digital Advisor
 
-## Getting Started
+BaselHack 2026, Pax challenge "AI that makes life insurance simple" (Team A4).
+Product, data model and design decisions: [`../documentation/ARCHITECTURE.md`](../documentation/ARCHITECTURE.md).
+Coding conventions: [`AGENTS.md`](AGENTS.md).
 
-First, run the development server:
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+cp .env.example .env.local   # fill in ANTHROPIC_API_KEY, LOGISMATA_API_TOKEN, SESSION_SECRET, DOCUMENT_ENCRYPTION_KEY
+pnpm db:reset                # SQLite in ./data with advisors, rule set v1 and three demo customers
+pnpm dev                     # http://localhost:3000/de
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production build: `pnpm build && PORT=3210 pnpm start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| URL | What |
+|---|---|
+| `/de` | Customer entry: start an advice conversation or pick a demo customer |
+| `/de/portal` | Vorsorge-Cockpit (policies, documents, hints, conversations) |
+| `/de/firma` | Company dashboard (password `COMPANY_PASSWORD`, default `pax-demo`) |
+| `/de/firma/simulation` | Run simulated customers against the real advisor |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Locales: `de`, `fr`, `it`, `en`.
 
-## Learn More
+## Services
 
-To learn more about Next.js, take a look at the following resources:
+- **LLM**: `LLM_PROVIDER=anthropic` (Haiku) today; `openai-compatible` + `LLM_BASE_URL` for a
+  self-hosted vLLM endpoint. Per-role overrides: `LLM_MODEL_CHAT|ANALYSIS|EXTRACTION|SIMULATION`.
+- **Logismata** (pension and tax calculations): `LOGISMATA_API_TOKEN` (expires 2026-11-03).
+- **Pax Quicksale** (live premiums): no credentials; an estimate is used when it is unreachable.
+- **Swiss-German speech** (Nemotron on Nebius): start it with
+  `python cookbook/nebius-nemotron/nebius_gpu.py up --gpu b200` in the `swiss-german-stt` repo,
+  keep the SSH tunnel on `127.0.0.1:8000` (`STT_BASE_URL`). For UI work without the GPU:
+  `node scripts/mock-stt.mjs` and `STT_BASE_URL=http://127.0.0.1:8009`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Command | Purpose |
+|---|---|
+| `pnpm check` | Typecheck, Biome, Vitest |
+| `pnpm db:reset` / `pnpm db:seed` | Fresh demo database / seed if empty |
+| `pnpm db:generate --name <x>` | New Drizzle migration after a schema change |
+| `pnpm exec tsx scripts/sample-docs.ts` | Regenerate the fictional sample PDFs in `public/samples/` |
+| `node scripts/pwa-icons.mjs` | Regenerate PWA icons and favicon from the Pax mark |
