@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration";
 import { routing } from "@/i18n/routing";
 import { paxCivil } from "../fonts";
 import "../globals.css";
@@ -18,6 +19,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
     description: t("claim"),
     applicationName: t("appName"),
     appleWebApp: { capable: true, title: "Pax", statusBarStyle: "default" },
+    icons: { apple: "/icons/apple-touch-icon.png" },
   };
 }
 
@@ -37,6 +39,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
     <html lang={locale} className={paxCivil.variable}>
       <body className="min-h-dvh">
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <ServiceWorkerRegistration />
       </body>
     </html>
   );
