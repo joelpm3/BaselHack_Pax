@@ -110,9 +110,12 @@ export function upsertLeadsForConversation(
   const hasPaxPolicy = policies.some((p) => !p.isExternal);
   const hasExternalPolicy = policies.some((p) => p.isExternal) || signals.externalPolicy !== null;
 
+  // Judge by who the customer was when the conversation started: a policy signed in this very
+  // conversation is the new-business sale, not a reason to re-type it as an upsell.
+  const existingCustomer = conversation.mode === "existing_customer";
   const types = determineLeadTypes({
-    lifecycle: customer.lifecycle,
-    hasPaxPolicy,
+    lifecycle: existingCustomer ? customer.lifecycle : "prospect",
+    hasPaxPolicy: existingCustomer && hasPaxPolicy,
     hasExternalPolicy,
     intentStage: signals.intentStage,
     gaps: signals.gaps,

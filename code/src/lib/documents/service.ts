@@ -272,9 +272,16 @@ const globalForExtractions = globalThis as unknown as {
 globalForExtractions.paxExtractions ??= new Map();
 const inFlight = globalForExtractions.paxExtractions;
 
-function setStatus(doc: DocumentRow, values: Partial<DocumentRow>): void {
-  db.update(schema.documents).set(values).where(eq(schema.documents.id, doc.id)).run();
-  publish({ type: "document.updated", documentId: doc.id, customerId: doc.customerId });
+/** Never resurrects a document the customer deleted while it was being extracted. */
+function setStatus(doc: DocumentRow, values: Partial<DocumentRow>): boolean {
+  const { changes } = db
+    .update(schema.documents)
+    .set(values)
+    .where(and(eq(schema.documents.id, doc.id), ne(schema.documents.status, "deleted")))
+    .run();
+  if (changes > 0)
+    publish({ type: "document.updated", documentId: doc.id, customerId: doc.customerId });
+  return changes > 0;
 }
 
 async function runExtraction(doc: DocumentRow): Promise<ExtractionSummary> {
@@ -287,16 +294,20 @@ async function runExtraction(doc: DocumentRow): Promise<ExtractionSummary> {
       filename: doc.filename,
       today: todayIso(),
     });
-    db.insert(schema.extractions)
-      .values({
-        documentId: doc.id,
-        docType: result.docType,
-        schemaVersion: 1,
-        fields: result.fields,
-        model: result.model,
-      })
-      .run();
-    setStatus(doc, { status: "extracted", docType: result.docType });
+    const stored = db.transaction((tx) => {
+      if (!setStatus(doc, { status: "extracted", docType: result.docType })) return false;
+      tx.insert(schema.extractions)
+        .values({
+          documentId: doc.id,
+          docType: result.docType,
+          schemaVersion: 1,
+          fields: result.fields,
+          model: result.model,
+        })
+        .run();
+      return true;
+    });
+    if (!stored) return getExtractionSummary(doc.id);
     audit({
       actorType: "ai",
       action: "document.extracted",

@@ -42,12 +42,16 @@ function useLiveSummaries(initial: ExtractionSummary[]) {
     async function refresh() {
       const fetched = await Promise.all(ids.map(fetchSummary));
       if (cancelled) return;
+      // Follow the current id list, so documents added after mount (a second upload) show up.
       setSummaries((prev) =>
-        prev.map((current) => {
-          const next = fetched.find((f) => f?.documentId === current.documentId);
+        ids.flatMap((id, i) => {
+          const current = prev.find((s) => s.documentId === id);
+          const next = fetched[i];
+          if (!current) return next ? [next] : [];
           // Never let a slow response undo what the customer just did.
-          if (!next || (TERMINAL.has(current.status) && !TERMINAL.has(next.status))) return current;
-          return next;
+          if (!next || (TERMINAL.has(current.status) && !TERMINAL.has(next.status)))
+            return [current];
+          return [next];
         }),
       );
       if (fetched.some((f) => f && inProgress(f))) timer = setTimeout(refresh, POLL_MS);

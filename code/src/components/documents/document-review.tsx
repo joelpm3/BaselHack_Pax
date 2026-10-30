@@ -136,7 +136,9 @@ export function DocumentReview({
   const tc = useTranslations("common.taxonomy.docType");
   const locale = useLocale() as Locale;
   const [edits, setEdits] = useState<Record<string, EditValue>>({});
-  const [subject, setSubject] = useState<DocumentSubject>(summary.subject ?? "self");
+  // The extraction may finish after mount: follow its subject until the customer picks one.
+  const [chosenSubject, setSubject] = useState<DocumentSubject | null>(null);
+  const subject = chosenSubject ?? summary.subject ?? "self";
   const [askDiscard, setAskDiscard] = useState(false);
   const [error, setError] = useState(false);
   const [pending, startTransition] = useTransition();
