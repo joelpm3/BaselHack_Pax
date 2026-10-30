@@ -1,1 +1,548 @@
-{}
+{
+  "nav": {
+    "cockpit": "Firmencockpit",
+    "label": "Hauptnavigation",
+    "menu": "Menü öffnen",
+    "close": "Menü schliessen",
+    "language": "Sprache",
+    "logout": "Abmelden",
+    "signedInAs": "Angemeldet als",
+    "overview": "Übersicht",
+    "live": "Live",
+    "conversations": "Gespräche",
+    "leads": "Leads",
+    "handovers": "Übergaben",
+    "rules": "Regeln",
+    "simulation": "Simulation"
+  },
+  "login": {
+    "title": "Im Firmencockpit anmelden",
+    "headline": "Was Kundinnen und Kunden den digitalen Berater fragen.",
+    "intro": "Alle Gespräche, eingeordnet und bewertet: Themen, häufige Fragen, Abbrüche, Leads und Übergaben an Fachpersonen, in Echtzeit.",
+    "advisor": "Wer arbeitet heute?",
+    "chooseAdvisor": "Wähle eine Beraterin oder einen Berater.",
+    "password": "Passwort",
+    "wrongPassword": "Das Passwort stimmt nicht.",
+    "demoNote": "Demo-Zugang mit gemeinsamem Passwort, keine echte Anmeldung.",
+    "submit": "Anmelden"
+  },
+  "common": {
+    "anonymous": "Anonym",
+    "unassigned": "Nicht zugewiesen",
+    "assign": "Zuständige Person",
+    "simulated": "Simuliert"
+  },
+  "scope": {
+    "label": "Herkunft der Gespräche",
+    "all": "Alle",
+    "real": "Echt",
+    "simulated": "Simuliert"
+  },
+  "taxonomy": {
+    "conversationStatus": {
+      "active": "Läuft",
+      "idle": "Pausiert",
+      "completed": "Beendet",
+      "abandoned": "Abgebrochen",
+      "handed_over": "Übergeben"
+    },
+    "handoverStatus": {
+      "open": "Offen",
+      "scheduled": "Geplant",
+      "done": "Erledigt",
+      "cancelled": "Storniert"
+    },
+    "mode": {
+      "new_business": "Neukunde",
+      "existing_customer": "Bestandskunde"
+    },
+    "lifecycle": {
+      "anonymous": "Anonym",
+      "prospect": "Interessent",
+      "client": "Kunde"
+    },
+    "ruleAction": {
+      "handover": "Übergabe an Fachperson",
+      "flag": "Markieren",
+      "block_product": "Produkt sperren"
+    },
+    "channel": {
+      "phone": "Telefon",
+      "video": "Video",
+      "branch": "Vor Ort",
+      "email": "E-Mail"
+    },
+    "urgency": {
+      "normal": "Normal",
+      "high": "Dringend"
+    },
+    "strength": {
+      "low": "gering",
+      "medium": "mittel",
+      "high": "hoch"
+    },
+    "marital": {
+      "single": "Ledig",
+      "married": "Verheiratet",
+      "registered_partnership": "Eingetragene Partnerschaft",
+      "cohabiting": "Konkubinat",
+      "divorced": "Geschieden",
+      "widowed": "Verwitwet"
+    },
+    "employment": {
+      "employed": "Angestellt",
+      "self_employed": "Selbstständig",
+      "unemployed": "Ohne Erwerb",
+      "student": "In Ausbildung",
+      "homemaker": "Haushalt und Familie",
+      "retired": "Pensioniert"
+    },
+    "goal": {
+      "protect_family": "Familie absichern",
+      "retire_comfortably": "Gut pensioniert werden",
+      "retire_early": "Früher pensioniert werden",
+      "buy_home": "Wohneigentum kaufen",
+      "save_taxes": "Steuern sparen",
+      "build_wealth": "Vermögen aufbauen",
+      "support_children": "Kinder unterstützen",
+      "secure_income_disability": "Einkommen bei Erwerbsunfähigkeit sichern"
+    },
+    "policyCategory": {
+      "pillar3a": "Säule 3a",
+      "savings_3b": "Sparen 3b",
+      "risk_death": "Todesfall",
+      "risk_disability": "Erwerbsunfähigkeit",
+      "payout_plan": "Auszahlungsplan",
+      "child": "Kinder",
+      "care": "Pflege",
+      "pension_fund": "Pensionskasse",
+      "nonlife_household": "Hausrat",
+      "nonlife_liability": "Haftpflicht",
+      "nonlife_motor": "Motorfahrzeug",
+      "health": "Krankenkasse",
+      "other": "Andere"
+    },
+    "recommendationStatus": {
+      "shown": "Gezeigt",
+      "accepted": "Angenommen",
+      "declined": "Abgelehnt"
+    },
+    "premiumSource": {
+      "quicksale": "Pax-Tarif",
+      "estimate": "Schätzung"
+    },
+    "documentStatus": {
+      "uploaded": "Hochgeladen",
+      "extracting": "Wird gelesen",
+      "extracted": "Gelesen",
+      "confirmed": "Bestätigt",
+      "failed": "Fehlgeschlagen",
+      "deleted": "Gelöscht"
+    }
+  },
+  "live": {
+    "title": "Live",
+    "description": "Laufende Gespräche, Phasenwechsel und neue Nachrichten in Echtzeit.",
+    "status": {
+      "connecting": "Verbinde …",
+      "open": "Live",
+      "offline": "Offline"
+    },
+    "runningNow": "{count, plural, one {Gespräch läuft gerade} other {Gespräche laufen gerade}}",
+    "emptyTitle": "Gerade läuft kein Gespräch.",
+    "emptyBody": "Sobald jemand mit dem Berater schreibt, erscheint das Gespräch hier. Für eine Demo <link>simulierte Kundinnen und Kunden starten</link>.",
+    "recentTitle": "In den letzten 30 Minuten",
+    "messages": "{count, plural, one {# Nachricht} other {# Nachrichten}}",
+    "customer": "Kunde",
+    "advisor": "Berater",
+    "handover": "Übergabe",
+    "feed": {
+      "title": "Ereignisse",
+      "waiting": "Warte auf neue Ereignisse …",
+      "started": "Neues Gespräch gestartet",
+      "startedSimulated": "Simuliertes Gespräch gestartet",
+      "customer": "Kunde",
+      "advisor": "Berater",
+      "analysis": "Analyse aktualisiert",
+      "lead": "Lead erstellt oder neu bewertet",
+      "handover": "Übergabe an eine Fachperson angefordert",
+      "newConversation": "Neues Gespräch"
+    }
+  },
+  "overview": {
+    "title": "Übersicht",
+    "description": "Was Kundinnen und Kunden mit dem digitalen Berater besprechen, wo sie abspringen und wen Pax anrufen sollte.",
+    "kpi": {
+      "label": "Kennzahlen",
+      "conversations": "Gespräche",
+      "today": "{count} heute",
+      "live": "Live jetzt",
+      "openLive": "Live ansehen",
+      "leads": "Leads",
+      "handoversOpen": "Offene Übergaben",
+      "openHandovers": "Zur Warteschlange",
+      "nps": "NPS",
+      "npsDetail": "Ø {average} aus {count, plural, one {# Bewertung} other {# Bewertungen}}",
+      "npsNone": "Noch keine Bewertungen"
+    },
+    "funnel": {
+      "title": "Verlauf und Abbrüche",
+      "description": "Wie weit Gespräche kommen. {abandoned, plural, =0 {Noch keine Abbrüche.} one {# Gespräch abgebrochen.} other {# Gespräche abgebrochen.}}",
+      "caption": "Gespräche nach erreichter Phase",
+      "stage": "Phase",
+      "reached": "Erreicht",
+      "dropOff": "Verlust",
+      "leftHere": "Hier verlassen",
+      "empty": "Noch keine Gespräche."
+    },
+    "trend": {
+      "title": "Gespräche pro Tag",
+      "description": "Letzte 14 Tage"
+    },
+    "sentiment": {
+      "title": "Stimmung",
+      "empty": "Noch keine analysierten Gespräche."
+    },
+    "topics": {
+      "title": "Top-Themen",
+      "description": "Gespräche pro Thema",
+      "empty": "Noch keine analysierten Gespräche."
+    },
+    "faq": {
+      "title": "Häufigste Fragen",
+      "description": "Zusammengefasste Kundenfragen",
+      "empty": "Noch keine Fragen erfasst."
+    },
+    "painPoints": {
+      "title": "Pain-Points",
+      "description": "Was Kundinnen und Kunden zuletzt verunsichert oder gestört hat",
+      "empty": "Noch keine Pain-Points erkannt."
+    },
+    "lifeEvents": {
+      "title": "Lebensereignisse",
+      "empty": "Noch keine Lebensereignisse erkannt."
+    },
+    "intent": {
+      "title": "Absicht",
+      "description": "Wie nahe Gespräche an einem Abschluss sind",
+      "empty": "Noch keine analysierten Gespräche."
+    },
+    "recent": {
+      "title": "Neueste Gespräche",
+      "all": "Alle Gespräche",
+      "empty": "Noch keine Gespräche."
+    }
+  },
+  "conversations": {
+    "title": "Gespräche",
+    "description": "Alle Gespräche mit dem digitalen Berater, neueste zuerst.",
+    "statusFilter": "Status",
+    "allStatuses": "Alle",
+    "count": "{count, plural, one {# Gespräch} other {# Gespräche}}",
+    "emptyTitle": "Keine Gespräche für diesen Filter.",
+    "emptyBody": "Ändere den Filter oder starte eine Simulation.",
+    "messages": "{count, plural, one {# Nachricht} other {# Nachrichten}}",
+    "notAnalysed": "Noch nicht analysiert",
+    "handover": "Übergabe",
+    "col": {
+      "customer": "Kundin oder Kunde",
+      "topic": "Worum es geht",
+      "stage": "Phase",
+      "signals": "Signale",
+      "status": "Status",
+      "last": "Letzte Aktivität"
+    }
+  },
+  "conversation": {
+    "title": "Gespräch",
+    "back": "Alle Gespräche",
+    "untitled": "Noch ohne Titel",
+    "started": "begonnen {time}",
+    "ruleSet": "Regeln v{version}",
+    "rerun": "Analyse neu ausführen",
+    "rerunFailed": "Die Analyse ist fehlgeschlagen.",
+    "transcript": {
+      "title": "Verlauf",
+      "description": "{count, plural, one {# Nachricht} other {# Nachrichten}}, Werkzeugaufrufe zusammengefasst",
+      "empty": "Noch keine Nachrichten.",
+      "customer": "Kunde",
+      "advisor": "Pax-Berater",
+      "voice": "Per Sprache",
+      "toolDone": "Ausgeführt",
+      "toolFailed": "Fehler",
+      "toolPending": "Läuft",
+      "input": "Eingabe",
+      "output": "Ergebnis"
+    },
+    "analysis": {
+      "title": "Analyse",
+      "updated": "Stand {time}, {count} Nachrichten ausgewertet",
+      "running": "Analyse läuft …",
+      "none": "Noch nicht analysiert.",
+      "lifeEvents": "Lebensereignisse",
+      "productInterest": "Produktinteresse",
+      "gaps": "Erkannte Lücken",
+      "perYear": "pro Jahr",
+      "painPoints": "Pain-Points",
+      "handover": "Übergabe-Prüfung",
+      "handoverRequired": "Fachperson nötig",
+      "handoverNotRequired": "Keine Übergabe nötig",
+      "triggeredRules": "Ausgelöste Firmenregeln",
+      "ruleVersion": "Regeln v{version}",
+      "unknownRule": "Regel nicht mehr vorhanden",
+      "nextBestAction": "Nächster Schritt",
+      "model": "Modell: {model}"
+    },
+    "leads": {
+      "title": "Leads",
+      "none": "Aus diesem Gespräch ist (noch) kein Lead entstanden.",
+      "premium": "Geschätztes Prämienvolumen {amount} pro Jahr",
+      "breakdown": "So entsteht der Score"
+    },
+    "leadNote": {
+      "label": "Notiz zum Lead",
+      "placeholder": "Notiz, Gesprächsergebnis oder nächster Schritt",
+      "type": "Art des Eintrags",
+      "note": "Notiz",
+      "call": "Anruf",
+      "email": "E-Mail",
+      "submit": "Speichern"
+    },
+    "activity": {
+      "system": "System",
+      "created": "Lead erstellt (Score {score})",
+      "rescored": "Neu bewertet: Score {from} → {to}",
+      "statusChange": "Status von «{from}» auf «{to}» geändert",
+      "assigned": "Zugewiesen an {name}",
+      "unassigned": "Zuweisung aufgehoben"
+    },
+    "handovers": {
+      "title": "Übergaben"
+    },
+    "profile": {
+      "title": "Kundenprofil",
+      "completeness": "Profil vollständig",
+      "name": "Name",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "age": "Alter",
+      "ageValue": "{age} (Jahrgang {year})",
+      "maritalStatus": "Zivilstand",
+      "employment": "Erwerb",
+      "income": "Bruttoeinkommen",
+      "partner": "Partner/in",
+      "bornIn": "Jg. {year}",
+      "children": "Kinder",
+      "residence": "Wohnort",
+      "assets": "Vermögen",
+      "pillar2": "Pensionskasse",
+      "insuredSalary": "versicherter Lohn {amount}",
+      "pillar3a": "Säule 3a",
+      "balance": "Guthaben {amount}",
+      "contribution": "Einzahlung {amount} pro Jahr",
+      "goals": "Ziele",
+      "concerns": "Sorgen",
+      "healthNotes": "Gesundheit",
+      "yes": "Ja",
+      "no": "Nein",
+      "policies": "Policen",
+      "perYear": "pro Jahr",
+      "sumInsured": "Summe {amount}",
+      "until": "bis {date}"
+    },
+    "recommendations": {
+      "title": "Empfehlungen",
+      "description": "Mit Kriterien, Prämie und Modell, so wie sie gezeigt wurden",
+      "none": "In diesem Gespräch wurde noch nichts empfohlen.",
+      "met": "Erfüllt",
+      "notMet": "Nicht erfüllt",
+      "perYear": "pro Jahr",
+      "alternatives": "Alternativen",
+      "model": "Modell: {model}"
+    },
+    "calculations": {
+      "title": "Berechnungen",
+      "description": "{count, plural, =0 {Keine Aufrufe} one {# Aufruf} other {# Aufrufe}} von Logismata und Quicksale",
+      "none": "Noch keine Berechnungen.",
+      "ok": "OK",
+      "error": "Fehler",
+      "input": "Eingabe",
+      "output": "Ergebnis"
+    },
+    "documents": {
+      "title": "Dokumente",
+      "none": "Keine Dokumente hochgeladen.",
+      "unknownType": "Typ unbekannt"
+    },
+    "audit": {
+      "title": "Prüfpfad",
+      "description": "Wer wann was geändert hat: KI, Kundschaft, Beratung und System",
+      "none": "Noch keine Einträge.",
+      "time": "Zeit",
+      "actorLabel": "Wer",
+      "action": "Aktion",
+      "details": "Details",
+      "profileChange": "Profil: {path}",
+      "feedback": "Bewertung {nps}/10",
+      "actor": {
+        "customer": "Kunde",
+        "ai": "KI",
+        "advisor": "Beratung",
+        "system": "System"
+      },
+      "source": {
+        "chat": "Chat",
+        "form": "Formular",
+        "document": "Dokument",
+        "crm": "CRM",
+        "advisor": "Beratung"
+      }
+    }
+  },
+  "score": {
+    "perYear": "pro Jahr",
+    "gapNoAmount": "Lücke ohne Betrag",
+    "client": "Bestehende Kundin, bestehender Kunde",
+    "prospect": "Kontaktdaten vorhanden",
+    "factor": {
+      "intent": "Absicht",
+      "gap": "Vorsorgelücke",
+      "product": "Produktinteresse",
+      "contact": "Erreichbarkeit",
+      "stage": "Phase erreicht",
+      "mode": "Bestandskunde",
+      "external_policy": "Fremdpolice",
+      "service": "Serviceanliegen",
+      "handover": "Übergabe angefragt"
+    }
+  },
+  "leads": {
+    "title": "Leads",
+    "description": "Wen Pax jetzt anrufen sollte, priorisiert nach Score und Dringlichkeit. Status und Zuständigkeit direkt hier ändern.",
+    "count": "{count, plural, one {# Lead} other {# Leads}}",
+    "emptyTitle": "Keine Leads für diesen Filter.",
+    "emptyBody": "Leads entstehen automatisch, sobald ein Gespräch Potenzial zeigt.",
+    "changeStatus": "Status ändern",
+    "unassigned": "Nicht zugewiesen",
+    "simulated": "Simuliert",
+    "noContact": "Noch keine Kontaktdaten",
+    "filter": {
+      "type": "Typ",
+      "minScore": "Score",
+      "topic": "Thema",
+      "status": "Status",
+      "origin": "Herkunft",
+      "all": "Alle",
+      "anyScore": "Alle",
+      "scoreFrom": "ab {score}"
+    },
+    "view": {
+      "label": "Ansicht",
+      "table": "Tabelle",
+      "kanban": "Pipeline"
+    },
+    "col": {
+      "priority": "Priorität",
+      "customer": "Kundin oder Kunde",
+      "score": "Score",
+      "reason": "Grund für den Anruf",
+      "status": "Status",
+      "assignee": "Zuständig",
+      "updated": "Aktualisiert"
+    }
+  },
+  "handovers": {
+    "title": "Übergaben",
+    "description": "Gespräche, in denen eine Fachperson übernehmen soll: ausgelöst durch eine Firmenregel oder den Wunsch der Kundin, des Kunden.",
+    "statusFilter": "Status",
+    "changeStatus": "Status ändern",
+    "emptyTitle": "Keine Übergaben mit Status «{status}».",
+    "emptyBody": "Neue Übergaben erscheinen hier automatisch.",
+    "noContact": "Keine Kontaktdaten",
+    "ruleVersion": "Regeln v{version}",
+    "unknownRule": "Regel nicht mehr vorhanden",
+    "noRule": "Ohne Regel: auf Wunsch der Kundin, des Kunden",
+    "urgency": {
+      "normal": "Normal",
+      "high": "Dringend"
+    }
+  },
+  "rules": {
+    "title": "Regeln",
+    "description": "Wann der Berater an eine Fachperson übergibt, was er markiert und welche Produkte er nicht empfiehlt. In eigenen Worten formuliert, gilt sofort für neue Gespräche.",
+    "languages": "Regeln dürfen auf Deutsch, Französisch, Italienisch oder Englisch geschrieben sein.",
+    "version": "Version {version}",
+    "activeVersion": "Aktiv",
+    "archived": "Archiviert",
+    "inactive": "Ausgeschaltet",
+    "createdBy": "von {name}, {time}",
+    "system": "System",
+    "missing": "Es gibt noch keine Regeln. Führe pnpm db:seed aus.",
+    "ruleText": "Regel {n}",
+    "placeholder": "Zum Beispiel: Wer ein Vermögen über CHF 300'000 hat, bekommt eine persönliche Beratung.",
+    "action": "Wirkung",
+    "product": "Produkt",
+    "chooseProduct": "Produkt wählen",
+    "active": "Aktiv",
+    "moveUp": "Nach oben",
+    "moveDown": "Nach unten",
+    "remove": "Regel entfernen",
+    "add": "Regel hinzufügen",
+    "leadHints": "Was einen guten Lead ausmacht",
+    "leadHintsHelp": "Freitext für die Lead-Bewertung: Wen soll das Team zuerst anrufen?",
+    "save": "Als Version {version} speichern",
+    "saved": "Version {version} ist jetzt aktiv.",
+    "unchanged": "Keine Änderungen, keine neue Version.",
+    "invalid": "Jede Regel braucht einen Text, gesperrte Produkte ein Produkt.",
+    "unsaved": "Ungespeicherte Änderungen",
+    "current": "Version {version} ist aktiv.",
+    "restore": "Version {version} wiederherstellen",
+    "history": "Versionen",
+    "historyHelp": "Alte Versionen bleiben erhalten: Jedes Gespräch weiss, nach welchen Regeln es beurteilt wurde.",
+    "versionStats": "{rules, plural, one {# Regel} other {# Regeln}}, {conversations, plural, one {# Gespräch} other {# Gespräche}}"
+  },
+  "simulation": {
+    "title": "Simulation",
+    "description": "Simulierte Kundinnen und Kunden sprechen mit dem echten Berater. So füllt sich das Cockpit für Demos und Tests, klar als simuliert markiert.",
+    "runs": "Durchläufe",
+    "emptyTitle": "Noch keine Simulation gestartet.",
+    "emptyBody": "Starte oben einen Durchlauf und schau auf der Live-Seite zu.",
+    "cancel": "Abbrechen",
+    "system": "System",
+    "runTitle": "Durchlauf vom {time}",
+    "startedBy": "gestartet von {name}",
+    "progress": "{done} von {size} Gesprächen fertig",
+    "outcomes": "{completed} beendet, {abandoned} abgebrochen, {failed} fehlgeschlagen, {turns} Antworten",
+    "mix": "{material, plural, one {# Persona} other {# Personas}} aus dem Pax-Material, {earlyLeavers, plural, one {# springt} other {# springen}} früh ab, {concurrency} gleichzeitig. Sprachen:",
+    "errors": "{count, plural, one {# Fehler} other {# Fehler}}",
+    "status": {
+      "running": "Läuft",
+      "completed": "Abgeschlossen",
+      "failed": "Fehlgeschlagen",
+      "cancelled": "Abgebrochen"
+    },
+    "form": {
+      "title": "Neuer Durchlauf",
+      "description": "Mischung aus den drei Personas des Pax-Materials (als Bestandskunden) und zufälligen Schweizer Profilen mit einem Anliegen, meist auf Deutsch, auch Französisch, Italienisch und Englisch. Höchstens {maxTurns} Nachrichten pro Gespräch; manche brechen bewusst früh ab.",
+      "size": "Anzahl Gespräche",
+      "sizeHint": "{min} bis {max}",
+      "concurrency": "Gleichzeitig",
+      "concurrencyHint": "{min} bis {max}",
+      "start": "Simulation starten",
+      "invalid": "Bitte Werte innerhalb der Grenzen wählen."
+    },
+    "concern": {
+      "baby_on_the_way": "Nachwuchs",
+      "buying_home": "Hauskauf",
+      "early_retirement": "Frühpensionierung",
+      "pillar3a_taxes": "3a und Steuern",
+      "disability_worry": "Erwerbsunfähigkeit",
+      "external_policy": "Fremdpolice",
+      "wants_human": "Will eine Person",
+      "self_employed": "Selbstständig",
+      "high_wealth": "Grosses Vermögen",
+      "retirement_payout": "Kapital oder Rente",
+      "first_job": "Erster Job"
+    }
+  }
+}

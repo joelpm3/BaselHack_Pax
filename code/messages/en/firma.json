@@ -1,1 +1,548 @@
-{}
+{
+  "nav": {
+    "cockpit": "Company cockpit",
+    "label": "Main navigation",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "language": "Language",
+    "logout": "Sign out",
+    "signedInAs": "Signed in as",
+    "overview": "Overview",
+    "live": "Live",
+    "conversations": "Conversations",
+    "leads": "Leads",
+    "handovers": "Handovers",
+    "rules": "Rules",
+    "simulation": "Simulation"
+  },
+  "login": {
+    "title": "Sign in to the company cockpit",
+    "headline": "What customers ask the digital advisor.",
+    "intro": "Every conversation, classified and scored: topics, frequent questions, drop-offs, leads and handovers to specialists, in real time.",
+    "advisor": "Who is working today?",
+    "chooseAdvisor": "Choose an advisor.",
+    "password": "Password",
+    "wrongPassword": "The password is not correct.",
+    "demoNote": "Demo access with a shared password, not a real sign-in.",
+    "submit": "Sign in"
+  },
+  "common": {
+    "anonymous": "Anonymous",
+    "unassigned": "Unassigned",
+    "assign": "Assigned to",
+    "simulated": "Simulated"
+  },
+  "scope": {
+    "label": "Origin of conversations",
+    "all": "All",
+    "real": "Real",
+    "simulated": "Simulated"
+  },
+  "taxonomy": {
+    "conversationStatus": {
+      "active": "Running",
+      "idle": "Paused",
+      "completed": "Finished",
+      "abandoned": "Dropped off",
+      "handed_over": "Handed over"
+    },
+    "handoverStatus": {
+      "open": "Open",
+      "scheduled": "Scheduled",
+      "done": "Done",
+      "cancelled": "Cancelled"
+    },
+    "mode": {
+      "new_business": "New customer",
+      "existing_customer": "Existing customer"
+    },
+    "lifecycle": {
+      "anonymous": "Anonymous",
+      "prospect": "Prospect",
+      "client": "Customer"
+    },
+    "ruleAction": {
+      "handover": "Hand over to a specialist",
+      "flag": "Flag",
+      "block_product": "Block product"
+    },
+    "channel": {
+      "phone": "Phone",
+      "video": "Video",
+      "branch": "In person",
+      "email": "Email"
+    },
+    "urgency": {
+      "normal": "Normal",
+      "high": "Urgent"
+    },
+    "strength": {
+      "low": "low",
+      "medium": "medium",
+      "high": "high"
+    },
+    "marital": {
+      "single": "Single",
+      "married": "Married",
+      "registered_partnership": "Registered partnership",
+      "cohabiting": "Cohabiting",
+      "divorced": "Divorced",
+      "widowed": "Widowed"
+    },
+    "employment": {
+      "employed": "Employed",
+      "self_employed": "Self-employed",
+      "unemployed": "Not working",
+      "student": "In education",
+      "homemaker": "Home and family",
+      "retired": "Retired"
+    },
+    "goal": {
+      "protect_family": "Protect the family",
+      "retire_comfortably": "Retire comfortably",
+      "retire_early": "Retire early",
+      "buy_home": "Buy a home",
+      "save_taxes": "Save taxes",
+      "build_wealth": "Build wealth",
+      "support_children": "Support the children",
+      "secure_income_disability": "Secure income if unable to work"
+    },
+    "policyCategory": {
+      "pillar3a": "Pillar 3a",
+      "savings_3b": "Savings 3b",
+      "risk_death": "Death",
+      "risk_disability": "Disability",
+      "payout_plan": "Payout plan",
+      "child": "Children",
+      "care": "Care",
+      "pension_fund": "Pension fund",
+      "nonlife_household": "Household",
+      "nonlife_liability": "Liability",
+      "nonlife_motor": "Motor",
+      "health": "Health insurance",
+      "other": "Other"
+    },
+    "recommendationStatus": {
+      "shown": "Shown",
+      "accepted": "Accepted",
+      "declined": "Declined"
+    },
+    "premiumSource": {
+      "quicksale": "Pax tariff",
+      "estimate": "Estimate"
+    },
+    "documentStatus": {
+      "uploaded": "Uploaded",
+      "extracting": "Being read",
+      "extracted": "Read",
+      "confirmed": "Confirmed",
+      "failed": "Failed",
+      "deleted": "Deleted"
+    }
+  },
+  "live": {
+    "title": "Live",
+    "description": "Running conversations, stage changes and new messages in real time.",
+    "status": {
+      "connecting": "Connecting …",
+      "open": "Live",
+      "offline": "Offline"
+    },
+    "runningNow": "{count, plural, one {conversation running now} other {conversations running now}}",
+    "emptyTitle": "No conversation is running right now.",
+    "emptyBody": "As soon as someone writes to the advisor, the conversation appears here. For a demo, <link>start simulated customers</link>.",
+    "recentTitle": "In the last 30 minutes",
+    "messages": "{count, plural, one {# message} other {# messages}}",
+    "customer": "Customer",
+    "advisor": "Advisor",
+    "handover": "Handover",
+    "feed": {
+      "title": "Events",
+      "waiting": "Waiting for new events …",
+      "started": "New conversation started",
+      "startedSimulated": "Simulated conversation started",
+      "customer": "Customer",
+      "advisor": "Advisor",
+      "analysis": "Analysis updated",
+      "lead": "Lead created or rescored",
+      "handover": "Handover to a specialist requested",
+      "newConversation": "New conversation"
+    }
+  },
+  "overview": {
+    "title": "Overview",
+    "description": "What customers discuss with the digital advisor, where they drop off and whom Pax should call.",
+    "kpi": {
+      "label": "Key figures",
+      "conversations": "Conversations",
+      "today": "{count} today",
+      "live": "Live now",
+      "openLive": "Watch live",
+      "leads": "Leads",
+      "handoversOpen": "Open handovers",
+      "openHandovers": "Go to the queue",
+      "nps": "NPS",
+      "npsDetail": "Avg. {average} from {count, plural, one {# rating} other {# ratings}}",
+      "npsNone": "No ratings yet"
+    },
+    "funnel": {
+      "title": "Progress and drop-offs",
+      "description": "How far conversations get. {abandoned, plural, =0 {No drop-offs yet.} one {# conversation dropped off.} other {# conversations dropped off.}}",
+      "caption": "Conversations by stage reached",
+      "stage": "Stage",
+      "reached": "Reached",
+      "dropOff": "Lost",
+      "leftHere": "Left here",
+      "empty": "No conversations yet."
+    },
+    "trend": {
+      "title": "Conversations per day",
+      "description": "Last 14 days"
+    },
+    "sentiment": {
+      "title": "Sentiment",
+      "empty": "No analysed conversations yet."
+    },
+    "topics": {
+      "title": "Top topics",
+      "description": "Conversations per topic",
+      "empty": "No analysed conversations yet."
+    },
+    "faq": {
+      "title": "Most frequent questions",
+      "description": "Customer questions, grouped",
+      "empty": "No questions recorded yet."
+    },
+    "painPoints": {
+      "title": "Pain points",
+      "description": "What recently confused or bothered customers",
+      "empty": "No pain points detected yet."
+    },
+    "lifeEvents": {
+      "title": "Life events",
+      "empty": "No life events detected yet."
+    },
+    "intent": {
+      "title": "Intent",
+      "description": "How close conversations are to a decision",
+      "empty": "No analysed conversations yet."
+    },
+    "recent": {
+      "title": "Latest conversations",
+      "all": "All conversations",
+      "empty": "No conversations yet."
+    }
+  },
+  "conversations": {
+    "title": "Conversations",
+    "description": "Every conversation with the digital advisor, newest first.",
+    "statusFilter": "Status",
+    "allStatuses": "All",
+    "count": "{count, plural, one {# conversation} other {# conversations}}",
+    "emptyTitle": "No conversations for this filter.",
+    "emptyBody": "Change the filter or start a simulation.",
+    "messages": "{count, plural, one {# message} other {# messages}}",
+    "notAnalysed": "Not analysed yet",
+    "handover": "Handover",
+    "col": {
+      "customer": "Customer",
+      "topic": "What it is about",
+      "stage": "Stage",
+      "signals": "Signals",
+      "status": "Status",
+      "last": "Last activity"
+    }
+  },
+  "conversation": {
+    "title": "Conversation",
+    "back": "All conversations",
+    "untitled": "No title yet",
+    "started": "started {time}",
+    "ruleSet": "Rules v{version}",
+    "rerun": "Run analysis again",
+    "rerunFailed": "The analysis failed.",
+    "transcript": {
+      "title": "Transcript",
+      "description": "{count, plural, one {# message} other {# messages}}, tool calls summarised",
+      "empty": "No messages yet.",
+      "customer": "Customer",
+      "advisor": "Pax advisor",
+      "voice": "By voice",
+      "toolDone": "Done",
+      "toolFailed": "Error",
+      "toolPending": "Running",
+      "input": "Input",
+      "output": "Result"
+    },
+    "analysis": {
+      "title": "Analysis",
+      "updated": "As of {time}, {count} messages analysed",
+      "running": "Analysis running …",
+      "none": "Not analysed yet.",
+      "lifeEvents": "Life events",
+      "productInterest": "Product interest",
+      "gaps": "Gaps found",
+      "perYear": "per year",
+      "painPoints": "Pain points",
+      "handover": "Handover check",
+      "handoverRequired": "Specialist needed",
+      "handoverNotRequired": "No handover needed",
+      "triggeredRules": "Company rules triggered",
+      "ruleVersion": "Rules v{version}",
+      "unknownRule": "Rule no longer exists",
+      "nextBestAction": "Next step",
+      "model": "Model: {model}"
+    },
+    "leads": {
+      "title": "Leads",
+      "none": "No lead has come out of this conversation (yet).",
+      "premium": "Estimated premium volume {amount} per year",
+      "breakdown": "How the score is made up"
+    },
+    "leadNote": {
+      "label": "Note on the lead",
+      "placeholder": "Note, call outcome or next step",
+      "type": "Type of entry",
+      "note": "Note",
+      "call": "Call",
+      "email": "Email",
+      "submit": "Save"
+    },
+    "activity": {
+      "system": "System",
+      "created": "Lead created (score {score})",
+      "rescored": "Rescored: score {from} → {to}",
+      "statusChange": "Status changed from “{from}” to “{to}”",
+      "assigned": "Assigned to {name}",
+      "unassigned": "Assignment removed"
+    },
+    "handovers": {
+      "title": "Handovers"
+    },
+    "profile": {
+      "title": "Customer profile",
+      "completeness": "Profile complete",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "age": "Age",
+      "ageValue": "{age} (born {year})",
+      "maritalStatus": "Marital status",
+      "employment": "Work",
+      "income": "Gross income",
+      "partner": "Partner",
+      "bornIn": "b. {year}",
+      "children": "Children",
+      "residence": "Residence",
+      "assets": "Assets",
+      "pillar2": "Pension fund",
+      "insuredSalary": "insured salary {amount}",
+      "pillar3a": "Pillar 3a",
+      "balance": "balance {amount}",
+      "contribution": "contribution {amount} per year",
+      "goals": "Goals",
+      "concerns": "Concerns",
+      "healthNotes": "Health",
+      "yes": "Yes",
+      "no": "No",
+      "policies": "Policies",
+      "perYear": "per year",
+      "sumInsured": "sum {amount}",
+      "until": "until {date}"
+    },
+    "recommendations": {
+      "title": "Recommendations",
+      "description": "With criteria, premium and model, as they were shown",
+      "none": "Nothing has been recommended in this conversation yet.",
+      "met": "Met",
+      "notMet": "Not met",
+      "perYear": "per year",
+      "alternatives": "Alternatives",
+      "model": "Model: {model}"
+    },
+    "calculations": {
+      "title": "Calculations",
+      "description": "{count, plural, =0 {No calls} one {# call} other {# calls}} to Logismata and Quicksale",
+      "none": "No calculations yet.",
+      "ok": "OK",
+      "error": "Error",
+      "input": "Input",
+      "output": "Result"
+    },
+    "documents": {
+      "title": "Documents",
+      "none": "No documents uploaded.",
+      "unknownType": "Unknown type"
+    },
+    "audit": {
+      "title": "Audit trail",
+      "description": "Who changed what and when: AI, customer, advisors and system",
+      "none": "No entries yet.",
+      "time": "Time",
+      "actorLabel": "Who",
+      "action": "Action",
+      "details": "Details",
+      "profileChange": "Profile: {path}",
+      "feedback": "Rating {nps}/10",
+      "actor": {
+        "customer": "Customer",
+        "ai": "AI",
+        "advisor": "Advisor",
+        "system": "System"
+      },
+      "source": {
+        "chat": "Chat",
+        "form": "Form",
+        "document": "Document",
+        "crm": "CRM",
+        "advisor": "Advisor"
+      }
+    }
+  },
+  "score": {
+    "perYear": "per year",
+    "gapNoAmount": "Gap without amount",
+    "client": "Existing customer",
+    "prospect": "Contact details given",
+    "factor": {
+      "intent": "Intent",
+      "gap": "Pension gap",
+      "product": "Product interest",
+      "contact": "Reachability",
+      "stage": "Stage reached",
+      "mode": "Existing customer",
+      "external_policy": "External policy",
+      "service": "Service request",
+      "handover": "Handover requested"
+    }
+  },
+  "leads": {
+    "title": "Leads",
+    "description": "Whom Pax should call now, ranked by score and urgency. Change status and owner right here.",
+    "count": "{count, plural, one {# lead} other {# leads}}",
+    "emptyTitle": "No leads for this filter.",
+    "emptyBody": "Leads are created automatically as soon as a conversation shows potential.",
+    "changeStatus": "Change status",
+    "unassigned": "Unassigned",
+    "simulated": "Simulated",
+    "noContact": "No contact details yet",
+    "filter": {
+      "type": "Type",
+      "minScore": "Score",
+      "topic": "Topic",
+      "status": "Status",
+      "origin": "Origin",
+      "all": "All",
+      "anyScore": "All",
+      "scoreFrom": "from {score}"
+    },
+    "view": {
+      "label": "View",
+      "table": "Table",
+      "kanban": "Pipeline"
+    },
+    "col": {
+      "priority": "Priority",
+      "customer": "Customer",
+      "score": "Score",
+      "reason": "Reason to call",
+      "status": "Status",
+      "assignee": "Owner",
+      "updated": "Updated"
+    }
+  },
+  "handovers": {
+    "title": "Handovers",
+    "description": "Conversations a specialist should take over, triggered by a company rule or by the customer's wish.",
+    "statusFilter": "Status",
+    "changeStatus": "Change status",
+    "emptyTitle": "No handovers with status “{status}”.",
+    "emptyBody": "New handovers appear here automatically.",
+    "noContact": "No contact details",
+    "ruleVersion": "Rules v{version}",
+    "unknownRule": "Rule no longer exists",
+    "noRule": "No rule: at the customer's request",
+    "urgency": {
+      "normal": "Normal",
+      "high": "Urgent"
+    }
+  },
+  "rules": {
+    "title": "Rules",
+    "description": "When the advisor hands over to a specialist, what it flags and which products it does not recommend. Written in your own words, effective immediately for new conversations.",
+    "languages": "Rules may be written in German, French, Italian or English.",
+    "version": "Version {version}",
+    "activeVersion": "Active",
+    "archived": "Archived",
+    "inactive": "Switched off",
+    "createdBy": "by {name}, {time}",
+    "system": "System",
+    "missing": "There are no rules yet. Run pnpm db:seed.",
+    "ruleText": "Rule {n}",
+    "placeholder": "For example: anyone with assets above CHF 300,000 gets personal advice.",
+    "action": "Effect",
+    "product": "Product",
+    "chooseProduct": "Choose a product",
+    "active": "Active",
+    "moveUp": "Move up",
+    "moveDown": "Move down",
+    "remove": "Remove rule",
+    "add": "Add rule",
+    "leadHints": "What makes a good lead",
+    "leadHintsHelp": "Free text for lead scoring: whom should the team call first?",
+    "save": "Save as version {version}",
+    "saved": "Version {version} is now active.",
+    "unchanged": "No changes, no new version.",
+    "invalid": "Every rule needs a text, blocked products need a product.",
+    "unsaved": "Unsaved changes",
+    "current": "Version {version} is active.",
+    "restore": "Restore version {version}",
+    "history": "Versions",
+    "historyHelp": "Old versions are kept: every conversation knows which rules it was judged by.",
+    "versionStats": "{rules, plural, one {# rule} other {# rules}}, {conversations, plural, one {# conversation} other {# conversations}}"
+  },
+  "simulation": {
+    "title": "Simulation",
+    "description": "Simulated customers talk to the real advisor. This fills the cockpit for demos and tests, clearly marked as simulated.",
+    "runs": "Runs",
+    "emptyTitle": "No simulation started yet.",
+    "emptyBody": "Start a run above and watch it on the live page.",
+    "cancel": "Cancel",
+    "system": "System",
+    "runTitle": "Run of {time}",
+    "startedBy": "started by {name}",
+    "progress": "{done} of {size} conversations finished",
+    "outcomes": "{completed} finished, {abandoned} dropped off, {failed} failed, {turns} replies",
+    "mix": "{material, plural, one {# persona} other {# personas}} from the Pax material, {earlyLeavers, plural, one {# drops} other {# drop}} off early, {concurrency} at a time. Languages:",
+    "errors": "{count, plural, one {# error} other {# errors}}",
+    "status": {
+      "running": "Running",
+      "completed": "Completed",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "form": {
+      "title": "New run",
+      "description": "A mix of the three personas from the Pax material (as existing customers) and random Swiss profiles with one concern each, mostly in German, also French, Italian and English. At most {maxTurns} messages per conversation; some drop off early on purpose.",
+      "size": "Number of conversations",
+      "sizeHint": "{min} to {max}",
+      "concurrency": "At the same time",
+      "concurrencyHint": "{min} to {max}",
+      "start": "Start simulation",
+      "invalid": "Please choose values within the limits."
+    },
+    "concern": {
+      "baby_on_the_way": "Baby",
+      "buying_home": "Buying a home",
+      "early_retirement": "Early retirement",
+      "pillar3a_taxes": "3a and taxes",
+      "disability_worry": "Disability",
+      "external_policy": "External policy",
+      "wants_human": "Wants a person",
+      "self_employed": "Self-employed",
+      "high_wealth": "High wealth",
+      "retirement_payout": "Lump sum or annuity",
+      "first_job": "First job"
+    }
+  }
+}
