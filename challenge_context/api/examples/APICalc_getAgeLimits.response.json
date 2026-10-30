@@ -1,0 +1,21 @@
+{
+    "response": {
+        "BirthYear": 1985,
+        "CurrentAge": 41,
+        "MinimumAge": 18,
+        "MaximumAge": 100,
+        "RegularPensionAge": 65,
+        "MinimumAHVAge": 63,
+        "MaximumAHVAge": 70,
+        "MinimumPensionAge": 58,
+        "MaximumPensionAge": 70,
+        "MinimumSaving3aAge": 18,
+        "MaximumSaving3aAge": 65,
+        "MaximumPurchaseP2Age": 62,
+        "YearsToRegularPensionAge": 24,
+        "MaximumSaving3aDuration": 24,
+        "AllowedForSaving3a": true,
+        "MaximumPurchaseP2Duration": 21,
+        "AllowedForPurchaseP2": true
+    }
+}

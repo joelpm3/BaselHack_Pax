@@ -1,0 +1,2715 @@
+openapi: 3.1.0
+info:
+  title: "APICalc"
+  version: "1.2"
+servers:
+- url: "https://baselhackathon2026.azurewebsites.net/viper"
+paths:
+  "/operation/standard/APICalc_getSaving3aLimits":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      description: "required apikeys: calc.*"
+      operationId: APICalc_getSaving3aLimits
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_Saving3aLimits"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_getAgeLimits":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      summary: "ermittelt Altersgrenzen"
+      description: "required apikeys: calc.*"
+      operationId: APICalc_getAgeLimits
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Sex, BirthYear ]
+              properties:
+                Sex:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                  x-speakeasy-enums:
+                    1: Male
+                    2: Female
+                BirthYear:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_AgeLimits"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_getTaxBaseInfo":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      description: "required apikeys: calc.*"
+      operationId: APICalc_getTaxBaseInfo
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_TaxBaseInfo"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_searchLocation":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      summary: "Suche Steuerort, ignoriert Umlaute und Gross-/Kleinschreibweise, max. 200 Treffer"
+      description: "required apikeys: calc.*"
+      operationId: APICalc_searchLocation
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Search:
+                  description: "Suche: [PLZ ] Ort[, Kt]"
+                  type: string
+                Language:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: DE
+                    2: FR
+                    3: IT
+                    4: EN
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items: 
+                      $ref: "#/components/schemas/APICalc_TaxLocation"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_searchLocationGeo":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      summary: "Suche Steuerort anhand Position, max. 200 Treffer"
+      description: "required apikeys: calc.*"
+      operationId: APICalc_searchLocationGeo
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Latitude:
+                  type: number
+                Longitude:
+                  type: number
+                RadiusKm:
+                  type: number
+                Language:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: DE
+                    2: FR
+                    3: IT
+                    4: EN
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items: 
+                      $ref: "#/components/schemas/APICalc_TaxLocation"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_getLocation":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      description: "required apikeys: calc.*"
+      operationId: APICalc_getLocation
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID ]
+              properties:
+                TaxLocationID:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_TaxLocation"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateIncome":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Basisfunktionen
+      summary: "ermittelt das gewünschte Einkommen (Brutto, Netto, Steuerbar) einer Einzelperson anhand eines gegebenen Einkommens (Brutto, Netto, Steuerbar). Mindestbetrag ist 10000"
+      description: "required apikeys: calc.*"
+      operationId: APICalc_calculateIncome
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID, Relationship, NumberOfChildren, BirthYear, Income, IncomeType, CalculateIncomeType ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                BirthYear:
+                  type: integer
+                Income:
+                  type: number
+                IncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    2: Taxable
+                    3: Net
+                CalculateIncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    2: Taxable
+                    3: Net
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: number
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_getAdditionalEstateGainFields":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Grundstücksgewinnsteuer
+      summary: "Ermittelt die möglichen Zusatzwerte für die Berechnung der Grundstücksgewinnsteuer"
+      description: "required apikeys: calc.tax.estategain"
+      operationId: APICalc_getAdditionalEstateGainFields
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID ]
+              properties:
+                TaxLocationID:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_AdditionalEstateGainFields"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateEstateGainTax":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Grundstücksgewinnsteuer
+      description: "required apikeys: calc.tax.estategain"
+      operationId: APICalc_calculateEstateGainTax
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID, Relationship, Confession1 ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                Confession1:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                Confession2:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                ConfessionPart1:
+                  description: "Anteil Konfession 1 (wie viele in Prozent der Familie haben diese Konfession, 0=automatisch)"
+                  type: integer
+                TaxableGain:
+                  description: "steuerbarer Gewinn"
+                  type: number
+                OwnerYears:
+                  description: "in Besitz seit wie vielen Jahren"
+                  type: integer
+                OwnerMonths:
+                  description: "... und Monaten"
+                  type: integer
+                Revenues:
+                  description: "Zusatzwert: Verkaufserlös"
+                  type: number
+                FirstCosts:
+                  description: "Zusatzwert: Anlagekosten"
+                  type: number
+                BuildingInvest:
+                  description: "Zusatzwert: Bauinvestionen"
+                  type: number
+                HasBuilding:
+                  description: "Zusatzwert: ist überbaut"
+                  type: boolean
+                SelfInhabited:
+                  description: "Zusatzwert: ist selbstbewohnt"
+                  type: boolean
+                SelfInhabYears:
+                  description: "Zusatzwert: selbstbewohnt seit wie vielen Jahren"
+                  type: integer
+                HasDiscount:
+                  description: "Zusatzwert: hat Eigentumsrabatt"
+                  type: boolean
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_EstateGainTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateIncomeFortuneTax":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Einkommens-/Vermögenssteuern
+      description: "required apikeys: calc.tax.income"
+      operationId: APICalc_calculateIncomeFortuneTax
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ IncomeType, Income, TaxLocationID, Relationship, Confession1, NumberOfChildren, BirthYear ]
+              properties:
+                IncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    2: Taxable
+                    3: Net
+                Income:
+                  type: number
+                Fortune:
+                  type: number
+                TaxRateDecisiveIncomeCanton:
+                  description: "Kanton, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxRateDecisiveFortuneCanton:
+                  description: "Kanton, satzbestimmendes Vermögen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxableIncomeConf:
+                  description: "Bund, steuerbares Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxRateDecisiveIncomeConf:
+                  description: "Bund, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                Confession1:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                Confession2:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                ConfessionPart1:
+                  description: "Anteil Konfession 1 (wie viele in Prozent der Familie haben diese Konfession, 0=automatisch)"
+                  type: integer
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                BirthYear:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_IncomeFortuneTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateCapitalTax":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Kapitalleistungssteuern
+      description: "required apikeys: calc.tax.capital"
+      operationId: APICalc_calculateCapitalTax
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ CapitalPayment, PaymentAge, TaxLocationID, Relationship, Confession1, NumberOfChildren, Sex, BirthYear ]
+              properties:
+                CapitalPayment:
+                  type: number
+                PaymentAge:
+                  type: integer
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                Confession1:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                Confession2:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                ConfessionPart1:
+                  description: "Anteil Konfession 1 (wie viele in Prozent der Familie haben diese Konfession, 0=automatisch)"
+                  type: integer
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                Sex:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                  x-speakeasy-enums:
+                    1: Male
+                    2: Female
+                BirthYear:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_CapitalTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateAllInheritanceDonationTaxes":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Erbschafts-/Schenkungssteuern
+      description: "required apikeys: calc.tax.inheritance"
+      operationId: APICalc_calculateAllInheritanceDonationTaxes
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                Amount:
+                  type: number
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items: 
+                      $ref: "#/components/schemas/APICalc_InheritanceDonationTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateGroupInheritanceDonationTaxes":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Erbschafts-/Schenkungssteuern
+      description: "required apikeys: calc.tax.inheritance"
+      operationId: APICalc_calculateGroupInheritanceDonationTaxes
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID, Group ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                Amount:
+                  type: number
+                Group:
+                  type: integer
+                  enum:
+                    - 100
+                    - 200
+                    - 300
+                    - 400
+                    - 500
+                    - 600
+                    - 700
+                    - 800
+                  x-speakeasy-enums:
+                    100: Spouse
+                    200: Partner
+                    300: Children
+                    400: Parents
+                    500: Grandparents
+                    600: Siblings
+                    700: UncleAunt
+                    800: Other
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: array
+                    items: 
+                      $ref: "#/components/schemas/APICalc_InheritanceDonationTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateBeneficiaryInheritanceDonationTax":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Erbschafts-/Schenkungssteuern
+      description: "required apikeys: calc.tax.inheritance"
+      operationId: APICalc_calculateBeneficiaryInheritanceDonationTax
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID, Beneficiary ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                Amount:
+                  type: number
+                Beneficiary:
+                  type: integer
+                  enum:
+                    - 101
+                    - 201
+                    - 202
+                    - 203
+                    - 301
+                    - 302
+                    - 303
+                    - 304
+                    - 305
+                    - 306
+                    - 307
+                    - 308
+                    - 401
+                    - 402
+                    - 403
+                    - 501
+                    - 502
+                    - 503
+                    - 504
+                    - 601
+                    - 602
+                    - 701
+                    - 702
+                    - 703
+                    - 704
+                    - 705
+                    - 706
+                    - 707
+                    - 801
+                    - 802
+                    - 803
+                    - 804
+                    - 805
+                    - 806
+                    - 807
+                    - 808
+                    - 809
+                    - 810
+                    - 811
+                  x-speakeasy-enums:
+                    101: Spouse
+                    201: LifePartner
+                    202: Fiance
+                    203: LifePartnerWithChild
+                    301: Children
+                    302: DescendantChildren
+                    303: FullOrphans
+                    304: FosterChildren
+                    305: DescendantFostgerChildren
+                    306: StepChildren
+                    307: DescendantStepChildren
+                    308: GodChildren
+                    401: Parents
+                    402: FosterParents
+                    403: StepParents
+                    501: Grandparents
+                    502: FosterGrandparents
+                    503: StepGrandparents
+                    504: GreatGrandparents
+                    601: Siblings
+                    602: StepSiblings
+                    701: Uncle
+                    702: GreatUncle
+                    703: Nephew
+                    704: GreatNephew
+                    705: GreatGreatNephew
+                    706: Cousin
+                    707: DescendantCousin
+                    801: Other
+                    802: Employed
+                    803: ParentsInLaw
+                    804: SonInLaw
+                    805: PersonsRelatedByMarriage
+                    806: Restricted
+                    807: NeedsPermanentCare
+                    808: IllegitimateChildren
+                    809: AssociationsOfPersons
+                    810: Foundations
+                    811: CharitableInstitutions
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_InheritanceDonationTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateCorporateEntityTax":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Kapital- und Gewinnsteuer juristischer Personen
+      description: "required apikeys: calc.tax.corporateentity"
+      operationId: APICalc_calculateCorporateEntityTax
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ TaxLocationID ]
+              properties:
+                TaxLocationID:
+                  type: integer
+                ProfitBeforeTaxes:
+                  description: "Berechnung vor(true) oder nach(false) Steuern"
+                  type: boolean
+                TaxableProfitConf:
+                  description: "Steuerbarer Gewinn Bund"
+                  type: number
+                TaxableProfitCanton:
+                  description: "Steuerbarer Gewinn Kanton"
+                  type: number
+                TaxableCapital:
+                  description: "Steuerbares Kapital (Ende Jahr, inkl Gewinn)"
+                  type: number
+                ShareCapital:
+                  description: "Aktienkapital"
+                  type: number
+                NetProfitParticipationConf:
+                  description: "Nettoertrag qualifizierte Beteiligungen Bund"
+                  type: number
+                NetProfitParticipationCanton:
+                  description: "Nettoertrag qualifizierte Beteiligungen Kanton"
+                  type: number
+                InnovationsDeduction:
+                  description: "Abzug/Ermässigung für Innovationen (Patentbox, F&E)"
+                  type: number
+                NotionalInterestDeduction:
+                  description: "Abzug Eigenfinanzierung"
+                  type: number
+                TotalAssets:
+                  description: "Total Aktiven"
+                  type: number
+                TotalBeneficiaryParticipation:
+                  description: "Total Anteile an qualifizierte Beteiligungen, Kapital an Patenten und Vergleichbar"
+                  type: number
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_CorporateEntityTaxResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateSaving3a":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Sparen 3a
+      description: "required apikeys: calc.tax.saving3a"
+      operationId: APICalc_calculateSaving3a
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Duration, IncomeType, Income, TaxLocationID, Relationship, Confession1, NumberOfChildren, Sex, BirthYear ]
+              properties:
+                Duration:
+                  type: integer
+                InitialInvestment:
+                  type: number
+                YearlyInvestment:
+                  type: number
+                InterestRate:
+                  type: number
+                IncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    2: Taxable
+                    3: Net
+                Income:
+                  type: number
+                TaxRateDecisiveIncomeCanton:
+                  description: "Kanton, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxableIncomeConf:
+                  description: "Bund, steuerbares Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxRateDecisiveIncomeConf:
+                  description: "Bund, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                Confession1:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                Confession2:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                ConfessionPart1:
+                  description: "Anteil Konfession 1 (wie viele in Prozent der Familie haben diese Konfession, 0=automatisch)"
+                  type: integer
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                Sex:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                  x-speakeasy-enums:
+                    1: Male
+                    2: Female
+                BirthYear:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_Saving3aResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculatePurchaseP2":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Steuern - Einkauf in PK
+      description: "required apikeys: calc.tax.purchasep2"
+      operationId: APICalc_calculatePurchaseP2
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Investment, PaymentDuration, InterestRate, IncomeType, Income, TaxLocationID, Relationship, Confession1, NumberOfChildren, Sex, BirthYear ]
+              properties:
+                Investment:
+                  description: "Gesamter Einkauf, unabhängig der Einzahldauer"
+                  type: number
+                PaymentDuration:
+                  description: "über wie viele Jahre einzahlen (Investition wird dabei aufgeteilt)"
+                  type: integer
+                InterestRate:
+                  type: number
+                ConversionRate:
+                  description: "Umwandlungssatz"
+                  type: number
+                IncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    2: Taxable
+                    3: Net
+                Income:
+                  type: number
+                TaxRateDecisiveIncomeCanton:
+                  description: "Kanton, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxableIncomeConf:
+                  description: "Bund, steuerbares Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxRateDecisiveIncomeConf:
+                  description: "Bund, satzbestimmendes Einkommen, kann angegeben bei IncomeType=Taxable"
+                  type: number
+                TaxLocationID:
+                  type: integer
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                Confession1:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                Confession2:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 9
+                  x-speakeasy-enums:
+                    1: Protestant
+                    2: RomanCatholic
+                    3: ChristCatholic
+                    4: None
+                    9: Other
+                ConfessionPart1:
+                  description: "Anteil Konfession 1 (wie viele in Prozent der Familie haben diese Konfession, 0=automatisch)"
+                  type: integer
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                Sex:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                  x-speakeasy-enums:
+                    1: Male
+                    2: Female
+                BirthYear:
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_PurchaseP2Result"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateSaving":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Sparen/Verzehren
+      description: "required apikeys: calc.saving"
+      operationId: APICalc_calculateSaving
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ SavingGoal ]
+              properties:
+                SavingGoal:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: EndCapital
+                    2: Investment
+                    3: Duration
+                    4: InterestRate
+                Duration:
+                  description: "Spardauer in Jahren (SavingGoal != Duration)"
+                  type: integer
+                InitialInvestment:
+                  description: "Ersteinlage/Startkapital"
+                  type: number
+                InvestmentMonthly:
+                  description: "Einzahlung monatlich(true) oder jährlich(false)"
+                  type: boolean
+                PeriodicInvestment:
+                  description: "Regelmässige Einzalung (SavingGoal != Investment)"
+                  type: number
+                InterestRate:
+                  description: "Zinssatz (SavingGoal != InterestRate)"
+                  type: number
+                EndCapital:
+                  description: "Endkapital (SavingGoal != EndCapital)"
+                  type: number
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_SavingResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateConsumption":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Sparen/Verzehren
+      description: "required apikeys: calc.saving"
+      operationId: APICalc_calculateConsumption
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ ConsumptionGoal ]
+              properties:
+                ConsumptionGoal:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Withdrawal
+                    2: Duration
+                    3: EndCapital
+                    4: InterestRate
+                StartCapital:
+                  type: number
+                InterestRate:
+                  description: "Zinssatz (ConsumptionGoal != InterestRate)"
+                  type: number
+                WithdrawalMonthly:
+                  description: "Bezug monatlich(true) oder jährlich(false)"
+                  type: boolean
+                Withdrawal:
+                  description: "Regelmässiger Bezug (ConsumptionGoal != Withdrawal)"
+                  type: number
+                Duration:
+                  description: "Bezugsdauer in Jahren (ConsumptionGoal != Duration)"
+                  type: integer
+                EndCapital:
+                  description: "Endkapital (ConsumptionGoal != EndCapital)"
+                  type: number
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_ConsumptionResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateBudgetProposal":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Sparen/Verzehren
+      description: "required apikeys: calc.saving"
+      operationId: APICalc_calculateBudgetProposal
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ IncomeType, Income, Relationship ]
+              properties:
+                BudgetMonthly:
+                  description: "Budgetangaben monatlich(true) oder jährlich(false), für Input als auch Output"
+                  type: boolean
+                IncomeType:
+                  type: integer
+                  enum:
+                    - 1
+                    - 3
+                  x-speakeasy-enums:
+                    1: Gross
+                    3: Net
+                Income:
+                  description: "Haushaltseinkommen"
+                  type: number
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                NumberOfChildren:
+                  description: "unterstützungspflichtige Kinder"
+                  type: integer
+                UseEffectiveTax:
+                  description: "verwende effektive/erfasste Steuern (anstelle statistischem Steuerwert)"
+                  type: boolean
+                EffectiveTaxValue:
+                  description: "effektive Steuern"
+                  type: number
+                Language:
+                  description: "Ausgabesprache der Budgetpositionen, default DE"
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: DE
+                    2: FR
+                    3: IT
+                    4: EN
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_BudgetResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateRiskBase":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Vorsorge-Check
+      summary: "berechnet die Rentengrundlagen der 2. Säule im Risikofall"
+      description: "required apikeys: calc.check.risk"
+      operationId: APICalc_calculateRiskBase
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Relationship, RelationshipSinceYear, Person1 ]
+              properties:
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                RelationshipSinceYear:
+                  type: integer
+                Person1:
+                  $ref: "#/components/schemas/APICalc_RiskPerson"
+                Person2:
+                  $ref: "#/components/schemas/APICalc_RiskPerson"
+                NumberOfChildren:
+                  description: "gemeinsame Kinder"
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_RiskBaseResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateRisk":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Vorsorge-Check
+      summary: "berechnet die Risikosituationen"
+      description: "required apikeys: calc.check.risk"
+      operationId: APICalc_calculateRisk
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Relationship, RelationshipSinceYear, Person1 ]
+              properties:
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                RelationshipSinceYear:
+                  type: integer
+                Person1:
+                  $ref: "#/components/schemas/APICalc_RiskPerson"
+                Person2:
+                  $ref: "#/components/schemas/APICalc_RiskPerson"
+                NumberOfChildren:
+                  description: "gemeinsame Kinder"
+                  type: integer
+                WithChildren:
+                  type: boolean
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_RiskResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateRetirementBase":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Pension-Check
+      summary: "berechnet die Rentengrundlagen der 2. Säule für die Altersvorsorge (reguläres Pensionsalter)"
+      description: "required apikeys: calc.check.retirement"
+      operationId: APICalc_calculateRetirementBase
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Relationship, RelationshipSinceYear, Person1 ]
+              properties:
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                RelationshipSinceYear:
+                  type: integer
+                Person1:
+                  $ref: "#/components/schemas/APICalc_RetirementPerson"
+                Person2:
+                  $ref: "#/components/schemas/APICalc_RetirementPerson"
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_RetirementBaseResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+  "/operation/standard/APICalc_calculateRetirement":
+    post:
+      security:
+      - "Bearer": []
+      x-codegen-request-body-name: body            
+      tags:
+      - Pension-Check
+      summary: "berechnet die Altersvorsorge"
+      description: "required apikeys: calc.check.retirement"
+      operationId: APICalc_calculateRetirement
+      parameters:
+      - in: query
+        description: Mandant
+        name: tenant
+        schema:
+          type: string            
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [ Relationship, RelationshipSinceYear, Person1 ]
+              properties:
+                Relationship:
+                  type: integer
+                  enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                  x-speakeasy-enums:
+                    1: Single
+                    2: Married
+                    3: Concubinage
+                    4: RegistredPartnership
+                RelationshipSinceYear:
+                  type: integer
+                Person1:
+                  $ref: "#/components/schemas/APICalc_RetirementPerson"
+                Person2:
+                  $ref: "#/components/schemas/APICalc_RetirementPerson"
+                CurrentFortune:
+                  description: "heutiges Vermögen"
+                  type: number
+                InterestRate:
+                  description: "Zinssatz (Aufbau und Verzehr)"
+                  type: number
+                Saving:
+                  description: "Sparquote"
+                  type: number
+                NeedInPcRetirement:
+                  description: "Bedarf im Alter in Prozent (sonst als Betrag)"
+                  type: boolean
+                NeedRetirement:
+                  description: "Bedarf im Alter"
+                  type: number
+                LiveSpan:
+                  description: "Lebensspanne (Default: 88)"
+                  type: integer
+      responses:
+        '200':
+          description: "OK"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    $ref: "#/components/schemas/APICalc_RetirementResult"
+        '400':
+          $ref: "#/components/responses/Error400"
+        '401':
+          $ref: "#/components/responses/Error401"
+        '403':
+          $ref: "#/components/responses/Error403"
+        '404':
+          $ref: "#/components/responses/Error404"
+        '500':
+          $ref: "#/components/responses/Error500"
+components:
+  securitySchemes:
+    "Bearer":
+      type: http
+      scheme: bearer
+      bearerFormat: JWT      
+  responses:
+    "Error400":
+      description: "BAD_REQUEST - invalid or missing input parameter"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorCodeResponse"
+    "Error401":
+      description: "UNAUTHORIZED - invalid or missing authorization"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    "Error403":
+      description: "FORBIDDEN - missing rights to process the request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    "Error404":
+      description: "NOT_FOUND - reference invalid or not found"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    "Error500":
+      description: "INTERNAL_SERVER_ERROR - a general or unexpected error is preventing the request"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    "ErrorResponse":
+      description: "Error description"
+      type: object
+      properties:
+        message:
+          type: string
+    "ErrorCodeResponse":
+      description: "Error description, with optional errorcode"
+      type: object
+      properties:
+        message:
+          type: string
+        errorcode:
+          type: integer
+          enum:
+            - 0
+            - 1
+            - 2
+            - 10
+            - 11
+            - 12
+            - 13
+            - 14
+            - 15
+            - 16
+            - 20
+            - 21
+            - 22
+            - 23
+            - 24
+            - 25
+            - 26
+            - 27
+            - 28
+            - 29
+            - 30
+            - 40
+            - 41
+            - 42
+            - 43
+            - 44
+            - 45
+            - 46
+            - 47
+            - 48
+            - 49
+            - 50
+            - 51
+            - 60
+            - 61
+            - 63
+            - 64
+            - 65
+            - 66
+            - 67
+            - 68
+            - 69
+            - 70
+            - 71
+          x-speakeasy-enums:
+            0: "undefined"
+            1: "'TaxLocationID' ist ungültig"
+            2: "'Language' ist ungültig"
+            10: "'BirthYear' muss angegeben werden"
+            11: "'BirthYear' ungültig, berechnetes Alter ist ausserhalb Wertebereich von 18...100"
+            12: "'BirthYear' ungültig, berechnetes Alter ist ausserhalb gültigem Wertebereich"
+            13: "'BirthYear' ungültig, berechnetes Alter ist zu alt"
+            14: "'BirthYear/Duration' ungültig, berechnetes Endalter ist ausserhalb gültigem Wertebereich"
+            15: "'BirthYear' darf nicht vor 1940 liegen"
+            16: "'BirthYear' darf nicht in der Zukunft liegen"
+            20: "'Relationship' ist ungültig"
+            21: "'RelationshipSinceYear' darf nicht vor 1940 liegen"
+            22: "'RelationshipSinceYear' darf nicht in der Zukunft liegen"
+            23: "'Sex' ist ungültig"
+            24: "'Confession1' ist ungültig"
+            25: "'Confession2' ist ungültig"
+            26: "'JointChildren' ist ausserhalb Wertebereich von 0..100"
+            27: "'NumberOfChildren' ist ausserhalb Wertebereich von 0..100"
+            28: "'Person1' muss angegeben werden"
+            29: "'Person2' muss angegeben werden"
+            30: "'LiveSpan' ist ausserhalb Wertebereich von 70..100"
+            40: "'CurrentFortune' darf nicht negativ sein"
+            41: "'Saving' darf nicht negativ sein"
+            42: "'Withdrawal' darf nicht negativ sein"
+            43: "'StartCapital' darf nicht negativ sein"
+            44: "'EndCapital' darf nicht negativ sein"
+            45: "'Investment' darf nicht negativ sein"
+            46: "'InitialInvestment' darf nicht negativ sein"
+            47: "'PeriodicInvestment' darf nicht negativ sein"
+            48: "'YearlyInvestment' darf nicht negativ sein"
+            49: "'Amount' darf nicht negativ sein"
+            50: "'CapitalPayment' darf nicht negativ sein"
+            51: "'Income' darf nicht negativ sein"
+            60: "'InterestRate' ist ausserhalb Wertebereich von -20..20"
+            61: "'ConversionRate' ist ausserhalb Wertebereich von 0..9"
+            63: "'Duration' ist ausserhalb Wertebereich von 1..100"
+            64: "'PaymentDuration' ist ausserhalb gültigem Wertebereich"
+            65: "'ConsumptionGoal' ist ungültig"
+            66: "'SavingGoal' ist ungültig"
+            67: "'PaymentAge' ist ausserhalb Wertebereich von 1..100"
+            68: "'IncomeType' ist ungültig"
+            69: "'CalculateIncomeType' ist ungültig"
+            70: "'Beneficiary' ist ungültig"
+            71: "'Group' ist ungültig"
+    "APICalc_Saving3aLimits":
+      type: object
+      properties:   
+        Max3aSaving:
+          description: "max. 3a Sparbetrag pro Jahr für Personen mit BVG"
+          type: number
+        Max3aSavingWithoutP2:
+          description: "max. 3a Sparbetrag pro Jahr für Personen ohne BVG"
+          type: number
+    "APICalc_AgeLimits":
+      type: object
+      properties:   
+        BirthYear:
+          type: integer
+        CurrentAge:
+          type: integer
+        MinimumAge:
+          type: integer
+        MaximumAge:
+          type: integer
+        RegularPensionAge:
+          type: integer
+        YearsToRegularPensionAge:
+          type: integer
+        MinimumAHVAge:
+          type: integer
+        MaximumAHVAge:
+          type: integer
+        MinimumPensionAge:
+          type: integer
+        MaximumPensionAge:
+          type: integer
+        MinimumSaving3aAge:
+          type: integer
+        MaximumSaving3aAge:
+          type: integer
+        MaximumSaving3aDuration:
+          type: integer
+        AllowedForSaving3a:
+          type: boolean
+        MaximumPurchaseP2Age:
+          type: integer
+        MaximumPurchaseP2Duration:
+          type: integer
+        AllowedForPurchaseP2:
+          type: boolean
+    "APICalc_TaxBaseInfo":
+      type: object
+      properties:   
+        TaxBaseVersion:
+          type: string
+        TaxBaseDate:
+          type: string
+    "APICalc_TaxLocation":
+      type: object
+      properties:   
+        LocationID:
+          type: integer
+        ZipCode:
+          type: string
+        City:
+          type: string
+        Canton:
+          type: string
+        Location:
+          type: string
+    "APICalc_EstateGainTaxResult":
+      type: object
+      properties:   
+        FederalTax:
+          type: number
+        StateTax:
+          type: number
+        CommunityTax:
+          type: number
+        ChurchTax:
+          type: number
+        TotalTaxes:
+          type: number
+    "APICalc_AdditionalEstateGainFields":
+      type: object
+      properties:   
+        Confession:
+          description: "braucht Konfession"
+          type: boolean
+        Revenues:
+          description: "braucht Verkaufserlös"
+          type: boolean
+        FirstCost:
+          description: "braucht Anlagekosten"
+          type: boolean
+        BuildingInvest:
+          description: "braucht Bauinvestionen"
+          type: boolean
+        HasBuilding:
+          description: "braucht ob überbaut"
+          type: boolean
+        SelfInhabitated:
+          description: "braucht ob selbstbewohnt"
+          type: boolean
+        SelfInhabYears:
+          description: "braucht Jahre selbstbewohnt"
+          type: boolean
+        HasDiscount:
+          description: "braucht ob Eigentumsrabatt"
+          type: boolean
+    "APICalc_IncomeFortuneTaxResult":
+      type: object
+      properties:   
+        CommunityTax:
+          description: "Gemeindesteuer"
+          type: number
+        ChurchTax:
+          description: "Kirchensteuer"
+          type: number
+        StateTax:
+          description: "Staatssteuer (Kanton)"
+          type: number
+        FederalTax:
+          description: "Bundessteuer"
+          type: number
+        FortuneTax:
+          description: "Vermögenssteuer"
+          type: number
+        PollTax:
+          description: "Personalsteuer"
+          type: number
+        TotalTaxes:
+          type: number
+        TaxFreedomDay:
+          type: integer
+        MarginalTaxRate:
+          type: number
+    "APICalc_CapitalTaxResult":
+      type: object
+      properties:   
+        CapitalTaxes:
+          description: "Total Kapitalleistungssteuern"
+          type: number
+        CommunityTax:
+          description: "Gemeindesteuer"
+          type: number
+        ChurchTax:
+          description: "Kirchensteuer"
+          type: number
+        StateTax:
+          description: "Staatssteuer (Kanton)"
+          type: number
+        FederalTax:
+          description: "Bundessteuer"
+          type: number
+        NetCapital:
+          type: number
+        TaxPercentage:
+          type: number
+    "APICalc_InheritanceDonationTaxResult":
+      type: object
+      properties:   
+        Group:
+          type: integer
+          enum:
+            - 100
+            - 200
+            - 300
+            - 400
+            - 500
+            - 600
+            - 700
+            - 800
+          x-speakeasy-enums:
+            100: Spouse
+            200: Partner
+            300: Children
+            400: Parents
+            500: Grandparents
+            600: Siblings
+            700: UncleAunt
+            800: Other
+          
+        Beneficiary:
+          type: integer
+          enum:
+            - 101
+            - 201
+            - 202
+            - 203
+            - 301
+            - 302
+            - 303
+            - 304
+            - 305
+            - 306
+            - 307
+            - 308
+            - 401
+            - 402
+            - 403
+            - 501
+            - 502
+            - 503
+            - 504
+            - 601
+            - 602
+            - 701
+            - 702
+            - 703
+            - 704
+            - 705
+            - 706
+            - 707
+            - 801
+            - 802
+            - 803
+            - 804
+            - 805
+            - 806
+            - 807
+            - 808
+            - 809
+            - 810
+            - 811
+          x-speakeasy-enums:
+            101: Spouse
+            201: LifePartner
+            202: Fiance
+            203: LifePartnerWithChild
+            301: Children
+            302: DescendantChildren
+            303: FullOrphans
+            304: FosterChildren
+            305: DescendantFostgerChildren
+            306: StepChildren
+            307: DescendantStepChildren
+            308: GodChildren
+            401: Parents
+            402: FosterParents
+            403: StepParents
+            501: Grandparents
+            502: FosterGrandparents
+            503: StepGrandparents
+            504: GreatGrandparents
+            601: Siblings
+            602: StepSiblings
+            701: Uncle
+            702: GreatUncle
+            703: Nephew
+            704: GreatNephew
+            705: GreatGreatNephew
+            706: Cousin
+            707: DescendantCousin
+            801: Other
+            802: Employed
+            803: ParentsInLaw
+            804: SonInLaw
+            805: PersonsRelatedByMarriage
+            806: Restricted
+            807: NeedsPermanentCare
+            808: IllegitimateChildren
+            809: AssociationsOfPersons
+            810: Foundations
+            811: CharitableInstitutions
+          
+        InheritanceTaxes:
+          description: "Erbschaftssteuern"
+          type: number
+        InheritanceExemption:
+          description: "Freibetrag"
+          type: number
+        InheritanceDeduction:
+          description: "Abzug"
+          type: number
+        DonationTaxes:
+          description: "Schenkungssteuern"
+          type: number
+        DonationExemption:
+          description: "Freibetrag"
+          type: number
+        DonationDeduction:
+          description: "Abzug"
+          type: number
+    "APICalc_CorporateEntityTaxResult":
+      type: object
+      properties:   
+        ProfitSimpleTaxState:
+          type: number
+        ProfitSimpleTaxCommunity:
+          type: number
+        ProfitCommunityTax:
+          type: number
+        ProfitChurchTax:
+          type: number
+        ProfitStateTax:
+          type: number
+        ProfitFederalTax:
+          type: number
+        TotalProfitTaxes:
+          type: number
+        CapitalSimpleTaxState:
+          type: number
+        CapitalSimpleTaxCommunity:
+          type: number
+        CapitalCommunityTax:
+          type: number
+        CapitalChurchTax:
+          type: number
+        CapitalStateTax:
+          type: number
+        TotalCapitalTaxes:
+          type: number
+        MinimalTaxesCanton:
+          type: number
+        TotalTaxes:
+          type: number
+    "APICalc_ResultDetail":
+      type: object
+      properties:   
+        Periods:
+          description: "Anzahl Einträge/Perioden in Data"
+          type: integer
+        Data1:
+          description: "Anfangsbetrag einer Periode"
+          type: array
+          items: 
+            type: number
+        Data2:
+          description: "Endbetrag einer Periode"
+          type: array
+          items: 
+            type: number
+    "APICalc_Saving3aResult":
+      type: object
+      properties:   
+        YearlyTaxBefore:
+          description: "Steuern ohne Sparen 3a"
+          type: number
+        YearlyTaxAfter:
+          description: "Steuern mit Sparen 3a"
+          type: number
+        YearlyTaxSavings:
+          description: "jährliche Steuereinsparung durch Sparen 3a"
+          type: number
+        OverallTaxSavings:
+          type: number
+        Deposits:
+          type: number
+        Interest:
+          type: number
+        GrossCapital:
+          type: number
+        CapitalTax:
+          type: number
+        NetCapital:
+          type: number
+        NetYield:
+          type: number
+        AlternativeGrossYield:
+          description: "Notwendige Rendite für alternative Produkte"
+          type: number
+        DetailsDeposits:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+        DetailsInterest:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+        DetailsTaxSaving:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+    "APICalc_PurchaseP2Result":
+      type: object
+      properties:   
+        TaxSavings:
+          type: number
+        NetInvestment:
+          type: number
+        TaxSavingsPercentage:
+          type: number
+        YearsToRetirement:
+          type: integer
+        AdditionalCapital:
+          type: number
+        AdditionalPension:
+          type: number
+        NetYield:
+          type: number
+        ConversionRate:
+          type: number
+        DetailsCapital:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+    "APICalc_SavingResult":
+      type: object
+      properties:   
+        Deposits:
+          description: "Summe der Einlagen"
+          type: number
+        Interest:
+          description: "Summe der Zinsen"
+          type: number
+        GrossCapital:
+          description: "Endkapital"
+          type: number
+        PeriodicInvestment:
+          description: "Periodische Einlage"
+          type: number
+        DurationYears:
+          description: "Dauer in ganze Jahren"
+          type: integer
+        DurationMonths:
+          description: "Restdauer in Monaten im letzten Jahr"
+          type: integer
+        InterestRate:
+          description: "Zinssatz"
+          type: number
+        DetailsDeposits:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+        DetailsInterest:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+    "APICalc_ConsumptionResult":
+      type: object
+      properties:   
+        Withdrawal:
+          description: "Periodischer Bezug"
+          type: number
+        DurationYears:
+          description: "Dauer in ganze Jahren"
+          type: integer
+        DurationMonths:
+          description: "Restdauer in Monaten im letzten Jahr"
+          type: integer
+        EndCapital:
+          description: "Verbleibendes Endkapital"
+          type: number
+        InterestRate:
+          description: "Zinssatz"
+          type: number
+        DetailsCapital:
+          $ref: "#/components/schemas/APICalc_ResultDetail"
+    "APICalc_BudgetResult":
+      type: object
+      properties:   
+        Categories:
+          type: array
+          items: 
+            $ref: "#/components/schemas/APICalc_BudgetCategory"
+        SumExpenses:
+          description: "Total Ausgaben"
+          type: number
+        IncomeNet:
+          description: "Haushaltseinkommen netto (nach Sozialleistungsabzügen)"
+          type: number
+        SavingQuote:
+          description: "Sparquote (positiv), sonst Ausgabenüberschuss (negativ)"
+          type: number
+    "APICalc_BudgetCategory":
+      type: object
+      properties:   
+        Description:
+          type: string
+        Amount:
+          type: number
+        Details:
+          type: array
+          items: 
+            $ref: "#/components/schemas/APICalc_BudgetCategoryDetail"
+    "APICalc_BudgetCategoryDetail":
+      type: object
+      properties:   
+        Description:
+          type: string
+        Amount:
+          type: number
+    "APICalc_RiskPerson":
+      type: object
+      required: [ Sex, BirthYear, WithBVG ]
+      properties:   
+        Sex:
+          type: integer
+          enum:
+            - 1
+            - 2
+          x-speakeasy-enums:
+            1: Male
+            2: Female
+          
+        BirthYear:
+          type: integer
+        GrossIncome:
+          type: number
+        NumberOfChildren:
+          description: "Kinder mit alleinigem Sorgerecht"
+          type: integer
+        WithBVG:
+          type: boolean
+        Pillar2Pensions:
+          description: "Leistungen aus der 2. Säule"
+          $ref: "#/components/schemas/APICalc_RiskPensionPillar2"
+        NeedInPcDisability:
+          description: "Bedarf IV in Prozent (sonst als Betrag)"
+          type: boolean
+        NeedDisability:
+          description: "Bedarf IV"
+          type: number
+        NeedInPcDeath:
+          description: "Bedarf Todesfall in Prozent (sonst als Betrag)"
+          type: boolean
+        NeedDeath:
+          description: "Bedarf Todesfall"
+          type: number
+    "APICalc_RiskPensionPillar2":
+      type: object
+      required: [ Disability, DisabilityChildren, Widow, Orphan ]
+      properties:   
+        CoverageCapital:
+          description: "Aktuelles Deckungskapital fuer Subsidiaerleistung bei Unfall. Falls 0: keine Subsidiaerleistungen."
+          type: number
+        Disability:
+          description: "IV-Rente, nur bei Krankheit"
+          type: number
+        DisabilityChildren:
+          description: "IV-Kinderrente, nur bei Krankheit"
+          type: number
+        Widow:
+          description: "Witwen-/Witwerrente, nur bei Krankheit"
+          type: number
+        Orphan:
+          description: "Waisenrente, nur bei Krankheit"
+          type: number
+    "APICalc_RiskBaseResult":
+      type: object
+      properties:   
+        Person1:
+          $ref: "#/components/schemas/APICalc_RiskPensionPillar2"
+        Person2:
+          $ref: "#/components/schemas/APICalc_RiskPensionPillar2"
+    "APICalc_RiskScenarioSummary":
+      type: object
+      properties:   
+        Scenario:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            - 6
+            - 7
+            - 8
+          x-speakeasy-enums:
+            1: Disability_Sickness_P1
+            2: Disability_Accident_P1
+            3: Death_Sickness_P1
+            4: Death_Accident_P1
+            5: Disability_Sickness_P2
+            6: Disability_Accident_P2
+            7: Death_Sickness_P2
+            8: Death_Accident_P2
+          
+        ErrorCode:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 8
+            - 9
+          x-speakeasy-enums:
+            1: OK
+            2: InternalError
+            8: Person1_already_retired_or_retired_soon
+            9: Person2_already_retired_or_retired_soon
+          
+        GrossIncome:
+          description: "Bruttoeinkommen (als Referenz)"
+          type: number
+        IncomeNeed:
+          description: "Bedarf"
+          type: number
+        IncomeGap:
+          description: "Einkommenslücke"
+          type: number
+        IncomeSurplus:
+          description: "Einnahmenüberschuss"
+          type: number
+        IncomeTotal:
+          description: "Total Renteneinkommen und Einkommen Partner bei Pension"
+          type: number
+        IncomePillar1:
+          description: "Renten aus 1. Säule"
+          type: number
+        IncomePillar2:
+          description: "Renten aus 2. Säule"
+          type: number
+        IncomePartner:
+          description: "Beim 1. Rentenfall Pension. Einkommen vom Partner der noch arbeitet"
+          type: number
+        CapitalGap:
+          description: "Kapitalisierte Lücke"
+          type: number
+    "APICalc_RiskResult":
+      type: object
+      properties:   
+        RiskScenarioSummaries:
+          type: array
+          items: 
+            $ref: "#/components/schemas/APICalc_RiskScenarioSummary"
+    "APICalc_RetirementPerson":
+      type: object
+      required: [ Sex, BirthYear, WithBVG ]
+      properties:   
+        Sex:
+          type: integer
+          enum:
+            - 1
+            - 2
+          x-speakeasy-enums:
+            1: Male
+            2: Female
+          
+        BirthYear:
+          type: integer
+        GrossIncome:
+          type: number
+        WithBVG:
+          type: boolean
+        RetirementPillar2:
+          description: "Leistungen aus der 2. Säule"
+          $ref: "#/components/schemas/APICalc_RetirementPillar2"
+        DesiredRetirementAge:
+          description: "Alter Erwerbsaufgabe"
+          type: integer
+    "APICalc_RetirementPillar2":
+      type: object
+      required: [ Pension ]
+      properties:   
+        Pension:
+          description: "Altersrente"
+          type: number
+        CurrentCapital:
+          description: "Aktuelles Guthaben. Wird approximiert falls nicht vorhanden (0)"
+          type: number
+    "APICalc_RetirementBaseResult":
+      type: object
+      properties:   
+        Person1:
+          $ref: "#/components/schemas/APICalc_RetirementPillar2"
+        Person2:
+          $ref: "#/components/schemas/APICalc_RetirementPillar2"
+    "APICalc_RetirementResult":
+      type: object
+      properties:   
+        ErrorCode:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 8
+            - 9
+          x-speakeasy-enums:
+            1: OK
+            2: InternalError
+            8: Person1_already_retired_or_retired_soon
+            9: Person2_already_retired_or_retired_soon
+          
+        GrossIncome:
+          description: "Bruttoeinkommen (als Referenz)"
+          type: number
+        IncomeNeed:
+          description: "Bedarf"
+          type: number
+        IncomeGap:
+          description: "Einkommenslücke"
+          type: number
+        IncomeTotal:
+          description: "Total Renteneinkommen"
+          type: number
+        IncomePillar1:
+          description: "Renten aus 1. Säule"
+          type: number
+        IncomePillar2:
+          description: "Renten aus 2. Säule"
+          type: number
+        IncomeWithdrawal:
+          description: "Vermögensverzehr"
+          type: number
+        AvailableFortune:
+          description: "Verfügbares Vermögen per 1. Rentenfall"
+          type: number
+        CapitalNeed:
+          description: "Notwendiges Vermögen per 1. Rentenfall"
+          type: number
+        CapitalGap:
+          description: "Kapitalisierte Lücke per 1. Rentenfall"
+          type: number

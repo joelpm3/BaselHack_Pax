@@ -1,0 +1,12 @@
+{
+    "response": {
+        "Group": 300,
+        "Beneficiary": 301,
+        "InheritanceTaxes": 0,
+        "InheritanceExemption": 0,
+        "InheritanceDeduction": 0,
+        "DonationTaxes": 0,
+        "DonationExemption": 0,
+        "DonationDeduction": 0
+    }
+}

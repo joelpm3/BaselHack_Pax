@@ -1,0 +1,9 @@
+{
+    "TaxLocationID": 400100000,
+    "Relationship": 1,
+    "NumberOfChildren": 0,
+    "BirthYear": 1985,
+    "Income": 120000,
+    "IncomeType": 1,
+    "CalculateIncomeType": 2
+}

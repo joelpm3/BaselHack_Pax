@@ -1,0 +1,389 @@
+Vorsorgecheck
+Grundlagen
+
+
+
+
+Personenangaben
+Name
+Geburtsdatum               15.07.1967
+Zivilstand                 ledig
+Erwerbsart                 angestellt
+Bruttoeinkommen pro Jahr   CHF          89'700
+
+
+
+
+                                                 Seite 2
+Erwerbsunfähigkeit
+
+
+
+
+durch Krankheit
+                                             � Heutiges Einkommen        89'700
+ 89'700
+
+                                             � Vorsorgebedarf            71'760
+
+ 50'000
+                                               Einnahmen                 64'560
+                                             � Lücke                      7'200
+
+
+
+     0
+                                             � Renten 2. Säule           37'944
+             Heute           bei Krankheit   � Renten 1. Säule           26'616
+                                             � Übrige Einnahmen               0
+Renteneinnahmen im 3. Jahr                     Einnahmen                 64'560
+
+
+
+durch Unfall
+                                             � Heutiges Einkommen        89'700
+ 89'700
+
+                                             � Vorsorgebedarf            71'760
+
+ 50'000
+                                               Einnahmen                 80'730
+                                             � Lücke                          0
+
+
+
+     0
+                                             � Renten 2. Säule           54'114
+             Heute            bei Unfall     � Renten 1. Säule           26'616
+                                             � Übrige Einnahmen               0
+Renteneinnahmen im 3. Jahr                     Einnahmen                 80'730
+
+
+
+
+                                                                    Seite 3
+Erwerbsunfähigkeit
+
+
+
+
+durch Krankheit
+
+
+                  EU kurzfristig                                  Erwerbsunfähigkeit langfristig
+
+
+ 89'700
+
+
+
+ 71'760
+ 64'560
+
+
+
+
+ 26'616
+
+
+
+
+      0
+           Tag 1        Tag 361          Tag 721
+
+
+
+Renten jährlich                    ab        Tag 1     Tag 2   Tag 361     Tag 721
+                                   bis       Tag 1   Tag 360   Tag 720     Alter 65
+
+� Renten 1. Säule                                               26'616      26'616
+
+   IV, Invalidenrente                                           26'616      26'616
+
+� Renten 2. Säule                           89'700    71'760    45'144      37'944
+
+   LFZ, Taggeld                             89'700    71'760    45'144
+
+   BVG, Futura Vorsorge, 97011,                                             37'944
+   SS, Invalidenrente
+
+   Total Vorsorgeleistungen                 89'700    71'760    71'760      64'560
+
+� Vorsorgebedarf                            89'700    89'700    89'700      71'760
+
+� Vorsorgelücke-/überschuss                          -17'940   -17'940       -7'200
+
+
+
+
+                                                                                                   Seite 4
+Erwerbsunfähigkeit
+
+
+
+
+durch Unfall
+
+
+                  EU kurzfristig                                  Erwerbsunfähigkeit langfristig
+
+
+ 89'700
+
+ 80'730
+
+ 71'760
+
+
+
+
+ 26'616
+
+
+
+
+      0
+           Tag 1        Tag 361          Tag 721
+
+
+
+Renten jährlich                    ab        Tag 1    Tag 2      Tag 3     Tag 361      Tag 721
+                                   bis       Tag 1    Tag 2    Tag 360     Tag 720      Alter 65
+
+� Renten 1. Säule                                                           26'616        26'616
+
+   IV, Invalidenrente                                                       26'616        26'616
+
+� Renten 2. Säule                           89'700   71'760     71'760      54'114        54'114
+
+   LFZ, Taggeld                             89'700   71'760
+
+   UVG, Invalidenrente                                                       54'114       54'114
+
+   UVG, Taggeld                                                 71'760
+
+   Total Vorsorgeleistungen                 89'700   71'760     71'760      80'730        80'730
+
+� Vorsorgebedarf                            89'700   89'700     89'700      89'700        71'760
+
+� Vorsorgelücke-/überschuss                          -17'940   -17'940       -8'970        8'970
+
+
+
+
+                                                                                                   Seite 5
+Tod
+
+
+
+
+durch Krankheit
+                                           � Heutiges Einkommen        89'700
+ 89'700
+
+                                           � Vorsorgebedarf                 0
+
+ 50'000
+                                             Einnahmen                      0
+                                           � Lücke                          0
+
+
+
+     0
+                                           � Renten 2. Säule                0
+             Heute         bei Krankheit   � Renten 1. Säule                0
+                                           � Übrige Einnahmen               0
+Dies sind Ihre langfristigen                 Einnahmen                      0
+Renteneinnahmen nach dem Ereignis
+
+
+durch Unfall
+                                           � Heutiges Einkommen        89'700
+ 89'700
+
+                                           � Vorsorgebedarf                 0
+
+ 50'000
+                                             Einnahmen                      0
+                                           � Lücke                          0
+
+
+
+     0
+                                           � Renten 2. Säule                0
+             Heute          bei Unfall     � Renten 1. Säule                0
+                                           � Übrige Einnahmen               0
+Dies sind Ihre langfristigen                 Einnahmen                      0
+Renteneinnahmen nach dem Ereignis
+
+
+
+
+                                                                  Seite 6
+Tod
+
+
+
+
+durch Krankheit
+
+
+                                             nach dem Todesfall
+
+
+89'700
+
+
+
+
+     0
+          Tag 1
+
+
+
+Renten jährlich              ab      Tag 1
+                             bis   Jahr 10
+
+  Total Vorsorgeleistungen
+
+
+
+
+                                                                  Seite 7
+Tod
+
+
+
+
+durch Unfall
+
+
+                                             nach dem Todesfall
+
+
+89'700
+
+
+
+
+     0
+          Tag 1
+
+
+
+Renten jährlich              ab      Tag 1
+                             bis   Jahr 10
+
+  Total Vorsorgeleistungen
+
+
+
+
+                                                                  Seite 8
+Erleben
+
+
+
+
+                            � Heutiges Einkommen        89'700
+89'700
+
+                            � Vorsorgebedarf            71'760
+
+50'000
+                              Einnahmen                 48'119
+                            � Lücke                     23'641
+
+
+
+    0
+                            � Renten 2. Säule           18'765
+          Heute   Pension   � Renten 1. Säule           29'354
+                            � Übrige Einnahmen               0
+                              Einnahmen                 48'119
+
+
+
+
+                                                   Seite 9
+Erleben
+
+
+
+
+                                                Pension
+
+
+ 89'700
+
+
+
+ 71'760
+
+
+
+
+ 48'119
+
+
+
+ 29'354
+
+
+
+
+      0
+          Alter 65
+
+
+
+Renten jährlich               ab     Alter 65
+                              bis lebenslang
+
+� Renten 1. Säule                     29'354
+
+   AHV, Altersrente                   29'354
+
+� Renten 2. Säule                     18'765
+
+   BVG, Futura Vorsorge, 97011,       18'765
+   SS, Erlebensfallrente
+
+   Total Vorsorgeleistungen           48'119
+
+� Vorsorgebedarf                      71'760
+
+� Vorsorgelücke-/überschuss          -23'641
+
+
+
+
+                                                          Seite 10
+Annahmen
+
+
+
+
+                                        Annahmen für
+                                     Berechnungen (in %)
+
+
+Vorsorgeverträge                  Zinssatz
+BVG, Futura Vorsorge, 97011, SS   1.00 %
+
+
+
+
+                                                   Seite 11
+Rechtliche Bestimmungen
+
+
+
+
+Das vorliegende Dokument basiert auf den von Ihnen erhaltenen Angaben und Unterlagen sowie auf
+den aktuellen gesetzlichen Grundlagen und Ausführungsbestimmungen. Hierbei handelt es sich um
+ein Planungsinstrument und die Analysen sind zukunftsorientiert und basieren somit auf aktuell
+gültigen Grundsätzen. Da trotz der sorgfältigen Erarbeitung Erfassungs- oder Verständnisfehler nicht
+ausgeschlossen werden können, bitten wir Sie um Überprüfung der Basisdaten. Daraus entstehen
+weder für Sie noch für uns rechtliche Verpflichtungen oder Haftungsansprüche.
+

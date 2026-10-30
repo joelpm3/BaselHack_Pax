@@ -1,0 +1,417 @@
+{
+    "response": [
+        {
+            "LocationID": 400100000,
+            "ZipCode": "4001",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4001 Basel"
+        },
+        {
+            "LocationID": 400000000,
+            "ZipCode": "4000",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4000 Basel"
+        },
+        {
+            "LocationID": 400000001,
+            "ZipCode": "4000",
+            "City": "Basilea",
+            "Canton": "BS",
+            "Location": "4000 Basilea"
+        },
+        {
+            "LocationID": 400000002,
+            "ZipCode": "4000",
+            "City": "B\u00e2le",
+            "Canton": "BS",
+            "Location": "4000 B\u00e2le"
+        },
+        {
+            "LocationID": 400200000,
+            "ZipCode": "4002",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4002 Basel"
+        },
+        {
+            "LocationID": 400300000,
+            "ZipCode": "4003",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4003 Basel"
+        },
+        {
+            "LocationID": 400400000,
+            "ZipCode": "4004",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4004 Basel"
+        },
+        {
+            "LocationID": 400500000,
+            "ZipCode": "4005",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4005 Basel"
+        },
+        {
+            "LocationID": 400600000,
+            "ZipCode": "4006",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4006 Basel"
+        },
+        {
+            "LocationID": 400700000,
+            "ZipCode": "4007",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4007 Basel"
+        },
+        {
+            "LocationID": 400800000,
+            "ZipCode": "4008",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4008 Basel"
+        },
+        {
+            "LocationID": 400900000,
+            "ZipCode": "4009",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4009 Basel"
+        },
+        {
+            "LocationID": 401000000,
+            "ZipCode": "4010",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4010 Basel"
+        },
+        {
+            "LocationID": 401100000,
+            "ZipCode": "4011",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4011 Basel"
+        },
+        {
+            "LocationID": 401200000,
+            "ZipCode": "4012",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4012 Basel"
+        },
+        {
+            "LocationID": 401300000,
+            "ZipCode": "4013",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4013 Basel"
+        },
+        {
+            "LocationID": 401500000,
+            "ZipCode": "4015",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4015 Basel"
+        },
+        {
+            "LocationID": 401600000,
+            "ZipCode": "4016",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4016 Basel"
+        },
+        {
+            "LocationID": 401700000,
+            "ZipCode": "4017",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4017 Basel"
+        },
+        {
+            "LocationID": 401800000,
+            "ZipCode": "4018",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4018 Basel"
+        },
+        {
+            "LocationID": 401900000,
+            "ZipCode": "4019",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4019 Basel"
+        },
+        {
+            "LocationID": 402000000,
+            "ZipCode": "4020",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4020 Basel"
+        },
+        {
+            "LocationID": 402100000,
+            "ZipCode": "4021",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4021 Basel"
+        },
+        {
+            "LocationID": 402300000,
+            "ZipCode": "4023",
+            "City": "Basel",
+            "Canton": "BL",
+            "Location": "4023 Basel"
+        },
+        {
+            "LocationID": 402400000,
+            "ZipCode": "4024",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4024 Basel"
+        },
+        {
+            "LocationID": 402500000,
+            "ZipCode": "4025",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4025 Basel"
+        },
+        {
+            "LocationID": 402700000,
+            "ZipCode": "4027",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4027 Basel"
+        },
+        {
+            "LocationID": 402800000,
+            "ZipCode": "4028",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4028 Basel"
+        },
+        {
+            "LocationID": 403000000,
+            "ZipCode": "4030",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4030 Basel"
+        },
+        {
+            "LocationID": 403100000,
+            "ZipCode": "4031",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4031 Basel"
+        },
+        {
+            "LocationID": 403200000,
+            "ZipCode": "4032",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4032 Basel"
+        },
+        {
+            "LocationID": 403900000,
+            "ZipCode": "4039",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4039 Basel"
+        },
+        {
+            "LocationID": 404002000,
+            "ZipCode": "4040",
+            "City": "Basel",
+            "Canton": "BL",
+            "Location": "4040 Basel"
+        },
+        {
+            "LocationID": 407000000,
+            "ZipCode": "4070",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4070 Basel"
+        },
+        {
+            "LocationID": 407500000,
+            "ZipCode": "4075",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4075 Basel"
+        },
+        {
+            "LocationID": 408000000,
+            "ZipCode": "4080",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4080 Basel"
+        },
+        {
+            "LocationID": 408300000,
+            "ZipCode": "4083",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4083 Basel"
+        },
+        {
+            "LocationID": 408400000,
+            "ZipCode": "4084",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4084 Basel"
+        },
+        {
+            "LocationID": 408500000,
+            "ZipCode": "4085",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4085 Basel"
+        },
+        {
+            "LocationID": 408600000,
+            "ZipCode": "4086",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4086 Basel"
+        },
+        {
+            "LocationID": 408700000,
+            "ZipCode": "4087",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4087 Basel"
+        },
+        {
+            "LocationID": 408800000,
+            "ZipCode": "4088",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4088 Basel"
+        },
+        {
+            "LocationID": 409100000,
+            "ZipCode": "4091",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4091 Basel"
+        },
+        {
+            "LocationID": 405100000,
+            "ZipCode": "4051",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4051 Basel"
+        },
+        {
+            "LocationID": 405800000,
+            "ZipCode": "4058",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4058 Basel"
+        },
+        {
+            "LocationID": 405600000,
+            "ZipCode": "4056",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4056 Basel"
+        },
+        {
+            "LocationID": 405400000,
+            "ZipCode": "4054",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4054 Basel"
+        },
+        {
+            "LocationID": 405500000,
+            "ZipCode": "4055",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4055 Basel"
+        },
+        {
+            "LocationID": 405200000,
+            "ZipCode": "4052",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4052 Basel"
+        },
+        {
+            "LocationID": 405700000,
+            "ZipCode": "4057",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4057 Basel"
+        },
+        {
+            "LocationID": 410200000,
+            "ZipCode": "4102",
+            "City": "Binningen",
+            "Canton": "BL",
+            "Location": "4102 Binningen"
+        },
+        {
+            "LocationID": 410200002,
+            "ZipCode": "4102",
+            "City": "Bottmingerm\u00fchle",
+            "Canton": "BL",
+            "Location": "4102 Bottmingerm\u00fchle"
+        },
+        {
+            "LocationID": 405300000,
+            "ZipCode": "4053",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4053 Basel"
+        },
+        {
+            "LocationID": 412700000,
+            "ZipCode": "4127",
+            "City": "Birsfelden",
+            "Canton": "BL",
+            "Location": "4127 Birsfelden"
+        },
+        {
+            "LocationID": 405900000,
+            "ZipCode": "4059",
+            "City": "Basel",
+            "Canton": "BS",
+            "Location": "4059 Basel"
+        },
+        {
+            "LocationID": 410100000,
+            "ZipCode": "4101",
+            "City": "Bruderholz",
+            "Canton": "BL",
+            "Location": "4101 Bruderholz"
+        },
+        {
+            "LocationID": 410300000,
+            "ZipCode": "4103",
+            "City": "Bottmingen",
+            "Canton": "BL",
+            "Location": "4103 Bottmingen"
+        },
+        {
+            "LocationID": 412300000,
+            "ZipCode": "4123",
+            "City": "Allschwil",
+            "Canton": "BL",
+            "Location": "4123 Allschwil"
+        },
+        {
+            "LocationID": 412300001,
+            "ZipCode": "4123",
+            "City": "Neuallschwil",
+            "Canton": "BL",
+            "Location": "4123 Neuallschwil"
+        }
+    ]
+}

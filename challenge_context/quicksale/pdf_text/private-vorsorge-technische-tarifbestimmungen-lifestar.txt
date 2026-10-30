@@ -1,0 +1,156 @@
+TECHNISCHE TARIFBESTIMMUNGEN
+
+PAX SPAR-LEBENSVERSICHERUNG
+ANTEILGEBUNDENE LEBENSVERSICHERUNG
+KLASSISCHE ANLAGE MIT GARANTIERTEM ZINS
+UND FONDSANLAGE
+
+
+                             LifeStar                     LifeStarInvest              TerzaLifeStar         TerzaLifeStarInvest
+
+Vorsorgeart                  3b                           3b                          3a                    3a
+
+Finanzierungsart             Periodische Prämie           Einmalprämie                Periodische Prämie    Einmalprämie
+
+Eintrittsalter               0 / 70                       0 / 65                      17 / 60               17 / 60
+(min./max.)
+
+Dauer in Jahren              10 / bis Endalter            10 / bis Endalter           10 / bis Endalter     10 / bis Endalter
+(min./max.)
+
+Endalter                     10 / 80                      10 / 75                     60 / 70               60 / 70
+(min./max.)
+
+Jahresprämie                 CHF 1’200 / offen            -                           CHF 1’200 /           -
+(min./max.)                                                                           3a-Maximalbetrag
+
+Einmalprämie                 -                            CHF 10’000                  -                     CHF 10’000
+(minimal)
+Dynamik                      1 %, 2 %, 3 %                -                           Nicht möglich         -
+                             oder 4 %
+Automatische                 -                            -                           Möglich 1)            -
+Prämienanpassung
+
+Todesfallleistung            0 / zweifache Prä-           Einmalprämie / zwei-        0 / zweifache Prä-    Einmalprämie / zwei-
+(min./max.)                  miensumme bis ma-            fache Einmal­prämie         miensumme bis ma-     fache Einmal­prämie
+                             ximal CHF 2’000’000          bis maximal                 ximal CHF 2’000’000   bis maximal
+                                                          CHF 2’000’000                                     CHF 2’000’000
+
+Auszahlung der               Garantierte Mindestleistung bei Tod oder – falls höher – der Wert des Anteilguthaben.
+Todesfallleistung
+
+Überschüsse                  Fondsgutschrift: Überschüsse werden für den Kauf weiterer Fondsanteile verwendet.
+                             Gutschrift in risikolose Anlage: Überschüsse werden in der risikolosen Anlage (Anlage mit
+                             variabler Verzinsung) angesammelt und jährlich verzinst.
+
+LifeStarPlanInvest, TerzaLifeStarPlanInvest
+Bei den Tarifen LifeStarPlanInvest und TerzaLifeStarPlanInvest gelten für die Einmaleinlagen eine minimale Einmal-
+prämie von CHF 500 und für die periodischen Prämien gelten die Regelungen von LifeStar bzw. TerzaLifeStar.
+
+1)
+     Bei Erhöhung des maximalen steuerlich abzugsfähigen Betrages wird die effektive Jahresprämie automatisch um
+     die Differenz aus neuem und altem Maximalbetrag erhöht.
+
+
+
+
+Pax, Schweizerische Lebensversicherungs-Gesellschaft AG       0211floq-PMPV-10.2026                                         Seite 1/3
+Garantieniveau für                  Konstant 10–100%
+periodische Prämie                  Die Prämienaufteilung
+
+                                                                   Garantieteil
+                                                                                    Konstant
+(individuell wählbar bei            in den Garantieteil bleibt
+Vertragsabschluss)                  über die ganze Laufzeit
+                                    konstant.
+                                                                                  Versicherungsdauer
+
+                                    Linear 0–40%
+                                    Die Prämienaufteilung
+
+                                                                   Garantieteil
+                                                                                    Linear
+
+                                    in den Garantieteil steigt
+                                    mit der Laufzeit linear an.
+
+                                                                                  Versicherungsdauer
+
+                                    Dynamisch 1–20%
+                                    Die Prämienaufteilung
+
+                                                                   Garantieteil
+                                    in den Garantieteil steigt
+                                                                                    Dynamisch
+                                    mit der Laufzeit dyna-
+                                    misch an.
+
+
+
+
+Pax, Schweizerische Lebensversicherungs-Gesellschaft AG   0211floq-PMPV-10.2026                        Seite 2/3
+Schematischer Verlauf für Einmalprämie
+
+
+
+
+FONDS
+Anzahl Fonds                           Es können 2 Anlagefonds kombiniert werden.
+Ausgabe- und                           Die Fonds werden zum Ausgabepreis (Nettoinventarwert zuzüglich einer einmali-
+Rücknahmepreise                        gen Ausgabekommission) in Schweizer Franken erworben. Zurzeit ist der Ausga-
+                                       bekommissionssatz 1 %.
+Verwaltungsgebühren                    Für das Management der Fonds werden Gebühren erhoben. Diese werden vom
+und Fondsangebot                       Fondsanbieter festgelegt. Die aktuell gültigen Gebührensätze finden Sie auf www.
+                                       pax.ch/fondsservice.
+Switch                                 Der Versicherungsnehmer kann Pax jederzeit beauftragen, die Fonds auszutau-
+                                       schen. Der Verkauf wie auch der Erwerb erfolgen zum Nettoinventarwert; das
+                                       heisst, es werden weder Ausgabekommissionen noch Switchgebühren berechnet.
+
+
+MÖGLICHE ZUSATZVERSICHERUNGEN FÜR PERIODISCHE PRÄMIEN
+                                                                                                                     3b       3a   DL2)
+Zusatzversicherung Im Todesfall                             Kapital: FKz / FK+2)                                     Ja       Ja   Ja
+                                                            Kapital fallend: FKFz / FKF+     2)
+                                                                                                                     Ja       Ja   Ja
+                                                            Hinterbliebenenrente: FRz / FR+       2)
+                                                                                                                     Ja       Ja   Ja
+                                                            Kapital bei Unfalltod: U / U+2)                          Ja       Ja   Ja
+                          Bei Erwerbsunfähigkeit            Prämienbefreiung: I / I+    2)
+                                                                                                                     Ja       Ja   Ja
+                                                            Rente: IR / IR+2)                                        Ja       Ja   Ja
+                                                            Rente ohne Unfalldeckung: IRoU / IRoU+            2)
+                                                                                                                     Ja       Ja   Ja
+                                                            Rente ohne Deckung psychischer Leiden:
+                                                                                                                     Ja       Ja   Ja
+                                                            IRoP / IRoP+2)
+                                                            Rente für junge Leute: IRjL / IRjL+2)                    Ja       Ja   Ja
+                                                            Rente ohne Unfalldeckung für junge Leute:
+                                                                                                                     Ja       Ja   Ja
+                                                            IRjLoU / IRjLoU+2)
+                                                            Rente ohne Deckung psychischer Leiden
+                                                                                                                     Ja       Ja   Ja
+                                                            für junge Leute: IRjLoP / IRjLoP+2)
+                                                            Kinderrente: IRK                                         Ja       Nein Nein
+Zusatzbaustein            Im Todesfall                      Beerdigungskosten                                        Ja       Ja   Nein
+                                                            Ausbaugarantie                                           Ja       Ja   Nein
+                          Bei Erwerbsunfähigkeit            Hilfeleistungen                                          Ja       Ja   Nein
+                                                            Option zur Rentenerhöhung                                Ja       Ja   Nein
+                                                      Ausbaugarantie                                                 Ja       Ja   Nein
+                          Bei Finanzierung von selbst
+                                                      Ausbaugarantie                                                 Ja       Ja   Nein
+                          genutztem Wohneigentum
+
+2)
+     DL = Drittlebensversicherung: Die Zusatzversicherung auf ein weiteres Leben ist nur in der Säule 3b möglich.
+
+
+
+
+Pax                               Tel. +41 61 277 66 66           Die vorliegenden Ausführungen dienen der Illustration.
+Aeschenplatz 13                   info@pax.ch                     Rechte und Pflichten ergeben sich ausschliesslich aus den
+CH - 4002 Basel                   www.pax.ch                      gesetzlichen Bestimmungen, der Versicherungspolice und
+                                                                  den Allgemeinen Versicherungsbedingungen (AVB).
+
+
+Pax, Schweizerische Lebensversicherungs-Gesellschaft AG   0211floq-PMPV-10.2026                                                    Seite 3/3
+

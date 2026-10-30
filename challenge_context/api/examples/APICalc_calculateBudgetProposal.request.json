@@ -1,0 +1,9 @@
+{
+    "BudgetMonthly": true,
+    "IncomeType": 1,
+    "Income": 120000,
+    "Relationship": 1,
+    "NumberOfChildren": 0,
+    "UseEffectiveTax": false,
+    "Language": 1
+}

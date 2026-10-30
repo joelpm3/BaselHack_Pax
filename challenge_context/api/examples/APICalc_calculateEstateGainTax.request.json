@@ -1,0 +1,17 @@
+{
+    "TaxLocationID": 400100000,
+    "Relationship": 1,
+    "Confession1": 4,
+    "Confession2": 4,
+    "ConfessionPart1": 0,
+    "TaxableGain": 200000,
+    "OwnerYears": 10,
+    "OwnerMonths": 0,
+    "Revenues": 800000,
+    "FirstCosts": 500000,
+    "BuildingInvest": 50000,
+    "HasBuilding": true,
+    "SelfInhabited": false,
+    "SelfInhabYears": 0,
+    "HasDiscount": false
+}

@@ -1,0 +1,9 @@
+{
+    "ConsumptionGoal": 2,
+    "StartCapital": 300000,
+    "InterestRate": 2,
+    "WithdrawalMonthly": false,
+    "Withdrawal": 24000,
+    "Duration": 15,
+    "EndCapital": 0
+}

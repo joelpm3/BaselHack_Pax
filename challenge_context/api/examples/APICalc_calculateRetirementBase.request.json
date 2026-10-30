@@ -1,0 +1,13 @@
+{
+    "Relationship": 1,
+    "RelationshipSinceYear": 2015,
+    "Person1": {
+        "Sex": 1,
+        "BirthYear": 1985,
+        "GrossIncome": 120000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+            "Pension": 40000
+        }
+    }
+}

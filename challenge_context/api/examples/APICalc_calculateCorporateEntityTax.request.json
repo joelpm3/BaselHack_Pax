@@ -1,0 +1,14 @@
+{
+    "TaxLocationID": 400100000,
+    "ProfitBeforeTaxes": true,
+    "TaxableProfitConf": 100000,
+    "TaxableProfitCanton": 100000,
+    "TaxableCapital": 500000,
+    "ShareCapital": 100000,
+    "NetProfitParticipationConf": 0,
+    "NetProfitParticipationCanton": 0,
+    "InnovationsDeduction": 0,
+    "NotionalInterestDeduction": 0,
+    "TotalAssets": 0,
+    "TotalBeneficiaryParticipation": 0
+}

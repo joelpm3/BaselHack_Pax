@@ -1,0 +1,11 @@
+{
+    "CapitalPayment": 250000,
+    "PaymentAge": 65,
+    "TaxLocationID": 400100000,
+    "Relationship": 1,
+    "Confession1": 4,
+    "Confession2": 4,
+    "NumberOfChildren": 0,
+    "Sex": 1,
+    "BirthYear": 1960
+}

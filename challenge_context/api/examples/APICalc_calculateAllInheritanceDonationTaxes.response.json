@@ -1,0 +1,394 @@
+{
+    "response": [
+        {
+            "Group": 100,
+            "Beneficiary": 101,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 200,
+            "Beneficiary": 201,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 200,
+            "Beneficiary": 202,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 200,
+            "Beneficiary": 203,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 301,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 302,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 303,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 304,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 305,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 306,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 307,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 308,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 400,
+            "Beneficiary": 401,
+            "InheritanceTaxes": 4900,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 5000,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 400,
+            "Beneficiary": 402,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 400,
+            "Beneficiary": 403,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 500,
+            "Beneficiary": 501,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 500,
+            "Beneficiary": 502,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 500,
+            "Beneficiary": 503,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 500,
+            "Beneficiary": 504,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 600,
+            "Beneficiary": 601,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 600,
+            "Beneficiary": 602,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 701,
+            "InheritanceTaxes": 12250,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 12500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 702,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 703,
+            "InheritanceTaxes": 9800,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 10000,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 704,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 705,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 706,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 700,
+            "Beneficiary": 707,
+            "InheritanceTaxes": 17150,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 17500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 801,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 802,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 803,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 804,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 805,
+            "InheritanceTaxes": 12250,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 12500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 806,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 807,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 808,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 809,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 810,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 800,
+            "Beneficiary": 811,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        }
+    ]
+}

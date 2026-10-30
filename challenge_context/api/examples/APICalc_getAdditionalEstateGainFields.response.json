@@ -1,0 +1,12 @@
+{
+    "response": {
+        "Confession": false,
+        "Revenues": true,
+        "FirstCost": false,
+        "BuildingInvest": true,
+        "HasBuilding": false,
+        "SelfInhabitated": true,
+        "SelfInhabYears": false,
+        "HasDiscount": false
+    }
+}

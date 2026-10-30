@@ -1,0 +1,302 @@
+PAX (CH) SUSTAINABLE BOND CHF
+ALV T
+Marketingmaterial – Thesaurierend, Stand 30.09.2026
+
+
+Der Fonds strebt einen langfristigen Kapitalzuwachs                            Investments, die sowohl bezüglich Produkten und
+verbunden mit angemessenen Erträgen an. Investiert                             Dienstleistungen als auch in ihrer Betriebsführung positiv
+wird hauptsächlich in auf CHF lautende oder gegenüber                          beurteilt sind, werden bevorzugt investiert. Solche, die in
+dem CHF abgesicherte Obligationen von privaten und                             beiden Dimensionen ungenügend abschneiden,
+öffentlich-rechtlichen Schuldnern weltweit. Der Fonds                          kommen nicht ins Portfolio. Für öffentlich-rechtliche
+wird aktiv verwaltet. Der Fokus liegt auf Schuldnern mit                       Schuldner gilt ein adaptiertes SDG-Rating. Darüber
+guter bis sehr guter Bonität. Ergänzend können                                 hinaus werden verschiedene Ausschlusskriterien
+ausgewählte Anlagen mit tieferer Bonität sowie weitere                         umgesetzt.
+Anlagemöglichkeiten zur Optimierung des Risiko-
+Rendite-Profils beigemischt werden. Die Umsetzung                              Bei der Portfoliokonstruktion werden zwei
+erfolgt primär mittels Anlagen in Zielfonds.                                   Nachhaltigkeitsziele verfolgt: Der aggregierte SDG-Score
+                                                                               muss positiv sein. Der kontinuierlichen Reduktion der
+Sämtliche Investments werden bezüglich ihres Beitrages                         CO2e-Intensität wird Rechnung getragen.
+zu den UN-Nachhaltigkeitszielen bewertet und in der
+eigens entwickelten PAM SDG-Matrix positioniert.
+
+
+Profil & Eignung                                                               Wertentwicklung
+  Der Fonds eignet sich für Anleger, welche                                     Hinweis
+    - mindestens einen mittelfristigen Anlagehorizont haben.                    Dieses Diagramm wird erst ab 3 Monaten angezeigt.
+    - sich an der Entwicklung des CHF-Obligationenmarktes                       (Fondslancierung am 29.09.2026)
+       beteiligen möchten.
+    - keine grossen Kursschwankungen in Kauf nehmen möchten.
+                                                                               Fondsdaten
+                                                                               ISIN                                                 CH1586436904
+Risikoindikator                                                                Valoren Nummer                                           158643690
+                                                                               Lancierungsdatum Fonds                                   29.09.2026
+            Fonds                                                              Fondsdomizil                                               Schweiz
+                                                                               Währung                                                        CHF
+       1        2            3         4        5          6        7
+                                                                               Fondvolumen in Mio.                                              10
+   Tief                                                            Hoch        NAV pro Anteil                                                99.98
+                                                                               Total Expense Ratio in % p.a.                                0.40%
+
+Jahresperformance                                                              Swinging Single Pricing                                          Ja
+in %                                                                           Vermögensverwalter                        Pax Asset Management AG
+                    2026                                                       Fondsleitung                             Swisscanto Fondsleitung AG
+Fonds                n.v.                                                      Depotbank                                      Zürcher Kantonalbank
+
+
+Performance
+in % pro Jahr
+                    1 Jahr       3 Jahre    5 Jahre    10 Jahre    Gesamt
+Fonds                 n.v.           n.v.       n.v.        n.v.        n.v.
+
+
+Risiko / Volatilität
+in % pro Jahr
+                    1 Jahr       3 Jahre    5 Jahre    10 Jahre    Gesamt
+Fonds                 n.v.           n.v.       n.v.        n.v.        n.v.
+
+
+
+
+Pax (CH) Sustainable Bond CHF ALV T, 30.09.2026                                                                                               1/5
+Obligationenratings                                                         Die grössten Positionen
+Nach Ratings in % des wirtschaftlichen Gesamtexposure                       in %
+                                                                                                                              Fonds    SDG-Score
+AAA                                             18.3%                       UBS (CH) Index Fund - Bonds EUR Corporate          20.0%         7●
+                                                                            (CHF hedged)
+                                                                            UBS (CH) Index Fund - Bonds CHF Corporate          20.0%         7●
+AA                                             16.9%
+                                                                            NSL
+                                                                            UBS (CH) Index Fund - Bonds CHF 1-5 NSL            20.0%         5●
+A                                                                 33.2%     UBS CH Investment Fund - Bonds Global              15.0%         5●
+                                                                            Corporate Climate Aware Hedged NSL (CHF
+                                                                            hedged)
+BBB                                                       27.4%
+                                                                            UBS (CH) Investment Fund - Bonds CHF Foreign       10.0%         7●
+                                                                            Index
+BB oder schlechter               2.3%                                       UBS (CH) Investment Fund - Bonds CHF               10.0%         4●
+                                                                            Domestic Index
+                                                                            Vontobel Fund - Sustainable Emerging Markets        5.0%         9●
+Rest                             1.9%                                       Debt (hedged), CHF
+
+                            0%          10%     20%       30%         40%
+      Fonds
+                                                                            Treibhausgasemissionen
+                                                                            Kennzahlen zu den Emissionen von Treibhausgasen (THG)
+    Hinweis                                                                 Emissionen (Total in tCO2 eq., Scopes 1 & 2)                   215.30
+    Die Fondszusammensetzung wird von der Fondsleitung mit einer            Intensität (gewich. Durchschnitt tCO2eq/Mio. CHF Umsatz)       55.30
+    Verzögerung von rund drei Monaten publiziert. Die
+                                                                            Abdeckungsgrad CO2-Daten: 71%
+    Nachhaltigkeitsbewertungen sowie die CO₂-Kennzahlen werden
+    daher auf denselben Stichtag und auf Basis der zu diesem Zeitpunkt
+    aktuellsten verfügbaren MSCI-Daten berechnet.
+
+
+
+
+Pax (CH) Sustainable Bond CHF ALV T, 30.09.2026                                                                                             2/5
+PAM SDG-Matrix
+Positionierung der investierten Zielfonds                                                     Detailansicht der investierten Zielfonds
+ Question Marks                           +100                                Blue Planet                                                                                       30
+
+
+
+
+                                                                                                              Products & Services
+                                                                                                                                                                                25
+
+
+                                                                                                                                                                                20
+
+
+                                                                                                                                                                                15
+
+
+         Business Operations
+ -100                                                                                +100                                                                                       10
+
+
+                                                                                                                                                                                5
+
+
+                                                                                                                                                                                0
+
+
+
+                                        Products & Services
+                                                                                                                                                          Business Operations
+
+
+                                                                                                                                                                                -5
+
+
+ Waste Zone                                 -100                     Growth Opportunities                                                                                    -10
+                                                                                              -10       -5                          0     5    10   15    20       25       30
+TODO: Abdeckungsgrad SDG-Scores: 90%. Die Punkte bilden die einzelnen Zielfonds
+ab, in die der Fonds investiert ist. Je nach Datengrundlage können nicht alle Zielfonds
+abgebildet werden. Der markierte Diamant-Punkt ist der aggregierte Wert auf
+Fondsebene.
+
+
+
+Ausschlusskriterien
+In % des Fondsvermögens
+                                                                                     Fonds
+Kritische Geschäftsfelder                                                            1.00%
+UN Global Compact Kontroversen (besonders schwer)                                    1.00%
+
+
+Portfolio-Scores pro Sustainable Development Goal (SDG)
+
+
+
+
+ +5                  +1                                         +0              -1      +17           +5                                 +12        +11             +12
+
+
+
+                                                                                                                                                                        +6
+                                                                                                                                                                        Total
+
+  +12                +2                                   +11          +14                     -1                                   -2   +4         +4
+
+Abdeckungsgrad SDG-Scores: 90%
+
+
+
+
+Pax (CH) Sustainable Bond CHF ALV T, 30.09.2026                                                                                                                                 3/5
+Definitionen und Glossar
+
+Erläuterungen zum Fonds                                                           Primärer angewandter Nachhaltigkeitsansatz
+Anlegerkreis – Bezeichnung
+Begrenztes Anlegerpublikum                                                        Ausschlüsse                            Best-in-Class
+Anlegerkreis - Beschreibung
+Anteile dieser Klasse sind thesaurierende Anteile, die sich ausschliesslich       ESG-Integration                        Engagement
+an die Pax, Schweizerische Lebensversicherungs-Gesellschaft AG für an-
+teilsgebundene Lebensversicherungen von einem oder mehreren indivi-               Stimmrechtsausübung
+duellen Anlagefonds wenden. Sofern die Eidgenössische Steuerverwal-
+tung dies gestattet, kann die Verrechnungssteuerpflicht durch Meldung
+gemäss Art. 38a VStV erfüllt werden.                                              Ausschlüsse
+                                                                                  Der Begriff Ausschlüsse bezieht sich auf den systematischen Ausschluss
+Total Expense Ratio (TER)                                                         bestimmter Emittenten aus einem Portfolio mit der Begründung, dass
+Die TER bezeichnet die Kommissionen, die laufend dem Fondsvermögen                ihre Geschäftstätigkeit gegen Normen oder Werte verstösst oder dass Ri-
+belastet werden (Betriebsaufwand), und wird in einem Prozentsatz des              siken antizipiert werden. Die Ausschlusskriterien von Pax Asset Manage-
+Fondsvermögens ausgedrückt. Die Angabe entspricht der Höhe der TER                ment und deren Umsetzung finden Sie auf:
+im zuletzt abgeschlossenen Geschäftsjahr und bietet keine Gewähr für              www.pax.ch/ausschlusskriterien.
+eine entsprechende Höhe in der Zukunft.
+                                                                                  Best-in-Class
+Swinging Single Pricing (SSP)                                                     Die Berücksichtigung bindender Nachhaltigkeits- bzw. ESG-Faktoren im
+Situative Korrektur des für die Berechnung des Ausgabe- und Rücknah-              Anlageprozess erfolgt durch die Auswahl von Wertpapieren, die im Ver-
+mepreises massgebenden Inventarwertes nach oben oder unten je nach                gleich (i.d.R. innerhalb einer Branche) hinsichtlich der Kriterien insgesamt
+über- wiegenden Anteilausgaben oder Rücknahmen, wobei sich der Kor-               positiv bewertet werden. Es wird bezweckt, ein im Peer-Vergleich
+rektur (Swing)-Faktor nach der Höhe der Kosten richtet, die dem Anlage-           besseres nachhaltiges Anlageuniversum zu definieren, welches Aus-
+fonds bei der Anpassung des Portefeuilles an die zu- bzw. abgeflossenen           gangspunkt für die Portfoliokonstruktion ist.
+Mittel entstehen (neutralisiert die den Anlagefonds bei der Anpassung             Der für diesen Anlagefonds verwendete Ansatz ist ein adaptierter Best-
+des Vermögens an Mittelzu- und abflüsse entstehenden Kosten). Die                 in-Class Ansatz, in dem er als Kriterienkatalog und Vergleichsgrösse die
+ausgewiesene Wertentwicklung (Brutto/Netto) kann eine Swing-Price                 SDGs (siehe Nachhaltigkeitsinformationen) zur Beurteilung heranzieht
+Anpassung beinhalten.                                                             (Best-in-SDGs).
+
+Erläuterung der allgemeinen Risiken                                               ESG-Integration
+Mit der Anlage sind Risiken, insbesondere diejenigen von Wert- und Er-            ESG-Integration ist die direkte Einbeziehung von ESG-Chancen bzw.
+tragsschwankungen, verbunden. Anlagen in Fremdwährungen weisen                    ESG-Risiken in die traditionelle Finanzanalyse und Anlageentscheidungen
+Wechselkursschwankungen auf. Weitere erhebliche Risiken stellen das               von Asset Managern mittels eines systematischen Prozesses und geeig-
+Verwahrungs- sowie das Gegenparteirisiko dar. Wir verweisen auf die de-           neter Research-Quellen. Auf die Definition eines Nachhaltigkeitsuni-
+taillierte Beschreibung der verschiedenen Risiken, die im Verkaufspros-           versum wird verzichtet.
+pekt aufgeführt werden.
+                                                                                  Engagement
+Risikoindikator                                                                   Engagement bezieht sich auf einen aktiven Dialog mit Geschäftsleitungen
+Die zur Berechnung der Risiko- und Ertragskategorie verwendeten histo-            von Unternehmen oder anderen relevanten Stakeholdern mit dem Ziel,
+rischen Daten können nicht als verlässlicher Hinweis auf das künftige Risi-       sie davon zu überzeugen, Umwelt-, Sozial- und Governance-Kriterien in-
+koprofil herangezogen werden. Die ausgewiesene Risiko- und Ertragska-             nerhalb ihres Einflussbereichs zu berücksichtigen und damit die unter-
+tegorie kann durchaus Veränderungen unterliegen. Die niedrigste Risiko-           nehmerische Qualität aus der Sicht des Asset Managers zu verbessern.
+kategorie kann nicht mit einer risikofreien Anlage gleichgesetzt werden.          Pax Asset Management engagiert sich im Rahmen eines kollaborativen
+Es besteht keine Kapitalgarantie bzw. kein Kapitalschutz. Das Risiko des          Engagements unter Einbezug eines externen Partners.
+Kapitalverlustes wird vom Anleger getragen.
+                                                                                  Stimmrechtsausübung
+Portfolio Allokationen                                                            Dieser Begriff bezieht sich darauf, dass Investoren ihren Präferenzen be-
+Alle Allokationen beziehen sich auf investiertes Fondskapital auf 100%            züglich Nachhaltigkeit Ausdruck verleihen, indem sie ihre Stimmrechte
+adjustiert. Geringe Abweichungen der Differenzen können aufgrund von              aktiv und auf Basis von nachhaltigkeitsbezogenen Grundsätzen oder
+Rundungen auftreten. Die Gewichtung des Geldmarkts kann das syntheti-             Richtlinien ausüben. Bei Kollektivanlagen werden die Stimmrechte im In-
+sche Exposure aus der Aktien-Absicherungsstrategie beinhalten.                    teresse der Investoren durch die Fondsleitung ausgeübt.
+
+Volatilität                                                                       Weiterführende Informationen zu den Nachhaltigkeitsansätzen
+Die Volatilität ist ein statistisches Risikomass, das angibt, wie stark die ab-   Detailliertere Informationen zu den Nachhaltigkeitsansätzen von Pax
+soluten Renditen einer Anlage oder eines Portfolios durchschnittlich pro          Asset Management finden Sie auf: www.pax.ch/nachhaltigkeit.
+Jahr um deren Mittelwert schwanken.
+
+
+
+
+Pax (CH) Sustainable Bond CHF ALV T, 30.09.2026                                                                                                           4/5
+Nachhaltigkeitsinformationen
+
+Abdeckungsgrad                                                                  Treibhausgasemissionen
+Anteil der Anlagen für die Nachhaltigkeitskennzahlen verfügbar sind bzw.        Angabe über die Gesamtmenge an Treibhausgasen (THG), für welche die
+für welche die definierten Nachhaltigkeitsgrundsätze zur Anwendung              investierten Unternehmen über den gesamten Herstellungsprozess
+kommen. Für den Anlagefonds gilt eine Mindestabdeckung von 80% des              hinaus bis hin zur Verwendung und Entsorgung der Produkte
+Fondsvermögens.                                                                 verantwortlich sind. Diese Gase umfassen insbesondere CO2, aber auch
+                                                                                andere Gase, die entsprechend ihrer Wirksamkeit in CO2-Äquivalente
+Sustainable Development Goals (SDGs)                                            (CO2eq) umgerechnet werden. Aus dieser Angabe leitet sich folgende
+Bei den SDGs handelt es sich um 17 politische Nachhaltigkeitsziele der          Kennzahl ab: Intensität – Ist ein Effizienzmass, das angibt, wie viel
+Vereinten Nationen, auf die sich die Staatengemeinschaft 2015 geeinigt          Emissionen an THG durch die investierten Unternehmen verursacht
+hat und welche weltweit bis 2030 umgesetzt und als Katalysator für eine         werden, um eine Million Schweizer Franken Umsatz zu generieren.
+nachhaltige Entwicklung wirken sollen. Zur Konkretisierung wurde ein Ka-
+talog mit 169 Zielvorgabenverabschiedet.                                        Kontroverse Praktiken
+                                                                                Kontroverse Praktiken sind durch Unternehmen und Staaten verursachte
+SDG-Scores                                                                      Ereignisse, die negative Auswirkungen auf Umwelt und Gesellschaft ha-
+Diese Ratings beurteilen basierend auf einer Vielzahl von branchenspezi-        ben, oder Schwächen bei der Unternehmensführung aufweisen. Diese
+fischen Kriterien a) die Produkte und Dienstleistungen eines Unterneh-          werden anhand ihres Schweregrades bewertet. Definiert werden diese
+mens im Hinblick auf die Erreichung der SDGs (was macht ein Unterneh-           Praktiken z.B. durch Investorenvereinigungen, wie in der Schweiz
+men) und b) die Geschäftsaktivitäten, d.h. Business Operations oder Be-         SVVKASIR (www.svvk-asir.ch) oder Unternehmensnetzwerke, wie z.B. UN
+triebsführung (wie macht es das Unternehmen). Die Bandbreite der                Global Compact.
+Scores geht basierend auf dem Ansatz des Partners MSCI ESG von -100
+bis +100. Für öffentlich-rechtliche Schuldner kommt ein eindimensionaler        UN Global Compact
+SDGScore des jeweiligen Landes zur Anwendung. Kollektive Anlagege-              Das globale Netzwerk von Unternehmen macht sich für die Einhaltung
+fässe werden so weit möglich auf die einzelnen gehaltenen Wertpapiere           von nachhaltigen Werten stark. Basierend auf 10 Prinzipien sollen Strate-
+heruntergebrochen („look-through“-Verfahren).                                   gie, Weisungen/Policies und Prozesse auf Nachhaltigkeit ausgerichtet
+                                                                                werden.
+PAM SDG-Matrix
+Die bewerteten Emittenten und Zielfonds werden in der PAM SDG-Matrix
+positioniert. Investments im Bereich „Blue Planet“ (beide Scoringdimensi-
+onen weisen ein positives Ergebnis aus) werden bevorzugt, solche im Be-
+reich „Waste Zone“ (beide Scoringdimensionen negativ) vermieden. Der
+Fonds investiert vereinzelt auch in die Quadranten „Question Marks“ und
+„Growth Opportunities“.
+
+
+
+
+Pax Asset Management AG
+Aeschenplatz 13
+Postfach
+4002 Basel
+
+
+Rechtlicher Hinweis
+Das vorliegende Dokument dient Werbe- und Informationszwecken, ist ausschliesslich für die Verbreitung in der Schweiz bestimmt und richtet sich nicht
+an Personen in anderen Ländern und an Personen, deren Nationalität oder Wohnsitz den Zugang zu solchen Informationen aufgrund der geltenden
+Gesetzgebung verbieten. Wir weisen darauf hin, dass die historische Performance keinen Indikator für die laufende oder zukünftige Performance dar-
+stellt und die Performancedaten die bei der Ausgabe und Rücknahme der Anteile erhobenen Kommissionen und Kosten unberücksichtigt lassen. Die
+Total Expense Ratio (TER) bezeichnet die Kommissionen, die laufend dem Fondsvermögen belastet werden (Betriebsaufwand) und wird in einem
+Prozentsatz des Fondsvermögens ausgedrückt. Die Angabe entspricht der Höhe der TER im zuletzt abgeschlossenen Geschäftsjahr und bietet keine
+Gewähr für eine entsprechende Höhe in der Zukunft.
+
+Dieses Dokument wurde von der Pax Asset Management AG mit grösster Sorgfalt und nach bestem Wissen und Gewissen erstellt. Diese bieten jedoch
+keine Gewähr für dessen Inhalt und Vollständigkeit und lehnen jede Haftung für Verluste ab, die sich aus der Verwendung dieser Informationen ergeben.
+Das Dokument stellt weder ein Angebot noch eine Empfehlung zur Zeichnung oder Rückgabe bzw. zum Erwerb oder Verkauf von Finanzinstrumenten
+oder Bankdienstleistungen dar und entbindet den Empfänger nicht von seiner eigenen Beurteilung. Insbesondere ist dem Empfänger empfohlen, allen-
+falls unter Beizug eines Beraters die Informationen in Bezug auf ihre Vereinbarkeit mit seinen persönlichen eigenen Verhältnissen, auf juristische, regula-
+torische, steuerliche und andere Konsequenzen zu prüfen. Das vorliegende Dokument wurde nicht von der Abteilung «Finanzanalyse» im Sinne der von
+der Schweizerischen Bankiervereinigung herausgegebenen «Richtlinien zur Sicherstellung der Unabhängigkeit der Finanzanalyse» erstellt und unterliegt
+folglich nicht diesen Richtlinien.
+
+Dieses Dokument ist kein Prospekt im Sinne von Artikel 652a bzw. 1156 des schweizerischen Obligationenrechts oder Artikel 27 ff. des Kotierungsregle-
+ments der SIX Swiss Exchange AG. Dieses Dokument und die darin enthaltenen Informationen dürfen nicht an Personen, die möglicherweise US- Perso-
+nen nach der Definition der Regulation S des US Securities Act von 1933 sind, verteilt und/oder weiterverteilt werden. Definitionsgemäss umfasst «US
+Person» jede natürliche US-Person oder juristische Person, jedes Unternehmen, jede Firma, Kollektivgesellschaft oder sonstige Gesellschaft, die nach
+amerikanischem Recht gegründet wurde. Im Weiteren gelten die Kategorien der Regulation S. Der Prospekt mit integriertem Fondsvertrag, der für die-
+sen Fonds berechtigte Anleger nennt, das Basisinformationsblatt sowie der Jahresbericht sind bei der Fondsleitung, der Depotbank und bei der Pax Asset
+Management AG kostenlos erhältlich.
+
+Pax (CH) Sustainable Bond CHF ALV T, 30.09.2026                                                                                                       5/5
+

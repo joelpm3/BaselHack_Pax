@@ -1,0 +1,58 @@
+{
+    "response": {
+        "RiskScenarioSummaries": [
+            {
+                "Scenario": 1,
+                "ErrorCode": 0,
+                "GrossIncome": 120000,
+                "IncomeNeed": 0,
+                "IncomeGap": 0,
+                "IncomeSurplus": 69268,
+                "IncomeTotal": 69268,
+                "IncomePillar1": 29268,
+                "IncomePillar2": 40000,
+                "IncomePartner": 0,
+                "CapitalGap": 0
+            },
+            {
+                "Scenario": 2,
+                "ErrorCode": 0,
+                "GrossIncome": 120000,
+                "IncomeNeed": 0,
+                "IncomeGap": 0,
+                "IncomeSurplus": 108000,
+                "IncomeTotal": 108000,
+                "IncomePillar1": 29268,
+                "IncomePillar2": 78732,
+                "IncomePartner": 0,
+                "CapitalGap": 0
+            },
+            {
+                "Scenario": 3,
+                "ErrorCode": 0,
+                "GrossIncome": 120000,
+                "IncomeNeed": 0,
+                "IncomeGap": 0,
+                "IncomeSurplus": 0,
+                "IncomeTotal": 0,
+                "IncomePillar1": 0,
+                "IncomePillar2": 0,
+                "IncomePartner": 0,
+                "CapitalGap": 0
+            },
+            {
+                "Scenario": 4,
+                "ErrorCode": 0,
+                "GrossIncome": 120000,
+                "IncomeNeed": 0,
+                "IncomeGap": 0,
+                "IncomeSurplus": 0,
+                "IncomeTotal": 0,
+                "IncomePillar1": 0,
+                "IncomePillar2": 0,
+                "IncomePartner": 0,
+                "CapitalGap": 0
+            }
+        ]
+    }
+}

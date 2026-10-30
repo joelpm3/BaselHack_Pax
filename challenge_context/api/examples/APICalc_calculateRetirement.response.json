@@ -1,0 +1,15 @@
+{
+    "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 120000,
+        "IncomeNeed": 96000,
+        "IncomeGap": 0,
+        "IncomeTotal": 96000,
+        "IncomePillar1": 32760,
+        "IncomePillar2": 40000,
+        "IncomeWithdrawal": 23240,
+        "AvailableFortune": 567975,
+        "CapitalNeed": 349955,
+        "CapitalGap": 0
+    }
+}

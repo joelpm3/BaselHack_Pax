@@ -1,0 +1,8 @@
+{
+    "SavingGoal": 1,
+    "Duration": 20,
+    "InitialInvestment": 10000,
+    "InvestmentMonthly": false,
+    "PeriodicInvestment": 6000,
+    "InterestRate": 2.5
+}

@@ -1,0 +1,11 @@
+{
+    "IncomeType": 1,
+    "Income": 120000,
+    "Fortune": 200000,
+    "TaxLocationID": 400100000,
+    "Relationship": 2,
+    "Confession1": 4,
+    "Confession2": 4,
+    "NumberOfChildren": 2,
+    "BirthYear": 1985
+}

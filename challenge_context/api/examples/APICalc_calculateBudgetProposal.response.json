@@ -1,0 +1,116 @@
+{
+    "response": {
+        "Categories": [
+            {
+                "Description": "Steuern",
+                "Amount": 15265,
+                "Details": []
+            },
+            {
+                "Description": "Wohnen",
+                "Amount": 17081,
+                "Details": [
+                    {
+                        "Description": "Miete",
+                        "Amount": 11949
+                    },
+                    {
+                        "Description": "Hypothekarzinsen",
+                        "Amount": 0
+                    },
+                    {
+                        "Description": "Neben- und Unterhaltskosten",
+                        "Amount": 5132
+                    }
+                ]
+            },
+            {
+                "Description": "Versichern und Vorsorgen",
+                "Amount": 5548,
+                "Details": [
+                    {
+                        "Description": "Haftpflicht und Hausrat",
+                        "Amount": 427
+                    },
+                    {
+                        "Description": "Beitr\u00e4ge an private Vorsorge",
+                        "Amount": 4322
+                    },
+                    {
+                        "Description": "Weitere Versicherungen und Geb\u00fchren",
+                        "Amount": 799
+                    }
+                ]
+            },
+            {
+                "Description": "Gesundheitskosten",
+                "Amount": 6256,
+                "Details": [
+                    {
+                        "Description": "Krankenkasse inkl. Zusatz",
+                        "Amount": 4670
+                    },
+                    {
+                        "Description": "Medikamente, Brillen, Franchise",
+                        "Amount": 491
+                    },
+                    {
+                        "Description": "\u00c4rzte, Spit\u00e4ler, Therapie",
+                        "Amount": 1095
+                    }
+                ]
+            },
+            {
+                "Description": "Mobilit\u00e4t und Kommunikation",
+                "Amount": 10367,
+                "Details": [
+                    {
+                        "Description": "Fahrzeug/Leasing",
+                        "Amount": 3698
+                    },
+                    {
+                        "Description": "Fahrzeugversicherung",
+                        "Amount": 869
+                    },
+                    {
+                        "Description": "Treibstoff und Unterhalt",
+                        "Amount": 1904
+                    },
+                    {
+                        "Description": "\u00d6ffentlicher Verkehr",
+                        "Amount": 2129
+                    },
+                    {
+                        "Description": "Tel/TV/Radio und Internet",
+                        "Amount": 1767
+                    }
+                ]
+            },
+            {
+                "Description": "Konsum und Freizeit",
+                "Amount": 30775,
+                "Details": [
+                    {
+                        "Description": "Nahrung und Genussmittel",
+                        "Amount": 5412
+                    },
+                    {
+                        "Description": "Kleider und Schuhe",
+                        "Amount": 2131
+                    },
+                    {
+                        "Description": "Ferien, Hobbys und Kultur",
+                        "Amount": 12790
+                    },
+                    {
+                        "Description": "Weitere Ausgaben",
+                        "Amount": 10442
+                    }
+                ]
+            }
+        ],
+        "SumExpenses": 85292,
+        "IncomeNet": 103997,
+        "SavingQuote": 18705
+    }
+}

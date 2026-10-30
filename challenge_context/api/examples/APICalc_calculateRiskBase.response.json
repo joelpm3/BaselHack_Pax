@@ -1,0 +1,11 @@
+{
+    "response": {
+        "Person1": {
+            "CoverageCapital": 73933,
+            "Disability": 22420,
+            "DisabilityChildren": 0,
+            "Widow": 0,
+            "Orphan": 0
+        }
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "response": {
+        "FederalTax": 0,
+        "StateTax": 36703,
+        "CommunityTax": 36703,
+        "ChurchTax": 0,
+        "TotalTaxes": 73406
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "Duration": 20,
+    "InitialInvestment": 5000,
+    "YearlyInvestment": 7000,
+    "InterestRate": 2,
+    "IncomeType": 1,
+    "Income": 120000,
+    "TaxLocationID": 400100000,
+    "Relationship": 1,
+    "Confession1": 4,
+    "Confession2": 4,
+    "NumberOfChildren": 0,
+    "Sex": 1,
+    "BirthYear": 1985
+}

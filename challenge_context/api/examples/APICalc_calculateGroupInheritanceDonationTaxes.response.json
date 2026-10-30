@@ -1,0 +1,84 @@
+{
+    "response": [
+        {
+            "Group": 300,
+            "Beneficiary": 301,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 302,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 303,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 304,
+            "InheritanceTaxes": 0,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 0,
+            "DonationTaxes": 0,
+            "DonationExemption": 0,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 305,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 306,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 307,
+            "InheritanceTaxes": 7350,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 7500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        },
+        {
+            "Group": 300,
+            "Beneficiary": 308,
+            "InheritanceTaxes": 22050,
+            "InheritanceExemption": 0,
+            "InheritanceDeduction": 2000,
+            "DonationTaxes": 22500,
+            "DonationExemption": 10000,
+            "DonationDeduction": 0
+        }
+    ]
+}

@@ -1,0 +1,19 @@
+{
+    "response": {
+        "ProfitSimpleTaxState": 5623,
+        "ProfitSimpleTaxCommunity": 0,
+        "ProfitCommunityTax": 2811,
+        "ProfitChurchTax": 0,
+        "ProfitStateTax": 2811,
+        "ProfitFederalTax": 7353,
+        "TotalProfitTaxes": 12975,
+        "CapitalSimpleTaxState": 486,
+        "CapitalSimpleTaxCommunity": 0,
+        "CapitalCommunityTax": 243,
+        "CapitalChurchTax": 0,
+        "CapitalStateTax": 243,
+        "TotalCapitalTaxes": 486,
+        "MinimalTaxesCanton": 0,
+        "TotalTaxes": 13461
+    }
+}

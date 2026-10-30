@@ -1,0 +1,3490 @@
+{
+    "message": "",
+    "state": "SUCCESS",
+    "data": {
+        "signatureRequested": false,
+        "hasAssociatedAntrag": false,
+        "hasPapierAntrag": false,
+        "nummer": "0",
+        "createdPapierAntragNummer": null,
+        "offDate": "",
+        "beginnDatum": "01.11.2026",
+        "sessionId": "54498ad0-d8d7-45c3-ae91-51eab44a236b",
+        "aktion": {
+            "key": "KEINE",
+            "parameter": []
+        },
+        "selectedUeberschussCode": "M",
+        "selectedUeberschussFondsPortfolioPP": "1311",
+        "selectedUeberschussFondsPortfolioEP": null,
+        "ueberschussKorrekturfaktor": 0.0,
+        "selectedZahlungsweise": "JAEHRLICH",
+        "selectedZahlungsart": "NO_ZAHLUNGSART",
+        "selectedGeschaeftsart": "NEUGESCHAEFT",
+        "selectedAuszahlungsart": null,
+        "selectedKontoKey": null,
+        "praemiendepotNummer": null,
+        "policenNummer": null,
+        "selectedVersPersonIndex": 0,
+        "selectedProduktIndex": 0,
+        "selectedDynamik": 0.0,
+        "anzahlPersonenBeteiligt": 1,
+        "ratenPraemie": 1200.0,
+        "jahresPraemie": 1200.0,
+        "einmalpraemieTotal": 0.0,
+        "erlebensfallleistungTotal": 23002.8,
+        "ueberschussTotal": 0.0,
+        "praemiendepotVerfuegbar": 39191.2,
+        "praemiendepotUnwiderruflich": 38361.0,
+        "darstellung": {
+            "jahresPraemieVisible": false,
+            "ratenpraemieVisible": true,
+            "ratenpraemieMutable": true,
+            "einmalpraemieTotalVisible": false,
+            "einmalpraemieTotalMutable": false,
+            "ueberschussTotalVisible": false,
+            "praemienentwicklungenVisible": false,
+            "zahlungsweiseMutable": true,
+            "exportOptionenAktiv": true,
+            "praemiendepotVisible": true,
+            "stempelabgabeVisible": false,
+            "dynamikMutable": false,
+            "szenarienVisible": true,
+            "auszahlungsentwicklungenVisible": false,
+            "bruttopraemieVisible": false,
+            "aktuelleUeberschuesseVisible": false,
+            "nettopraemieVisible": false,
+            "ueberschusssystemMutable": false,
+            "ueberschusssystemVisible": false,
+            "ueberschussFondsPortfoliosPPMutable": true,
+            "ueberschussFondsPortfoliosPPVisible": true,
+            "ueberschussFondsPortfoliosEPMutable": false,
+            "ueberschussFondsPortfoliosEPVisible": false,
+            "kapitalVisible": false,
+            "praemienverlaufsprofileVisible": true,
+            "praemienverlaufsprofileMutable": true,
+            "rentenrechnerVisible": false,
+            "superuserSuchfilterVisible": false,
+            "offlimitVisible": false,
+            "kontoerfassungVisible": false,
+            "praemiendepotNummerVisible": false,
+            "policenNummerVisible": false,
+            "risikosummenVersicherungenVisible": true,
+            "berufeVisible": false,
+            "ueberschussKorrekturfaktorVisible": false,
+            "auszahlungsartVisible": false,
+            "ibanMutable": true,
+            "verwendeteAnnahmenVisible": true
+        },
+        "exportoption": {
+            "selectedAntragsauswahl": "DIGITALANTRAG",
+            "selectedDokumentsprache": "GERMAN",
+            "avb": true,
+            "factsheet": true,
+            "factsheetMutable": true,
+            "notiz": "",
+            "bemerkung": "",
+            "admNr": "",
+            "rdNr": "",
+            "emailVersand": false,
+            "emailNachrichtValid": false,
+            "emailNachricht": null,
+            "erwerbstaetig": false,
+            "zusatzFragen": null
+        },
+        "vorsorgeart": {
+            "saeule3a": true,
+            "praemie3aMaximieren": false,
+            "automatischeErhoehung": false,
+            "todesfallkapitalMinimum": false,
+            "investitionsmanagement": false,
+            "praemieBestehendes3a": 0.0,
+            "garantiertesErlebensfallkapital": 23002.8,
+            "garantiertesErlebensfallkapitalOrdentlichesRentenalter": 0.0,
+            "darstellung": {
+                "saeule3aMutable": false,
+                "praemie3aMaximierenVisible": true,
+                "bestehendes3aVisible": true,
+                "autoErhoehungVisible": true,
+                "todesfallkapitalMinimumVisible": true,
+                "investitionsmanagementVisible": false,
+                "garantiertesErlebensfallkapitalVisible": true,
+                "garantiertesErlebensfallkapitalOrdentlichesRentenalterVisible": false
+            }
+        },
+        "fondsumschichtungMitZeitpunkt": {
+            "fondsumschichtung": true,
+            "zeitpunkte": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "selectedZeitpunkt": 5,
+            "darstellung": {
+                "fondsumschichtungVisible": true,
+                "zeitpunktVisible": true
+            }
+        },
+        "stempelabgabe": 0.0,
+        "bruttopraemie": 0,
+        "aktuelleUeberschuesse": 0,
+        "nettopraemie": 0,
+        "kapital": 0.0,
+        "selectedPraemienverlaufsprofil": "KONSTANT",
+        "kinderVersicherung": false,
+        "auszahlungsplan": false,
+        "sparprodukt": true,
+        "privilegierteEinmalpraemie": false,
+        "qualifiziert": true,
+        "errorOnExport": false,
+        "errorOnSendMail": false,
+        "angemessenheitLink": "https://www.pax.ch/de/-/media/pax/download-files/vertriebspartner/pax-angemessenheitspruefung.pdf",
+        "identifizierung": {
+            "dokument": "",
+            "dokumente": [
+                "",
+                "Pass",
+                "Identit\u00e4tskarte",
+                "Schweizer F\u00fchrerausweis",
+                "Schweizer Ausl\u00e4nderausweis"
+            ],
+            "dokumentNummer": "",
+            "gueltigBis": "",
+            "ausstellungsLand": "",
+            "ausstellungsOrt": "",
+            "ausstellungsDatum": "",
+            "ueberpruefungOrt": "",
+            "ueberpruefungDatum": "",
+            "name": "",
+            "vorname": "",
+            "darstellung": {
+                "idVisible": false,
+                "identifizierungVisible": false,
+                "beguenstigungVisible": true,
+                "beguenstigtePersonenVisible": false,
+                "geldgeberMutable": true
+            },
+            "beguenstigung": "",
+            "beguenstigungen": [
+                "",
+                "Standardbeg\u00fcnstigung (S\u00e4ule 3a)",
+                "Abweichende Beg\u00fcnstigung (S\u00e4ule 3a)"
+            ],
+            "beguenstigungHinweis": null,
+            "beguenstigungAbweichend": false,
+            "beguenstigtePersonen": [
+                "",
+                "",
+                "",
+                ""
+            ],
+            "antragsteller": "eine nat\u00fcrliche Person",
+            "antragstellerTyp": 1,
+            "kleingedruckt": null,
+            "formulare": null,
+            "geldgeber": "",
+            "geldgeberListe": [
+                "der Antragsteller/Versicherungsnehmer",
+                "eine andere Person"
+            ],
+            "geldgeberFormulare": null,
+            "pxlVisionSupported": false
+        },
+        "benutzer": {
+            "kontakt": "Betreuer",
+            "geschlechtCode": "1",
+            "geschlechter": [
+                {
+                    "key": "0",
+                    "label": ""
+                },
+                {
+                    "key": "1",
+                    "label": "Mann"
+                },
+                {
+                    "key": "2",
+                    "label": "Frau"
+                },
+                {
+                    "key": "3",
+                    "label": "Firma"
+                }
+            ],
+            "firma": "",
+            "code": "0",
+            "nachname": "",
+            "vorname": "",
+            "vermittlerCode": "0",
+            "strasse": "",
+            "plz": "",
+            "ort": "",
+            "tel": "",
+            "mail": "",
+            "sprache": "DE",
+            "superuser": false,
+            "registernummerPerson": "",
+            "registernummerFirma": "",
+            "vertriebspartnernummer": null
+        },
+        "correspondence": {
+            "index": 0,
+            "technischesAlter": 0,
+            "selectedHauptberufId": 0,
+            "selectedNebenberufId": 0,
+            "name": "",
+            "vorname": "",
+            "geburtsdatum": "",
+            "wohnsitz": "CH",
+            "selectedNationalitaet": null,
+            "selectedAuslaenderausweis": null,
+            "allgemeineFragen": {
+                "fragen": []
+            },
+            "gesundheitsFragen": {
+                "fragen": [],
+                "fragenParent": []
+            },
+            "selectedGeschlecht": null,
+            "raucher": false,
+            "praemienbefreiung": false,
+            "beerdigungskosten": false,
+            "rentenerhoehung": false,
+            "hilfeleistungen": false,
+            "ausbaugarantie": false,
+            "selectedSelbststaendigkeit": null,
+            "selectedRolle": null,
+            "risikosummenVersicherungen": null,
+            "hasErwerbsunfaehigkeitsVersicherung": false,
+            "selectedVerhaeltnisse": null,
+            "anderesVerhaeltnis": null,
+            "zivilstandCode": "",
+            "titelIndex": -1,
+            "adressNummer": "",
+            "zusatz": "",
+            "strasseHausnummer": "",
+            "plz": "",
+            "ort": "",
+            "kanton": "",
+            "anredeCode": "",
+            "mobileNummer": true,
+            "telefonNummer": "",
+            "telefonGeschaeft": "",
+            "email": "",
+            "beruf": "",
+            "berufOhneBerechnung": "",
+            "versicherungsNehmer": false,
+            "correspondence": false,
+            "praemienzahler": false,
+            "angemessenheitspruefungErfolgt": false,
+            "arbeitgeber": null,
+            "firma": null,
+            "tarife": null,
+            "geschlechter": null,
+            "selbststaendigkeiten": null,
+            "erwerbsarten": null,
+            "besondereBedingungen": null,
+            "auslaenderausweise": null,
+            "rollen": null,
+            "anreden": [
+                {
+                    "code": "",
+                    "label": ""
+                },
+                {
+                    "code": "01",
+                    "label": "Herr"
+                },
+                {
+                    "code": "02",
+                    "label": "Frau"
+                },
+                {
+                    "code": "03",
+                    "label": "Firma"
+                }
+            ],
+            "titel": [
+                {
+                    "index": 0,
+                    "label": ""
+                },
+                {
+                    "index": 1,
+                    "label": "Dr."
+                },
+                {
+                    "index": 2,
+                    "label": "Dr. med."
+                },
+                {
+                    "index": 3,
+                    "label": "Dr. med. dent."
+                }
+            ],
+            "zivilstaende": null,
+            "warnungen": null,
+            "darstellung": null,
+            "personenangabenDarstellung": null,
+            "praemienzahlerDarstellung": null,
+            "correspondenceDarstellung": {
+                "wohnsitzMutable": false,
+                "kantonMutable": true,
+                "nationalitaetMutable": true,
+                "ausweisMutable": false,
+                "anredeMutable": true,
+                "geburtsdatumMutable": true,
+                "berufMutable": true,
+                "versicherungsnehmerMutable": true,
+                "praemienzahlerMutable": true,
+                "firmaNameVisible": false,
+                "nachnameVisible": true,
+                "vornameVisible": true,
+                "zusatzVisible": true,
+                "zivilstandVisible": false,
+                "geburtsdatumVisible": true,
+                "nationalitaetVisible": false,
+                "arbeitgeberVisible": false,
+                "firmaVisible": false,
+                "telefonNummerFirmaVisible": false,
+                "telefonNummerPrivatVisible": true,
+                "telefonNummerGeschaeftVisible": false,
+                "emailVisible": true,
+                "berufVisible": false,
+                "erwerbsartenVisible": false,
+                "erwerbsartenMutable": false,
+                "besondereBedingungenVisible": false,
+                "titelVisible": true,
+                "verhaeltnisVisible": false,
+                "versicherungsnehmerAndereVisible": true
+            },
+            "isFirma": false
+        },
+        "versicherungsnehmer": {
+            "index": 0,
+            "technischesAlter": 0,
+            "selectedHauptberufId": 0,
+            "selectedNebenberufId": 0,
+            "name": "",
+            "vorname": "",
+            "geburtsdatum": "",
+            "wohnsitz": "CH",
+            "selectedNationalitaet": "CH",
+            "selectedAuslaenderausweis": "",
+            "allgemeineFragen": {
+                "fragen": []
+            },
+            "gesundheitsFragen": {
+                "fragen": [],
+                "fragenParent": []
+            },
+            "selectedGeschlecht": null,
+            "raucher": false,
+            "praemienbefreiung": false,
+            "beerdigungskosten": false,
+            "rentenerhoehung": false,
+            "hilfeleistungen": false,
+            "ausbaugarantie": false,
+            "selectedSelbststaendigkeit": null,
+            "selectedRolle": null,
+            "risikosummenVersicherungen": null,
+            "hasErwerbsunfaehigkeitsVersicherung": false,
+            "selectedVerhaeltnisse": null,
+            "anderesVerhaeltnis": null,
+            "zivilstandCode": "",
+            "titelIndex": -1,
+            "adressNummer": "",
+            "zusatz": "",
+            "strasseHausnummer": "",
+            "plz": "",
+            "ort": "",
+            "kanton": "",
+            "anredeCode": "",
+            "mobileNummer": true,
+            "telefonNummer": "",
+            "telefonGeschaeft": "",
+            "email": "",
+            "beruf": "",
+            "berufOhneBerechnung": "",
+            "versicherungsNehmer": false,
+            "correspondence": false,
+            "praemienzahler": false,
+            "angemessenheitspruefungErfolgt": false,
+            "arbeitgeber": {
+                "name": "",
+                "ort": "",
+                "land": ""
+            },
+            "firma": {
+                "name": "",
+                "ort": "",
+                "land": ""
+            },
+            "tarife": null,
+            "geschlechter": null,
+            "selbststaendigkeiten": null,
+            "erwerbsarten": [
+                {
+                    "value": "angestellt",
+                    "mutable": true,
+                    "key": "21",
+                    "status": false
+                },
+                {
+                    "value": "in Ausbildung",
+                    "mutable": true,
+                    "key": "11",
+                    "status": false
+                },
+                {
+                    "value": "Hausmann/Hausfrau",
+                    "mutable": false,
+                    "key": "99",
+                    "status": false
+                },
+                {
+                    "value": "befristet/tempor\u00e4r angestellt",
+                    "mutable": true,
+                    "key": "51",
+                    "status": false
+                },
+                {
+                    "value": "selbst\u00e4ndig",
+                    "mutable": true,
+                    "key": "31",
+                    "status": false
+                },
+                {
+                    "value": "pensioniert",
+                    "mutable": false,
+                    "key": "41",
+                    "status": false
+                },
+                {
+                    "value": "arbeitslos",
+                    "mutable": false,
+                    "key": "61",
+                    "status": false
+                }
+            ],
+            "besondereBedingungen": null,
+            "auslaenderausweise": [],
+            "rollen": null,
+            "anreden": [
+                {
+                    "code": "",
+                    "label": ""
+                },
+                {
+                    "code": "01",
+                    "label": "Herr"
+                },
+                {
+                    "code": "02",
+                    "label": "Frau"
+                },
+                {
+                    "code": "03",
+                    "label": "Firma"
+                }
+            ],
+            "titel": [
+                {
+                    "index": 0,
+                    "label": ""
+                },
+                {
+                    "index": 1,
+                    "label": "Dr."
+                },
+                {
+                    "index": 2,
+                    "label": "Dr. med."
+                },
+                {
+                    "index": 3,
+                    "label": "Dr. med. dent."
+                }
+            ],
+            "zivilstaende": [
+                {
+                    "code": "",
+                    "label": ""
+                },
+                {
+                    "code": "01",
+                    "label": "ledig"
+                },
+                {
+                    "code": "02",
+                    "label": "verheiratet"
+                },
+                {
+                    "code": "03",
+                    "label": "geschieden"
+                },
+                {
+                    "code": "04",
+                    "label": "verwitwet"
+                },
+                {
+                    "code": "05",
+                    "label": "Konkubinat"
+                },
+                {
+                    "code": "06",
+                    "label": "eingetragene Partnerschaft"
+                }
+            ],
+            "warnungen": null,
+            "darstellung": null,
+            "personenangabenDarstellung": {
+                "wohnsitzMutable": false,
+                "kantonMutable": true,
+                "nationalitaetMutable": true,
+                "ausweisMutable": true,
+                "anredeMutable": true,
+                "geburtsdatumMutable": true,
+                "berufMutable": true,
+                "versicherungsnehmerMutable": true,
+                "praemienzahlerMutable": true,
+                "firmaNameVisible": false,
+                "nachnameVisible": true,
+                "vornameVisible": true,
+                "zusatzVisible": true,
+                "zivilstandVisible": true,
+                "geburtsdatumVisible": true,
+                "nationalitaetVisible": true,
+                "arbeitgeberVisible": false,
+                "firmaVisible": false,
+                "telefonNummerFirmaVisible": false,
+                "telefonNummerPrivatVisible": true,
+                "telefonNummerGeschaeftVisible": false,
+                "emailVisible": true,
+                "berufVisible": true,
+                "erwerbsartenVisible": true,
+                "erwerbsartenMutable": false,
+                "besondereBedingungenVisible": false,
+                "titelVisible": true,
+                "verhaeltnisVisible": false,
+                "versicherungsnehmerAndereVisible": true
+            },
+            "praemienzahlerDarstellung": null,
+            "correspondenceDarstellung": null,
+            "isFirma": false
+        },
+        "praemienzahler": {
+            "index": 0,
+            "technischesAlter": 0,
+            "selectedHauptberufId": 0,
+            "selectedNebenberufId": 0,
+            "name": "",
+            "vorname": "",
+            "geburtsdatum": "",
+            "wohnsitz": "CH",
+            "selectedNationalitaet": "CH",
+            "selectedAuslaenderausweis": "",
+            "allgemeineFragen": {
+                "fragen": []
+            },
+            "gesundheitsFragen": {
+                "fragen": [],
+                "fragenParent": []
+            },
+            "selectedGeschlecht": null,
+            "raucher": false,
+            "praemienbefreiung": false,
+            "beerdigungskosten": false,
+            "rentenerhoehung": false,
+            "hilfeleistungen": false,
+            "ausbaugarantie": false,
+            "selectedSelbststaendigkeit": null,
+            "selectedRolle": null,
+            "risikosummenVersicherungen": null,
+            "hasErwerbsunfaehigkeitsVersicherung": false,
+            "selectedVerhaeltnisse": [],
+            "anderesVerhaeltnis": null,
+            "zivilstandCode": "",
+            "titelIndex": -1,
+            "adressNummer": "",
+            "zusatz": "",
+            "strasseHausnummer": "",
+            "plz": "",
+            "ort": "",
+            "kanton": "",
+            "anredeCode": "",
+            "mobileNummer": true,
+            "telefonNummer": "",
+            "telefonGeschaeft": "",
+            "email": "",
+            "beruf": "",
+            "berufOhneBerechnung": "",
+            "versicherungsNehmer": false,
+            "correspondence": false,
+            "praemienzahler": false,
+            "angemessenheitspruefungErfolgt": false,
+            "arbeitgeber": null,
+            "firma": null,
+            "tarife": null,
+            "geschlechter": null,
+            "selbststaendigkeiten": null,
+            "erwerbsarten": null,
+            "besondereBedingungen": null,
+            "auslaenderausweise": [],
+            "rollen": null,
+            "anreden": [
+                {
+                    "code": "",
+                    "label": ""
+                },
+                {
+                    "code": "01",
+                    "label": "Herr"
+                },
+                {
+                    "code": "02",
+                    "label": "Frau"
+                },
+                {
+                    "code": "03",
+                    "label": "Firma"
+                }
+            ],
+            "titel": [
+                {
+                    "index": 0,
+                    "label": ""
+                },
+                {
+                    "index": 1,
+                    "label": "Dr."
+                },
+                {
+                    "index": 2,
+                    "label": "Dr. med."
+                },
+                {
+                    "index": 3,
+                    "label": "Dr. med. dent."
+                }
+            ],
+            "zivilstaende": null,
+            "warnungen": null,
+            "darstellung": null,
+            "personenangabenDarstellung": null,
+            "praemienzahlerDarstellung": {
+                "wohnsitzMutable": true,
+                "kantonMutable": true,
+                "nationalitaetMutable": true,
+                "ausweisMutable": true,
+                "anredeMutable": true,
+                "geburtsdatumMutable": true,
+                "berufMutable": false,
+                "versicherungsnehmerMutable": false,
+                "praemienzahlerMutable": true,
+                "firmaNameVisible": false,
+                "nachnameVisible": true,
+                "vornameVisible": true,
+                "zusatzVisible": false,
+                "zivilstandVisible": false,
+                "geburtsdatumVisible": true,
+                "nationalitaetVisible": true,
+                "arbeitgeberVisible": false,
+                "firmaVisible": false,
+                "telefonNummerFirmaVisible": false,
+                "telefonNummerPrivatVisible": false,
+                "telefonNummerGeschaeftVisible": false,
+                "emailVisible": false,
+                "berufVisible": false,
+                "erwerbsartenVisible": false,
+                "erwerbsartenMutable": false,
+                "besondereBedingungenVisible": false,
+                "titelVisible": true,
+                "verhaeltnisVisible": false,
+                "versicherungsnehmerAndereVisible": true
+            },
+            "correspondenceDarstellung": null,
+            "isFirma": false
+        },
+        "offlimit": {
+            "noLimits": false,
+            "noRounding": true
+        },
+        "produkte": [
+            {
+                "index": 0,
+                "name": "TerzaLifeStar (3a)"
+            },
+            {
+                "index": 1,
+                "name": "TerzaLifeStarInvest (3a)"
+            },
+            {
+                "index": 2,
+                "name": "TerzaLifeStarPlanInvest (3a)"
+            },
+            {
+                "index": 3,
+                "name": "LifeStar (3b)"
+            },
+            {
+                "index": 4,
+                "name": "LifeStarInvest (3b)"
+            },
+            {
+                "index": 5,
+                "name": "LifeStarPlanInvest (3b)"
+            },
+            {
+                "index": 6,
+                "name": "Privilegierte Einmalpr\u00e4mie (LifeStar) (3a)"
+            },
+            {
+                "index": 7,
+                "name": "Privilegierte Einmalpr\u00e4mie (LifeStar) (3b)"
+            },
+            {
+                "index": 8,
+                "name": "TerzaFondsStar (3a)"
+            },
+            {
+                "index": 9,
+                "name": "TerzaFondsStarInvest (3a)"
+            },
+            {
+                "index": 10,
+                "name": "TerzaFondsStarPlanInvest (3a)"
+            },
+            {
+                "index": 11,
+                "name": "FondsStar (3b)"
+            },
+            {
+                "index": 12,
+                "name": "FondsStarInvest (3b)"
+            },
+            {
+                "index": 13,
+                "name": "FondsStarPlanInvest (3b)"
+            },
+            {
+                "index": 14,
+                "name": "Privilegierte Einmalpr\u00e4mie (FondsStar) (3a)"
+            },
+            {
+                "index": 15,
+                "name": "Privilegierte Einmalpr\u00e4mie (FondsStar) (3b)"
+            },
+            {
+                "index": 16,
+                "name": "Auszahlungsplan (3b)"
+            },
+            {
+                "index": 17,
+                "name": "Todesfallversicherung"
+            },
+            {
+                "index": 18,
+                "name": "Erwerbsunf\u00e4higkeitsversicherung"
+            }
+        ],
+        "personen": [
+            {
+                "index": 0,
+                "technischesAlter": 32,
+                "selectedHauptberufId": 0,
+                "selectedNebenberufId": 0,
+                "name": "",
+                "vorname": "",
+                "geburtsdatum": "01.01.1995",
+                "wohnsitz": "CH",
+                "selectedNationalitaet": "CH",
+                "selectedAuslaenderausweis": "",
+                "allgemeineFragen": {
+                    "fragen": []
+                },
+                "gesundheitsFragen": {
+                    "fragen": [],
+                    "fragenParent": []
+                },
+                "selectedGeschlecht": "MANN",
+                "raucher": true,
+                "praemienbefreiung": true,
+                "beerdigungskosten": false,
+                "rentenerhoehung": false,
+                "hilfeleistungen": false,
+                "ausbaugarantie": false,
+                "selectedSelbststaendigkeit": "NEIN",
+                "selectedRolle": "HAUPTVERSICHERT",
+                "risikosummenVersicherungen": {
+                    "todSumme": "bis 150'000 mit Pr\u00e4mienbefreiung",
+                    "todSummen": [
+                        {
+                            "value": "bis 150'000 mit Pr\u00e4mienbefreiung",
+                            "mutable": true
+                        },
+                        {
+                            "value": "150'001 - 400'000",
+                            "mutable": true
+                        },
+                        {
+                            "value": "400'001 - 600'000",
+                            "mutable": true
+                        },
+                        {
+                            "value": "ab 600'001",
+                            "mutable": true
+                        }
+                    ],
+                    "invaliditaetSumme": null,
+                    "invaliditaetSummen": null,
+                    "jahreseinkommen": 0.0,
+                    "jahreseinkommenEingegeben": false,
+                    "darstellung": {
+                        "todVisible": true,
+                        "euVisible": false,
+                        "euMutable": false,
+                        "todMutable": false
+                    },
+                    "todesfallLeistungen": [
+                        {
+                            "gesellschaft": "Dieser Antrag von Pax",
+                            "versicherungssumme": 37000.0,
+                            "abschlussjahr": "2026"
+                        }
+                    ],
+                    "euInvalidenrente": {
+                        "anzahlKinder": 0,
+                        "antragLeistungen": 0.0,
+                        "totalLeistungen": 0.0
+                    }
+                },
+                "hasErwerbsunfaehigkeitsVersicherung": false,
+                "selectedVerhaeltnisse": [],
+                "anderesVerhaeltnis": null,
+                "zivilstandCode": "",
+                "titelIndex": -1,
+                "adressNummer": "",
+                "zusatz": "",
+                "strasseHausnummer": "",
+                "plz": "",
+                "ort": "",
+                "kanton": "",
+                "anredeCode": "01",
+                "mobileNummer": true,
+                "telefonNummer": "",
+                "telefonGeschaeft": "",
+                "email": "",
+                "beruf": "",
+                "berufOhneBerechnung": "",
+                "versicherungsNehmer": true,
+                "correspondence": false,
+                "praemienzahler": false,
+                "angemessenheitspruefungErfolgt": false,
+                "arbeitgeber": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "firma": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "tarife": [
+                    {
+                        "index": 0,
+                        "dauer": 33,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 65,
+                        "code": "097701A0",
+                        "selectedTarif": "LifeStar",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 1121.2,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 36999.6,
+                        "erlebensfallleistung": 23002.8,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": true,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": true,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": true,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": true,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": true,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "LifeStar",
+                                "tarifbeschreibung": "Fondsgebundene Lebensversicherung"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 1,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "FKZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "FKFZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "FRZ",
+                                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "IR",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "IRoP",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Deckung psychische Leiden"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "IRoU",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Unfalldeckung"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "U",
+                                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 2,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "FKZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "FKFZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "FRZ",
+                                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "IR",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "IRoP",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Deckung psychische Leiden"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "IRoU",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Unfalldeckung"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "U",
+                                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 3,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "FKZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "FKFZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "FRZ",
+                                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "IR",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "IRoP",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Deckung psychische Leiden"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "IRoU",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Unfalldeckung"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "U",
+                                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 4,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "FKZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "FKFZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "FRZ",
+                                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "IR",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "IRoP",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Deckung psychische Leiden"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "IRoU",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Unfalldeckung"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "U",
+                                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 5,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "FKZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "FKFZ",
+                                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "FRZ",
+                                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "IR",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "IRoP",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Deckung psychische Leiden"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "IRoU",
+                                "tarifbeschreibung": "Erwerbsunf\u00e4higkeitsrente ohne Unfalldeckung"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "U",
+                                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 6,
+                        "dauer": 33,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 65,
+                        "code": "073002A0",
+                        "selectedTarif": "I",
+                        "selectedWartefrist": 3,
+                        "periodischePraemie": 78.8,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 1121.2,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [
+                            3,
+                            6,
+                            12,
+                            24
+                        ],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": true
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "I",
+                                "tarifbeschreibung": "Pr\u00e4mienbefreiung"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    }
+                ],
+                "geschlechter": [
+                    {
+                        "key": "MANN",
+                        "label": "Mann"
+                    },
+                    {
+                        "key": "FRAU",
+                        "label": "Frau"
+                    }
+                ],
+                "selbststaendigkeiten": [
+                    {
+                        "key": "NEIN",
+                        "label": "Nein"
+                    },
+                    {
+                        "key": "JA",
+                        "label": "Ja (ohne BVG)"
+                    },
+                    {
+                        "key": "BVG",
+                        "label": "Ja (mit BVG)"
+                    }
+                ],
+                "erwerbsarten": [
+                    {
+                        "value": "angestellt",
+                        "mutable": true,
+                        "key": "21",
+                        "status": false
+                    },
+                    {
+                        "value": "in Ausbildung",
+                        "mutable": true,
+                        "key": "11",
+                        "status": false
+                    },
+                    {
+                        "value": "Hausmann/Hausfrau",
+                        "mutable": false,
+                        "key": "99",
+                        "status": false
+                    },
+                    {
+                        "value": "befristet/tempor\u00e4r angestellt",
+                        "mutable": true,
+                        "key": "51",
+                        "status": false
+                    },
+                    {
+                        "value": "selbst\u00e4ndig",
+                        "mutable": true,
+                        "key": "31",
+                        "status": false
+                    },
+                    {
+                        "value": "pensioniert",
+                        "mutable": false,
+                        "key": "41",
+                        "status": false
+                    },
+                    {
+                        "value": "arbeitslos",
+                        "mutable": false,
+                        "key": "61",
+                        "status": false
+                    }
+                ],
+                "besondereBedingungen": [
+                    {
+                        "value": "F\u00fcr Berufe mit Vorbehalt",
+                        "mutable": false,
+                        "key": "0",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Piloten",
+                        "mutable": true,
+                        "key": "1",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Mitarbeitende internationaler Organisationen",
+                        "mutable": true,
+                        "key": "2",
+                        "status": false
+                    }
+                ],
+                "auslaenderausweise": [],
+                "rollen": [
+                    {
+                        "key": "HAUPTVERSICHERT",
+                        "label": "Versicherter 1"
+                    },
+                    {
+                        "key": "MITVERSICHERT",
+                        "label": "Versicherter 2"
+                    },
+                    {
+                        "key": "ZUSATZVERSICHERT",
+                        "label": "Versicherter 3"
+                    },
+                    {
+                        "key": "NICHTVERSICHERT",
+                        "label": ""
+                    }
+                ],
+                "anreden": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "Herr"
+                    },
+                    {
+                        "code": "02",
+                        "label": "Frau"
+                    }
+                ],
+                "titel": [
+                    {
+                        "index": 0,
+                        "label": ""
+                    },
+                    {
+                        "index": 1,
+                        "label": "Dr."
+                    },
+                    {
+                        "index": 2,
+                        "label": "Dr. med."
+                    },
+                    {
+                        "index": 3,
+                        "label": "Dr. med. dent."
+                    }
+                ],
+                "zivilstaende": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "ledig"
+                    },
+                    {
+                        "code": "02",
+                        "label": "verheiratet"
+                    },
+                    {
+                        "code": "03",
+                        "label": "geschieden"
+                    },
+                    {
+                        "code": "04",
+                        "label": "verwitwet"
+                    },
+                    {
+                        "code": "05",
+                        "label": "Konkubinat"
+                    },
+                    {
+                        "code": "06",
+                        "label": "eingetragene Partnerschaft"
+                    }
+                ],
+                "warnungen": null,
+                "darstellung": {
+                    "rolleMutable": true,
+                    "nachnameMutable": true,
+                    "vornameMutable": true,
+                    "geschlechtMutable": true,
+                    "geburtsdatumMutable": true,
+                    "nationalitaetMutable": true,
+                    "ausweisMutable": true,
+                    "raucherMutable": true,
+                    "raucherVisible": true,
+                    "selbststaendigMutable": true,
+                    "selbststaendigVisible": true,
+                    "berufVisible": false,
+                    "praemienbefreiungMutable": true,
+                    "praemienbefreiungVisible": true,
+                    "beerdigungskostenVisible": true,
+                    "ausbaugarantieVisible": true,
+                    "rentenerhoehungVisible": false,
+                    "hilfeleistungenVisible": false
+                },
+                "personenangabenDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": true,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": true,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": true,
+                    "erwerbsartenVisible": true,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": true,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "praemienzahlerDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": false,
+                    "versicherungsnehmerMutable": false,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": false,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": false,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": false,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": false,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "correspondenceDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "isFirma": false
+            },
+            {
+                "index": 1,
+                "technischesAlter": 37,
+                "selectedHauptberufId": 0,
+                "selectedNebenberufId": 0,
+                "name": "",
+                "vorname": "",
+                "geburtsdatum": "01.01.1990",
+                "wohnsitz": "CH",
+                "selectedNationalitaet": "CH",
+                "selectedAuslaenderausweis": "",
+                "allgemeineFragen": {
+                    "fragen": []
+                },
+                "gesundheitsFragen": {
+                    "fragen": [],
+                    "fragenParent": []
+                },
+                "selectedGeschlecht": "FRAU",
+                "raucher": true,
+                "praemienbefreiung": false,
+                "beerdigungskosten": false,
+                "rentenerhoehung": false,
+                "hilfeleistungen": false,
+                "ausbaugarantie": false,
+                "selectedSelbststaendigkeit": "NEIN",
+                "selectedRolle": "NICHTVERSICHERT",
+                "risikosummenVersicherungen": null,
+                "hasErwerbsunfaehigkeitsVersicherung": false,
+                "selectedVerhaeltnisse": [],
+                "anderesVerhaeltnis": null,
+                "zivilstandCode": "",
+                "titelIndex": -1,
+                "adressNummer": "",
+                "zusatz": "",
+                "strasseHausnummer": "",
+                "plz": "",
+                "ort": "",
+                "kanton": "",
+                "anredeCode": "02",
+                "mobileNummer": true,
+                "telefonNummer": "",
+                "telefonGeschaeft": "",
+                "email": "",
+                "beruf": "",
+                "berufOhneBerechnung": "",
+                "versicherungsNehmer": false,
+                "correspondence": false,
+                "praemienzahler": false,
+                "angemessenheitspruefungErfolgt": false,
+                "arbeitgeber": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "firma": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "tarife": [
+                    {
+                        "index": 0,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": true,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": true,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": true,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "LifeStar",
+                                "tarifbeschreibung": "Fondsgebundene Lebensversicherung"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 1,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 2,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 3,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 4,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 5,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 6,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": false,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": false,
+                            "dauerValueVisible": false,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": false,
+                            "schlussalterValueVisible": false,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": false,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": false,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": false,
+                            "risikosummeValueVisible": false,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": false,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": false,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": false,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    }
+                ],
+                "geschlechter": [
+                    {
+                        "key": "MANN",
+                        "label": "Mann"
+                    },
+                    {
+                        "key": "FRAU",
+                        "label": "Frau"
+                    }
+                ],
+                "selbststaendigkeiten": [
+                    {
+                        "key": "NEIN",
+                        "label": "Nein"
+                    },
+                    {
+                        "key": "JA",
+                        "label": "Ja (ohne BVG)"
+                    },
+                    {
+                        "key": "BVG",
+                        "label": "Ja (mit BVG)"
+                    }
+                ],
+                "erwerbsarten": [
+                    {
+                        "value": "angestellt",
+                        "mutable": true,
+                        "key": "21",
+                        "status": false
+                    },
+                    {
+                        "value": "in Ausbildung",
+                        "mutable": true,
+                        "key": "11",
+                        "status": false
+                    },
+                    {
+                        "value": "Hausmann/Hausfrau",
+                        "mutable": false,
+                        "key": "99",
+                        "status": false
+                    },
+                    {
+                        "value": "befristet/tempor\u00e4r angestellt",
+                        "mutable": true,
+                        "key": "51",
+                        "status": false
+                    },
+                    {
+                        "value": "selbst\u00e4ndig",
+                        "mutable": true,
+                        "key": "31",
+                        "status": false
+                    },
+                    {
+                        "value": "pensioniert",
+                        "mutable": false,
+                        "key": "41",
+                        "status": false
+                    },
+                    {
+                        "value": "arbeitslos",
+                        "mutable": false,
+                        "key": "61",
+                        "status": false
+                    }
+                ],
+                "besondereBedingungen": [
+                    {
+                        "value": "F\u00fcr Berufe mit Vorbehalt",
+                        "mutable": false,
+                        "key": "0",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Piloten",
+                        "mutable": true,
+                        "key": "1",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Mitarbeitende internationaler Organisationen",
+                        "mutable": true,
+                        "key": "2",
+                        "status": false
+                    }
+                ],
+                "auslaenderausweise": [],
+                "rollen": [
+                    {
+                        "key": "HAUPTVERSICHERT",
+                        "label": "Versicherter 1"
+                    },
+                    {
+                        "key": "MITVERSICHERT",
+                        "label": "Versicherter 2"
+                    },
+                    {
+                        "key": "ZUSATZVERSICHERT",
+                        "label": "Versicherter 3"
+                    },
+                    {
+                        "key": "NICHTVERSICHERT",
+                        "label": ""
+                    }
+                ],
+                "anreden": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "Herr"
+                    },
+                    {
+                        "code": "02",
+                        "label": "Frau"
+                    }
+                ],
+                "titel": [
+                    {
+                        "index": 0,
+                        "label": ""
+                    },
+                    {
+                        "index": 1,
+                        "label": "Dr."
+                    },
+                    {
+                        "index": 2,
+                        "label": "Dr. med."
+                    },
+                    {
+                        "index": 3,
+                        "label": "Dr. med. dent."
+                    }
+                ],
+                "zivilstaende": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "ledig"
+                    },
+                    {
+                        "code": "02",
+                        "label": "verheiratet"
+                    },
+                    {
+                        "code": "03",
+                        "label": "geschieden"
+                    },
+                    {
+                        "code": "04",
+                        "label": "verwitwet"
+                    },
+                    {
+                        "code": "05",
+                        "label": "Konkubinat"
+                    },
+                    {
+                        "code": "06",
+                        "label": "eingetragene Partnerschaft"
+                    }
+                ],
+                "warnungen": null,
+                "darstellung": {
+                    "rolleMutable": true,
+                    "nachnameMutable": false,
+                    "vornameMutable": false,
+                    "geschlechtMutable": false,
+                    "geburtsdatumMutable": false,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "raucherMutable": false,
+                    "raucherVisible": false,
+                    "selbststaendigMutable": false,
+                    "selbststaendigVisible": false,
+                    "berufVisible": false,
+                    "praemienbefreiungMutable": true,
+                    "praemienbefreiungVisible": true,
+                    "beerdigungskostenVisible": false,
+                    "ausbaugarantieVisible": false,
+                    "rentenerhoehungVisible": false,
+                    "hilfeleistungenVisible": false
+                },
+                "personenangabenDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": true,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": true,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": true,
+                    "erwerbsartenVisible": true,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": true,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "praemienzahlerDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": false,
+                    "versicherungsnehmerMutable": false,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": false,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": false,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": false,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": false,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "correspondenceDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "isFirma": false
+            },
+            {
+                "index": 2,
+                "technischesAlter": 42,
+                "selectedHauptberufId": 0,
+                "selectedNebenberufId": 0,
+                "name": "",
+                "vorname": "",
+                "geburtsdatum": "01.01.1985",
+                "wohnsitz": "CH",
+                "selectedNationalitaet": "CH",
+                "selectedAuslaenderausweis": "",
+                "allgemeineFragen": {
+                    "fragen": []
+                },
+                "gesundheitsFragen": {
+                    "fragen": [],
+                    "fragenParent": []
+                },
+                "selectedGeschlecht": "MANN",
+                "raucher": true,
+                "praemienbefreiung": false,
+                "beerdigungskosten": false,
+                "rentenerhoehung": false,
+                "hilfeleistungen": false,
+                "ausbaugarantie": false,
+                "selectedSelbststaendigkeit": "NEIN",
+                "selectedRolle": "NICHTVERSICHERT",
+                "risikosummenVersicherungen": null,
+                "hasErwerbsunfaehigkeitsVersicherung": false,
+                "selectedVerhaeltnisse": [],
+                "anderesVerhaeltnis": null,
+                "zivilstandCode": "",
+                "titelIndex": -1,
+                "adressNummer": "",
+                "zusatz": "",
+                "strasseHausnummer": "",
+                "plz": "",
+                "ort": "",
+                "kanton": "",
+                "anredeCode": "01",
+                "mobileNummer": true,
+                "telefonNummer": "",
+                "telefonGeschaeft": "",
+                "email": "",
+                "beruf": "",
+                "berufOhneBerechnung": "",
+                "versicherungsNehmer": false,
+                "correspondence": false,
+                "praemienzahler": false,
+                "angemessenheitspruefungErfolgt": false,
+                "arbeitgeber": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "firma": {
+                    "name": "",
+                    "ort": "",
+                    "land": ""
+                },
+                "tarife": [
+                    {
+                        "index": 0,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": true,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": true,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": true,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": true,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "LifeStar",
+                                "tarifbeschreibung": "Fondsgebundene Lebensversicherung"
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 1,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 2,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 3,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 4,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 5,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": true,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": true,
+                            "dauerValueVisible": true,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": true,
+                            "schlussalterValueVisible": true,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": true,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": true,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": true,
+                            "risikosummeValueVisible": true,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": true,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": true,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": true,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "",
+                                "tarifbeschreibung": ""
+                            }
+                        ],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    },
+                    {
+                        "index": 6,
+                        "dauer": 0,
+                        "auszahlungsbeginn": null,
+                        "auszahlungsdauer": 0,
+                        "schlussalter": 0,
+                        "code": "",
+                        "selectedTarif": "",
+                        "selectedWartefrist": 0,
+                        "periodischePraemie": 0.0,
+                        "einmalpraemie": 0.0,
+                        "risikosumme": 0.0,
+                        "erlebensfallleistung": 0.0,
+                        "ueberschuss": 0.0,
+                        "wartefristen": [],
+                        "darstellung": {
+                            "bezeichnungVisible": false,
+                            "bezeichnungMutable": false,
+                            "dauerVisible": false,
+                            "dauerValueVisible": false,
+                            "dauerMutable": false,
+                            "auszahlungsbeginnVisible": false,
+                            "auszahlungsbeginnMutable": false,
+                            "auszahlungsdauerVisible": false,
+                            "auszahlungsdauerMutable": false,
+                            "schlussalterVisible": false,
+                            "schlussalterValueVisible": false,
+                            "schlussalterMutable": false,
+                            "periodischePraemieVisible": false,
+                            "periodischePraemieMutable": false,
+                            "einmalpraemieVisible": false,
+                            "einmalpraemieMutable": false,
+                            "risikosummeVisible": false,
+                            "risikosummeValueVisible": false,
+                            "risikosummeMutable": false,
+                            "erlebensfallleistungVisible": false,
+                            "erlebensfallleistungMutable": false,
+                            "ueberschussVisible": false,
+                            "verhaeltnisEKzuTKVisible": false,
+                            "verhaeltnisEKzuTKMutable": false,
+                            "selectedWfVisible": false,
+                            "selectedWfMutable": false
+                        },
+                        "tarifauswahlen": [],
+                        "selectedTarifauswahlIndex": 0,
+                        "verhaeltnisEKzuTK": 0.0
+                    }
+                ],
+                "geschlechter": [
+                    {
+                        "key": "MANN",
+                        "label": "Mann"
+                    },
+                    {
+                        "key": "FRAU",
+                        "label": "Frau"
+                    }
+                ],
+                "selbststaendigkeiten": [
+                    {
+                        "key": "NEIN",
+                        "label": "Nein"
+                    },
+                    {
+                        "key": "JA",
+                        "label": "Ja (ohne BVG)"
+                    },
+                    {
+                        "key": "BVG",
+                        "label": "Ja (mit BVG)"
+                    }
+                ],
+                "erwerbsarten": [
+                    {
+                        "value": "angestellt",
+                        "mutable": true,
+                        "key": "21",
+                        "status": false
+                    },
+                    {
+                        "value": "in Ausbildung",
+                        "mutable": true,
+                        "key": "11",
+                        "status": false
+                    },
+                    {
+                        "value": "Hausmann/Hausfrau",
+                        "mutable": false,
+                        "key": "99",
+                        "status": false
+                    },
+                    {
+                        "value": "befristet/tempor\u00e4r angestellt",
+                        "mutable": true,
+                        "key": "51",
+                        "status": false
+                    },
+                    {
+                        "value": "selbst\u00e4ndig",
+                        "mutable": true,
+                        "key": "31",
+                        "status": false
+                    },
+                    {
+                        "value": "pensioniert",
+                        "mutable": false,
+                        "key": "41",
+                        "status": false
+                    },
+                    {
+                        "value": "arbeitslos",
+                        "mutable": false,
+                        "key": "61",
+                        "status": false
+                    }
+                ],
+                "besondereBedingungen": [
+                    {
+                        "value": "F\u00fcr Berufe mit Vorbehalt",
+                        "mutable": false,
+                        "key": "0",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Piloten",
+                        "mutable": true,
+                        "key": "1",
+                        "status": false
+                    },
+                    {
+                        "value": "F\u00fcr Mitarbeitende internationaler Organisationen",
+                        "mutable": true,
+                        "key": "2",
+                        "status": false
+                    }
+                ],
+                "auslaenderausweise": [],
+                "rollen": [
+                    {
+                        "key": "HAUPTVERSICHERT",
+                        "label": "Versicherter 1"
+                    },
+                    {
+                        "key": "MITVERSICHERT",
+                        "label": "Versicherter 2"
+                    },
+                    {
+                        "key": "ZUSATZVERSICHERT",
+                        "label": "Versicherter 3"
+                    },
+                    {
+                        "key": "NICHTVERSICHERT",
+                        "label": ""
+                    }
+                ],
+                "anreden": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "Herr"
+                    },
+                    {
+                        "code": "02",
+                        "label": "Frau"
+                    }
+                ],
+                "titel": [
+                    {
+                        "index": 0,
+                        "label": ""
+                    },
+                    {
+                        "index": 1,
+                        "label": "Dr."
+                    },
+                    {
+                        "index": 2,
+                        "label": "Dr. med."
+                    },
+                    {
+                        "index": 3,
+                        "label": "Dr. med. dent."
+                    }
+                ],
+                "zivilstaende": [
+                    {
+                        "code": "",
+                        "label": ""
+                    },
+                    {
+                        "code": "01",
+                        "label": "ledig"
+                    },
+                    {
+                        "code": "02",
+                        "label": "verheiratet"
+                    },
+                    {
+                        "code": "03",
+                        "label": "geschieden"
+                    },
+                    {
+                        "code": "04",
+                        "label": "verwitwet"
+                    },
+                    {
+                        "code": "05",
+                        "label": "Konkubinat"
+                    },
+                    {
+                        "code": "06",
+                        "label": "eingetragene Partnerschaft"
+                    }
+                ],
+                "warnungen": null,
+                "darstellung": {
+                    "rolleMutable": true,
+                    "nachnameMutable": false,
+                    "vornameMutable": false,
+                    "geschlechtMutable": false,
+                    "geburtsdatumMutable": false,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "raucherMutable": false,
+                    "raucherVisible": false,
+                    "selbststaendigMutable": false,
+                    "selbststaendigVisible": false,
+                    "berufVisible": false,
+                    "praemienbefreiungMutable": true,
+                    "praemienbefreiungVisible": true,
+                    "beerdigungskostenVisible": false,
+                    "ausbaugarantieVisible": false,
+                    "rentenerhoehungVisible": false,
+                    "hilfeleistungenVisible": false
+                },
+                "personenangabenDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": true,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": true,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": true,
+                    "erwerbsartenVisible": true,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": true,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "praemienzahlerDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": false,
+                    "versicherungsnehmerMutable": false,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": false,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": false,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": false,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": false,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "correspondenceDarstellung": {
+                    "wohnsitzMutable": false,
+                    "kantonMutable": true,
+                    "nationalitaetMutable": false,
+                    "ausweisMutable": false,
+                    "anredeMutable": false,
+                    "geburtsdatumMutable": false,
+                    "berufMutable": true,
+                    "versicherungsnehmerMutable": true,
+                    "praemienzahlerMutable": true,
+                    "firmaNameVisible": false,
+                    "nachnameVisible": true,
+                    "vornameVisible": true,
+                    "zusatzVisible": true,
+                    "zivilstandVisible": false,
+                    "geburtsdatumVisible": true,
+                    "nationalitaetVisible": false,
+                    "arbeitgeberVisible": false,
+                    "firmaVisible": false,
+                    "telefonNummerFirmaVisible": false,
+                    "telefonNummerPrivatVisible": true,
+                    "telefonNummerGeschaeftVisible": false,
+                    "emailVisible": true,
+                    "berufVisible": false,
+                    "erwerbsartenVisible": false,
+                    "erwerbsartenMutable": false,
+                    "besondereBedingungenVisible": false,
+                    "titelVisible": true,
+                    "verhaeltnisVisible": false,
+                    "versicherungsnehmerAndereVisible": true
+                },
+                "isFirma": false
+            }
+        ],
+        "dynamiken": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0
+        ],
+        "praemienentwicklungen": [],
+        "praemienentwicklungenNetto": null,
+        "umwandlungswertentwicklungen": null,
+        "verwendeteAnnahmen": {
+            "bruttorenditen": [
+                {
+                    "bezeichnung": "Pax (CH) Sustainable Equity Switzerland Small & Mid Cap ALV T",
+                    "tief": -0.3,
+                    "mittel": 6.0,
+                    "hoch": 8.1
+                }
+            ],
+            "zinssaetze": [
+                {
+                    "bezeichnung": "zinssatzKlassischeAnlagePP",
+                    "tief": 1.1,
+                    "mittel": 1.8,
+                    "hoch": 2.4
+                }
+            ],
+            "szenarienBetraege": [
+                {
+                    "bezeichnung": "NIEDRIG",
+                    "betrag": 30084.8
+                },
+                {
+                    "bezeichnung": "MITTEL",
+                    "betrag": 44631.8
+                },
+                {
+                    "bezeichnung": "HOCH",
+                    "betrag": 56528.4
+                }
+            ]
+        },
+        "auszahlungsentwicklungen": null,
+        "ueberschusssysteme": [
+            {
+                "code": "M",
+                "bezeichnung": "Gutschrift"
+            }
+        ],
+        "ueberschussFondsPortfoliosPP": [
+            {
+                "code": "1311",
+                "bezeichnung": "Pax (CH) Sustainable Equity Switzerland Small & Mid Cap ALV T",
+                "fondsType": "FUER_PERIODISCHE_PRAEMIE"
+            },
+            {
+                "code": "1690",
+                "bezeichnung": "Risikolose Anlage",
+                "fondsType": null
+            }
+        ],
+        "ueberschussFondsPortfoliosEP": null,
+        "fonds": [
+            {
+                "index": 0,
+                "bezeichnung": "Aufteilung periodische Pr\u00e4mie",
+                "fondsAllokationen": [
+                    {
+                        "index": 0,
+                        "anteil": 80,
+                        "selectedFondsauswahlIndex": 0,
+                        "fondsauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "Garantieanlage",
+                                "factsheet": null
+                            }
+                        ],
+                        "darstellung": {
+                            "anteilVisible": true,
+                            "anteilMutable": true,
+                            "fondsauswahlenVisible": true,
+                            "fondsauswahlenMutable": false
+                        }
+                    },
+                    {
+                        "index": 1,
+                        "anteil": 20,
+                        "selectedFondsauswahlIndex": 5,
+                        "fondsauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 25",
+                                "factsheet": "https://assets.pax.ch/x/2a412e2456/pax-fondsinformation-sustainable-portfolio-25.pdf"
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 50",
+                                "factsheet": "https://assets.pax.ch/x/910244cab6/pax-fondsinformation-sustainable-portfolio-50.pdf"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 75",
+                                "factsheet": "https://assets.pax.ch/x/3e0c4df4b5/pax-fondsinformation-sustainable-portfolio-75.pdf"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 100",
+                                "factsheet": "https://assets.pax.ch/x/15599adc6b/pax-fondsinformation-sustainable-portfolio-100.pdf"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio Target Return",
+                                "factsheet": "https://assets.pax.ch/x/0b15f502eb/pax-fondsinformation-sustainable-portfolio-target-return.pdf"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "Pax (CH) Sustainable Equity Switzerland Small & Mid Cap ALV T",
+                                "factsheet": "https://assets.pax.ch/x/f01b692322/pax-fondsinformation-sustainable-equity-switzerland-small-mid-cap.pdf"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "UBS MSCI World Selection UCITS ETF",
+                                "factsheet": "https://assets.pax.ch/x/d1b50d9a6d/ubs-fondsinformation-etf-msci-world-selection-ucits-etf.pdf"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "Pax (CH) Equity Infrastructure Europe",
+                                "factsheet": "https://assets.pax.ch/x/185ca4195d/pax-fondsinformation-sustainable-equity-infrastructure-europe.pdf"
+                            },
+                            {
+                                "index": 8,
+                                "bezeichnung": "Pax (CH) Sustainable Bond CHF",
+                                "factsheet": "https://assets.pax.ch/x/a9a1df8855/pax-fondsinformation-sustainable-bond-ch.pdf"
+                            },
+                            {
+                                "index": 9,
+                                "bezeichnung": "Pax (CH) Sustainable Equity Global CHF",
+                                "factsheet": "https://assets.pax.ch/x/20a7b58045/pax-fondsinformation-sustainable-equity-global.pdf"
+                            },
+                            {
+                                "index": 10,
+                                "bezeichnung": "Swisscanto (CH) Real Estate Fund Responsible IFCA FA CHF",
+                                "factsheet": "https://assets.pax.ch/x/121c0c7117/swisscanto-fondsinformation-real-estate-fund-responsible-ifca-fa.pdf"
+                            },
+                            {
+                                "index": 11,
+                                "bezeichnung": "Raiffeisen ETF - Solid Gold Responsibly Sourced & Traceable",
+                                "factsheet": "https://assets.pax.ch/x/f4a4e1f6e5/raiffeisen-fondsinformation-etf-solid-gold-responsibly-sourced-traceable.pdf"
+                            }
+                        ],
+                        "darstellung": {
+                            "anteilVisible": true,
+                            "anteilMutable": true,
+                            "fondsauswahlenVisible": true,
+                            "fondsauswahlenMutable": true
+                        }
+                    },
+                    {
+                        "index": 2,
+                        "anteil": 0,
+                        "selectedFondsauswahlIndex": -1,
+                        "fondsauswahlen": [
+                            {
+                                "index": 0,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 25",
+                                "factsheet": "https://assets.pax.ch/x/2a412e2456/pax-fondsinformation-sustainable-portfolio-25.pdf"
+                            },
+                            {
+                                "index": 1,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 50",
+                                "factsheet": "https://assets.pax.ch/x/910244cab6/pax-fondsinformation-sustainable-portfolio-50.pdf"
+                            },
+                            {
+                                "index": 2,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 75",
+                                "factsheet": "https://assets.pax.ch/x/3e0c4df4b5/pax-fondsinformation-sustainable-portfolio-75.pdf"
+                            },
+                            {
+                                "index": 3,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio 100",
+                                "factsheet": "https://assets.pax.ch/x/15599adc6b/pax-fondsinformation-sustainable-portfolio-100.pdf"
+                            },
+                            {
+                                "index": 4,
+                                "bezeichnung": "Pax (CH) Sustainable Portfolio Target Return",
+                                "factsheet": "https://assets.pax.ch/x/0b15f502eb/pax-fondsinformation-sustainable-portfolio-target-return.pdf"
+                            },
+                            {
+                                "index": 5,
+                                "bezeichnung": "UBS MSCI World Selection UCITS ETF",
+                                "factsheet": "https://assets.pax.ch/x/d1b50d9a6d/ubs-fondsinformation-etf-msci-world-selection-ucits-etf.pdf"
+                            },
+                            {
+                                "index": 6,
+                                "bezeichnung": "Pax (CH) Equity Infrastructure Europe",
+                                "factsheet": "https://assets.pax.ch/x/185ca4195d/pax-fondsinformation-sustainable-equity-infrastructure-europe.pdf"
+                            },
+                            {
+                                "index": 7,
+                                "bezeichnung": "Pax (CH) Sustainable Bond CHF",
+                                "factsheet": "https://assets.pax.ch/x/a9a1df8855/pax-fondsinformation-sustainable-bond-ch.pdf"
+                            },
+                            {
+                                "index": 8,
+                                "bezeichnung": "Pax (CH) Sustainable Equity Global CHF",
+                                "factsheet": "https://assets.pax.ch/x/20a7b58045/pax-fondsinformation-sustainable-equity-global.pdf"
+                            },
+                            {
+                                "index": 9,
+                                "bezeichnung": "Swisscanto (CH) Real Estate Fund Responsible IFCA FA CHF",
+                                "factsheet": "https://assets.pax.ch/x/121c0c7117/swisscanto-fondsinformation-real-estate-fund-responsible-ifca-fa.pdf"
+                            },
+                            {
+                                "index": 10,
+                                "bezeichnung": "Raiffeisen ETF - Solid Gold Responsibly Sourced & Traceable",
+                                "factsheet": "https://assets.pax.ch/x/f4a4e1f6e5/raiffeisen-fondsinformation-etf-solid-gold-responsibly-sourced-traceable.pdf"
+                            },
+                            {
+                                "index": -1,
+                                "bezeichnung": "",
+                                "factsheet": null
+                            }
+                        ],
+                        "darstellung": {
+                            "anteilVisible": true,
+                            "anteilMutable": false,
+                            "fondsauswahlenVisible": true,
+                            "fondsauswahlenMutable": true
+                        }
+                    }
+                ],
+                "darstellung": {
+                    "anteilVisible": true
+                }
+            }
+        ],
+        "zahlungsweisen": [
+            {
+                "key": "JAEHRLICH",
+                "label": "J\u00e4hrlich"
+            },
+            {
+                "key": "HALBJAEHRLICH",
+                "label": "Halbj\u00e4hrlich"
+            },
+            {
+                "key": "VIERTELJAEHRLICH",
+                "label": "Viertelj\u00e4hrlich"
+            },
+            {
+                "key": "MONATLICH",
+                "label": "Monatlich"
+            }
+        ],
+        "zahlungsarten": [
+            {
+                "key": "NO_ZAHLUNGSART",
+                "label": ""
+            },
+            {
+                "key": "QR_RECHNUNG",
+                "label": "QR-Rechnung"
+            },
+            {
+                "key": "BELASTUNG_LSV",
+                "label": "Belastung LSV/BAD"
+            },
+            {
+                "key": "PRAEMIENDEPOT_ALT",
+                "label": "Pr\u00e4miendepot Nr."
+            },
+            {
+                "key": "PRAEMIENDEPOT_NEU",
+                "label": "Pr\u00e4miendepot neu"
+            }
+        ],
+        "geschaeftsarten": [
+            {
+                "key": "NEUGESCHAEFT",
+                "label": "Neugesch\u00e4ft"
+            },
+            {
+                "key": "ERSATZGESCHAEFT",
+                "label": "Ersatzgesch\u00e4ft aus Police"
+            },
+            {
+                "key": "WIEDERANLAGE",
+                "label": "Wiederanlage aus Police"
+            }
+        ],
+        "auszahlungsarten": null,
+        "konten": null,
+        "warnungen": [],
+        "versichertepersonen": [
+            {
+                "index": 0,
+                "personIndex": 0,
+                "name": "Versicherter 1",
+                "erwerbsartValid": true
+            }
+        ],
+        "praemienverlaufsprofile": [
+            {
+                "key": "KONSTANT",
+                "label": "konstant"
+            },
+            {
+                "key": "LINEAR",
+                "label": "linear"
+            },
+            {
+                "key": "DYNAMISCH",
+                "label": "dynamisch"
+            }
+        ],
+        "praemienzahlerVerhaeltnisse": null,
+        "antragDarstellung": {
+            "idUploadVisible": true,
+            "vermittlerCodeExtended": false,
+            "vermittlerCodeMutable": true,
+            "firmaCodeMutable": true,
+            "vertriebspartnernummerVisible": false,
+            "idCheckOverrideBlockVisible": false,
+            "digitalantragSigningAvailable": false
+        },
+        "angemessenheitspruefungErfolgt": false,
+        "versicherungssummeNachUmwandlung": null
+    },
+    "applicationRevision": "",
+    "qsPlus": false
+}

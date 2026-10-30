@@ -1,0 +1,13 @@
+{
+    "response": {
+        "CommunityTax": 4011,
+        "ChurchTax": 0,
+        "StateTax": 4011,
+        "FederalTax": 523,
+        "FortuneTax": 90,
+        "PollTax": 0,
+        "TotalTaxes": 8635,
+        "TaxFreedomDay": 29,
+        "MarginalTaxRate": 25
+    }
+}

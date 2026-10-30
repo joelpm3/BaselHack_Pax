@@ -1,0 +1,19 @@
+{
+    "Relationship": 1,
+    "RelationshipSinceYear": 2015,
+    "Person1": {
+        "Sex": 1,
+        "BirthYear": 1985,
+        "GrossIncome": 120000,
+        "NumberOfChildren": 0,
+        "WithBVG": true,
+        "Pillar2Pensions": {
+            "Disability": 40000,
+            "DisabilityChildren": 8000,
+            "Widow": 30000,
+            "Orphan": 8000
+        }
+    },
+    "NumberOfChildren": 0,
+    "WithChildren": false
+}

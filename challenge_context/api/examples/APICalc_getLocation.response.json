@@ -1,0 +1,9 @@
+{
+    "response": {
+        "LocationID": 400100000,
+        "ZipCode": "4001",
+        "City": "Basel",
+        "Canton": "BS",
+        "Location": "4001 Basel"
+    }
+}

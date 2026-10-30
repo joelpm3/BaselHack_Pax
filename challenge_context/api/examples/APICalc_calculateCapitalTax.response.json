@@ -1,0 +1,11 @@
+{
+    "response": {
+        "CapitalTaxes": 20653,
+        "CommunityTax": 8375,
+        "ChurchTax": 0,
+        "StateTax": 8375,
+        "FederalTax": 3903,
+        "NetCapital": 229347,
+        "TaxPercentage": 8.26
+    }
+}

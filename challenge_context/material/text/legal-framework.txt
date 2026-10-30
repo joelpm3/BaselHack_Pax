@@ -1,0 +1,36 @@
+Legal framework
+Non -exhaustive list created specifically for
+the challenge.
+Legal framework
+
+
+
+
+Data protection and appropriate                Traceability of AI recommendations           Human verification before a critical            Secure and regulatory   -compliant
+information to the customer                                                                 decision is made                                implementation
+
+
+
+    Transparent processing of customer,         AI recommendations must be explainable,      The AI Advisor should not replace human         Implementation of appropriate security
+    financial and health data with advance      documented and auditable in a way that is    review in complex cases or where there are      measures (e.g. access protection, logging,
+    information to the customer; personal       understandable for customers as well as      significant implications for the customer (n    encryption) and ensuring compliance with
+    data must not be transmitted to external    internal and external auditors; each         both cases, based on predefined criteria).      insurance law and contractual
+                                                recommendation should be based on                                                            requirements (e.g. information obligations,
+    AI models and/or cloud services in an
+                                                traceable criteria.                                                                          formal requirements, anti-money
+    uncontrolled manner.
+                                                                                                                                             laundering).
+
+
+
+
+2
+Pax, Schweizerische
+Lebensversicherungs   -Gesellschaft AG
+Aeschenplatz 13
+Postfach
+4002 Basel
++41 61 277 66 66
+info@pax.ch
+www.pax.ch
+
