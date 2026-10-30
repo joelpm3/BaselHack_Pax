@@ -33,7 +33,7 @@ export default function PortalPage({ params }: PageProps<"/[locale]/portal">) {
   setRequestLocale(locale);
   return (
     <div className="min-h-dvh pb-16">
-      <PortalHeader locale={locale} />
+      <PortalHeader />
       <Suspense fallback={<CockpitSkeleton />}>
         <Cockpit locale={locale as Locale} />
       </Suspense>
