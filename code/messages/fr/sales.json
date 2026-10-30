@@ -1,0 +1,359 @@
+{
+  "server": {
+    "gaps": {
+      "death": "Décès",
+      "disability": "Incapacité de gain",
+      "retirement": "Retraite",
+      "tax": "Impôts",
+      "child": "Enfants",
+      "payout": "Revenu à la retraite",
+      "care": "Aide immédiate en cas de décès"
+    },
+    "headlines": {
+      "death": "Protéger financièrement votre famille",
+      "disability": "Assurer votre revenu en cas de maladie",
+      "retirement": "Combler de manière ciblée la lacune à la retraite",
+      "tax": "Économiser des impôts avec le pilier 3a",
+      "child": "Prévoir pour votre enfant",
+      "payout": "Transformer un capital en revenu planifiable",
+      "care": "Soulager vos proches en cas de coup dur"
+    },
+    "criteria": {
+      "gap": "Lacune",
+      "gapValue": "{gap} : {amount} par an",
+      "gapValueUnknown": "{gap} : montant pas encore calculé",
+      "entryAge": "Âge d'entrée",
+      "entryAgeValue": "{age} ans (possible de {min} à {max})",
+      "sumInsured": "Capital décès",
+      "sumFromIncome": "{sum} : trois salaires annuels bruts, car la lacune n'est pas encore calculée",
+      "sumFromGap": "{gap} par an × {years} ans = {sum}",
+      "duration": "Durée",
+      "durationDeath": {
+        "until_youngest_child_25": "{years} ans, jusqu'aux 25 ans de votre plus jeune enfant (jusqu'à {endAge} ans)",
+        "partner_10_years": "{years} ans pour protéger votre partenaire (jusqu'à {endAge} ans)",
+        "minimum_5_years": "{years} ans, la durée minimale (jusqu'à {endAge} ans)"
+      },
+      "pension": "Rente en cas d'incapacité de gain",
+      "pensionValue": "{pension} par an jusqu'à {endAge} ans",
+      "waitingPeriod": "Délai d'attente",
+      "waiting24": "24 mois : d'ici là, le maintien du salaire et les indemnités journalières maladie paient",
+      "waiting12": "12 mois : en tant qu'indépendant·e sans longues indemnités journalières",
+      "occupation": "Groupe professionnel",
+      "occupationAssumed": "Groupe {group} supposé, profession pas encore connue",
+      "occupationValue": "Groupe {group} ({occupation})",
+      "capital": "Montant à placer",
+      "capitalGiven": "{capital} de capital disponible",
+      "capitalFromGap": "{capital} : 15 ans de votre lacune (hypothèse)",
+      "premium": "Prime d'épargne",
+      "premiumValue": "{premium} par an",
+      "premiumPartial": "{premium} par an ; pour combler toute la lacune, il faudrait {required}",
+      "room3a": "Marge pilier 3a",
+      "room3aValue": "Vous pouvez encore verser {room} cette année",
+      "room3aFull": "Votre pilier 3a est déjà au maximum",
+      "budget": "Budget",
+      "budgetValue": "Prime {premium}, votre budget {budget}",
+      "smoker": "Statut fumeur",
+      "nonSmokerAssumed": "Non-fumeur supposé, confirmé dans la proposition",
+      "smokerYes": "Fumeur",
+      "smokerNo": "Non-fumeur",
+      "insured": "Personne assurée",
+      "partner": "Votre partenaire",
+      "rules": "Règles Pax",
+      "rulesValue": "Vérifiées, aucun blocage (règles version {version})",
+      "suitability": "Test d'adéquation",
+      "suitabilityPending": "Nécessaire avant l'offre, encore ouvert"
+    },
+    "rationale": {
+      "todesfall": "Si votre revenu disparaît, il manque à vos proches environ {gap} par an. Un capital décès de {sum} couvre cette lacune pendant {years} ans, jusqu'à {endAge} ans.",
+      "todesfallIncome": "Un capital décès de {sum} donne à vos proches {years} ans pour se réorganiser, jusqu'à {endAge} ans.",
+      "erwerbsunfaehigkeit": "Si une maladie vous rend incapable de travailler, il vous manque environ {gap} par an une fois le maintien du salaire et les indemnités journalières terminés. Une rente de {pension} par an dès le {months}e mois comble cette lacune jusqu'à {endAge} ans.",
+      "erwerbsunfaehigkeitNoAmount": "Si une maladie vous rend incapable de travailler, une rente de {pension} par an dès le {months}e mois remplace une partie de votre revenu jusqu'à {endAge} ans.",
+      "savings": "À la retraite, il vous manque environ {gap} par an. Avec {premium} par an dans le pilier {pillar}, vous épargnez de manière ciblée jusqu'à {endAge} ans.",
+      "savingsNoAmount": "Avec {premium} par an dans le pilier {pillar}, vous constituez un capital pour votre retraite jusqu'à {endAge} ans.",
+      "savingsTax": "Vous n'utilisez pas encore entièrement la déduction fiscale du pilier 3a. Avec {premium} par an dans le pilier {pillar}, vous économisez des impôts chaque année et épargnez pour la retraite, jusqu'à {endAge} ans.",
+      "auszahlungsplan": "{capital} devient un revenu planifiable dès {startAge} ans, en partie garanti, en partie avec une chance de rendement.",
+      "kinderversicherung": "Avec {premium} par an, vous épargnez pour le départ de votre enfant dans la vie adulte, avec une couverture invalidité pour l'enfant et une libération du paiement des primes s'il vous arrive quelque chose.",
+      "care": "Pax Care est gratuit : CHF 2'000 d'aide immédiate et un soutien personnel pour vos proches en cas de décès."
+    },
+    "excluded": {
+      "entryAge": "L'âge d'entrée de {age} ans est en dehors de {min} à {max} ans.",
+      "capitalUnknown": "Le montant à placer pour un plan de versement manque."
+    },
+    "alternatives": {
+      "todesfall": "Pure protection décès à la prime la plus basse, sans épargne.",
+      "erwerbsunfaehigkeit": "Une rente en cas d'incapacité de gain assure votre revenu plutôt qu'un capital.",
+      "lifestar": "Épargne avec une part garantie et des fonds, avec protection décès ; prime nettement plus élevée. Seulement après le test d'adéquation.",
+      "fondsstar": "Entièrement placé en fonds : chance de rendement plus élevée, sans part garantie. Seulement après le test d'adéquation.",
+      "pax3a": "Pilier 3a conclu en ligne dès CHF 50 par mois, avec libération du paiement des primes en cas d'incapacité de gain.",
+      "auszahlungsplan": "Transforme un capital existant en revenu planifiable dès la retraite.",
+      "kinderversicherung": "Épargner pour l'enfant avec une couverture invalidité.",
+      "care": "Aide immédiate gratuite en cas de décès.",
+      "todesfallDecreasingLabel": "Assurance décès à capital décroissant",
+      "todesfall_decreasing": "Moins chère, car le capital diminue à mesure que vos enfants grandissent et que la lacune se réduit.",
+      "pensionFundBuyinLabel": "Rachat dans la caisse de pension",
+      "pension_fund_buyin": "Augmente votre rente et est déductible des impôts ; l'argent reste bloqué jusqu'à la retraite."
+    }
+  },
+  "issues": {
+    "entry_age_below_min": "Pas encore possible à {age} ans (dès {min} ans).",
+    "entry_age_above_max": "Plus possible à {age} ans (jusqu'à {max} ans).",
+    "end_age_out_of_range": "L'âge final de {endAge} ans n'est pas possible (entre {min} et {max}).",
+    "duration_too_short": "Une durée de {years} ans est plus courte que le minimum de {min} ans.",
+    "sum_below_min": "Le capital décès est inférieur au minimum de CHF {min, number}.",
+    "sum_above_max": "Le capital décès dépasse le maximum de CHF {max, number}.",
+    "pension_above_sum_insurance": "Les rentes supérieures à CHF {max, number} relèvent de l'assurance dommages : en cas de sinistre, une preuve de revenu est nécessaire.",
+    "premium_below_min": "La prime annuelle est inférieure au minimum de CHF {min, number}.",
+    "premium_above_3a_max": "La prime annuelle dépasse le montant maximal du pilier 3a de CHF {max, number}.",
+    "single_premium_below_min": "Le placement unique est inférieur au minimum de CHF {min, number}.",
+    "single_premium_above_max": "Le placement unique dépasse le maximum de CHF {max, number}.",
+    "amount_missing": "Il manque la somme assurée, la rente ou la prime.",
+    "quicksale_unavailable": "Le calculateur de primes Pax n'était pas joignable, la prime est estimée.",
+    "quicksale_warning": "Calculateur de primes Pax : {text}"
+  },
+  "price": {
+    "labelQuicksale": "Valeur indicative selon le tarif Pax, sans engagement",
+    "labelEstimate": "Estimation, sans engagement",
+    "free": "Gratuit",
+    "once": "unique",
+    "perYear": "par an",
+    "net": "{amount} avec l'excédent actuel (non garanti)",
+    "maturityTitle": "Capital probable à l'échéance",
+    "payoutTitle": "Versement par an",
+    "scenarioNote": "Exemple de calcul selon les scénarios de l'Association Suisse d'Assurances ; seule la valeur garantie est certaine.",
+    "scenario": {
+      "guaranteed": "Garanti",
+      "low": "Scénario bas",
+      "medium": "Scénario moyen",
+      "high": "Scénario haut"
+    }
+  },
+  "riders": {
+    "I": "Libération du paiement des primes en cas d'incapacité de gain",
+    "PFZ": "Libération du paiement des primes en cas d'agrandissement de la famille",
+    "IR": "Rente en cas d'incapacité de gain",
+    "included": "inclus"
+  },
+  "cover": {
+    "sumInsured": "Capital décès",
+    "annualPension": "Rente en cas d'incapacité de gain",
+    "perYear": "{amount} par an",
+    "waitingPeriod": "Délai d'attente",
+    "months": "{months} mois",
+    "savingsPremium": "Prime d'épargne",
+    "singlePremium": "Placement unique",
+    "payout": "Versement (scénario moyen)",
+    "duration": "Durée",
+    "durationValue": "{years} ans, jusqu'à {endAge} ans",
+    "pillar": "Type de prévoyance",
+    "pillar3a": "Prévoyance liée (pilier 3a)",
+    "pillar3b": "Prévoyance libre (pilier 3b)"
+  },
+  "recommendation": {
+    "title": "Recommandation",
+    "titleMany": "{count} recommandations",
+    "pending": "Calcul de la recommandation …",
+    "rules": "Règles Pax v{version}",
+    "none": "Aucun produit Pax ne convient actuellement à ces lacunes.",
+    "excluded": "Non recommandé",
+    "needsInfo": "Il manque encore des informations pour une recommandation : {fields}.",
+    "missing": {
+      "person_birthYear": "votre année de naissance",
+      "person_sex": "votre sexe",
+      "partner_birthYear": "l'année de naissance de votre partenaire",
+      "partner_sex": "le sexe de votre partenaire",
+      "partner": "des informations sur votre partenaire"
+    },
+    "closes": "Comble : {gaps}",
+    "conditional": "Après le test d'adéquation",
+    "accepted": "Conclu",
+    "declined": "Ne convient pas",
+    "flag": "Remarque des règles Pax :",
+    "why": "Pourquoi cette recommandation ({count} critères)",
+    "alternatives": "Alternatives",
+    "error": "Cela n'a pas fonctionné. Veuillez réessayer.",
+    "startSuitability": "Commencer le test d'adéquation",
+    "viewOffer": "Voir l'offre",
+    "decline": "Ne convient pas",
+    "productPage": "Produit chez Pax",
+    "declineMessage": "{product} ne me convient pas.",
+    "suitabilityMessage": "J'aimerais faire le test d'adéquation pour {product}.",
+    "offerMessage": "J'aimerais voir l'offre pour {product}.",
+    "met": "rempli",
+    "open": "ouvert"
+  },
+  "profiles": {
+    "conservative": "Conservateur",
+    "balanced": "Équilibré",
+    "dynamic": "Dynamique"
+  },
+  "suitability": {
+    "titleShort": "Test d'adéquation",
+    "title": "Test d'adéquation : {product}",
+    "pending": "Préparation du test d'adéquation …",
+    "notApplicable": "{product} ne nécessite pas de test d'adéquation.",
+    "intro": "Avec un placement en fonds, vous supportez un risque de perte. C'est pourquoi Pax vérifie, avant l'offre, si le produit correspond à vos finances, à votre objectif et à votre expérience. Veuillez répondre à toutes les questions pour vous seul·e, sans votre partenaire.",
+    "a": {
+      "title": "Capacité financière",
+      "hint": "Combien souhaitez-vous épargner par an ou placer en une fois ?",
+      "annualPremium": "Prime d'épargne annuelle",
+      "singlePremium": "Placement unique",
+      "netIncome": "Votre revenu annuel net après déductions sociales",
+      "netAssets": "Votre fortune nette après déduction des hypothèques et des dettes",
+      "savingCapacity": "Combien pouvez-vous épargner en plus chaque année après toutes les dépenses ?",
+      "oneOffCapacity": "Quel montant pouvez-vous placer en une fois ?"
+    },
+    "brackets": {
+      "income": {
+        "lt75k": "moins de 75'000",
+        "75k_150k": "75'000 à 150'000",
+        "150k_250k": "150'001 à 250'000",
+        "gt250k": "plus de 250'000"
+      },
+      "assets": {
+        "lt10k": "moins de 10'000",
+        "10k_50k": "10'000 à 50'000",
+        "50k_150k": "50'001 à 150'000",
+        "150k_300k": "150'001 à 300'000",
+        "gt300k": "plus de 300'000"
+      },
+      "saving": {
+        "lt1k": "moins de 1'000",
+        "1k_3k": "1'000 à 3'000",
+        "3k_7k": "3'001 à 7'000",
+        "gt7k": "plus de 7'000"
+      }
+    },
+    "b": { "title": "Objectif de placement et horizon" },
+    "c": { "title": "Connaissances et disposition au risque" },
+    "questions": {
+      "goal": {
+        "label": "Quel objectif poursuivez-vous avec votre placement ?",
+        "minimise_loss": "Je veux limiter le plus possible le risque de perte. Les chances de gains élevés sont moins importantes pour moi.",
+        "moderate_gains": "J'accepte un certain risque de perte pour avoir des chances de gains modérés.",
+        "high_gains": "Je suis prêt·e à prendre un risque de perte élevé pour avoir la possibilité de gains élevés."
+      },
+      "horizon": {
+        "label": "Sur quelle période voulez-vous épargner ou placer ?",
+        "10_15": "10 à 15 ans",
+        "gt15": "Plus de 15 ans"
+      },
+      "knowledge": {
+        "label": "Connaissez-vous les titres ?",
+        "none": "Non, je n'ai encore aucune connaissance ni expérience des titres.",
+        "knowledge_only": "Je connais les titres, mais je n'en ai jamais acheté.",
+        "experience": "Oui, j'ai déjà acquis des connaissances et de l'expérience avec les titres.",
+        "expert": "Oui, j'ai beaucoup d'expérience et je connais très bien les titres."
+      },
+      "drawdown": {
+        "label": "Vos titres perdent 30 % de leur valeur. Que faites-vous ?",
+        "sell_all": "Je vends tout pour éviter une perte encore plus grande.",
+        "sell_part": "Je vends une partie pour limiter ma perte si les cours continuent de baisser.",
+        "hold": "Je ne fais rien pour l'instant, car je connais les fluctuations des marchés.",
+        "buy_more": "J'investis davantage, car je m'attends à une reprise."
+      }
+    },
+    "points": "{points} pts",
+    "d": {
+      "title": "Part garantie",
+      "hint": "La part garantie de votre prime ne comporte aucun risque de perte et augmente donc votre score.",
+      "none": "{product} place toute la prime en fonds, sans part garantie.",
+      "label": "Part garantie de la prime",
+      "formula": "{points} points × (100 % − {g} %) + 120 × {g} % = {total} points"
+    },
+    "scale": "{total} sur 120 points",
+    "total": "{total} points",
+    "profileIs": "Votre profil de placement : {profile} ({total} points).",
+    "pointsDetail": "{points} points issus des questions, {g} % de part garantie.",
+    "answerAll": "Répondez à toutes les questions pour voir votre profil de placement et les fonds adaptés.",
+    "funds": "Fonds Pax adaptés à votre profil",
+    "suggested": "Proposition",
+    "fundChosen": "Fonds choisi :",
+    "affordAnnualOk": "Votre prime d'épargne de {amount} correspond à votre capacité d'épargne.",
+    "affordAnnualNo": "Votre prime d'épargne de {amount} dépasse ce que vous pouvez épargner par an.",
+    "affordSingleOk": "Votre placement unique de {amount} correspond au montant dont vous disposez.",
+    "affordSingleNo": "Votre placement unique de {amount} dépasse le montant que vous pouvez placer en une fois.",
+    "suitable": "Résultat : le produit correspond à votre profil de placement et est supportable pour vous.",
+    "notSuitable": "Résultat : Pax déconseille ce produit, car il n'est pas supportable financièrement. Choisissez un montant plus bas ou une alternative.",
+    "error": "Le test n'a pas pu être enregistré. Veuillez réessayer.",
+    "submit": "Terminer le test",
+    "edit": "Modifier les réponses",
+    "resultMessageOk": "J'ai terminé le test d'adéquation pour {product} : {total} points, profil {profile}, fonds {fund}.",
+    "resultMessageNo": "J'ai terminé le test d'adéquation pour {product} : {total} points, profil {profile}. Selon le test, le montant n'est pas supportable pour moi."
+  },
+  "offer": {
+    "titleShort": "Offre",
+    "title": "Offre : {product}",
+    "pending": "Préparation de l'offre …",
+    "status": {
+      "not_found": "Cette offre n'est plus disponible.",
+      "suitability_required": "Ce produit nécessite d'abord le test d'adéquation.",
+      "not_suitable": "Selon le test d'adéquation, Pax déconseille ce produit."
+    },
+    "you": "Vous",
+    "demoBadge": "Démo",
+    "insured": "Personne assurée",
+    "insuredDetails": "né·e le {birthDate}, {smoker, select, yes {fumeur} other {non-fumeur}}",
+    "period": "Durée du contrat",
+    "periodValue": "du {start} au {end}",
+    "fund": "Fonds",
+    "guaranteedShare": "Part garantie",
+    "conditionsTitle": "Conditions importantes",
+    "conditions": {
+      "withdrawal": "Vous pouvez révoquer la proposition dans un délai de 14 jours.",
+      "premiumGuaranteed": "La prime brute est garantie pour toute la durée. La réduction issue des excédents n'est pas garantie.",
+      "investmentRisk": "Le placement en fonds fluctue. Les valeurs des scénarios sont des exemples de calcul et ne sont pas garanties.",
+      "maximumBenefit": "La rente est un montant maximal ; la prestation dépend du degré d'incapacité de gain.",
+      "crisisCoach": "Inclus : un coach de crise jusqu'à CHF 2'500 après 90 jours d'incapacité de gain, et la couverture continue en cas de déménagement en Europe.",
+      "pillar3a": "Pilier 3a : les primes sont déductibles du revenu jusqu'au montant maximal ; le capital est bloqué au plus tôt jusqu'à cinq ans avant l'âge de référence.",
+      "health": "Une vraie proposition comprend des questions de santé. Pax examine la proposition avant la conclusion du contrat.",
+      "cooperative": "Avec la conclusion, vous devenez membre de la coopérative Pax Holding."
+    },
+    "nextTitle": "La suite",
+    "next": {
+      "contact": "Compléter vos coordonnées",
+      "sign": "Signer avec votre nom",
+      "policy": "Votre police apparaît aussitôt dans votre Cockpit prévoyance. Début de l'assurance : {date}."
+    },
+    "demoNotice": "Ceci est un prototype : la signature est une démo et aucun contrat juridiquement valable n'est conclu.",
+    "contact": {
+      "title": "Vos coordonnées",
+      "hint": "Pour la police, nous avons besoin de votre nom et de vos coordonnées.",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "birthDate": "Date de naissance",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "privacy": "Pax utilise ces données uniquement pour votre offre et votre police.",
+      "error": "Veuillez vérifier vos données (date de naissance, e-mail, téléphone).",
+      "submit": "Enregistrer"
+    },
+    "sign": {
+      "title": "Signer",
+      "consentsLegend": "Confirmations",
+      "consents": {
+        "offerRead": "J'ai lu l'offre et les conditions importantes.",
+        "dataCorrect": "Mes données sont complètes et exactes, y compris mon statut de fumeur.",
+        "demoUnderstood": "Je comprends qu'il s'agit d'une démo et qu'aucun contrat n'est conclu."
+      },
+      "signatureLabel": "Signature",
+      "signaturePlaceholder": "Prénom Nom",
+      "signatureHint": "Tapez votre nom complet : {name}.",
+      "editContact": "Modifier les données",
+      "errors": {
+        "invalid": "Veuillez confirmer tous les points et taper votre nom.",
+        "not_found": "Cette offre n'est plus disponible.",
+        "already_signed": "Cette offre est déjà signée.",
+        "suitability_missing": "Il manque un test d'adéquation favorable pour ce produit.",
+        "contact_missing": "Veuillez d'abord compléter vos coordonnées.",
+        "signature_mismatch": "Le nom ne correspond pas à vos données. Tapez : {name}."
+      },
+      "submit": "Signer maintenant",
+      "signedMessage": "J'ai signé l'offre pour {product} (police {number})."
+    },
+    "signed": {
+      "title": "Signé. Votre police {number} commence le {date}.",
+      "body": "Vous la trouvez maintenant dans votre Cockpit prévoyance, avec vos autres polices.",
+      "portal": "Vers le Cockpit prévoyance"
+    }
+  }
+}

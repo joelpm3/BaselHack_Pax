@@ -1,1 +1,29 @@
-{}
+{
+  "start": "Spracheingabe starten",
+  "startHint": "Sprechen Sie Schweizerdeutsch, bis 60 Sekunden. Der Text erscheint im Eingabefeld.",
+  "stop": "Aufnahme beenden und in Text umwandeln",
+  "cancel": "Aufnahme verwerfen",
+  "recording": "Aufnahme läuft. Mit Escape verwerfen.",
+  "elapsedLabel": "Aufnahmedauer",
+  "requesting": "Mikrofon wird freigegeben …",
+  "transcribing": "Wird in Text umgewandelt …",
+  "dismiss": "Meldung schliessen",
+  "errors": {
+    "permission": "Kein Zugriff aufs Mikrofon. Erlauben Sie den Zugriff in den Browser-Einstellungen.",
+    "no_microphone": "Kein Mikrofon gefunden oder es wird von einer anderen App verwendet.",
+    "not_supported": "Dieser Browser kann keine Sprache aufnehmen. Bitte tippen Sie Ihre Nachricht.",
+    "nothing_heard": "Ich habe nichts verstanden. Bitte versuchen Sie es nochmals.",
+    "too_short": "Die Aufnahme war zu kurz. Halten Sie die Aufnahme etwas länger.",
+    "too_long": "Die Aufnahme ist länger als 60 Sekunden.",
+    "too_large": "Die Aufnahme ist zu gross.",
+    "unsupported": "Dieses Audioformat wird nicht unterstützt.",
+    "empty": "Die Aufnahme ist leer. Bitte versuchen Sie es nochmals.",
+    "invalid": "Die Aufnahme konnte nicht übertragen werden. Bitte versuchen Sie es nochmals.",
+    "busy": "Die Spracherkennung ist gerade ausgelastet. Bitte versuchen Sie es gleich nochmals.",
+    "unavailable": "Die Spracheingabe ist gerade nicht verfügbar. Bitte tippen Sie Ihre Nachricht.",
+    "starting": "Die Spracherkennung wird gestartet. Bitte versuchen Sie es in einer Minute nochmals.",
+    "unreadable": "Die Aufnahme konnte nicht gelesen werden. Bitte versuchen Sie es nochmals.",
+    "unauthorized": "Ihre Sitzung ist abgelaufen. Bitte laden Sie die Seite neu.",
+    "failed": "Die Spracherkennung hat nicht geantwortet. Bitte versuchen Sie es nochmals."
+  }
+}

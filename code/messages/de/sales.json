@@ -1,0 +1,359 @@
+{
+  "server": {
+    "gaps": {
+      "death": "Todesfall",
+      "disability": "Erwerbsunfähigkeit",
+      "retirement": "Alter",
+      "tax": "Steuern",
+      "child": "Kinder",
+      "payout": "Auszahlung im Alter",
+      "care": "Soforthilfe im Todesfall"
+    },
+    "headlines": {
+      "death": "Ihre Familie finanziell absichern",
+      "disability": "Ihr Einkommen bei Krankheit sichern",
+      "retirement": "Die Lücke im Alter gezielt schliessen",
+      "tax": "Steuern sparen mit der Säule 3a",
+      "child": "Für Ihr Kind vorsorgen",
+      "payout": "Kapital in ein planbares Einkommen verwandeln",
+      "care": "Angehörige im Ernstfall entlasten"
+    },
+    "criteria": {
+      "gap": "Lücke",
+      "gapValue": "{gap}: {amount} pro Jahr",
+      "gapValueUnknown": "{gap}: Betrag noch nicht berechnet",
+      "entryAge": "Eintrittsalter",
+      "entryAgeValue": "{age} Jahre (möglich {min} bis {max})",
+      "sumInsured": "Todesfallkapital",
+      "sumFromIncome": "{sum}: drei Bruttojahreslöhne, weil die Lücke noch nicht berechnet ist",
+      "sumFromGap": "{gap} pro Jahr × {years} Jahre = {sum}",
+      "duration": "Laufzeit",
+      "durationDeath": {
+        "until_youngest_child_25": "{years} Jahre, bis Ihr jüngstes Kind 25 ist (bis Alter {endAge})",
+        "partner_10_years": "{years} Jahre zur Absicherung Ihrer Partnerin oder Ihres Partners (bis Alter {endAge})",
+        "minimum_5_years": "{years} Jahre, die Mindestlaufzeit (bis Alter {endAge})"
+      },
+      "pension": "Rente bei Erwerbsunfähigkeit",
+      "pensionValue": "{pension} pro Jahr bis Alter {endAge}",
+      "waitingPeriod": "Wartefrist",
+      "waiting24": "24 Monate: vorher zahlen Lohnfortzahlung und Krankentaggeld",
+      "waiting12": "12 Monate: als Selbstständige ohne lange Taggeldversicherung",
+      "occupation": "Berufsgruppe",
+      "occupationAssumed": "Gruppe {group} angenommen, Beruf noch nicht bekannt",
+      "occupationValue": "Gruppe {group} ({occupation})",
+      "capital": "Anlagebetrag",
+      "capitalGiven": "{capital} verfügbares Kapital",
+      "capitalFromGap": "{capital}: 15 Jahre Ihrer Lücke (Annahme)",
+      "premium": "Sparprämie",
+      "premiumValue": "{premium} pro Jahr",
+      "premiumPartial": "{premium} pro Jahr; für die ganze Lücke wären {required} nötig",
+      "room3a": "Spielraum Säule 3a",
+      "room3aValue": "{room} können Sie dieses Jahr noch einzahlen",
+      "room3aFull": "Die Säule 3a ist bereits ausgeschöpft",
+      "budget": "Budget",
+      "budgetValue": "Prämie {premium}, Ihr Budget {budget}",
+      "smoker": "Raucherstatus",
+      "nonSmokerAssumed": "Nichtraucher angenommen, wird im Antrag bestätigt",
+      "smokerYes": "Raucher",
+      "smokerNo": "Nichtraucher",
+      "insured": "Versicherte Person",
+      "partner": "Ihre Partnerin oder Ihr Partner",
+      "rules": "Pax-Regeln",
+      "rulesValue": "Geprüft, keine Sperre (Regelwerk Version {version})",
+      "suitability": "Angemessenheitsprüfung",
+      "suitabilityPending": "Vor der Offerte nötig, noch offen"
+    },
+    "rationale": {
+      "todesfall": "Fällt Ihr Einkommen weg, fehlen Ihren Angehörigen rund {gap} pro Jahr. Ein Todesfallkapital von {sum} deckt diese Lücke für {years} Jahre, bis Alter {endAge}.",
+      "todesfallIncome": "Ein Todesfallkapital von {sum} gibt Ihren Angehörigen für {years} Jahre Zeit, sich neu zu organisieren, bis Alter {endAge}.",
+      "erwerbsunfaehigkeit": "Werden Sie wegen Krankheit erwerbsunfähig, fehlen Ihnen nach Lohnfortzahlung und Taggeld rund {gap} pro Jahr. Eine Rente von {pension} pro Jahr ab dem {months}. Monat schliesst diese Lücke bis Alter {endAge}.",
+      "erwerbsunfaehigkeitNoAmount": "Werden Sie wegen Krankheit erwerbsunfähig, deckt eine Rente von {pension} pro Jahr ab dem {months}. Monat einen Teil Ihres Einkommens bis Alter {endAge}.",
+      "savings": "Im Alter fehlen Ihnen rund {gap} pro Jahr. Mit {premium} pro Jahr in der Säule {pillar} sparen Sie bis Alter {endAge} gezielt dafür.",
+      "savingsNoAmount": "Mit {premium} pro Jahr in der Säule {pillar} bauen Sie bis Alter {endAge} Kapital für Ihre Pension auf.",
+      "savingsTax": "Sie nutzen den Steuerabzug der Säule 3a noch nicht voll. Mit {premium} pro Jahr in der Säule {pillar} sparen Sie jedes Jahr Steuern und Kapital fürs Alter, bis Alter {endAge}.",
+      "auszahlungsplan": "Aus {capital} wird ein planbares Einkommen ab Alter {startAge}, zum Teil garantiert, zum Teil mit Renditechance.",
+      "kinderversicherung": "Mit {premium} pro Jahr sparen Sie für den Start Ihres Kindes ins Erwachsenenleben, mit Invaliditätsschutz für das Kind und Prämienbefreiung, falls Ihnen etwas zustösst.",
+      "care": "Pax Care ist kostenlos: CHF 2'000 Soforthilfe und persönliche Unterstützung für Ihre Angehörigen im Todesfall."
+    },
+    "excluded": {
+      "entryAge": "Eintrittsalter {age} liegt ausserhalb von {min} bis {max} Jahren.",
+      "capitalUnknown": "Für einen Auszahlungsplan fehlt der Anlagebetrag."
+    },
+    "alternatives": {
+      "todesfall": "Reiner Todesfallschutz zur tiefsten Prämie, ohne Sparteil.",
+      "erwerbsunfaehigkeit": "Eine Rente bei Erwerbsunfähigkeit sichert Ihr Einkommen statt eines Kapitals.",
+      "lifestar": "Sparen mit garantiertem Teil und Fondsanlage, mit Todesfallschutz; deutlich höhere Prämie. Nur nach der Angemessenheitsprüfung.",
+      "fondsstar": "Ganz in Fonds angelegt: höhere Renditechance, kein garantierter Teil. Nur nach der Angemessenheitsprüfung.",
+      "pax3a": "Säule 3a digital abschliessen ab CHF 50 pro Monat, mit Prämienbefreiung bei Erwerbsunfähigkeit.",
+      "auszahlungsplan": "Verwandelt vorhandenes Kapital ab der Pension in ein planbares Einkommen.",
+      "kinderversicherung": "Sparen für das Kind mit Invaliditätsschutz.",
+      "care": "Kostenlose Soforthilfe im Todesfall.",
+      "todesfallDecreasingLabel": "Todesfallversicherung mit fallendem Kapital",
+      "todesfall_decreasing": "Günstiger, weil das Kapital sinkt, während Ihre Kinder älter werden und die Lücke kleiner wird.",
+      "pensionFundBuyinLabel": "Einkauf in die Pensionskasse",
+      "pension_fund_buyin": "Erhöht Ihre Rente und ist steuerlich abzugsfähig; das Geld bleibt bis zur Pension gebunden."
+    }
+  },
+  "issues": {
+    "entry_age_below_min": "Mit {age} Jahren noch nicht möglich (ab {min} Jahren).",
+    "entry_age_above_max": "Mit {age} Jahren nicht mehr möglich (bis {max} Jahre).",
+    "end_age_out_of_range": "Endalter {endAge} ist nicht möglich (zwischen {min} und {max}).",
+    "duration_too_short": "Laufzeit {years} Jahre ist kürzer als die Mindestlaufzeit von {min} Jahren.",
+    "sum_below_min": "Das Todesfallkapital liegt unter dem Minimum von CHF {min, number}.",
+    "sum_above_max": "Das Todesfallkapital liegt über dem Maximum von CHF {max, number}.",
+    "pension_above_sum_insurance": "Renten über CHF {max, number} gelten als Schadenversicherung: Im Leistungsfall braucht es einen Einkommensnachweis.",
+    "premium_below_min": "Die Jahresprämie liegt unter dem Minimum von CHF {min, number}.",
+    "premium_above_3a_max": "Die Jahresprämie liegt über dem 3a-Maximalbetrag von CHF {max, number}.",
+    "single_premium_below_min": "Die Einmalanlage liegt unter dem Minimum von CHF {min, number}.",
+    "single_premium_above_max": "Die Einmalanlage liegt über dem Maximum von CHF {max, number}.",
+    "amount_missing": "Es fehlt die Versicherungssumme, die Rente oder die Prämie.",
+    "quicksale_unavailable": "Der Pax-Tarifrechner war nicht erreichbar, die Prämie ist geschätzt.",
+    "quicksale_warning": "Pax-Tarifrechner: {text}"
+  },
+  "price": {
+    "labelQuicksale": "Richtwert gemäss Pax-Tarif, unverbindlich",
+    "labelEstimate": "Geschätzt, unverbindlich",
+    "free": "Kostenlos",
+    "once": "einmalig",
+    "perYear": "pro Jahr",
+    "net": "{amount} mit dem aktuellen Überschuss (nicht garantiert)",
+    "maturityTitle": "Voraussichtliches Kapital bei Ablauf",
+    "payoutTitle": "Auszahlung pro Jahr",
+    "scenarioNote": "Beispielrechnung nach Szenarien des Schweizerischen Versicherungsverbands; nur der garantierte Wert ist sicher.",
+    "scenario": {
+      "guaranteed": "Garantiert",
+      "low": "Tiefes Szenario",
+      "medium": "Mittleres Szenario",
+      "high": "Hohes Szenario"
+    }
+  },
+  "riders": {
+    "I": "Prämienbefreiung bei Erwerbsunfähigkeit",
+    "PFZ": "Prämienbefreiung bei Familienzuwachs",
+    "IR": "Rente bei Erwerbsunfähigkeit",
+    "included": "inbegriffen"
+  },
+  "cover": {
+    "sumInsured": "Todesfallkapital",
+    "annualPension": "Rente bei Erwerbsunfähigkeit",
+    "perYear": "{amount} pro Jahr",
+    "waitingPeriod": "Wartefrist",
+    "months": "{months} Monate",
+    "savingsPremium": "Sparprämie",
+    "singlePremium": "Einmalanlage",
+    "payout": "Auszahlung (mittleres Szenario)",
+    "duration": "Laufzeit",
+    "durationValue": "{years} Jahre, bis Alter {endAge}",
+    "pillar": "Vorsorgeart",
+    "pillar3a": "Gebundene Vorsorge (Säule 3a)",
+    "pillar3b": "Freie Vorsorge (Säule 3b)"
+  },
+  "recommendation": {
+    "title": "Empfehlung",
+    "titleMany": "{count} Empfehlungen",
+    "pending": "Empfehlung wird berechnet …",
+    "rules": "Pax-Regeln v{version}",
+    "none": "Für diese Lücken passt gerade kein Pax-Produkt.",
+    "excluded": "Nicht empfohlen",
+    "needsInfo": "Für eine Empfehlung fehlen noch Angaben: {fields}.",
+    "missing": {
+      "person_birthYear": "Ihr Geburtsjahr",
+      "person_sex": "Ihr Geschlecht",
+      "partner_birthYear": "Geburtsjahr Ihrer Partnerin oder Ihres Partners",
+      "partner_sex": "Geschlecht Ihrer Partnerin oder Ihres Partners",
+      "partner": "Angaben zu Ihrer Partnerin oder Ihrem Partner"
+    },
+    "closes": "Schliesst: {gaps}",
+    "conditional": "Nach der Angemessenheitsprüfung",
+    "accepted": "Abgeschlossen",
+    "declined": "Nicht passend",
+    "flag": "Hinweis aus den Pax-Regeln:",
+    "why": "Warum diese Empfehlung ({count} Kriterien)",
+    "alternatives": "Alternativen",
+    "error": "Das hat nicht geklappt. Bitte versuchen Sie es nochmals.",
+    "startSuitability": "Angemessenheitsprüfung starten",
+    "viewOffer": "Offerte ansehen",
+    "decline": "Nicht passend",
+    "productPage": "Produkt bei Pax",
+    "declineMessage": "{product} passt für mich nicht.",
+    "suitabilityMessage": "Ich möchte die Angemessenheitsprüfung für {product} machen.",
+    "offerMessage": "Ich möchte die Offerte für {product} ansehen.",
+    "met": "erfüllt",
+    "open": "offen"
+  },
+  "profiles": {
+    "conservative": "Konservativ",
+    "balanced": "Ausgewogen",
+    "dynamic": "Dynamisch"
+  },
+  "suitability": {
+    "titleShort": "Angemessenheitsprüfung",
+    "title": "Angemessenheitsprüfung: {product}",
+    "pending": "Angemessenheitsprüfung wird vorbereitet …",
+    "notApplicable": "Für {product} braucht es keine Angemessenheitsprüfung.",
+    "intro": "Bei einer Fondsanlage tragen Sie ein Verlustrisiko. Deshalb prüft Pax vor der Offerte, ob das Produkt zu Ihren Finanzen, Ihrem Ziel und Ihrer Erfahrung passt. Beantworten Sie bitte alle Fragen nur für sich, ohne Partnerin oder Partner.",
+    "a": {
+      "title": "Finanzielle Tragbarkeit",
+      "hint": "Wie viel möchten Sie jährlich sparen oder einmalig anlegen?",
+      "annualPremium": "Jährliche Sparprämie",
+      "singlePremium": "Einmalanlage",
+      "netIncome": "Ihr jährliches Nettoeinkommen nach Sozialabzügen",
+      "netAssets": "Ihr Nettovermögen nach Abzug von Hypotheken und Schulden",
+      "savingCapacity": "Wie viel können Sie nach allen Ausgaben jährlich zusätzlich sparen?",
+      "oneOffCapacity": "Welchen Betrag können Sie einmalig anlegen?"
+    },
+    "brackets": {
+      "income": {
+        "lt75k": "unter 75'000",
+        "75k_150k": "75'000 bis 150'000",
+        "150k_250k": "150'001 bis 250'000",
+        "gt250k": "über 250'000"
+      },
+      "assets": {
+        "lt10k": "unter 10'000",
+        "10k_50k": "10'000 bis 50'000",
+        "50k_150k": "50'001 bis 150'000",
+        "150k_300k": "150'001 bis 300'000",
+        "gt300k": "über 300'000"
+      },
+      "saving": {
+        "lt1k": "unter 1'000",
+        "1k_3k": "1'000 bis 3'000",
+        "3k_7k": "3'001 bis 7'000",
+        "gt7k": "über 7'000"
+      }
+    },
+    "b": { "title": "Anlageziel und Laufzeit" },
+    "c": { "title": "Kenntnisse und Risikobereitschaft" },
+    "questions": {
+      "goal": {
+        "label": "Welches Ziel verfolgen Sie mit Ihrer Anlage?",
+        "minimise_loss": "Ich möchte das Verlustrisiko möglichst gering halten. Hohe Gewinnchancen sind mir weniger wichtig.",
+        "moderate_gains": "Ich nehme ein gewisses Verlustrisiko in Kauf, um moderate Gewinnchancen zu haben.",
+        "high_gains": "Ich bin bereit, ein hohes Verlustrisiko einzugehen, um die Möglichkeit auf hohe Gewinne zu haben."
+      },
+      "horizon": {
+        "label": "Über welchen Zeitraum wollen Sie sparen oder anlegen?",
+        "10_15": "10 bis 15 Jahre",
+        "gt15": "Mehr als 15 Jahre"
+      },
+      "knowledge": {
+        "label": "Kennen Sie sich mit Wertschriften aus?",
+        "none": "Nein, ich habe noch keine Kenntnisse und Erfahrungen mit Wertschriften.",
+        "knowledge_only": "Ich kenne Wertschriften, habe aber noch nie welche gekauft.",
+        "experience": "Ja, ich habe bereits Kenntnisse und Erfahrungen mit Wertschriften gesammelt.",
+        "expert": "Ja, ich habe viel Erfahrung und kenne mich bestens mit Wertschriften aus."
+      },
+      "drawdown": {
+        "label": "Ihre Wertschriften verlieren 30 % an Wert. Was tun Sie?",
+        "sell_all": "Ich verkaufe alles, um einen noch grösseren Verlust zu vermeiden.",
+        "sell_part": "Ich verkaufe einen Teil, um bei weiter sinkenden Kursen meinen Verlust zu begrenzen.",
+        "hold": "Ich unternehme vorläufig nichts, denn ich bin mir der Schwankungen bewusst.",
+        "buy_more": "Ich investiere zusätzlich, weil ich eine Erholung erwarte."
+      }
+    },
+    "points": "{points} Pkt.",
+    "d": {
+      "title": "Garantierter Teil",
+      "hint": "Der garantierte Teil Ihrer Prämie trägt kein Verlustrisiko und erhöht deshalb Ihre Punktzahl.",
+      "none": "{product} legt die ganze Prämie in Fonds an, ohne garantierten Teil.",
+      "label": "Garantierter Anteil der Prämie",
+      "formula": "{points} Punkte × (100 % − {g} %) + 120 × {g} % = {total} Punkte"
+    },
+    "scale": "{total} von 120 Punkten",
+    "total": "{total} Punkte",
+    "profileIs": "Ihr Anlageprofil: {profile} ({total} Punkte).",
+    "pointsDetail": "{points} Punkte aus den Fragen, {g} % garantierter Teil.",
+    "answerAll": "Beantworten Sie alle Fragen, dann sehen Sie Ihr Anlageprofil und die passenden Fonds.",
+    "funds": "Passende Pax-Fonds für Ihr Profil",
+    "suggested": "Vorschlag",
+    "fundChosen": "Gewählter Fonds:",
+    "affordAnnualOk": "Ihre Sparprämie von {amount} passt zu Ihrem Sparpotenzial.",
+    "affordAnnualNo": "Ihre Sparprämie von {amount} ist höher als Ihr jährliches Sparpotenzial.",
+    "affordSingleOk": "Ihre Einmalanlage von {amount} passt zu Ihrem verfügbaren Betrag.",
+    "affordSingleNo": "Ihre Einmalanlage von {amount} ist höher als der Betrag, den Sie einmalig anlegen können.",
+    "suitable": "Ergebnis: Das Produkt passt zu Ihrem Anlageprofil und ist für Sie tragbar.",
+    "notSuitable": "Ergebnis: Pax rät von diesem Produkt ab, weil es finanziell nicht tragbar ist. Wählen Sie einen tieferen Betrag oder eine Alternative.",
+    "error": "Die Prüfung konnte nicht gespeichert werden. Bitte versuchen Sie es nochmals.",
+    "submit": "Prüfung abschliessen",
+    "edit": "Angaben ändern",
+    "resultMessageOk": "Ich habe die Angemessenheitsprüfung für {product} abgeschlossen: {total} Punkte, Profil {profile}, Fonds {fund}.",
+    "resultMessageNo": "Ich habe die Angemessenheitsprüfung für {product} abgeschlossen: {total} Punkte, Profil {profile}. Laut Prüfung ist der Betrag für mich nicht tragbar."
+  },
+  "offer": {
+    "titleShort": "Offerte",
+    "title": "Offerte: {product}",
+    "pending": "Offerte wird erstellt …",
+    "status": {
+      "not_found": "Diese Offerte ist nicht mehr verfügbar.",
+      "suitability_required": "Für dieses Produkt braucht es zuerst die Angemessenheitsprüfung.",
+      "not_suitable": "Laut Angemessenheitsprüfung rät Pax von diesem Produkt ab."
+    },
+    "you": "Sie",
+    "demoBadge": "Demo",
+    "insured": "Versicherte Person",
+    "insuredDetails": "geboren am {birthDate}, {smoker, select, yes {Raucher} other {Nichtraucher}}",
+    "period": "Vertragsdauer",
+    "periodValue": "{start} bis {end}",
+    "fund": "Fonds",
+    "guaranteedShare": "Garantierter Teil",
+    "conditionsTitle": "Wichtige Bedingungen",
+    "conditions": {
+      "withdrawal": "Sie können den Antrag innerhalb von 14 Tagen widerrufen.",
+      "premiumGuaranteed": "Die Bruttoprämie ist für die ganze Laufzeit garantiert. Die Ermässigung aus Überschüssen ist nicht garantiert.",
+      "investmentRisk": "Die Fondsanlage schwankt. Die Szenariowerte sind Beispielrechnungen und nicht garantiert.",
+      "maximumBenefit": "Die Rente ist ein Höchstbetrag; die Leistung hängt vom Grad der Erwerbsunfähigkeit ab.",
+      "crisisCoach": "Inbegriffen: Krisencoach bis CHF 2'500 ab 90 Tagen Erwerbsunfähigkeit, Deckung auch bei Umzug in ein europäisches Land.",
+      "pillar3a": "Säule 3a: Prämien sind bis zum Maximalbetrag vom Einkommen abziehbar; das Kapital ist bis frühestens fünf Jahre vor dem Referenzalter gebunden.",
+      "health": "Im echten Antrag folgen Gesundheitsfragen. Pax prüft den Antrag, bevor der Vertrag zustande kommt.",
+      "cooperative": "Mit dem Abschluss werden Sie Mitglied der Genossenschaft Pax Holding."
+    },
+    "nextTitle": "So geht es weiter",
+    "next": {
+      "contact": "Kontaktangaben ergänzen",
+      "sign": "Mit Ihrem Namen unterschreiben",
+      "policy": "Ihre Police erscheint sofort in Ihrem Vorsorge-Cockpit. Versicherungsbeginn: {date}."
+    },
+    "demoNotice": "Dies ist ein Prototyp: Die Unterschrift ist eine Demo und es entsteht kein rechtsgültiger Vertrag.",
+    "contact": {
+      "title": "Ihre Kontaktangaben",
+      "hint": "Für die Police brauchen wir Ihren Namen und wie wir Sie erreichen.",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "birthDate": "Geburtsdatum",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "privacy": "Pax nutzt diese Angaben nur für Ihre Offerte und Police.",
+      "error": "Bitte prüfen Sie Ihre Angaben (Geburtsdatum, E-Mail, Telefon).",
+      "submit": "Angaben speichern"
+    },
+    "sign": {
+      "title": "Unterschreiben",
+      "consentsLegend": "Bestätigungen",
+      "consents": {
+        "offerRead": "Ich habe die Offerte und die wichtigsten Bedingungen gelesen.",
+        "dataCorrect": "Meine Angaben sind vollständig und richtig, auch zum Raucherstatus.",
+        "demoUnderstood": "Mir ist bewusst, dass dies eine Demo ist und kein Vertrag entsteht."
+      },
+      "signatureLabel": "Unterschrift",
+      "signaturePlaceholder": "Vorname Nachname",
+      "signatureHint": "Tippen Sie Ihren vollen Namen: {name}.",
+      "editContact": "Angaben ändern",
+      "errors": {
+        "invalid": "Bitte bestätigen Sie alle Punkte und tippen Sie Ihren Namen.",
+        "not_found": "Diese Offerte ist nicht mehr verfügbar.",
+        "already_signed": "Diese Offerte ist bereits unterschrieben.",
+        "suitability_missing": "Für dieses Produkt fehlt eine passende Angemessenheitsprüfung.",
+        "contact_missing": "Bitte ergänzen Sie zuerst Ihre Kontaktangaben.",
+        "signature_mismatch": "Der Name stimmt nicht mit Ihren Angaben überein. Tippen Sie: {name}."
+      },
+      "submit": "Jetzt unterschreiben",
+      "signedMessage": "Ich habe die Offerte für {product} unterschrieben (Police {number})."
+    },
+    "signed": {
+      "title": "Unterschrieben. Ihre Police {number} beginnt am {date}.",
+      "body": "Sie finden sie jetzt in Ihrem Vorsorge-Cockpit, zusammen mit Ihren anderen Policen.",
+      "portal": "Zum Vorsorge-Cockpit"
+    }
+  }
+}

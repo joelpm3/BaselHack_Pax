@@ -1,0 +1,359 @@
+{
+  "server": {
+    "gaps": {
+      "death": "Death",
+      "disability": "Disability",
+      "retirement": "Retirement",
+      "tax": "Taxes",
+      "child": "Children",
+      "payout": "Retirement income from capital",
+      "care": "Immediate help in case of death"
+    },
+    "headlines": {
+      "death": "Protect your family financially",
+      "disability": "Secure your income if you fall ill",
+      "retirement": "Close your retirement gap step by step",
+      "tax": "Save taxes with pillar 3a",
+      "child": "Provide for your child",
+      "payout": "Turn capital into a reliable income",
+      "care": "Support your loved ones when it matters"
+    },
+    "criteria": {
+      "gap": "Gap",
+      "gapValue": "{gap}: {amount} per year",
+      "gapValueUnknown": "{gap}: amount not calculated yet",
+      "entryAge": "Entry age",
+      "entryAgeValue": "{age} years (possible from {min} to {max})",
+      "sumInsured": "Death benefit",
+      "sumFromIncome": "{sum}: three gross annual salaries, because the gap has not been calculated yet",
+      "sumFromGap": "{gap} per year × {years} years = {sum}",
+      "duration": "Term",
+      "durationDeath": {
+        "until_youngest_child_25": "{years} years, until your youngest child turns 25 (until age {endAge})",
+        "partner_10_years": "{years} years to protect your partner (until age {endAge})",
+        "minimum_5_years": "{years} years, the minimum term (until age {endAge})"
+      },
+      "pension": "Disability pension",
+      "pensionValue": "{pension} per year until age {endAge}",
+      "waitingPeriod": "Waiting period",
+      "waiting24": "24 months: until then, salary continuation and sickness benefits pay",
+      "waiting12": "12 months: as a self-employed person without long sickness benefits",
+      "occupation": "Occupation group",
+      "occupationAssumed": "Group {group} assumed, occupation not known yet",
+      "occupationValue": "Group {group} ({occupation})",
+      "capital": "Amount to invest",
+      "capitalGiven": "{capital} available capital",
+      "capitalFromGap": "{capital}: 15 years of your gap (assumption)",
+      "premium": "Savings premium",
+      "premiumValue": "{premium} per year",
+      "premiumPartial": "{premium} per year; closing the whole gap would take {required}",
+      "room3a": "Pillar 3a room",
+      "room3aValue": "You can still pay in {room} this year",
+      "room3aFull": "Your pillar 3a is already maxed out",
+      "budget": "Budget",
+      "budgetValue": "Premium {premium}, your budget {budget}",
+      "smoker": "Smoker status",
+      "nonSmokerAssumed": "Non-smoker assumed, confirmed in the application",
+      "smokerYes": "Smoker",
+      "smokerNo": "Non-smoker",
+      "insured": "Insured person",
+      "partner": "Your partner",
+      "rules": "Pax rules",
+      "rulesValue": "Checked, no restriction (rule set version {version})",
+      "suitability": "Suitability check",
+      "suitabilityPending": "Required before the offer, still open"
+    },
+    "rationale": {
+      "todesfall": "If your income stops, your family would be short about {gap} per year. A death benefit of {sum} covers this gap for {years} years, until age {endAge}.",
+      "todesfallIncome": "A death benefit of {sum} gives your family {years} years to reorganise, until age {endAge}.",
+      "erwerbsunfaehigkeit": "If illness leaves you unable to work, you would be short about {gap} per year once salary continuation and sickness benefits end. A pension of {pension} per year from month {months} closes this gap until age {endAge}.",
+      "erwerbsunfaehigkeitNoAmount": "If illness leaves you unable to work, a pension of {pension} per year from month {months} replaces part of your income until age {endAge}.",
+      "savings": "In retirement you would be short about {gap} per year. Saving {premium} per year in pillar {pillar} builds up money for it until age {endAge}.",
+      "savingsNoAmount": "Saving {premium} per year in pillar {pillar} builds up capital for your retirement until age {endAge}.",
+      "savingsTax": "You are not yet using the full pillar 3a tax deduction. With {premium} per year in pillar {pillar} you save taxes every year and build capital for retirement, until age {endAge}.",
+      "auszahlungsplan": "{capital} becomes a predictable income from age {startAge}, partly guaranteed, partly with a chance of returns.",
+      "kinderversicherung": "With {premium} per year you save for your child's start into adult life, with disability cover for the child and premium waiver if something happens to you.",
+      "care": "Pax Care is free of charge: CHF 2,000 immediate help and personal support for your loved ones in case of death."
+    },
+    "excluded": {
+      "entryAge": "Entry age {age} is outside {min} to {max} years.",
+      "capitalUnknown": "The amount to invest in a payout plan is missing."
+    },
+    "alternatives": {
+      "todesfall": "Pure death cover at the lowest premium, without savings.",
+      "erwerbsunfaehigkeit": "A disability pension secures your income rather than a lump sum.",
+      "lifestar": "Saving with a guaranteed part and funds, including death cover; clearly higher premium. Only after the suitability check.",
+      "fondsstar": "Fully invested in funds: higher return potential, no guaranteed part. Only after the suitability check.",
+      "pax3a": "Pillar 3a fully online from CHF 50 per month, with premium waiver in case of disability.",
+      "auszahlungsplan": "Turns existing capital into a predictable income from retirement.",
+      "kinderversicherung": "Saving for the child with disability cover.",
+      "care": "Free immediate help in case of death.",
+      "todesfallDecreasingLabel": "Term life insurance with decreasing benefit",
+      "todesfall_decreasing": "Cheaper, because the benefit falls as your children grow older and the gap gets smaller.",
+      "pensionFundBuyinLabel": "Pension fund buy-in",
+      "pension_fund_buyin": "Raises your pension and is tax-deductible; the money stays locked in until retirement."
+    }
+  },
+  "issues": {
+    "entry_age_below_min": "Not possible yet at {age} (from age {min}).",
+    "entry_age_above_max": "No longer possible at {age} (up to age {max}).",
+    "end_age_out_of_range": "End age {endAge} is not possible (between {min} and {max}).",
+    "duration_too_short": "A term of {years} years is shorter than the minimum of {min} years.",
+    "sum_below_min": "The death benefit is below the minimum of CHF {min, number}.",
+    "sum_above_max": "The death benefit is above the maximum of CHF {max, number}.",
+    "pension_above_sum_insurance": "Pensions above CHF {max, number} are indemnity insurance: a claim requires proof of income.",
+    "premium_below_min": "The annual premium is below the minimum of CHF {min, number}.",
+    "premium_above_3a_max": "The annual premium is above the pillar 3a maximum of CHF {max, number}.",
+    "single_premium_below_min": "The one-off investment is below the minimum of CHF {min, number}.",
+    "single_premium_above_max": "The one-off investment is above the maximum of CHF {max, number}.",
+    "amount_missing": "The sum insured, pension or premium is missing.",
+    "quicksale_unavailable": "The Pax premium calculator was unavailable, so the premium is estimated.",
+    "quicksale_warning": "Pax premium calculator: {text}"
+  },
+  "price": {
+    "labelQuicksale": "Indicative Pax tariff, not binding",
+    "labelEstimate": "Estimated, not binding",
+    "free": "Free of charge",
+    "once": "one-off",
+    "perYear": "per year",
+    "net": "{amount} with the current surplus (not guaranteed)",
+    "maturityTitle": "Expected capital at maturity",
+    "payoutTitle": "Payout per year",
+    "scenarioNote": "Example calculation using the Swiss Insurance Association's scenarios; only the guaranteed value is certain.",
+    "scenario": {
+      "guaranteed": "Guaranteed",
+      "low": "Low scenario",
+      "medium": "Medium scenario",
+      "high": "High scenario"
+    }
+  },
+  "riders": {
+    "I": "Premium waiver in case of disability",
+    "PFZ": "Premium waiver when your family grows",
+    "IR": "Disability pension",
+    "included": "included"
+  },
+  "cover": {
+    "sumInsured": "Death benefit",
+    "annualPension": "Disability pension",
+    "perYear": "{amount} per year",
+    "waitingPeriod": "Waiting period",
+    "months": "{months} months",
+    "savingsPremium": "Savings premium",
+    "singlePremium": "One-off investment",
+    "payout": "Payout (medium scenario)",
+    "duration": "Term",
+    "durationValue": "{years} years, until age {endAge}",
+    "pillar": "Type of provision",
+    "pillar3a": "Tied pension provision (pillar 3a)",
+    "pillar3b": "Flexible pension provision (pillar 3b)"
+  },
+  "recommendation": {
+    "title": "Recommendation",
+    "titleMany": "{count} recommendations",
+    "pending": "Calculating your recommendation …",
+    "rules": "Pax rules v{version}",
+    "none": "No Pax product fits these gaps right now.",
+    "excluded": "Not recommended",
+    "needsInfo": "A few details are still missing for a recommendation: {fields}.",
+    "missing": {
+      "person_birthYear": "your year of birth",
+      "person_sex": "your sex",
+      "partner_birthYear": "your partner's year of birth",
+      "partner_sex": "your partner's sex",
+      "partner": "details about your partner"
+    },
+    "closes": "Closes: {gaps}",
+    "conditional": "After the suitability check",
+    "accepted": "Signed",
+    "declined": "Not a fit",
+    "flag": "Note from the Pax rules:",
+    "why": "Why this recommendation ({count} criteria)",
+    "alternatives": "Alternatives",
+    "error": "That didn't work. Please try again.",
+    "startSuitability": "Start suitability check",
+    "viewOffer": "View offer",
+    "decline": "Not a fit",
+    "productPage": "Product at Pax",
+    "declineMessage": "{product} is not a fit for me.",
+    "suitabilityMessage": "I'd like to do the suitability check for {product}.",
+    "offerMessage": "I'd like to see the offer for {product}.",
+    "met": "met",
+    "open": "open"
+  },
+  "profiles": {
+    "conservative": "Conservative",
+    "balanced": "Balanced",
+    "dynamic": "Dynamic"
+  },
+  "suitability": {
+    "titleShort": "Suitability check",
+    "title": "Suitability check: {product}",
+    "pending": "Preparing the suitability check …",
+    "notApplicable": "{product} does not need a suitability check.",
+    "intro": "With a fund investment you carry a risk of loss. That is why Pax checks, before the offer, whether the product fits your finances, your goal and your experience. Please answer every question for yourself only, without your partner.",
+    "a": {
+      "title": "Financial capacity",
+      "hint": "How much would you like to save per year or invest once?",
+      "annualPremium": "Annual savings premium",
+      "singlePremium": "One-off investment",
+      "netIncome": "Your annual net income after social security deductions",
+      "netAssets": "Your net assets after mortgages and debts",
+      "savingCapacity": "How much can you additionally save per year after all expenses?",
+      "oneOffCapacity": "How much can you invest as a one-off amount?"
+    },
+    "brackets": {
+      "income": {
+        "lt75k": "under 75,000",
+        "75k_150k": "75,000 to 150,000",
+        "150k_250k": "150,001 to 250,000",
+        "gt250k": "over 250,000"
+      },
+      "assets": {
+        "lt10k": "under 10,000",
+        "10k_50k": "10,000 to 50,000",
+        "50k_150k": "50,001 to 150,000",
+        "150k_300k": "150,001 to 300,000",
+        "gt300k": "over 300,000"
+      },
+      "saving": {
+        "lt1k": "under 1,000",
+        "1k_3k": "1,000 to 3,000",
+        "3k_7k": "3,001 to 7,000",
+        "gt7k": "over 7,000"
+      }
+    },
+    "b": { "title": "Investment goal and horizon" },
+    "c": { "title": "Knowledge and risk tolerance" },
+    "questions": {
+      "goal": {
+        "label": "What is the goal of your investment?",
+        "minimise_loss": "I want to keep the risk of loss as low as possible. High chances of gains matter less to me.",
+        "moderate_gains": "I accept some risk of loss to have moderate chances of gains.",
+        "high_gains": "I am prepared to take a high risk of loss for the chance of high gains."
+      },
+      "horizon": {
+        "label": "Over what period do you want to save or invest?",
+        "10_15": "10 to 15 years",
+        "gt15": "More than 15 years"
+      },
+      "knowledge": {
+        "label": "How familiar are you with securities?",
+        "none": "I have no knowledge of or experience with securities yet.",
+        "knowledge_only": "I know about securities but have never bought any.",
+        "experience": "Yes, I have already gained knowledge and experience with securities.",
+        "expert": "Yes, I have a lot of experience and know securities very well."
+      },
+      "drawdown": {
+        "label": "Your securities lose 30 % of their value. What do you do?",
+        "sell_all": "I sell everything to avoid an even bigger loss.",
+        "sell_part": "I sell part of them to limit my loss if prices keep falling.",
+        "hold": "I do nothing for now, because I am aware that markets fluctuate.",
+        "buy_more": "I invest more, because I expect a recovery."
+      }
+    },
+    "points": "{points} pts",
+    "d": {
+      "title": "Guaranteed part",
+      "hint": "The guaranteed part of your premium carries no risk of loss and therefore raises your score.",
+      "none": "{product} invests the whole premium in funds, without a guaranteed part.",
+      "label": "Guaranteed share of the premium",
+      "formula": "{points} points × (100 % − {g} %) + 120 × {g} % = {total} points"
+    },
+    "scale": "{total} of 120 points",
+    "total": "{total} points",
+    "profileIs": "Your investment profile: {profile} ({total} points).",
+    "pointsDetail": "{points} points from the questions, {g} % guaranteed part.",
+    "answerAll": "Answer all questions to see your investment profile and the matching funds.",
+    "funds": "Pax funds that match your profile",
+    "suggested": "Suggested",
+    "fundChosen": "Chosen fund:",
+    "affordAnnualOk": "Your savings premium of {amount} fits your savings capacity.",
+    "affordAnnualNo": "Your savings premium of {amount} is higher than what you can save per year.",
+    "affordSingleOk": "Your one-off investment of {amount} fits the amount you have available.",
+    "affordSingleNo": "Your one-off investment of {amount} is higher than the amount you can invest once.",
+    "suitable": "Result: the product matches your investment profile and is affordable for you.",
+    "notSuitable": "Result: Pax advises against this product because it is not affordable for you. Choose a lower amount or an alternative.",
+    "error": "The check could not be saved. Please try again.",
+    "submit": "Complete the check",
+    "edit": "Change answers",
+    "resultMessageOk": "I completed the suitability check for {product}: {total} points, profile {profile}, fund {fund}.",
+    "resultMessageNo": "I completed the suitability check for {product}: {total} points, profile {profile}. According to the check, the amount is not affordable for me."
+  },
+  "offer": {
+    "titleShort": "Offer",
+    "title": "Offer: {product}",
+    "pending": "Preparing the offer …",
+    "status": {
+      "not_found": "This offer is no longer available.",
+      "suitability_required": "This product needs the suitability check first.",
+      "not_suitable": "According to the suitability check, Pax advises against this product."
+    },
+    "you": "You",
+    "demoBadge": "Demo",
+    "insured": "Insured person",
+    "insuredDetails": "born {birthDate}, {smoker, select, yes {smoker} other {non-smoker}}",
+    "period": "Contract period",
+    "periodValue": "{start} to {end}",
+    "fund": "Fund",
+    "guaranteedShare": "Guaranteed part",
+    "conditionsTitle": "Key conditions",
+    "conditions": {
+      "withdrawal": "You can withdraw the application within 14 days.",
+      "premiumGuaranteed": "The gross premium is guaranteed for the whole term. The reduction from surpluses is not guaranteed.",
+      "investmentRisk": "The fund investment fluctuates. Scenario values are example calculations and not guaranteed.",
+      "maximumBenefit": "The pension is a maximum; the benefit depends on the degree of disability.",
+      "crisisCoach": "Included: a crisis coach up to CHF 2,500 after 90 days of disability, and cover continues if you move within Europe.",
+      "pillar3a": "Pillar 3a: premiums are deductible from income up to the maximum; the capital is locked in until at the earliest five years before the reference age.",
+      "health": "A real application includes health questions. Pax reviews the application before the contract is concluded.",
+      "cooperative": "With the contract you become a member of the Pax Holding cooperative."
+    },
+    "nextTitle": "What happens next",
+    "next": {
+      "contact": "Add your contact details",
+      "sign": "Sign with your name",
+      "policy": "Your policy appears in your pension cockpit right away. Cover starts on {date}."
+    },
+    "demoNotice": "This is a prototype: the signature is a demo and no legally binding contract is concluded.",
+    "contact": {
+      "title": "Your contact details",
+      "hint": "For the policy we need your name and how to reach you.",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "birthDate": "Date of birth",
+      "email": "Email",
+      "phone": "Phone",
+      "privacy": "Pax only uses these details for your offer and policy.",
+      "error": "Please check your details (date of birth, email, phone).",
+      "submit": "Save details"
+    },
+    "sign": {
+      "title": "Sign",
+      "consentsLegend": "Confirmations",
+      "consents": {
+        "offerRead": "I have read the offer and the key conditions.",
+        "dataCorrect": "My details are complete and correct, including my smoker status.",
+        "demoUnderstood": "I understand this is a demo and no contract is concluded."
+      },
+      "signatureLabel": "Signature",
+      "signaturePlaceholder": "First name Last name",
+      "signatureHint": "Type your full name: {name}.",
+      "editContact": "Change details",
+      "errors": {
+        "invalid": "Please confirm all points and type your name.",
+        "not_found": "This offer is no longer available.",
+        "already_signed": "This offer has already been signed.",
+        "suitability_missing": "This product is missing a matching suitability check.",
+        "contact_missing": "Please add your contact details first.",
+        "signature_mismatch": "The name does not match your details. Type: {name}."
+      },
+      "submit": "Sign now",
+      "signedMessage": "I signed the offer for {product} (policy {number})."
+    },
+    "signed": {
+      "title": "Signed. Your policy {number} starts on {date}.",
+      "body": "You can now find it in your pension cockpit, together with your other policies.",
+      "portal": "Go to pension cockpit"
+    }
+  }
+}

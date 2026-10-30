@@ -1,1 +1,29 @@
-{}
+{
+  "start": "Démarrer la saisie vocale",
+  "startHint": "Parlez en suisse allemand, jusqu'à 60 secondes. Le texte apparaît dans le champ de saisie.",
+  "stop": "Arrêter l'enregistrement et le convertir en texte",
+  "cancel": "Supprimer l'enregistrement",
+  "recording": "Enregistrement en cours. Échap pour supprimer.",
+  "elapsedLabel": "Durée de l'enregistrement",
+  "requesting": "Activation du microphone …",
+  "transcribing": "Conversion en texte …",
+  "dismiss": "Fermer le message",
+  "errors": {
+    "permission": "Pas d'accès au microphone. Autorisez l'accès dans les réglages du navigateur.",
+    "no_microphone": "Aucun microphone trouvé, ou il est utilisé par une autre application.",
+    "not_supported": "Ce navigateur ne peut pas enregistrer la voix. Veuillez taper votre message.",
+    "nothing_heard": "Je n'ai rien compris. Veuillez réessayer.",
+    "too_short": "L'enregistrement était trop court. Parlez un peu plus longtemps.",
+    "too_long": "L'enregistrement dépasse 60 secondes.",
+    "too_large": "L'enregistrement est trop volumineux.",
+    "unsupported": "Ce format audio n'est pas pris en charge.",
+    "empty": "L'enregistrement est vide. Veuillez réessayer.",
+    "invalid": "L'enregistrement n'a pas pu être transmis. Veuillez réessayer.",
+    "busy": "La reconnaissance vocale est occupée. Veuillez réessayer dans un instant.",
+    "unavailable": "La saisie vocale n'est pas disponible pour le moment. Veuillez taper votre message.",
+    "starting": "La reconnaissance vocale démarre. Veuillez réessayer dans une minute.",
+    "unreadable": "L'enregistrement n'a pas pu être lu. Veuillez réessayer.",
+    "unauthorized": "Votre session a expiré. Veuillez recharger la page.",
+    "failed": "La reconnaissance vocale n'a pas répondu. Veuillez réessayer."
+  }
+}

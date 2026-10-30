@@ -6,7 +6,7 @@ export interface QuoteInput {
   birthDate: string; // ISO yyyy-mm-dd
   sex: "male" | "female";
   smoker: boolean;
-  /** Contract end age, e.g. 65. */
+  /** Contract end age, e.g. 65. Kinderversicherung: the child's end age. */
   endAge: number;
   /** Todesfall: death benefit. */
   sumInsured?: number;
@@ -21,6 +21,51 @@ export interface QuoteInput {
   /** Disability: occupation risk group 1–4. */
   occupationGroup?: 1 | 2 | 3 | 4;
   premiumWaiver?: boolean;
+  /** LifeStar / Auszahlungsplan: guaranteed share of the premium in percent (LifeStar 10–100). */
+  guaranteedSharePercent?: number;
+  /** Unit-linked products: fund chosen after the suitability check (Pax fund name). */
+  fundName?: string;
+}
+
+/**
+ * Machine-readable pricing issues, so the UI can translate them. `warnings` carries the same
+ * information as German text for the model and the audit trail.
+ */
+export type QuoteIssueCode =
+  | "entry_age_below_min"
+  | "entry_age_above_max"
+  | "end_age_out_of_range"
+  | "duration_too_short"
+  | "sum_below_min"
+  | "sum_above_max"
+  | "pension_above_sum_insurance"
+  | "premium_below_min"
+  | "premium_above_3a_max"
+  | "single_premium_below_min"
+  | "single_premium_above_max"
+  | "amount_missing"
+  | "quicksale_unavailable"
+  | "quicksale_warning";
+
+export interface QuoteIssue {
+  code: QuoteIssueCode;
+  /** Blocking issues mean the product cannot be written with these inputs. */
+  blocking: boolean;
+  params?: Record<string, string | number>;
+}
+
+export interface QuoteRider {
+  /** Quicksale tariff code, e.g. "I" (premium waiver), "PFZ", "IR". */
+  code?: string;
+  name: string;
+  premiumAnnual: number;
+}
+
+export interface ScenarioValues {
+  guaranteed?: number;
+  low?: number;
+  medium?: number;
+  high?: number;
 }
 
 export interface Quote {
@@ -31,9 +76,20 @@ export interface Quote {
   source: "quicksale" | "estimate";
   sumInsured?: number;
   annualPension?: number;
+  /** One-off premium (savings products, Auszahlungsplan). */
+  singlePremium?: number;
   /** Savings products: projected values by scenario (low/medium/high) and guaranteed. */
-  maturity?: { guaranteed?: number; low?: number; medium?: number; high?: number };
-  riders: Array<{ name: string; premiumAnnual: number }>;
+  maturity?: ScenarioValues;
+  /** Auszahlungsplan: projected annual payout by scenario and guaranteed. */
+  payoutAnnual?: ScenarioValues;
+  /** Contract start (ISO, first of next month) and duration in years. */
+  startDate?: string;
+  durationYears?: number;
+  /** Unit-linked: fund and guaranteed share actually used for the projection. */
+  fundName?: string;
+  guaranteedSharePercent?: number;
+  riders: QuoteRider[];
   warnings: string[];
+  issues: QuoteIssue[];
   inputs: QuoteInput;
 }

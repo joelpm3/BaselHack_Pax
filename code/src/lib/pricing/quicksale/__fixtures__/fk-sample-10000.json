@@ -1,0 +1,366 @@
+{
+  "message": "",
+  "state": "SUCCESS",
+  "data": {
+    "beginnDatum": "01.11.2026",
+    "ratenPraemie": 113.6,
+    "jahresPraemie": 113.6,
+    "einmalpraemieTotal": 0,
+    "erlebensfallleistungTotal": 0,
+    "bruttopraemie": 113.6,
+    "aktuelleUeberschuesse": 2.4,
+    "nettopraemie": 111.2,
+    "sparprodukt": false,
+    "warnungen": [],
+    "vorsorgeart": {
+      "saeule3a": false,
+      "praemie3aMaximieren": false,
+      "garantiertesErlebensfallkapital": 0
+    },
+    "verwendeteAnnahmen": {
+      "bruttorenditen": [],
+      "zinssaetze": [],
+      "szenarienBetraege": [
+        {
+          "bezeichnung": "NIEDRIG",
+          "betrag": 0
+        },
+        {
+          "bezeichnung": "MITTEL",
+          "betrag": 0
+        },
+        {
+          "bezeichnung": "HOCH",
+          "betrag": 0
+        }
+      ]
+    },
+    "fonds": [],
+    "personen": [
+      {
+        "index": 0,
+        "geburtsdatum": "01.01.1987",
+        "selectedGeschlecht": "MANN",
+        "raucher": false,
+        "praemienbefreiung": false,
+        "selectedHauptberufId": 0,
+        "technischesAlter": 40,
+        "selectedRolle": "HAUPTVERSICHERT",
+        "tarife": [
+          {
+            "index": 0,
+            "code": "040001A0",
+            "selectedTarif": "FK",
+            "dauer": 25,
+            "schlussalter": 65,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 113.6,
+            "einmalpraemie": 0,
+            "risikosumme": 10000,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "FK",
+                "tarifbeschreibung": "Todesfallversicherung"
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKF",
+                "tarifbeschreibung": "Todesfallversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FR",
+                "tarifbeschreibung": "Temporäre Hinterbliebenenrente"
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 2,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 3,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 4,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 5,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 6,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": []
+          }
+        ]
+      }
+    ]
+  }
+}
