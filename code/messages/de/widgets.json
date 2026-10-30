@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "Diese Berechnung ist im Moment nicht verfügbar. Der Berater kann trotzdem weiterhelfen.",
+    "failed": "Das hat gerade nicht geklappt. Der Berater kann trotzdem weiterhelfen.",
     "yes": "Ja",
     "no": "Nein",
     "cancel": "Abbrechen"

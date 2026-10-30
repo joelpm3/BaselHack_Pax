@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "This calculation is not available right now. The advisor can still help you.",
+    "failed": "That didn't work just now. The advisor can still help you.",
     "yes": "Yes",
     "no": "No",
     "cancel": "Cancel"

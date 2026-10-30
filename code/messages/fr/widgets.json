@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "Ce calcul n'est pas disponible pour le moment. Le conseiller peut quand même vous aider.",
+    "failed": "Cela n'a pas fonctionné pour le moment. Le conseiller peut quand même vous aider.",
     "yes": "Oui",
     "no": "Non",
     "cancel": "Annuler"

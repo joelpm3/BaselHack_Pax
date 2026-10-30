@@ -22,7 +22,7 @@ export function createHandoverTools(ctx: ToolContext) {
         reason: z
           .string()
           .min(5)
-          .max(400)
+          .max(1500)
           .describe("For the human advisor: what the customer needs and why a person should help"),
         ruleIds: z
           .array(z.string())
