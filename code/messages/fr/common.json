@@ -1,0 +1,107 @@
+{
+  "appName": "Conseiller prévoyance Pax",
+  "claim": "La prévoyance, en un point.",
+  "language": "Langue",
+  "loading": "Chargement …",
+  "retry": "Réessayer",
+  "save": "Enregistrer",
+  "cancel": "Annuler",
+  "confirm": "Confirmer",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "close": "Fermer",
+  "back": "Retour",
+  "perYear": "par an",
+  "perMonth": "par mois",
+  "indicativePrice": "Valeur indicative selon le tarif Pax, sans engagement",
+  "estimatedPrice": "Estimé, sans engagement",
+  "simulated": "Simulé",
+  "taxonomy": {
+    "topics": {
+      "retirement": "Prévoyance vieillesse",
+      "pillar3a": "Pilier 3a",
+      "death_cover": "Couverture décès",
+      "disability_cover": "Incapacité de gain",
+      "home_ownership": "Propriété du logement",
+      "family_children": "Famille & enfants",
+      "taxes": "Impôts",
+      "payout_retirement": "Versement & retraite",
+      "care": "Soins & aide immédiate",
+      "pension_fund": "Caisse de pension",
+      "existing_contract": "Contrat existant",
+      "general": "Général"
+    },
+    "stages": {
+      "started": "Démarré",
+      "getting_to_know": "Faire connaissance",
+      "situation_captured": "Situation saisie",
+      "analysis_shown": "Analyse affichée",
+      "scenario_explored": "Scénario simulé",
+      "recommendation_shown": "Recommandation affichée",
+      "offer_viewed": "Offre consultée",
+      "application_started": "Demande commencée",
+      "signed": "Conclu"
+    },
+    "intent": {
+      "informing": "S'informe",
+      "exploring": "Explore",
+      "comparing": "Compare",
+      "ready": "Prêt à conclure"
+    },
+    "sentiment": {
+      "positive": "Positif",
+      "neutral": "Neutre",
+      "negative": "Négatif",
+      "mixed": "Mitigé"
+    },
+    "leadType": {
+      "new_business": "Nouveau client",
+      "existing_upsell": "Client existant",
+      "switch_opportunity": "Potentiel de changement",
+      "service": "Service"
+    },
+    "leadStatus": {
+      "new": "Nouveau",
+      "contacted": "Contacté",
+      "meeting": "Rendez-vous",
+      "offer": "Offre",
+      "won": "Conclu",
+      "lost": "Perdu"
+    },
+    "priority": {
+      "low": "Basse",
+      "medium": "Moyenne",
+      "high": "Haute",
+      "urgent": "Urgente"
+    },
+    "gap": {
+      "death": "Décès",
+      "disability": "Incapacité de gain",
+      "retirement": "Retraite",
+      "tax": "Impôts",
+      "child": "Enfants",
+      "payout": "Versement",
+      "care": "Aide immédiate"
+    },
+    "lifeEvent": {
+      "first_job": "Premier emploi",
+      "marriage": "Mariage",
+      "child_birth": "Naissance d'un enfant",
+      "home_purchase": "Achat immobilier",
+      "job_change": "Changement d'emploi",
+      "self_employment": "Indépendance",
+      "divorce": "Divorce",
+      "early_retirement": "Retraite anticipée",
+      "retirement": "Retraite",
+      "inheritance": "Héritage",
+      "illness": "Maladie",
+      "relocation": "Déménagement"
+    },
+    "docType": {
+      "pension_certificate": "Certificat de prévoyance",
+      "insurance_policy": "Police d'assurance",
+      "salary_certificate": "Certificat de salaire",
+      "other": "Autre document"
+    }
+  }
+}

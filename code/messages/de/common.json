@@ -1,0 +1,107 @@
+{
+  "appName": "Pax Vorsorge-Berater",
+  "claim": "Vorsorge auf den Punkt gebracht.",
+  "language": "Sprache",
+  "loading": "Wird geladen …",
+  "retry": "Erneut versuchen",
+  "save": "Speichern",
+  "cancel": "Abbrechen",
+  "confirm": "Bestätigen",
+  "edit": "Bearbeiten",
+  "delete": "Löschen",
+  "close": "Schliessen",
+  "back": "Zurück",
+  "perYear": "pro Jahr",
+  "perMonth": "pro Monat",
+  "indicativePrice": "Richtwert gemäss Pax-Tarif, unverbindlich",
+  "estimatedPrice": "Geschätzt, unverbindlich",
+  "simulated": "Simuliert",
+  "taxonomy": {
+    "topics": {
+      "retirement": "Altersvorsorge",
+      "pillar3a": "Säule 3a",
+      "death_cover": "Todesfallschutz",
+      "disability_cover": "Erwerbsunfähigkeit",
+      "home_ownership": "Wohneigentum",
+      "family_children": "Familie & Kinder",
+      "taxes": "Steuern",
+      "payout_retirement": "Auszahlung & Pensionierung",
+      "care": "Pflege & Soforthilfe",
+      "pension_fund": "Pensionskasse",
+      "existing_contract": "Bestehender Vertrag",
+      "general": "Allgemein"
+    },
+    "stages": {
+      "started": "Gestartet",
+      "getting_to_know": "Kennenlernen",
+      "situation_captured": "Situation erfasst",
+      "analysis_shown": "Analyse gezeigt",
+      "scenario_explored": "Szenario simuliert",
+      "recommendation_shown": "Empfehlung gezeigt",
+      "offer_viewed": "Offerte angesehen",
+      "application_started": "Antrag begonnen",
+      "signed": "Abgeschlossen"
+    },
+    "intent": {
+      "informing": "Informiert sich",
+      "exploring": "Erkundet",
+      "comparing": "Vergleicht",
+      "ready": "Abschlussbereit"
+    },
+    "sentiment": {
+      "positive": "Positiv",
+      "neutral": "Neutral",
+      "negative": "Negativ",
+      "mixed": "Gemischt"
+    },
+    "leadType": {
+      "new_business": "Neukunde",
+      "existing_upsell": "Bestandskunde",
+      "switch_opportunity": "Wechselpotenzial",
+      "service": "Service"
+    },
+    "leadStatus": {
+      "new": "Neu",
+      "contacted": "Kontaktiert",
+      "meeting": "Termin",
+      "offer": "Offerte",
+      "won": "Abschluss",
+      "lost": "Verloren"
+    },
+    "priority": {
+      "low": "Tief",
+      "medium": "Mittel",
+      "high": "Hoch",
+      "urgent": "Dringend"
+    },
+    "gap": {
+      "death": "Todesfall",
+      "disability": "Erwerbsunfähigkeit",
+      "retirement": "Pensionierung",
+      "tax": "Steuern",
+      "child": "Kinder",
+      "payout": "Auszahlung",
+      "care": "Soforthilfe"
+    },
+    "lifeEvent": {
+      "first_job": "Erster Job",
+      "marriage": "Heirat",
+      "child_birth": "Geburt eines Kindes",
+      "home_purchase": "Hauskauf",
+      "job_change": "Stellenwechsel",
+      "self_employment": "Selbstständigkeit",
+      "divorce": "Scheidung",
+      "early_retirement": "Frühpensionierung",
+      "retirement": "Pensionierung",
+      "inheritance": "Erbschaft",
+      "illness": "Krankheit",
+      "relocation": "Umzug"
+    },
+    "docType": {
+      "pension_certificate": "Vorsorgeausweis",
+      "insurance_policy": "Versicherungspolice",
+      "salary_certificate": "Lohnausweis",
+      "other": "Anderes Dokument"
+    }
+  }
+}

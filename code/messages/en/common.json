@@ -1,0 +1,107 @@
+{
+  "appName": "Pax pension advisor",
+  "claim": "Pensions, to the point.",
+  "language": "Language",
+  "loading": "Loading …",
+  "retry": "Try again",
+  "save": "Save",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "edit": "Edit",
+  "delete": "Delete",
+  "close": "Close",
+  "back": "Back",
+  "perYear": "per year",
+  "perMonth": "per month",
+  "indicativePrice": "Indicative value based on the Pax tariff, non-binding",
+  "estimatedPrice": "Estimated, non-binding",
+  "simulated": "Simulated",
+  "taxonomy": {
+    "topics": {
+      "retirement": "Retirement planning",
+      "pillar3a": "Pillar 3a",
+      "death_cover": "Death cover",
+      "disability_cover": "Disability cover",
+      "home_ownership": "Home ownership",
+      "family_children": "Family & children",
+      "taxes": "Taxes",
+      "payout_retirement": "Payout & retirement",
+      "care": "Care & immediate help",
+      "pension_fund": "Pension fund",
+      "existing_contract": "Existing contract",
+      "general": "General"
+    },
+    "stages": {
+      "started": "Started",
+      "getting_to_know": "Getting to know",
+      "situation_captured": "Situation captured",
+      "analysis_shown": "Analysis shown",
+      "scenario_explored": "Scenario explored",
+      "recommendation_shown": "Recommendation shown",
+      "offer_viewed": "Offer viewed",
+      "application_started": "Application started",
+      "signed": "Signed"
+    },
+    "intent": {
+      "informing": "Informing",
+      "exploring": "Exploring",
+      "comparing": "Comparing",
+      "ready": "Ready to buy"
+    },
+    "sentiment": {
+      "positive": "Positive",
+      "neutral": "Neutral",
+      "negative": "Negative",
+      "mixed": "Mixed"
+    },
+    "leadType": {
+      "new_business": "New customer",
+      "existing_upsell": "Existing customer",
+      "switch_opportunity": "Switch opportunity",
+      "service": "Service"
+    },
+    "leadStatus": {
+      "new": "New",
+      "contacted": "Contacted",
+      "meeting": "Meeting",
+      "offer": "Offer",
+      "won": "Won",
+      "lost": "Lost"
+    },
+    "priority": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High",
+      "urgent": "Urgent"
+    },
+    "gap": {
+      "death": "Death",
+      "disability": "Disability",
+      "retirement": "Retirement",
+      "tax": "Taxes",
+      "child": "Children",
+      "payout": "Payout",
+      "care": "Immediate help"
+    },
+    "lifeEvent": {
+      "first_job": "First job",
+      "marriage": "Marriage",
+      "child_birth": "Birth of a child",
+      "home_purchase": "Home purchase",
+      "job_change": "Job change",
+      "self_employment": "Self-employment",
+      "divorce": "Divorce",
+      "early_retirement": "Early retirement",
+      "retirement": "Retirement",
+      "inheritance": "Inheritance",
+      "illness": "Illness",
+      "relocation": "Relocation"
+    },
+    "docType": {
+      "pension_certificate": "Pension fund certificate",
+      "insurance_policy": "Insurance policy",
+      "salary_certificate": "Salary certificate",
+      "other": "Other document"
+    }
+  }
+}
