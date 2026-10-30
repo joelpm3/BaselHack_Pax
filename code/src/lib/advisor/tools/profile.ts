@@ -1,0 +1,235 @@
+import "server-only";
+import { tool } from "ai";
+import { eq } from "drizzle-orm";
+import { z } from "zod";
+import { db, schema } from "@/lib/db";
+import {
+  childSchema,
+  employmentSchema,
+  goalSchema,
+  type LifeSituation,
+  maritalStatusSchema,
+  plannedEventSchema,
+  profileCompleteness,
+  sexSchema,
+} from "@/lib/domain/profile";
+import { applyProfileChanges, getProfile, type ProfileChange } from "@/lib/profile/service";
+import { resolveTaxLocation } from "../logismata/checks";
+import { missingFor } from "../logismata/mapping";
+import type { UpdateProfileOutput } from "../types";
+import type { ToolContext } from "./context";
+
+const chf = (what: string) => z.number().min(0).describe(`${what}, CHF per year`);
+
+const personInput = z.object({
+  firstName: z.string().min(1).optional(),
+  birthYear: z.number().int().min(1920).max(2030).optional(),
+  sex: sexSchema.optional().describe("Only when clear from how the person refers to themselves"),
+  maritalStatus: maritalStatusSchema.optional(),
+  employment: employmentSchema.optional(),
+  workloadPercent: z.number().min(0).max(100).optional(),
+  grossIncome: chf("Gross salary (monthly × 12, or × 13 with a 13th salary)").optional(),
+  occupation: z.string().optional(),
+  smoker: z.boolean().optional(),
+  healthNotes: z.string().optional().describe("Only what the customer volunteered"),
+});
+
+export const updateProfileInput = z.object({
+  person: personInput.optional().describe("The customer"),
+  partner: personInput.optional().describe("Spouse or partner"),
+  removePartner: z.boolean().optional().describe("True after a separation or bereavement"),
+  children: z
+    .array(childSchema)
+    .optional()
+    .describe("The COMPLETE list of children; replaces what is stored"),
+  residence: z
+    .object({ zip: z.string().optional(), city: z.string().optional() })
+    .optional()
+    .describe("Place of residence; resolved to a tax location automatically"),
+  assets: z
+    .object({
+      liquid: z.number().min(0).optional().describe("Savings accounts, CHF"),
+      securities: z.number().min(0).optional().describe("Securities, CHF"),
+      realEstateValue: z.number().min(0).optional(),
+      mortgage: z.number().min(0).optional(),
+      total: z.number().optional().describe("Net wealth when only a total is given, CHF"),
+    })
+    .optional(),
+  pillar1: z.object({ contributionGapYears: z.number().int().min(0).optional() }).optional(),
+  pillar2: z
+    .object({
+      hasPensionFund: z.boolean().optional(),
+      insuredSalary: chf("Insured salary").optional(),
+      currentCapital: z.number().min(0).optional().describe("Current retirement savings, CHF"),
+      projectedCapitalAtRetirement: z.number().min(0).optional(),
+      projectedPensionAtRetirement: chf("Projected retirement pension").optional(),
+      disabilityPension: chf("Disability pension").optional(),
+      partnerPension: chf("Spouse/partner pension").optional(),
+      childPension: chf("Child/orphan pension per child").optional(),
+      deathLumpSum: z.number().min(0).optional(),
+      maxBuyIn: z.number().min(0).optional().describe("Maximum possible buy-in, CHF"),
+    })
+    .optional(),
+  pillar3a: z
+    .object({
+      balance: z.number().min(0).optional(),
+      annualContribution: chf("Yearly 3a contribution").optional(),
+    })
+    .optional(),
+  addGoals: z.array(goalSchema).optional().describe("Goals to add (kept with existing ones)"),
+  addConcerns: z
+    .array(z.string().min(2))
+    .optional()
+    .describe("Worries in the customer's own words, short"),
+  addPlannedEvents: z.array(plannedEventSchema).optional(),
+  riskAttitude: z.enum(["low", "medium", "high"]).optional(),
+  desiredRetirementAge: z.number().int().min(55).max(70).optional(),
+  contact: z
+    .object({
+      firstName: z.string().optional(),
+      lastName: z.string().optional(),
+      email: z.email().optional(),
+      phone: z.string().min(6).optional(),
+    })
+    .optional()
+    .describe("Only when the customer gives contact details themselves"),
+});
+export type UpdateProfileInput = z.infer<typeof updateProfileInput>;
+
+function flatten(prefix: string, values: Record<string, unknown> | undefined): ProfileChange[] {
+  if (!values) return [];
+  return Object.entries(values)
+    .filter(([, value]) => value !== undefined)
+    .map(([key, value]) => ({ path: `${prefix}.${key}`, value }));
+}
+
+function union<T>(existing: T[], added: T[] | undefined, key: (v: T) => string): T[] | undefined {
+  if (!added?.length) return undefined;
+  const seen = new Set(existing.map(key));
+  const next = [...existing];
+  for (const item of added) {
+    if (seen.has(key(item))) continue;
+    seen.add(key(item));
+    next.push(item);
+  }
+  return next.length === existing.length ? undefined : next;
+}
+
+/** Turns the tool input into dot-path changes for applyProfileChanges. */
+export function toProfileChanges(
+  input: UpdateProfileInput,
+  current: LifeSituation,
+): ProfileChange[] {
+  const changes: ProfileChange[] = [
+    ...flatten("person", input.person),
+    ...(input.removePartner
+      ? [{ path: "partner", value: null }]
+      : flatten("partner", input.partner)),
+    ...flatten("assets", input.assets),
+    ...flatten("pillar1", input.pillar1),
+    ...flatten("pillar2", input.pillar2),
+    ...flatten("pillar3a", input.pillar3a),
+  ];
+  if (input.children) changes.push({ path: "children", value: input.children });
+  const goals = union(current.goals, input.addGoals, (g) => g);
+  if (goals) changes.push({ path: "goals", value: goals });
+  const concerns = union(current.concerns, input.addConcerns, (c) => c.toLowerCase());
+  if (concerns) changes.push({ path: "concerns", value: concerns });
+  const events = union(current.plannedEvents, input.addPlannedEvents, (e) => `${e.type}:${e.year}`);
+  if (events) changes.push({ path: "plannedEvents", value: events });
+  if (input.riskAttitude) changes.push({ path: "riskAttitude", value: input.riskAttitude });
+  if (input.desiredRetirementAge)
+    changes.push({ path: "desiredRetirementAge", value: input.desiredRetirementAge });
+  if (input.contact?.firstName && !input.person?.firstName && !current.person.firstName)
+    changes.push({ path: "person.firstName", value: input.contact.firstName });
+  return changes;
+}
+
+function saveContact(customerId: string, contact: NonNullable<UpdateProfileInput["contact"]>) {
+  const customer = db.query.customers
+    .findFirst({ where: eq(schema.customers.id, customerId) })
+    .sync();
+  if (!customer) return;
+  const givesContact = Boolean(contact.email || contact.phone);
+  db.update(schema.customers)
+    .set({
+      firstName: contact.firstName ?? customer.firstName,
+      lastName: contact.lastName ?? customer.lastName,
+      email: contact.email ?? customer.email,
+      phone: contact.phone ?? customer.phone,
+      lifecycle:
+        customer.lifecycle === "anonymous" && givesContact ? "prospect" : customer.lifecycle,
+    })
+    .where(eq(schema.customers.id, customerId))
+    .run();
+}
+
+export function missingForAnalysis(profile: LifeSituation): string[] {
+  return [...new Set([...missingFor(profile, "risk"), ...missingFor(profile, "tax")])];
+}
+
+export function createProfileTools(ctx: ToolContext) {
+  return {
+    updateProfile: tool({
+      description:
+        "Store facts the customer just told you about their life and finances (and contact details " +
+        "they volunteer). Call it as soon as you learn something new, before you reply. Never " +
+        "store guesses. Shows the customer a small card with what you noted, which they can correct.",
+      inputSchema: updateProfileInput,
+      execute: async (input, { toolCallId }): Promise<UpdateProfileOutput> => {
+        const current = getProfile(ctx.customerId);
+        const changes = toProfileChanges(input, current);
+        let location: UpdateProfileOutput["location"] = null;
+        let locationNotFound: string | null = null;
+        if (input.residence?.zip || input.residence?.city) {
+          const query = input.residence;
+          const resolved = await resolveTaxLocation(query, ctx.locale, {
+            customerId: ctx.customerId,
+            conversationId: ctx.conversationId,
+            toolCallId,
+          }).catch(() => null);
+          if (resolved) {
+            location = resolved;
+            changes.push(
+              { path: "residence.zip", value: resolved.zip },
+              { path: "residence.city", value: resolved.city },
+              { path: "residence.canton", value: resolved.canton },
+              { path: "residence.taxLocationId", value: resolved.taxLocationId },
+            );
+          } else {
+            locationNotFound = [query.zip, query.city].filter(Boolean).join(" ");
+            if (query.zip) changes.push({ path: "residence.zip", value: query.zip });
+            if (query.city) changes.push({ path: "residence.city", value: query.city });
+          }
+        }
+        if (input.contact) saveContact(ctx.customerId, input.contact);
+        try {
+          const profile = applyProfileChanges(ctx.customerId, changes, {
+            source: "chat",
+            conversationId: ctx.conversationId,
+            messageId: ctx.assistantMessageId,
+          });
+          return {
+            status: "ok",
+            changes,
+            completeness: profileCompleteness(profile),
+            location,
+            locationNotFound,
+            missingForAnalysis: missingForAnalysis(profile),
+            error: null,
+          };
+        } catch (error) {
+          return {
+            status: "invalid",
+            changes: [],
+            completeness: profileCompleteness(current),
+            location: null,
+            locationNotFound,
+            missingForAnalysis: missingForAnalysis(current),
+            error: error instanceof Error ? error.message.slice(0, 500) : "invalid profile",
+          };
+        }
+      },
+    }),
+  };
+}

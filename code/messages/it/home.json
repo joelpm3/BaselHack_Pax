@@ -1,1 +1,54 @@
-{}
+{
+  "header": {
+    "home": "Consulente previdenza Pax, alla pagina iniziale",
+    "portal": "Cockpit previdenza"
+  },
+  "title": "Quanto è protetta la sua vita?",
+  "lead": "Mi racconti come vive e cosa ha in programma. Calcolo con vere basi svizzere e le mostro la sua previdenza su tutti e tre i pilastri, quadrato per quadrato.",
+  "start": {
+    "title": "Inizia la consulenza",
+    "body": "Prima ci conosciamo, poi facciamo i calcoli. Senza registrazione."
+  },
+  "existing": {
+    "title": "Sono già cliente Pax",
+    "body": "Verifichi se la sua previdenza è ancora adatta alla sua vita."
+  },
+  "upload": "Ho i miei documenti a portata di mano",
+  "resume": "Riprendere l'ultima conversazione",
+  "resumeTitled": "Riprendere «{title}»",
+  "example": {
+    "caption": "Ecco come appare un quadro previdenziale: il reddito in pensione",
+    "sources": {
+      "pillar1": "1° pilastro: AVS",
+      "pillar2": "2° pilastro: cassa pensione",
+      "other": "3° pilastro e risparmi",
+      "partner": "Reddito del o della partner"
+    },
+    "gap": "Quadrati vuoti: la lacuna rispetto al fabbisogno",
+    "unit": "1 quadrato = CHF 500 al mese"
+  },
+  "points": {
+    "label": "Come consiglia il consulente previdenza Pax",
+    "life": {
+      "title": "Prima la sua vita",
+      "body": "Famiglia, lavoro, progetti e preoccupazioni. I prodotti arrivano solo alla fine."
+    },
+    "numbers": {
+      "title": "Calcoli veri",
+      "body": "AVS, cassa pensione e pilastro 3a, calcolati con le basi di Logismata."
+    },
+    "people": {
+      "title": "Una persona quando serve",
+      "body": "Quando diventa complesso, subentra una persona specializzata di Pax. Decide lei."
+    }
+  },
+  "demo": {
+    "title": "Bentornata, bentornato",
+    "lead": "Scelga il suo conto cliente. Conosco le sue polizze e guardiamo insieme cosa è cambiato nella sua vita.",
+    "note": "Demo: queste clienti e questi clienti sono inventati. Nell'app vera qui accederebbe con il suo login Pax.",
+    "born": "classe {year}",
+    "children": "{count, plural, one {# figlio} other {# figli}}",
+    "policies": "{count, plural, =0 {nessuna polizza Pax} one {# polizza Pax} other {# polizze Pax}}",
+    "choose": "Continuare come {name}"
+  }
+}

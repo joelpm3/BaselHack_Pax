@@ -8,4 +8,6 @@ export interface ToolContext {
   locale: Locale;
   mode: ConversationMode;
   ruleSet: ActiveRuleSet;
+  /** Id of the assistant message being generated (for provenance of profile changes). */
+  assistantMessageId?: string;
 }

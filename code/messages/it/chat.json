@@ -1,1 +1,105 @@
-{}
+{
+  "pageTitle": "Consulenza",
+  "newConversation": "Nuova conversazione",
+  "transcript": "Andamento della conversazione",
+  "thinking": "Il consulente sta scrivendo",
+  "disclaimer": "Calcoli e prezzi sono valori indicativi senza impegno. Vincolante è solo un'offerta di Pax.",
+  "error": {
+    "unavailable": "Al momento il consulente non è raggiungibile. Il suo messaggio è salvato.",
+    "retry": "Riprova"
+  },
+  "greeting": {
+    "default": "Buongiorno, mi fa piacere che sia qui. Sono il suo consulente digitale per la previdenza di Pax. Prima di parlare di cifre vorrei conoscerla: cosa la preoccupa quando pensa al suo futuro?",
+    "upload": "Buongiorno, mi fa piacere che sia qui. Ha i documenti a portata di mano, molto bene: li guarderemo insieme tra poco e così ci risparmiamo molte domande. Prima però vorrei conoscerla un po': com'è la sua vita in questo momento?",
+    "existing": "Buongiorno {name}, che piacere rivederla. Ho davanti a me le sue polizze Pax. Dall'ultima volta è cambiato qualcosa nella sua vita, per esempio in famiglia, sul lavoro o nell'abitazione?",
+    "existingAnonymous": "Buongiorno, che piacere rivederla. Ho davanti a me le sue polizze Pax. Dall'ultima volta è cambiato qualcosa nella sua vita?",
+    "hint": "Buongiorno {name}, guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza e le sue polizze. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?",
+    "hintAnonymous": "Buongiorno, guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?"
+  },
+  "message": {
+    "you": "Lei",
+    "advisor": "Consulente Pax",
+    "voice": "a voce",
+    "upload": "documenti caricati"
+  },
+  "composer": {
+    "label": "Il suo messaggio",
+    "placeholder": "La sua risposta …",
+    "send": "Invia",
+    "stop": "Interrompi la risposta",
+    "quickReplies": "Risposte suggerite",
+    "uploaded": "Ho caricato {count, plural, one {un documento} other {# documenti}}: {names}"
+  },
+  "picture": {
+    "title": "Il suo quadro previdenziale",
+    "unit": "= CHF 500 al mese",
+    "open": "Aprire il quadro previdenziale",
+    "close": "Chiudi",
+    "need": "Il suo fabbisogno",
+    "gap": "Mancano {amount} al mese",
+    "covered": "Il suo fabbisogno è coperto",
+    "tabs": {
+      "label": "Scegliere una situazione",
+      "retirement": "Pensione",
+      "disability": "Invalidità",
+      "death": "Decesso"
+    },
+    "context": {
+      "retirement": "Reddito dopo il pensionamento",
+      "disability": "Se a causa di una malattia non può più lavorare",
+      "death": "Per la sua famiglia, se muore a causa di una malattia"
+    },
+    "noNeed": {
+      "retirement": "Per la pensione non è ancora calcolato alcun fabbisogno.",
+      "disability": "Senza un proprio reddito da lavoro qui non c'è fabbisogno di reddito.",
+      "death": "Nessuno dipende finanziariamente dal suo reddito, quindi qui non c'è fabbisogno."
+    },
+    "sources": {
+      "pillar1": "1° pilastro: AVS/AI",
+      "pillar2": "2° pilastro: cassa pensione",
+      "other": "3° pilastro e risparmi",
+      "partner": "Reddito del o della partner",
+      "gap": "Lacuna"
+    },
+    "table": {
+      "caption": "Quadro previdenziale in cifre, al mese"
+    },
+    "building": {
+      "title": "Il suo quadro prende forma",
+      "body": "Appena conosco la sua età, la sua famiglia e il suo reddito, calcolo il suo quadro previdenziale.",
+      "known": "{count} dati su {total} noti",
+      "factKnown": "noto",
+      "factOpen": "ancora aperto"
+    },
+    "facts": {
+      "age": "Età",
+      "family": "Famiglia",
+      "work": "Lavoro",
+      "income": "Reddito",
+      "residence": "Domicilio",
+      "goals": "Obiettivi",
+      "assets": "Patrimonio",
+      "pillar2": "Cassa pensione",
+      "pillar3a": "Pilastro 3a"
+    },
+    "pillars": {
+      "title": "I suoi tre pilastri",
+      "p1": "1° pilastro: AVS/AI",
+      "p1Status": "Previdenza di base obbligatoria per chi vive e lavora in Svizzera",
+      "p2": "2° pilastro: cassa pensione",
+      "p2Yes": "Assicurata/o",
+      "p2No": "Nessuna cassa pensione",
+      "p2Capital": "Avere {amount}",
+      "p3": "3° pilastro: previdenza privata",
+      "p3Balance": "Avere 3a {amount}",
+      "p3Contribution": "{amount} all'anno",
+      "policies": "{count, plural, one {# polizza registrata} other {# polizze registrate}}",
+      "open": "Ancora aperto"
+    },
+    "strip": {
+      "gap": "{kind}: lacuna {amount}/mese",
+      "covered": "{kind}: coperto",
+      "building": "{count} dati su {total}"
+    }
+  }
+}

@@ -1,1 +1,105 @@
-{}
+{
+  "pageTitle": "Beratung",
+  "newConversation": "Neues Gespräch",
+  "transcript": "Gesprächsverlauf",
+  "thinking": "Der Berater schreibt",
+  "disclaimer": "Berechnungen und Preise sind unverbindliche Richtwerte. Verbindlich ist erst eine Offerte von Pax.",
+  "error": {
+    "unavailable": "Der Berater ist im Moment nicht erreichbar. Ihre Nachricht ist gespeichert.",
+    "retry": "Erneut versuchen"
+  },
+  "greeting": {
+    "default": "Grüezi, schön, dass Sie da sind. Ich bin Ihr digitaler Vorsorge-Berater von Pax. Bevor wir über Zahlen sprechen, möchte ich Sie kennenlernen: Was beschäftigt Sie gerade, wenn Sie an Ihre Zukunft denken?",
+    "upload": "Grüezi, schön, dass Sie da sind. Sie haben Unterlagen zur Hand, sehr gut: Die schauen wir uns gleich gemeinsam an und ersparen uns so viele Fragen. Zuerst möchte ich Sie aber kurz kennenlernen: Wie sieht Ihr Leben im Moment aus?",
+    "existing": "Grüezi {name}, schön, Sie wieder zu sehen. Ich habe Ihre Pax-Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert, zum Beispiel in der Familie, bei der Arbeit oder beim Wohnen?",
+    "existingAnonymous": "Grüezi, schön, Sie wieder zu sehen. Ich habe Ihre Pax-Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert?",
+    "hint": "Grüezi {name}, gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit und Ihre Policen vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?",
+    "hintAnonymous": "Grüezi, gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?"
+  },
+  "message": {
+    "you": "Sie",
+    "advisor": "Pax Berater",
+    "voice": "per Sprache",
+    "upload": "Unterlagen hochgeladen"
+  },
+  "composer": {
+    "label": "Ihre Nachricht",
+    "placeholder": "Ihre Antwort …",
+    "send": "Senden",
+    "stop": "Antwort stoppen",
+    "quickReplies": "Antwortvorschläge",
+    "uploaded": "Ich habe {count, plural, one {ein Dokument} other {# Dokumente}} hochgeladen: {names}"
+  },
+  "picture": {
+    "title": "Ihr Vorsorgebild",
+    "unit": "= CHF 500 pro Monat",
+    "open": "Vorsorgebild öffnen",
+    "close": "Schliessen",
+    "need": "Ihr Bedarf",
+    "gap": "Es fehlen {amount} pro Monat",
+    "covered": "Ihr Bedarf ist gedeckt",
+    "tabs": {
+      "label": "Situation wählen",
+      "retirement": "Pension",
+      "disability": "Invalidität",
+      "death": "Todesfall"
+    },
+    "context": {
+      "retirement": "Einkommen nach der Pensionierung",
+      "disability": "Wenn Sie wegen Krankheit nicht mehr arbeiten können",
+      "death": "Für Ihre Familie, wenn Sie wegen Krankheit sterben"
+    },
+    "noNeed": {
+      "retirement": "Für die Pension ist noch kein Bedarf berechnet.",
+      "disability": "Ohne eigenes Erwerbseinkommen entsteht hier kein Einkommensbedarf.",
+      "death": "Niemand ist finanziell von Ihrem Einkommen abhängig. Deshalb gibt es hier keinen Bedarf."
+    },
+    "sources": {
+      "pillar1": "1. Säule: AHV/IV",
+      "pillar2": "2. Säule: Pensionskasse",
+      "other": "3. Säule und Vermögen",
+      "partner": "Einkommen Partnerin/Partner",
+      "gap": "Lücke"
+    },
+    "table": {
+      "caption": "Vorsorgebild in Zahlen, pro Monat"
+    },
+    "building": {
+      "title": "Ihr Bild entsteht",
+      "body": "Sobald ich Ihr Alter, Ihre Familie und Ihr Einkommen kenne, rechne ich Ihr Vorsorgebild.",
+      "known": "{count} von {total} Angaben bekannt",
+      "factKnown": "bekannt",
+      "factOpen": "noch offen"
+    },
+    "facts": {
+      "age": "Alter",
+      "family": "Familie",
+      "work": "Arbeit",
+      "income": "Einkommen",
+      "residence": "Wohnort",
+      "goals": "Ziele",
+      "assets": "Vermögen",
+      "pillar2": "Pensionskasse",
+      "pillar3a": "Säule 3a"
+    },
+    "pillars": {
+      "title": "Ihre drei Säulen",
+      "p1": "1. Säule: AHV/IV",
+      "p1Status": "Gesetzliche Grundvorsorge für alle, die in der Schweiz leben und arbeiten",
+      "p2": "2. Säule: Pensionskasse",
+      "p2Yes": "Versichert",
+      "p2No": "Keine Pensionskasse",
+      "p2Capital": "Guthaben {amount}",
+      "p3": "3. Säule: private Vorsorge",
+      "p3Balance": "3a-Guthaben {amount}",
+      "p3Contribution": "{amount} pro Jahr",
+      "policies": "{count, plural, one {# Police} other {# Policen}} erfasst",
+      "open": "Noch offen"
+    },
+    "strip": {
+      "gap": "{kind}: Lücke {amount}/Mt.",
+      "covered": "{kind}: gedeckt",
+      "building": "{count} von {total} Angaben"
+    }
+  }
+}

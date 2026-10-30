@@ -1,1 +1,289 @@
-{}
+{
+  "common": {
+    "failed": "This calculation is not available right now. The advisor can still help you.",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel"
+  },
+  "profile": {
+    "saving": "Noting that down",
+    "title": "Noted",
+    "corrected": "Corrected",
+    "edit": "Correct",
+    "save": "Save",
+    "invalid": "Please check the details. Numbers without text, years with four digits.",
+    "removed": "removed",
+    "updated": "updated",
+    "children": "{count, plural, =0 {no children} one {# child} other {# children}} ({years})"
+  },
+  "fields": {
+    "location": "Place of residence",
+    "partnerEntry": "Partner",
+    "person": {
+      "firstName": "First name",
+      "birthYear": "Year of birth",
+      "sex": "Sex",
+      "maritalStatus": "Marital status",
+      "employment": "Work situation",
+      "workloadPercent": "Workload",
+      "grossIncome": "Gross income per year",
+      "occupation": "Occupation",
+      "smoker": "Smoker",
+      "healthNotes": "Health"
+    },
+    "partner": {
+      "firstName": "Partner's first name",
+      "birthYear": "Partner's year of birth",
+      "sex": "Partner's sex",
+      "employment": "Partner's work situation",
+      "workloadPercent": "Partner's workload",
+      "grossIncome": "Partner's income per year",
+      "occupation": "Partner's occupation",
+      "smoker": "Partner smokes"
+    },
+    "children": "Children",
+    "goals": "Goals",
+    "concerns": "What's on your mind",
+    "plannedEvents": "Plans",
+    "assets": {
+      "liquid": "Savings",
+      "securities": "Securities",
+      "realEstateValue": "Property value",
+      "mortgage": "Mortgage",
+      "total": "Assets"
+    },
+    "pillar1": {
+      "contributionGapYears": "Missing AHV years"
+    },
+    "pillar2": {
+      "hasPensionFund": "Pension fund",
+      "insuredSalary": "Insured salary",
+      "currentCapital": "Retirement savings today",
+      "projectedCapitalAtRetirement": "Retirement savings at 65",
+      "projectedPensionAtRetirement": "Retirement pension per year",
+      "disabilityPension": "Disability pension per year",
+      "partnerPension": "Partner's pension per year",
+      "childPension": "Child's pension per year",
+      "deathLumpSum": "Lump sum on death",
+      "maxBuyIn": "Possible buy-in"
+    },
+    "pillar3a": {
+      "balance": "3a balance",
+      "annualContribution": "3a contribution per year"
+    },
+    "desiredRetirementAge": "Desired retirement age",
+    "riskAttitude": "Risk appetite"
+  },
+  "enums": {
+    "sex": {
+      "male": "Man",
+      "female": "Woman"
+    },
+    "maritalStatus": {
+      "single": "single",
+      "married": "married",
+      "registered_partnership": "registered partnership",
+      "cohabiting": "living together",
+      "divorced": "divorced",
+      "widowed": "widowed"
+    },
+    "employment": {
+      "employed": "employed",
+      "self_employed": "self-employed",
+      "unemployed": "not working",
+      "student": "in education",
+      "homemaker": "family and home",
+      "retired": "retired"
+    },
+    "riskAttitude": {
+      "low": "low",
+      "medium": "medium",
+      "high": "high"
+    },
+    "goal": {
+      "protect_family": "Protect the family",
+      "retire_comfortably": "Live well in retirement",
+      "retire_early": "Stop working earlier",
+      "buy_home": "Own a home",
+      "save_taxes": "Save taxes",
+      "build_wealth": "Build wealth",
+      "support_children": "Support the children",
+      "secure_income_disability": "Secure income in case of disability"
+    },
+    "plannedEvent": {
+      "child": "Child",
+      "home_purchase": "Home",
+      "marriage": "Marriage",
+      "early_retirement": "Early retirement",
+      "self_employment": "Self-employment",
+      "sabbatical": "Time out",
+      "divorce": "Divorce",
+      "inheritance": "Inheritance",
+      "other": "Other"
+    }
+  },
+  "breakdown": {
+    "noNeed": "no need",
+    "gap": "Gap {amount}/month",
+    "covered": "covered",
+    "need": "Need",
+    "unit": "1 square = CHF 500 per month",
+    "sources": {
+      "pillar1": "AHV/IV",
+      "pillar2": "Pension fund/UVG",
+      "other": "3rd pillar and savings",
+      "partner": "Partner's income",
+      "gap": "Gap"
+    }
+  },
+  "pension": {
+    "title": "Your provision at {age}",
+    "pending": "Calculating your retirement",
+    "pillar1": "AHV",
+    "pillar2": "Pension fund",
+    "other": "3rd pillar, savings",
+    "unit": "1 square = CHF 500 per month, empty squares are the gap",
+    "need": "Need ({percent}% of today's income)",
+    "total": "Income in retirement",
+    "gap": "Gap per month",
+    "surplus": "Reserve per month",
+    "capitalGap": "To close the gap you would need about {amount} more savings by {year}.",
+    "household": "Calculated for your household.",
+    "estimated": "The pension fund is estimated; your pension certificate makes it more precise.",
+    "assumptions": "Assumptions: {interest}% interest, life expectancy 88 years. Calculated by Logismata, non-binding."
+  },
+  "risk": {
+    "title": "If something happens",
+    "pending": "Calculating your risks",
+    "you": "you",
+    "partner": "your partner",
+    "persons": "Choose a person",
+    "ifHappensTo": "If it happens to {name}",
+    "retired": "{name} is already retired or about to retire. Retirement is what counts here.",
+    "disability": {
+      "illness": "Unable to work due to illness",
+      "accident": "Unable to work due to an accident"
+    },
+    "death": {
+      "illness": "Death due to illness",
+      "accident": "Death due to an accident"
+    },
+    "estimated": "The pension fund benefits are estimated; your pension certificate makes them more precise.",
+    "assumptions": "Need: {need}% of income if unable to work, {deathNeed}% for the survivors. Long-term view from year 3. Calculated by Logismata, non-binding."
+  },
+  "tax": {
+    "title": "Save taxes with pillar 3a",
+    "pending": "Calculating your tax savings",
+    "contribution": "With {amount} per year into pillar 3a (maximum {max})",
+    "yearly": "{amount} less tax per year",
+    "overall": "Savings until retirement ({years} years)",
+    "netCapital": "3a capital after tax",
+    "capitalTax": "Tax on payout",
+    "buyIn": {
+      "title": "Pension fund buy-in: {amount} over {years, plural, one {# year} other {# years}}",
+      "taxSavings": "Tax savings",
+      "netInvestment": "Cost after tax",
+      "additionalPension": "Extra pension per year"
+    },
+    "assumptions": "For your place of residence, no church tax, {interest}% interest. Calculated by Logismata, non-binding, no tax advice."
+  },
+  "scenario": {
+    "title": "Scenario",
+    "pending": "Calculating the scenario",
+    "recalculating": "Recalculating",
+    "failed": "I could not calculate that just now. Please try again.",
+    "noChange": "This scenario does not change your cover.",
+    "taxSavings": "Tax savings with this amount: {amount} per year.",
+    "lostPension": "The withdrawal costs you about {amount} of pension fund pension per month.",
+    "discuss": "Discuss with the advisor",
+    "discussMessage": "I looked at the scenario “{scenario}” ({params}). What does that mean for me?",
+    "estimated": "Pension fund estimated.",
+    "assumptions": "Scenario calculated by Logismata, non-binding. It does not change your pension picture.",
+    "before": "Today",
+    "after": "With the scenario",
+    "deltaNone": "The gap stays the same.",
+    "deltaUp": "The gap grows by {amount} per month.",
+    "deltaDown": "The gap shrinks by {amount} per month.",
+    "you": "you",
+    "partner": "your partner",
+    "titles": {
+      "child": "If a child arrives",
+      "home_purchase": "Buying a home with pension money",
+      "early_retirement": "Retiring earlier",
+      "pillar3a": "More or less into pillar 3a"
+    },
+    "params": {
+      "children": "Additional children",
+      "retirementAge": "Retirement age",
+      "yearlyAmount": "Contribution per year",
+      "pensionFundWithdrawal": "Pension fund withdrawal",
+      "pillar3aWithdrawal": "Pillar 3a withdrawal"
+    },
+    "kinds": {
+      "retirement": "Income after retirement",
+      "disability": "If {name} falls ill and can no longer work",
+      "death": "If {name} dies of an illness"
+    }
+  },
+  "upload": {
+    "title": "A shortcut with your documents",
+    "body": "With your documents I need to ask less and calculate more precisely. You check everything before I use it.",
+    "types": {
+      "pension_certificate": {
+        "name": "Pension certificate",
+        "why": "shows your pension fund: savings, pensions for disability and death."
+      },
+      "insurance_policy": {
+        "name": "Insurance policies",
+        "why": "so that nothing is insured twice."
+      },
+      "salary_certificate": {
+        "name": "Salary certificate",
+        "why": "for your exact income."
+      }
+    },
+    "skip": "Continue without documents",
+    "skipMessage": "I don't have any documents at hand right now. Please just ask me directly.",
+    "privacy": "Stored encrypted, used only for your consultation, deletable at any time."
+  },
+  "review": {
+    "title": "Your documents",
+    "pending": "Reading your documents"
+  },
+  "handover": {
+    "title": "Personal advice",
+    "pending": "Arranging a specialist",
+    "body": "A Pax specialist will contact you and already knows this conversation. How and when suits you?",
+    "channel": "How would you like to talk?",
+    "time": "When suits you?",
+    "phone": "Your phone number",
+    "submit": "Request a call back",
+    "error": "Please check your phone number.",
+    "bookedTitle": "Call back requested",
+    "booked": "A Pax specialist will contact you {time}. Requested: {channel}.",
+    "bookedMessage": "I have requested a call back: {channel}, {time}.",
+    "channels": {
+      "phone": "Phone",
+      "video": "Video call",
+      "branch": "Meeting at an agency",
+      "email": "Email"
+    },
+    "times": {
+      "today": "today",
+      "tomorrowMorning": "tomorrow morning",
+      "tomorrowAfternoon": "tomorrow afternoon",
+      "eveningThisWeek": "an evening this week"
+    }
+  },
+  "feedback": {
+    "title": "Your opinion",
+    "question": "How likely are you to recommend this consultation?",
+    "low": "not at all",
+    "high": "very likely",
+    "comment": "What did you miss or like? (optional)",
+    "submit": "Send feedback",
+    "error": "The feedback could not be saved. Please try again.",
+    "thanksTitle": "Thank you for your feedback",
+    "thanks": "It helps us make the advice better."
+  }
+}
