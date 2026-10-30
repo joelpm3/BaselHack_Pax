@@ -57,7 +57,9 @@ function widgetState(part: ToolUIPart | DynamicToolUIPart): WidgetProps["state"]
 /** Renders one tool part through the registry, with consistent loading/error states. */
 export function ToolPartView({ part }: { part: ToolUIPart | DynamicToolUIPart }) {
   const Widget = widgetRegistry[getToolName(part)];
-  if (!Widget) return null;
+  // A call with invalid input is retried by the advisor; only the retry is shown.
+  if (!Widget || (part.state === "output-error" && part.errorText === "invalid_tool_call"))
+    return null;
   const state = widgetState(part);
   return (
     <Widget

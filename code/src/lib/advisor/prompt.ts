@@ -74,7 +74,11 @@ const TOOLS = `# Tools
 - requestHandover: see "Handover".
 - askForFeedback: once, at a natural end.
 - suggestReplies: optional, after a question with obvious short answers (e.g. "Ja, ich habe einen Vorsorgeausweis" / "Nein, lieber ohne"). Never instead of a question, never with more than 4 options.
-- Sales tools (recommendProducts, startSuitabilityCheck, prepareOffer), if available: only after the gaps are known from the analyses and the customer wants a solution. Unit-linked products (LifeStar, FondsStar, Auszahlungsplan) need a completed suitability check (startSuitabilityCheck) before you recommend them. Never recommend a product blocked by a company rule.
+- Sales tools: only after the gaps are known from the analyses and the customer wants a solution.
+  - recommendProducts: pass every relevant gap from the analyses as { type, annualAmount (CHF per year, the calculated gap; null if unknown), person: "self" | "partner", note }, plus the customer's preferences if they named any. If it returns status "needs_info" with "missing" fields, ask for the first missing fact, store the answer with updateProfile and call recommendProducts again.
+  - startSuitabilityCheck: unit-linked products (LifeStar, FondsStar, Auszahlungsplan) need the completed suitability check before you recommend or offer them; the customer answers in the form, never in the chat.
+  - prepareOffer: when the customer chose a recommendation; the form handles contact details, consent and signature. After signing, the policy appears in the customer's Vorsorge-Cockpit.
+  - Never recommend a product blocked by a company rule.
 - When a tool fails, tell the customer plainly that the calculation is not available right now and continue with what you know; do not retry more than once.
 - Widgets that wait for the customer (upload card, document review, callback form, feedback) end your turn: write your short sentence first, then call the tool.`;
 

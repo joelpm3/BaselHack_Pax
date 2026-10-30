@@ -3,8 +3,10 @@ import {
   convertToModelMessages,
   generateText,
   getToolName,
+  InvalidToolInputError,
   isStepCount,
   isToolUIPart,
+  NoSuchToolError,
   type StopCondition,
   streamText,
   type ToolSet,
@@ -46,6 +48,8 @@ import { missingForAnalysis } from "./tools/profile";
 
 /** Error text sent to the client; the chat maps it to a localized message. */
 export const ADVISOR_UNAVAILABLE = "advisor_unavailable";
+/** Error text of a tool call the model sent with invalid input (hidden in the chat). */
+export const INVALID_TOOL_CALL = "invalid_tool_call";
 const MAX_STEPS = 8;
 
 export interface TurnInput {
@@ -265,6 +269,9 @@ export async function streamAdvisorTurn(
       return undefined;
     },
     onError: (error) => {
+      // A malformed tool call is repaired by the model in its next step; the UI hides it.
+      if (InvalidToolInputError.isInstance(error) || NoSuchToolError.isInstance(error))
+        return INVALID_TOOL_CALL;
       console.error(`[advisor] stream error in ${conversation.id}`, error);
       streamError = error instanceof Error ? error.message : String(error);
       return ADVISOR_UNAVAILABLE;
