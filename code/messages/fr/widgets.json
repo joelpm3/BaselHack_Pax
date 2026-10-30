@@ -1,0 +1,289 @@
+{
+  "common": {
+    "failed": "Cela n'a pas fonctionné pour le moment. Le conseiller peut quand même vous aider.",
+    "yes": "Oui",
+    "no": "Non",
+    "cancel": "Annuler"
+  },
+  "profile": {
+    "saving": "Je le note",
+    "title": "Noté",
+    "corrected": "Corrigé",
+    "edit": "Corriger",
+    "save": "Enregistrer",
+    "invalid": "Veuillez vérifier les données. Des chiffres sans texte, des années à quatre chiffres.",
+    "removed": "supprimé",
+    "updated": "mis à jour",
+    "children": "{count, plural, =0 {pas d'enfant} one {# enfant} other {# enfants}} ({years})"
+  },
+  "fields": {
+    "location": "Domicile",
+    "partnerEntry": "Partenaire",
+    "person": {
+      "firstName": "Prénom",
+      "birthYear": "Année de naissance",
+      "sex": "Sexe",
+      "maritalStatus": "État civil",
+      "employment": "Situation professionnelle",
+      "workloadPercent": "Taux d'activité",
+      "grossIncome": "Revenu brut par an",
+      "occupation": "Profession",
+      "smoker": "Fumeur·se",
+      "healthNotes": "Santé"
+    },
+    "partner": {
+      "firstName": "Prénom du ou de la partenaire",
+      "birthYear": "Année de naissance du ou de la partenaire",
+      "sex": "Sexe du ou de la partenaire",
+      "employment": "Situation professionnelle du ou de la partenaire",
+      "workloadPercent": "Taux d'activité du ou de la partenaire",
+      "grossIncome": "Revenu du ou de la partenaire par an",
+      "occupation": "Profession du ou de la partenaire",
+      "smoker": "Partenaire fumeur·se"
+    },
+    "children": "Enfants",
+    "goals": "Objectifs",
+    "concerns": "Ce qui vous préoccupe",
+    "plannedEvents": "Projets",
+    "assets": {
+      "liquid": "Épargne",
+      "securities": "Titres",
+      "realEstateValue": "Valeur du bien immobilier",
+      "mortgage": "Hypothèque",
+      "total": "Fortune"
+    },
+    "pillar1": {
+      "contributionGapYears": "Années de cotisation AVS manquantes"
+    },
+    "pillar2": {
+      "hasPensionFund": "Caisse de pension",
+      "insuredSalary": "Salaire assuré",
+      "currentCapital": "Avoir de vieillesse aujourd'hui",
+      "projectedCapitalAtRetirement": "Avoir de vieillesse à 65 ans",
+      "projectedPensionAtRetirement": "Rente de vieillesse par an",
+      "disabilityPension": "Rente d'invalidité par an",
+      "partnerPension": "Rente de partenaire par an",
+      "childPension": "Rente pour enfant par an",
+      "deathLumpSum": "Capital-décès",
+      "maxBuyIn": "Rachat possible"
+    },
+    "pillar3a": {
+      "balance": "Avoir 3a",
+      "annualContribution": "Versement 3a par an"
+    },
+    "desiredRetirementAge": "Âge de retraite souhaité",
+    "riskAttitude": "Goût du risque"
+  },
+  "enums": {
+    "sex": {
+      "male": "Homme",
+      "female": "Femme"
+    },
+    "maritalStatus": {
+      "single": "célibataire",
+      "married": "marié·e",
+      "registered_partnership": "en partenariat enregistré",
+      "cohabiting": "en concubinage",
+      "divorced": "divorcé·e",
+      "widowed": "veuf ou veuve"
+    },
+    "employment": {
+      "employed": "salarié·e",
+      "self_employed": "indépendant·e",
+      "unemployed": "sans emploi",
+      "student": "en formation",
+      "homemaker": "famille et foyer",
+      "retired": "retraité·e"
+    },
+    "riskAttitude": {
+      "low": "faible",
+      "medium": "moyen",
+      "high": "élevé"
+    },
+    "goal": {
+      "protect_family": "Protéger la famille",
+      "retire_comfortably": "Bien vivre à la retraite",
+      "retire_early": "Arrêter plus tôt",
+      "buy_home": "Devenir propriétaire",
+      "save_taxes": "Économiser des impôts",
+      "build_wealth": "Constituer un patrimoine",
+      "support_children": "Soutenir les enfants",
+      "secure_income_disability": "Assurer le revenu en cas d'invalidité"
+    },
+    "plannedEvent": {
+      "child": "Enfant",
+      "home_purchase": "Logement en propriété",
+      "marriage": "Mariage",
+      "early_retirement": "Retraite anticipée",
+      "self_employment": "Indépendance",
+      "sabbatical": "Pause",
+      "divorce": "Divorce",
+      "inheritance": "Héritage",
+      "other": "Autre"
+    }
+  },
+  "breakdown": {
+    "noNeed": "pas de besoin",
+    "gap": "Lacune {amount}/mois",
+    "covered": "couvert",
+    "need": "Besoin",
+    "unit": "1 carré = CHF 500 par mois",
+    "sources": {
+      "pillar1": "AVS/AI",
+      "pillar2": "Caisse de pension/LAA",
+      "other": "3e pilier et épargne",
+      "partner": "Revenu du ou de la partenaire",
+      "gap": "Lacune"
+    }
+  },
+  "pension": {
+    "title": "Votre prévoyance à {age} ans",
+    "pending": "Je calcule votre retraite",
+    "pillar1": "AVS",
+    "pillar2": "Caisse de pension",
+    "other": "3e pilier, épargne",
+    "unit": "1 carré = CHF 500 par mois, les carrés vides sont la lacune",
+    "need": "Besoin ({percent} % du revenu actuel)",
+    "total": "Revenu à la retraite",
+    "gap": "Lacune par mois",
+    "surplus": "Réserve par mois",
+    "capitalGap": "Pour combler la lacune, il vous faudrait environ {amount} de fortune supplémentaire d'ici {year}.",
+    "household": "Calculé pour votre ménage.",
+    "estimated": "La caisse de pension est estimée ; votre certificat de prévoyance permet plus de précision.",
+    "assumptions": "Hypothèses : intérêt de {interest} %, espérance de vie de 88 ans. Calcul de Logismata, sans engagement."
+  },
+  "risk": {
+    "title": "S'il vous arrive quelque chose",
+    "pending": "Je calcule vos risques",
+    "you": "vous",
+    "partner": "votre partenaire",
+    "persons": "Choisir une personne",
+    "ifHappensTo": "Si cela arrive à {name}",
+    "retired": "{name} est déjà à la retraite ou sur le point de l'être. Ici, c'est la retraite qui compte.",
+    "disability": {
+      "illness": "Incapacité de gain due à une maladie",
+      "accident": "Incapacité de gain due à un accident"
+    },
+    "death": {
+      "illness": "Décès dû à une maladie",
+      "accident": "Décès dû à un accident"
+    },
+    "estimated": "Les prestations de la caisse de pension sont estimées ; votre certificat de prévoyance permet plus de précision.",
+    "assumptions": "Besoin : {need} % du revenu en cas d'incapacité de gain, {deathNeed} % pour les survivants. Vision à long terme dès la 3e année. Calcul de Logismata, sans engagement."
+  },
+  "tax": {
+    "title": "Économiser des impôts avec le pilier 3a",
+    "pending": "Je calcule votre économie d'impôts",
+    "contribution": "Avec {amount} par an dans le pilier 3a (maximum {max})",
+    "yearly": "{amount} d'impôts en moins par an",
+    "overall": "Économie jusqu'à la retraite ({years} ans)",
+    "netCapital": "Capital 3a après impôts",
+    "capitalTax": "Impôt au versement",
+    "buyIn": {
+      "title": "Rachat dans la caisse de pension : {amount} sur {years, plural, one {# an} other {# ans}}",
+      "taxSavings": "Économie d'impôts",
+      "netInvestment": "Coût après impôts",
+      "additionalPension": "Rente supplémentaire par an"
+    },
+    "assumptions": "Pour votre domicile, sans confession, intérêt de {interest} %. Calcul de Logismata, sans engagement, pas de conseil fiscal."
+  },
+  "scenario": {
+    "title": "Scénario",
+    "pending": "Je calcule le scénario",
+    "recalculating": "Nouveau calcul en cours",
+    "failed": "Je n'ai pas pu calculer cela pour le moment. Veuillez réessayer.",
+    "noChange": "Ce scénario ne modifie pas votre couverture.",
+    "taxSavings": "Économie d'impôts avec ce montant : {amount} par an.",
+    "lostPension": "Le retrait anticipé vous coûte environ {amount} de rente de caisse de pension par mois.",
+    "discuss": "En parler avec le conseiller",
+    "discussMessage": "J'ai regardé le scénario « {scenario} » ({params}). Qu'est-ce que cela signifie pour moi ?",
+    "estimated": "Caisse de pension estimée.",
+    "assumptions": "Scénario calculé avec Logismata, sans engagement. Il ne modifie pas votre image de prévoyance.",
+    "before": "Aujourd'hui",
+    "after": "Avec le scénario",
+    "deltaNone": "La lacune reste la même.",
+    "deltaUp": "La lacune augmente de {amount} par mois.",
+    "deltaDown": "La lacune diminue de {amount} par mois.",
+    "you": "vous",
+    "partner": "votre partenaire",
+    "titles": {
+      "child": "Si un enfant arrive",
+      "home_purchase": "Devenir propriétaire avec l'argent de la prévoyance",
+      "early_retirement": "Prendre sa retraite plus tôt",
+      "pillar3a": "Plus ou moins dans le pilier 3a"
+    },
+    "params": {
+      "children": "Enfants supplémentaires",
+      "retirementAge": "Âge de la retraite",
+      "yearlyAmount": "Versement par an",
+      "pensionFundWithdrawal": "Retrait anticipé caisse de pension",
+      "pillar3aWithdrawal": "Retrait pilier 3a"
+    },
+    "kinds": {
+      "retirement": "Revenu après la retraite",
+      "disability": "Si {name} tombe malade et ne peut plus travailler",
+      "death": "Si {name} décède d'une maladie"
+    }
+  },
+  "upload": {
+    "title": "Un raccourci avec vos documents",
+    "body": "Avec vos documents, je dois poser moins de questions et je calcule plus précisément. Vous vérifiez tout avant que je l'utilise.",
+    "types": {
+      "pension_certificate": {
+        "name": "Certificat de prévoyance",
+        "why": "montre votre caisse de pension : avoir, rentes en cas d'invalidité et de décès."
+      },
+      "insurance_policy": {
+        "name": "Polices d'assurance",
+        "why": "pour que rien ne soit assuré deux fois."
+      },
+      "salary_certificate": {
+        "name": "Certificat de salaire",
+        "why": "pour votre revenu exact."
+      }
+    },
+    "skip": "Continuer sans documents",
+    "skipMessage": "Je n'ai pas de documents sous la main pour le moment. Posez-moi plutôt directement les questions.",
+    "privacy": "Enregistrés de manière chiffrée, uniquement pour votre conseil, supprimables à tout moment."
+  },
+  "review": {
+    "title": "Vos documents",
+    "pending": "Je lis vos documents"
+  },
+  "handover": {
+    "title": "Conseil personnel",
+    "pending": "J'organise un·e spécialiste",
+    "body": "Un·e spécialiste Pax vous contacte et connaît déjà cette conversation. Comment et quand cela vous convient-il ?",
+    "channel": "Comment souhaitez-vous échanger ?",
+    "time": "Quand cela vous convient-il ?",
+    "phone": "Votre numéro de téléphone",
+    "submit": "Demander un rappel",
+    "error": "Veuillez vérifier votre numéro de téléphone.",
+    "bookedTitle": "Rappel demandé",
+    "booked": "Un·e spécialiste Pax vous contacte {time}. Souhaité : {channel}.",
+    "bookedMessage": "J'ai demandé un rappel : {channel}, {time}.",
+    "channels": {
+      "phone": "Téléphone",
+      "video": "Appel vidéo",
+      "branch": "Rendez-vous dans une agence",
+      "email": "E-mail"
+    },
+    "times": {
+      "today": "aujourd'hui",
+      "tomorrowMorning": "demain matin",
+      "tomorrowAfternoon": "demain après-midi",
+      "eveningThisWeek": "un soir cette semaine"
+    }
+  },
+  "feedback": {
+    "title": "Votre avis",
+    "question": "Quelle est la probabilité que vous recommandiez ce conseil ?",
+    "low": "pas du tout",
+    "high": "très probable",
+    "comment": "Qu'est-ce qui vous a manqué ou plu ? (facultatif)",
+    "submit": "Envoyer le feedback",
+    "error": "Le feedback n'a pas pu être enregistré. Veuillez réessayer.",
+    "thanksTitle": "Merci pour votre feedback",
+    "thanks": "Cela nous aide à améliorer le conseil."
+  }
+}

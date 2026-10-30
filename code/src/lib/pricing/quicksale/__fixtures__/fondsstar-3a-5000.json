@@ -1,0 +1,450 @@
+{
+  "message": "",
+  "state": "SUCCESS",
+  "data": {
+    "beginnDatum": "01.11.2026",
+    "ratenPraemie": 5000,
+    "jahresPraemie": 5000,
+    "einmalpraemieTotal": 0,
+    "erlebensfallleistungTotal": 0,
+    "bruttopraemie": 0,
+    "aktuelleUeberschuesse": 0,
+    "nettopraemie": 0,
+    "sparprodukt": true,
+    "warnungen": [],
+    "vorsorgeart": {
+      "saeule3a": true,
+      "praemie3aMaximieren": false,
+      "garantiertesErlebensfallkapital": 0
+    },
+    "verwendeteAnnahmen": {
+      "bruttorenditen": [
+        {
+          "bezeichnung": "Pax (CH) Sustainable Equity Switzerland Small & Mid Cap ALV T",
+          "tief": -0.5,
+          "mittel": 6,
+          "hoch": 8.4
+        }
+      ],
+      "zinssaetze": [],
+      "szenarienBetraege": [
+        {
+          "bezeichnung": "NIEDRIG",
+          "betrag": 75723.2
+        },
+        {
+          "bezeichnung": "MITTEL",
+          "betrag": 185743.7
+        },
+        {
+          "bezeichnung": "HOCH",
+          "betrag": 262815.3
+        }
+      ]
+    },
+    "fonds": [
+      {
+        "index": 0,
+        "fondsAllokationen": [
+          {
+            "index": 1,
+            "anteil": 100,
+            "selectedFondsauswahlIndex": 5,
+            "fondsauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 25"
+              },
+              {
+                "index": 1,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 50"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 75"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 100"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio Target Return"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "Pax (CH) Sustainable Equity Switzerland Small & Mid Cap ALV T"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "UBS MSCI World Selection UCITS ETF"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "Pax (CH) Equity Infrastructure Europe"
+              },
+              {
+                "index": 8,
+                "bezeichnung": "Pax (CH) Sustainable Bond CHF"
+              },
+              {
+                "index": 9,
+                "bezeichnung": "Pax (CH) Sustainable Equity Global CHF"
+              },
+              {
+                "index": 10,
+                "bezeichnung": "Swisscanto (CH) Real Estate Fund Responsible IFCA FA CHF"
+              },
+              {
+                "index": 11,
+                "bezeichnung": "Raiffeisen ETF - Solid Gold Responsibly Sourced & Traceable"
+              }
+            ]
+          },
+          {
+            "index": 2,
+            "anteil": 0,
+            "selectedFondsauswahlIndex": -1,
+            "fondsauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 25"
+              },
+              {
+                "index": 1,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 50"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 75"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio 100"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "Pax (CH) Sustainable Portfolio Target Return"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "UBS MSCI World Selection UCITS ETF"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "Pax (CH) Equity Infrastructure Europe"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "Pax (CH) Sustainable Bond CHF"
+              },
+              {
+                "index": 8,
+                "bezeichnung": "Pax (CH) Sustainable Equity Global CHF"
+              },
+              {
+                "index": 9,
+                "bezeichnung": "Swisscanto (CH) Real Estate Fund Responsible IFCA FA CHF"
+              },
+              {
+                "index": 10,
+                "bezeichnung": "Raiffeisen ETF - Solid Gold Responsibly Sourced & Traceable"
+              },
+              {
+                "index": -1,
+                "bezeichnung": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "personen": [
+      {
+        "index": 0,
+        "geburtsdatum": "01.01.1987",
+        "selectedGeschlecht": "MANN",
+        "raucher": false,
+        "praemienbefreiung": true,
+        "selectedHauptberufId": 0,
+        "technischesAlter": 40,
+        "selectedRolle": "HAUPTVERSICHERT",
+        "tarife": [
+          {
+            "index": 0,
+            "code": "096001A0",
+            "selectedTarif": "TerzaFondsStar",
+            "dauer": 25,
+            "schlussalter": 65,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 4654.4,
+            "einmalpraemie": 0,
+            "risikosumme": 97225.7,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "TerzaFondsStar",
+                "tarifbeschreibung": "Fondsgebundene Lebensversicherung"
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "code": "087102G0",
+            "selectedTarif": "PFZ",
+            "dauer": 25,
+            "schlussalter": 65,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "PFZ",
+                "tarifbeschreibung": "Prämienbefreiung bei Familienzuwachs"
+              }
+            ]
+          },
+          {
+            "index": 2,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 3,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 4,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 5,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "FKZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "FKFZ",
+                "tarifbeschreibung": "Todesfallzusatzversicherung mit fallendem Kapital"
+              },
+              {
+                "index": 3,
+                "bezeichnung": "FRZ",
+                "tarifbeschreibung": "Hinterbliebenenrente (Zusatzversicherung)"
+              },
+              {
+                "index": 4,
+                "bezeichnung": "IR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 5,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 6,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              },
+              {
+                "index": 7,
+                "bezeichnung": "U",
+                "tarifbeschreibung": "Zusatzversicherung gegen Tod durch Unfall"
+              }
+            ]
+          },
+          {
+            "index": 6,
+            "code": "073002A0",
+            "selectedTarif": "I",
+            "dauer": 25,
+            "schlussalter": 65,
+            "selectedWartefrist": 3,
+            "periodischePraemie": 345.6,
+            "einmalpraemie": 0,
+            "risikosumme": 4654.4,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "I",
+                "tarifbeschreibung": "Prämienbefreiung"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "common": {
+    "failed": "Das hat gerade nicht geklappt. Der Berater kann trotzdem weiterhelfen.",
+    "yes": "Ja",
+    "no": "Nein",
+    "cancel": "Abbrechen"
+  },
+  "profile": {
+    "saving": "Ich notiere das",
+    "title": "Notiert",
+    "corrected": "Korrigiert",
+    "edit": "Korrigieren",
+    "save": "Speichern",
+    "invalid": "Bitte prüfen Sie die Angaben. Zahlen ohne Text, Jahre vierstellig.",
+    "removed": "entfernt",
+    "updated": "aktualisiert",
+    "children": "{count, plural, =0 {keine Kinder} one {# Kind} other {# Kinder}} ({years})"
+  },
+  "fields": {
+    "location": "Wohnort",
+    "partnerEntry": "Partnerin/Partner",
+    "person": {
+      "firstName": "Vorname",
+      "birthYear": "Jahrgang",
+      "sex": "Geschlecht",
+      "maritalStatus": "Zivilstand",
+      "employment": "Erwerbssituation",
+      "workloadPercent": "Pensum",
+      "grossIncome": "Bruttoeinkommen pro Jahr",
+      "occupation": "Beruf",
+      "smoker": "Raucher/in",
+      "healthNotes": "Gesundheit"
+    },
+    "partner": {
+      "firstName": "Vorname Partner/in",
+      "birthYear": "Jahrgang Partner/in",
+      "sex": "Geschlecht Partner/in",
+      "employment": "Erwerbssituation Partner/in",
+      "workloadPercent": "Pensum Partner/in",
+      "grossIncome": "Einkommen Partner/in pro Jahr",
+      "occupation": "Beruf Partner/in",
+      "smoker": "Partner/in raucht"
+    },
+    "children": "Kinder",
+    "goals": "Ziele",
+    "concerns": "Was Sie beschäftigt",
+    "plannedEvents": "Pläne",
+    "assets": {
+      "liquid": "Ersparnisse",
+      "securities": "Wertschriften",
+      "realEstateValue": "Wert Liegenschaft",
+      "mortgage": "Hypothek",
+      "total": "Vermögen"
+    },
+    "pillar1": {
+      "contributionGapYears": "AHV-Beitragslücken (Jahre)"
+    },
+    "pillar2": {
+      "hasPensionFund": "Pensionskasse",
+      "insuredSalary": "Versicherter Lohn",
+      "currentCapital": "Altersguthaben heute",
+      "projectedCapitalAtRetirement": "Altersguthaben mit 65",
+      "projectedPensionAtRetirement": "Altersrente pro Jahr",
+      "disabilityPension": "Invalidenrente pro Jahr",
+      "partnerPension": "Partnerrente pro Jahr",
+      "childPension": "Kinderrente pro Jahr",
+      "deathLumpSum": "Todesfallkapital",
+      "maxBuyIn": "Möglicher Einkauf"
+    },
+    "pillar3a": {
+      "balance": "3a-Guthaben",
+      "annualContribution": "3a-Einzahlung pro Jahr"
+    },
+    "desiredRetirementAge": "Gewünschtes Pensionsalter",
+    "riskAttitude": "Risikobereitschaft"
+  },
+  "enums": {
+    "sex": {
+      "male": "Mann",
+      "female": "Frau"
+    },
+    "maritalStatus": {
+      "single": "ledig",
+      "married": "verheiratet",
+      "registered_partnership": "eingetragene Partnerschaft",
+      "cohabiting": "im Konkubinat",
+      "divorced": "geschieden",
+      "widowed": "verwitwet"
+    },
+    "employment": {
+      "employed": "angestellt",
+      "self_employed": "selbstständig",
+      "unemployed": "ohne Stelle",
+      "student": "in Ausbildung",
+      "homemaker": "Familie und Haushalt",
+      "retired": "pensioniert"
+    },
+    "riskAttitude": {
+      "low": "tief",
+      "medium": "mittel",
+      "high": "hoch"
+    },
+    "goal": {
+      "protect_family": "Familie absichern",
+      "retire_comfortably": "Gut leben im Alter",
+      "retire_early": "Früher aufhören",
+      "buy_home": "Wohneigentum",
+      "save_taxes": "Steuern sparen",
+      "build_wealth": "Vermögen aufbauen",
+      "support_children": "Kinder unterstützen",
+      "secure_income_disability": "Einkommen bei Invalidität sichern"
+    },
+    "plannedEvent": {
+      "child": "Kind",
+      "home_purchase": "Wohneigentum",
+      "marriage": "Heirat",
+      "early_retirement": "Frühpensionierung",
+      "self_employment": "Selbstständigkeit",
+      "sabbatical": "Auszeit",
+      "divorce": "Scheidung",
+      "inheritance": "Erbschaft",
+      "other": "Anderes"
+    }
+  },
+  "breakdown": {
+    "noNeed": "kein Bedarf",
+    "gap": "Lücke {amount}/Mt.",
+    "covered": "gedeckt",
+    "need": "Bedarf",
+    "unit": "1 Quadrat = CHF 500 pro Monat",
+    "sources": {
+      "pillar1": "AHV/IV",
+      "pillar2": "Pensionskasse/UVG",
+      "other": "3. Säule und Vermögen",
+      "partner": "Einkommen Partner/in",
+      "gap": "Lücke"
+    }
+  },
+  "pension": {
+    "title": "Ihre Vorsorge mit {age}",
+    "pending": "Ich rechne Ihre Pension",
+    "pillar1": "AHV",
+    "pillar2": "Pensionskasse",
+    "other": "3. Säule, Vermögen",
+    "unit": "1 Quadrat = CHF 500 pro Monat, leere Quadrate sind die Lücke",
+    "need": "Bedarf ({percent} % des heutigen Einkommens)",
+    "total": "Einkommen im Alter",
+    "gap": "Lücke pro Monat",
+    "surplus": "Reserve pro Monat",
+    "capitalGap": "Um die Lücke zu schliessen, bräuchten Sie bis {year} rund {amount} zusätzliches Vermögen.",
+    "household": "Gerechnet für Ihren Haushalt.",
+    "estimated": "Die Pensionskasse ist geschätzt; mit Ihrem Vorsorgeausweis wird es genauer.",
+    "assumptions": "Annahmen: Zins {interest} %, Lebenserwartung 88 Jahre. Berechnung von Logismata, unverbindlich."
+  },
+  "risk": {
+    "title": "Wenn etwas passiert",
+    "pending": "Ich rechne Ihre Risiken",
+    "you": "Sie",
+    "partner": "Partner/in",
+    "persons": "Person wählen",
+    "ifHappensTo": "Wenn es {name} trifft",
+    "retired": "{name} ist bereits pensioniert oder kurz davor. Hier zählt die Pension.",
+    "disability": {
+      "illness": "Erwerbsunfähig durch Krankheit",
+      "accident": "Erwerbsunfähig durch Unfall"
+    },
+    "death": {
+      "illness": "Todesfall durch Krankheit",
+      "accident": "Todesfall durch Unfall"
+    },
+    "estimated": "Die Leistungen der Pensionskasse sind geschätzt; Ihr Vorsorgeausweis macht es genauer.",
+    "assumptions": "Bedarf: {need} % des Einkommens bei Erwerbsunfähigkeit, {deathNeed} % für die Hinterbliebenen. Langfristige Sicht ab dem 3. Jahr. Berechnung von Logismata, unverbindlich."
+  },
+  "tax": {
+    "title": "Steuern sparen mit der Säule 3a",
+    "pending": "Ich rechne Ihre Steuerersparnis",
+    "contribution": "Mit {amount} pro Jahr in die Säule 3a (Maximum {max})",
+    "yearly": "{amount} weniger Steuern pro Jahr",
+    "overall": "Ersparnis bis zur Pension ({years} Jahre)",
+    "netCapital": "3a-Kapital nach Steuern",
+    "capitalTax": "Steuer bei Auszahlung",
+    "buyIn": {
+      "title": "Einkauf in die Pensionskasse: {amount} über {years, plural, one {# Jahr} other {# Jahre}}",
+      "taxSavings": "Steuerersparnis",
+      "netInvestment": "Kosten nach Steuern",
+      "additionalPension": "Mehr Rente pro Jahr"
+    },
+    "assumptions": "Für Ihren Wohnort, ohne Konfession, Zins {interest} %. Berechnung von Logismata, unverbindlich, keine Steuerberatung."
+  },
+  "scenario": {
+    "title": "Szenario",
+    "pending": "Ich rechne das Szenario",
+    "recalculating": "Wird neu gerechnet",
+    "failed": "Das konnte ich gerade nicht rechnen. Bitte versuchen Sie es nochmals.",
+    "noChange": "Dieses Szenario verändert Ihre Absicherung nicht.",
+    "taxSavings": "Steuerersparnis mit diesem Betrag: {amount} pro Jahr.",
+    "lostPension": "Der Vorbezug kostet Sie rund {amount} Pensionskassenrente pro Monat.",
+    "discuss": "Mit dem Berater besprechen",
+    "discussMessage": "Ich habe das Szenario «{scenario}» angeschaut ({params}). Was bedeutet das für mich?",
+    "estimated": "Pensionskasse geschätzt.",
+    "assumptions": "Szenario mit Logismata gerechnet, unverbindlich. Es ändert Ihr Vorsorgebild nicht.",
+    "before": "Heute",
+    "after": "Mit dem Szenario",
+    "deltaNone": "Die Lücke bleibt gleich.",
+    "deltaUp": "Die Lücke wächst um {amount} pro Monat.",
+    "deltaDown": "Die Lücke sinkt um {amount} pro Monat.",
+    "you": "Sie",
+    "partner": "Ihre Partnerin oder Ihren Partner",
+    "titles": {
+      "child": "Wenn ein Kind dazukommt",
+      "home_purchase": "Wohneigentum mit Vorsorgegeld",
+      "early_retirement": "Früher in Pension",
+      "pillar3a": "Mehr oder weniger in die Säule 3a"
+    },
+    "params": {
+      "children": "Zusätzliche Kinder",
+      "retirementAge": "Pensionsalter",
+      "yearlyAmount": "Einzahlung pro Jahr",
+      "pensionFundWithdrawal": "Vorbezug Pensionskasse",
+      "pillar3aWithdrawal": "Bezug Säule 3a"
+    },
+    "kinds": {
+      "retirement": "Einkommen nach der Pensionierung",
+      "disability": "Wenn {name} krank wird und nicht mehr arbeiten kann",
+      "death": "Wenn {name} wegen Krankheit stirbt"
+    }
+  },
+  "upload": {
+    "title": "Abkürzung mit Ihren Unterlagen",
+    "body": "Mit Ihren Dokumenten muss ich weniger fragen und rechne genauer. Sie prüfen alles, bevor ich es verwende.",
+    "types": {
+      "pension_certificate": {
+        "name": "Vorsorgeausweis",
+        "why": "zeigt Ihre Pensionskasse: Guthaben, Renten bei Invalidität und Tod."
+      },
+      "insurance_policy": {
+        "name": "Versicherungspolicen",
+        "why": "damit nichts doppelt versichert ist."
+      },
+      "salary_certificate": {
+        "name": "Lohnausweis",
+        "why": "für Ihr genaues Einkommen."
+      }
+    },
+    "skip": "Ohne Unterlagen weiter",
+    "skipMessage": "Ich habe gerade keine Unterlagen zur Hand. Fragen Sie mich lieber direkt.",
+    "privacy": "Verschlüsselt gespeichert, nur für Ihre Beratung, jederzeit löschbar."
+  },
+  "review": {
+    "title": "Ihre Unterlagen",
+    "pending": "Ich lese Ihre Unterlagen"
+  },
+  "handover": {
+    "title": "Persönliche Beratung",
+    "pending": "Ich organisiere eine Fachperson",
+    "body": "Eine Pax-Fachperson meldet sich bei Ihnen und kennt dieses Gespräch bereits. Wie und wann passt es Ihnen?",
+    "channel": "Wie möchten Sie sprechen?",
+    "time": "Wann passt es Ihnen?",
+    "phone": "Ihre Telefonnummer",
+    "submit": "Rückruf anfordern",
+    "error": "Bitte prüfen Sie Ihre Telefonnummer.",
+    "bookedTitle": "Rückruf angefordert",
+    "booked": "Eine Pax-Fachperson meldet sich {time}. Gewünscht: {channel}.",
+    "bookedMessage": "Ich habe einen Rückruf angefordert: {channel}, {time}.",
+    "channels": {
+      "phone": "Telefon",
+      "video": "Video-Call",
+      "branch": "Treffen in einer Agentur",
+      "email": "E-Mail"
+    },
+    "times": {
+      "today": "heute",
+      "tomorrowMorning": "morgen Vormittag",
+      "tomorrowAfternoon": "morgen Nachmittag",
+      "eveningThisWeek": "diese Woche abends"
+    }
+  },
+  "feedback": {
+    "title": "Ihre Meinung",
+    "question": "Wie wahrscheinlich ist es, dass Sie diese Beratung weiterempfehlen?",
+    "low": "gar nicht",
+    "high": "sehr wahrscheinlich",
+    "comment": "Was hat Ihnen gefehlt oder gefallen? (freiwillig)",
+    "submit": "Feedback senden",
+    "error": "Das Feedback konnte nicht gespeichert werden. Bitte versuchen Sie es nochmals.",
+    "thanksTitle": "Danke für Ihr Feedback",
+    "thanks": "Das hilft uns, die Beratung besser zu machen."
+  }
+}

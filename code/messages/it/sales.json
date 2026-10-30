@@ -1,0 +1,359 @@
+{
+  "server": {
+    "gaps": {
+      "death": "Decesso",
+      "disability": "Incapacità di guadagno",
+      "retirement": "Vecchiaia",
+      "tax": "Imposte",
+      "child": "Figli",
+      "payout": "Reddito durante la pensione",
+      "care": "Aiuto immediato in caso di decesso"
+    },
+    "headlines": {
+      "death": "Proteggere finanziariamente la sua famiglia",
+      "disability": "Assicurare il suo reddito in caso di malattia",
+      "retirement": "Colmare in modo mirato la lacuna in vecchiaia",
+      "tax": "Risparmiare imposte con il pilastro 3a",
+      "child": "Previdenza per suo figlio",
+      "payout": "Trasformare un capitale in un reddito pianificabile",
+      "care": "Sostenere i suoi cari quando conta"
+    },
+    "criteria": {
+      "gap": "Lacuna",
+      "gapValue": "{gap}: {amount} all'anno",
+      "gapValueUnknown": "{gap}: importo non ancora calcolato",
+      "entryAge": "Età d'entrata",
+      "entryAgeValue": "{age} anni (possibile da {min} a {max})",
+      "sumInsured": "Capitale in caso di decesso",
+      "sumFromIncome": "{sum}: tre salari annui lordi, perché la lacuna non è ancora calcolata",
+      "sumFromGap": "{gap} all'anno × {years} anni = {sum}",
+      "duration": "Durata",
+      "durationDeath": {
+        "until_youngest_child_25": "{years} anni, fino ai 25 anni del figlio più giovane (fino all'età di {endAge} anni)",
+        "partner_10_years": "{years} anni per proteggere il suo partner (fino all'età di {endAge} anni)",
+        "minimum_5_years": "{years} anni, la durata minima (fino all'età di {endAge} anni)"
+      },
+      "pension": "Rendita in caso di incapacità di guadagno",
+      "pensionValue": "{pension} all'anno fino all'età di {endAge} anni",
+      "waitingPeriod": "Termine d'attesa",
+      "waiting24": "24 mesi: fino ad allora pagano la continuazione del salario e l'indennità giornaliera di malattia",
+      "waiting12": "12 mesi: come indipendente senza una lunga indennità giornaliera",
+      "occupation": "Gruppo professionale",
+      "occupationAssumed": "Gruppo {group} ipotizzato, professione non ancora nota",
+      "occupationValue": "Gruppo {group} ({occupation})",
+      "capital": "Importo da investire",
+      "capitalGiven": "{capital} di capitale disponibile",
+      "capitalFromGap": "{capital}: 15 anni della sua lacuna (ipotesi)",
+      "premium": "Premio di risparmio",
+      "premiumValue": "{premium} all'anno",
+      "premiumPartial": "{premium} all'anno; per l'intera lacuna servirebbero {required}",
+      "room3a": "Margine pilastro 3a",
+      "room3aValue": "Quest'anno può ancora versare {room}",
+      "room3aFull": "Il suo pilastro 3a è già al massimo",
+      "budget": "Budget",
+      "budgetValue": "Premio {premium}, il suo budget {budget}",
+      "smoker": "Stato di fumatore",
+      "nonSmokerAssumed": "Non fumatore ipotizzato, confermato nella proposta",
+      "smokerYes": "Fumatore",
+      "smokerNo": "Non fumatore",
+      "insured": "Persona assicurata",
+      "partner": "Il suo partner",
+      "rules": "Regole Pax",
+      "rulesValue": "Verificate, nessun blocco (regole versione {version})",
+      "suitability": "Verifica dell'adeguatezza",
+      "suitabilityPending": "Necessaria prima dell'offerta, ancora aperta"
+    },
+    "rationale": {
+      "todesfall": "Se il suo reddito viene a mancare, ai suoi cari mancano circa {gap} all'anno. Un capitale in caso di decesso di {sum} copre questa lacuna per {years} anni, fino all'età di {endAge} anni.",
+      "todesfallIncome": "Un capitale in caso di decesso di {sum} dà ai suoi cari {years} anni per riorganizzarsi, fino all'età di {endAge} anni.",
+      "erwerbsunfaehigkeit": "Se una malattia le impedisce di lavorare, le mancano circa {gap} all'anno quando finiscono la continuazione del salario e l'indennità giornaliera. Una rendita di {pension} all'anno dal {months}° mese colma questa lacuna fino all'età di {endAge} anni.",
+      "erwerbsunfaehigkeitNoAmount": "Se una malattia le impedisce di lavorare, una rendita di {pension} all'anno dal {months}° mese sostituisce una parte del suo reddito fino all'età di {endAge} anni.",
+      "savings": "In vecchiaia le mancano circa {gap} all'anno. Con {premium} all'anno nel pilastro {pillar} risparmia in modo mirato fino all'età di {endAge} anni.",
+      "savingsNoAmount": "Con {premium} all'anno nel pilastro {pillar} costituisce un capitale per la sua pensione fino all'età di {endAge} anni.",
+      "savingsTax": "Non sfrutta ancora pienamente la deduzione fiscale del pilastro 3a. Con {premium} all'anno nel pilastro {pillar} risparmia imposte ogni anno e capitale per la vecchiaia, fino all'età di {endAge} anni.",
+      "auszahlungsplan": "{capital} diventa un reddito pianificabile dall'età di {startAge} anni, in parte garantito, in parte con opportunità di rendimento.",
+      "kinderversicherung": "Con {premium} all'anno risparmia per l'avvio di suo figlio nella vita adulta, con copertura invalidità per il figlio ed esonero dal pagamento dei premi se le succede qualcosa.",
+      "care": "Pax Care è gratuito: CHF 2'000 di aiuto immediato e sostegno personale per i suoi cari in caso di decesso."
+    },
+    "excluded": {
+      "entryAge": "L'età d'entrata di {age} anni è al di fuori di {min}–{max} anni.",
+      "capitalUnknown": "Manca l'importo da investire per un piano di prelievo."
+    },
+    "alternatives": {
+      "todesfall": "Pura protezione in caso di decesso al premio più basso, senza risparmio.",
+      "erwerbsunfaehigkeit": "Una rendita in caso di incapacità di guadagno assicura il suo reddito invece di un capitale.",
+      "lifestar": "Risparmio con parte garantita e fondi, con protezione in caso di decesso; premio nettamente più alto. Solo dopo la verifica dell'adeguatezza.",
+      "fondsstar": "Interamente investito in fondi: maggiore opportunità di rendimento, nessuna parte garantita. Solo dopo la verifica dell'adeguatezza.",
+      "pax3a": "Pilastro 3a da concludere online da CHF 50 al mese, con esonero dal pagamento dei premi in caso di incapacità di guadagno.",
+      "auszahlungsplan": "Trasforma un capitale esistente in un reddito pianificabile dalla pensione.",
+      "kinderversicherung": "Risparmiare per il figlio con copertura invalidità.",
+      "care": "Aiuto immediato gratuito in caso di decesso.",
+      "todesfallDecreasingLabel": "Assicurazione in caso di decesso con capitale decrescente",
+      "todesfall_decreasing": "Più conveniente, perché il capitale diminuisce man mano che i figli crescono e la lacuna si riduce.",
+      "pensionFundBuyinLabel": "Riscatto nella cassa pensioni",
+      "pension_fund_buyin": "Aumenta la sua rendita ed è deducibile dalle imposte; il denaro resta vincolato fino alla pensione."
+    }
+  },
+  "issues": {
+    "entry_age_below_min": "Non ancora possibile a {age} anni (da {min} anni).",
+    "entry_age_above_max": "Non più possibile a {age} anni (fino a {max} anni).",
+    "end_age_out_of_range": "L'età finale di {endAge} anni non è possibile (tra {min} e {max}).",
+    "duration_too_short": "Una durata di {years} anni è inferiore al minimo di {min} anni.",
+    "sum_below_min": "Il capitale in caso di decesso è inferiore al minimo di CHF {min, number}.",
+    "sum_above_max": "Il capitale in caso di decesso supera il massimo di CHF {max, number}.",
+    "pension_above_sum_insurance": "Le rendite superiori a CHF {max, number} sono assicurazioni contro i danni: in caso di prestazione serve una prova del reddito.",
+    "premium_below_min": "Il premio annuo è inferiore al minimo di CHF {min, number}.",
+    "premium_above_3a_max": "Il premio annuo supera l'importo massimo del pilastro 3a di CHF {max, number}.",
+    "single_premium_below_min": "L'investimento unico è inferiore al minimo di CHF {min, number}.",
+    "single_premium_above_max": "L'investimento unico supera il massimo di CHF {max, number}.",
+    "amount_missing": "Manca la somma assicurata, la rendita o il premio.",
+    "quicksale_unavailable": "Il calcolatore dei premi Pax non era raggiungibile, il premio è stimato.",
+    "quicksale_warning": "Calcolatore dei premi Pax: {text}"
+  },
+  "price": {
+    "labelQuicksale": "Valore indicativo secondo la tariffa Pax, senza impegno",
+    "labelEstimate": "Stimato, senza impegno",
+    "free": "Gratuito",
+    "once": "unico",
+    "perYear": "all'anno",
+    "net": "{amount} con l'eccedenza attuale (non garantita)",
+    "maturityTitle": "Capitale previsto alla scadenza",
+    "payoutTitle": "Pagamento all'anno",
+    "scenarioNote": "Esempio di calcolo secondo gli scenari dell'Associazione Svizzera d'Assicurazioni; solo il valore garantito è certo.",
+    "scenario": {
+      "guaranteed": "Garantito",
+      "low": "Scenario basso",
+      "medium": "Scenario medio",
+      "high": "Scenario alto"
+    }
+  },
+  "riders": {
+    "I": "Esonero dal pagamento dei premi in caso di incapacità di guadagno",
+    "PFZ": "Esonero dal pagamento dei premi in caso di aumento della famiglia",
+    "IR": "Rendita in caso di incapacità di guadagno",
+    "included": "incluso"
+  },
+  "cover": {
+    "sumInsured": "Capitale in caso di decesso",
+    "annualPension": "Rendita in caso di incapacità di guadagno",
+    "perYear": "{amount} all'anno",
+    "waitingPeriod": "Termine d'attesa",
+    "months": "{months} mesi",
+    "savingsPremium": "Premio di risparmio",
+    "singlePremium": "Investimento unico",
+    "payout": "Pagamento (scenario medio)",
+    "duration": "Durata",
+    "durationValue": "{years} anni, fino all'età di {endAge} anni",
+    "pillar": "Tipo di previdenza",
+    "pillar3a": "Previdenza vincolata (pilastro 3a)",
+    "pillar3b": "Previdenza libera (pilastro 3b)"
+  },
+  "recommendation": {
+    "title": "Raccomandazione",
+    "titleMany": "{count} raccomandazioni",
+    "pending": "Calcolo della raccomandazione …",
+    "rules": "Regole Pax v{version}",
+    "none": "Al momento nessun prodotto Pax è adatto a queste lacune.",
+    "excluded": "Non raccomandato",
+    "needsInfo": "Per una raccomandazione mancano ancora alcune informazioni: {fields}.",
+    "missing": {
+      "person_birthYear": "il suo anno di nascita",
+      "person_sex": "il suo sesso",
+      "partner_birthYear": "l'anno di nascita del suo partner",
+      "partner_sex": "il sesso del suo partner",
+      "partner": "informazioni sul suo partner"
+    },
+    "closes": "Colma: {gaps}",
+    "conditional": "Dopo la verifica dell'adeguatezza",
+    "accepted": "Concluso",
+    "declined": "Non adatto",
+    "flag": "Nota dalle regole Pax:",
+    "why": "Perché questa raccomandazione ({count} criteri)",
+    "alternatives": "Alternative",
+    "error": "Non ha funzionato. Riprovi, per favore.",
+    "startSuitability": "Avviare la verifica dell'adeguatezza",
+    "viewOffer": "Vedere l'offerta",
+    "decline": "Non adatto",
+    "productPage": "Prodotto presso Pax",
+    "declineMessage": "{product} non è adatto a me.",
+    "suitabilityMessage": "Vorrei fare la verifica dell'adeguatezza per {product}.",
+    "offerMessage": "Vorrei vedere l'offerta per {product}.",
+    "met": "soddisfatto",
+    "open": "aperto"
+  },
+  "profiles": {
+    "conservative": "Conservativo",
+    "balanced": "Equilibrato",
+    "dynamic": "Dinamico"
+  },
+  "suitability": {
+    "titleShort": "Verifica dell'adeguatezza",
+    "title": "Verifica dell'adeguatezza: {product}",
+    "pending": "Preparazione della verifica dell'adeguatezza …",
+    "notApplicable": "{product} non richiede una verifica dell'adeguatezza.",
+    "intro": "Con un investimento in fondi lei sopporta un rischio di perdita. Per questo Pax verifica, prima dell'offerta, se il prodotto è adatto alle sue finanze, al suo obiettivo e alla sua esperienza. Risponda a tutte le domande solo per sé, senza il suo partner.",
+    "a": {
+      "title": "Capacità finanziaria",
+      "hint": "Quanto desidera risparmiare all'anno o investire una tantum?",
+      "annualPremium": "Premio di risparmio annuo",
+      "singlePremium": "Investimento unico",
+      "netIncome": "Il suo reddito annuo netto dopo le deduzioni sociali",
+      "netAssets": "Il suo patrimonio netto dopo la deduzione di ipoteche e debiti",
+      "savingCapacity": "Quanto può risparmiare in più ogni anno dopo tutte le spese?",
+      "oneOffCapacity": "Quale importo può investire una tantum?"
+    },
+    "brackets": {
+      "income": {
+        "lt75k": "meno di 75'000",
+        "75k_150k": "da 75'000 a 150'000",
+        "150k_250k": "da 150'001 a 250'000",
+        "gt250k": "oltre 250'000"
+      },
+      "assets": {
+        "lt10k": "meno di 10'000",
+        "10k_50k": "da 10'000 a 50'000",
+        "50k_150k": "da 50'001 a 150'000",
+        "150k_300k": "da 150'001 a 300'000",
+        "gt300k": "oltre 300'000"
+      },
+      "saving": {
+        "lt1k": "meno di 1'000",
+        "1k_3k": "da 1'000 a 3'000",
+        "3k_7k": "da 3'001 a 7'000",
+        "gt7k": "oltre 7'000"
+      }
+    },
+    "b": { "title": "Obiettivo d'investimento e orizzonte" },
+    "c": { "title": "Conoscenze e propensione al rischio" },
+    "questions": {
+      "goal": {
+        "label": "Quale obiettivo persegue con il suo investimento?",
+        "minimise_loss": "Voglio mantenere il rischio di perdita il più basso possibile. Le opportunità di guadagni elevati sono meno importanti per me.",
+        "moderate_gains": "Accetto un certo rischio di perdita per avere opportunità di guadagno moderate.",
+        "high_gains": "Sono disposto/a ad assumere un rischio di perdita elevato per avere la possibilità di guadagni elevati."
+      },
+      "horizon": {
+        "label": "Per quale periodo vuole risparmiare o investire?",
+        "10_15": "Da 10 a 15 anni",
+        "gt15": "Più di 15 anni"
+      },
+      "knowledge": {
+        "label": "Conosce i titoli?",
+        "none": "No, non ho ancora conoscenze né esperienze con i titoli.",
+        "knowledge_only": "Conosco i titoli, ma non ne ho mai acquistati.",
+        "experience": "Sì, ho già acquisito conoscenze ed esperienze con i titoli.",
+        "expert": "Sì, ho molta esperienza e conosco molto bene i titoli."
+      },
+      "drawdown": {
+        "label": "I suoi titoli perdono il 30 % del loro valore. Cosa fa?",
+        "sell_all": "Vendo tutto per evitare una perdita ancora maggiore.",
+        "sell_part": "Vendo una parte per limitare la perdita se i corsi continuano a scendere.",
+        "hold": "Per ora non faccio nulla, perché conosco le oscillazioni dei mercati.",
+        "buy_more": "Investo di più, perché mi aspetto una ripresa."
+      }
+    },
+    "points": "{points} pt.",
+    "d": {
+      "title": "Parte garantita",
+      "hint": "La parte garantita del premio non comporta alcun rischio di perdita e aumenta quindi il suo punteggio.",
+      "none": "{product} investe l'intero premio in fondi, senza parte garantita.",
+      "label": "Quota garantita del premio",
+      "formula": "{points} punti × (100 % − {g} %) + 120 × {g} % = {total} punti"
+    },
+    "scale": "{total} su 120 punti",
+    "total": "{total} punti",
+    "profileIs": "Il suo profilo d'investimento: {profile} ({total} punti).",
+    "pointsDetail": "{points} punti dalle domande, {g} % di parte garantita.",
+    "answerAll": "Risponda a tutte le domande per vedere il suo profilo d'investimento e i fondi adatti.",
+    "funds": "Fondi Pax adatti al suo profilo",
+    "suggested": "Proposta",
+    "fundChosen": "Fondo scelto:",
+    "affordAnnualOk": "Il suo premio di risparmio di {amount} è adatto alla sua capacità di risparmio.",
+    "affordAnnualNo": "Il suo premio di risparmio di {amount} supera ciò che può risparmiare all'anno.",
+    "affordSingleOk": "Il suo investimento unico di {amount} è adatto all'importo disponibile.",
+    "affordSingleNo": "Il suo investimento unico di {amount} supera l'importo che può investire una tantum.",
+    "suitable": "Risultato: il prodotto corrisponde al suo profilo d'investimento ed è sostenibile per lei.",
+    "notSuitable": "Risultato: Pax sconsiglia questo prodotto perché non è sostenibile finanziariamente. Scelga un importo più basso o un'alternativa.",
+    "error": "Non è stato possibile salvare la verifica. Riprovi, per favore.",
+    "submit": "Concludere la verifica",
+    "edit": "Modificare le risposte",
+    "resultMessageOk": "Ho concluso la verifica dell'adeguatezza per {product}: {total} punti, profilo {profile}, fondo {fund}.",
+    "resultMessageNo": "Ho concluso la verifica dell'adeguatezza per {product}: {total} punti, profilo {profile}. Secondo la verifica, l'importo non è sostenibile per me."
+  },
+  "offer": {
+    "titleShort": "Offerta",
+    "title": "Offerta: {product}",
+    "pending": "Preparazione dell'offerta …",
+    "status": {
+      "not_found": "Questa offerta non è più disponibile.",
+      "suitability_required": "Per questo prodotto serve prima la verifica dell'adeguatezza.",
+      "not_suitable": "Secondo la verifica dell'adeguatezza, Pax sconsiglia questo prodotto."
+    },
+    "you": "Lei",
+    "demoBadge": "Demo",
+    "insured": "Persona assicurata",
+    "insuredDetails": "nato/a il {birthDate}, {smoker, select, yes {fumatore} other {non fumatore}}",
+    "period": "Durata del contratto",
+    "periodValue": "dal {start} al {end}",
+    "fund": "Fondo",
+    "guaranteedShare": "Parte garantita",
+    "conditionsTitle": "Condizioni importanti",
+    "conditions": {
+      "withdrawal": "Può revocare la proposta entro 14 giorni.",
+      "premiumGuaranteed": "Il premio lordo è garantito per tutta la durata. La riduzione dovuta alle eccedenze non è garantita.",
+      "investmentRisk": "L'investimento in fondi oscilla. I valori degli scenari sono esempi di calcolo e non sono garantiti.",
+      "maximumBenefit": "La rendita è un importo massimo; la prestazione dipende dal grado di incapacità di guadagno.",
+      "crisisCoach": "Incluso: un coach di crisi fino a CHF 2'500 dopo 90 giorni di incapacità di guadagno, e la copertura continua in caso di trasferimento in Europa.",
+      "pillar3a": "Pilastro 3a: i premi sono deducibili dal reddito fino all'importo massimo; il capitale è vincolato al più presto fino a cinque anni prima dell'età di riferimento.",
+      "health": "Una vera proposta comprende domande sulla salute. Pax esamina la proposta prima della conclusione del contratto.",
+      "cooperative": "Con la conclusione diventa membro della cooperativa Pax Holding."
+    },
+    "nextTitle": "Come procedere",
+    "next": {
+      "contact": "Completare i dati di contatto",
+      "sign": "Firmare con il suo nome",
+      "policy": "La sua polizza appare subito nel suo Cockpit previdenza. Inizio dell'assicurazione: {date}."
+    },
+    "demoNotice": "Questo è un prototipo: la firma è una demo e non viene concluso alcun contratto giuridicamente valido.",
+    "contact": {
+      "title": "I suoi dati di contatto",
+      "hint": "Per la polizza ci servono il suo nome e come raggiungerla.",
+      "firstName": "Nome",
+      "lastName": "Cognome",
+      "birthDate": "Data di nascita",
+      "email": "E-mail",
+      "phone": "Telefono",
+      "privacy": "Pax utilizza questi dati solo per la sua offerta e la sua polizza.",
+      "error": "Verifichi i suoi dati (data di nascita, e-mail, telefono).",
+      "submit": "Salvare i dati"
+    },
+    "sign": {
+      "title": "Firmare",
+      "consentsLegend": "Conferme",
+      "consents": {
+        "offerRead": "Ho letto l'offerta e le condizioni importanti.",
+        "dataCorrect": "I miei dati sono completi e corretti, anche riguardo allo stato di fumatore.",
+        "demoUnderstood": "Sono consapevole che si tratta di una demo e che non viene concluso alcun contratto."
+      },
+      "signatureLabel": "Firma",
+      "signaturePlaceholder": "Nome Cognome",
+      "signatureHint": "Digiti il suo nome completo: {name}.",
+      "editContact": "Modificare i dati",
+      "errors": {
+        "invalid": "Confermi tutti i punti e digiti il suo nome.",
+        "not_found": "Questa offerta non è più disponibile.",
+        "already_signed": "Questa offerta è già stata firmata.",
+        "suitability_missing": "Per questo prodotto manca una verifica dell'adeguatezza positiva.",
+        "contact_missing": "Completi prima i suoi dati di contatto.",
+        "signature_mismatch": "Il nome non corrisponde ai suoi dati. Digiti: {name}."
+      },
+      "submit": "Firmare ora",
+      "signedMessage": "Ho firmato l'offerta per {product} (polizza {number})."
+    },
+    "signed": {
+      "title": "Firmato. La sua polizza {number} inizia il {date}.",
+      "body": "Ora la trova nel suo Cockpit previdenza, insieme alle sue altre polizze.",
+      "portal": "Al Cockpit previdenza"
+    }
+  }
+}

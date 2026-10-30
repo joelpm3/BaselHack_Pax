@@ -1,0 +1,54 @@
+{
+  "header": {
+    "home": "Pax pension advisor, go to the home page",
+    "portal": "Pension cockpit"
+  },
+  "title": "How well is your life protected?",
+  "lead": "Tell me how you live and what you are planning. I calculate with real Swiss figures and show you your provision across all three pillars, square by square.",
+  "start": {
+    "title": "Start your consultation",
+    "body": "First we get to know each other, then we do the maths. No sign-up."
+  },
+  "existing": {
+    "title": "I am already a Pax customer",
+    "body": "Check whether your provision still fits your life."
+  },
+  "upload": "I have my documents at hand",
+  "resume": "Continue the last conversation",
+  "resumeTitled": "Continue “{title}”",
+  "example": {
+    "caption": "This is what a pension picture looks like: income in retirement",
+    "sources": {
+      "pillar1": "1st pillar: AHV",
+      "pillar2": "2nd pillar: pension fund",
+      "other": "3rd pillar and savings",
+      "partner": "Partner's income"
+    },
+    "gap": "Empty squares: the gap to what you need",
+    "unit": "1 square = CHF 500 per month"
+  },
+  "points": {
+    "label": "How the Pax pension advisor works",
+    "life": {
+      "title": "Your life comes first",
+      "body": "Family, work, plans and worries. Products only come at the very end."
+    },
+    "numbers": {
+      "title": "Real calculations",
+      "body": "AHV, pension fund and pillar 3a, calculated with the Logismata engine."
+    },
+    "people": {
+      "title": "A person whenever you need one",
+      "body": "When it gets complex, a Pax specialist takes over. You decide."
+    }
+  },
+  "demo": {
+    "title": "Welcome back",
+    "lead": "Choose your customer account. I know your policies and we look at what has changed in your life.",
+    "note": "Demo: these customers are fictitious. In the real app you would sign in here with your Pax login.",
+    "born": "born {year}",
+    "children": "{count, plural, one {# child} other {# children}}",
+    "policies": "{count, plural, =0 {no Pax policy} one {# Pax policy} other {# Pax policies}}",
+    "choose": "Continue as {name}"
+  }
+}

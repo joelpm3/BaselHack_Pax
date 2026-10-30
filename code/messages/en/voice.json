@@ -1,0 +1,29 @@
+{
+  "start": "Start voice input",
+  "startHint": "Speak Swiss German, up to 60 seconds. The text appears in the input field.",
+  "stop": "Stop recording and convert to text",
+  "cancel": "Discard recording",
+  "recording": "Recording. Press Escape to discard.",
+  "elapsedLabel": "Recording length",
+  "requesting": "Turning on the microphone …",
+  "transcribing": "Converting to text …",
+  "dismiss": "Close message",
+  "errors": {
+    "permission": "No access to the microphone. Allow access in your browser settings.",
+    "no_microphone": "No microphone found, or another app is using it.",
+    "not_supported": "This browser cannot record speech. Please type your message.",
+    "nothing_heard": "I didn't catch anything. Please try again.",
+    "too_short": "The recording was too short. Speak a little longer.",
+    "too_long": "The recording is longer than 60 seconds.",
+    "too_large": "The recording is too large.",
+    "unsupported": "This audio format is not supported.",
+    "empty": "The recording is empty. Please try again.",
+    "invalid": "The recording could not be sent. Please try again.",
+    "busy": "Speech recognition is busy right now. Please try again in a moment.",
+    "unavailable": "Voice input is not available right now. Please type your message.",
+    "starting": "Speech recognition is starting up. Please try again in a minute.",
+    "unreadable": "The recording could not be read. Please try again.",
+    "unauthorized": "Your session has expired. Please reload the page.",
+    "failed": "Speech recognition did not respond. Please try again."
+  }
+}

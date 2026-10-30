@@ -1,0 +1,29 @@
+{
+  "start": "Avvia l'inserimento vocale",
+  "startHint": "Parli in svizzero tedesco, fino a 60 secondi. Il testo appare nel campo di inserimento.",
+  "stop": "Termina la registrazione e converti in testo",
+  "cancel": "Elimina la registrazione",
+  "recording": "Registrazione in corso. Esc per eliminare.",
+  "elapsedLabel": "Durata della registrazione",
+  "requesting": "Attivazione del microfono …",
+  "transcribing": "Conversione in testo …",
+  "dismiss": "Chiudi il messaggio",
+  "errors": {
+    "permission": "Nessun accesso al microfono. Consenta l'accesso nelle impostazioni del browser.",
+    "no_microphone": "Nessun microfono trovato, oppure è usato da un'altra app.",
+    "not_supported": "Questo browser non può registrare la voce. Scriva il suo messaggio.",
+    "nothing_heard": "Non ho capito nulla. Riprovi, per favore.",
+    "too_short": "La registrazione era troppo breve. Parli un po' più a lungo.",
+    "too_long": "La registrazione supera i 60 secondi.",
+    "too_large": "La registrazione è troppo grande.",
+    "unsupported": "Questo formato audio non è supportato.",
+    "empty": "La registrazione è vuota. Riprovi, per favore.",
+    "invalid": "Non è stato possibile trasmettere la registrazione. Riprovi, per favore.",
+    "busy": "Il riconoscimento vocale è occupato. Riprovi tra un attimo.",
+    "unavailable": "L'inserimento vocale non è disponibile al momento. Scriva il suo messaggio.",
+    "starting": "Il riconoscimento vocale si sta avviando. Riprovi tra un minuto.",
+    "unreadable": "Non è stato possibile leggere la registrazione. Riprovi, per favore.",
+    "unauthorized": "La sessione è scaduta. Ricarichi la pagina.",
+    "failed": "Il riconoscimento vocale non ha risposto. Riprovi, per favore."
+  }
+}

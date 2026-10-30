@@ -1,0 +1,107 @@
+{
+  "appName": "Consulente previdenza Pax",
+  "claim": "La previdenza, in un punto.",
+  "language": "Lingua",
+  "loading": "Caricamento …",
+  "retry": "Riprova",
+  "save": "Salva",
+  "cancel": "Annulla",
+  "confirm": "Conferma",
+  "edit": "Modifica",
+  "delete": "Elimina",
+  "close": "Chiudi",
+  "back": "Indietro",
+  "perYear": "all'anno",
+  "perMonth": "al mese",
+  "indicativePrice": "Valore indicativo secondo la tariffa Pax, senza impegno",
+  "estimatedPrice": "Stimato, senza impegno",
+  "simulated": "Simulato",
+  "taxonomy": {
+    "topics": {
+      "retirement": "Previdenza per la vecchiaia",
+      "pillar3a": "Pilastro 3a",
+      "death_cover": "Copertura in caso di decesso",
+      "disability_cover": "Incapacità di guadagno",
+      "home_ownership": "Proprietà abitativa",
+      "family_children": "Famiglia e figli",
+      "taxes": "Imposte",
+      "payout_retirement": "Prelievo e pensionamento",
+      "care": "Cure e aiuto immediato",
+      "pension_fund": "Cassa pensione",
+      "existing_contract": "Contratto esistente",
+      "general": "Generale"
+    },
+    "stages": {
+      "started": "Avviato",
+      "getting_to_know": "Conoscenza",
+      "situation_captured": "Situazione rilevata",
+      "analysis_shown": "Analisi mostrata",
+      "scenario_explored": "Scenario simulato",
+      "recommendation_shown": "Raccomandazione mostrata",
+      "offer_viewed": "Offerta visualizzata",
+      "application_started": "Proposta iniziata",
+      "signed": "Concluso"
+    },
+    "intent": {
+      "informing": "Si informa",
+      "exploring": "Esplora",
+      "comparing": "Confronta",
+      "ready": "Pronto a concludere"
+    },
+    "sentiment": {
+      "positive": "Positivo",
+      "neutral": "Neutro",
+      "negative": "Negativo",
+      "mixed": "Misto"
+    },
+    "leadType": {
+      "new_business": "Nuovo cliente",
+      "existing_upsell": "Cliente esistente",
+      "switch_opportunity": "Potenziale di cambio",
+      "service": "Servizio"
+    },
+    "leadStatus": {
+      "new": "Nuovo",
+      "contacted": "Contattato",
+      "meeting": "Appuntamento",
+      "offer": "Offerta",
+      "won": "Concluso",
+      "lost": "Perso"
+    },
+    "priority": {
+      "low": "Bassa",
+      "medium": "Media",
+      "high": "Alta",
+      "urgent": "Urgente"
+    },
+    "gap": {
+      "death": "Decesso",
+      "disability": "Incapacità di guadagno",
+      "retirement": "Pensionamento",
+      "tax": "Imposte",
+      "child": "Figli",
+      "payout": "Prelievo",
+      "care": "Aiuto immediato"
+    },
+    "lifeEvent": {
+      "first_job": "Primo impiego",
+      "marriage": "Matrimonio",
+      "child_birth": "Nascita di un figlio",
+      "home_purchase": "Acquisto casa",
+      "job_change": "Cambio di lavoro",
+      "self_employment": "Lavoro indipendente",
+      "divorce": "Divorzio",
+      "early_retirement": "Pensionamento anticipato",
+      "retirement": "Pensionamento",
+      "inheritance": "Eredità",
+      "illness": "Malattia",
+      "relocation": "Trasloco"
+    },
+    "docType": {
+      "pension_certificate": "Certificato di previdenza",
+      "insurance_policy": "Polizza assicurativa",
+      "salary_certificate": "Certificato di salario",
+      "other": "Altro documento"
+    }
+  }
+}

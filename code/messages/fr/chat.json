@@ -1,0 +1,105 @@
+{
+  "pageTitle": "Conseil",
+  "newConversation": "Nouvelle conversation",
+  "transcript": "Déroulement de la conversation",
+  "thinking": "Le conseiller écrit",
+  "disclaimer": "Les calculs et les prix sont des valeurs indicatives sans engagement. Seule une offre de Pax est contraignante.",
+  "error": {
+    "unavailable": "Le conseiller n'est pas joignable pour le moment. Votre message est enregistré.",
+    "retry": "Réessayer"
+  },
+  "greeting": {
+    "default": "Bonjour, je suis ravi que vous soyez là. Je suis votre conseiller prévoyance numérique de Pax. Avant de parler chiffres, j'aimerais faire votre connaissance : qu'est-ce qui vous occupe quand vous pensez à votre avenir ?",
+    "upload": "Bonjour, je suis ravi que vous soyez là. Vous avez vos documents sous la main, très bien : nous les regarderons ensemble tout à l'heure, cela nous évitera beaucoup de questions. Mais d'abord, j'aimerais vous connaître un peu : à quoi ressemble votre vie en ce moment ?",
+    "existing": "Bonjour {name}, ravi de vous revoir. J'ai vos polices Pax sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois, par exemple dans votre famille, au travail ou dans votre logement ?",
+    "existingAnonymous": "Bonjour, ravi de vous revoir. J'ai vos polices Pax sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois ?",
+    "hint": "Bonjour {name}, regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance et vos polices. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?",
+    "hintAnonymous": "Bonjour, regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?"
+  },
+  "message": {
+    "you": "Vous",
+    "advisor": "Conseiller Pax",
+    "voice": "par la voix",
+    "upload": "documents téléchargés"
+  },
+  "composer": {
+    "label": "Votre message",
+    "placeholder": "Votre réponse …",
+    "send": "Envoyer",
+    "stop": "Arrêter la réponse",
+    "quickReplies": "Réponses proposées",
+    "uploaded": "J'ai téléchargé {count, plural, one {un document} other {# documents}} : {names}"
+  },
+  "picture": {
+    "title": "Votre image de prévoyance",
+    "unit": "= CHF 500 par mois",
+    "open": "Ouvrir l'image de prévoyance",
+    "close": "Fermer",
+    "need": "Vos besoins",
+    "gap": "Il manque {amount} par mois",
+    "covered": "Vos besoins sont couverts",
+    "tabs": {
+      "label": "Choisir une situation",
+      "retirement": "Retraite",
+      "disability": "Invalidité",
+      "death": "Décès"
+    },
+    "context": {
+      "retirement": "Revenu après la retraite",
+      "disability": "Si une maladie vous empêche de travailler",
+      "death": "Pour votre famille si vous décédez d'une maladie"
+    },
+    "noNeed": {
+      "retirement": "Aucun besoin n'est encore calculé pour la retraite.",
+      "disability": "Sans revenu professionnel propre, il n'y a pas de besoin de revenu ici.",
+      "death": "Personne ne dépend financièrement de votre revenu. Il n'y a donc pas de besoin ici."
+    },
+    "sources": {
+      "pillar1": "1er pilier : AVS/AI",
+      "pillar2": "2e pilier : caisse de pension",
+      "other": "3e pilier et épargne",
+      "partner": "Revenu du ou de la partenaire",
+      "gap": "Lacune"
+    },
+    "table": {
+      "caption": "Image de prévoyance en chiffres, par mois"
+    },
+    "building": {
+      "title": "Votre image prend forme",
+      "body": "Dès que je connais votre âge, votre famille et votre revenu, je calcule votre image de prévoyance.",
+      "known": "{count} informations sur {total} connues",
+      "factKnown": "connu",
+      "factOpen": "encore ouvert"
+    },
+    "facts": {
+      "age": "Âge",
+      "family": "Famille",
+      "work": "Travail",
+      "income": "Revenu",
+      "residence": "Domicile",
+      "goals": "Objectifs",
+      "assets": "Fortune",
+      "pillar2": "Caisse de pension",
+      "pillar3a": "Pilier 3a"
+    },
+    "pillars": {
+      "title": "Vos trois piliers",
+      "p1": "1er pilier : AVS/AI",
+      "p1Status": "Prévoyance de base légale pour toutes les personnes qui vivent et travaillent en Suisse",
+      "p2": "2e pilier : caisse de pension",
+      "p2Yes": "Assuré·e",
+      "p2No": "Pas de caisse de pension",
+      "p2Capital": "Avoir {amount}",
+      "p3": "3e pilier : prévoyance privée",
+      "p3Balance": "Avoir 3a {amount}",
+      "p3Contribution": "{amount} par an",
+      "policies": "{count, plural, one {# police enregistrée} other {# polices enregistrées}}",
+      "open": "Encore ouvert"
+    },
+    "strip": {
+      "gap": "{kind} : lacune {amount}/mois",
+      "covered": "{kind} : couvert",
+      "building": "{count} informations sur {total}"
+    }
+  }
+}

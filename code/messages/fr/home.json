@@ -1,0 +1,54 @@
+{
+  "header": {
+    "home": "Conseiller prévoyance Pax, retour à l'accueil",
+    "portal": "Cockpit prévoyance"
+  },
+  "title": "Votre vie est-elle bien protégée ?",
+  "lead": "Racontez-moi comment vous vivez et ce que vous prévoyez. Je calcule avec de vraies bases suisses et vous montre votre prévoyance sur les trois piliers, carré par carré.",
+  "start": {
+    "title": "Commencer le conseil",
+    "body": "D'abord, nous faisons connaissance, ensuite nous calculons. Sans inscription."
+  },
+  "existing": {
+    "title": "Je suis déjà client·e Pax",
+    "body": "Vérifiez si votre prévoyance correspond encore à votre vie."
+  },
+  "upload": "J'ai mes documents sous la main",
+  "resume": "Reprendre la dernière conversation",
+  "resumeTitled": "Reprendre « {title} »",
+  "example": {
+    "caption": "Voici à quoi ressemble une image de prévoyance : le revenu à la retraite",
+    "sources": {
+      "pillar1": "1er pilier : AVS",
+      "pillar2": "2e pilier : caisse de pension",
+      "other": "3e pilier et épargne",
+      "partner": "Revenu du ou de la partenaire"
+    },
+    "gap": "Carrés vides : la lacune par rapport à vos besoins",
+    "unit": "1 carré = CHF 500 par mois"
+  },
+  "points": {
+    "label": "Comment conseille le conseiller prévoyance Pax",
+    "life": {
+      "title": "D'abord votre vie",
+      "body": "Famille, travail, projets et soucis. Les produits viennent tout à la fin."
+    },
+    "numbers": {
+      "title": "De vrais calculs",
+      "body": "AVS, caisse de pension et pilier 3a, calculés avec les bases de Logismata."
+    },
+    "people": {
+      "title": "Une personne quand il le faut",
+      "body": "Quand cela devient complexe, un·e spécialiste Pax prend le relais. Vous décidez."
+    }
+  },
+  "demo": {
+    "title": "Bon retour",
+    "lead": "Choisissez votre compte client. Je connais vos polices et nous regardons ensemble ce qui a changé dans votre vie.",
+    "note": "Démo : ces clientes et clients sont fictifs. Dans la vraie application, vous vous connectez ici avec votre login Pax.",
+    "born": "né·e en {year}",
+    "children": "{count, plural, one {# enfant} other {# enfants}}",
+    "policies": "{count, plural, =0 {aucune police Pax} one {# police Pax} other {# polices Pax}}",
+    "choose": "Continuer en tant que {name}"
+  }
+}

@@ -1,0 +1,174 @@
+import type { IdentifiedGap, ProductInterest, ScoreBreakdown } from "@/lib/db/schema";
+import {
+  type ConversationMode,
+  type CustomerLifecycle,
+  FUNNEL_STAGES,
+  type FunnelStage,
+  type IntentStage,
+  type LeadType,
+  type Priority,
+  stageIndex,
+} from "@/lib/domain/taxonomy";
+
+/**
+ * Deterministic lead score (0–100) with a breakdown the dashboard can explain. The LLM only
+ * classifies the conversation; how much each signal is worth is decided here, in code, so the
+ * score is reproducible and auditable.
+ *
+ * `factor` is a stable key and `note` a language-neutral value (taxonomy key or number); the
+ * dashboard translates both.
+ */
+export const SCORE_FACTORS = [
+  "intent",
+  "gap",
+  "product",
+  "contact",
+  "stage",
+  "mode",
+  "external_policy",
+  "service",
+  "handover",
+] as const;
+export type ScoreFactor = (typeof SCORE_FACTORS)[number];
+
+export interface LeadScoreInput {
+  type: LeadType;
+  intentStage: IntentStage;
+  gaps: IdentifiedGap[];
+  productInterest: ProductInterest[];
+  lifecycle: CustomerLifecycle;
+  hasContactDetails: boolean;
+  stage: FunnelStage;
+  mode: ConversationMode;
+  handover: { required: boolean; urgency: "normal" | "high" } | null;
+}
+
+export interface LeadScore {
+  score: number;
+  breakdown: ScoreBreakdown[];
+}
+
+const INTENT_POINTS: Record<IntentStage, number> = {
+  informing: 0,
+  exploring: 10,
+  comparing: 20,
+  ready: 30,
+};
+
+const STRENGTH_POINTS: Record<ProductInterest["strength"], number> = {
+  low: 5,
+  medium: 10,
+  high: 15,
+};
+
+const MAX_STAGE_POINTS = 15;
+
+/** Annual gap in CHF → points. Gaps without an amount still count a little. */
+export function gapPoints(gaps: IdentifiedGap[]): { points: number; total: number } {
+  const total = gaps.reduce((sum, g) => sum + Math.max(0, g.amountAnnual ?? 0), 0);
+  if (total >= 30_000) return { points: 20, total };
+  if (total >= 15_000) return { points: 15, total };
+  if (total >= 5_000) return { points: 10, total };
+  if (total > 0) return { points: 5, total };
+  return { points: Math.min(gaps.length * 4, 8), total };
+}
+
+export function scoreLead(input: LeadScoreInput): LeadScore {
+  const breakdown: ScoreBreakdown[] = [];
+  const add = (factor: ScoreFactor, points: number, note: string) => {
+    if (points > 0) breakdown.push({ factor, points, note });
+  };
+
+  const isService = input.type === "service";
+
+  add("intent", INTENT_POINTS[input.intentStage], input.intentStage);
+
+  if (!isService) {
+    const gap = gapPoints(input.gaps);
+    add("gap", gap.points, String(Math.round(gap.total)));
+
+    const strongest = input.productInterest.reduce<ProductInterest | null>(
+      (best, p) =>
+        !best || STRENGTH_POINTS[p.strength] > STRENGTH_POINTS[best.strength] ? p : best,
+      null,
+    );
+    if (strongest) {
+      add(
+        "product",
+        STRENGTH_POINTS[strongest.strength],
+        `${strongest.productCode}:${strongest.strength}`,
+      );
+    }
+  } else {
+    add("service", 20, "service");
+  }
+
+  if (input.lifecycle === "client") add("contact", 10, "client");
+  else if (input.hasContactDetails) add("contact", 10, "prospect");
+
+  const reached = stageIndex(input.stage);
+  add("stage", Math.round((reached / (FUNNEL_STAGES.length - 1)) * MAX_STAGE_POINTS), input.stage);
+
+  if (input.mode === "existing_customer") add("mode", 5, input.mode);
+  if (input.type === "switch_opportunity") add("external_policy", 10, "external");
+  if (input.handover?.required) add("handover", 5, input.handover.urgency);
+
+  const score = Math.min(
+    100,
+    breakdown.reduce((sum, b) => sum + b.points, 0),
+  );
+  return { score, breakdown };
+}
+
+/** Priority from the score, raised by an open handover (a person asked for a human). */
+export function leadPriority(
+  score: number,
+  handover: { urgency: "normal" | "high" } | null,
+): Priority {
+  if (handover?.urgency === "high") return "urgent";
+  const fromScore: Priority =
+    score >= 75 ? "urgent" : score >= 55 ? "high" : score >= 30 ? "medium" : "low";
+  if (handover && (fromScore === "low" || fromScore === "medium")) return "high";
+  return fromScore;
+}
+
+export interface LeadTypeInput {
+  lifecycle: CustomerLifecycle;
+  /** Holds at least one (non-external) Pax policy. */
+  hasPaxPolicy: boolean;
+  /** External life/pension policy in the cockpit or mentioned in the conversation. */
+  hasExternalPolicy: boolean;
+  intentStage: IntentStage;
+  gaps: IdentifiedGap[];
+  productInterest: ProductInterest[];
+  /** Pure service concern (change of beneficiary, payment, policy question), if any. */
+  serviceRequest: string | null;
+}
+
+/** Sales potential: a concrete gap, a product of interest, or someone actively comparing. */
+export function hasSalesPotential(
+  input: Pick<LeadTypeInput, "intentStage" | "gaps" | "productInterest">,
+): boolean {
+  return (
+    input.gaps.length > 0 ||
+    input.productInterest.length > 0 ||
+    input.intentStage === "comparing" ||
+    input.intentStage === "ready"
+  );
+}
+
+/**
+ * Which leads a conversation produces. A conversation can be several things at once, e.g. an
+ * existing client with a new need who also holds an expensive external policy.
+ */
+export function determineLeadTypes(input: LeadTypeInput): LeadType[] {
+  const types: LeadType[] = [];
+  const sales = hasSalesPotential(input);
+  const isClient = input.lifecycle === "client" || input.hasPaxPolicy;
+  if (sales) types.push(isClient ? "existing_upsell" : "new_business");
+  if (input.hasExternalPolicy && (sales || input.intentStage !== "informing")) {
+    types.push("switch_opportunity");
+  }
+  if (input.serviceRequest && !sales) types.push("service");
+  return types;
+}

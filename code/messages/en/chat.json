@@ -1,0 +1,105 @@
+{
+  "pageTitle": "Consultation",
+  "newConversation": "New conversation",
+  "transcript": "Conversation",
+  "thinking": "The advisor is writing",
+  "disclaimer": "Calculations and prices are non-binding estimates. Only an offer from Pax is binding.",
+  "error": {
+    "unavailable": "The advisor cannot be reached right now. Your message has been saved.",
+    "retry": "Try again"
+  },
+  "greeting": {
+    "default": "Hello, good to have you here. I am your digital pension advisor from Pax. Before we talk about numbers, I would like to get to know you: what is on your mind when you think about your future?",
+    "upload": "Hello, good to have you here. You have your documents at hand, great: we will look at them together shortly and save ourselves many questions. But first I would like to get to know you a little: what does your life look like at the moment?",
+    "existing": "Hello {name}, good to see you again. I have your Pax policies in front of me. Has anything changed in your life since last time, for example in your family, at work or where you live?",
+    "existingAnonymous": "Hello, good to see you again. I have your Pax policies in front of me. Has anything changed in your life since last time?",
+    "hint": "Hello {name}, let's look at “{title}” together. I have the note from your pension cockpit and your policies in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?",
+    "hintAnonymous": "Hello, let's look at “{title}” together. I have the note from your pension cockpit in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?"
+  },
+  "message": {
+    "you": "You",
+    "advisor": "Pax advisor",
+    "voice": "by voice",
+    "upload": "documents uploaded"
+  },
+  "composer": {
+    "label": "Your message",
+    "placeholder": "Your answer …",
+    "send": "Send",
+    "stop": "Stop the answer",
+    "quickReplies": "Suggested answers",
+    "uploaded": "I have uploaded {count, plural, one {a document} other {# documents}}: {names}"
+  },
+  "picture": {
+    "title": "Your pension picture",
+    "unit": "= CHF 500 per month",
+    "open": "Open the pension picture",
+    "close": "Close",
+    "need": "What you need",
+    "gap": "{amount} per month missing",
+    "covered": "Your need is covered",
+    "tabs": {
+      "label": "Choose a situation",
+      "retirement": "Retirement",
+      "disability": "Disability",
+      "death": "Death"
+    },
+    "context": {
+      "retirement": "Income after retirement",
+      "disability": "If illness stops you from working",
+      "death": "For your family if you die of an illness"
+    },
+    "noNeed": {
+      "retirement": "No need has been calculated for retirement yet.",
+      "disability": "Without your own earned income there is no income need here.",
+      "death": "Nobody depends financially on your income, so there is no need here."
+    },
+    "sources": {
+      "pillar1": "1st pillar: AHV/IV",
+      "pillar2": "2nd pillar: pension fund",
+      "other": "3rd pillar and savings",
+      "partner": "Partner's income",
+      "gap": "Gap"
+    },
+    "table": {
+      "caption": "Pension picture in figures, per month"
+    },
+    "building": {
+      "title": "Your picture is taking shape",
+      "body": "As soon as I know your age, your family and your income, I calculate your pension picture.",
+      "known": "{count} of {total} facts known",
+      "factKnown": "known",
+      "factOpen": "still open"
+    },
+    "facts": {
+      "age": "Age",
+      "family": "Family",
+      "work": "Work",
+      "income": "Income",
+      "residence": "Home",
+      "goals": "Goals",
+      "assets": "Assets",
+      "pillar2": "Pension fund",
+      "pillar3a": "Pillar 3a"
+    },
+    "pillars": {
+      "title": "Your three pillars",
+      "p1": "1st pillar: AHV/IV",
+      "p1Status": "Mandatory state provision for everyone who lives and works in Switzerland",
+      "p2": "2nd pillar: pension fund",
+      "p2Yes": "Insured",
+      "p2No": "No pension fund",
+      "p2Capital": "Savings {amount}",
+      "p3": "3rd pillar: private provision",
+      "p3Balance": "3a balance {amount}",
+      "p3Contribution": "{amount} per year",
+      "policies": "{count, plural, one {# policy} other {# policies}} on file",
+      "open": "Still open"
+    },
+    "strip": {
+      "gap": "{kind}: gap {amount}/month",
+      "covered": "{kind}: covered",
+      "building": "{count} of {total} facts"
+    }
+  }
+}

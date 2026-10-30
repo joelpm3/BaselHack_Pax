@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+/*
+ * Pax UI tokens (challenge_context/DESIGN.md, ui.pax.ch) rebuilt as a Tailwind 4 theme.
+ * Semantic tokens are the default; brand/accents are used sparingly.
+ * Contrast Green (#5ca700) is the only green allowed for text on light surfaces.
+ */
+@theme {
+  --font-sans: var(--font-pax-civil), Arial, system-ui, sans-serif;
+
+  /* Brand */
+  --color-pax-green: #8ccd0f;
+  --color-pax-purple: #3c0078;
+  --color-deep-green: #003018;
+  --color-deep-purple: #2a0754;
+  --color-contrast-green: #5ca700;
+  --color-light-green: #e3f2c5;
+  --color-light-purple: #e7e1ee;
+  --color-aura-purple: #500099;
+
+  /* Neutral */
+  --color-ink: #121212;
+  --color-gray-1: #f5f5f5;
+  --color-gray-2: #ededed;
+  --color-gray-3: #d4d4d4;
+  --color-gray-4: #adadad;
+  --color-gray-5: #8e8e8e;
+  --color-gray-6: #6a6a6a;
+  --color-gray-7: #282828;
+
+  /* System */
+  --color-success: #00be00;
+  --color-success-light: #f5fbe9;
+  --color-success-dark: #003018;
+  --color-warning: #ff9600;
+  --color-warning-light: #fff4e5;
+  --color-warning-dark: #814c00;
+  --color-error: #ff3232;
+  --color-error-light: #fff5f5;
+  --color-error-dark: #5c1212;
+  --color-info: #3c0078;
+  --color-info-light: #f8f6fb;
+
+  /* Accents: only for "Störer" (badges/callouts) */
+  --color-accent-pink: #ff28d7;
+  --color-accent-orange: #ff6c00;
+  --color-accent-yellow: #fae614;
+  --color-accent-mint: #00d7c3;
+  --color-accent-blue: #22a2ff;
+
+  /* Chart series (in order) */
+  --color-chart-1: #8ccd0f;
+  --color-chart-2: #3c0078;
+  --color-chart-3: #78c7c7;
+  --color-chart-4: #e6be4b;
+  --color-chart-5: #345076;
+  --color-chart-6: #b54963;
+  --color-chart-7: #bcbbb0;
+  --color-chart-8: #c3a57d;
+
+  /* Radius */
+  --radius-sm: 4px;
+  --radius-m: 10px;
+  --radius-xl: 20px;
+
+  /* Type scale (desktop ≥1024px values applied via the .text-* utilities below) */
+  --text-heading-xl: 2rem;
+  --text-heading-xl--line-height: 1.25;
+  --text-heading-l: 1.625rem;
+  --text-heading-l--line-height: 1.3;
+  --text-heading-m: 1.375rem;
+  --text-heading-m--line-height: 1.3;
+  --text-heading-s: 1.125rem;
+  --text-heading-s--line-height: 1.4;
+  --text-paragraph-l: 1.125rem;
+  --text-paragraph-l--line-height: 1.55;
+  --text-paragraph-m: 1rem;
+  --text-paragraph-m--line-height: 1.55;
+  --text-paragraph-s: 0.875rem;
+  --text-paragraph-s--line-height: 1.55;
+  --text-paragraph-xs: 0.75rem;
+  --text-paragraph-xs--line-height: 1.55;
+  --text-display-m: 2rem;
+  --text-display-m--line-height: 1.25;
+  --text-display-l: 2.5rem;
+  --text-display-l--line-height: 1.2;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --text-heading-xl: 2.75rem;
+    --text-heading-l: 2.375rem;
+    --text-heading-m: 1.75rem;
+    --text-heading-s: 1.375rem;
+    --text-paragraph-l: 1.375rem;
+    --text-paragraph-m: 1.125rem;
+    --text-paragraph-s: 1rem;
+    --text-paragraph-xs: 0.875rem;
+    --text-display-m: 3.75rem;
+    --text-display-l: 4.5rem;
+  }
+}
+
+/* Semantic, theme-aware tokens */
+:root {
+  --background-default: #ffffff;
+  --background-muted: #f5f5f5;
+  --text-default: #121212;
+  --text-muted: #6a6a6a;
+  --text-subtle: #8e8e8e;
+  --border-soft: #d4d4d4;
+  --border-subtle: #adadad;
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-surface: var(--background-default);
+  --color-surface-muted: var(--background-muted);
+  --color-fg: var(--text-default);
+  --color-fg-muted: var(--text-muted);
+  --color-fg-subtle: var(--text-subtle);
+  --color-line: var(--border-soft);
+  --color-line-strong: var(--border-subtle);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--background-default);
+    color: var(--text-default);
+    font-family: var(--font-sans);
+    font-size: var(--text-paragraph-m);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-pax-green);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      /* biome-ignore lint/complexity/noImportantStyles: reduced motion must override component styles */
+      animation-duration: 0.01ms !important;
+      /* biome-ignore lint/complexity/noImportantStyles: reduced motion must override component styles */
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

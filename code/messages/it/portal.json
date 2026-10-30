@@ -1,0 +1,221 @@
+{
+  "metaTitle": "Cockpit previdenziale",
+  "title": "Il Suo cockpit previdenziale",
+  "greeting": "Buongiorno {name}",
+  "greetingAnonymous": "Buongiorno",
+  "intro": "Tutte le Sue assicurazioni e i Suoi documenti previdenziali in un unico posto, presso Pax e altrove.",
+  "header": {
+    "home": "Consulente previdenziale Pax, pagina iniziale",
+    "navigation": "Navigazione principale",
+    "language": "Lingua",
+    "toAdvisor": "Alla consulenza"
+  },
+  "empty": {
+    "title": "Il Suo cockpit è ancora vuoto",
+    "body": "Inizi una consulenza o carichi i Suoi documenti. Poi vedrà qui tutta la Sua previdenza a colpo d’occhio.",
+    "start": "Iniziare la consulenza"
+  },
+  "pillars": {
+    "pillar1": "1° pilastro",
+    "pillar1Detail": "AVS e AI",
+    "pillar2": "2° pilastro",
+    "pillar2Detail": "Cassa pensione",
+    "pillar3": "3° pilastro",
+    "pillar3Detail": "Previdenza privata",
+    "other": "Altre",
+    "otherDetail": "Cose e salute",
+    "automatic": "Assicurato dallo Stato",
+    "contracts": "{count, plural, =0 {Nessun contratto} one {# contratto} other {# contratti}}",
+    "premium": "{amount} all’anno",
+    "legendPax": "Contratto presso Pax",
+    "legendExternal": "Contratto presso un altro assicuratore",
+    "legendState": "Previdenza statale"
+  },
+  "figures": {
+    "premiums": "Premi all’anno",
+    "premiumsDetail": "di cui {pax} presso Pax",
+    "perYear": "all’anno",
+    "death": "Capitale in caso di decesso",
+    "deathNote": "da tutti i contratti",
+    "disability": "Rendita per incapacità di guadagno",
+    "retirement": "Rendita della cassa pensione dai {age} anni",
+    "unknown": "Non ancora noto"
+  },
+  "hints": {
+    "title": "Aspetti da verificare",
+    "loading": "Stiamo verificando i Suoi contratti …",
+    "empty": "Al momento non c’è nulla che richieda la Sua attenzione.",
+    "discuss": "Parlarne con il consulente",
+    "dismiss": "Nascondere",
+    "restore": "Mostrare di nuovo",
+    "dismissedCount": "{count, plural, one {# indicazione nascosta} other {# indicazioni nascoste}}",
+    "concerns": "Riguarda: {product}, {insurer}",
+    "severity": {
+      "warning": "Da verificare",
+      "opportunity": "Opportunità",
+      "info": "Buono a sapersi"
+    },
+    "source": {
+      "quicksale": "Premio Pax secondo la tariffa attuale, senza impegno. Un cambio richiede un esame dello stato di salute.",
+      "estimate": "Premio Pax stimato, senza impegno. Un cambio richiede un esame dello stato di salute.",
+      "logismata": "Risparmio fiscale calcolato con Logismata, senza garanzia.",
+      "ruleOfThumb": "Regola empirica: circa tre redditi annui lordi. La lacuna esatta la calcoliamo insieme durante un colloquio.",
+      "ivMax": "Calcolato con la rendita AI massima. La rendita effettiva è spesso più bassa."
+    },
+    "fallback": {
+      "cheaper_equivalent": {
+        "title": "La stessa copertura costa meno",
+        "body": "Per la Sua polizza presso {insurer} paga {externalPremium} all’anno. La stessa copertura costa circa {paxPremium} secondo la tariffa Pax, ossia circa {saving} in meno. Disdica solo quando la nuova copertura è confermata."
+      },
+      "coverage_mismatch_death": {
+        "title": "La copertura in caso di decesso è scarsa",
+        "body": "Oggi in caso di decesso verrebbero versati {cover}. Secondo la regola empirica, una famiglia ha bisogno di circa tre redditi annui, qui circa {need}. Faccia calcolare la lacuna esatta durante un colloquio."
+      },
+      "coverage_mismatch_death_without_dependants": {
+        "title": "Copertura decesso senza persone a carico",
+        "body": "Paga per un capitale in caso di decesso di {cover}, anche se al momento nessuno dipende dal Suo reddito. Verifichi se Le serve ancora, ad esempio per un’ipoteca."
+      },
+      "coverage_mismatch_disability": {
+        "title": "Lacuna in caso di incapacità di guadagno",
+        "body": "In caso di incapacità di guadagno prolungata mancherebbero circa {gap} all’anno per raggiungere l’80 per cento del reddito attuale, nonostante AI e cassa pensione. La rendita AI è calcolata al massimo."
+      },
+      "double_cover_indemnity": {
+        "title": "Assicurato due volte",
+        "body": "Due contratti coprono lo stesso danno, ma un sinistro viene risarcito una sola volta. Insieme costano {premiumTotal} all’anno. Verifichi quale contratto desidera mantenere."
+      },
+      "double_cover_personal": {
+        "title": "Due contratti per lo stesso rischio",
+        "body": "La stessa persona ha due contratti presso assicuratori diversi ({premiumTotal} all’anno). Può essere voluto. Un solo contratto per l’intera somma è però spesso più conveniente."
+      },
+      "pillar3a_not_maxed": {
+        "title": "Pilastro 3a non sfruttato appieno",
+        "body": "Versa {contribution} all’anno nel pilastro 3a, mentre sono consentiti {limit}. Ogni franco fino al massimo riduce il Suo reddito imponibile e rafforza la Sua previdenza per la vecchiaia."
+      },
+      "pillar3a_not_maxed_unknown": {
+        "title": "Pilastro 3a: fino a {limit} all’anno",
+        "body": "Ogni anno può versare fino a {limit} nel pilastro 3a e dedurli dal reddito imponibile. Non sappiamo ancora se lo fa già."
+      },
+      "pension_buyin": {
+        "title": "Un riscatto nella cassa pensione fa risparmiare imposte",
+        "body": "Secondo il Suo certificato di previdenza può versare fino a {maxBuyIn} nella cassa pensione. Ripartito su {years} anni, risparmia circa {taxSavings} di imposte. Dopo un riscatto, per tre anni non è possibile un prelievo di capitale."
+      },
+      "pension_buyin_no_tax": {
+        "title": "Riscatto nella cassa pensione possibile",
+        "body": "Secondo il Suo certificato di previdenza può versare fino a {maxBuyIn} nella cassa pensione. Il riscatto è deducibile dal reddito imponibile e aumenta le prestazioni di vecchiaia."
+      },
+      "contract_ending_notice": {
+        "title": "Termine di disdetta il {date}",
+        "body": "Può disdire {product} presso {insurer} fino al {date}. Se non fa nulla, il contratto prosegue. È un buon momento per verificare se Le è ancora adatto."
+      },
+      "contract_ending_end": {
+        "title": "{product} termina il {date}",
+        "body": "Dopo questa data la copertura non esiste più. Verifichi se Le serve ancora."
+      }
+    }
+  },
+  "dates": {
+    "title": "Prossime scadenze",
+    "empty": "Nei prossimi due anni non scade alcun termine.",
+    "notice": "Ultimo giorno per disdire",
+    "end": "Fine del contratto",
+    "contract": "{product}, {insurer}",
+    "inDays": "{days, plural, =0 {oggi} one {tra # giorno} other {tra # giorni}}"
+  },
+  "policies": {
+    "title": "I Suoi contratti",
+    "empty": "Ancora nessun contratto. Carichi le Sue polizze e appariranno qui.",
+    "groups": {
+      "pillar2": "2° pilastro: cassa pensione",
+      "pillar3a": "Pilastro 3a: previdenza vincolata",
+      "pillar3b": "Pilastro 3b: previdenza libera e copertura dei rischi",
+      "other": "Altre assicurazioni"
+    },
+    "pax": "Pax",
+    "external": "Esterno",
+    "insured": "Assicurato/a: {name}",
+    "sumInsured": "Somma assicurata",
+    "deathSum": "Capitale in caso di decesso",
+    "annuity": "Rendita all’anno",
+    "premium": "Premio all’anno",
+    "term": "Durata",
+    "until": "fino al {date}",
+    "noticeBy": "Disdire entro il",
+    "capital": "Avere di vecchiaia",
+    "projectedPension": "Rendita di vecchiaia all’anno",
+    "disabilityPension": "Rendita d’invalidità all’anno",
+    "maxBuyIn": "Riscatto possibile",
+    "fromDocument": "Dal Suo documento",
+    "status": {
+      "offer": "Offerta",
+      "active": "Attivo",
+      "ended": "Scaduto",
+      "cancelled": "Disdetto"
+    }
+  },
+  "documents": {
+    "title": "I Suoi documenti",
+    "empty": "Ancora nessun documento. Carichi il certificato di previdenza, le polizze o il certificato di salario: durante la consulenza dovrà rispondere a meno domande.",
+    "meta": "{filename}, caricato il {date}",
+    "filed": "Archiviato",
+    "waiting": "{count, plural, one {# documento attende la Sua conferma} other {# documenti attendono la Sua conferma}}",
+    "review": "Verificare i valori",
+    "showProblem": "Mostrare i dettagli",
+    "viewNamed": "Visualizzare {filename}",
+    "deleteNamed": "Eliminare {filename}",
+    "deleteQuestion": "Eliminare definitivamente {filename}? I valori già confermati restano nel Suo profilo.",
+    "deleteConfirm": "Sì, eliminare",
+    "cancel": "Annullare",
+    "encrypted": "Salvati in forma cifrata. Solo Lei e la Sua consulenza Pax potete aprire i documenti."
+  },
+  "conversations": {
+    "title": "I Suoi colloqui",
+    "empty": "Ancora nessun colloquio.",
+    "new": "Iniziare un nuovo colloquio",
+    "continue": "Riprendere",
+    "untitled": "Colloquio del {date}",
+    "meta": "{stage}, ultima attività il {date}"
+  },
+  "profile": {
+    "title": "Cosa sappiamo di Lei",
+    "empty": "Ancora nessun dato. Questo quadro si completa durante il colloquio o con i Suoi documenti.",
+    "you": "Lei",
+    "partner": "Partner",
+    "family": "Famiglia e domicilio",
+    "firstName": "Nome",
+    "birthYear": "Anno di nascita",
+    "maritalStatusLabel": "Stato civile",
+    "employmentLabel": "Situazione lavorativa",
+    "workload": "Grado di occupazione",
+    "income": "Reddito lordo all’anno",
+    "children": "Figli",
+    "childrenValue": "{count, plural, one {# figlio} other {# figli}} (nati nel {years})",
+    "residence": "Domicilio",
+    "assets": "Patrimonio",
+    "pensionFund": "Cassa pensione",
+    "insuredSalary": "Salario assicurato",
+    "currentCapital": "Avere di vecchiaia",
+    "projectedPension": "Rendita di vecchiaia prevista",
+    "maxBuyIn": "Riscatto possibile",
+    "pillar3a": "Pilastro 3a",
+    "contribution": "Versamento all’anno",
+    "balance": "Avere",
+    "fromDocument": "Da un documento confermato",
+    "fromDocumentLegend": "Valore da un documento che ha confermato",
+    "maritalStatus": {
+      "single": "Celibe o nubile",
+      "married": "Sposato/a",
+      "registered_partnership": "Unione domestica registrata",
+      "cohabiting": "Convivente",
+      "divorced": "Divorziato/a",
+      "widowed": "Vedovo/a"
+    },
+    "employment": {
+      "employed": "Dipendente",
+      "self_employed": "Indipendente",
+      "unemployed": "Senza attività lucrativa",
+      "student": "In formazione",
+      "homemaker": "Lavoro familiare",
+      "retired": "Pensionato/a"
+    }
+  }
+}

@@ -1,0 +1,247 @@
+{
+  "message": "",
+  "state": "SUCCESS",
+  "data": {
+    "beginnDatum": "01.11.2026",
+    "ratenPraemie": 811.5,
+    "jahresPraemie": 811.5,
+    "einmalpraemieTotal": 0,
+    "erlebensfallleistungTotal": 0,
+    "bruttopraemie": 811.5,
+    "aktuelleUeberschuesse": 106.8,
+    "nettopraemie": 704.7,
+    "sparprodukt": false,
+    "warnungen": [],
+    "vorsorgeart": {
+      "saeule3a": false,
+      "praemie3aMaximieren": false,
+      "garantiertesErlebensfallkapital": 0
+    },
+    "verwendeteAnnahmen": {
+      "bruttorenditen": [],
+      "zinssaetze": [],
+      "szenarienBetraege": [
+        {
+          "bezeichnung": "NIEDRIG",
+          "betrag": 0
+        },
+        {
+          "bezeichnung": "MITTEL",
+          "betrag": 0
+        },
+        {
+          "bezeichnung": "HOCH",
+          "betrag": 0
+        }
+      ]
+    },
+    "fonds": [],
+    "personen": [
+      {
+        "index": 0,
+        "geburtsdatum": "01.01.1987",
+        "selectedGeschlecht": "MANN",
+        "raucher": true,
+        "praemienbefreiung": true,
+        "selectedHauptberufId": 883,
+        "technischesAlter": 40,
+        "selectedRolle": "HAUPTVERSICHERT",
+        "tarife": [
+          {
+            "index": 0,
+            "code": "070001A0",
+            "selectedTarif": "SIR",
+            "dauer": 25,
+            "schlussalter": 65,
+            "selectedWartefrist": 24,
+            "periodischePraemie": 811.5,
+            "einmalpraemie": 0,
+            "risikosumme": 10000,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "SIR",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente"
+              },
+              {
+                "index": 1,
+                "bezeichnung": "SIRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "SIRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 2,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 3,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 4,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 5,
+            "code": "",
+            "selectedTarif": "",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 0,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "",
+                "tarifbeschreibung": ""
+              },
+              {
+                "index": 1,
+                "bezeichnung": "IRoP",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Deckung psychische Leiden"
+              },
+              {
+                "index": 2,
+                "bezeichnung": "IRoU",
+                "tarifbeschreibung": "Erwerbsunfähigkeitsrente ohne Unfalldeckung"
+              }
+            ]
+          },
+          {
+            "index": 6,
+            "code": "073102A0",
+            "selectedTarif": "I incl.",
+            "dauer": 0,
+            "schlussalter": 0,
+            "selectedWartefrist": 3,
+            "periodischePraemie": 0,
+            "einmalpraemie": 0,
+            "risikosumme": 0,
+            "erlebensfallleistung": 0,
+            "tarifauswahlen": [
+              {
+                "index": 0,
+                "bezeichnung": "I incl.",
+                "tarifbeschreibung": "Prämienbefreiung bei Erwerbsunfähigkeit"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

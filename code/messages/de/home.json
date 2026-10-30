@@ -1,0 +1,54 @@
+{
+  "header": {
+    "home": "Pax Vorsorge-Berater, zur Startseite",
+    "portal": "Vorsorge-Cockpit"
+  },
+  "title": "Wie gut ist Ihr Leben abgesichert?",
+  "lead": "Erzählen Sie mir, wie Sie leben und was Sie vorhaben. Ich rechne mit echten Schweizer Grundlagen und zeige Ihnen Ihre Vorsorge über alle drei Säulen, Quadrat für Quadrat.",
+  "start": {
+    "title": "Beratung starten",
+    "body": "Zuerst lernen wir uns kennen, dann rechnen wir. Ohne Anmeldung."
+  },
+  "existing": {
+    "title": "Ich bin bereits Pax-Kunde",
+    "body": "Prüfen Sie, ob Ihre Vorsorge noch zu Ihrem Leben passt."
+  },
+  "upload": "Ich habe meine Unterlagen zur Hand",
+  "resume": "Letztes Gespräch fortsetzen",
+  "resumeTitled": "Weiter mit «{title}»",
+  "example": {
+    "caption": "So sieht ein Vorsorgebild aus: Einkommen im Alter",
+    "sources": {
+      "pillar1": "1. Säule: AHV",
+      "pillar2": "2. Säule: Pensionskasse",
+      "other": "3. Säule und Vermögen",
+      "partner": "Einkommen Partnerin oder Partner"
+    },
+    "gap": "Leere Quadrate: die Lücke zum Bedarf",
+    "unit": "1 Quadrat = CHF 500 pro Monat"
+  },
+  "points": {
+    "label": "So berät der Pax Vorsorge-Berater",
+    "life": {
+      "title": "Zuerst Ihr Leben",
+      "body": "Familie, Arbeit, Pläne und Sorgen. Produkte kommen erst ganz am Schluss."
+    },
+    "numbers": {
+      "title": "Echte Berechnungen",
+      "body": "AHV, Pensionskasse und Säule 3a, gerechnet mit den Grundlagen von Logismata."
+    },
+    "people": {
+      "title": "Jederzeit ein Mensch",
+      "body": "Wenn es komplex wird, übernimmt eine Pax-Fachperson. Sie entscheiden."
+    }
+  },
+  "demo": {
+    "title": "Willkommen zurück",
+    "lead": "Wählen Sie Ihr Kundenkonto. Ich kenne Ihre Policen und schaue mit Ihnen, was sich in Ihrem Leben verändert hat.",
+    "note": "Demo: Diese Kundinnen und Kunden sind erfunden. In der echten App melden Sie sich hier mit Ihrem Pax-Login an.",
+    "born": "Jahrgang {year}",
+    "children": "{count, plural, one {# Kind} other {# Kinder}}",
+    "policies": "{count, plural, =0 {keine Pax-Police} one {# Pax-Police} other {# Pax-Policen}}",
+    "choose": "Als {name} weiterfahren"
+  }
+}
