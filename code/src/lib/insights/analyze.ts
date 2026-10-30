@@ -225,13 +225,36 @@ function ensureHandover(
   publish({ type: "handover.created", handoverId: handover.id, conversationId: conversation.id });
 }
 
+// Scheduled runs and manual re-runs from the dashboard share one queue per conversation, so an
+// older run can never finish after a newer one and overwrite its analysis and leads.
+const globalForLocks = globalThis as unknown as {
+  paxAnalysisLocks?: Map<string, Promise<unknown>>;
+};
+globalForLocks.paxAnalysisLocks ??= new Map();
+const locks = globalForLocks.paxAnalysisLocks;
+
 /**
  * Classifies a conversation, extracts FAQ, creates handovers and upserts scored leads.
  * Skips when nothing changed since the last run (unless forced).
  */
-export async function analyzeConversation(
+export function analyzeConversation(
   conversationId: string,
   options: { force?: boolean } = {},
+): Promise<AnalysisOutcome> {
+  const run = (locks.get(conversationId) ?? Promise.resolve()).then(() =>
+    analyzeUnlocked(conversationId, options),
+  );
+  const settled = run.catch(() => undefined);
+  locks.set(conversationId, settled);
+  void settled.then(() => {
+    if (locks.get(conversationId) === settled) locks.delete(conversationId);
+  });
+  return run;
+}
+
+async function analyzeUnlocked(
+  conversationId: string,
+  options: { force?: boolean },
 ): Promise<AnalysisOutcome> {
   const ctx = loadContext(conversationId);
   if (!ctx) return "skipped";
