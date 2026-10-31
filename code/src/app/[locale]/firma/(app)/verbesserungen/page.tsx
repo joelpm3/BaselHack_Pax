@@ -87,7 +87,7 @@ async function ImprovementsContent() {
       </section>
 
       <section className="grid gap-3" aria-labelledby="open-proposals">
-        <h2 id="open-proposals" className="text-lg font-bold">
+        <h2 id="open-proposals" className="text-paragraph-l font-bold">
           {t("open")} <span className="font-normal text-fg-muted">{open.length}</span>
         </h2>
         {open.length === 0 ? (
@@ -121,7 +121,7 @@ async function ImprovementsContent() {
                     {flag.conversationTitle ?? t("untitled")}
                   </Link>
                   <p>{flag.note}</p>
-                  <p className="text-xs text-fg-muted">
+                  <p className="text-paragraph-xs text-fg-muted">
                     {t("flags.by", {
                       name: flag.advisorName ?? "–",
                       time: format.dateTime(flag.createdAt, dateTime),
@@ -201,8 +201,8 @@ function Stat({ value, label, note }: { value: string; label: string; note?: str
   return (
     <div className="grid content-start gap-0.5">
       <dt className="order-2 text-fg-muted">{label}</dt>
-      <dd className="order-1 text-2xl font-bold tabular-nums">{value}</dd>
-      {note ? <dd className="order-3 text-xs text-fg-muted">{note}</dd> : null}
+      <dd className="order-1 text-heading-m font-bold tabular-nums">{value}</dd>
+      {note ? <dd className="order-3 text-paragraph-xs text-fg-muted">{note}</dd> : null}
     </div>
   );
 }
@@ -225,7 +225,7 @@ async function ProposalCard({
           <Badge tone="warning">{t(`category.${proposal.category}`)}</Badge>
           <Badge tone="info">{t(`kind.${proposal.kind}`)}</Badge>
         </div>
-        <h3 className="text-base font-bold">{proposal.title}</h3>
+        <h3 className="text-paragraph-m font-bold">{proposal.title}</h3>
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <div className="grid content-start gap-1">

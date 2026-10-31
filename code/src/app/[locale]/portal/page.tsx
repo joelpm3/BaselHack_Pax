@@ -112,7 +112,7 @@ async function EmptyCockpit() {
           <span className="size-5 border-2 border-white" />
           <span className="size-5 bg-pax-green" />
         </div>
-        <h1 className="text-heading-xl font-bold">{t("title")}</h1>
+        <h1 className="text-heading-xl font-bold text-pax-green">{t("title")}</h1>
         <p className="mt-3 max-w-xl text-paragraph-l text-white/80">{t("body")}</p>
         <Link href="/" className={buttonClasses("inverse", "lg", "mt-8")}>
           {t("start")}
@@ -139,7 +139,7 @@ function CockpitSkeleton() {
         </div>
       </div>
       <div className="mx-auto max-w-6xl px-4 pt-6 lg:px-8">
-        <div className="h-24 animate-pulse rounded-[16px] bg-surface-muted" />
+        <div className="h-24 animate-pulse rounded-xl bg-surface-muted" />
       </div>
     </div>
   );

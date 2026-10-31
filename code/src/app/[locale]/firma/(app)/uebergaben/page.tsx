@@ -152,7 +152,7 @@ async function HandoversContent({
                   ) : null}
                 </span>
                 <span
-                  className="text-xs text-fg-muted"
+                  className="text-paragraph-xs text-fg-muted"
                   title={format.dateTime(h.createdAt, { dateStyle: "medium", timeStyle: "short" })}
                 >
                   {status === "open"
@@ -179,7 +179,7 @@ async function HandoversContent({
                   {h.openLeads > 0 ? (
                     <Link
                       href={customerHref(h.customerId, "leads")}
-                      className="rounded-full bg-light-purple px-2 py-0.5 text-xs font-medium text-deep-purple hover:underline"
+                      className="rounded-full bg-light-purple px-2 py-0.5 text-paragraph-xs font-medium text-deep-purple hover:underline"
                     >
                       {tKinds("lead.alsoOpen", { count: h.openLeads })}
                     </Link>

@@ -32,7 +32,7 @@ export function FlagConversationForm({ conversationId }: { conversationId: strin
         maxLength={2000}
         placeholder={t("placeholder")}
         aria-invalid={state.error || undefined}
-        className="min-h-16 text-sm"
+        className="min-h-16 text-paragraph-s"
       />
       {state.error ? (
         <p role="alert" className="text-error-dark">

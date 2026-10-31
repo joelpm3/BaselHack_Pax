@@ -55,7 +55,7 @@ export function TextComposer({
   return (
     <form
       onSubmit={submit}
-      className="flex items-end gap-1 rounded-[20px] border-[1.2px] border-line-strong bg-surface p-1.5 focus-within:border-pax-purple"
+      className="flex items-end gap-1 rounded-xl border-[1.2px] border-line-strong bg-surface p-1.5 focus-within:border-pax-purple"
     >
       {upload}
       <label htmlFor="chat-input" className="sr-only">
@@ -96,7 +96,7 @@ export function TextComposer({
         <button
           type="submit"
           disabled={!text.trim()}
-          className="grid size-10 shrink-0 place-items-center rounded-full bg-pax-purple text-white transition-colors hover:bg-deep-purple disabled:bg-gray-3"
+          className="grid size-10 shrink-0 place-items-center rounded-full bg-pax-green text-ink transition-colors hover:bg-contrast-green hover:text-white disabled:bg-gray-3"
         >
           <ArrowUp aria-hidden className="size-5" />
           <span className="sr-only">{t("send")}</span>

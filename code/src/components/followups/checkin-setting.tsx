@@ -12,7 +12,7 @@ export async function CheckinSetting({ customerId }: { customerId: string }) {
   if (!checkin) return null;
   const { enabled } = checkin;
   return (
-    <div className="grid gap-3 rounded-[16px] border border-line p-5">
+    <div className="grid gap-3 rounded-xl border border-line p-5">
       <p className="flex items-center gap-2 font-medium">
         <span
           aria-hidden

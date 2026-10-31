@@ -24,7 +24,7 @@ export function ExampleSquares() {
   const t = useTranslations("home.example");
   const squares = buildSquares(EXAMPLE);
   return (
-    <figure className="rounded-[16px] bg-surface-muted p-6 sm:p-8 lg:rounded-xl">
+    <figure className="rounded-xl bg-surface-muted p-6 sm:p-8 lg:rounded-xl">
       <div aria-hidden className="grid w-max grid-cols-5 gap-2 sm:gap-2.5 lg:gap-3">
         {squares.map((square, i) => (
           <span

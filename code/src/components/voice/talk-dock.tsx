@@ -158,7 +158,7 @@ export function TalkDock({
             ) : working ? (
               <Spinner label={status} />
             ) : (
-              <Mic aria-hidden className="size-7" strokeWidth={1.75} />
+              <Mic aria-hidden className="size-7" />
             )}
           </button>
           <span aria-hidden className="text-paragraph-xs leading-4 font-medium text-pax-purple">

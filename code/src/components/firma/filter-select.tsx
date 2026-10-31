@@ -28,7 +28,7 @@ export function FilterSelect({
   const id = useId();
   return (
     <div className="grid gap-1">
-      <label htmlFor={id} className="text-xs text-fg-muted">
+      <label htmlFor={id} className="text-paragraph-xs text-fg-muted">
         {label}
       </label>
       <Select
@@ -38,7 +38,10 @@ export function FilterSelect({
           const next = e.target.value;
           start(() => router.push(hrefWith(path, { ...params, [param]: next || null })));
         }}
-        className={cn("h-9 w-auto min-w-36 py-0 pr-8 pl-3 text-sm", pending && "opacity-60")}
+        className={cn(
+          "h-9 w-auto min-w-36 py-0 pr-8 pl-3 text-paragraph-s",
+          pending && "opacity-60",
+        )}
       >
         {options.map((o) => (
           <option key={o.value} value={o.value}>

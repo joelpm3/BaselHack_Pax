@@ -167,7 +167,7 @@ export function DocumentList({ documents }: { documents: PortalDocument[] }) {
         ) : null}
 
         {listed.length === 0 && uploaded.length === 0 ? (
-          <p className="rounded-[16px] bg-surface-muted p-5 text-paragraph-s text-fg-muted">
+          <p className="rounded-xl bg-surface-muted p-5 text-paragraph-s text-fg-muted">
             {t("empty")}
           </p>
         ) : (

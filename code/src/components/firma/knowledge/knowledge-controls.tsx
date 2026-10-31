@@ -99,7 +99,7 @@ export function KnowledgeUploadForm() {
           type="file"
           accept="application/pdf,.pdf"
           required
-          className="block w-full text-sm file:mr-3 file:rounded-full file:border-0 file:bg-light-purple file:px-3.5 file:py-2 file:font-medium file:text-deep-purple hover:file:bg-gray-2"
+          className="block w-full text-paragraph-s file:mr-3 file:rounded-full file:border-0 file:bg-light-purple file:px-3.5 file:py-2 file:font-medium file:text-deep-purple hover:file:bg-gray-2"
         />
       </Field>
       <div className="flex flex-wrap items-center gap-3">
@@ -256,7 +256,7 @@ export function KnowledgeTest({ productCodes }: { productCodes: string[] }) {
               className="grid gap-1 border-l-2 border-pax-purple pl-3"
             >
               <p className="font-medium">{excerpt.heading}</p>
-              <p className="text-xs text-fg-muted">
+              <p className="text-paragraph-xs text-fg-muted">
                 {excerpt.source.title} v{excerpt.source.version}
                 {excerpt.page ? `, ${t("page", { page: excerpt.page })}` : ""}
               </p>

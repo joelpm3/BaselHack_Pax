@@ -211,7 +211,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               {error ? (
                 <li
                   role="alert"
-                  className="rounded-[16px] border border-warning bg-warning-light px-4 py-3 text-paragraph-s text-warning-dark"
+                  className="rounded-xl border border-warning bg-warning-light px-4 py-3 text-paragraph-s text-warning-dark"
                 >
                   <p>{t("error.unavailable")}</p>
                   <button

@@ -138,18 +138,17 @@ export function LiveStatus({ className }: { className?: string }) {
   const t = useTranslations("firma.live.status");
   return (
     <span
-      className={cn("inline-flex items-center gap-2 text-fg-muted", className)}
+      className={cn(
+        "inline-flex h-8 items-center gap-2 rounded-full border border-line px-3 text-paragraph-xs font-medium text-fg",
+        className,
+      )}
       aria-live="polite"
     >
       <span
         aria-hidden
         className={cn(
-          "size-2.5",
-          status === "open"
-            ? "animate-pulse bg-pax-green"
-            : status === "connecting"
-              ? "bg-warning"
-              : "bg-gray-4",
+          "size-2",
+          status === "open" ? "bg-pax-green" : status === "connecting" ? "bg-warning" : "bg-gray-4",
         )}
       />
       {t(status)}

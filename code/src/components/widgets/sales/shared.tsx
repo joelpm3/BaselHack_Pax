@@ -138,11 +138,7 @@ export function CriteriaList({ criteria }: { criteria: Criterion[] }) {
       {criteria.map((c) => (
         <li key={c.criterion} className="flex items-start gap-2 text-paragraph-xs">
           {c.met ? (
-            <Check
-              aria-hidden
-              className="mt-0.5 size-4 shrink-0 text-contrast-green"
-              strokeWidth={2.5}
-            />
+            <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-contrast-green" />
           ) : (
             <Circle aria-hidden className="mt-0.5 size-4 shrink-0 text-gray-5" />
           )}

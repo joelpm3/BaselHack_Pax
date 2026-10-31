@@ -51,7 +51,7 @@ async function HintCard({
   const tone = TONE[hint.severity];
   const source = sourceKey(hint);
   return (
-    <article className={cn("rounded-[16px] p-5 lg:p-6", tone.surface)}>
+    <article className={cn("rounded-xl p-5 lg:p-6", tone.surface)}>
       <p className="flex items-center gap-2 text-paragraph-xs font-medium">
         <span className={cn("size-2.5 shrink-0", tone.marker)} aria-hidden />
         {t(`severity.${hint.severity}`)}
@@ -114,7 +114,7 @@ export async function HintList({
         />
       ))}
       {dismissed.length > 0 ? (
-        <details className="group rounded-[16px] border border-line px-5 py-3">
+        <details className="group rounded-xl border border-line px-5 py-3">
           <summary className="cursor-pointer text-paragraph-s font-medium">
             {t("dismissedCount", { count: dismissed.length })}
           </summary>
@@ -142,7 +142,7 @@ export function HintListSkeleton({ label }: { label: string }) {
     <div className="flex flex-col gap-3" aria-busy="true">
       <p className="text-paragraph-s text-fg-muted">{label}</p>
       {[0, 1].map((i) => (
-        <div key={i} className="h-36 animate-pulse rounded-[16px] bg-surface-muted" />
+        <div key={i} className="h-36 animate-pulse rounded-xl bg-surface-muted" />
       ))}
     </div>
   );

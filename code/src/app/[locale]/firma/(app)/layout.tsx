@@ -37,9 +37,9 @@ async function SignedInAdvisor() {
   const [advisor, t] = await Promise.all([requireAdvisor(), getTranslations("firma.nav")]);
   return (
     <div className="grid leading-tight">
-      <span className="text-xs text-white/60">{t("signedInAs")}</span>
+      <span className="text-paragraph-xs text-white/60">{t("signedInAs")}</span>
       <span className="font-medium">{advisor.name}</span>
-      <span className="text-xs text-white/60">{advisor.team}</span>
+      <span className="text-paragraph-xs text-white/60">{advisor.team}</span>
     </div>
   );
 }

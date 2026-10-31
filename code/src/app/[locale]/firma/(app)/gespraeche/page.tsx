@@ -174,14 +174,14 @@ async function ConversationsContent({
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1 md:contents">
                   <span className="flex items-center gap-2">
                     <StageSquares stage={c.stage} label={tStage(c.stage)} />
-                    <span className="hidden truncate text-xs text-fg-muted md:inline">
+                    <span className="hidden truncate text-paragraph-xs text-fg-muted md:inline">
                       {tStage(c.stage)}
                     </span>
                   </span>
                   <span>
                     <ConversationStatusBadge status={c.status} />
                   </span>
-                  <span className="text-xs text-fg-muted tabular-nums md:text-right">
+                  <span className="text-paragraph-xs text-fg-muted tabular-nums md:text-right">
                     {format.dateTime(c.lastMessageAt ?? c.createdAt, {
                       day: "numeric",
                       month: "numeric",

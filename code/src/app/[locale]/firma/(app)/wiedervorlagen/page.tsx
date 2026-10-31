@@ -116,7 +116,7 @@ async function FollowUpsContent({
                 className="grid gap-x-6 gap-y-2 px-4 py-4 md:grid-cols-[8rem_minmax(0,1fr)_auto] md:items-start"
               >
                 <span className="grid content-start gap-1">
-                  <span className="text-xs text-fg-muted">{t("card.followUpOn")}</span>
+                  <span className="text-paragraph-xs text-fg-muted">{t("card.followUpOn")}</span>
                   <span className="font-medium">
                     <BusinessDate date={row.followUpOn} />
                   </span>
@@ -152,14 +152,14 @@ async function FollowUpsContent({
                 </span>
                 <span className="flex flex-wrap items-center gap-x-3 gap-y-1 md:justify-end">
                   {lastEmail ? (
-                    <span className="text-xs text-fg-muted">
+                    <span className="text-paragraph-xs text-fg-muted">
                       {lastEmail.repliedAt
                         ? t("outbox.replied")
                         : t(`outbox.kind.${outboxKindKey(lastEmail)}`)}{" "}
                       <BusinessDate date={lastEmail.sentOn} />
                     </span>
                   ) : tab === "due" ? (
-                    <span className="text-xs text-fg-muted">{t("card.noEmail")}</span>
+                    <span className="text-paragraph-xs text-fg-muted">{t("card.noEmail")}</span>
                   ) : null}
                   {tab === "due" || tab === "upcoming" ? (
                     <DismissEventButton eventId={row.id} />

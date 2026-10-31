@@ -19,7 +19,7 @@ export interface CardProps extends ComponentProps<"section"> {
 export function Card({ tone = "default", className, ...props }: CardProps) {
   return (
     <section
-      className={cn("rounded-[16px] p-5 lg:rounded-xl lg:p-6", tones[tone], className)}
+      className={cn("rounded-xl p-5 lg:rounded-xl lg:p-6", tones[tone], className)}
       {...props}
     />
   );

@@ -119,7 +119,7 @@ async function CustomersContent({
                   <OpenWork kind="handover" count={c.openHandovers} />
                   <OpenWork kind="lead" count={c.openLeads} score={c.topLeadScore} />
                 </span>
-                <span className="col-span-2 text-xs text-fg-muted sm:col-span-1 sm:text-right">
+                <span className="col-span-2 text-paragraph-xs text-fg-muted sm:col-span-1 sm:text-right">
                   {c.lastContactAt ? format.relativeTime(c.lastContactAt, now) : "–"}
                 </span>
               </Link>

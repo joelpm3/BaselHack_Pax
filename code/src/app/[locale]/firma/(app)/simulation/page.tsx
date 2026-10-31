@@ -64,7 +64,7 @@ async function Runs() {
   return (
     <section className="grid gap-4">
       <LiveRefresh types={["simulation", "conversation", "analysis"]} intervalMs={1500} />
-      <h2 className="text-lg font-bold">{t("runs")}</h2>
+      <h2 className="text-paragraph-l font-bold">{t("runs")}</h2>
       {runs.length === 0 ? (
         <EmptyState title={t("emptyTitle")}>{t("emptyBody")}</EmptyState>
       ) : (
@@ -168,7 +168,7 @@ async function RunCard({ run }: { run: SimulationRunItem }) {
           <summary className="cursor-pointer">
             {t("errors", { count: stats.errors.length })}
           </summary>
-          <ul className="mt-2 grid gap-1 text-xs">
+          <ul className="mt-2 grid gap-1 text-paragraph-xs">
             {stats.errors.map((e) => (
               <li key={e}>{e}</li>
             ))}
@@ -193,7 +193,7 @@ async function RunCard({ run }: { run: SimulationRunItem }) {
                 <StageSquares stage={c.stage} label={tStage(c.stage)} />
                 <span className="min-w-0 truncate text-fg-muted">{c.title ?? tStage(c.stage)}</span>
                 <span className="flex items-center gap-2">
-                  <span className="text-xs text-fg-muted">{c.locale.toUpperCase()}</span>
+                  <span className="text-paragraph-xs text-fg-muted">{c.locale.toUpperCase()}</span>
                   <ConversationStatusBadge status={c.status} />
                 </span>
               </Link>

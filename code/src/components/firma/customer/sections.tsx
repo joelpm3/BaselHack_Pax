@@ -43,7 +43,7 @@ export async function ConversationsSection({ detail }: { detail: CustomerDetail 
                   <span className="truncate font-medium group-hover:underline">
                     {c.title ?? t("untitled")}
                   </span>
-                  <span className="text-xs text-fg-muted tabular-nums">
+                  <span className="text-paragraph-xs text-fg-muted tabular-nums">
                     {format.dateTime(c.lastMessageAt ?? c.createdAt, dateTime)}
                   </span>
                 </span>
@@ -99,7 +99,7 @@ export async function ApplicationsSection({
                 {t("premium", { amount: formatChf(a.premiumAnnual, locale) })}
               </span>
             ) : null}
-            <span className="ml-auto text-xs text-fg-muted tabular-nums">
+            <span className="ml-auto text-paragraph-xs text-fg-muted tabular-nums">
               {format.dateTime(a.signedAt ?? a.createdAt, dateTime)}
             </span>
           </li>
@@ -166,7 +166,7 @@ export async function CommunicationsSection({
               const DirectionIcon = m.direction === "inbound" ? ArrowDownLeft : ArrowUpRight;
               return (
                 <li key={m.id} className="grid gap-1 border-l-2 border-contrast-green pl-3">
-                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-fg-muted">
+                  <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-paragraph-xs text-fg-muted">
                     <Icon aria-hidden className="size-3.5 text-fg" />
                     <span className="font-medium text-fg">{t(`channel.${m.channel}`)}</span>
                     {m.direction ? (
@@ -182,7 +182,7 @@ export async function CommunicationsSection({
                   {m.body ? (
                     <p className="line-clamp-4 whitespace-pre-wrap text-fg-muted">{m.body}</p>
                   ) : null}
-                  <span className="text-xs text-fg-subtle">{m.actor ?? t("system")}</span>
+                  <span className="text-paragraph-xs text-fg-subtle">{m.actor ?? t("system")}</span>
                 </li>
               );
             })}
@@ -281,14 +281,14 @@ export async function TimelineSection({
         <div className="grid gap-5">
           {[...days.entries()].map(([day, entries]) => (
             <section key={day} className="grid gap-2">
-              <h3 className="text-xs font-medium text-fg-muted">{day}</h3>
+              <h3 className="text-paragraph-xs font-medium text-fg-muted">{day}</h3>
               <ol className="grid">
                 {entries.map((e, i) => (
                   <li
                     key={e.id}
                     className="grid grid-cols-[3rem_0.75rem_minmax(0,1fr)] gap-x-3 sm:grid-cols-[3.5rem_0.75rem_minmax(0,1fr)]"
                   >
-                    <span className="pt-0.5 text-xs text-fg-muted tabular-nums">
+                    <span className="pt-0.5 text-paragraph-xs text-fg-muted tabular-nums">
                       {format.dateTime(e.at, { hour: "2-digit", minute: "2-digit" })}
                     </span>
                     <span className="relative flex justify-center">
@@ -309,13 +309,15 @@ export async function TimelineSection({
                     <div className="grid min-w-0 gap-0.5 pb-3">
                       <span className="flex flex-wrap items-baseline gap-x-2">
                         <span className="font-medium">{line(e)}</span>
-                        {e.actor ? <span className="text-xs text-fg-muted">{e.actor}</span> : null}
+                        {e.actor ? (
+                          <span className="text-paragraph-xs text-fg-muted">{e.actor}</span>
+                        ) : null}
                       </span>
                       {e.text ? <p className="line-clamp-3 text-fg-muted">{e.text}</p> : null}
                       {e.conversationId ? (
                         <Link
                           href={`/firma/gespraeche/${e.conversationId}`}
-                          className="justify-self-start text-xs text-contrast-green hover:underline"
+                          className="justify-self-start text-paragraph-xs text-contrast-green hover:underline"
                         >
                           {e.kind === "conversation"
                             ? t("openConversation")

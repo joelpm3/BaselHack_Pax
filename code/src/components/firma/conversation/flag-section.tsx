@@ -36,7 +36,7 @@ export async function FlagSection({ conversationId }: { conversationId: string }
                     <Badge>{t("resolved")}</Badge>
                   )}
                 </div>
-                <p className="text-xs text-fg-muted">
+                <p className="text-paragraph-xs text-fg-muted">
                   {t("by", {
                     name: flag.advisorName ?? t("unknownAdvisor"),
                     time: format.dateTime(flag.createdAt, {

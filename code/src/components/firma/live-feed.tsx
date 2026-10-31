@@ -76,7 +76,7 @@ export function LiveFeed({ labels }: { labels: Record<string, string> }) {
 
   return (
     <section aria-label={t("title")} className="grid content-start gap-3">
-      <h2 className="text-base font-bold">{t("title")}</h2>
+      <h2 className="text-paragraph-m font-bold">{t("title")}</h2>
       {items.length === 0 ? (
         <p className="rounded-xl bg-gray-1 px-4 py-6 text-fg-muted">{t("waiting")}</p>
       ) : (
@@ -91,7 +91,7 @@ export function LiveFeed({ labels }: { labels: Record<string, string> }) {
               : null;
             return (
               <li key={e.id} className="grid gap-1 bg-surface px-3 py-2.5">
-                <div className="flex items-center gap-2 text-xs text-fg-muted">
+                <div className="flex items-center gap-2 text-paragraph-xs text-fg-muted">
                   <span aria-hidden className="text-pax-purple">
                     {icon}
                   </span>

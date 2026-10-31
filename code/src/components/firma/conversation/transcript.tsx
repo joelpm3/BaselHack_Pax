@@ -68,7 +68,7 @@ async function ToolCall({ tool }: { tool: ToolSummary }) {
     ? t(`toolNames.${tool.name}`)
     : humanizeToolName(tool.name);
   return (
-    <details className="group rounded-m border border-line bg-gray-1 text-xs">
+    <details className="group rounded-m border border-line bg-gray-1 text-paragraph-xs">
       <summary className="flex cursor-pointer list-none items-start gap-2 px-3 py-2 [&::-webkit-details-marker]:hidden">
         <Wrench aria-hidden className="mt-px size-3.5 shrink-0 text-pax-purple" />
         <span className="shrink-0 font-medium">{name}</span>
@@ -118,7 +118,7 @@ export async function Transcript({ messages }: { messages: ConversationDetail["m
                 isCustomer ? "items-end" : "items-start",
               )}
             >
-              <div className="flex items-center gap-2 text-xs text-fg-muted">
+              <div className="flex items-center gap-2 text-paragraph-xs text-fg-muted">
                 <span className="font-medium text-fg">
                   {isCustomer ? t("customer") : t("advisor")}
                 </span>

@@ -18,7 +18,7 @@ import { HANDOVER_STATUSES, LEAD_STATUSES } from "@/lib/domain/taxonomy";
 import type { AdvisorOption } from "@/lib/firma/conversations";
 import { cn } from "@/lib/utils";
 
-const compact = "h-8 w-auto py-0 pr-7 pl-2.5 text-sm";
+const compact = "h-8 w-auto py-0 pr-7 pl-2.5 text-paragraph-s";
 
 export function LeadStatusSelect({
   leadId,
@@ -137,7 +137,7 @@ export function LeadNoteForm({ leadId }: { leadId: string }) {
         required
         maxLength={4000}
         placeholder={t("placeholder")}
-        className="min-h-16 text-sm"
+        className="min-h-16 text-paragraph-s"
       />
       <div className="flex items-center gap-2">
         <Select name="type" aria-label={t("type")} defaultValue="note" className={compact}>

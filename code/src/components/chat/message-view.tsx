@@ -21,7 +21,7 @@ function UserMessage({ message }: { message: ChatMessage }) {
   const text = message.parts.map((p) => (p.type === "text" ? p.text : "")).join("\n");
   return (
     <div className="flex justify-end">
-      <div className="max-w-[85%] rounded-[16px] rounded-br-sm bg-light-purple px-4 py-2.5 text-deep-purple">
+      <div className="max-w-[85%] rounded-xl rounded-br-sm bg-light-purple px-4 py-2.5 text-deep-purple">
         <p className="sr-only">{t("you")}</p>
         <p className="whitespace-pre-wrap break-words">{text}</p>
         {metadata?.inputMode === "voice" || metadata?.inputMode === "upload" ? (

@@ -11,7 +11,7 @@ export async function UpcomingDates({ dates, today }: { dates: UpcomingDate[]; t
   const t = await getTranslations("portal.dates");
   if (dates.length === 0) return <EmptyNote>{t("empty")}</EmptyNote>;
   return (
-    <ol className="divide-y divide-line rounded-[16px] border border-line">
+    <ol className="divide-y divide-line rounded-xl border border-line">
       {dates.map((d) => {
         const days = daysBetween(today, d.date);
         const [day, month, year] = formatSwissDate(d.date).split(".");

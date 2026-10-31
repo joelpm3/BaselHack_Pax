@@ -115,26 +115,26 @@ export function LeadsKanban({ leads }: { leads: KanbanLead[] }) {
                     ) : null}
                     <span className="font-bold tabular-nums">{lead.score}</span>
                   </div>
-                  <p className="text-xs text-fg-muted">
+                  <p className="text-paragraph-xs text-fg-muted">
                     {tType(lead.type)}
                     {lead.city ? ` · ${lead.city}` : ""}
                   </p>
-                  <p className="line-clamp-3 text-xs">{lead.reasonToCall}</p>
+                  <p className="line-clamp-3 text-paragraph-xs">{lead.reasonToCall}</p>
                   {lead.hasOpenHandover ? (
                     <Link
                       href={customerHref(lead.customerId, "handovers")}
-                      className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
+                      className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-paragraph-xs font-medium text-warning-dark hover:underline"
                     >
                       {tKinds("handover.alsoOpen")}
                     </Link>
                   ) : null}
-                  <p className="truncate text-xs text-fg-muted">
+                  <p className="truncate text-paragraph-xs text-fg-muted">
                     {lead.assignee ?? t("unassigned")}
                   </p>
                   <LeadStatusSelect
                     leadId={lead.id}
                     status={lead.status}
-                    className="h-7 w-full text-xs"
+                    className="h-7 w-full text-paragraph-xs"
                   />
                 </article>
               ))}

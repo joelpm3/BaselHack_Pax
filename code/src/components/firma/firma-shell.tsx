@@ -76,10 +76,12 @@ function NavList({ pathname, onNavigate }: { pathname: string | null; onNavigate
                   : "text-white/75 hover:bg-white/8 hover:text-white",
               )}
             >
-              <Icon aria-hidden className="size-[18px]" strokeWidth={1.75} />
+              <Icon aria-hidden className="size-[18px]" />
               <span className="grid flex-1 leading-tight">
                 {extra ? tExtra(extra) : t(key as Exclude<typeof key, "customers">)}
-                {hint ? <span className="text-xs text-white/60">{tExtra(hint)}</span> : null}
+                {hint ? (
+                  <span className="text-paragraph-xs text-white/60">{tExtra(hint)}</span>
+                ) : null}
               </span>
               {active ? <span aria-hidden className="size-2 bg-pax-green" /> : null}
             </Link>
@@ -107,7 +109,7 @@ function LocaleLinks({ pathname }: { pathname: string }) {
             locale={l}
             aria-current={l === locale ? "true" : undefined}
             className={cn(
-              "grid h-7 min-w-9 place-items-center rounded-sm px-1.5 text-xs font-medium",
+              "grid h-7 min-w-9 place-items-center rounded-sm px-1.5 text-paragraph-xs font-medium",
               l === locale
                 ? "bg-white text-deep-purple"
                 : "text-white/70 hover:bg-white/10 hover:text-white",
@@ -139,7 +141,7 @@ export function FirmaShell({
 
   return (
     // The dashboard is denser than the customer app: smaller paragraph steps for shared UI parts.
-    <div className="min-h-dvh text-sm [--text-paragraph-s:0.875rem] [--text-paragraph-xs:0.75rem] lg:grid lg:grid-cols-[15rem_minmax(0,1fr)]">
+    <div className="min-h-dvh text-paragraph-s [--text-paragraph-s:0.875rem] [--text-paragraph-xs:0.75rem] lg:grid lg:grid-cols-[15rem_minmax(0,1fr)]">
       <header className="sticky top-0 z-20 flex h-14 items-center justify-between bg-deep-purple px-4 text-white lg:hidden">
         <Link href="/firma" className="flex items-center gap-3">
           <PaxLogo variant="negative" className="h-6" />

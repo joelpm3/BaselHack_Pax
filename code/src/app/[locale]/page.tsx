@@ -19,7 +19,7 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
       <main className="mx-auto w-full max-w-[1160px] px-4 lg:px-8">
         <section className="grid gap-12 pt-10 pb-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:items-center lg:gap-16 lg:pt-20 lg:pb-24">
           <div className="max-w-[620px]">
-            <h1 className="text-heading-xl font-bold text-pax-purple">{t("title")}</h1>
+            <h1 className="text-heading-xl font-bold text-contrast-green">{t("title")}</h1>
             <p className="mt-5 max-w-[56ch] text-paragraph-l text-fg-muted">{t("lead")}</p>
 
             <div className="mt-8 flex flex-col gap-3">
@@ -27,7 +27,7 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
                 <input type="hidden" name="locale" value={locale} />
                 <button
                   type="submit"
-                  className="group flex w-full items-center gap-4 rounded-[16px] bg-pax-purple px-5 py-5 text-left text-white transition-colors hover:bg-deep-purple lg:rounded-xl lg:px-6"
+                  className="group flex w-full items-center gap-4 rounded-xl bg-pax-purple px-5 py-5 text-left text-white transition-colors hover:bg-deep-purple lg:rounded-xl lg:px-6"
                 >
                   <span className="flex-1">
                     <span className="block text-heading-s font-bold">{t("start.title")}</span>
@@ -43,7 +43,7 @@ export default function HomePage({ params }: PageProps<"/[locale]">) {
 
               <Link
                 href="/kunde"
-                className="group flex items-center gap-4 rounded-[16px] border-[1.6px] border-ink px-5 py-5 transition-colors hover:bg-gray-1 lg:rounded-xl lg:px-6"
+                className="group flex items-center gap-4 rounded-xl border-[1.6px] border-ink px-5 py-5 transition-colors hover:bg-gray-1 lg:rounded-xl lg:px-6"
               >
                 <span className="flex-1">
                   <span className="block text-heading-s font-bold">{t("existing.title")}</span>
