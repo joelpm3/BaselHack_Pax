@@ -9,7 +9,7 @@ import { FinePrint, useChf, WidgetCard, WidgetFailed, WidgetPending } from "../w
 import { SquareColumns } from "./square-columns";
 
 const MAX_COLUMNS = 12;
-const MAX_ROWS = 14;
+const MAX_ROWS = 16;
 const ORDER = ["capital"] as const;
 const FILL = { capital: "bg-pax-purple border-pax-purple" };
 

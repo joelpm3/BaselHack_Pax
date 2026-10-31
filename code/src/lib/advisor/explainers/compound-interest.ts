@@ -40,12 +40,16 @@ export const EXAMPLE_PARAMS: CompoundParams = {
   years: 30,
 };
 
+/**
+ * Keeps values inside the slider range. Amounts are not snapped to the slider step: a profile
+ * figure such as CHF 7'258 a year (CHF 604.83 a month) stays exact until the customer moves it.
+ */
 export function clampCompound(params: CompoundParams): CompoundParams {
   const clamp = (key: keyof CompoundParams) => {
-    const { min, max, step } = COMPOUND_LIMITS[key];
+    const { min, max } = COMPOUND_LIMITS[key];
     const value = Number.isFinite(params[key]) ? params[key] : min;
-    const stepped = Math.round(value / step) * step;
-    return Math.min(max, Math.max(min, Number(stepped.toFixed(2))));
+    const precise = key === "years" ? Math.round(value) : Number(value.toFixed(2));
+    return Math.min(max, Math.max(min, precise));
   };
   return {
     startAmount: clamp("startAmount"),
@@ -129,12 +133,19 @@ export function squareUnit(maxTotal: number, maxSquares: number): number {
   return NICE_UNITS.find((unit) => maxTotal / unit <= maxSquares) ?? (NICE_UNITS.at(-1) as number);
 }
 
-/** Which years get a column: every year up to `maxColumns`, otherwise evenly spaced. */
+/**
+ * Which years get a column: every year up to `maxColumns`, otherwise a regular step (every 3rd,
+ * 5th … year) so the axis reads evenly. The last year always gets a column.
+ */
 export function columnYears(years: number, maxColumns: number): number[] {
-  if (years <= maxColumns) return Array.from({ length: years }, (_, i) => i + 1);
-  const picked = new Set<number>();
-  for (let i = 1; i <= maxColumns; i++) picked.add(Math.round((i * years) / maxColumns));
-  return [...picked].sort((a, b) => a - b);
+  const step = Math.ceil(years / maxColumns);
+  const picked: number[] = [];
+  for (let year = step; year <= years; year += step) picked.push(year);
+  if (picked.at(-1) !== years) {
+    if (picked.length >= maxColumns) picked.pop();
+    picked.push(years);
+  }
+  return picked;
 }
 
 /**

@@ -15,7 +15,7 @@ import { KeySquare } from "./square-columns";
 type Plan = Extract<LifePlanOutput, { status: "ok" }>;
 
 const PHASE_FILL: Record<LifePhaseKind, string> = {
-  work: "bg-light-purple border-light-purple",
+  work: "bg-light-purple border-pax-purple/25",
   sabbatical: "bg-transparent border-pax-purple border-dashed",
   retirement: "bg-light-green border-pax-green",
 };
@@ -174,7 +174,7 @@ function MoneyRow({ label, monthly, fill }: { label: string; monthly: number; fi
     <div className="flex flex-col gap-1.5">
       <div className="flex items-baseline justify-between gap-3 text-paragraph-xs">
         <span className="font-medium">{label}</span>
-        <span className="font-bold tabular-nums">{chf(monthly)}</span>
+        <span className="font-bold whitespace-nowrap tabular-nums">{chf(monthly)}</span>
       </div>
       <div aria-hidden className="flex flex-wrap gap-1">
         {Array.from({ length: count }, (_, i) => (
@@ -212,7 +212,7 @@ function Money({ plan }: { plan: Plan }) {
         <MoneyRow
           label={t("expenses")}
           monthly={money.expensesMonthly}
-          fill="bg-transparent border-gray-5"
+          fill="bg-gray-3 border-gray-3"
         />
       ) : null}
       {income.status === "ok" ? (

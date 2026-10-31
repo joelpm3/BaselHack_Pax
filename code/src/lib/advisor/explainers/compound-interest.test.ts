@@ -70,13 +70,13 @@ describe("compoundGrowth", () => {
 });
 
 describe("clampCompound", () => {
-  it("keeps values inside limits and on steps", () => {
+  it("keeps values inside limits without rounding profile figures to the slider step", () => {
     expect(
-      clampCompound({ startAmount: -5, monthlySaving: 123, ratePercent: 2.1, years: 99 }),
-    ).toEqual({ startAmount: 0, monthlySaving: 100, ratePercent: 2, years: 50 });
+      clampCompound({ startAmount: -5, monthlySaving: 7258 / 12, ratePercent: 2.1, years: 99 }),
+    ).toEqual({ startAmount: 0, monthlySaving: 604.83, ratePercent: 2.1, years: 50 });
     expect(
-      clampCompound({ startAmount: Number.NaN, monthlySaving: 605, ratePercent: 20, years: 0 }),
-    ).toEqual({ startAmount: 0, monthlySaving: 600, ratePercent: 8, years: 1 });
+      clampCompound({ startAmount: Number.NaN, monthlySaving: 9999, ratePercent: 20, years: 0.4 }),
+    ).toEqual({ startAmount: 0, monthlySaving: 5000, ratePercent: 8, years: 1 });
   });
 });
 
@@ -88,9 +88,13 @@ describe("square chart", () => {
 
   it("spreads columns evenly and always ends with the last year", () => {
     expect(columnYears(5, 12)).toEqual([1, 2, 3, 4, 5]);
-    const years = columnYears(30, 10);
-    expect(years).toHaveLength(10);
-    expect(years.at(-1)).toBe(30);
+    expect(columnYears(30, 12)).toEqual([3, 6, 9, 12, 15, 18, 21, 24, 27, 30]);
+    expect(columnYears(25, 12)).toEqual([3, 6, 9, 12, 15, 18, 21, 24, 25]);
+    for (let years = 1; years <= 50; years++) {
+      const picked = columnYears(years, 12);
+      expect(picked.length).toBeLessThanOrEqual(12);
+      expect(picked.at(-1)).toBe(years);
+    }
   });
 
   it("keeps each column's squares equal to its rounded total", () => {

@@ -1,5 +1,5 @@
 import "server-only";
-import { tool } from "ai";
+import { type JSONValue, tool } from "ai";
 import { z } from "zod";
 import { callLogismata } from "@/lib/logismata/client";
 import { getProfile } from "@/lib/profile/service";
@@ -130,6 +130,19 @@ const drawdownInput = z.object({
     .describe("Monthly amount the customer wants to live from, if they named one"),
 });
 
+/**
+ * Added to what the model reads (not to the widget): without it the model tends to follow an
+ * explainer straight with suggestReplies and leave the widget without a word.
+ */
+const WRITE_NEXT =
+  "The customer sees this widget now. Next, write one or two sentences on what to look at, " +
+  "then your question; call suggestReplies only after that text.";
+
+function forModel(value: object): { type: "json"; value: JSONValue } {
+  // The outputs are plain JSON data; interfaces just lack JSONValue's index signature.
+  return { type: "json", value: { ...value, nextStep: WRITE_NEXT } as JSONValue };
+}
+
 export function createExplainerTools(ctx: ToolContext) {
   const callContext = (toolCallId: string) => ({
     customerId: ctx.customerId,
@@ -152,6 +165,7 @@ export function createExplainerTools(ctx: ToolContext) {
         const chosen = compoundParams(input, profile);
         return { status: "ok", ...chosen, summary: compoundSummary(chosen.params) };
       },
+      toModelOutput: ({ output }) => forModel(output),
     }),
 
     showLifePlan: tool({
@@ -185,6 +199,7 @@ export function createExplainerTools(ctx: ToolContext) {
         }
         return buildLifePlan(profile, year, { income, expensesMonthly: monthlyExpenses });
       },
+      toModelOutput: ({ output }) => forModel(output),
     }),
 
     calculateCapitalDrawdown: tool({
@@ -240,10 +255,8 @@ export function createExplainerTools(ctx: ToolContext) {
         };
       },
       // The model needs the figures, not the yearly series of the chart.
-      toModelOutput: ({ output }) => ({
-        type: "json",
-        value: output.status === "ok" ? { ...output, capitalByYear: undefined } : output,
-      }),
+      toModelOutput: ({ output }) =>
+        forModel(output.status === "ok" ? { ...output, capitalByYear: undefined } : output),
     }),
 
     showReferences: tool({
