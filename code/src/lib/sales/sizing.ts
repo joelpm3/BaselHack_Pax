@@ -1,4 +1,4 @@
-import { DISABILITY_SUM_INSURANCE_MAX, PILLAR_3A_MAX } from "@/lib/pricing/limits";
+import { DISABILITY_SUM_INSURANCE_MAX, pillar3aMaxFor } from "@/lib/pricing/limits";
 
 /**
  * Gap → cover sizing. Pure: the numbers that end up in a recommendation's criteria, so the
@@ -14,6 +14,7 @@ const RETIREMENT_YEARS = 20;
 
 export interface InsuredFacts {
   age: number;
+  /** Calendar year of the contract start (the 3a room is that year's). */
   currentYear: number;
   grossIncome?: number;
   employment?: string;
@@ -22,6 +23,7 @@ export interface InsuredFacts {
   /** Birth year of the youngest child, if any. */
   youngestChildBirthYear?: number;
   hasPensionFund?: boolean;
+  /** 3a contributions already paid in `currentYear` (policies that ended before don't count). */
   pillar3aContribution?: number;
   retirementAge: number;
 }
@@ -141,12 +143,12 @@ export function sizeDisabilityCover(
   };
 }
 
-/** Room left in pillar 3a this year. */
+/** Room left in pillar 3a in the start year. */
 export function pillar3aRoom(facts: InsuredFacts): number {
   const max =
     facts.hasPensionFund === false
       ? Math.min(PILLAR_3A_MAX_NO_PENSION_FUND, Math.round((facts.grossIncome ?? 0) * 0.2))
-      : PILLAR_3A_MAX;
+      : pillar3aMaxFor(facts.currentYear);
   return Math.max(0, max - (facts.pillar3aContribution ?? 0));
 }
 
@@ -160,18 +162,25 @@ export interface SavingsPlan {
   room3a: number;
   closesGapFully: boolean;
   limitedByBudget: boolean;
+  /** The customer's desired premium was lowered to the 3a room or raised to the minimum. */
+  desiredAdjusted: boolean;
 }
+
+/** 1'200 is the tariff minimum for LifeStar and FondsStar. */
+export const SAVINGS_MIN_PREMIUM = 1200;
 
 /**
  * Annual saving: the retirement gap capitalised over 20 years of retirement, spread over the
  * years until retirement with a modest 1.5 % growth. Tax-only gaps fill the 3a room. 3a first;
- * 3b when the 3a room is used up.
+ * 3b when the 3a room is used up. A premium the customer asked for replaces the sized one,
+ * within the 3a room and the tariff minimum.
  */
 export function sizeSavings(
   gapAnnual: number | null,
   includeTaxGap: boolean,
   facts: InsuredFacts,
   maxBudget?: number,
+  desiredPremium?: number,
 ): SavingsPlan {
   const endAge = clamp(facts.retirementAge, 60, 70);
   const years = Math.max(10, endAge - facts.age);
@@ -179,12 +188,12 @@ export function sizeSavings(
   const growth = ((1.015 ** years - 1) / 0.015) * 1.015;
   const forGap = gapAnnual && gapAnnual > 0 ? (gapAnnual * RETIREMENT_YEARS) / growth : 0;
   const requiredPremium = Math.round(Math.max(forGap, includeTaxGap ? room3a : 0));
-  const use3a = room3a >= 1200;
-  let premium = use3a ? Math.min(requiredPremium, room3a) : requiredPremium;
+  const use3a = room3a >= SAVINGS_MIN_PREMIUM;
+  const wanted = desiredPremium ?? requiredPremium;
+  let premium = use3a ? Math.min(wanted, room3a) : wanted;
   const limitedByBudget = maxBudget !== undefined && premium > maxBudget;
   if (limitedByBudget) premium = maxBudget ?? premium;
-  // 1'200 is the tariff minimum for LifeStar and FondsStar.
-  premium = Math.max(1200, Math.round(premium));
+  premium = Math.max(SAVINGS_MIN_PREMIUM, Math.round(premium));
   return {
     annualPremium: premium,
     pillar: use3a ? "3a" : "3b",
@@ -194,5 +203,6 @@ export function sizeSavings(
     room3a,
     closesGapFully: premium >= requiredPremium,
     limitedByBudget,
+    desiredAdjusted: desiredPremium !== undefined && premium !== Math.round(desiredPremium),
   };
 }

@@ -47,9 +47,12 @@
       "premium": "Prime d'épargne",
       "premiumValue": "{premium} par an",
       "premiumPartial": "{premium} par an ; pour combler toute la lacune, il faudrait {required}",
+      "premiumDesired": "{premium} par an, comme souhaité",
       "room3a": "Marge pilier 3a",
       "room3aValue": "Vous pouvez encore verser {room} cette année",
       "room3aFull": "Votre pilier 3a est déjà au maximum",
+      "room3aYearValue": "Vous pouvez verser {room} en {year}",
+      "room3aYearFull": "Votre pilier 3a est déjà au maximum en {year}",
       "budget": "Budget",
       "budgetValue": "Prime {premium}, votre budget {budget}",
       "smoker": "Statut fumeur",
@@ -61,7 +64,9 @@
       "rules": "Règles Pax",
       "rulesValue": "Vérifiées, aucun blocage (règles version {version})",
       "suitability": "Test d'adéquation",
-      "suitabilityPending": "Nécessaire avant l'offre, encore ouvert"
+      "suitabilityPending": "Nécessaire avant l'offre, encore ouvert",
+      "start": "Début du contrat",
+      "startValue": "{date}"
     },
     "rationale": {
       "todesfall": "Si votre revenu disparaît, il manque à vos proches environ {gap} par an. Un capital décès de {sum} couvre cette lacune pendant {years} ans, jusqu'à {endAge} ans.",

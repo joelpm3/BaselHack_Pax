@@ -47,9 +47,12 @@
       "premium": "Sparprämie",
       "premiumValue": "{premium} pro Jahr",
       "premiumPartial": "{premium} pro Jahr; für die ganze Lücke wären {required} nötig",
+      "premiumDesired": "{premium} pro Jahr, wie gewünscht",
       "room3a": "Spielraum Säule 3a",
       "room3aValue": "{room} können Sie dieses Jahr noch einzahlen",
       "room3aFull": "Die Säule 3a ist bereits ausgeschöpft",
+      "room3aYearValue": "{room} können Sie {year} einzahlen",
+      "room3aYearFull": "Die Säule 3a ist {year} bereits ausgeschöpft",
       "budget": "Budget",
       "budgetValue": "Prämie {premium}, Ihr Budget {budget}",
       "smoker": "Raucherstatus",
@@ -61,7 +64,9 @@
       "rules": "Pax-Regeln",
       "rulesValue": "Geprüft, keine Sperre (Regelwerk Version {version})",
       "suitability": "Angemessenheitsprüfung",
-      "suitabilityPending": "Vor der Offerte nötig, noch offen"
+      "suitabilityPending": "Vor der Offerte nötig, noch offen",
+      "start": "Vertragsbeginn",
+      "startValue": "{date}"
     },
     "rationale": {
       "todesfall": "Fällt Ihr Einkommen weg, fehlen Ihren Angehörigen rund {gap} pro Jahr. Ein Todesfallkapital von {sum} deckt diese Lücke für {years} Jahre, bis Alter {endAge}.",

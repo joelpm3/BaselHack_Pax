@@ -280,6 +280,20 @@ export const SCENARIOS: Scenario[] = [
       { intent: "React briefly to the answer." },
     ],
     maxTurns: 2,
+  {
+    id: "cancelled-insurance-3a",
+    title:
+      "Live case 31.10.: German writer in an English conversation, insurance 3a cancelled, new 3a from 2027",
+    locale: "en",
+    persona: `Man, born 1991, single, no children, cashier at Coop, CHF 65'000 gross, lives in Basel (Gundeli). Has an insurance-based 3a from an old broker: mostly risk, very little savings, insurer unknown, pays the 3a maximum. Cancelled it as of the end of 2026; the 2026 premium is paid. Wants a new, fully invested 3a with the maximum from 1 January 2027 and wants to sign today. Writes German, uses du.`,
+    script: [
+      "Ich bin 35, ein Mann, Single, keine Kinder. Ich arbeite bei Coop an der Kasse und verdiene 65'000 Franken im Jahr. Ich wohne in Basel im Gundeli. Ich habe eine 3a-Versicherung über einen alten Berater, da ist viel Risiko drin und ganz wenig Sparanteil. Ich zahle den Maximalbeitrag ein, bei welcher Versicherung das ist, weiss ich nicht. Kann ich mich früh pensionieren?",
+      "Auf dem Sparkonto habe ich 2000 Franken, ich gebe etwa 3500 im Monat aus. Andere Versicherungen habe ich keine.",
+      "Die 3a-Versicherung habe ich auf Ende Jahr gekündigt, die Prämie für 2026 ist schon bezahlt. Was bleibt mir mit 65?",
+      "Ich möchte ab 1. Januar 2027 eine neue 3a mit dem Maximalbeitrag, voll in Aktien investiert und mit wenig Risiko. Können wir das heute abschliessen?",
+      "Ja, ich möchte die Offerte.",
+    ],
+    maxTurns: 5,
   },
   // The pitch personas (documentation/DEMO_PERSONAS.md).
   ...PERSONA_SCENARIOS,

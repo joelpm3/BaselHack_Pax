@@ -47,9 +47,12 @@
       "premium": "Savings premium",
       "premiumValue": "{premium} per year",
       "premiumPartial": "{premium} per year; closing the whole gap would take {required}",
+      "premiumDesired": "{premium} per year, as you asked",
       "room3a": "Pillar 3a room",
       "room3aValue": "You can still pay in {room} this year",
       "room3aFull": "Your pillar 3a is already maxed out",
+      "room3aYearValue": "You can pay in {room} in {year}",
+      "room3aYearFull": "Your pillar 3a is already maxed out for {year}",
       "budget": "Budget",
       "budgetValue": "Premium {premium}, your budget {budget}",
       "smoker": "Smoker status",
@@ -61,7 +64,9 @@
       "rules": "Pax rules",
       "rulesValue": "Checked, no restriction (rule set version {version})",
       "suitability": "Suitability check",
-      "suitabilityPending": "Required before the offer, still open"
+      "suitabilityPending": "Required before the offer, still open",
+      "start": "Contract start",
+      "startValue": "{date}"
     },
     "rationale": {
       "todesfall": "If your income stops, your family would be short about {gap} per year. A death benefit of {sum} covers this gap for {years} years, until age {endAge}.",

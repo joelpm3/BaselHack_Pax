@@ -61,6 +61,22 @@ export function riskResultForModel(output: RiskAnalysisOutput): JSONValue {
       survivorsPensionPerMonth: perMonth(c.deathAnnuity),
       disabilityPensionPerMonth: perMonth(c.disabilityAnnuity),
     })),
+    ...(output.coverEnding?.length
+      ? {
+          coverEnding: output.coverEnding.map((c) => ({
+            person: c.person,
+            endDate: c.endDate,
+            cancelled: c.cancelled,
+            note:
+              "Counted in policies today; this cover is gone after endDate unless replaced." +
+              (c.amountsKnown
+                ? ""
+                : " Its benefits are unknown, so it adds nothing to the figures."),
+            deathCapital: c.deathCapital,
+            disabilityPensionPerMonth: perMonth(c.disabilityAnnuity),
+          })),
+        }
+      : {}),
     dependentChildren: output.dependentChildren,
     assumptions: { ...output.assumptions },
   };

@@ -112,7 +112,14 @@ export type PensionOverviewOutput =
       breakdown: IncomeBreakdown;
       availableFortune: number;
       capitalNeed: number;
-      pillar3a: { balance: number | null; annualContribution: number | null };
+      pillar3a: {
+        balance: number | null;
+        annualContribution: number | null;
+        /** Yearly amount the projection counts as saved (from next year on). */
+        countedAsSaving?: number;
+        /** For the advisor: how insurance 3a premiums and ending policies were treated. */
+        note?: string | null;
+      };
       assumptions: Assumptions;
     };
 
@@ -145,6 +152,19 @@ export interface PolicyCover {
   supportPeriod: DeathSizing;
 }
 
+/** Cover from a policy that ends soon (cancelled or expiring); still counted until then. */
+export interface CoverEnding {
+  person: 1 | 2;
+  endDate: string;
+  /** The customer gave notice. */
+  cancelled: boolean;
+  deathCapital: number;
+  /** CHF per year. */
+  disabilityAnnuity: number;
+  /** False when the policy's benefits are unknown (e.g. an insurance 3a without figures). */
+  amountsKnown: boolean;
+}
+
 export type RiskAnalysisOutput =
   | MissingOutput
   | {
@@ -153,6 +173,8 @@ export type RiskAnalysisOutput =
       dependentChildren: number;
       /** Policies already included in the breakdowns (`policies` source). */
       policyCover: PolicyCover[];
+      /** Cover that ends within two years: counted today, gone afterwards. */
+      coverEnding?: CoverEnding[];
       assumptions: Assumptions;
     };
 

@@ -3,13 +3,15 @@ import type { LifeSituation, Person } from "@/lib/domain/profile";
 import type { PolicyCategory, PolicyStatus } from "@/lib/domain/taxonomy";
 import { deathSupportYears } from "@/lib/sales/sizing";
 import { hasPartner, REGULAR_RETIREMENT_AGE } from "./logismata/mapping";
-import type { IncomeBreakdown, PolicyCover, RiskPersonResult } from "./types";
+import { INSURANCE_3A } from "./pillar3a";
+import type { CoverEnding, IncomeBreakdown, PolicyCover, RiskPersonResult } from "./types";
 
 /**
  * Private cover from the household's own policies (Pax and other insurers), counted on top of
  * what Logismata calculates for AHV/IV and the pension fund. Pensions count as they are; a
  * lump-sum death capital is spread evenly over the survivors' support period, the same period
  * a new death cover is sized over, so a cover sized to close the gap shows it as closed.
+ * An insurance 3a stated in the chat counts with its death capital and disability pension.
  */
 
 export interface CoverPolicy {
@@ -18,6 +20,17 @@ export interface CoverPolicy {
   sumInsured: number | null;
   annuityAnnual: number | null;
   insuredPerson: string | null;
+  endDate?: string | null;
+  details?: Record<string, unknown> | null;
+}
+
+/** An insurance 3a's risk benefits as a death and a disability policy; others as they are. */
+function asRiskPolicies(policy: CoverPolicy): CoverPolicy[] {
+  if (policy.category !== "pillar3a" || policy.details?.kind !== INSURANCE_3A) return [policy];
+  return [
+    { ...policy, category: "risk_death", annuityAnnual: null },
+    { ...policy, category: "risk_disability", sumInsured: null },
+  ];
 }
 
 const amount = (value: number | null) =>
@@ -36,9 +49,9 @@ function coverOf(
   year: number,
 ): PolicyCover | null {
   const subject = person === 1 ? "self" : "partner";
-  const own = policies.filter(
-    (p) => p.status === "active" && subjectOfPolicy(p, profile) === subject,
-  );
+  const own = policies
+    .flatMap(asRiskPolicies)
+    .filter((p) => p.status === "active" && subjectOfPolicy(p, profile) === subject);
   const sum = (category: PolicyCategory, field: "sumInsured" | "annuityAnnual") =>
     own.filter((p) => p.category === category).reduce((s, p) => s + amount(p[field]), 0);
   const deathCapital = sum("risk_death", "sumInsured");
@@ -72,6 +85,43 @@ export function policyCoverFor(
   if (hasPartner(profile) && profile.partner)
     covers.push(coverOf(2, profile.partner, policies, profile, year));
   return covers.filter((c): c is PolicyCover => c !== null);
+}
+
+/** Cover ending within this many years is reported as ending. */
+const COVER_ENDING_YEARS = 2;
+
+/**
+ * Death and disability cover that ends within two years (cancelled or expiring): counted today,
+ * gone afterwards. Tells the advisor which part of the cover a cancellation takes away.
+ */
+export function coverEndingFor(
+  policies: CoverPolicy[],
+  profile: LifeSituation,
+  today: string,
+): CoverEnding[] {
+  const limit = `${Number(today.slice(0, 4)) + COVER_ENDING_YEARS}${today.slice(4)}`;
+  const isRisk = (p: CoverPolicy) =>
+    p.category === "risk_death" || p.category === "risk_disability";
+  return policies.flatMap((p) => {
+    if (p.status !== "active" || !p.endDate || p.endDate < today || p.endDate > limit) return [];
+    const risk = asRiskPolicies(p).filter(isRisk);
+    const subject = subjectOfPolicy(p, profile);
+    if (risk.length === 0 || subject === "other") return [];
+    const sum = (category: PolicyCategory, field: "sumInsured" | "annuityAnnual") =>
+      risk.filter((r) => r.category === category).reduce((s, r) => s + amount(r[field]), 0);
+    const deathCapital = sum("risk_death", "sumInsured");
+    const disabilityAnnuity = sum("risk_disability", "annuityAnnual");
+    return [
+      {
+        person: subject === "self" ? (1 as const) : (2 as const),
+        endDate: p.endDate,
+        cancelled: p.details?.cancelled === true,
+        deathCapital,
+        disabilityAnnuity,
+        amountsKnown: deathCapital + disabilityAnnuity > 0,
+      },
+    ];
+  });
 }
 
 /** Yearly income the policies provide in this event. */

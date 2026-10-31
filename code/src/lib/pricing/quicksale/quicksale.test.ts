@@ -82,6 +82,16 @@ describe("action planning", () => {
     expect(plan(proposal(fkSample), sample)).toEqual([]);
   });
 
+  it("sets a chosen contract start first", () => {
+    const later = { ...sample, startDate: "2027-01-01" };
+    const actions = plan(proposal(fkSample), later);
+    expect(actions).toEqual([
+      { aktion: { key: "BEGINNDATUM_AENDERN" }, beginnDatum: "01.01.2027" },
+    ]);
+    const started = { ...proposal(fkSample), beginnDatum: "01.01.2027" };
+    expect(plan(started, later)).toEqual([]);
+  });
+
   it("changes sex, end age and the occupation (with the whole person)", () => {
     const sir = normalizeQuoteInput({
       ...sample,

@@ -4,6 +4,7 @@ import { emptyBreakdown } from "./logismata/mapping";
 import {
   applyPolicyCover,
   type CoverPolicy,
+  coverEndingFor,
   policyCoverFor,
   withPolicyCover,
 } from "./policy-cover";
@@ -146,5 +147,37 @@ describe("applyPolicyCover", () => {
     );
     expect(jane1.scenarios[0].breakdown.gap).toBe(20000);
     expect(may.scenarios[0].breakdown.gap).toBe(14000);
+  });
+});
+
+describe("insurance 3a and ending cover", () => {
+  const insurance3a = termLife({
+    category: "pillar3a",
+    sumInsured: 50000,
+    annuityAnnual: 12000,
+    insuredPerson: "May Müller",
+    endDate: "2026-12-31",
+    details: { kind: "insurance_3a", cancelled: true },
+  });
+
+  it("counts an insurance 3a's death capital and disability pension", () => {
+    const [may] = policyCoverFor([insurance3a], jane, YEAR);
+    expect(may).toMatchObject({ person: 2, deathCapital: 50000, disabilityAnnuity: 12000 });
+    // A savings 3a (no insurance_3a kind) is not risk cover.
+    expect(policyCoverFor([{ ...insurance3a, details: {} }], jane, YEAR)).toEqual([]);
+  });
+
+  it("reports cover a cancellation ends within two years", () => {
+    expect(coverEndingFor([insurance3a, termLife()], jane, "2026-10-31")).toEqual([
+      {
+        person: 2,
+        endDate: "2026-12-31",
+        cancelled: true,
+        deathCapital: 50000,
+        disabilityAnnuity: 12000,
+        amountsKnown: true,
+      },
+    ]);
+    expect(coverEndingFor([insurance3a], jane, "2027-01-01")).toEqual([]);
   });
 });

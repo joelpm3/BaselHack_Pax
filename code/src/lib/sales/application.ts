@@ -570,8 +570,11 @@ export function signApplication(
   if (rec && offerDiffers(offer, currentInputs(rec, customer)))
     return { ok: false, error: "offer_outdated" };
 
+  // The offer's start (e.g. 1 January when this year's 3a room is used), never earlier than
+  // the first of next month.
   const now = new Date();
-  const startDate = contractStartDate(now);
+  const earliest = contractStartDate(now);
+  const startDate = offer.startDate && offer.startDate > earliest ? offer.startDate : earliest;
   const years = offer.cover.durationYears;
   const number = policyNumber(startDate);
   const params = rec ? parametersOf(rec) : undefined;

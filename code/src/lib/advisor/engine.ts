@@ -30,6 +30,7 @@ import {
   type Conversation,
   countMessages,
   deleteAnswersAfterLastUserMessage,
+  followCustomerLanguage,
   getConversation,
   loadMessages,
   messageText,
@@ -189,7 +190,8 @@ export async function streamAdvisorTurn(
   input: TurnInput,
   onSettled?: (result: TurnResult) => void,
 ): Promise<ReadableStream<UIMessageChunk>> {
-  const { conversation, message } = input;
+  const { message } = input;
+  const conversation = followCustomerLanguage(input.conversation, message);
   if (input.trigger === "regenerate-message") deleteAnswersAfterLastUserMessage(conversation.id);
   const inputMode = message.metadata?.inputMode ?? "text";
   if (saveUserMessage(conversation.id, message, inputMode)) {

@@ -101,6 +101,25 @@ describe("sizeSavings", () => {
     expect(plan.annualPremium).toBeGreaterThan(1200);
   });
 
+  it("takes the premium the customer asked for, within the 3a room and the minimum", () => {
+    // 2027 start after the old 3a policy ended: the whole room is free again.
+    const nextYear = { ...family, currentYear: 2027, pillar3aContribution: 0 };
+    expect(sizeSavings(null, true, nextYear, 7258, 7258)).toMatchObject({
+      annualPremium: 7258,
+      pillar: "3a",
+      desiredAdjusted: false,
+    });
+    const paying = { ...family, pillar3aContribution: 3000 };
+    expect(sizeSavings(null, true, paying, undefined, 7258)).toMatchObject({
+      annualPremium: 4258,
+      desiredAdjusted: true,
+    });
+    expect(sizeSavings(null, true, family, undefined, 500)).toMatchObject({
+      annualPremium: 1200,
+      desiredAdjusted: true,
+    });
+  });
+
   it("uses 20 % of income without a pension fund", () => {
     expect(pillar3aRoom({ ...family, hasPensionFund: false })).toBe(20_000);
   });

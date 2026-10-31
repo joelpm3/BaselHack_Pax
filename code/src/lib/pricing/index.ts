@@ -25,7 +25,7 @@ export type {
  */
 export async function quotePremium(input: QuoteInput, context: CallContext = {}): Promise<Quote> {
   const inputs = normalizeQuoteInput(input);
-  const startDate = contractStartDate(new Date());
+  const startDate = inputs.startDate ?? contractStartDate(new Date());
   const issues = checkQuoteInput(inputs, startDate);
   const key = quoteCacheKey(inputs);
 

@@ -47,9 +47,12 @@
       "premium": "Premio di risparmio",
       "premiumValue": "{premium} all'anno",
       "premiumPartial": "{premium} all'anno; per l'intera lacuna servirebbero {required}",
+      "premiumDesired": "{premium} all'anno, come desiderato",
       "room3a": "Margine pilastro 3a",
       "room3aValue": "Quest'anno può ancora versare {room}",
       "room3aFull": "Il suo pilastro 3a è già al massimo",
+      "room3aYearValue": "Nel {year} può versare {room}",
+      "room3aYearFull": "Il pilastro 3a è già al massimo nel {year}",
       "budget": "Budget",
       "budgetValue": "Premio {premium}, il suo budget {budget}",
       "smoker": "Stato di fumatore",
@@ -61,7 +64,9 @@
       "rules": "Regole Pax",
       "rulesValue": "Verificate, nessun blocco (regole versione {version})",
       "suitability": "Verifica dell'adeguatezza",
-      "suitabilityPending": "Necessaria prima dell'offerta, ancora aperta"
+      "suitabilityPending": "Necessaria prima dell'offerta, ancora aperta",
+      "start": "Inizio del contratto",
+      "startValue": "{date}"
     },
     "rationale": {
       "todesfall": "Se il suo reddito viene a mancare, ai suoi cari mancano circa {gap} all'anno. Un capitale in caso di decesso di {sum} copre questa lacuna per {years} anni, fino all'età di {endAge} anni.",
