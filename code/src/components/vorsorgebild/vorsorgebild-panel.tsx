@@ -166,11 +166,11 @@ function Building({ model }: { model: VorsorgebildModel }) {
         <p className="mt-1 text-paragraph-s text-fg-muted">{t("body")}</p>
       </div>
       <ul
-        className="grid grid-cols-3 gap-x-3 gap-y-2.5"
+        className="grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-x-3 gap-y-2.5"
         aria-label={t("known", { count: known, total: model.facts.length })}
       >
         {model.facts.map((fact) => (
-          <li key={fact.key} className="flex items-center gap-2 text-paragraph-xs">
+          <li key={fact.key} className="flex min-w-0 items-center gap-2 text-paragraph-xs">
             <span
               aria-hidden
               className={cn(
@@ -178,7 +178,7 @@ function Building({ model }: { model: VorsorgebildModel }) {
                 fact.known ? "border-pax-purple bg-pax-purple" : "border-gray-4",
               )}
             />
-            <span className={fact.known ? "text-ink" : "text-fg-muted"}>
+            <span className={cn("min-w-0 hyphens-auto", fact.known ? "text-ink" : "text-fg-muted")}>
               {tf(fact.key)}
               <span className="sr-only">: {fact.known ? t("factKnown") : t("factOpen")}</span>
             </span>
