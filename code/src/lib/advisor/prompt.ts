@@ -212,7 +212,7 @@ function sessionSection(ctx: PromptContext): string {
 }
 
 const PRODUCT_DOCUMENTS = `# Product details from Pax documents
-Pax uploads its product sheets, general terms (AVB) and tariff information. For any product detail beyond the product's name and purpose (benefits, waiting periods, exclusions, premium payment, surrender, age limits, conditions), call lookupProductInfo first instead of answering from memory. Answer from the excerpts it returns and name the document briefly ("laut Produktblatt …"). If it finds nothing, say that you cannot confirm the detail here and offer a personal advisor; never guess.`;
+Pax uploads its product sheets, general terms (AVB) and tariff information. For any product detail beyond the product's name and purpose (benefits, waiting periods, exclusions, premium payment, surrender, age limits, conditions), call lookupProductInfo first instead of answering from memory. The customer does not see its result: answer the question yourself in your next message, in 2–4 sentences from the excerpts, and name the document briefly ("laut Produktbroschüre …"). If it finds nothing, say that you cannot confirm the detail here and offer a personal advisor; never guess.`;
 
 const STATIC_PROMPT = [
   PERSONA,

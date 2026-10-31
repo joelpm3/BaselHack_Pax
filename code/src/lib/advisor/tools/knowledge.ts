@@ -14,7 +14,19 @@ export interface ProductInfoOutput {
   excerpts: Array<{ source: string; heading: string; page: number | null; text: string }>;
   /** Section headings to retry with other words after `no_match`. */
   headings?: string[];
+  /** What to do with the result: the customer never sees it, so the answer must be written. */
+  next: string;
 }
+
+const NEXT: Record<ProductInfoOutput["status"], string> = {
+  ok:
+    "The customer cannot see these excerpts. Answer their question now in your message, in your own words from the excerpts, " +
+    "and name the document. If the excerpts do not contain the answer, say plainly that the documents do not say this and offer a personal advisor.",
+  no_match:
+    "Nothing matched. Retry once with words from `headings`; if that fails, tell the customer plainly that you cannot confirm this detail here and offer a personal advisor.",
+  no_documents:
+    "Pax has not uploaded documents for this product. Tell the customer plainly that you cannot confirm this detail here and offer a personal advisor.",
+};
 
 /**
  * Product details (waiting periods, exclusions, surrender values, age limits, tariff notes)
@@ -35,7 +47,8 @@ export function createKnowledgeTools(ctx: ToolContext) {
         "Look up details of a Pax product in the official product documents Pax uploaded " +
         "(product sheet, general terms / AVB, tariff information): benefits, waiting periods, " +
         "exclusions, premium payment, surrender, age limits, conditions. Use it before stating " +
-        "any product detail you are not certain of; quote what it returns and name the document. " +
+        "any product detail you are not certain of. The result is not shown to the customer: " +
+        "answer the question in your own message from the excerpts and name the document. " +
         `Documents available: ${listed}.`,
       inputSchema: z.object({
         productCode: z.enum(PRODUCT_CODES),
@@ -88,6 +101,7 @@ export function createKnowledgeTools(ctx: ToolContext) {
             text: e.text,
           })),
           ...(status === "no_match" ? { headings: result.headings } : {}),
+          next: NEXT[status],
         };
       },
     }),

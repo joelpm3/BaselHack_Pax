@@ -52,7 +52,7 @@ function matches(query: string, word: string): boolean {
   if (word === query) return true;
   const shorter = query.length <= word.length ? query : word;
   const longer = shorter === query ? word : query;
-  if (shorter.length >= 4 && longer.startsWith(shorter) && longer.length - shorter.length <= 3)
+  if (shorter.length >= 4 && longer.startsWith(shorter) && longer.length - shorter.length <= 2)
     return true;
   return query.length >= MIN_INFIX && word.includes(query);
 }
