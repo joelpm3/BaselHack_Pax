@@ -24,7 +24,7 @@ import { db, schema } from "@/lib/db";
 import { lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
 import { messageItems } from "@/lib/insights/transcript";
 import { getProfile } from "@/lib/profile/service";
-import { asksAboutInsurance, flagsFor, type ToolCall } from "./converse-checks";
+import { asksAboutInsurance, explainsOptions, flagsFor, type ToolCall } from "./converse-checks";
 import { type Beat, SCENARIOS, type Scenario, scenarioById } from "./converse-scenarios";
 
 // Opus ignores `temperature`; the SDK would warn on every step.
@@ -221,6 +221,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
   let informal = false;
   let analysisShown = false;
   let insuranceAsked = false;
+  let optionsExplained = false;
 
   for (let i = 0; i < scenario.maxTurns; i++) {
     const beat = beatOf(scenario.script[i]);
@@ -265,6 +266,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
     analysisShown ||= tools.some((t) =>
       ["showRiskAnalysis", "showPensionOverview"].includes(t.name),
     );
+    optionsExplained ||= texts.some(explainsOptions);
     const flags = flagsFor({
       customer: text,
       texts,
@@ -273,6 +275,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       customerUsesInformal: informal,
       analysisShown,
       insuranceAsked,
+      optionsExplained,
     });
     insuranceAsked ||= texts.some(asksAboutInsurance);
     exchanges.push({

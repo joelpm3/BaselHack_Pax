@@ -219,6 +219,51 @@ export const SCENARIOS: Scenario[] = [
     maxTurns: 8,
   },
   // The pitch personas (documentation/DEMO_PERSONAS.md).
+  {
+    id: "case-140bc36e",
+    title: "Live case: single cashier leaves an insurance 3a, wants a fully invested 3a today",
+    locale: "de",
+    persona: `Man, born 1991 (35), single, no children, cashier at Coop, CHF 65'000 per year, lives in Basel (4053, Gundeli). Has a pension fund through Coop but no certificate at hand. Had an insurance 3a (other insurer, name unknown) where he pays the maximum but almost nothing is saved; he already cancelled it for the end of the year and paid 2026 in full. Savings CHF 2'000, spends about CHF 3'500 a month. Wanted to know about early retirement. With "ganz wenig Risiko" he means little insurance cover (he needs no death cover); he is fine with market ups and downs over 30 years. Beginner: uses everyday words. ${VOICE} Uses du.`,
+    script: [
+      {
+        say: "Ich bin 35 Jahre alt, ich bin Single. Ich arbeite bei Coop an der Kasse. Ich bekomme 65'000 Franken Lohn im Jahr. Ich hatte eine 3-A-Versicherung. Über meinen alten Versicherungsberater. Dort habe ich sehr viel Risiko. Ich habe ganz wenig Sparanteil. Ich habe keine Kinder, keine Frau. Ich überlege mir, ob ich früh pensionieren kann. Was denkst du?",
+        voice: true,
+      },
+      { say: "Weiss ich noch nicht", voice: true },
+      { intent: "Answer the advisor's question (Basel, Gundeli; you are a man).", voice: true },
+      {
+        intent:
+          "Answer; you have no documents. Say you pay the maximum into the insurance 3a but almost nothing is saved.",
+        voice: true,
+      },
+      { intent: "Answer the advisor's question.", voice: true },
+      {
+        say: "Wenn ich jetzt hier theoretisch in 3A wechseln würde und in den nächsten Jahren voll investieren würde, in Aktien oder so, was könnte ich hier rausholen?",
+        voice: true,
+      },
+      {
+        say: "Keine Ahnung, aber ich habe das jetzt gekündigt auf Ende Jahr. Ich möchte jetzt eigentlich neu drei A machen, mit voll investieren und ganz wenig Risiko. Können wir das heute abschliessen?",
+        voice: true,
+      },
+      { intent: "Answer the advisor's question.", voice: true },
+      { say: "Okay, ich möchte das jetzt abschliessen.", voice: true },
+    ],
+    maxTurns: 10,
+  },
+  {
+    id: "product-choice-expert",
+    title: "Expert customer chooses a 3a solution (bank vs insurance, guarantee vs return)",
+    locale: "de",
+    persona: `Woman, born 1984, financial controller, CHF 120'000 per year, married, husband born 1982 (CHF 95'000), two children (2014, 2017), lives in 6300 Zug. Has a pension fund; knows her Umwandlungssatz (5.4% overmandatory), possible Einkauf of CHF 60'000. No 3a yet, no private life insurance. Wants to start a 3a and wonders whether a bank 3a or an insurance 3a with disability cover is better. Expert: uses technical terms, dislikes basic explanations. Uses Sie, precise short messages.`,
+    script: [
+      "Ich möchte mit der Säule 3a starten, Maximalbetrag. Bank-3a mit Fonds oder 3a-Versicherung mit Prämienbefreiung: was spricht wofür? Einen Einkauf in die PK von rund 60'000 prüfe ich parallel, Umwandlungssatz im Überobligatorium 5,4 %.",
+      { intent: "Answer the advisor's question briefly and precisely." },
+      { intent: "Answer; say you want it 'sicher, aber mit Rendite'." },
+      { intent: "Ask which option the advisor recommends for you, and ask to see it." },
+      { intent: "Answer the advisor's question." },
+    ],
+    maxTurns: 7,
+  },
   ...PERSONA_SCENARIOS,
 ];
 
