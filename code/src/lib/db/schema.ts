@@ -36,6 +36,12 @@ import {
   SENTIMENTS,
   type Topic,
 } from "@/lib/domain/taxonomy";
+import {
+  DATE_PRECISIONS,
+  FUTURE_EVENT_KINDS,
+  FUTURE_EVENT_STATUSES,
+  OUTBOX_KINDS,
+} from "@/lib/followups/taxonomy";
 
 const id = () =>
   text("id")
@@ -569,3 +575,84 @@ export const auditLog = sqliteTable(
   },
   (t) => [index("audit_log_entity_idx").on(t.entityType, t.entityId)],
 );
+
+// ─── Follow-ups (future life events, outbox, yearly check-in) ───────────────
+
+/**
+ * Dated future life events the classifier extracted from a conversation ("in zwei Jahren bin
+ * ich fertig"). About a week before `expectedDate` the follow-up engine turns one into a
+ * Wiedervorlage lead and a personalised (mocked) email.
+ */
+export const futureEvents = sqliteTable(
+  "future_events",
+  {
+    id: id(),
+    customerId: text("customer_id")
+      .notNull()
+      .references(() => customers.id, { onDelete: "cascade" }),
+    conversationId: text("conversation_id").references(() => conversations.id, {
+      onDelete: "set null",
+    }),
+    kind: text("kind", { enum: FUTURE_EVENT_KINDS }).notNull(),
+    /** Who it concerns when not the customer, e.g. "Tochter Lena". */
+    subject: text("subject"),
+    /** First day of the expected month (or the exact day), ISO yyyy-mm-dd. */
+    expectedDate: text("expected_date").notNull(),
+    precision: text("precision", { enum: DATE_PRECISIONS }).notNull(),
+    confidence: real("confidence").notNull(),
+    /** The customer's own words, e.g. "in zwei Jahren bin ich fertig". */
+    sourceQuote: text("source_quote").notNull(),
+    /** Short German note on what the customer plans. */
+    note: text("note"),
+    status: text("status", { enum: FUTURE_EVENT_STATUSES }).notNull().default("upcoming"),
+    leadId: text("lead_id").references(() => leads.id, { onDelete: "set null" }),
+    isSimulated: bool("is_simulated").notNull().default(false),
+    createdAt: createdAt(),
+    updatedAt: updatedAt(),
+  },
+  (t) => [
+    index("future_events_customer_idx").on(t.customerId),
+    index("future_events_status_date_idx").on(t.status, t.expectedDate),
+  ],
+);
+
+/** Mocked outbox: generated emails are stored and shown, never sent. */
+export const outboxEmails = sqliteTable(
+  "outbox_emails",
+  {
+    id: id(),
+    customerId: text("customer_id")
+      .notNull()
+      .references(() => customers.id, { onDelete: "cascade" }),
+    kind: text("kind", { enum: OUTBOX_KINDS }).notNull(),
+    futureEventId: text("future_event_id").references(() => futureEvents.id, {
+      onDelete: "cascade",
+    }),
+    leadId: text("lead_id").references(() => leads.id, { onDelete: "set null" }),
+    /** 1 = first email, 2 = reminder. */
+    sequence: integer("sequence").notNull().default(1),
+    toAddress: text("to_address").notNull(),
+    locale: text("locale", { enum: LOCALES }).notNull(),
+    subject: text("subject").notNull(),
+    body: text("body").notNull(),
+    /** Business date the email went out (may be a simulated "today"), ISO yyyy-mm-dd. */
+    sentOn: text("sent_on").notNull(),
+    repliedAt: timestamp("replied_at"),
+    model: text("model"),
+    createdAt: createdAt(),
+  },
+  (t) => [
+    index("outbox_emails_customer_idx").on(t.customerId),
+    index("outbox_emails_event_idx").on(t.futureEventId),
+  ],
+);
+
+/** Contact preferences the customer controls in the cockpit (the company can see and change them). */
+export const contactPreferences = sqliteTable("contact_preferences", {
+  customerId: text("customer_id")
+    .primaryKey()
+    .references(() => customers.id, { onDelete: "cascade" }),
+  yearlyCheckin: bool("yearly_checkin").notNull().default(true),
+  updatedBy: text("updated_by", { enum: ACTOR_TYPES }).notNull(),
+  updatedAt: updatedAt(),
+});

@@ -1,0 +1,139 @@
+{
+  "kind": {
+    "end_of_studies": "Fine degli studi",
+    "first_job": "Primo impiego",
+    "wedding": "Matrimonio",
+    "child_birth": "Nascita",
+    "home_purchase": "Casa di proprietà",
+    "retirement": "Pensionamento",
+    "child_turns_18": "Figlio compie 18 anni",
+    "child_turns_25": "Figlio compie 25 anni",
+    "contract_end": "Fine del contratto",
+    "job_change": "Cambio di lavoro",
+    "self_employment": "Attività indipendente",
+    "other": "Evento di vita"
+  },
+  "status": {
+    "upcoming": "Previsto",
+    "due": "Da trattare",
+    "responded": "Risposto",
+    "lost": "Nessuna reazione",
+    "dismissed": "Scartato"
+  },
+  "season": {
+    "spring": "Primavera {year}",
+    "summer": "Estate {year}",
+    "autumn": "Autunno {year}",
+    "winter": "Inverno {year}"
+  },
+  "page": {
+    "title": "Promemoria",
+    "description": "Eventi di vita che la clientela ha annunciato durante il colloquio. Una settimana prima Pax si fa vivo di sua iniziativa con un'e-mail personale. A differenza di un passaggio, qui nessuno ha chiesto di parlare con una persona.",
+    "tabs": "Stato dei promemoria"
+  },
+  "tab": {
+    "due": "Da trattare",
+    "upcoming": "Previsti",
+    "responded": "Con risposta",
+    "lost": "Nessuna reazione"
+  },
+  "empty": {
+    "due": {
+      "title": "Al momento non c'è nulla da trattare",
+      "body": "Andate avanti nel tempo con il viaggio nel tempo per far scadere gli eventi previsti."
+    },
+    "upcoming": {
+      "title": "Nessun evento annunciato",
+      "body": "Appena qualcuno scrive nella chat per esempio «tra due anni finisco», appare qui."
+    },
+    "responded": {
+      "title": "Ancora nessuna risposta",
+      "body": "Qui compaiono i promemoria a cui qualcuno ha risposto o dopo i quali la persona è tornata nella chat."
+    },
+    "lost": {
+      "title": "Nessun promemoria perso",
+      "body": "Se due e-mail restano senza risposta, il lead è considerato perso. Si riapre se la persona si fa viva più tardi."
+    }
+  },
+  "clock": {
+    "label": "Viaggio nel tempo per la demo",
+    "simulated": "Data simulata",
+    "real": "Data di oggi",
+    "plusWeek": "+1 settimana",
+    "plusMonth": "+1 mese",
+    "plusHalfYear": "+6 mesi",
+    "plusYear": "+1 anno",
+    "jumpTo": "Scegliere una data",
+    "jump": "Vai",
+    "run": "Controllare ora i promemoria",
+    "back": "Tornare a oggi",
+    "reset": "Reimpostare la demo",
+    "resetConfirm": "Eliminare tutti i lead di promemoria e le e-mail generati e tornare alla data di oggi?",
+    "working": "Pax controlla i promemoria e scrive le e-mail …",
+    "nothing": "Niente di nuovo da trattare.",
+    "invalid": "Questa data non è valida.",
+    "summary": {
+      "opened": "{count, plural, one {# promemoria aperto} other {# promemoria aperti}}",
+      "reminded": "{count, plural, one {# sollecito inviato} other {# solleciti inviati}}",
+      "lost": "{count, plural, one {# lead perso per mancata reazione} other {# lead persi per mancata reazione}}",
+      "reopened": "{count, plural, one {# lead riaperto} other {# lead riaperti}}",
+      "responded": "{count, plural, one {# risposta registrata} other {# risposte registrate}}",
+      "checkins": "{count, plural, one {# check-in annuale inviato} other {# check-in annuali inviati}}",
+      "failed": "{count, plural, one {# e-mail non è stata scritta, controllare di nuovo} other {# e-mail non sono state scritte, controllare di nuovo}}"
+    }
+  },
+  "timeline": {
+    "caption": "{count, plural, =0 {Nessun promemoria previsto} one {# promemoria previsto da oggi} other {# promemoria previsti da oggi}}",
+    "today": "Oggi",
+    "anonymous": "Anonimo"
+  },
+  "card": {
+    "expected": "Previsto:",
+    "fromConversation": "Dal colloquio del",
+    "followUpOn": "Promemoria dal",
+    "dueNow": "Da trattare",
+    "confidence": "Affidabilità {value} %",
+    "noEmail": "Nessun indirizzo e-mail registrato: si prega di telefonare.",
+    "recordReply": "Registrare la risposta",
+    "dismiss": "Scartare"
+  },
+  "outbox": {
+    "title": "Posta in uscita",
+    "description": "Simulazione: Pax non invia nulla, le e-mail restano qui.",
+    "empty": "Ancora nessuna e-mail.",
+    "to": "A {address}",
+    "replied": "Risposto",
+    "kind": {
+      "event_follow_up": "Promemoria",
+      "reminder": "Sollecito",
+      "yearly_checkin": "Check-in annuale"
+    }
+  },
+  "checkin": {
+    "title": "Check-in annuale",
+    "description": "Una volta all'anno Pax chiede se è cambiato qualcosa in famiglia, nel lavoro, nell'abitazione o nel reddito. La clientela può disattivarlo nel proprio cockpit previdenziale.",
+    "next": "Prossimo il",
+    "dueNow": "da inviare",
+    "off": "Disiscritto",
+    "turnOff": "Disiscrivere",
+    "turnOn": "Iscrivere di nuovo",
+    "empty": "Ancora nessun cliente con indirizzo e-mail.",
+    "noEmail": "Check-in annuale: nessun indirizzo e-mail registrato."
+  },
+  "customer": {
+    "title": "Promemoria e posta",
+    "description": "Eventi di vita annunciati e le e-mail che Pax ha scritto in merito.",
+    "events": "Eventi di vita annunciati",
+    "noEvents": "Ancora nessun evento annunciato."
+  },
+  "portal": {
+    "title": "Check-in annuale",
+    "body": "Una volta all'anno le chiediamo brevemente per e-mail se è cambiato qualcosa in famiglia, nel lavoro, nell'abitazione o nel reddito. Così la sua previdenza resta aggiornata.",
+    "on": "Attivato",
+    "off": "Disattivato",
+    "turnOff": "Disattivare",
+    "turnOn": "Attivare",
+    "next": "Prossima richiesta:",
+    "noEmail": "Non abbiamo ancora il suo indirizzo e-mail. Può indicarlo nel colloquio con il consulente."
+  }
+}

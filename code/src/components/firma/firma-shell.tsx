@@ -2,6 +2,7 @@
 
 import {
   Bot,
+  CalendarClock,
   Handshake,
   LayoutDashboard,
   LogOut,
@@ -28,6 +29,7 @@ const NAV = [
   { href: "/firma/kunden", key: "customers", icon: UsersRound },
   { href: "/firma/leads", key: "leads", icon: Target },
   { href: "/firma/uebergaben", key: "handovers", icon: Handshake },
+  { href: "/firma/wiedervorlagen", key: "followUps", icon: CalendarClock },
   { href: "/firma/regeln", key: "rules", icon: ScrollText },
   { href: "/firma/simulation", key: "simulation", icon: Bot },
 ] as const;

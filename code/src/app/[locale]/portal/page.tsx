@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense, use } from "react";
+import { CheckinSetting } from "@/components/followups/checkin-setting";
 import { adviceEntries, keyFigures, upcomingDates } from "@/components/portal/cockpit";
 import { ConversationList } from "@/components/portal/conversation-list";
 import { DocumentList } from "@/components/portal/document-list";
@@ -46,6 +47,7 @@ async function Cockpit({ locale }: { locale: Locale }) {
   const customer = await getCurrentCustomer();
   if (!customer) return <EmptyCockpit />;
   const t = await getTranslations("portal");
+  const tFollowUps = await getTranslations("followups.portal");
   const today = toIsoDate(new Date());
   const { profile, policies, calculated, documents, conversations, documentPaths } = loadCockpit(
     customer.id,
@@ -89,6 +91,9 @@ async function Cockpit({ locale }: { locale: Locale }) {
             </Section>
             <Section id="profile" title={t("profile.title")} className="order-6">
               <ProfileSummary profile={profile} documentPaths={documentPaths} locale={locale} />
+            </Section>
+            <Section id="checkin" title={tFollowUps("title")} className="order-7">
+              <CheckinSetting customerId={customer.id} />
             </Section>
           </div>
         </div>
