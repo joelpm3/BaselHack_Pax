@@ -38,7 +38,6 @@ function amount(value: number, decimals = 2): string {
   return dec ? `${grouped}.${dec}` : grouped;
 }
 
-
 // ─── Drawing primitives (y measured from the top of the page) ───────────────
 
 interface Fonts {
@@ -369,10 +368,349 @@ async function salaryCertificate() {
   await save(pdf, "lohnausweis-2025-may-mueller.pdf");
 }
 
+// ─── Vorsorgeausweis ────────────────────────────────────────────────────────
+
+/**
+ * Plan "Standard" of the fictional Pensionskasse Muster: age-graded savings credits on the
+ * insured salary, risk 3.0% and costs 0.5%; the employee pays half the savings credit plus 1%.
+ */
+const PLAN = {
+  coordination: 26460,
+  interest: 0.0125,
+  risk: 0.03,
+  costs: 0.005,
+  disabilityShare: 0.4,
+  partnerShare: 0.6,
+  childShare: 0.2,
+  conversion: { 58: 0.049, 60: 0.052, 62: 0.055, 63: 0.0565, 64: 0.058, 65: 0.06 } as Record<
+    number,
+    number
+  >,
+};
+
+function savingsRate(bvgAge: number): number {
+  if (bvgAge < 25) return 0;
+  if (bvgAge < 35) return 0.07;
+  if (bvgAge < 45) return 0.1;
+  if (bvgAge < 55) return 0.15;
+  return 0.18;
+}
+
+interface PensionPerson {
+  file: string;
+  salutation: string;
+  name: string;
+  street: string;
+  town: string;
+  birthDate: string;
+  ahv: string;
+  civilStatus: string;
+  insuranceNumber: string;
+  employer: string;
+  entry: string;
+  workload: number;
+  salary: number;
+  capital: number;
+  /** Mandatory BVG part of the capital (shown as "davon"). */
+  bvgCapital: number;
+  deathLumpSum: number;
+  maxBuyIn: number;
+}
+
+const birth = (p: PensionPerson) => {
+  const [, month, year] = p.birthDate.split(".").map(Number);
+  return { month, year };
+};
+
+/** Projected capital at the end of the month the person reaches `age`, from 01.01.2026. */
+function projectedCapital(p: PensionPerson, insured: number, age: number): number {
+  const { month, year } = birth(p);
+  let capital = p.capital;
+  for (let y = 2026; y <= year + age; y++) {
+    const share = y === year + age ? month / 12 : 1;
+    capital = capital * (1 + PLAN.interest * share) + savingsRate(y - year) * insured * share;
+  }
+  return round05(capital);
+}
+
+const round05 = (value: number) => Math.round(value * 20) / 20;
+const pad = (n: number) => String(n).padStart(2, "0");
+const lastDay = (month: number, year: number) => new Date(Date.UTC(year, month, 0)).getUTCDate();
+
+async function pensionCertificate(p: PensionPerson) {
+  const { pdf, addPage } = await newDocument(
+    `Vorsorgeausweis 2026 ${p.name}`,
+    "Vorsorgeausweis Pensionskasse Muster, Muster",
+  );
+  const ACCENT = rgb(0.11, 0.33, 0.52);
+  const L = 48;
+  const R = A4[0] - 48;
+  const coordination = round05(PLAN.coordination * (p.workload / 100));
+  const insured = p.salary - coordination;
+  const { month, year } = birth(p);
+  const savings = savingsRate(2026 - year);
+  const disability = round05(insured * PLAN.disabilityShare);
+  const retirementDate = `${lastDay(month, year + 65)}.${pad(month)}.${year + 65}`;
+
+  /** Section heading with a tinted band; returns the next top. */
+  const section = (c: Canvas, label: string, top: number) => {
+    c.rect(L, top, R - L, 17, { fill: TINT });
+    c.rect(L, top, 3, 17, { fill: ACCENT });
+    c.text(label, L + 10, top + 4.5, { size: 9.5, bold: true });
+    return top + 24;
+  };
+  /** Label/value rows, value right-aligned; returns the next top. */
+  const rows = (
+    c: Canvas,
+    top: number,
+    items: Array<[string, string, { bold?: boolean; note?: string }?]>,
+  ) => {
+    let y = top;
+    for (const [label, value, opts] of items) {
+      c.text(label, L + 10, y, { size: 9, bold: opts?.bold });
+      c.text(value, R - 6, y, { size: 9, bold: opts?.bold, align: "right" });
+      if (opts?.note) {
+        y += 11;
+        c.text(opts.note, L + 10, y, { size: 7, color: MUTED });
+      }
+      y += 16;
+      c.line(L, y - 4, R, y - 4, 0.3);
+    }
+    return y + 6;
+  };
+  /** Two label/value pairs per line for the personal data. */
+  const grid = (c: Canvas, top: number, pairs: Array<[string, string]>) => {
+    const half = (R - L) / 2;
+    let y = top;
+    pairs.forEach(([label, value], i) => {
+      const x = L + 10 + (i % 2) * half;
+      c.text(label, x, y, { size: 8, color: MUTED });
+      c.text(value, x + 92, y, { size: 9 });
+      if (i % 2 === 1 || i === pairs.length - 1) y += 14;
+    });
+    return y + 6;
+  };
+
+  // Page 1
+  const c = addPage();
+  c.specimen("Seite 1 von 2");
+  c.rect(L, 40, 16, 16, { fill: ACCENT });
+  c.text("Pensionskasse Muster", L + 24, 41, { size: 14, bold: true });
+  c.text("Sammelstiftung für die berufliche Vorsorge", L + 24, 60, { size: 8, color: MUTED });
+  c.text("Musterstrasse 12, 4057 Basel", L + 24, 71, { size: 8, color: MUTED });
+  c.text("Telefon 061 000 00 10, info@pk-muster.example", L + 24, 82, {
+    size: 8,
+    color: MUTED,
+  });
+
+  ["Persönlich", p.salutation, p.name, p.street, p.town].forEach((line, i) => {
+    c.text(line, 330, 120 + i * 13, { size: i === 0 ? 8 : 10, bold: i === 0 });
+  });
+
+  c.text("Basel, 15. Januar 2026", L, 210, { size: 9 });
+  c.text("Vorsorgeausweis per 1. Januar 2026", L, 232, { size: 16, bold: true });
+  c.text("Vorsorgeplan Standard. Alle Beträge in CHF.", L, 253, { size: 9, color: MUTED });
+
+  let y = section(c, "Persönliche Daten", 276);
+  y = grid(c, y, [
+    ["Name", `${p.salutation} ${p.name}`],
+    ["Versicherten-Nr.", p.insuranceNumber],
+    ["Geburtsdatum", p.birthDate],
+    ["AHV-Nr.", p.ahv],
+    ["Zivilstand", p.civilStatus],
+    ["Eintritt", p.entry],
+    ["Beschäftigungsgrad", `${p.workload} %`],
+    ["Rücktrittsdatum", retirementDate],
+    ["Arbeitgeber", p.employer],
+  ]);
+
+  y = section(c, "Lohn", y);
+  y = rows(c, y, [
+    ["Massgebender Jahreslohn (AHV-Lohn)", amount(p.salary)],
+    [
+      "Koordinationsabzug",
+      `– ${amount(coordination)}`,
+      p.workload < 100 ? { note: `dem Beschäftigungsgrad von ${p.workload} % angepasst` } : {},
+    ],
+    ["Versicherter Lohn", amount(insured), { bold: true }],
+  ]);
+
+  y = section(c, "Altersleistungen", y);
+  const at65 = projectedCapital(p, insured, 65);
+  const pension65 = round05(at65 * PLAN.conversion[65]);
+  y = rows(c, y, [
+    ["Altersguthaben per 01.01.2026", amount(p.capital), { bold: true }],
+    ["davon Altersguthaben nach BVG (Obligatorium)", amount(p.bvgCapital)],
+    [`Projiziertes Altersguthaben mit 65 (${retirementDate})`, amount(at65)],
+    ["Projizierte jährliche Altersrente mit 65", amount(pension65), { bold: true }],
+  ]);
+
+  // Projection table
+  c.text("Projektion bei vorzeitiger und ordentlicher Pensionierung", L + 10, y, {
+    size: 8.5,
+    bold: true,
+  });
+  y += 15;
+  const cols = [L + 10, L + 60, R - 230, R - 120, R - 6];
+  ["Alter", "per", "Altersguthaben", "Umwandlungssatz", "Altersrente p.a."].forEach((h, i) => {
+    c.text(h, cols[i], y, { size: 7.5, color: MUTED, align: i >= 2 ? "right" : "left" });
+  });
+  y += 12;
+  c.line(L, y - 2, R, y - 2, 0.6, INK);
+  for (const age of [58, 60, 62, 63, 64, 65]) {
+    const capital = projectedCapital(p, insured, age);
+    const rate = PLAN.conversion[age];
+    const bold = age === 65;
+    const cells = [
+      String(age),
+      `${lastDay(month, year + age)}.${pad(month)}.${year + age}`,
+      amount(capital),
+      `${(rate * 100).toFixed(2)} %`,
+      amount(round05(capital * rate)),
+    ];
+    cells.forEach((cell, i) => {
+      c.text(cell, cols[i], y + 2, { size: 8.5, bold, align: i >= 2 ? "right" : "left" });
+    });
+    y += 14;
+    c.line(L, y - 1, R, y - 1, 0.3);
+  }
+  c.paragraph(
+    `Die Projektion rechnet mit einem Zins von ${(PLAN.interest * 100).toFixed(2)} % und dem heutigen versicherten Lohn. Sie ist unverbindlich.`,
+    L + 10,
+    y + 4,
+    R - L - 20,
+    { size: 7.5, color: MUTED },
+  );
+
+  // Page 2
+  const d = addPage();
+  d.specimen("Seite 2 von 2");
+  d.text(`Vorsorgeausweis per 1. Januar 2026, ${p.name}, ${p.insuranceNumber}`, L, 40, {
+    size: 8,
+    color: MUTED,
+  });
+
+  y = section(d, "Leistungen bei Invalidität", 64);
+  y = rows(d, y, [
+    [
+      "Jährliche Invalidenrente",
+      amount(disability),
+      { note: "nach einer Wartefrist von 24 Monaten" },
+    ],
+    ["Jährliche Invaliden-Kinderrente je Kind", amount(round05(disability * PLAN.childShare))],
+    ["Beitragsbefreiung", "nach 3 Monaten"],
+  ]);
+
+  y = section(d, "Leistungen bei Tod vor der Pensionierung", y);
+  y = rows(d, y, [
+    [
+      "Jährliche Ehegatten- oder Lebenspartnerrente",
+      amount(round05(disability * PLAN.partnerShare)),
+    ],
+    ["Jährliche Waisenrente je Kind", amount(round05(disability * PLAN.childShare))],
+    [
+      "Zusätzliches Todesfallkapital",
+      p.deathLumpSum > 0 ? amount(p.deathLumpSum) : "keines",
+      { note: "an die Begünstigten gemäss Reglement" },
+    ],
+  ]);
+
+  y = section(d, "Beiträge pro Jahr", y);
+  const fcols = [L + 10, R - 220, R - 110, R - 6];
+  ["Beitrag", "Arbeitnehmer", "Arbeitgeber", "Total"].forEach((h, i) => {
+    d.text(h, fcols[i], y, { size: 7.5, color: MUTED, align: i > 0 ? "right" : "left" });
+  });
+  y += 12;
+  d.line(L, y - 2, R, y - 2, 0.6, INK);
+  const split: Array<[string, number, number]> = [
+    [`Sparbeitrag (${(savings * 100).toFixed(1)} %)`, savings / 2, savings / 2],
+    [`Risikobeitrag (${(PLAN.risk * 100).toFixed(1)} %)`, 0.01, PLAN.risk - 0.01],
+    [`Verwaltungskosten (${(PLAN.costs * 100).toFixed(1)} %)`, 0, PLAN.costs],
+  ];
+  const sums = [0, 0];
+  for (const [label, employee, employer] of split) {
+    const an = round05(insured * employee);
+    const ag = round05(insured * employer);
+    sums[0] += an;
+    sums[1] += ag;
+    [label, amount(an), amount(ag), amount(an + ag)].forEach((cell, i) => {
+      d.text(cell, fcols[i], y + 2, { size: 8.5, align: i > 0 ? "right" : "left" });
+    });
+    y += 14;
+    d.line(L, y - 1, R, y - 1, 0.3);
+  }
+  ["Total Beiträge pro Jahr", amount(sums[0]), amount(sums[1]), amount(sums[0] + sums[1])].forEach(
+    (cell, i) => {
+      d.text(cell, fcols[i], y + 2, { size: 8.5, bold: true, align: i > 0 ? "right" : "left" });
+    },
+  );
+  y += 24;
+
+  y = section(d, "Einkauf und Wohneigentum", y);
+  y = rows(d, y, [
+    [
+      "Maximal möglicher Einkauf per 01.01.2026",
+      amount(p.maxBuyIn),
+      { note: "Einkäufe sind vom steuerbaren Einkommen abziehbar." },
+    ],
+    ["Möglicher Vorbezug für Wohneigentum per 01.01.2026", amount(p.capital)],
+  ]);
+
+  y += 4;
+  y += d.paragraph(
+    "Massgebend sind das Vorsorgereglement der Pensionskasse Muster und die gesetzlichen Bestimmungen. Dieser Ausweis ersetzt alle früheren Ausweise. Eine aus einem Einkauf resultierende Leistung darf innerhalb von drei Jahren nicht als Kapital bezogen werden. Bitte prüfen Sie die Angaben und melden Sie Änderungen Ihrer Personalabteilung.",
+    L,
+    y,
+    R - L,
+    { size: 8, color: MUTED },
+  );
+  d.text("Pensionskasse Muster, Verwaltung", L, y + 16, { size: 9, bold: true });
+
+  await save(pdf, p.file);
+}
+
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log(`Writing demo documents to ${OUT_DIR}`);
   await salaryCertificate();
+  await pensionCertificate({
+    file: "vorsorgeausweis-2026-may-mueller.pdf",
+    salutation: MAY.salutation,
+    name: MAY.name,
+    street: MAY.street,
+    town: MAY.town,
+    birthDate: MAY.birthDate,
+    ahv: MAY.ahv,
+    civilStatus: "verheiratet",
+    insuranceNumber: "PKM-104-2231",
+    employer: `${EMPLOYER.name}, Basel`,
+    entry: "01.03.2014",
+    workload: 100,
+    salary: SALARY_2025.gross,
+    capital: 185400,
+    bvgCapital: 131250,
+    deathLumpSum: 50000,
+    maxBuyIn: 86350,
+  });
+  await pensionCertificate({
+    file: "vorsorgeausweis-2026-taylor-johnson.pdf",
+    salutation: "Herr",
+    name: "Taylor Johnson",
+    street: "Beispielgasse 8",
+    town: "8004 Zürich",
+    birthDate: "16.09.1995",
+    ahv: "756.9876.5432.17",
+    civilStatus: "ledig",
+    insuranceNumber: "PKM-311-0457",
+    employer: "Muster Software AG, Zürich",
+    entry: "01.08.2020",
+    workload: 90,
+    salary: 100000,
+    capital: 41870,
+    bvgCapital: 30120,
+    deathLumpSum: 0,
+    maxBuyIn: 132600,
+  });
 }
 
 main().catch((error) => {
