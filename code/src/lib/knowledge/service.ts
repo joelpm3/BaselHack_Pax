@@ -251,10 +251,10 @@ export async function processKnowledgeDocument(id: string): Promise<void> {
       productName: PRODUCTS[doc.productCode].name,
     });
     if (sections.length === 0) throw new Error("No text found in the document");
-    db.transaction((tx) => {
+    const activated = db.transaction((tx) => {
       const current = tx.select({ status: kd.status }).from(kd).where(eq(kd.id, id)).get();
       // Deleted while it was being read: keep it deleted.
-      if (current?.status !== "processing") return;
+      if (current?.status !== "processing") return false;
       // A newer version finished first: this one is history, not the active text.
       const newer = tx
         .select({ id: kd.id })
@@ -265,7 +265,7 @@ export async function processKnowledgeDocument(id: string): Promise<void> {
         .get();
       if (newer) {
         tx.update(kd).set({ status: "superseded", sections, model }).where(eq(kd.id, id)).run();
-        return;
+        return false;
       }
       tx.update(kd)
         .set({ status: "superseded" })
@@ -275,7 +275,9 @@ export async function processKnowledgeDocument(id: string): Promise<void> {
         .set({ status: "active", sections, model, activatedAt: new Date(), error: null })
         .where(eq(kd.id, id))
         .run();
+      return true;
     });
+    if (!activated) return;
     audit({
       actorType: "system",
       action: "knowledge.activated",
