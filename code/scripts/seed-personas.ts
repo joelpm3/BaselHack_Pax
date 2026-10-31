@@ -96,6 +96,7 @@ interface SeedHandover {
 interface SeedConversation {
   key: string;
   daysAgo: number;
+  /** UTC; Swiss local time is one or two hours later. */
   hour: number;
   title: string;
   locale: Locale;
@@ -165,6 +166,9 @@ const stamp = (daysAgo: number, hour: number, minutes = 0) =>
     new Date(`${day(daysAgo)}T${String(hour).padStart(2, "0")}:00:00Z`).getTime() +
       minutes * 60_000,
   );
+/** Advisor work happens in office hours, `afterDays` after the conversation. */
+const office = (conversationDaysAgo: number, afterDays: number, step: number) =>
+  stamp(conversationDaysAgo - afterDays, 7, 30 + step * 6);
 
 /** The profile Pax knows from the CRM, built from the simulated twin's facts. */
 function baseProfile(p: SimPersona): LifeSituationInput {
@@ -234,7 +238,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "student-3a",
         daysAgo: 40,
-        hour: 19,
+        hour: 18,
         title: "Säule 3a im Studium",
         locale: "de",
         status: "completed",
@@ -330,7 +334,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "konkubinat",
         daysAgo: 18,
-        hour: 20,
+        hour: 18,
         title: "Absicherung im Konkubinat vor der Hochzeit",
         locale: "de",
         status: "completed",
@@ -486,7 +490,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "self-employed-house",
         daysAgo: 9,
-        hour: 7,
+        hour: 5,
         title: "Selbstständig, Hauskauf und keine Pensionskasse",
         locale: "de",
         status: "handed_over",
@@ -667,7 +671,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "rente-kapital",
         daysAgo: 25,
-        hour: 10,
+        hour: 8,
         title: "Rente oder Kapital, 3a gestaffelt beziehen",
         locale: "de",
         status: "handed_over",
@@ -806,7 +810,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "steuern-wohnung",
         daysAgo: 60,
-        hour: 12,
+        hour: 10,
         title: "3a-Steuern und Wohnungskauf in fünf Jahren",
         locale: "de",
         status: "completed",
@@ -849,6 +853,10 @@ const PERSONAS: SeedPersona[] = [
             "UX-Designerin (CHF 92'000) zahlt das 3a-Maximum, plant in fünf Jahren eine Wohnung um CHF 700'000. Ersparnisse CHF 48'000, Pax 3a CHF 21'000; braucht rund CHF 140'000 Eigenkapital.",
           nextBestAction:
             "Sparplan für das Eigenkapital zeigen und Vorbezug aus 3a und Pensionskasse (WEF) mit Auswirkung auf die Rente erklären.",
+        },
+        feedback: {
+          nps: 7,
+          comment: "Gute Infos, aber ich hätte gern gleich gesehen, wie viel ich sparen muss.",
         },
         lead: {
           type: "existing_upsell",
@@ -902,7 +910,8 @@ const PERSONAS: SeedPersona[] = [
         productName: "Pax Todesfallversicherung",
         pillar: "3b",
         insuredPerson: "Camille Rochat",
-        startDate: `2011-${camilleContractEnd.slice(5, 7)}-01`,
+        // Taken out in 2011 for the flat, for a whole number of years.
+        startDate: `2011-${addDays(camilleContractEnd, 1).slice(5)}`,
         endDate: camilleContractEnd,
         premiumAnnual: 540,
         sumInsured: 300_000,
@@ -926,7 +935,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "fin-contrat",
         daysAgo: 4,
-        hour: 8,
+        hour: 6,
         title: "Fin de l'assurance décès, rappel souhaité",
         locale: "fr",
         status: "handed_over",
@@ -1029,7 +1038,8 @@ const PERSONAS: SeedPersona[] = [
     clientSinceDays: 1_100,
     profile: (base) => ({
       ...base,
-      person: { ...base.person, occupation: "Office-Managerin" },
+      // The CRM still has last year's salary; the raise comes up in the check-in chat.
+      person: { ...base.person, occupation: "Office-Managerin", grossIncome: 78_000 },
       children: [{ birthYear: 2005, educationUntil: 2029 }],
       pillar2: { hasPensionFund: true },
       pillar3a: { balance: 46_000, annualContribution: 5_000 },
@@ -1069,7 +1079,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "eu-burnout",
         daysAgo: 430,
-        hour: 21,
+        hour: 18,
         title: "Was passiert, wenn ich lange krank bin?",
         locale: "de",
         status: "completed",
@@ -1167,7 +1177,7 @@ const PERSONAS: SeedPersona[] = [
       {
         key: "begunstigung-studium",
         daysAgo: 366,
-        hour: 18,
+        hour: 16,
         title: "Begünstigung 3a und Studium der Tochter",
         locale: "de",
         status: "completed",
@@ -1324,7 +1334,11 @@ function insertConversation(
         assigned = advisorId(u.assign);
         to.assignedAdvisorId = assigned;
       }
-      return { advisor: u.advisor, data: { from, to }, createdAt: after(u.afterDays, 30) };
+      return {
+        advisor: u.advisor,
+        data: { from, to },
+        createdAt: office(conv.daysAgo, u.afterDays, 0),
+      };
     });
     const [row] = db
       .insert(schema.handovers)
@@ -1365,7 +1379,7 @@ function insertConversation(
           to: ctx.email,
           direction: "outbound",
         },
-        createdAt: after(h.email.afterDays, 45),
+        createdAt: office(conv.daysAgo, h.email.afterDays, 1),
       });
     }
     if (audits.length > 0) db.insert(schema.auditLog).values(audits).run();
@@ -1437,7 +1451,7 @@ function insertLead(
   let status: LeadStatus = "new";
   let assigned: string | null = null;
   steps.forEach((s, i) => {
-    const createdAt = after(s.afterDays, 10 + i);
+    const createdAt = office(conv.daysAgo, s.afterDays, i);
     if ("assign" in s) {
       const to = advisorId(s.assign);
       activities.push({

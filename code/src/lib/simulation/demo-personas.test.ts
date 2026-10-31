@@ -121,7 +121,8 @@ describe("seeded pitch personas", () => {
         .get();
       const data = lifeSituationSchema.parse(profile?.data);
       expect(data.person.birthYear).toBe(sim.birthYear);
-      expect(data.person.grossIncome).toBe(sim.grossIncome);
+      // Monika's raise is news for the check-in chat: the CRM still has the old salary.
+      expect(data.person.grossIncome).toBe(key === "yearly_checkin" ? 78_000 : sim.grossIncome);
       expect(data.residence.zip).toBe(sim.zip);
       expect(data.children.map((c) => c.birthYear)).toEqual(sim.childrenBirthYears);
       expect(data.pillar3a.balance ?? null).toBe(sim.pillar3aBalance);
