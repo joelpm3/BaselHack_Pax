@@ -3,7 +3,7 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { HANDOVER_STATUSES, type HandoverStatus } from "@/lib/domain/taxonomy";
 import type { Scope } from "./aggregate";
-import { customerColumns, scopeWhere } from "./common";
+import { customerColumns, OPEN_LEAD_SQL, scopeWhere } from "./common";
 import { resolveRules } from "./conversations";
 
 export function parseHandoverStatus(value: unknown): HandoverStatus {
@@ -31,6 +31,8 @@ export function listHandovers(status: HandoverStatus, scope: Scope) {
       summary: schema.analyses.summary,
       email: schema.customers.email,
       phone: schema.customers.phone,
+      /** The same person's open sales leads, linked from the handover card. */
+      openLeads: sql<number>`(select count(*) from ${schema.leads} where ${schema.leads.customerId} = ${h.customerId} and ${OPEN_LEAD_SQL})`,
       ...customerColumns,
     })
     .from(h)

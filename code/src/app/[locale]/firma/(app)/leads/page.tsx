@@ -6,8 +6,9 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { Suspense, use } from "react";
 import { LeadTypeBadge, PriorityBadge } from "@/components/firma/badges";
 import { AssignSelect, LeadStatusSelect } from "@/components/firma/controls";
-import { CustomerLabel } from "@/components/firma/customer-label";
+import { CustomerLink, customerHref } from "@/components/firma/customer-link";
 import { FilterSelect } from "@/components/firma/filter-select";
+import { KindDefinition, KindMark } from "@/components/firma/kind-mark";
 import { type KanbanLead, LeadsKanban } from "@/components/firma/leads-kanban";
 import { LiveRefresh } from "@/components/firma/live-events";
 import {
@@ -38,7 +39,19 @@ export default function LeadsPage({ params, searchParams }: PageProps<"/[locale]
   const t = useTranslations("firma.leads");
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} />
+      <PageHeader
+        title={
+          <span className="flex items-center gap-3">
+            <KindMark kind="lead" />
+            {t("title")}
+          </span>
+        }
+        description={
+          <>
+            {t("description")} <KindDefinition kind="lead" className="mt-1" />
+          </>
+        }
+      />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <LeadsContent searchParams={searchParams} />
       </Suspense>
@@ -61,8 +74,9 @@ async function LeadsContent({
   const advisors = listAdvisors();
   const advisorName = new Map(advisors.map((a) => [a.id, a.name]));
 
-  const [t, tType, tStatus, tTopic, tScope, tCommon, format] = await Promise.all([
+  const [t, tKinds, tType, tStatus, tTopic, tScope, tCommon, format] = await Promise.all([
     getTranslations("firma.leads"),
+    getTranslations("firmaCustomers.kinds"),
     getTranslations("common.taxonomy.leadType"),
     getTranslations("common.taxonomy.leadStatus"),
     getTranslations("common.taxonomy.topics"),
@@ -173,6 +187,8 @@ async function LeadsContent({
               city: l.city,
               reasonToCall: l.reasonToCall,
               conversationId: l.conversationId,
+              customerId: l.customerId,
+              hasOpenHandover: l.openHandovers > 0,
               isSimulated: l.isSimulated,
               assignee: l.assignedAdvisorId ? (advisorName.get(l.assignedAdvisorId) ?? null) : null,
             }),
@@ -215,11 +231,12 @@ async function LeadsContent({
                   <td className="px-3 py-3">
                     <div className="grid gap-1">
                       <span className="flex items-center gap-1.5">
-                        <CustomerLabel
+                        <CustomerLink
+                          customerId={l.customerId}
                           firstName={l.firstName}
                           lastName={l.lastName}
                           city={l.city}
-                          className="font-medium"
+                          section="leads"
                         />
                         {l.isSimulated ? (
                           <Bot
@@ -253,6 +270,14 @@ async function LeadsContent({
                           <span className="text-xs">{t("noContact")}</span>
                         ) : null}
                       </span>
+                      {l.openHandovers > 0 ? (
+                        <Link
+                          href={customerHref(l.customerId, "handovers")}
+                          className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
+                        >
+                          {tKinds("handover.alsoOpen")}
+                        </Link>
+                      ) : null}
                     </div>
                   </td>
                   <td className="px-3 py-3">

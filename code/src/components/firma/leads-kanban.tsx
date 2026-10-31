@@ -13,6 +13,7 @@ import {
 } from "@/lib/domain/taxonomy";
 import { cn } from "@/lib/utils";
 import { LeadStatusSelect } from "./controls";
+import { customerHref } from "./customer-link";
 
 export interface KanbanLead {
   id: string;
@@ -24,6 +25,9 @@ export interface KanbanLead {
   city: string | null;
   reasonToCall: string;
   conversationId: string | null;
+  customerId: string;
+  /** The person also has an open handover (wants a human). */
+  hasOpenHandover: boolean;
   isSimulated: boolean;
   assignee: string | null;
 }
@@ -41,6 +45,7 @@ export function LeadsKanban({ leads }: { leads: KanbanLead[] }) {
   const tStatus = useTranslations("common.taxonomy.leadStatus");
   const tType = useTranslations("common.taxonomy.leadType");
   const tPriority = useTranslations("common.taxonomy.priority");
+  const tKinds = useTranslations("firmaCustomers.kinds");
   const [, start] = useTransition();
   const [dragOver, setDragOver] = useState<LeadStatus | null>(null);
   const [optimistic, move] = useOptimistic(
@@ -104,11 +109,7 @@ export function LeadsKanban({ leads }: { leads: KanbanLead[] }) {
                       className={cn("size-2 shrink-0", PRIORITY_MARK[lead.priority])}
                     />
                     <Link
-                      href={
-                        lead.conversationId
-                          ? `/firma/gespraeche/${lead.conversationId}#lead-${lead.id}`
-                          : "/firma/leads"
-                      }
+                      href={customerHref(lead.customerId, "leads")}
                       className="min-w-0 flex-1 truncate font-medium hover:underline"
                     >
                       {lead.name}
@@ -126,6 +127,14 @@ export function LeadsKanban({ leads }: { leads: KanbanLead[] }) {
                     {lead.city ? ` · ${lead.city}` : ""}
                   </p>
                   <p className="line-clamp-3 text-xs">{lead.reasonToCall}</p>
+                  {lead.hasOpenHandover ? (
+                    <Link
+                      href={customerHref(lead.customerId, "handovers")}
+                      className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
+                    >
+                      {tKinds("handover.alsoOpen")}
+                    </Link>
+                  ) : null}
                   <p className="truncate text-xs text-fg-muted">
                     {lead.assignee ?? t("unassigned")}
                   </p>
