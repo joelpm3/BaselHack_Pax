@@ -1,3 +1,4 @@
+import type { WidgetInputTool } from "@/lib/advisor/widget-inputs";
 import type { Locale } from "@/lib/domain/taxonomy";
 import { PERSONA_SCENARIOS } from "./persona-scenarios";
 
@@ -8,7 +9,19 @@ import { PERSONA_SCENARIOS } from "./persona-scenarios";
  * the customer continues on its own until `maxTurns` or until it says goodbye.
  */
 
-export type Beat = string | { say: string; voice?: boolean } | { intent: string; voice?: boolean };
+/**
+ * Before the message: the customer sets values in the latest widget of `tool` (merged into what
+ * it shows), as the widget's server action would store them.
+ */
+export interface WidgetMove {
+  tool: WidgetInputTool;
+  values: Record<string, number>;
+}
+
+export type Beat =
+  | string
+  | { say: string; voice?: boolean; widget?: WidgetMove }
+  | { intent: string; voice?: boolean; widget?: WidgetMove };
 
 export interface Scenario {
   id: string;
@@ -217,6 +230,56 @@ export const SCENARIOS: Scenario[] = [
       { intent: "Answer the advisor's question." },
     ],
     maxTurns: 8,
+  },
+  // Widget inputs reach the advisor (ask first, pre-fill, ask before saving slider values).
+  {
+    id: "widget-figures-first",
+    title: "Concept question: one sentence, asks for figures, then a pre-filled widget",
+    locale: "de",
+    persona: `Woman, born 1992, employed, lives in 8004 Zürich. Has about CHF 20'000 in a savings account and can put aside about CHF 500 a month. Curious, short messages, uses Sie.`,
+    script: [
+      "Was ist eigentlich der Zinseszins?",
+      "Ich habe etwa 20'000 gespart und kann so 500 im Monat zur Seite legen.",
+    ],
+    maxTurns: 2,
+  },
+  {
+    id: "widget-sliders-save",
+    title: "Customer moves the compound-interest sliders: advisor asks before saving",
+    locale: "de",
+    knownProfile: {
+      person: { birthYear: 1988, employment: "employed", grossIncome: 90000 },
+      assets: { liquid: 15000 },
+    },
+    persona: `Man, born 1988, employed, CHF 90'000. Has CHF 30'000 in savings now (more than he said last time) and can put aside CHF 400 a month. Short messages, uses Sie.`,
+    script: [
+      "Zeigen Sie mir doch mit einem Beispiel, wie der Zinseszins funktioniert.",
+      {
+        say: "Ok, so sieht das bei mir aus.",
+        widget: {
+          tool: "explainCompoundInterest",
+          values: { startAmount: 30000, monthlySaving: 400 },
+        },
+      },
+      { intent: "Say yes, these are your real figures." },
+    ],
+    maxTurns: 3,
+  },
+  {
+    id: "widget-what-if",
+    title: "Hypothetical what-if amount: widget with it, no question about saving it",
+    locale: "de",
+    knownProfile: {
+      person: { birthYear: 1985, employment: "employed", grossIncome: 85000 },
+      assets: { liquid: 20000 },
+      monthlySavings: 300,
+    },
+    persona: `Woman, born 1985, employed, CHF 85'000, savings CHF 20'000, puts aside CHF 300 a month. Wonders what more saving would do. Uses Sie.`,
+    script: [
+      "Was wäre, wenn ich 1'000 Franken im Monat sparen würde statt 300? Wie viel hätte ich in 20 Jahren?",
+      { intent: "React briefly to the answer." },
+    ],
+    maxTurns: 2,
   },
   // The pitch personas (documentation/DEMO_PERSONAS.md).
   ...PERSONA_SCENARIOS,

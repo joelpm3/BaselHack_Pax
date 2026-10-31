@@ -5,6 +5,7 @@
     "pending": "Ich rechne das Beispiel",
     "introGeneral": "Ein Beispiel zum Ausprobieren: Verschieben Sie die Regler und sehen Sie, woher das Geld am Ende kommt.",
     "introPillar3a": "Mit Ihren Zahlen zur Säule 3a bis zur Pensionierung. Alle Regler lassen sich verstellen.",
+    "introOwn": "Mit Ihrem Ersparten und Ihrem Sparbetrag. Verschieben Sie die Regler und sehen Sie, woher das Geld am Ende kommt.",
     "params": {
       "startAmount": "Startbetrag",
       "monthlySaving": "Sparbetrag pro Monat",

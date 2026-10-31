@@ -1,5 +1,5 @@
 import "server-only";
-import { tool } from "ai";
+import { type JSONValue, tool } from "ai";
 import { z } from "zod";
 import { runSaving } from "../logismata/checks";
 import {
@@ -8,6 +8,7 @@ import {
   SAVINGS_LIMITS,
   type SavingsPlanOutput,
 } from "../savings-plan";
+import { withoutCustomerInputs } from "../widget-inputs";
 import type { ToolContext } from "./context";
 
 export function createSavingsPlanTools(ctx: ToolContext) {
@@ -37,7 +38,7 @@ export function createSavingsPlanTools(ctx: ToolContext) {
           .min(0)
           .max(SAVINGS_LIMITS.startCapital.max)
           .optional()
-          .describe("CHF already saved for this goal; default 0"),
+          .describe("CHF already saved for this goal, as the customer said it; default 0"),
       }),
       execute: (input, { toolCallId }): Promise<SavingsPlanOutput> =>
         runSaving(normalizeSavingsParams(input), {
@@ -45,6 +46,10 @@ export function createSavingsPlanTools(ctx: ToolContext) {
           conversationId: ctx.conversationId,
           toolCallId,
         }),
+      toModelOutput: ({ output }) => ({
+        type: "json",
+        value: withoutCustomerInputs(output) as JSONValue,
+      }),
     }),
   };
 }

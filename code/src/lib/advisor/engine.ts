@@ -42,6 +42,8 @@ import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
 import type { ToolContext } from "./tools/context";
 import { readinessFor } from "./tools/profile";
+import { widgetChangeNote } from "./widget-inputs";
+import { takeWidgetChanges } from "./widget-inputs-store";
 
 /**
  * One advisor turn, shared by /api/chat (streamed to the browser) and runAdvisorTurn
@@ -73,7 +75,8 @@ const waitsForCustomer: StopCondition<ToolSet> = ({ steps }) =>
  * Prepares the stored transcript for the model: drops the greeting (it is in the instructions)
  * and old reasoning (its signature is bound to the previous, different system prompt), and adds
  * context the model needs but the customer should not see. After the review card, the note
- * states what the server already did with each document (values applied, discarded).
+ * states what the server already did with each document (values applied, discarded); after the
+ * customer moved a widget's sliders, what they set there.
  */
 function forModel(messages: AdvisorUIMessage[], customerId: string): AdvisorUIMessage[] {
   return messages
@@ -89,6 +92,7 @@ function forModel(messages: AdvisorUIMessage[], customerId: string): AdvisorUIMe
         notes.push(...documentNotesForAdvisor(customerId, documentIds));
       if (m.metadata?.inputMode === "voice")
         notes.push("[Dictated by voice: the transcript may contain recognition errors]");
+      for (const change of m.metadata?.widgetChanges ?? []) notes.push(widgetChangeNote(change));
       return notes.length
         ? { ...m, parts: [...m.parts, { type: "text" as const, text: notes.join("\n") }] }
         : m;
@@ -196,6 +200,9 @@ export async function streamAdvisorTurn(
       preview: messageText(message).slice(0, 160),
     });
   }
+
+  // Before the history is loaded: the note is stored on this message and replayed from there.
+  takeWidgetChanges(conversation.id, conversation.customerId, message.id);
 
   const ruleSet = getActiveRuleSet();
   const history = loadMessages(conversation.id);

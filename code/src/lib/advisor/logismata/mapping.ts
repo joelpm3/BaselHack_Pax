@@ -109,6 +109,7 @@ const NOT_CALCULATED = [
   "riskAttitude",
   "privateCover",
   "monthlySpending",
+  "monthlySavings",
   "person.firstName",
   "person.occupation",
   "person.smoker",

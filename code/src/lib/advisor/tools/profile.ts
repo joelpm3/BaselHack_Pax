@@ -118,6 +118,11 @@ export const updateProfileInput = z.object({
       "Death or disability policies the customer says they or their partner already have: new ones, or amounts for one stored from the chat earlier (same insurer, type and person updates it)",
     ),
   monthlySpending: z.number().min(0).optional().describe("Rough household spending, CHF PER MONTH"),
+  monthlySavings: z
+    .number()
+    .min(0)
+    .optional()
+    .describe("What the customer can put aside, CHF PER MONTH"),
   contact: z
     .object({
       firstName: z.string().optional(),
@@ -183,6 +188,8 @@ export function toProfileChanges(
   if (privateCover) changes.push({ path: "privateCover", value: privateCover });
   if (input.monthlySpending !== undefined)
     changes.push({ path: "monthlySpending", value: input.monthlySpending });
+  if (input.monthlySavings !== undefined)
+    changes.push({ path: "monthlySavings", value: input.monthlySavings });
   if (input.contact?.firstName && !input.person?.firstName && !current.person.firstName)
     changes.push({ path: "person.firstName", value: input.contact.firstName });
   return changes;

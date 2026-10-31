@@ -87,6 +87,7 @@
     "riskAttitude": "Goût du risque",
     "privateCover": "Assurance décès/invalidité privée",
     "monthlySpending": "Dépenses par mois",
+    "monthlySavings": "Épargne possible par mois",
     "existingPolicies": "Assurances existantes"
   },
   "enums": {

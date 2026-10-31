@@ -2,7 +2,7 @@
 
 import { MessageSquareText, RotateCcw, Sprout } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { useChatActions } from "@/components/chat/chat-actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -10,10 +10,12 @@ import {
   COMPOUND_PARTS,
   type CompoundParams,
   type CompoundPart,
+  clampCompound,
   compoundColumns,
   compoundGrowth,
 } from "@/lib/advisor/explainers/compound-interest";
 import type { CompoundInterestOutput } from "@/lib/advisor/explainers/types";
+import { saveCompoundInputs } from "@/lib/advisor/widget-inputs-actions";
 import type { WidgetProps } from "../types";
 import {
   FinePrint,
@@ -36,23 +38,44 @@ const MAX_COLUMNS = 12;
 const MAX_ROWS = 18;
 const PARAM_KEYS = ["startAmount", "monthlySaving", "ratePercent", "years"] as const;
 
-export function CompoundInterestWidget({ state, output }: WidgetProps) {
+/** Wait this long after the last slider move before storing the values for the advisor. */
+const SAVE_DELAY_MS = 400;
+
+export function CompoundInterestWidget({ toolCallId, state, output }: WidgetProps) {
   const t = useTranslations("explainers.compound");
   if (state === "output-error") return <WidgetFailed icon={Sprout} title={t("title")} />;
   if (state !== "output-available") return <WidgetPending icon={Sprout} label={t("pending")} />;
   const data = output as CompoundInterestOutput | undefined;
   if (!data || data.status !== "ok" || !isRecord(data.params)) return null;
-  return <CompoundBody initial={data} />;
+  return <CompoundBody toolCallId={toolCallId} initial={data} />;
 }
 
-function CompoundBody({ initial }: { initial: CompoundInterestOutput }) {
+/** The customer's stored slider values (after a reload), or the tool's own. */
+function startingParams(initial: CompoundInterestOutput): CompoundParams {
+  const saved = initial.customerInputs?.values;
+  if (!isRecord(saved)) return initial.params;
+  const valid = PARAM_KEYS.every((key) => typeof saved[key] === "number");
+  return valid ? clampCompound(saved as unknown as CompoundParams) : initial.params;
+}
+
+function CompoundBody({
+  toolCallId,
+  initial,
+}: {
+  toolCallId: string;
+  initial: CompoundInterestOutput;
+}) {
   const t = useTranslations("explainers.compound");
   const tShared = useTranslations("explainers");
   const chf = useChf();
   const locale = useLocale();
-  const { busy, sendMessage } = useChatActions();
-  const [params, setParams] = useState<CompoundParams>(initial.params);
-  const [touched, setTouched] = useState<Set<keyof CompoundParams>>(() => new Set());
+  const { conversationId, busy, sendMessage } = useChatActions();
+  const [params, setParams] = useState<CompoundParams>(() => startingParams(initial));
+  const [touched, setTouched] = useState<Set<keyof CompoundParams>>(() => {
+    const start = startingParams(initial);
+    return new Set(PARAM_KEYS.filter((key) => start[key] !== initial.params[key]));
+  });
+  const save = useInputsSaver(conversationId, toolCallId, busy);
 
   const rows = useMemo(() => compoundGrowth(params), [params]);
   const { unit, columns } = useMemo(
@@ -76,13 +99,21 @@ function CompoundBody({ initial }: { initial: CompoundInterestOutput }) {
         : chf(value);
 
   function change(key: keyof CompoundParams, value: number) {
-    setParams((current) => ({ ...current, [key]: value }));
+    const next = { ...params, [key]: value };
+    setParams(next);
     setTouched((current) => new Set(current).add(key));
+    save.schedule(next);
   }
 
   function reset() {
     setParams(initial.params);
     setTouched(new Set());
+    save.schedule(initial.params);
+  }
+
+  async function discuss() {
+    await save.flush();
+    sendMessage(t("discussMessage", { params: summary, total: chf(total) }));
   }
 
   const summary = PARAM_KEYS.map(
@@ -92,7 +123,11 @@ function CompoundBody({ initial }: { initial: CompoundInterestOutput }) {
   return (
     <WidgetCard icon={Sprout} title={t("title")}>
       <p className="text-paragraph-s text-fg-muted">
-        {initial.basis === "pillar3a" ? t("introPillar3a") : t("introGeneral")}
+        {initial.basis === "pillar3a"
+          ? t("introPillar3a")
+          : initial.basis === "own"
+            ? t("introOwn")
+            : t("introGeneral")}
       </p>
 
       <div className="mt-4 flex flex-wrap items-baseline justify-between gap-x-3">
@@ -156,12 +191,7 @@ function CompoundBody({ initial }: { initial: CompoundInterestOutput }) {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        <Button
-          size="sm"
-          variant="secondary"
-          disabled={busy}
-          onClick={() => sendMessage(t("discussMessage", { params: summary, total: chf(total) }))}
-        >
+        <Button size="sm" variant="secondary" disabled={busy} onClick={discuss}>
           <MessageSquareText aria-hidden />
           {tShared("discuss")}
         </Button>
@@ -217,4 +247,62 @@ function Slider({
       {source ? <span className="text-paragraph-xs text-fg-muted">{source}</span> : null}
     </div>
   );
+}
+
+/** How often to retry values the server could not store yet (the turn's message is not saved). */
+const SAVE_RETRIES = 3;
+
+/**
+ * Stores the slider values for the advisor, debounced; no chat message is sent. While a turn
+ * runs, its message (perhaps this very widget) is not stored yet, so values that could not be
+ * kept wait and go out again once the advisor has finished.
+ */
+function useInputsSaver(conversationId: string, toolCallId: string, busy: boolean) {
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pending = useRef<CompoundParams | null>(null);
+  const retries = useRef(0);
+
+  const flush = useCallback(async () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
+    const values = pending.current;
+    if (!values) return;
+    const saved = await saveCompoundInputs({ conversationId, toolCallId, values }).catch(
+      () => false,
+    );
+    // Newer values replaced these meanwhile: their own timer sends them.
+    if (pending.current !== values) return;
+    if (saved) {
+      pending.current = null;
+      retries.current = 0;
+    } else if (retries.current < SAVE_RETRIES) {
+      retries.current += 1;
+      timer.current = setTimeout(() => void flush(), SAVE_DELAY_MS * 4);
+    }
+  }, [conversationId, toolCallId]);
+
+  useEffect(() => {
+    if (busy || !pending.current) return;
+    retries.current = 0;
+    void flush();
+  }, [busy, flush]);
+
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
+
+  const schedule = useCallback(
+    (values: CompoundParams) => {
+      pending.current = values;
+      retries.current = 0;
+      if (timer.current) clearTimeout(timer.current);
+      timer.current = setTimeout(() => void flush(), SAVE_DELAY_MS);
+    },
+    [flush],
+  );
+
+  return { schedule, flush };
 }

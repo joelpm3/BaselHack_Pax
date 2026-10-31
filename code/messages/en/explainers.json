@@ -5,6 +5,7 @@
     "pending": "Calculating the example",
     "introGeneral": "An example to try: move the sliders and see where the money comes from in the end.",
     "introPillar3a": "With your pillar 3a figures until retirement. You can change every slider.",
+    "introOwn": "With your savings and what you put aside. Move the sliders and see where the money comes from in the end.",
     "params": {
       "startAmount": "Starting amount",
       "monthlySaving": "Saving per month",

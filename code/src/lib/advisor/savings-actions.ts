@@ -5,6 +5,7 @@ import { getCurrentCustomer } from "@/lib/auth/customer";
 import { getOwnedConversation, patchToolOutput } from "./conversations";
 import { runSaving } from "./logismata/checks";
 import { normalizeSavingsParams, type SavingsPlanOutput } from "./savings-plan";
+import { recordWidgetInputs } from "./widget-inputs-store";
 
 const recalculateSchema = z.object({
   conversationId: z.string().min(1).max(64),
@@ -33,6 +34,10 @@ export async function recalculateSavingsPlan(
     conversationId,
     toolCallId,
   }).catch(() => null);
-  if (result) patchToolOutput(conversationId, toolCallId, { ...result });
+  if (result) {
+    // First, while the output still holds the values the advisor saw.
+    recordWidgetInputs(conversationId, toolCallId, "calculateSavingsPlan", { ...result.params });
+    patchToolOutput(conversationId, toolCallId, { ...result });
+  }
   return result;
 }

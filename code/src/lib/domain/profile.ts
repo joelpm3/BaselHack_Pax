@@ -147,6 +147,8 @@ export const lifeSituationSchema = z.object({
   privateCover: privateCoverSchema.optional(),
   /** Rough household spending, CHF per MONTH (the only monthly amount in the profile). */
   monthlySpending: z.number().min(0).optional(),
+  /** What the customer can put aside, CHF per MONTH (pre-fills the savings widgets). */
+  monthlySavings: z.number().min(0).optional(),
 });
 export type LifeSituation = z.infer<typeof lifeSituationSchema>;
 

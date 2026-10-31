@@ -87,6 +87,7 @@
     "riskAttitude": "Risk appetite",
     "privateCover": "Private life/disability cover",
     "monthlySpending": "Spending per month",
+    "monthlySavings": "Savings per month",
     "existingPolicies": "Existing insurance"
   },
   "enums": {

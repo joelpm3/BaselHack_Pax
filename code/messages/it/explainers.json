@@ -5,6 +5,7 @@
     "pending": "Calcolo l’esempio",
     "introGeneral": "Un esempio da provare: sposti i cursori e veda da dove viene il denaro alla fine.",
     "introPillar3a": "Con i Suoi dati del pilastro 3a fino al pensionamento. Tutti i cursori sono regolabili.",
+    "introOwn": "Con i Suoi risparmi e l’importo che mette da parte. Sposti i cursori e veda da dove arriva il denaro alla fine.",
     "params": {
       "startAmount": "Importo iniziale",
       "monthlySaving": "Risparmio al mese",

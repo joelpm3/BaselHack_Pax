@@ -4,6 +4,7 @@
  */
 
 import type { IncomeBreakdown, MissingOutput } from "../types";
+import type { CustomerInputs } from "../widget-inputs";
 import type { CompoundParams, CompoundSummary } from "./compound-interest";
 import type { PaxArticleId } from "./references";
 
@@ -14,8 +15,15 @@ export interface CompoundInterestOutput {
   status: "ok";
   params: CompoundParams;
   sources: Record<keyof CompoundParams, ValueSource>;
-  /** What the profile figures stand for, e.g. the 3a balance as start amount. */
-  basis: "pillar3a" | "general";
+  /**
+   * Whose amounts: the customer's 3a figures, their own savings (said or from the profile), or a
+   * general example.
+   */
+  basis: "pillar3a" | "own" | "general";
+  /** Which money the sliders stand for, even while they show example values. */
+  account?: "pillar3a" | "savings";
+  /** The customer's latest slider values (see widget-inputs.ts); absent until they move one. */
+  customerInputs?: CustomerInputs;
   summary: CompoundSummary;
 }
 

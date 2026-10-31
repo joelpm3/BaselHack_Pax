@@ -80,6 +80,7 @@ export const EDITABLE_FIELDS: Record<string, FieldSpec> = {
   riskAttitude: { kind: "enum", enumName: "riskAttitude", options: ["low", "medium", "high"] },
   privateCover: { kind: "enum", enumName: "privateCover", options: privateCoverSchema.options },
   monthlySpending: chf,
+  monthlySavings: chf,
 };
 
 /** Fields the card shows but does not edit inline (lists, place of residence). */
