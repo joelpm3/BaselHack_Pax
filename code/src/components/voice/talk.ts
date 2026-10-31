@@ -9,19 +9,6 @@ export function appendTranscript(current: string, transcript: string): string {
   return `${before} ${next}`;
 }
 
-const MIN_AUTO_SEND_S = 4;
-const MAX_AUTO_SEND_S = 10;
-const WORDS_PER_EXTRA_SECOND = 12;
-
-/**
- * Seconds the transcript stays on screen before it is sent by itself: long voice answers need
- * longer to read through than a short "ja, genau".
- */
-export function autoSendSeconds(text: string): number {
-  const words = text.trim().split(/\s+/).filter(Boolean).length;
-  return Math.min(MAX_AUTO_SEND_S, MIN_AUTO_SEND_S + Math.floor(words / WORDS_PER_EXTRA_SECOND));
-}
-
 /** The subset of an element the Space shortcut needs to look at. */
 export interface ShortcutTarget {
   tagName?: string;

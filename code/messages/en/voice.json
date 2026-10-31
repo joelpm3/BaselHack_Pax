@@ -50,8 +50,6 @@
     "editLabel": "Correct the text",
     "discard": "Discard",
     "send": "Send",
-    "sendingIn": "Sending in {seconds} s",
-    "held": "Sending paused",
     "editing": "Correct the text and choose “Send”.",
     "afterReply": "Will be sent as soon as the answer is complete"
   },

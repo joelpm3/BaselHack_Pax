@@ -2,62 +2,35 @@
 
 import { ArrowUp, Pencil, Trash2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
-import { autoSendSeconds } from "./talk";
+import { type KeyboardEvent, useEffect, useRef } from "react";
 
 export interface TranscriptReviewProps {
   text: string;
   onChange: (text: string) => void;
   onSend: () => void;
   onDiscard: () => void;
-  /** Recording more or the advisor still answering: the countdown waits. */
-  paused: boolean;
+  /** Editing holds the transcript until the customer sends it. */
+  editing: boolean;
+  onEdit: () => void;
   /** The advisor is answering, so sending is not possible yet. */
   busy: boolean;
 }
 
 /**
- * What the recogniser understood, shown before it goes out. It sends itself after a few
- * seconds (longer for long answers) unless the customer edits it, discards it, or rests the
- * pointer or focus on it. Remount it (via `key`) when the text grows to restart the countdown.
+ * A transcript that cannot go out yet because the advisor is still answering. The composer
+ * sends it as soon as the answer is done; until then it can be corrected or discarded.
  */
 export function TranscriptReview({
   text,
   onChange,
   onSend,
   onDiscard,
-  paused,
+  editing,
+  onEdit,
   busy,
 }: TranscriptReviewProps) {
   const t = useTranslations("voice.review");
-  const total = autoSendSeconds(text);
-  const [left, setLeft] = useState(total);
-  const [editing, setEditing] = useState(false);
-  // Hover and focus each hold the countdown, so they are tracked apart.
-  const [hovered, setHovered] = useState(false);
-  const [focused, setFocused] = useState(false);
-  const holding = hovered || focused;
   const field = useRef<HTMLTextAreaElement>(null);
-  const send = useRef(onSend);
-  useEffect(() => {
-    send.current = onSend;
-  });
-
-  const waiting = editing || paused || busy || holding;
-
-  useEffect(() => {
-    if (waiting) {
-      setLeft(total);
-      return;
-    }
-    if (left <= 0) {
-      send.current();
-      return;
-    }
-    const id = window.setTimeout(() => setLeft((s) => s - 1), 1000);
-    return () => window.clearTimeout(id);
-  }, [waiting, left, total]);
 
   useEffect(() => {
     if (!editing) return;
@@ -73,42 +46,14 @@ export function TranscriptReview({
     }
   }
 
-  const note = editing
-    ? t("editing")
-    : busy
-      ? t("afterReply")
-      : holding || paused
-        ? t("held")
-        : t("sendingIn", { seconds: left });
+  const note = editing ? t("editing") : t("afterReply");
 
   return (
     <section
       aria-label={t("title")}
-      onPointerEnter={(event) => event.pointerType === "mouse" && setHovered(true)}
-      onPointerLeave={(event) => event.pointerType === "mouse" && setHovered(false)}
-      onFocus={() => setFocused(true)}
-      onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false);
-      }}
       className="rounded-xl border-[1.5px] border-pax-purple bg-surface p-3"
     >
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-paragraph-xs font-medium text-pax-purple">{t("title")}</h2>
-        {!editing ? (
-          <span aria-hidden className="flex items-center gap-[3px]">
-            {Array.from({ length: total }, (_, i) => (
-              <span
-                // biome-ignore lint/suspicious/noArrayIndexKey: fixed positions of the countdown
-                key={i}
-                className={cn(
-                  "size-1.5",
-                  i < left && !waiting ? "bg-pax-purple" : waiting ? "bg-gray-3" : "bg-gray-2",
-                )}
-              />
-            ))}
-          </span>
-        ) : null}
-      </div>
+      <h2 className="text-paragraph-xs font-medium text-pax-purple">{t("title")}</h2>
 
       {editing ? (
         <>
@@ -128,7 +73,7 @@ export function TranscriptReview({
       ) : (
         <button
           type="button"
-          onClick={() => setEditing(true)}
+          onClick={onEdit}
           className="mt-1 block w-full text-left text-paragraph-m leading-6 text-deep-purple"
         >
           <span className="sr-only">{t("editLabel")}: </span>
@@ -151,7 +96,7 @@ export function TranscriptReview({
           {!editing ? (
             <button
               type="button"
-              onClick={() => setEditing(true)}
+              onClick={onEdit}
               className="inline-flex h-9 items-center gap-1.5 rounded-m px-2.5 text-paragraph-s text-fg hover:bg-gray-1"
             >
               <Pencil aria-hidden className="size-4" />

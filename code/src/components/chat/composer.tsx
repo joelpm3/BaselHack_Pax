@@ -30,9 +30,10 @@ export function useEffectiveInputMode(): InputMode {
 }
 
 /**
- * Voice-first composer. Talking goes through the talk square: the transcript is shown for a
- * few seconds to fix, then sent. Writing is one tap away and remembered per device. Quick
- * replies and the paperclip work in both modes.
+ * Voice-first composer. Talking goes through the talk square and the transcript is sent as soon
+ * as it is ready; only while the advisor is still answering does it wait in a card that can be
+ * corrected. Writing is one tap away and remembered per device. Quick replies and the paperclip
+ * work in both modes.
  */
 export function Composer({ conversationId, busy, quickReplies, onSend, onStop }: ComposerProps) {
   const t = useTranslations("chat.composer");
@@ -41,9 +42,9 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
   const [text, setText] = useState("");
   // The typed text came from a transcript moved over from the voice review.
   const [textFromVoice, setTextFromVoice] = useState(false);
+  // A transcript that could not be sent yet (the advisor is answering, or more is being said).
   const [review, setReview] = useState<string | null>(null);
-  // Bumped on every new transcript so the review restarts its countdown.
-  const [reviewKey, setReviewKey] = useState(0);
+  const [editingReview, setEditingReview] = useState(false);
   const [focusText, setFocusText] = useState(false);
   const meter = useRef<HTMLDivElement>(null);
 
@@ -60,7 +61,6 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
       return;
     }
     setReview((current) => appendTranscript(current ?? "", transcript));
-    setReviewKey((k) => k + 1);
   }, []);
   const onLevel = useCallback((level: number) => {
     meter.current?.style.setProperty("--level", level.toFixed(3));
@@ -76,9 +76,24 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
     return true;
   }
 
-  function sendReview() {
-    if (review !== null && send(review, { inputMode: "voice" })) setReview(null);
+  function clearReview() {
+    setReview(null);
+    setEditingReview(false);
   }
+
+  function sendReview() {
+    if (review !== null && send(review, { inputMode: "voice" })) clearReview();
+  }
+
+  // Sends the transcript by itself once nothing holds it back.
+  const autoSend = review !== null && !busy && idle && !editingReview;
+  const sendReviewRef = useRef(sendReview);
+  useEffect(() => {
+    sendReviewRef.current = sendReview;
+  });
+  useEffect(() => {
+    if (autoSend) sendReviewRef.current();
+  }, [autoSend]);
 
   function sendText() {
     if (send(text, { inputMode: textFromVoice ? "voice" : "text" })) {
@@ -105,7 +120,7 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
     if (review !== null) {
       setText((current) => appendTranscript(current, review));
       setTextFromVoice(true);
-      setReview(null);
+      clearReview();
     }
     setFocusText(true);
     setInputMode("text");
@@ -161,12 +176,12 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
         <>
           {review !== null ? (
             <TranscriptReview
-              key={reviewKey}
               text={review}
               onChange={setReview}
               onSend={sendReview}
-              onDiscard={() => setReview(null)}
-              paused={!idle}
+              onDiscard={clearReview}
+              editing={editingReview}
+              onEdit={() => setEditingReview(true)}
               busy={busy}
             />
           ) : null}

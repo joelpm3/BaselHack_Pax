@@ -50,8 +50,6 @@
     "editLabel": "Text korrigieren",
     "discard": "Verwerfen",
     "send": "Senden",
-    "sendingIn": "Wird in {seconds} s gesendet",
-    "held": "Senden angehalten",
     "editing": "Korrigieren Sie den Text und wählen Sie «Senden».",
     "afterReply": "Wird gesendet, sobald die Antwort fertig ist"
   },

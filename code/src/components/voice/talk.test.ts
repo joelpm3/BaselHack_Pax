@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { appendTranscript, autoSendSeconds, isSpaceShortcutFree } from "./talk";
+import { appendTranscript, isSpaceShortcutFree } from "./talk";
 
 describe("appendTranscript", () => {
   it("starts with the transcript when nothing was said yet", () => {
@@ -10,18 +10,6 @@ describe("appendTranscript", () => {
   });
   it("keeps the draft when the transcript is empty", () => {
     expect(appendTranscript("ich bin 38", " ")).toBe("ich bin 38");
-  });
-});
-
-describe("autoSendSeconds", () => {
-  it("gives short answers the minimum", () => {
-    expect(autoSendSeconds("ja genau")).toBe(4);
-  });
-  it("grows with the length of the transcript", () => {
-    expect(autoSendSeconds(Array(36).fill("wort").join(" "))).toBe(7);
-  });
-  it("is capped for very long transcripts", () => {
-    expect(autoSendSeconds(Array(400).fill("wort").join(" "))).toBe(10);
   });
 });
 

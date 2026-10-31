@@ -50,8 +50,6 @@
     "editLabel": "Corriger le texte",
     "discard": "Supprimer",
     "send": "Envoyer",
-    "sendingIn": "Envoi dans {seconds} s",
-    "held": "Envoi en pause",
     "editing": "Corrigez le texte et choisissez « Envoyer ».",
     "afterReply": "Sera envoyé dès que la réponse est terminée"
   },
