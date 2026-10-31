@@ -53,7 +53,16 @@ export function summarizeTool(name: string, output: unknown): ToolLine | null {
     case "updateProfile": {
       const o = output as unknown as UpdateProfileOutput;
       if (o.status !== "ok") return line("profileInvalid");
-      return { ...line("profile"), changes: Array.isArray(o.changes) ? o.changes : [] };
+      const changes = Array.isArray(o.changes) ? o.changes : [];
+      // A town the customer picked in the card afterwards (8165 → Schleinikon) is only in `location`.
+      const picked =
+        o.location && !changes.some((c) => c.path === "residence.city")
+          ? [
+              { path: "residence.zip", value: o.location.zip },
+              { path: "residence.city", value: o.location.city },
+            ]
+          : [];
+      return { ...line("profile"), changes: [...changes, ...picked] };
     }
     case "showRiskAnalysis": {
       const o = output as unknown as RiskAnalysisOutput;

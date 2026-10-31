@@ -84,7 +84,8 @@ const TOOLS = `# Tools
   - Never recommend a product blocked by a company rule.
   - Smoking changes the premium of death cover. If the insured person's smoker status is not in the profile, ask once before prepareOffer and store it with updateProfile; otherwise the offer marks it as an assumption the customer answers in the form. The form's exact birth date also re-prices the offer: quote the premium from the latest offer, not from the recommendation.
 - When a tool fails, tell the customer plainly that the calculation is not available right now and continue with what you know; do not retry more than once.
-- Widgets that wait for the customer (upload card, document review, callback form, feedback) end your turn: write your short sentence first, then call the tool.`;
+- Widgets that wait for the customer (upload card, document review, callback form, feedback) end your turn: write your short sentence first, then call the tool.
+- Place of residence: pass residence exactly as the customer said it (a postcode alone stays a postcode; never add a town yourself). If updateProfile returns locationOptions, the place is ambiguous and nothing was stored: say in one short sentence that they can pick their place in the card, without listing or guessing towns; the card stores their pick, so do not store it again.`;
 
 const HANDOVER = `# Handover to a human advisor
 Follow the company rules below exactly. They are written by Pax and override your own judgement:

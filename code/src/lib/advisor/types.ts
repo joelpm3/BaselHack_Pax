@@ -51,14 +51,34 @@ export interface ProfileFieldChange {
   value: unknown;
 }
 
+/** A place of residence from the official locality directory; no postcode for multi-postcode towns. */
+export interface PlaceOption {
+  zip: string | null;
+  town: string;
+  canton: string;
+}
+
+export interface ResidencePlace {
+  zip: string | null;
+  city: string;
+  canton: string;
+  /** Logismata tax location; null if Logismata was unreachable (resolved again later). */
+  taxLocationId: number | null;
+}
+
 export interface UpdateProfileOutput {
   status: "ok" | "invalid";
   /** Paths and new values that were stored with this call. */
   changes: ProfileFieldChange[];
   completeness: number;
-  location: { zip: string; city: string; canton: string; taxLocationId: number } | null;
+  location: ResidencePlace | null;
   /** The place the customer named but which could not be resolved to a tax location. */
   locationNotFound: string | null;
+  /**
+   * Several places fit what the customer said (postcode 8165, town "Wil"): nothing was stored,
+   * the card lets the customer pick one (pickResidence), which then fills `location`.
+   */
+  locationOptions?: PlaceOption[] | null;
   /** Core fields still needed for the analyses (profile paths). */
   missingForAnalysis: string[];
   error: string | null;

@@ -1,16 +1,26 @@
 "use client";
 
-import { Check, NotebookPen, Pencil } from "lucide-react";
+import { Check, MapPin, NotebookPen, Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
-import { saveProfileFields } from "@/app/[locale]/chat/actions";
+import { pickResidence, saveProfileFields } from "@/app/[locale]/chat/actions";
 import { useChatActions } from "@/components/chat/chat-actions";
 import { usePictureActions } from "@/components/chat/picture-context";
 import { Button } from "@/components/ui/button";
 import { Input, Select } from "@/components/ui/field";
 import { EDITABLE_FIELDS, type FieldSpec, parseFieldValue } from "@/lib/advisor/profile-fields";
-import type { ProfileFieldChange, UpdateProfileOutput } from "@/lib/advisor/types";
-import { formatProfileValue, profileFieldLabelKey, visibleProfileChanges } from "./profile-format";
+import type {
+  PlaceOption,
+  ProfileFieldChange,
+  ResidencePlace,
+  UpdateProfileOutput,
+} from "@/lib/advisor/types";
+import {
+  formatProfileValue,
+  profileFieldLabelKey,
+  residenceLabel,
+  visibleProfileChanges,
+} from "./profile-format";
 import type { WidgetProps } from "./types";
 import { useChf, WidgetPending } from "./widget-card";
 
@@ -21,7 +31,7 @@ function useFormatValue() {
 }
 
 /** "Ihre Situation": what the advisor just noted, correctable inline (saved as source "form"). */
-export function ProfileCard({ state, output }: WidgetProps) {
+export function ProfileCard({ toolCallId, state, output }: WidgetProps) {
   const t = useTranslations("widgets.profile");
   if (state !== "output-available") {
     return state === "output-error" ? null : (
@@ -31,34 +41,44 @@ export function ProfileCard({ state, output }: WidgetProps) {
   const data = output as UpdateProfileOutput | undefined;
   if (!data || data.status !== "ok" || !Array.isArray(data.changes)) return null;
   const changes = visibleProfileChanges(data.changes);
-  if (changes.length === 0 && !data.location) return null;
-  return <ProfileCardBody changes={changes} location={data.location} />;
+  const options = data.location ? [] : (data.locationOptions ?? []);
+  if (changes.length === 0 && !data.location && options.length === 0) return null;
+  return (
+    <ProfileCardBody
+      toolCallId={toolCallId}
+      changes={changes}
+      location={data.location}
+      options={options}
+    />
+  );
 }
 
 function ProfileCardBody({
+  toolCallId,
   changes,
-  location,
+  location: initialLocation,
+  options,
 }: {
+  toolCallId: string;
   changes: ProfileFieldChange[];
-  location: UpdateProfileOutput["location"];
+  location: ResidencePlace | null;
+  options: PlaceOption[];
 }) {
   const t = useTranslations("widgets");
   const format = useFormatValue();
   const { conversationId, busy } = useChatActions();
   const picture = usePictureActions();
   const [values, setValues] = useState(() => new Map(changes.map((c) => [c.path, c.value])));
+  const [location, setLocation] = useState(initialLocation);
   const [editing, setEditing] = useState(false);
   const [error, setError] = useState(false);
   const [saved, setSaved] = useState(false);
   const [pending, startTransition] = useTransition();
   const editable = changes.filter((c) => EDITABLE_FIELDS[c.path]);
   const rows = changes.filter((c) => !c.path.startsWith("residence."));
-  const place = location
-    ? `${location.zip} ${location.city} (${location.canton})`
-    : changes
-        .filter((c) => c.path === "residence.zip" || c.path === "residence.city")
-        .map((c) => String(c.value))
-        .join(" ");
+  const place = residenceLabel(changes, location);
+  const picking = !location && options.length > 0;
+  const noted = Boolean(place) || rows.length > 0;
 
   function save(form: FormData) {
     const updates: Array<{ path: string; value: string | number | boolean | null }> = [];
@@ -95,23 +115,25 @@ function ProfileCardBody({
 
   return (
     <section className="rounded-[16px] border border-line bg-surface-muted px-4 py-3 lg:rounded-xl">
-      <header className="flex items-center gap-2">
-        <NotebookPen aria-hidden className="size-4 shrink-0 text-pax-purple" />
-        <h3 className="flex-1 text-paragraph-xs font-bold">
-          {saved ? t("profile.corrected") : t("profile.title")}
-        </h3>
-        {editable.length > 0 && !editing ? (
-          <button
-            type="button"
-            onClick={() => setEditing(true)}
-            disabled={busy}
-            className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-paragraph-xs font-medium text-pax-purple hover:bg-light-purple disabled:text-gray-5"
-          >
-            <Pencil aria-hidden className="size-3.5" />
-            {t("profile.edit")}
-          </button>
-        ) : null}
-      </header>
+      {noted ? (
+        <header className="flex items-center gap-2">
+          <NotebookPen aria-hidden className="size-4 shrink-0 text-pax-purple" />
+          <h3 className="flex-1 text-paragraph-xs font-bold">
+            {saved ? t("profile.corrected") : t("profile.title")}
+          </h3>
+          {editable.length > 0 && !editing ? (
+            <button
+              type="button"
+              onClick={() => setEditing(true)}
+              disabled={busy}
+              className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-paragraph-xs font-medium text-pax-purple hover:bg-light-purple disabled:text-gray-5"
+            >
+              <Pencil aria-hidden className="size-3.5" />
+              {t("profile.edit")}
+            </button>
+          ) : null}
+        </header>
+      ) : null}
 
       {editing ? (
         <form action={save} className="mt-3 flex flex-col gap-3">
@@ -138,7 +160,7 @@ function ProfileCardBody({
             </Button>
           </div>
         </form>
-      ) : (
+      ) : noted ? (
         <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-paragraph-xs">
           {place ? (
             <>
@@ -153,8 +175,85 @@ function ProfileCardBody({
             </div>
           ))}
         </dl>
-      )}
+      ) : null}
+      {picking ? (
+        <PlacePicker
+          toolCallId={toolCallId}
+          options={options}
+          onPicked={setLocation}
+          spaced={noted}
+        />
+      ) : null}
     </section>
+  );
+}
+
+/** "Welcher Ort?": the customer picks the town; the server stores it, no model decides. */
+function PlacePicker({
+  toolCallId,
+  options,
+  onPicked,
+  spaced,
+}: {
+  toolCallId: string;
+  options: PlaceOption[];
+  onPicked: (location: ResidencePlace) => void;
+  spaced: boolean;
+}) {
+  const t = useTranslations("locality");
+  const { conversationId, sendMessage, busy } = useChatActions();
+  const picture = usePictureActions();
+  const [pending, startTransition] = useTransition();
+  const [failed, setFailed] = useState(false);
+  const zips = new Set(options.map((o) => o.zip));
+  const sharedZip = zips.size === 1 ? options[0].zip : null;
+
+  function pick(option: PlaceOption) {
+    startTransition(async () => {
+      const result = await pickResidence({
+        conversationId,
+        toolCallId,
+        zip: option.zip,
+        town: option.town,
+      }).catch(() => ({ ok: false as const }));
+      if (!result.ok) {
+        setFailed(true);
+        return;
+      }
+      picture?.setPicture(result.picture);
+      onPicked(result.location);
+      sendMessage(t("pickedMessage", { place: residenceLabel([], result.location) }), {
+        inputMode: "widget",
+      });
+    });
+  }
+
+  return (
+    <div className={spaced ? "mt-3 border-line border-t pt-3" : undefined}>
+      <p className="flex items-start gap-2 text-paragraph-xs font-bold">
+        <MapPin aria-hidden className="mt-0.5 size-4 shrink-0 text-pax-purple" />
+        {sharedZip ? t("questionZip", { zip: sharedZip }) : t("question")}
+      </p>
+      <ul aria-label={t("options")} className="mt-2 flex flex-wrap gap-1.5">
+        {options.map((option) => (
+          <li key={`${option.zip}-${option.town}`}>
+            <button
+              type="button"
+              onClick={() => pick(option)}
+              disabled={busy || pending}
+              className="rounded-full border-[1.5px] border-pax-purple bg-surface px-3.5 py-1.5 text-paragraph-xs font-medium text-pax-purple transition-colors hover:bg-light-purple disabled:border-gray-3 disabled:text-gray-5"
+            >
+              {sharedZip ? option.town : residenceLabel([], { zip: option.zip, city: option.town })}
+            </button>
+          </li>
+        ))}
+      </ul>
+      {failed ? (
+        <p role="alert" className="mt-2 text-paragraph-xs text-error-dark">
+          {t("failed")}
+        </p>
+      ) : null}
+    </div>
   );
 }
 

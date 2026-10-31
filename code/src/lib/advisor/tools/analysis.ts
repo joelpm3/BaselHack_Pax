@@ -137,6 +137,9 @@ export function createAnalysisTools(ctx: ToolContext) {
           callCtx,
         );
         const missing = missingFor(profile, "tax");
+        // A postcode with several towns (8165) stays unresolved until the customer names the town.
+        if (missing.length === 0 && profile.residence.taxLocationId === undefined)
+          missing.push("residence.city");
         if (missing.length) return { status: "missing", missing };
         const limit = max3a(profile);
         const yearlyAmount = Math.min(input.yearlyAmount ?? limit, limit);

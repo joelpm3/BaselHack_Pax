@@ -25,6 +25,15 @@ describe("summarizeTool", () => {
       amounts: {},
       changes,
     });
+    const picked = {
+      status: "ok",
+      changes: [],
+      location: { zip: "8165", city: "Schleinikon", canton: "ZH", taxLocationId: 816503000 },
+    };
+    expect(summarizeTool("updateProfile", picked)?.changes).toEqual([
+      { path: "residence.zip", value: "8165" },
+      { path: "residence.city", value: "Schleinikon" },
+    ]);
     expect(summarizeTool("updateProfile", { status: "invalid", changes: [] })?.key).toBe(
       "profileInvalid",
     );

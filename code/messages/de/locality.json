@@ -1,0 +1,7 @@
+{
+  "questionZip": "Die Postleitzahl {zip} gilt für mehrere Orte. Welcher ist Ihrer?",
+  "question": "Diesen Ort gibt es mehrmals in der Schweiz. Welcher ist Ihrer?",
+  "options": "Wohnort wählen",
+  "pickedMessage": "Ich wohne in {place}.",
+  "failed": "Der Ort konnte nicht gespeichert werden. Wählen Sie ihn nochmals oder schreiben Sie ihn ins Eingabefeld."
+}

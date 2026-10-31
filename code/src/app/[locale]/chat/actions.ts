@@ -8,11 +8,12 @@ import {
   getOwnedConversation,
   patchToolOutput,
 } from "@/lib/advisor/conversations";
+import { resolveResidence } from "@/lib/advisor/location";
 import { buildVorsorgebild } from "@/lib/advisor/picture";
 import { EDITABLE_FIELDS } from "@/lib/advisor/profile-fields";
 import { computeScenario } from "@/lib/advisor/scenarios";
 import { scenarioInput } from "@/lib/advisor/tools/scenario";
-import type { ScenarioOutput, VorsorgebildModel } from "@/lib/advisor/types";
+import type { ResidencePlace, ScenarioOutput, VorsorgebildModel } from "@/lib/advisor/types";
 import { audit } from "@/lib/audit";
 import { getCurrentCustomer, getOrCreateCustomer, setCustomerCookie } from "@/lib/auth/customer";
 import { db, schema } from "@/lib/db";
@@ -227,4 +228,42 @@ export async function recalculateScenario(input: {
   );
   if (result.status === "ok") patchToolOutput(conversation.id, input.toolCallId, { ...result });
   return result;
+}
+
+const pickResidenceSchema = z.object({
+  conversationId: z.string(),
+  toolCallId: z.string().min(1).max(100),
+  zip: z
+    .string()
+    .regex(/^\d{4}$/)
+    .nullable(),
+  town: z.string().min(1).max(100),
+});
+
+export type PickResidenceResult =
+  | { ok: true; location: ResidencePlace; picture: VorsorgebildModel }
+  | { ok: false };
+
+/**
+ * The customer picked their town in the "Welcher Ort?" card (postcode 8165 covers three).
+ * Checked against the official locality directory and stored as chosen; no model decides it.
+ */
+export async function pickResidence(
+  input: z.infer<typeof pickResidenceSchema>,
+): Promise<PickResidenceResult> {
+  const data = pickResidenceSchema.parse(input);
+  const { customer, conversation } = await requireConversation(data.conversationId);
+  const result = await resolveResidence(
+    { zip: data.zip ?? undefined, city: data.town },
+    getProfile(customer.id).residence,
+    conversation.locale,
+    { customerId: customer.id, conversationId: conversation.id, toolCallId: data.toolCallId },
+  );
+  if (result.status !== "resolved" || result.location.city !== data.town) return { ok: false };
+  applyProfileChanges(customer.id, result.changes, {
+    source: "form",
+    conversationId: conversation.id,
+  });
+  patchToolOutput(conversation.id, data.toolCallId, { location: result.location });
+  return { ok: true, location: result.location, picture: buildVorsorgebild(customer.id) };
 }

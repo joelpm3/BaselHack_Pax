@@ -212,47 +212,22 @@ export async function runPurchaseP2(
   );
 }
 
-interface LocationRow {
+export interface LocationRow {
   LocationID?: number;
   ZipCode?: string;
   City?: string;
   Canton?: string;
 }
 
-export interface TaxLocation {
-  zip: string;
-  city: string;
-  canton: string;
-  taxLocationId: number;
-}
-
-/** Resolves "4053", "Basel" or "4053 Basel" to one Logismata tax location (best match). */
-export async function resolveTaxLocation(
-  query: { zip?: string; city?: string },
+/** Logismata tax locations matching "8165", "Basel" or "8165 Schleinikon". */
+export async function searchLocations(
+  text: string,
   locale: Locale,
   ctx: CallContext,
-): Promise<TaxLocation | null> {
-  const search = [query.zip, query.city].filter(Boolean).join(" ").trim();
-  if (!search) return null;
-  const run = (text: string) =>
-    callLogismata<LocationRow[]>(
-      "APICalc_searchLocation",
-      { Search: text, Language: LOGISMATA.language[locale] },
-      ctx,
-    );
-  let rows = await run(search);
-  if (rows.length === 0 && query.zip && query.city) rows = await run(query.zip);
-  const city = query.city?.toLowerCase();
-  const best =
-    rows.find((r) => r.ZipCode === query.zip && (!city || r.City?.toLowerCase() === city)) ??
-    rows.find((r) => r.ZipCode === query.zip) ??
-    rows.find((r) => city && r.City?.toLowerCase() === city) ??
-    rows[0];
-  if (!best?.LocationID || !best.ZipCode || !best.City || !best.Canton) return null;
-  return {
-    zip: best.ZipCode,
-    city: best.City,
-    canton: best.Canton,
-    taxLocationId: best.LocationID,
-  };
+): Promise<LocationRow[]> {
+  return callLogismata<LocationRow[]>(
+    "APICalc_searchLocation",
+    { Search: text, Language: LOGISMATA.language[locale] },
+    ctx,
+  );
 }

@@ -1,0 +1,7 @@
+{
+  "questionZip": "Il numero postale {zip} comprende più località. Qual è la sua?",
+  "question": "Questa località esiste più volte in Svizzera. Qual è la sua?",
+  "options": "Scegliere il luogo di domicilio",
+  "pickedMessage": "Abito a {place}.",
+  "failed": "Non è stato possibile salvare la località. La scelga di nuovo o la scriva nel campo del messaggio."
+}
