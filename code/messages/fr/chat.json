@@ -66,10 +66,12 @@
     },
     "building": {
       "title": "Votre image prend forme",
-      "body": "Dès que je connais votre âge, votre famille et votre revenu, je calcule votre image de prévoyance.",
       "known": "{count} informations sur {total} connues",
       "factKnown": "connu",
-      "factOpen": "encore ouvert"
+      "factOpen": "encore ouvert",
+      "missing": "Il me manque encore : {fields}.",
+      "calculating": "Toutes les informations nécessaires sont là. Je calcule maintenant votre image de prévoyance.",
+      "unavailable": "Toutes les informations nécessaires sont là, mais le calcul n'est pas disponible pour le moment. Je réessaierai pendant l'entretien."
     },
     "facts": {
       "age": "Âge",
@@ -100,6 +102,11 @@
       "gap": "{kind} : lacune {amount}/mois",
       "covered": "{kind} : couvert",
       "building": "{count} informations sur {total}"
-    }
+    },
+    "partnerContext": {
+      "disability": "Si une maladie empêche {name} de travailler",
+      "death": "Pour votre famille si {name} décède d'une maladie"
+    },
+    "partnerFallback": "votre partenaire"
   }
 }

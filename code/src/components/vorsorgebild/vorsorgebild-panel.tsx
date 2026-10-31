@@ -96,7 +96,13 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
   return (
     <section aria-labelledby="vorsorgebild-figures" className="flex flex-col gap-4">
       <div>
-        <p className="text-paragraph-xs text-fg-muted">{t(`context.${scenario.kind}`)}</p>
+        <p className="text-paragraph-xs text-fg-muted">
+          {scenario.person === 2 && scenario.kind !== "retirement"
+            ? t(`partnerContext.${scenario.kind}`, {
+                name: scenario.partnerName ?? t("partnerFallback"),
+              })
+            : t(`context.${scenario.kind}`)}
+        </p>
         <p id="vorsorgebild-figures" className="mt-1 text-heading-s font-bold">
           {breakdown.gap > 0 ? t("gap", { amount: chf(breakdown.gap) }) : t("covered")}
         </p>
@@ -158,12 +164,24 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
 function Building({ model }: { model: VorsorgebildModel }) {
   const t = useTranslations("chat.picture.building");
   const tf = useTranslations("chat.picture.facts");
+  const fields = useTranslations("widgets.fields");
+  const locale = useLocale();
   const known = model.facts.filter((f) => f.known).length;
+  const body =
+    model.missing.length > 0
+      ? t("missing", {
+          fields: new Intl.ListFormat(locale, { type: "conjunction" }).format(
+            model.missing.map((path) => fields(path)),
+          ),
+        })
+      : model.pending
+        ? t("calculating")
+        : t("unavailable");
   return (
     <section className="flex flex-col gap-4">
       <div>
         <p className="text-heading-s font-bold">{t("title")}</p>
-        <p className="mt-1 text-paragraph-s text-fg-muted">{t("body")}</p>
+        <p className="mt-1 text-paragraph-s text-fg-muted">{body}</p>
       </div>
       <ul
         className="grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-x-3 gap-y-2.5"

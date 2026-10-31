@@ -66,10 +66,12 @@
     },
     "building": {
       "title": "Ihr Bild entsteht",
-      "body": "Sobald ich Ihr Alter, Ihre Familie und Ihr Einkommen kenne, rechne ich Ihr Vorsorgebild.",
       "known": "{count} von {total} Angaben bekannt",
       "factKnown": "bekannt",
-      "factOpen": "noch offen"
+      "factOpen": "noch offen",
+      "missing": "Dafür fehlt mir noch: {fields}.",
+      "calculating": "Alle nötigen Angaben sind da. Ich rechne jetzt Ihr Vorsorgebild.",
+      "unavailable": "Alle nötigen Angaben sind da, aber die Berechnung ist im Moment nicht erreichbar. Ich versuche es im Gespräch nochmals."
     },
     "facts": {
       "age": "Alter",
@@ -100,6 +102,11 @@
       "gap": "{kind}: Lücke {amount}/Mt.",
       "covered": "{kind}: gedeckt",
       "building": "{count} von {total} Angaben"
-    }
+    },
+    "partnerContext": {
+      "disability": "Wenn {name} wegen Krankheit nicht mehr arbeiten kann",
+      "death": "Für Ihre Familie, wenn {name} wegen Krankheit stirbt"
+    },
+    "partnerFallback": "Ihre Partnerin oder Ihr Partner"
   }
 }

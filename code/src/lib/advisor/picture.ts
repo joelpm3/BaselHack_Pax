@@ -6,13 +6,14 @@ import { type PolicyCategory, THIRD_PILLAR_CATEGORIES } from "@/lib/domain/taxon
 import { getProfile } from "@/lib/profile/service";
 import { latestCalculation } from "./logismata/latest";
 import {
-  describeRiskScenario,
+  householdRiskScenarios,
   isJointlyTaxed,
+  missingForPicture,
   type RetirementResponse,
   type RiskScenarioSummary,
   retirementBreakdown,
-  riskBreakdown,
 } from "./logismata/mapping";
+import { outdatedChecks, PICTURE_CALCULATIONS } from "./picture-refresh";
 import type { PictureScenario, VorsorgebildModel } from "./types";
 
 /**
@@ -25,7 +26,12 @@ const FACTS: Array<{ key: string; known: (p: LifeSituation) => boolean }> = [
   { key: "family", known: (p) => p.person.maritalStatus !== undefined },
   { key: "work", known: (p) => p.person.employment !== undefined },
   { key: "income", known: (p) => p.person.grossIncome !== undefined },
-  { key: "residence", known: (p) => p.residence.taxLocationId !== undefined },
+  // A postcode or town is enough: the tax location is resolved from it when a tax check needs it.
+  {
+    key: "residence",
+    known: (p) =>
+      p.residence.taxLocationId !== undefined || Boolean(p.residence.zip || p.residence.city),
+  },
   { key: "goals", known: (p) => p.goals.length > 0 || p.concerns.length > 0 },
   { key: "assets", known: (p) => p.assets.total !== undefined || p.assets.liquid !== undefined },
   { key: "pillar2", known: (p) => p.pillar2.hasPensionFund !== undefined },
@@ -39,26 +45,29 @@ function completenessOf(profile: LifeSituation): number {
   return Math.round((FACTS.filter((f) => f.known(profile)).length / FACTS.length) * 100);
 }
 
-function scenarios(customerId: string): PictureScenario[] {
+function scenarios(customerId: string, profile: LifeSituation): PictureScenario[] {
   const result: PictureScenario[] = [];
-  const retirement = latestCalculation(customerId, "APICalc_calculateRetirement");
+  const retirement = latestCalculation(customerId, PICTURE_CALCULATIONS.retirement);
   if (retirement?.output) {
     result.push({
       kind: "retirement",
+      person: 1,
+      partnerName: null,
       breakdown: retirementBreakdown(retirement.output as RetirementResponse),
       calculatedAt: retirement.createdAt.getTime(),
     });
   }
-  const risk = latestCalculation(customerId, "APICalc_calculateRisk");
+  const risk = latestCalculation(customerId, PICTURE_CALCULATIONS.risk);
+  if (!risk) return result;
   const summaries =
-    (risk?.output as { RiskScenarioSummaries?: RiskScenarioSummary[] } | null)
+    (risk.output as { RiskScenarioSummaries?: RiskScenarioSummary[] } | null)
       ?.RiskScenarioSummaries ?? [];
-  for (const summary of summaries) {
-    const scenario = describeRiskScenario(summary.Scenario ?? 0);
-    if (!risk || scenario?.person !== 1 || scenario.cause !== "illness") continue;
+  for (const scenario of householdRiskScenarios(summaries)) {
     result.push({
       kind: scenario.event,
-      breakdown: riskBreakdown(summary),
+      person: scenario.person,
+      partnerName: scenario.person === 2 ? (profile.partner?.firstName ?? null) : null,
+      breakdown: scenario.breakdown,
       calculatedAt: risk.createdAt.getTime(),
     });
   }
@@ -84,7 +93,9 @@ export function buildVorsorgebild(customerId: string): VorsorgebildModel {
     firstName: profile.person.firstName ?? null,
     completeness: completenessOf(profile),
     facts: FACTS.map((f) => ({ key: f.key, known: f.known(profile) })),
-    scenarios: scenarios(customerId),
+    missing: missingForPicture(profile),
+    pending: outdatedChecks(customerId, profile).length > 0,
+    scenarios: scenarios(customerId, profile),
     pillars: {
       incomeToday: own === undefined && partner === undefined ? null : (own ?? 0) + (partner ?? 0),
       hasPensionFund: profile.pillar2.hasPensionFund ?? null,

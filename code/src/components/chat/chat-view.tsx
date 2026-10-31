@@ -93,6 +93,12 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   );
   const pictureActions = useMemo(() => ({ setPicture, refreshPicture }), [refreshPicture]);
 
+  // Every input is known but nothing is calculated yet (e.g. an existing customer opening a new
+  // conversation, or a corrected value): the route runs the checks, no turn needed.
+  useEffect(() => {
+    if (picture.pending) refreshPicture();
+  }, [picture.pending, refreshPicture]);
+
   // Follow the transcript while it grows (streaming, widgets loading) unless the person scrolled
   // up. On open, ignore scroll events until they interact: the router's scroll reset and
   // widgets settling would otherwise leave a reopened conversation at the greeting.

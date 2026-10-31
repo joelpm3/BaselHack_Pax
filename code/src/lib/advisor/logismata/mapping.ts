@@ -94,6 +94,33 @@ export function missingFor(profile: LifeSituation, check: Check): string[] {
   return missing;
 }
 
+/** Profile paths still needed before the Vorsorgebild (retirement and risk check) can be calculated. */
+export function missingForPicture(profile: LifeSituation): string[] {
+  return [...new Set([...missingFor(profile, "retirement"), ...missingFor(profile, "risk")])];
+}
+
+/** Profile paths that never reach the retirement or risk request. */
+const NOT_CALCULATED = [
+  "goals",
+  "concerns",
+  "plannedEvents",
+  "residence",
+  "riskAttitude",
+  "person.firstName",
+  "person.occupation",
+  "person.smoker",
+  "person.healthNotes",
+  "partner.firstName",
+  "partner.occupation",
+  "partner.smoker",
+  "partner.healthNotes",
+];
+
+/** True when changing this profile path can change the retirement or risk check. */
+export function affectsCalculations(path: string): boolean {
+  return !NOT_CALCULATED.some((prefix) => path === prefix || path.startsWith(`${prefix}.`));
+}
+
 /** Not in the profile: assume the relationship has lasted five years (affects survivors' pensions). */
 export function relationshipSinceYear(profile: LifeSituation, year: number): number {
   const births = [profile.person.birthYear, profile.partner?.birthYear].filter(
@@ -453,6 +480,38 @@ export function describeRiskScenario(
     event: i % 4 < 2 ? "disability" : "death",
     cause: i % 2 === 0 ? "illness" : "accident",
   };
+}
+
+export interface HouseholdRiskScenario {
+  event: "disability" | "death";
+  /** Whose disability or death: the customer (1) or the partner (2). */
+  person: 1 | 2;
+  breakdown: IncomeBreakdown;
+}
+
+/**
+ * The illness scenarios the Vorsorgebild shows. Normally the customer's own; when the customer
+ * has no income need of their own (e.g. a homemaker) but the household lives from the partner's
+ * income, the partner's scenario is the one that matters for the family.
+ */
+export function householdRiskScenarios(summaries: RiskScenarioSummary[]): HouseholdRiskScenario[] {
+  const result: HouseholdRiskScenario[] = [];
+  for (const event of ["disability", "death"] as const) {
+    const candidates = summaries
+      .map((summary) => ({ summary, scenario: describeRiskScenario(summary.Scenario ?? 0) }))
+      .filter(({ scenario }) => scenario?.event === event && scenario.cause === "illness")
+      .map(({ summary, scenario }) => ({
+        event,
+        person: scenario?.person ?? 1,
+        breakdown: riskBreakdown(summary),
+      }));
+    const own = candidates.find((c) => c.person === 1);
+    const partner = candidates.find((c) => c.person === 2);
+    const pick =
+      own && own.breakdown.need === 0 && partner && partner.breakdown.need > 0 ? partner : own;
+    if (pick) result.push(pick);
+  }
+  return result;
 }
 
 /** ErrorCode 8/9: the person is (almost) retired; 0/1 mean OK. */
