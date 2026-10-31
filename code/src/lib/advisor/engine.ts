@@ -23,6 +23,7 @@ import { listHints } from "@/lib/hints/service";
 import { scheduleAnalysis } from "@/lib/insights";
 import { getProfile } from "@/lib/profile/service";
 import { getActiveRuleSet } from "@/lib/rules/active";
+import { applicationStates } from "@/lib/sales/status";
 import {
   type AdvisorUIMessage,
   type Conversation,
@@ -239,6 +240,7 @@ export async function streamAdvisorTurn(
         .filter((h) => h.status !== "dismissed")
         .slice(0, 8),
       topicHintId: greeting?.metadata?.hintId ?? null,
+      applications: applicationStates(conversation.id),
     }),
     messages: await convertToModelMessages(forModel(history), {
       tools,
