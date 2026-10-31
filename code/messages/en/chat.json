@@ -106,12 +106,17 @@
     "strip": {
       "gap": "{kind}: gap {amount}/month",
       "covered": "{kind}: covered",
-      "building": "{count} of {total} facts"
+      "building": "{count} of {total} facts",
+      "open": "{kind}: still open"
     },
     "partnerContext": {
       "disability": "If illness stops {name} from working",
       "death": "For your family if {name} dies of an illness"
     },
-    "partnerFallback": "your partner"
+    "partnerFallback": "your partner",
+    "focus": {
+      "discussed": "Being discussed",
+      "notCalculated": "Nothing has been calculated for this situation yet."
+    }
   }
 }

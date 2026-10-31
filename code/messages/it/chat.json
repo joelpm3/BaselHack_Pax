@@ -106,12 +106,17 @@
     "strip": {
       "gap": "{kind}: lacuna {amount}/mese",
       "covered": "{kind}: coperto",
-      "building": "{count} dati su {total}"
+      "building": "{count} dati su {total}",
+      "open": "{kind}: ancora aperto"
     },
     "partnerContext": {
       "disability": "Se a causa di una malattia {name} non può più lavorare",
       "death": "Per la sua famiglia, se {name} muore a causa di una malattia"
     },
-    "partnerFallback": "la sua o il suo partner"
+    "partnerFallback": "la sua o il suo partner",
+    "focus": {
+      "discussed": "In discussione",
+      "notCalculated": "Per questa situazione non è ancora stato calcolato nulla."
+    }
   }
 }
