@@ -22,6 +22,8 @@ import {
   retirementBreakdown,
   riskBreakdown,
   riskPensionsEstimated,
+  riskPersons,
+  riskRequestMatches,
   withBvg,
   yearsUntilRetirement,
 } from "./mapping";
@@ -203,6 +205,30 @@ describe("requests", () => {
     });
   });
 
+  it("reuses a stored risk request only while it still describes the profile", () => {
+    const stored = JSON.parse(JSON.stringify(buildRiskRequest(youngFamily, YEAR)));
+    expect(riskRequestMatches(stored, youngFamily, YEAR)).toBe(true);
+    // Unrelated facts do not matter; income, children and family do.
+    expect(riskRequestMatches(stored, { ...youngFamily, goals: ["buy_home"] }, YEAR)).toBe(true);
+    const raise = profile({ ...youngFamily, partner: { ...youngFamily.partner, grossIncome: 1 } });
+    expect(riskRequestMatches(stored, raise, YEAR)).toBe(false);
+    const baby = { ...youngFamily, children: [...youngFamily.children, { birthYear: 2026 }] };
+    expect(riskRequestMatches(stored, baby, YEAR)).toBe(false);
+    expect(riskRequestMatches(null, youngFamily, YEAR)).toBe(false);
+  });
+
+  it("checks stored pillar 2 pensions against the certificate on file", () => {
+    const known = profile({ ...single, pillar2: { disabilityPension: 30000 } });
+    const pensions = { Disability: 30000, DisabilityChildren: 4000, Widow: 12000, Orphan: 4000 };
+    const stored = JSON.parse(
+      JSON.stringify(buildRiskRequest(known, YEAR, { pillar2Pensions: pensions })),
+    );
+    expect(riskRequestMatches(stored, known, YEAR)).toBe(true);
+    const newCertificate = profile({ ...single, pillar2: { disabilityPension: 32000 } });
+    expect(riskRequestMatches(stored, newCertificate, YEAR)).toBe(false);
+    expect(riskRequestMatches(stored, single, YEAR)).toBe(false);
+  });
+
   it("only sends pillar 2 pensions when known", () => {
     expect(buildRiskRequest(single, YEAR).Person1).not.toHaveProperty("Pillar2Pensions");
     const known = profile({ ...single, pillar2: { disabilityPension: 30000 } });
@@ -291,6 +317,23 @@ describe("responses", () => {
     expect(retirement).toMatchObject({ need: 96000, other: 27240, surplus: 4000 });
     const risk = riskBreakdown({ IncomeNeed: 76000, IncomeGap: 27134, IncomePartner: 1000 });
     expect(risk).toMatchObject({ need: 76000, gap: 27134, partner: 1000, pillar1: 0 });
+  });
+
+  it("groups risk scenarios by person and marks retired persons", () => {
+    const persons = riskPersons(
+      [
+        { Scenario: 1, IncomeNeed: 80000, IncomeGap: 1000 },
+        { Scenario: 3, IncomeNeed: 70000 },
+        { Scenario: 5, ErrorCode: 8 },
+      ],
+      youngFamily,
+    );
+    expect(persons).toHaveLength(2);
+    expect(persons[0].scenarios.map((s) => [s.event, s.cause])).toEqual([
+      ["disability", "illness"],
+      ["death", "illness"],
+    ]);
+    expect(persons[1]).toMatchObject({ person: 2, retired: true, scenarios: [] });
   });
 
   it("decodes the eight risk scenarios", () => {

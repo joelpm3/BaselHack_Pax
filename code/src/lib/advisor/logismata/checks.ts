@@ -10,10 +10,8 @@ import {
   buildRiskBaseRequest,
   buildRiskRequest,
   buildSaving3aRequest,
-  describeRiskScenario,
   hasKnownRiskPensions,
   hasPartner,
-  isRetiredError,
   mergeRiskPensions,
   type Pillar2RiskPensions,
   type RetirementOverrides,
@@ -23,8 +21,8 @@ import {
   type RiskScenarioSummary,
   retirementAge,
   retirementBreakdown,
-  riskBreakdown,
   riskPensionsEstimated,
+  riskPersons,
   withBvg,
 } from "./mapping";
 
@@ -171,31 +169,8 @@ export async function runRiskCheck(
     buildRiskRequest(profile, year, { ...overrides, ...pensions }),
     ctx,
   );
-  const persons = new Map<1 | 2, RiskPersonResult>();
-  for (const summary of response.RiskScenarioSummaries ?? []) {
-    const scenario = describeRiskScenario(summary.Scenario ?? 0);
-    if (!scenario) continue;
-    const firstName =
-      scenario.person === 1
-        ? (profile.person.firstName ?? null)
-        : (profile.partner?.firstName ?? null);
-    const entry = persons.get(scenario.person) ?? {
-      person: scenario.person,
-      firstName,
-      retired: false,
-      scenarios: [],
-    };
-    if (isRetiredError(summary.ErrorCode)) entry.retired = true;
-    else
-      entry.scenarios.push({
-        event: scenario.event,
-        cause: scenario.cause,
-        breakdown: riskBreakdown(summary),
-      });
-    persons.set(scenario.person, entry);
-  }
   return {
-    persons: [...persons.values()].sort((a, b) => a.person - b.person),
+    persons: riskPersons(response.RiskScenarioSummaries ?? [], profile),
     estimated: riskPensionsEstimated(profile),
   };
 }

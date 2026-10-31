@@ -22,6 +22,8 @@ function sourceKey(hint: HintRow): string | null {
   const data = hint.data ?? {};
   if (hint.type === "cheaper_equivalent") return `source.${String(data.quoteSource)}`;
   if (hint.type === "pension_buyin" && data.source === "logismata") return "source.logismata";
+  if (hint.type === "coverage_mismatch" && data.source === "calculation")
+    return "source.calculation";
   if (hint.type === "coverage_mismatch" && data.risk === "death") return "source.ruleOfThumb";
   if (hint.type === "coverage_mismatch" && data.risk === "disability") return "source.ivMax";
   return null;

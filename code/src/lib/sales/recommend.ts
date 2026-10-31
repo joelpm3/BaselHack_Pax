@@ -40,7 +40,8 @@ export const recommendInputSchema = z.object({
           .min(0)
           .nullable()
           .describe(
-            "Gap in CHF per year from the analysis (need minus income); null if not calculated",
+            "Gap in CHF per year from the analysis (monthly gap × 12, not the cumulative gap " +
+              "until retirement); null if not calculated",
           ),
         person: z
           .enum(["self", "partner"])

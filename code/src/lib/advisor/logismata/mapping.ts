@@ -1,5 +1,5 @@
 import type { LifeSituation, Partner, Person, Pillar2 } from "@/lib/domain/profile";
-import type { IncomeBreakdown, RiskCause } from "../types";
+import type { IncomeBreakdown, RiskCause, RiskPersonResult } from "../types";
 
 /**
  * Pure mapping between the customer's LifeSituation and Logismata APICalc requests/responses.
@@ -519,6 +519,64 @@ export function householdRiskScenarios(summaries: RiskScenarioSummary[]): Househ
 /** ErrorCode 8/9: the person is (almost) retired; 0/1 mean OK. */
 export function isRetiredError(code: number | undefined): boolean {
   return code === 8 || code === 9;
+}
+
+/** The eight risk scenarios grouped by person (1 = customer, 2 = partner). */
+export function riskPersons(
+  summaries: RiskScenarioSummary[],
+  profile: LifeSituation,
+): RiskPersonResult[] {
+  const persons = new Map<1 | 2, RiskPersonResult>();
+  for (const summary of summaries) {
+    const scenario = describeRiskScenario(summary.Scenario ?? 0);
+    if (!scenario) continue;
+    const firstName =
+      scenario.person === 1
+        ? (profile.person.firstName ?? null)
+        : (profile.partner?.firstName ?? null);
+    const entry = persons.get(scenario.person) ?? {
+      person: scenario.person,
+      firstName,
+      retired: false,
+      scenarios: [],
+    };
+    if (isRetiredError(summary.ErrorCode)) entry.retired = true;
+    else
+      entry.scenarios.push({
+        event: scenario.event,
+        cause: scenario.cause,
+        breakdown: riskBreakdown(summary),
+      });
+    persons.set(scenario.person, entry);
+  }
+  return [...persons.values()].sort((a, b) => a.person - b.person);
+}
+
+/**
+ * True when a stored risk request still describes the profile, i.e. its result can be reused.
+ * Pension-fund risk benefits come from a separate Logismata estimate, so the stored ones are
+ * taken as they are, as long as the certificate values on file are still the ones in them.
+ */
+export function riskRequestMatches(input: unknown, profile: LifeSituation, year: number): boolean {
+  if (typeof input !== "object" || input === null) return false;
+  const stored = input as {
+    Person1?: { Pillar2Pensions?: Pillar2RiskPensions };
+    Person2?: { Pillar2Pensions?: Pillar2RiskPensions };
+  };
+  const own = stored.Person1?.Pillar2Pensions;
+  const partners = stored.Person2?.Pillar2Pensions;
+  // Certificate values must be the ones on file now; the RiskBase estimate around them may stay.
+  const fits = (p: Pillar2 | undefined, pensions: Pillar2RiskPensions | undefined) =>
+    hasKnownRiskPensions(p) === (pensions !== undefined) &&
+    (!p ||
+      !pensions ||
+      JSON.stringify(mergeRiskPensions(p, pensions)) === JSON.stringify(pensions));
+  if (!fits(profile.pillar2, own) || !fits(partnerOf(profile)?.pillar2, partners)) return false;
+  const expected = buildRiskRequest(profile, year, {
+    pillar2Pensions: own,
+    partnerPillar2Pensions: partners,
+  });
+  return JSON.stringify(expected) === JSON.stringify(input);
 }
 
 export function emptyBreakdown(): IncomeBreakdown {

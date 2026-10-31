@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { emptyBreakdown } from "@/lib/advisor/logismata/mapping";
+import type { IncomeBreakdown, RiskPersonResult } from "@/lib/advisor/types";
 import { lifeSituationSchema } from "@/lib/domain/profile";
 import {
   cheaperEquivalentCandidates,
@@ -8,6 +10,7 @@ import {
   detectDoubleCover,
   detectPillar3aNotMaxed,
   type HintFacts,
+  MAX_IV_CHILD_PENSION,
   type PolicyFacts,
   pensionBuyInCandidates,
   pensionBuyInHint,
@@ -171,25 +174,113 @@ describe("coverage_mismatch", () => {
     expect(hints.filter((h) => h.data.risk === "death")).toEqual([]);
   });
 
-  it("flags a disability gap from the pension certificate even with the maximum IV pension", () => {
+  it("flags a disability gap from the pension certificate, counting the child pensions", () => {
+    const certificate = (disabilityPension: number) => [
+      policy({
+        category: "pension_fund",
+        insuredPerson: "May Müller",
+        details: { disabilityPension, childPension: 1000 },
+      }),
+      policy({ insuredPerson: "May", sumInsured: 400000 }),
+    ];
+    const hints = detectCoverageMismatch(
+      facts({ profile: muellerProfile, policies: certificate(20000) }),
+    );
+    const childPensions = MAX_IV_CHILD_PENSION + 1000;
+    expect(hints).toEqual([
+      expect.objectContaining({
+        key: "coverage_mismatch:disability:partner",
+        severity: "warning",
+        data: expect.objectContaining({
+          source: "estimate",
+          need: 80000,
+          childPensions,
+          gap: 80000 - 30240 - childPensions - 20000,
+        }),
+      }),
+    ]);
+    // With the child pensions May's certificate covers the need, as the risk card says.
+    expect(
+      detectCoverageMismatch(facts({ profile: muellerProfile, policies: certificate(29420) })),
+    ).toEqual([]);
+  });
+
+  describe("with a stored risk calculation", () => {
+    const breakdown = (need: number, gap: number, policies = 0): IncomeBreakdown => ({
+      ...emptyBreakdown(),
+      need,
+      pillar1: need - gap - policies,
+      policies,
+      total: need - gap,
+      gap,
+      capitalGap: gap * 20 + 210000,
+    });
+    const person = (
+      number: 1 | 2,
+      death: IncomeBreakdown,
+      disability: IncomeBreakdown,
+    ): RiskPersonResult => ({
+      person: number,
+      firstName: number === 1 ? "Jane" : "May",
+      retired: false,
+      scenarios: [
+        { event: "disability", cause: "illness", breakdown: disability },
+        { event: "death", cause: "illness", breakdown: death },
+      ],
+    });
+    const pax = policy({ insuredPerson: "May Müller", sumInsured: 150000 });
     const fund = policy({
       category: "pension_fund",
       insuredPerson: "May Müller",
       details: { disabilityPension: 29420 },
     });
-    const hints = detectCoverageMismatch(
-      facts({
-        profile: muellerProfile,
-        policies: [fund, policy({ insuredPerson: "May", sumInsured: 400000 })],
-      }),
-    );
-    expect(hints).toEqual([
-      expect.objectContaining({
-        key: "coverage_mismatch:disability:partner",
-        severity: "warning",
-        data: expect.objectContaining({ need: 80000, gap: 80000 - 30240 - 29420 }),
-      }),
-    ]);
+
+    it("uses the calculated gaps instead of the rules of thumb", () => {
+      const risk = {
+        persons: [
+          person(1, breakdown(0, 0), breakdown(0, 0)),
+          // Covered today, as on the card, even though the cumulative gap is positive.
+          person(2, breakdown(70000, 0, 6000), breakdown(80000, 0)),
+        ],
+      };
+      const hints = detectCoverageMismatch(
+        facts({ profile: muellerProfile, policies: [pax, fund], risk }),
+      );
+      expect(hints).toEqual([]);
+    });
+
+    it("reports the calculated monthly gap", () => {
+      const risk = { persons: [person(2, breakdown(70000, 14532), breakdown(80000, 2400))] };
+      const hints = detectCoverageMismatch(
+        facts({ profile: muellerProfile, policies: [pax], risk }),
+      );
+      expect(hints).toEqual([
+        expect.objectContaining({
+          key: "coverage_mismatch:death:partner",
+          severity: "warning",
+          policyId: pax.id,
+          data: expect.objectContaining({
+            source: "calculation",
+            name: "May",
+            gap: 14532,
+            monthlyGap: 1211,
+          }),
+        }),
+      ]);
+    });
+
+    it("falls back to the rules of thumb for a person the calculation does not cover", () => {
+      const risk = { persons: [person(1, breakdown(0, 0), breakdown(0, 0))] };
+      const hints = detectCoverageMismatch(
+        facts({ profile: muellerProfile, policies: [pax], risk }),
+      );
+      expect(hints).toEqual([
+        expect.objectContaining({
+          key: "coverage_mismatch:death:partner",
+          data: expect.objectContaining({ source: "rule_of_thumb", gap: 150000 }),
+        }),
+      ]);
+    });
   });
 
   it("questions death cover nobody depends on", () => {

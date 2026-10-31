@@ -45,11 +45,15 @@ function guideFor(hint: DetectedHint): string {
     case "cheaper_equivalent":
       return "An external contract costs clearly more than equivalent cover (same sum, same end age) at the Pax tariff. Say what they pay today and what the same cover would cost (indicative, non-binding). Switching needs a new health declaration: they should only cancel the old contract once the new cover is confirmed. Mention the notice deadline if given.";
     case "coverage_mismatch":
+      if (d.source === "calculation")
+        return d.risk === "death"
+          ? "The Logismata risk check (the same figures as the customer's Vorsorgebild and risk card) shows that if this person died of illness, the family would lack monthlyGap CHF per month to reach the survivors' need (70% of income), after AHV and pension-fund survivors' pensions and the existing policies. Quote the monthly gap. The gap is already calculated: never say it still has to be calculated."
+          : "The Logismata risk check (the same figures as the customer's Vorsorgebild and risk card) shows that if this person could no longer work because of illness, monthlyGap CHF per month would be missing to reach 80% of today's income, after IV pensions incl. child pensions, the pension fund and existing policies. Quote the monthly gap. The gap is already calculated: never say it still has to be calculated.";
       if (d.risk === "death")
-        return "Death cover is low compared with the income the family depends on (rule of thumb: about three gross annual incomes; the advisor can calculate the exact gap). Explain who would be affected.";
+        return "Rough check by rule of thumb, no calculation yet: the lump sums on death from policies and the pension fund (cover) are low compared with about three gross annual incomes (need). AHV and pension-fund survivors' pensions come on top and are not included, so never say there is no protection at all. Say it is a rule of thumb and that the advisor calculates the exact gap. Explain who would be affected.";
       if (d.risk === "death_without_dependants")
         return "They pay for death cover although nobody depends on their income at the moment. It can still make sense (e.g. a mortgage or planned family); suggest checking whether it is still needed. Do not suggest buying anything.";
-      return "In case of long-term disability, even the maximum IV pension plus the pension fund's disability pension stays below 80% of today's income. Real IV pensions are often lower than the maximum.";
+      return "Rough check, no calculation yet: in case of long-term disability, even the maximum IV pension plus IV child pensions and the pension fund's disability and child pensions stay below 80% of today's income. Real IV pensions are often lower than the maximum. Say that the advisor calculates the exact gap.";
     case "double_cover":
       return d.kind === "indemnity"
         ? "Two contracts cover the same damage; indemnity insurance pays a loss only once, so one premium is paid for nothing. Suggest checking which one to keep. Do not suggest Pax products."
@@ -88,7 +92,7 @@ function fallbackText(hint: DetectedHint, locale: Locale): HintText {
   const chf = (v: unknown) => (typeof v === "number" ? formatChf(v, locale) : "–");
   const variant =
     hint.type === "coverage_mismatch"
-      ? `coverage_mismatch_${String(d.risk)}`
+      ? `coverage_mismatch_${String(d.risk)}${d.source === "calculation" ? "_calculated" : ""}`
       : hint.type === "double_cover"
         ? `double_cover_${String(d.kind)}`
         : hint.type === "contract_ending"
@@ -99,7 +103,9 @@ function fallbackText(hint: DetectedHint, locale: Locale): HintText {
               ? "pension_buyin_no_tax"
               : hint.type;
   const values = {
-    name: typeof d.name === "string" ? d.name : "",
+    subject: String(d.subject ?? "self"),
+    name: typeof d.name === "string" ? d.name : t("hints.partnerFallback", {}),
+    monthlyGap: chf(d.monthlyGap),
     insurer: String(d.insurer ?? ""),
     product: String(d.productName ?? ""),
     cover: chf(d.cover),

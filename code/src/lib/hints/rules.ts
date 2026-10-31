@@ -1,3 +1,4 @@
+import type { RiskPersonResult } from "@/lib/advisor/types";
 import { type PolicySubject, subjectOfPolicy } from "@/lib/domain/policy-subject";
 import { type LifeSituation, type Person, pillar2Of } from "@/lib/domain/profile";
 import type { HintSeverity, HintType, PolicyCategory, PolicyStatus } from "@/lib/domain/taxonomy";
@@ -33,6 +34,11 @@ export interface HintFacts {
   /** ISO date. */
   today: string;
   limits3a: { withPensionFund: number; withoutPensionFund: number };
+  /**
+   * The stored Logismata risk check incl. the household's policies, when it still matches the
+   * profile. Gap hints use it; only without it do they fall back to rules of thumb.
+   */
+  risk?: { persons: RiskPersonResult[] } | null;
 }
 
 export interface DetectedHint {
@@ -52,6 +58,10 @@ export const DEATH_COVER_INCOME_MULTIPLE = 3;
 export const DISABILITY_NEED_SHARE = 0.8;
 /** Maximum full IV pension (CHF 2'520 per month); real IV pensions are often lower. */
 export const MAX_IV_PENSION = 30_240;
+/** IV child pension: 40% of the IV pension per child. */
+export const MAX_IV_CHILD_PENSION = Math.round(MAX_IV_PENSION * 0.4);
+/** A calculated gap below this share of the need is not worth a hint. */
+export const MIN_CALCULATED_GAP_SHARE = 0.1;
 
 type Subject = PolicySubject;
 
@@ -195,12 +205,54 @@ function deathCoverOf(facts: HintFacts, subject: Subject): number {
   return risk + lumpSum;
 }
 
-function pensionFundDisabilityOf(facts: HintFacts, subject: Subject): number | undefined {
+function pensionFundBenefitOf(
+  facts: HintFacts,
+  subject: Subject,
+  field: "disabilityPension" | "childPension",
+): number | undefined {
   const fund = policiesOf(facts, subject, "pension_fund").find(
-    (p) => typeof p.details?.disabilityPension === "number",
+    (p) => typeof p.details?.[field] === "number",
   );
-  if (fund) return num(fund.details?.disabilityPension);
-  return pillar2Of(facts.profile, subject).disabilityPension;
+  if (fund) return num(fund.details?.[field]);
+  return pillar2Of(facts.profile, subject)[field];
+}
+
+/** The stored risk check for this adult, unless Logismata reports them as retired. */
+function calculatedFor(facts: HintFacts, subject: Subject): RiskPersonResult | undefined {
+  const number = subject === "self" ? 1 : 2;
+  const person = facts.risk?.persons.find((p) => p.person === number);
+  return person && !person.retired ? person : undefined;
+}
+
+/** A gap from the stored risk check: the same figures the risk card and the Vorsorgebild show. */
+function calculatedGapHint(
+  adult: Adult,
+  person: RiskPersonResult,
+  event: "death" | "disability",
+  severity: HintSeverity,
+  policyId: string | null,
+): DetectedHint | null {
+  // Illness is the typical gap (accidents add UVG benefits); the Vorsorgebild shows it too.
+  const b = person.scenarios.find((s) => s.event === event && s.cause === "illness")?.breakdown;
+  if (!b || b.need <= 0 || b.gap < b.need * MIN_CALCULATED_GAP_SHARE) return null;
+  return {
+    type: "coverage_mismatch",
+    severity,
+    policyId,
+    key: `coverage_mismatch:${event}:${adult.subject}`,
+    data: {
+      risk: event,
+      source: "calculation",
+      subject: adult.subject,
+      name: adult.name ?? null,
+      need: b.need,
+      coveredIncome: b.total,
+      policies: b.policies,
+      gap: b.gap,
+      monthlyNeed: Math.round(b.need / 12),
+      monthlyGap: Math.round(b.gap / 12),
+    },
+  };
 }
 
 export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
@@ -218,8 +270,23 @@ export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
     const mainDeathPolicy = deathPolicies.toSorted(
       (a, b) => num(b.sumInsured) - num(a.sumInsured),
     )[0];
+    const calculated = calculatedFor(facts, adult.subject);
 
-    if (income > 0 && hasDependants) {
+    if (calculated) {
+      const found = [
+        calculatedGapHint(adult, calculated, "death", "warning", mainDeathPolicy?.id ?? null),
+        calculatedGapHint(
+          adult,
+          calculated,
+          "disability",
+          hasDependants ? "warning" : "info",
+          null,
+        ),
+      ];
+      hints.push(...found.filter((h): h is DetectedHint => h !== null));
+    }
+
+    if (!calculated && income > 0 && hasDependants) {
       const cover = deathCoverOf(facts, adult.subject);
       const need = income * DEATH_COVER_INCOME_MULTIPLE;
       if (cover < need * 0.8) {
@@ -230,6 +297,7 @@ export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
           key: `coverage_mismatch:death:${adult.subject}`,
           data: {
             risk: "death",
+            source: "rule_of_thumb",
             subject: adult.subject,
             name: adult.name ?? null,
             income,
@@ -261,14 +329,18 @@ export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
       });
     }
 
-    const pensionFundDisability = pensionFundDisabilityOf(facts, adult.subject);
-    if (income > 0 && pensionFundDisability !== undefined) {
+    const pensionFundDisability = pensionFundBenefitOf(facts, adult.subject, "disabilityPension");
+    if (!calculated && income > 0 && pensionFundDisability !== undefined) {
       const privateDisability = policiesOf(facts, adult.subject, "risk_disability").reduce(
         (s, p) => s + num(p.annuityAnnual),
         0,
       );
+      // Child pensions are part of the cover, as in Logismata's calculation.
+      const childPensions =
+        children *
+        (MAX_IV_CHILD_PENSION + (pensionFundBenefitOf(facts, adult.subject, "childPension") ?? 0));
       const need = Math.round(income * DISABILITY_NEED_SHARE);
-      const cover = MAX_IV_PENSION + pensionFundDisability + privateDisability;
+      const cover = MAX_IV_PENSION + childPensions + pensionFundDisability + privateDisability;
       if (cover < need * 0.9) {
         hints.push({
           type: "coverage_mismatch",
@@ -277,11 +349,13 @@ export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
           key: `coverage_mismatch:disability:${adult.subject}`,
           data: {
             risk: "disability",
+            source: "estimate",
             subject: adult.subject,
             name: adult.name ?? null,
             income,
             need,
             ivPensionMax: MAX_IV_PENSION,
+            childPensions,
             pensionFundDisability,
             privateDisability,
             gap: need - cover,

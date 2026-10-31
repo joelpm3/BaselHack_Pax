@@ -23,6 +23,7 @@ import {
 } from "../logismata/mapping";
 import { policyCoverOf } from "../policies";
 import { applyPolicyCover } from "../policy-cover";
+import { riskResultForModel } from "../risk-model-output";
 import type { PensionOverviewOutput, RiskAnalysisOutput, TaxSavingsOutput } from "../types";
 import type { ToolContext } from "./context";
 
@@ -76,7 +77,8 @@ export function createAnalysisTools(ctx: ToolContext) {
         "dies, separately for illness and accident, against the need (80% of gross for " +
         "disability, 70% for survivors). Shows a gap chart like the Pax Vorsorgecheck. Active " +
         "death and disability policies (Pax and other insurers) are already counted in the " +
-        "`policies` source and reduce the gap; see policyCover for how death capital is spread.",
+        "`policies` figure and reduce the gap. The result gives the card's monthly figures; " +
+        "follow its readingGuide.",
       inputSchema: z.object({}),
       execute: async (_input, { toolCallId }): Promise<RiskAnalysisOutput> => {
         const profile = getProfile(ctx.customerId);
@@ -98,6 +100,8 @@ export function createAnalysisTools(ctx: ToolContext) {
           },
         };
       },
+      // The model reads the card's monthly figures, not the widget's yearly breakdowns.
+      toModelOutput: ({ output }) => ({ type: "json", value: riskResultForModel(output) }),
     }),
 
     calculateTaxSavings: tool({

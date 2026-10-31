@@ -66,6 +66,7 @@
     "restore": "Show again",
     "dismissedCount": "{count, plural, one {# hidden note} other {# hidden notes}}",
     "concerns": "Concerns: {product}, {insurer}",
+    "partnerFallback": "your partner",
     "severity": {
       "warning": "Please check",
       "opportunity": "Opportunity",
@@ -75,8 +76,9 @@
       "quicksale": "Pax premium according to the current tariff, non-binding. Switching requires a health check.",
       "estimate": "Pax premium estimated, non-binding. Switching requires a health check.",
       "logismata": "Tax saving calculated with Logismata, without guarantee.",
+      "calculation": "Calculated with Logismata like your pension picture, including your existing policies. Non-binding.",
       "ruleOfThumb": "Rule of thumb: about three gross annual incomes. We calculate the exact gap with you in a conversation.",
-      "ivMax": "Calculated with the maximum IV pension. The actual pension is often lower."
+      "ivMax": "Rough estimate with the maximum IV pension including child pensions. The actual pension is often lower; we calculate the exact gap with you in a conversation."
     },
     "fallback": {
       "cheaper_equivalent": {
@@ -85,7 +87,11 @@
       },
       "coverage_mismatch_death": {
         "title": "Death cover is on the low side",
-        "body": "Today {cover} would be paid out on death. As a rule of thumb, a family needs about three annual incomes, here around {need}. Have the gap calculated precisely in a conversation."
+        "body": "Today a lump sum of {cover} would be paid out on death, plus pensions from the AHV and the pension fund. As a rule of thumb, a family needs about three annual incomes, here around {need}. Have the gap calculated precisely in a conversation."
+      },
+      "coverage_mismatch_death_calculated": {
+        "title": "Gap on death: {monthlyGap} a month",
+        "body": "{subject, select, partner {If {name} died} other {If you died}} of an illness, your family would be about {monthlyGap} a month short, even with the AHV, the pension fund and your existing policies. This is the same calculation as in your pension picture."
       },
       "coverage_mismatch_death_without_dependants": {
         "title": "Death cover without dependants",
@@ -93,7 +99,11 @@
       },
       "coverage_mismatch_disability": {
         "title": "Gap if you can no longer work",
-        "body": "If you were unable to work for a long time, about {gap} a year would be missing to reach 80 percent of today's income, even with the IV and the pension fund. The IV pension is calculated at its maximum."
+        "body": "If you were unable to work for a long time, about {gap} a year would be missing to reach 80 percent of today's income, even with the IV, child pensions and the pension fund. The IV pension is calculated at its maximum."
+      },
+      "coverage_mismatch_disability_calculated": {
+        "title": "Gap if unable to work: {monthlyGap} a month",
+        "body": "{subject, select, partner {If {name} could no longer work} other {If you could no longer work}} because of illness, about {monthlyGap} a month would be missing to reach 80 percent of today's income, even with the IV, child pensions, the pension fund and your existing policies."
       },
       "double_cover_indemnity": {
         "title": "Insured twice",
