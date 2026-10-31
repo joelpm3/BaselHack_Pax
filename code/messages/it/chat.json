@@ -32,7 +32,7 @@
   },
   "picture": {
     "title": "Il suo quadro previdenziale",
-    "unit": "= CHF 500 al mese",
+    "unit": "1 quadrato = CHF 500 al mese",
     "open": "Aprire il quadro previdenziale",
     "close": "Chiudi",
     "need": "Il suo fabbisogno",
@@ -67,12 +67,16 @@
     },
     "building": {
       "title": "Il suo quadro prende forma",
-      "known": "{count} dati su {total} noti",
       "factKnown": "noto",
       "factOpen": "ancora aperto",
       "missing": "Mi manca ancora: {fields}.",
       "calculating": "Tutti i dati necessari ci sono. Ora calcolo il suo quadro previdenziale.",
-      "unavailable": "Tutti i dati necessari ci sono, ma al momento il calcolo non è disponibile. Riproverò durante il colloquio."
+      "unavailable": "Tutti i dati necessari ci sono, ma al momento il calcolo non è disponibile. Riproverò durante il colloquio.",
+      "target": "Il suo fabbisogno in pensione: circa {amount} al mese",
+      "targetNote": "Il {percent} % del suo reddito lordo attuale. Quanto ne coprono AVS, cassa pensioni e 3° pilastro è ancora aperto.",
+      "situations": "Il suo quadro per situazione",
+      "situationPending": "Calcolo in corso",
+      "factsTitle": "I suoi dati ({count} su {total})"
     },
     "facts": {
       "age": "Età",
@@ -91,7 +95,7 @@
       "p1Status": "Previdenza di base obbligatoria per chi vive e lavora in Svizzera",
       "p2": "2° pilastro: cassa pensione",
       "p2Yes": "Assicurata/o",
-      "p2No": "Nessuna cassa pensione",
+      "p2No": "Nessuna cassa pensione propria",
       "p2Capital": "Avere {amount}",
       "p3": "3° pilastro: previdenza privata",
       "p3Balance": "Avere 3a {amount}",

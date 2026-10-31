@@ -32,7 +32,7 @@
   },
   "picture": {
     "title": "Your pension picture",
-    "unit": "= CHF 500 per month",
+    "unit": "1 square = CHF 500 a month",
     "open": "Open the pension picture",
     "close": "Close",
     "need": "What you need",
@@ -67,12 +67,16 @@
     },
     "building": {
       "title": "Your picture is taking shape",
-      "known": "{count} of {total} facts known",
       "factKnown": "known",
       "factOpen": "still open",
       "missing": "I still need: {fields}.",
       "calculating": "I have everything I need. I'm calculating your pension picture now.",
-      "unavailable": "I have everything I need, but the calculation isn't available right now. I'll try again during our conversation."
+      "unavailable": "I have everything I need, but the calculation isn't available right now. I'll try again during our conversation.",
+      "target": "What you need in retirement: about {amount} a month",
+      "targetNote": "{percent}% of your gross income today. How much of it AHV, your pension fund and pillar 3 cover is still open.",
+      "situations": "Your picture by situation",
+      "situationPending": "Calculating",
+      "factsTitle": "Your details ({count} of {total})"
     },
     "facts": {
       "age": "Age",
@@ -91,7 +95,7 @@
       "p1Status": "Mandatory state provision for everyone who lives and works in Switzerland",
       "p2": "2nd pillar: pension fund",
       "p2Yes": "Insured",
-      "p2No": "No pension fund",
+      "p2No": "No pension fund of your own",
       "p2Capital": "Savings {amount}",
       "p3": "3rd pillar: private provision",
       "p3Balance": "3a balance {amount}",

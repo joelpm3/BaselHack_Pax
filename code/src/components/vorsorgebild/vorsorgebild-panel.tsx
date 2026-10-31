@@ -1,11 +1,13 @@
 "use client";
 
+import { Circle, CircleCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { usePolicyCoverText } from "@/components/widgets/policy-cover-note";
+import { NEED_PERCENT } from "@/lib/advisor/logismata/mapping";
 import type { PictureKind, PictureScenario, VorsorgebildModel } from "@/lib/advisor/types";
 import { cn, formatChf } from "@/lib/utils";
-import { monthlyChf, SOURCES } from "./grid";
+import { monthlyChf, SOURCES, targetBreakdown } from "./grid";
 import { SquareGrid } from "./square-grid";
 import { LegendSquare } from "./square-style";
 
@@ -25,13 +27,7 @@ export function VorsorgebildPanel({ model }: { model: VorsorgebildModel }) {
 
   return (
     <div className="flex flex-col gap-6">
-      <header className="flex flex-col gap-1">
-        <h2 className="text-heading-s font-bold">{t("title")}</h2>
-        <p className="flex items-center gap-1.5 text-paragraph-xs text-fg-muted">
-          <span aria-hidden className="inline-block size-2.5 bg-pax-purple" />
-          {t("unit")}
-        </p>
-      </header>
+      <h2 className="text-heading-s font-bold">{t("title")}</h2>
 
       {scenario ? (
         <>
@@ -112,13 +108,16 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
         </p>
       </div>
 
-      <SquareGrid
-        key={`${scenario.kind}-${scenario.calculatedAt}`}
-        breakdown={breakdown}
-        columns={10}
-        size="lg"
-        animate
-      />
+      <div className="flex flex-col gap-2">
+        <SquareGrid
+          key={`${scenario.kind}-${scenario.calculatedAt}`}
+          breakdown={breakdown}
+          columns={10}
+          size="lg"
+          animate
+        />
+        <p className="text-paragraph-xs text-fg-muted">{t("unit")}</p>
+      </div>
 
       <ul className="flex flex-col gap-1.5 text-paragraph-xs">
         {sources.map((source) => (
@@ -169,7 +168,10 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
 
 function Building({ model }: { model: VorsorgebildModel }) {
   const t = useTranslations("chat.picture.building");
+  const tp = useTranslations("chat.picture");
   const tf = useTranslations("chat.picture.facts");
+  // The panel renders twice (side panel and mobile sheet), so heading ids must be unique.
+  const id = useId();
   const fields = useTranslations("widgets.fields");
   const locale = useLocale();
   const known = model.facts.filter((f) => f.known).length;
@@ -183,32 +185,64 @@ function Building({ model }: { model: VorsorgebildModel }) {
       : model.pending
         ? t("calculating")
         : t("unavailable");
+  const target = targetBreakdown(model.pillars.incomeToday);
+  const status = model.pending ? t("situationPending") : tp("pillars.open");
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-6">
       <div>
-        <p className="text-heading-s font-bold">{t("title")}</p>
+        <p className="text-paragraph-m font-bold">{t("title")}</p>
         <p className="mt-1 text-paragraph-s text-fg-muted">{body}</p>
       </div>
-      <ul
-        className="grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-x-3 gap-y-2.5"
-        aria-label={t("known", { count: known, total: model.facts.length })}
-      >
-        {model.facts.map((fact) => (
-          <li key={fact.key} className="flex min-w-0 items-center gap-2 text-paragraph-xs">
-            <span
-              aria-hidden
-              className={cn(
-                "size-4 shrink-0 border-[1.5px] transition-colors duration-500",
-                fact.known ? "border-pax-purple bg-pax-purple" : "border-gray-4",
+
+      {target ? (
+        <div className="flex flex-col gap-3">
+          <p className="text-paragraph-s font-bold">
+            {t("target", { amount: formatChf(monthlyChf(target.need), locale) })}
+          </p>
+          <SquareGrid key={target.need} breakdown={target} columns={10} size="lg" animate />
+          <div className="flex flex-col gap-1 text-paragraph-xs text-fg-muted">
+            <p>{tp("unit")}</p>
+            <p>{t("targetNote", { percent: NEED_PERCENT })}</p>
+          </div>
+        </div>
+      ) : null}
+
+      <section aria-labelledby={`${id}-situations`}>
+        <h3 id={`${id}-situations`} className="text-paragraph-s font-bold">
+          {t("situations")}
+        </h3>
+        <dl className="mt-2 flex flex-col divide-y divide-line">
+          {ORDER.map((kind) => (
+            <div key={kind} className="flex items-baseline justify-between gap-3 py-2">
+              <dt className="text-paragraph-xs font-medium">{tp(`tabs.${kind}`)}</dt>
+              <dd className="text-paragraph-xs text-fg-muted">{status}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      <section aria-labelledby={`${id}-facts`}>
+        <h3 id={`${id}-facts`} className="text-paragraph-s font-bold">
+          {t("factsTitle", { count: known, total: model.facts.length })}
+        </h3>
+        <ul className="mt-3 grid grid-cols-[repeat(auto-fill,minmax(7.5rem,1fr))] gap-x-3 gap-y-2.5">
+          {model.facts.map((fact) => (
+            <li key={fact.key} className="flex min-w-0 items-center gap-2 text-paragraph-xs">
+              {fact.known ? (
+                <CircleCheck aria-hidden className="size-4 shrink-0 text-pax-purple" />
+              ) : (
+                <Circle aria-hidden className="size-4 shrink-0 text-gray-4" />
               )}
-            />
-            <span className={cn("min-w-0 hyphens-auto", fact.known ? "text-ink" : "text-fg-muted")}>
-              {tf(fact.key)}
-              <span className="sr-only">: {fact.known ? t("factKnown") : t("factOpen")}</span>
-            </span>
-          </li>
-        ))}
-      </ul>
+              <span
+                className={cn("min-w-0 hyphens-auto", fact.known ? "text-ink" : "text-fg-muted")}
+              >
+                {tf(fact.key)}
+                <span className="sr-only">: {fact.known ? t("factKnown") : t("factOpen")}</span>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
     </section>
   );
 }

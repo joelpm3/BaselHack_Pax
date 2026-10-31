@@ -32,7 +32,7 @@
   },
   "picture": {
     "title": "Ihr Vorsorgebild",
-    "unit": "= CHF 500 pro Monat",
+    "unit": "1 Quadrat = CHF 500 pro Monat",
     "open": "Vorsorgebild öffnen",
     "close": "Schliessen",
     "need": "Ihr Bedarf",
@@ -67,12 +67,16 @@
     },
     "building": {
       "title": "Ihr Bild entsteht",
-      "known": "{count} von {total} Angaben bekannt",
       "factKnown": "bekannt",
       "factOpen": "noch offen",
       "missing": "Dafür fehlt mir noch: {fields}.",
       "calculating": "Alle nötigen Angaben sind da. Ich rechne jetzt Ihr Vorsorgebild.",
-      "unavailable": "Alle nötigen Angaben sind da, aber die Berechnung ist im Moment nicht erreichbar. Ich versuche es im Gespräch nochmals."
+      "unavailable": "Alle nötigen Angaben sind da, aber die Berechnung ist im Moment nicht erreichbar. Ich versuche es im Gespräch nochmals.",
+      "target": "Ihr Bedarf im Alter: rund {amount} pro Monat",
+      "targetNote": "{percent} % Ihres heutigen Bruttoeinkommens. Wie viel davon AHV, Pensionskasse und 3. Säule decken, ist noch offen.",
+      "situations": "Ihr Bild nach Situation",
+      "situationPending": "Wird gerechnet",
+      "factsTitle": "Ihre Angaben ({count} von {total})"
     },
     "facts": {
       "age": "Alter",
@@ -91,7 +95,7 @@
       "p1Status": "Gesetzliche Grundvorsorge für alle, die in der Schweiz leben und arbeiten",
       "p2": "2. Säule: Pensionskasse",
       "p2Yes": "Versichert",
-      "p2No": "Keine Pensionskasse",
+      "p2No": "Keine eigene Pensionskasse",
       "p2Capital": "Guthaben {amount}",
       "p3": "3. Säule: private Vorsorge",
       "p3Balance": "3a-Guthaben {amount}",
