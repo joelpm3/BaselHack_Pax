@@ -1,4 +1,4 @@
-# Pax Digital Advisor
+# Pax Clara
 
 BaselHack 2026, Pax challenge "AI that makes life insurance simple" (Team A4).
 Product, data model and design decisions: [`../documentation/ARCHITECTURE.md`](../documentation/ARCHITECTURE.md).

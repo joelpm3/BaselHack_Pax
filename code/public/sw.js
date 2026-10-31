@@ -1,4 +1,4 @@
-// Pax advisor service worker: makes the app installable and shows an offline page when the
+// Pax Clara service worker: makes the app installable and shows an offline page when the
 // network is gone. Advice, prices and documents are always fetched live (never cached).
 const CACHE = "pax-shell-v1";
 const OFFLINE_URL = "/offline.html";

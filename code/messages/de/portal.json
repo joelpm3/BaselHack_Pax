@@ -5,7 +5,7 @@
   "greetingAnonymous": "Guten Tag",
   "intro": "Alle Ihre Versicherungen und Vorsorgeunterlagen an einem Ort, bei Pax und anderswo.",
   "header": {
-    "home": "Pax Vorsorge-Berater, Startseite",
+    "home": "Pax Clara, Startseite",
     "navigation": "Hauptnavigation",
     "language": "Sprache",
     "toAdvisor": "Zur Beratung"
@@ -61,7 +61,7 @@
     "title": "Hinweise für Sie",
     "loading": "Wir prüfen Ihre Verträge …",
     "empty": "Im Moment sehen wir nichts, das Sie angehen müssten.",
-    "discuss": "Mit dem Berater besprechen",
+    "discuss": "Mit Clara besprechen",
     "dismiss": "Ausblenden",
     "restore": "Wieder anzeigen",
     "dismissedCount": "{count, plural, one {# ausgeblendeter Hinweis} other {# ausgeblendete Hinweise}}",

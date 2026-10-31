@@ -5,14 +5,14 @@
   "greetingAnonymous": "Hello",
   "intro": "All your insurance and pension documents in one place, at Pax and elsewhere.",
   "header": {
-    "home": "Pax pension advisor, home page",
+    "home": "Pax Clara, home page",
     "navigation": "Main navigation",
     "language": "Language",
-    "toAdvisor": "Talk to the advisor"
+    "toAdvisor": "Talk to Clara"
   },
   "empty": {
     "title": "Your cockpit is still empty",
-    "body": "Start a conversation with the advisor or upload your documents. Then you'll see your whole pension picture here at a glance.",
+    "body": "Start a conversation with Clara or upload your documents. Then you'll see your whole pension picture here at a glance.",
     "start": "Start your advice"
   },
   "pillars": {
@@ -61,7 +61,7 @@
     "title": "Things to look at",
     "loading": "We're checking your contracts …",
     "empty": "Right now there's nothing that needs your attention.",
-    "discuss": "Discuss with the advisor",
+    "discuss": "Discuss with Clara",
     "dismiss": "Hide",
     "restore": "Show again",
     "dismissedCount": "{count, plural, one {# hidden note} other {# hidden notes}}",

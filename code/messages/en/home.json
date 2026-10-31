@@ -1,6 +1,6 @@
 {
   "header": {
-    "home": "Pax pension advisor, go to the home page",
+    "home": "Pax Clara, go to the home page",
     "portal": "Pension cockpit"
   },
   "title": "How well is your life protected?",
@@ -28,7 +28,7 @@
     "unit": "1 square = CHF 500 per month"
   },
   "points": {
-    "label": "How the Pax pension advisor works",
+    "label": "How Pax Clara works",
     "life": {
       "title": "Your life comes first",
       "body": "Family, work, plans and worries. Products only come at the very end."

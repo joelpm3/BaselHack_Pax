@@ -110,7 +110,7 @@ const fixtures: Fixture[] = [
     turns: [
       {
         role: "assistant",
-        text: "Grüezi! Ich bin der digitale Vorsorge-Berater von Pax. Erzählen Sie mir kurz, was Sie gerade beschäftigt?",
+        text: "Grüezi! Ich bin Clara, die digitale Vorsorgeberaterin der Pax. Erzählen Sie mir kurz, was Sie gerade beschäftigt?",
       },
       {
         role: "user",
@@ -185,7 +185,7 @@ const fixtures: Fixture[] = [
     turns: [
       {
         role: "assistant",
-        text: "Bonjour ! Je suis le conseiller en prévoyance numérique de Pax. Qu'est-ce qui vous amène ?",
+        text: "Bonjour ! Je suis Clara, la conseillère numérique en prévoyance de Pax. Qu'est-ce qui vous amène ?",
       },
       {
         role: "user",
@@ -234,7 +234,7 @@ const fixtures: Fixture[] = [
     turns: [
       {
         role: "assistant",
-        text: "Buongiorno! Sono il consulente digitale di Pax per la previdenza. Come posso aiutarla?",
+        text: "Buongiorno! Sono Clara, la consulente digitale per la previdenza di Pax. Come posso aiutarla?",
       },
       {
         role: "user",
@@ -294,7 +294,7 @@ const fixtures: Fixture[] = [
     turns: [
       {
         role: "assistant",
-        text: "Hello! I'm Pax's digital pension advisor. What would you like to look at today?",
+        text: "Hello! I'm Clara, Pax's digital pension advisor. What would you like to look at today?",
       },
       {
         role: "user",
@@ -339,7 +339,7 @@ const fixtures: Fixture[] = [
     turns: [
       {
         role: "assistant",
-        text: "Grüezi! Ich bin der digitale Vorsorge-Berater von Pax. Was beschäftigt Sie?",
+        text: "Grüezi! Ich bin Clara, die digitale Vorsorgeberaterin der Pax. Was beschäftigt Sie?",
       },
       { role: "user", text: "Was ist eigentlich der Unterschied zwischen Säule 3a und 3b?" },
       {

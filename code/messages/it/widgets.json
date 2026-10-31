@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "Al momento non ha funzionato. Il consulente può comunque aiutarla.",
+    "failed": "Al momento non ha funzionato. Clara può comunque aiutarla.",
     "yes": "Sì",
     "no": "No",
     "cancel": "Annulla"
@@ -214,11 +214,11 @@
     "title": "Scenario",
     "pending": "Calcolo lo scenario",
     "recalculating": "Nuovo calcolo in corso",
-    "failed": "Al momento non sono riuscito a calcolarlo. Riprovi, per favore.",
+    "failed": "Al momento non sono riuscita a calcolarlo. Riprovi, per favore.",
     "noChange": "Questo scenario non cambia la sua copertura.",
     "taxSavings": "Risparmio fiscale con questo importo: {amount} all'anno.",
     "lostPension": "Il prelievo anticipato le costa circa {amount} di rendita della cassa pensione al mese.",
-    "discuss": "Parlarne con il consulente",
+    "discuss": "Parlarne con Clara",
     "discussMessage": "Ho guardato lo scenario «{scenario}» ({params}). Cosa significa per me?",
     "estimated": "Cassa pensione stimata.",
     "assumptions": "Scenario calcolato con Logismata, senza impegno. Non cambia il suo quadro previdenziale.",

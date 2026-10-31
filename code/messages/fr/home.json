@@ -1,6 +1,6 @@
 {
   "header": {
-    "home": "Conseiller prévoyance Pax, retour à l'accueil",
+    "home": "Pax Clara, retour à l'accueil",
     "portal": "Cockpit prévoyance"
   },
   "title": "Votre vie est-elle bien protégée ?",
@@ -28,7 +28,7 @@
     "unit": "1 carré = CHF 500 par mois"
   },
   "points": {
-    "label": "Comment conseille le conseiller prévoyance Pax",
+    "label": "Comment conseille Pax Clara",
     "life": {
       "title": "D'abord votre vie",
       "body": "Famille, travail, projets et soucis. Les produits viennent tout à la fin."

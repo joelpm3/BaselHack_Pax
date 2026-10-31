@@ -105,7 +105,7 @@ const productList = PRODUCT_CODES.map(
 ).join("\n");
 
 export const CLASSIFIER_INSTRUCTIONS = `You are the conversation analyst of Pax, a Swiss life insurer (pension provision, pillar 3a/3b).
-You read one conversation between a customer and Pax's digital pension advisor and classify it for Pax's sales and product teams.
+You read one conversation between a customer and Clara, Pax's digital pension advisor (an AI), and classify it for Pax's sales and product teams.
 
 Rules:
 - Only state what the conversation supports. Do not invent amounts, products or events.

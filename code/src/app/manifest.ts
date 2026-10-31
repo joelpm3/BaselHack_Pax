@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Pax Vorsorge-Berater",
-    short_name: "Pax",
+    name: "Pax Clara",
+    short_name: "Pax Clara",
     description: "Vorsorge auf den Punkt gebracht.",
     id: "/",
     start_url: "/",

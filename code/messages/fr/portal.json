@@ -5,7 +5,7 @@
   "greetingAnonymous": "Bonjour",
   "intro": "Toutes vos assurances et vos documents de prévoyance au même endroit, chez Pax et ailleurs.",
   "header": {
-    "home": "Conseiller en prévoyance Pax, page d’accueil",
+    "home": "Pax Clara, page d’accueil",
     "navigation": "Navigation principale",
     "language": "Langue",
     "toAdvisor": "Vers le conseil"
@@ -61,7 +61,7 @@
     "title": "Points à examiner",
     "loading": "Nous vérifions vos contrats …",
     "empty": "Pour l’instant, rien ne demande votre attention.",
-    "discuss": "En parler avec le conseiller",
+    "discuss": "En parler avec Clara",
     "dismiss": "Masquer",
     "restore": "Afficher à nouveau",
     "dismissedCount": "{count, plural, one {# remarque masquée} other {# remarques masquées}}",

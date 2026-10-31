@@ -142,7 +142,7 @@ class Sheet {
 }
 
 const DISCLAIMER =
-  "Fiktives Musterdokument für die Demo des Pax Vorsorge-Beraters (BaselHack 2026). Firmen und Personen sind erfunden.";
+  "Fiktives Musterdokument für die Demo von Pax Clara (BaselHack 2026). Firmen und Personen sind erfunden.";
 
 async function newDocument(title: string, accent: ReturnType<typeof rgb>) {
   const pdf = await PDFDocument.create();

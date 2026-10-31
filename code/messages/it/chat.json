@@ -2,23 +2,23 @@
   "pageTitle": "Consulenza",
   "newConversation": "Nuova conversazione",
   "transcript": "Andamento della conversazione",
-  "thinking": "Il consulente sta scrivendo",
+  "thinking": "Clara sta scrivendo",
   "disclaimer": "Calcoli e prezzi sono valori indicativi senza impegno. Vincolante è solo un'offerta di Pax.",
   "error": {
-    "unavailable": "Al momento il consulente non è raggiungibile. Il suo messaggio è salvato.",
+    "unavailable": "Al momento Clara non è raggiungibile. Il suo messaggio è salvato.",
     "retry": "Riprova"
   },
   "greeting": {
-    "default": "Buongiorno, mi fa piacere che sia qui. Sono il suo consulente digitale per la previdenza di Pax. Prima di parlare di cifre vorrei conoscerla: cosa la preoccupa quando pensa al suo futuro?",
-    "upload": "Buongiorno, mi fa piacere che sia qui. Ha i documenti a portata di mano, molto bene: li guarderemo insieme tra poco e così ci risparmiamo molte domande. Prima però vorrei conoscerla un po': com'è la sua vita in questo momento?",
-    "existing": "Buongiorno {name}, che piacere rivederla. Ho davanti a me le sue polizze Pax. Dall'ultima volta è cambiato qualcosa nella sua vita, per esempio in famiglia, sul lavoro o nell'abitazione?",
-    "existingAnonymous": "Buongiorno, che piacere rivederla. Ho davanti a me le sue polizze Pax. Dall'ultima volta è cambiato qualcosa nella sua vita?",
-    "hint": "Buongiorno {name}, guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza e le sue polizze. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?",
-    "hintAnonymous": "Buongiorno, guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?"
+    "default": "Buongiorno, mi fa piacere che sia qui. Sono Clara, la consulente digitale per la previdenza di Pax. Prima di parlare di cifre vorrei conoscerla: cosa la preoccupa quando pensa al suo futuro?",
+    "upload": "Buongiorno, mi fa piacere che sia qui. Sono Clara, la consulente digitale per la previdenza di Pax. Ha i documenti a portata di mano, molto bene: li guarderemo insieme tra poco e così ci risparmiamo molte domande. Prima però vorrei conoscerla un po': com'è la sua vita in questo momento?",
+    "existing": "Buongiorno {name}, che piacere rivederla. Sono Clara, la consulente digitale per la previdenza di Pax, e ho davanti a me le sue polizze. Dall'ultima volta è cambiato qualcosa nella sua vita, per esempio in famiglia, sul lavoro o nell'abitazione?",
+    "existingAnonymous": "Buongiorno, che piacere rivederla. Sono Clara, la consulente digitale per la previdenza di Pax, e ho davanti a me le sue polizze. Dall'ultima volta è cambiato qualcosa nella sua vita?",
+    "hint": "Buongiorno {name}, sono Clara, la consulente digitale per la previdenza di Pax. Guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza e le sue polizze. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?",
+    "hintAnonymous": "Buongiorno, sono Clara, la consulente digitale per la previdenza di Pax. Guardiamo insieme «{title}». Ho davanti a me la segnalazione del suo cockpit previdenza. Per inquadrarla bene: è cambiato qualcosa nella sua vita da quando ha stipulato i suoi contratti?"
   },
   "message": {
     "you": "Lei",
-    "advisor": "Consulente Pax",
+    "advisor": "Pax Clara",
     "voice": "a voce",
     "upload": "documenti caricati"
   },

@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "Cela n'a pas fonctionné pour le moment. Le conseiller peut quand même vous aider.",
+    "failed": "Cela n'a pas fonctionné pour le moment. Clara peut quand même vous aider.",
     "yes": "Oui",
     "no": "Non",
     "cancel": "Annuler"
@@ -218,7 +218,7 @@
     "noChange": "Ce scénario ne modifie pas votre couverture.",
     "taxSavings": "Économie d'impôts avec ce montant : {amount} par an.",
     "lostPension": "Le retrait anticipé vous coûte environ {amount} de rente de caisse de pension par mois.",
-    "discuss": "En parler avec le conseiller",
+    "discuss": "En parler avec Clara",
     "discussMessage": "J'ai regardé le scénario « {scenario} » ({params}). Qu'est-ce que cela signifie pour moi ?",
     "estimated": "Caisse de pension estimée.",
     "assumptions": "Scénario calculé avec Logismata, sans engagement. Il ne modifie pas votre image de prévoyance.",

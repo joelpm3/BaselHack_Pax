@@ -2,23 +2,23 @@
   "pageTitle": "Consultation",
   "newConversation": "New conversation",
   "transcript": "Conversation",
-  "thinking": "The advisor is writing",
+  "thinking": "Clara is writing",
   "disclaimer": "Calculations and prices are non-binding estimates. Only an offer from Pax is binding.",
   "error": {
-    "unavailable": "The advisor cannot be reached right now. Your message has been saved.",
+    "unavailable": "Clara cannot be reached right now. Your message has been saved.",
     "retry": "Try again"
   },
   "greeting": {
-    "default": "Hello, good to have you here. I am your digital pension advisor from Pax. Before we talk about numbers, I would like to get to know you: what is on your mind when you think about your future?",
-    "upload": "Hello, good to have you here. You have your documents at hand, great: we will look at them together shortly and save ourselves many questions. But first I would like to get to know you a little: what does your life look like at the moment?",
-    "existing": "Hello {name}, good to see you again. I have your Pax policies in front of me. Has anything changed in your life since last time, for example in your family, at work or where you live?",
-    "existingAnonymous": "Hello, good to see you again. I have your Pax policies in front of me. Has anything changed in your life since last time?",
-    "hint": "Hello {name}, let's look at “{title}” together. I have the note from your pension cockpit and your policies in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?",
-    "hintAnonymous": "Hello, let's look at “{title}” together. I have the note from your pension cockpit in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?"
+    "default": "Hello, good to have you here. I am Clara, Pax's digital pension advisor. Before we talk about numbers, I would like to get to know you: what is on your mind when you think about your future?",
+    "upload": "Hello, good to have you here. I am Clara, Pax's digital pension advisor. You have your documents at hand, great: we will look at them together shortly and save ourselves many questions. But first I would like to get to know you a little: what does your life look like at the moment?",
+    "existing": "Hello {name}, good to see you again. I am Clara, Pax's digital pension advisor, and I have your policies in front of me. Has anything changed in your life since last time, for example in your family, at work or where you live?",
+    "existingAnonymous": "Hello, good to see you again. I am Clara, Pax's digital pension advisor, and I have your policies in front of me. Has anything changed in your life since last time?",
+    "hint": "Hello {name}, I am Clara, Pax's digital pension advisor. Let's look at “{title}” together. I have the note from your pension cockpit and your policies in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?",
+    "hintAnonymous": "Hello, I am Clara, Pax's digital pension advisor. Let's look at “{title}” together. I have the note from your pension cockpit in front of me. So that I can put it in context: has anything changed in your life since you took out your contracts?"
   },
   "message": {
     "you": "You",
-    "advisor": "Pax advisor",
+    "advisor": "Pax Clara",
     "voice": "by voice",
     "upload": "documents uploaded"
   },

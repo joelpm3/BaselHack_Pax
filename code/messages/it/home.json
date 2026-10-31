@@ -1,6 +1,6 @@
 {
   "header": {
-    "home": "Consulente previdenza Pax, alla pagina iniziale",
+    "home": "Pax Clara, alla pagina iniziale",
     "portal": "Cockpit previdenza"
   },
   "title": "Quanto è protetta la sua vita?",
@@ -28,7 +28,7 @@
     "unit": "1 quadrato = CHF 500 al mese"
   },
   "points": {
-    "label": "Come consiglia il consulente previdenza Pax",
+    "label": "Come consiglia Pax Clara",
     "life": {
       "title": "Prima la sua vita",
       "body": "Famiglia, lavoro, progetti e preoccupazioni. I prodotti arrivano solo alla fine."

@@ -2,23 +2,23 @@
   "pageTitle": "Beratung",
   "newConversation": "Neues Gespräch",
   "transcript": "Gesprächsverlauf",
-  "thinking": "Der Berater schreibt",
+  "thinking": "Clara schreibt",
   "disclaimer": "Berechnungen und Preise sind unverbindliche Richtwerte. Verbindlich ist erst eine Offerte von Pax.",
   "error": {
-    "unavailable": "Der Berater ist im Moment nicht erreichbar. Ihre Nachricht ist gespeichert.",
+    "unavailable": "Clara ist im Moment nicht erreichbar. Ihre Nachricht ist gespeichert.",
     "retry": "Erneut versuchen"
   },
   "greeting": {
-    "default": "Grüezi, schön, dass Sie da sind. Ich bin Ihr digitaler Vorsorge-Berater von Pax. Bevor wir über Zahlen sprechen, möchte ich Sie kennenlernen: Was beschäftigt Sie gerade, wenn Sie an Ihre Zukunft denken?",
-    "upload": "Grüezi, schön, dass Sie da sind. Sie haben Unterlagen zur Hand, sehr gut: Die schauen wir uns gleich gemeinsam an und ersparen uns so viele Fragen. Zuerst möchte ich Sie aber kurz kennenlernen: Wie sieht Ihr Leben im Moment aus?",
-    "existing": "Grüezi {name}, schön, Sie wieder zu sehen. Ich habe Ihre Pax-Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert, zum Beispiel in der Familie, bei der Arbeit oder beim Wohnen?",
-    "existingAnonymous": "Grüezi, schön, Sie wieder zu sehen. Ich habe Ihre Pax-Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert?",
-    "hint": "Grüezi {name}, gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit und Ihre Policen vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?",
-    "hintAnonymous": "Grüezi, gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?"
+    "default": "Grüezi, schön, dass Sie da sind. Ich bin Clara, die digitale Vorsorgeberaterin der Pax. Bevor wir über Zahlen sprechen, möchte ich Sie kennenlernen: Was beschäftigt Sie gerade, wenn Sie an Ihre Zukunft denken?",
+    "upload": "Grüezi, schön, dass Sie da sind. Ich bin Clara, die digitale Vorsorgeberaterin der Pax. Sie haben Unterlagen zur Hand, sehr gut: Die schauen wir uns gleich gemeinsam an und ersparen uns so viele Fragen. Zuerst möchte ich Sie aber kurz kennenlernen: Wie sieht Ihr Leben im Moment aus?",
+    "existing": "Grüezi {name}, schön, Sie wieder zu sehen. Ich bin Clara, die digitale Vorsorgeberaterin der Pax, und habe Ihre Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert, zum Beispiel in der Familie, bei der Arbeit oder beim Wohnen?",
+    "existingAnonymous": "Grüezi, schön, Sie wieder zu sehen. Ich bin Clara, die digitale Vorsorgeberaterin der Pax, und habe Ihre Policen vor mir. Hat sich in Ihrem Leben seit dem letzten Mal etwas verändert?",
+    "hint": "Grüezi {name}, ich bin Clara, die digitale Vorsorgeberaterin der Pax. Gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit und Ihre Policen vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?",
+    "hintAnonymous": "Grüezi, ich bin Clara, die digitale Vorsorgeberaterin der Pax. Gerne schauen wir uns «{title}» gemeinsam an. Ich habe den Hinweis aus Ihrem Vorsorge-Cockpit vor mir. Damit ich es richtig einordne: Hat sich in Ihrem Leben etwas verändert, seit Sie Ihre Verträge abgeschlossen haben?"
   },
   "message": {
     "you": "Sie",
-    "advisor": "Pax Berater",
+    "advisor": "Pax Clara",
     "voice": "per Sprache",
     "upload": "Unterlagen hochgeladen"
   },

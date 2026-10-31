@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "common" });
   return {
-    title: { default: t("appName"), template: `%s · Pax` },
+    title: { default: t("appName"), template: `%s · Pax Clara` },
     description: t("claim"),
     applicationName: t("appName"),
-    appleWebApp: { capable: true, title: "Pax", statusBarStyle: "default" },
+    appleWebApp: { capable: true, title: "Pax Clara", statusBarStyle: "default" },
     icons: { apple: "/icons/apple-touch-icon.png" },
   };
 }
