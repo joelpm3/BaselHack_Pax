@@ -19,7 +19,10 @@ export async function GET(_request: Request, ctx: RouteContext<"/api/firma/knowl
   }
   return new Response(new Uint8Array(data), {
     headers: {
-      "Content-Type": "application/pdf",
+      // Seeded product pages from pax.ch are Markdown; uploads are always PDF.
+      "Content-Type": doc.filename.endsWith(".md")
+        ? "text/markdown; charset=utf-8"
+        : "application/pdf",
       "Content-Length": String(data.length),
       "Content-Disposition": `inline; filename*=UTF-8''${encodeURIComponent(doc.filename)}`,
       "Cache-Control": "private, no-store",
