@@ -102,7 +102,12 @@ export const updateProfileInput = z.object({
     .array(z.string().min(2))
     .optional()
     .describe("Worries in the customer's own words, short"),
-  addPlannedEvents: z.array(plannedEventSchema).optional(),
+  addPlannedEvents: z
+    .array(plannedEventSchema)
+    .optional()
+    .describe(
+      "The customer's own or the household's plans. Never the partner's retirement: it follows from the partner's birth year (or desiredRetirementAge is the customer's)",
+    ),
   riskAttitude: z.enum(["low", "medium", "high"]).optional(),
   desiredRetirementAge: z.number().int().min(55).max(70).optional(),
   privateCover: privateCoverSchema
