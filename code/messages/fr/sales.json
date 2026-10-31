@@ -293,6 +293,9 @@
     "demoBadge": "Démo",
     "insured": "Personne assurée",
     "insuredDetails": "né·e le {birthDate}, {smoker, select, yes {fumeur} other {non-fumeur}}",
+    "birthDateAssumed": "Date de naissance déduite de l'année de naissance.",
+    "smokerAssumed": "Statut de fumeur supposé : veuillez l'indiquer ci-dessous.",
+    "repriced": "Nous avons recalculé la prime avec votre date de naissance et votre statut de fumeur.",
     "period": "Durée du contrat",
     "periodValue": "du {start} au {end}",
     "fund": "Fonds",
@@ -316,13 +319,20 @@
     },
     "demoNotice": "Ceci est un prototype : la signature est une démo et aucun contrat juridiquement valable n'est conclu.",
     "contact": {
-      "title": "Vos coordonnées",
-      "hint": "Pour la police, nous avons besoin de votre nom et de vos coordonnées.",
+      "title": "Vos données",
+      "hint": "Pour la police, nous avons besoin de votre nom, de votre date de naissance et de vos coordonnées. La date de naissance et le statut de fumeur déterminent la prime.",
       "firstName": "Prénom",
       "lastName": "Nom",
       "birthDate": "Date de naissance",
       "email": "E-mail",
       "phone": "Téléphone",
+      "smoker": "Fumez-vous ?",
+      "smokerPartner": "{name} fume-t-il ou fume-t-elle ?",
+      "smokerInsured": "La personne assurée fume-t-elle ?",
+      "smokerHint": "Le statut de fumeur influence la prime.",
+      "smokerChoose": "Veuillez choisir",
+      "smokerNo": "Non, non-fumeur·euse",
+      "smokerYes": "Oui, fumeur·euse",
       "privacy": "Pax utilise ces données uniquement pour votre offre et votre police.",
       "error": "Veuillez vérifier vos données (date de naissance, e-mail, téléphone).",
       "submit": "Enregistrer"
@@ -345,7 +355,8 @@
         "already_signed": "Cette offre est déjà signée.",
         "suitability_missing": "Il manque un test d'adéquation favorable pour ce produit.",
         "contact_missing": "Veuillez d'abord compléter vos coordonnées.",
-        "signature_mismatch": "Le nom ne correspond pas à vos données. Tapez : {name}."
+        "signature_mismatch": "Le nom ne correspond pas à vos données. Tapez : {name}.",
+        "offer_outdated": "Votre date de naissance ou votre statut de fumeur a changé depuis l'offre. Ouvrez « Modifier les données » et enregistrez pour que nous recalculions la prime."
       },
       "submit": "Signer maintenant",
       "signedMessage": "J'ai signé l'offre pour {product} (police {number})."

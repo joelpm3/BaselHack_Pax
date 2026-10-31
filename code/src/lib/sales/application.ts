@@ -9,6 +9,8 @@ import { PRODUCTS } from "@/lib/domain/products";
 import { publish } from "@/lib/events/bus";
 import { quotePremium } from "@/lib/pricing";
 import { addYears, contractStartDate } from "@/lib/pricing/limits";
+import { applyProfileChanges, getProfile } from "@/lib/profile/service";
+import { type OfferInputs, offerDiffers, offerInputs } from "./offer-inputs";
 import { type RecommendationParameters, syncRecommendationCard } from "./recommend";
 import { advanceConversationStage } from "./stage";
 import {
@@ -214,6 +216,86 @@ function insuredName(params: RecommendationParameters, customer: Customer): stri
   return [customer.firstName, customer.lastName].filter(Boolean).join(" ") || params.insured.name;
 }
 
+/** The insured facts known now (exact birth date, smoker status) applied to the recommendation. */
+function currentInputs(rec: Recommendation, customer: Customer): OfferInputs {
+  const params = parametersOf(rec);
+  const profile = getProfile(customer.id);
+  const person = params.insured.who === "partner" ? profile.partner : profile.person;
+  return offerInputs(params.quoteInput, params.insured, {
+    customerBirthDate: customer.birthDate,
+    smoker: person?.smoker,
+  });
+}
+
+/** Prices the recommendation with the given insured facts (and the suitability fund) as an offer. */
+async function priceOffer(
+  rec: Recommendation,
+  customer: Customer,
+  inputs: OfferInputs,
+  suitability: SuitabilityRecord | undefined,
+  context: { customerId: string; conversationId: string; toolCallId?: string },
+): Promise<OfferView> {
+  const params = parametersOf(rec);
+  const product = PRODUCTS[rec.productCode];
+  const quoteInput = { ...inputs.input };
+  if (suitability) {
+    quoteInput.fundName = suitability.fund;
+    if (rec.productCode !== "fondsstar")
+      quoteInput.guaranteedSharePercent = suitability.answers.guaranteedSharePercent;
+    if (suitability.answers.annualPremium)
+      quoteInput.annualPremium = suitability.answers.annualPremium;
+    if (suitability.answers.singlePremium)
+      quoteInput.singlePremium = suitability.answers.singlePremium;
+  }
+  const quote = await quotePremium(quoteInput, context);
+  const startDate = quote.startDate ?? contractStartDate(new Date());
+  const durationYears = quote.durationYears ?? params.cover.durationYears;
+  const price: PriceView = {
+    ...params.price,
+    annualGross: quote.premiumAnnualGross,
+    annualNet: quote.premiumAnnualNet,
+    source: quote.source,
+    singlePremium: quote.singlePremium,
+    maturity: quote.maturity,
+    payoutAnnual: quote.payoutAnnual,
+    riders: quote.riders,
+    startDate,
+    durationYears,
+    fundName: quote.fundName ?? suitability?.fund,
+    guaranteedSharePercent: quote.guaranteedSharePercent,
+    issues: quote.issues,
+  };
+  return {
+    productCode: rec.productCode,
+    productName: product.name,
+    pillar: rec.pillar,
+    insured: {
+      who: params.insured.who,
+      name: insuredName(params, customer),
+      birthDate: quote.inputs.birthDate,
+      sex: quote.inputs.sex,
+      smoker: quote.inputs.smoker,
+      birthDateAssumed: inputs.birthDateAssumed,
+      smokerAssumed: inputs.smokerAssumed,
+    },
+    cover: {
+      ...params.cover,
+      endAge: quote.inputs.endAge,
+      annualPremium: quote.inputs.annualPremium,
+      singlePremium: quote.inputs.singlePremium,
+      durationYears,
+    },
+    price,
+    startDate,
+    endDate: addYears(startDate, durationYears),
+    fund: price.fundName,
+    guaranteedSharePercent: price.guaranteedSharePercent,
+    suitability: suitability
+      ? { total: suitability.result.total, profile: suitability.result.profile }
+      : undefined,
+  };
+}
+
 /** Prices the chosen recommendation (with the fund from the suitability check) as an offer. */
 export async function prepareOffer(
   ctx: ToolContext,
@@ -234,7 +316,6 @@ export async function prepareOffer(
   };
   if (!rec || !customer) return empty;
   const contact = contactOf(customer);
-  const params = parametersOf(rec);
   const product = PRODUCTS[rec.productCode];
   let app = applicationFor(ctx.conversationId, rec.productCode, rec.id);
 
@@ -266,64 +347,12 @@ export async function prepareOffer(
       return { ...empty, status: "not_suitable", applicationId: app?.id ?? null, contact };
   }
 
-  const quoteInput = { ...params.quoteInput };
-  if (suitability) {
-    quoteInput.fundName = suitability.fund;
-    if (rec.productCode !== "fondsstar")
-      quoteInput.guaranteedSharePercent = suitability.answers.guaranteedSharePercent;
-    if (suitability.answers.annualPremium)
-      quoteInput.annualPremium = suitability.answers.annualPremium;
-    if (suitability.answers.singlePremium)
-      quoteInput.singlePremium = suitability.answers.singlePremium;
-  }
-  const quote = await quotePremium(quoteInput, {
+  const offer = await priceOffer(rec, customer, currentInputs(rec, customer), suitability, {
     customerId: ctx.customerId,
     conversationId: ctx.conversationId,
     toolCallId,
   });
-  const startDate = quote.startDate ?? contractStartDate(new Date());
-  const durationYears = quote.durationYears ?? params.cover.durationYears;
-  const price: PriceView = {
-    ...params.price,
-    annualGross: quote.premiumAnnualGross,
-    annualNet: quote.premiumAnnualNet,
-    source: quote.source,
-    singlePremium: quote.singlePremium,
-    maturity: quote.maturity,
-    payoutAnnual: quote.payoutAnnual,
-    riders: quote.riders,
-    startDate,
-    durationYears,
-    fundName: quote.fundName ?? suitability?.fund,
-    guaranteedSharePercent: quote.guaranteedSharePercent,
-    issues: quote.issues,
-  };
-  const offer: OfferView = {
-    productCode: rec.productCode,
-    productName: product.name,
-    pillar: rec.pillar,
-    insured: {
-      who: params.insured.who,
-      name: insuredName(params, customer),
-      birthDate: quote.inputs.birthDate,
-      sex: quote.inputs.sex,
-      smoker: quote.inputs.smoker,
-    },
-    cover: {
-      ...params.cover,
-      annualPremium: quote.inputs.annualPremium,
-      singlePremium: quote.inputs.singlePremium,
-      durationYears,
-    },
-    price,
-    startDate,
-    endDate: addYears(startDate, durationYears),
-    fund: price.fundName,
-    guaranteedSharePercent: price.guaranteedSharePercent,
-    suitability: suitability
-      ? { total: suitability.result.total, profile: suitability.result.profile }
-      : undefined,
-  };
+  const price = offer.price;
 
   if (app && app.status === "draft") {
     db.update(schema.applications)
@@ -367,7 +396,7 @@ export async function prepareOffer(
     applicationId: app.id,
     recommendationId: rec.id,
     offer,
-    needsContact: needsContact(customer),
+    needsContact: needsContact(customer) || Boolean(offer.insured.smokerAssumed),
     contact,
   };
 }
@@ -390,7 +419,10 @@ export const contactSchema = z.object({
 });
 export type ContactInput = z.infer<typeof contactSchema>;
 
-/** Contact details make an anonymous visitor a prospect. */
+/**
+ * Contact details make an anonymous visitor a prospect. The birth date also corrects the birth
+ * year in the profile (the chat only knew the year, or a wrong one).
+ */
 export function saveContact(
   customer: Customer,
   conversationId: string,
@@ -403,6 +435,11 @@ export function saveContact(
     })
     .where(eq(schema.customers.id, customer.id))
     .run();
+  applyProfileChanges(
+    customer.id,
+    [{ path: "person.birthYear", value: Number(contact.birthDate.slice(0, 4)) }],
+    { source: "form", conversationId },
+  );
   audit({
     actorType: "customer",
     actorId: customer.id,
@@ -414,6 +451,72 @@ export function saveContact(
   advanceConversationStage(conversationId, "application_started");
 }
 
+/**
+ * After the application form: stores the insured person's smoker status in the profile and
+ * re-prices the draft offer if the birth date or smoker status differ from the priced ones.
+ * Returns the offer as it now stands (null if the application cannot change any more).
+ */
+export async function updateOfferDetails(
+  customerId: string,
+  conversationId: string,
+  app: Application,
+  smoker: boolean,
+): Promise<{ offer: OfferView; repriced: boolean } | null> {
+  if (app.status !== "draft" || !app.recommendationId) return null;
+  const rec = recommendation(conversationId, app.recommendationId);
+  const customer = db.query.customers
+    .findFirst({ where: eq(schema.customers.id, customerId) })
+    .sync();
+  const current = app.offer as unknown as OfferView;
+  if (!rec || !customer || !current?.price) return null;
+  const who = parametersOf(rec).insured.who === "partner" ? "partner" : "person";
+  applyProfileChanges(customerId, [{ path: `${who}.smoker`, value: smoker }], {
+    source: "form",
+    conversationId,
+  });
+  const inputs = currentInputs(rec, customer);
+  const repriced = offerDiffers(current, inputs);
+  const offer: OfferView = repriced
+    ? await priceOffer(
+        rec,
+        customer,
+        inputs,
+        (app.suitability as SuitabilityRecord | null) ?? undefined,
+        { customerId, conversationId },
+      )
+    : {
+        ...current,
+        insured: {
+          ...current.insured,
+          birthDateAssumed: inputs.birthDateAssumed,
+          smokerAssumed: inputs.smokerAssumed,
+        },
+      };
+  db.update(schema.applications)
+    .set({
+      offer: offer as unknown as Record<string, unknown>,
+      premiumAnnual: offer.price.annualGross,
+    })
+    .where(eq(schema.applications.id, app.id))
+    .run();
+  if (repriced) {
+    audit({
+      actorType: "customer",
+      actorId: customerId,
+      action: "offer.repriced",
+      entityType: "application",
+      entityId: app.id,
+      data: {
+        birthDate: { before: current.insured.birthDate, after: offer.insured.birthDate },
+        smoker: { before: current.insured.smoker, after: offer.insured.smoker },
+        premiumAnnual: { before: current.price.annualGross, after: offer.price.annualGross },
+        source: offer.price.source,
+      },
+    });
+  }
+  return { offer, repriced };
+}
+
 export const consentSchema = z.object({
   offerRead: z.literal(true),
   dataCorrect: z.literal(true),
@@ -423,6 +526,7 @@ export const consentSchema = z.object({
 export type SignError =
   | "not_found"
   | "already_signed"
+  | "offer_outdated"
   | "suitability_missing"
   | "contact_missing"
   | "signature_mismatch";
@@ -459,18 +563,17 @@ export function signApplication(
   if (!customer.firstName || !customer.lastName) return { ok: false, error: "contact_missing" };
   if (normalizeName(signatureName) !== normalizeName(`${customer.firstName} ${customer.lastName}`))
     return { ok: false, error: "signature_mismatch" };
+  const rec = app.recommendationId
+    ? recommendation(conversationId, app.recommendationId)
+    : undefined;
+  // Never sign a premium computed for another birth date or smoker status than the ones on file.
+  if (rec && offerDiffers(offer, currentInputs(rec, customer)))
+    return { ok: false, error: "offer_outdated" };
 
   const now = new Date();
   const startDate = contractStartDate(now);
   const years = offer.cover.durationYears;
   const number = policyNumber(startDate);
-  const rec = app.recommendationId
-    ? db
-        .select()
-        .from(schema.recommendations)
-        .where(eq(schema.recommendations.id, app.recommendationId))
-        .get()
-    : undefined;
   const params = rec ? parametersOf(rec) : undefined;
   const category =
     product.category === "pillar3a" && offer.pillar === "3b" ? "savings_3b" : product.category;

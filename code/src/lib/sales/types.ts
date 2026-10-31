@@ -112,6 +112,10 @@ export interface OfferView {
     birthDate: string;
     sex: "male" | "female";
     smoker: boolean;
+    /** Birth date derived from the birth year (1 January) until the form gives the exact one. */
+    birthDateAssumed?: boolean;
+    /** Smoker status never stated: priced as non-smoker until the customer answers in the form. */
+    smokerAssumed?: boolean;
   };
   cover: CoverView;
   price: PriceView;
@@ -143,7 +147,10 @@ export interface OfferOutput {
   applicationId: string | null;
   recommendationId: string;
   offer: OfferView | null;
-  /** Anonymous customers give contact details before signing. */
+  /**
+   * The form with contact details, birth date and smoker status comes before signing: for
+   * customers without contact details and whenever the smoker status is only assumed.
+   */
   needsContact: boolean;
   contact: ContactPrefill;
   /** Patched by the widget actions. */

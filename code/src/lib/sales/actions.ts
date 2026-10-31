@@ -14,10 +14,11 @@ import {
   saveContact,
   saveSuitability,
   signApplication,
+  updateOfferDetails,
 } from "./application";
 import { declineRecommendation } from "./recommend";
 import { type SuitabilityAnswers, suitabilityAnswersSchema } from "./suitability";
-import type { SignedInfo, SuitabilityRecord } from "./types";
+import type { OfferView, SignedInfo, SuitabilityRecord } from "./types";
 
 /**
  * Widget actions of the sales flow. Every action checks that the customer cookie owns the
@@ -86,17 +87,37 @@ export async function submitSuitabilityAction(
   return { ok: true, record };
 }
 
+/**
+ * The application form: contact details, exact birth date and the insured person's smoker
+ * status. The offer is re-priced when the birth date or smoker status differ from its prices.
+ */
 export async function saveContactAction(
-  input: Ids & { contact: ContactInput },
-): Promise<{ ok: true } | { ok: false; error: "invalid" | "not_found" }> {
-  const parsed = ids.extend({ contact: contactSchema }).safeParse(input);
+  input: Ids & { applicationId: string; contact: ContactInput; smoker: boolean },
+): Promise<
+  | { ok: true; offer: OfferView | null; repriced: boolean }
+  | { ok: false; error: "invalid" | "not_found" }
+> {
+  const parsed = ids
+    .extend({
+      applicationId: z.string().min(1).max(64),
+      contact: contactSchema,
+      smoker: z.boolean(),
+    })
+    .safeParse(input);
   if (!parsed.success) return { ok: false, error: "invalid" };
-  const { conversationId, toolCallId, contact } = parsed.data;
+  const { conversationId, toolCallId, applicationId, contact, smoker } = parsed.data;
   const customer = await owner(conversationId);
-  if (!customer) return { ok: false, error: "not_found" };
+  const app = customer ? ownedApplication(conversationId, applicationId) : undefined;
+  if (!customer || !app) return { ok: false, error: "not_found" };
   saveContact(customer, conversationId, contact);
-  patchToolOutput(conversationId, toolCallId, { contactSaved: true, contact });
-  return { ok: true };
+  const updated = await updateOfferDetails(customer.id, conversationId, app, smoker);
+  patchToolOutput(conversationId, toolCallId, {
+    contactSaved: true,
+    contact,
+    ...(updated ? { offer: updated.offer } : {}),
+  });
+  publish({ type: "conversation.updated", conversationId });
+  return { ok: true, offer: updated?.offer ?? null, repriced: updated?.repriced ?? false };
 }
 
 export async function signApplicationAction(

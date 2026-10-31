@@ -293,6 +293,9 @@
     "demoBadge": "Demo",
     "insured": "Versicherte Person",
     "insuredDetails": "geboren am {birthDate}, {smoker, select, yes {Raucher} other {Nichtraucher}}",
+    "birthDateAssumed": "Geburtsdatum aus dem Jahrgang angenommen.",
+    "smokerAssumed": "Raucherstatus angenommen: Bitte geben Sie ihn unten an.",
+    "repriced": "Wir haben die Prämie mit Ihrem Geburtsdatum und Raucherstatus neu berechnet.",
     "period": "Vertragsdauer",
     "periodValue": "{start} bis {end}",
     "fund": "Fonds",
@@ -316,13 +319,20 @@
     },
     "demoNotice": "Dies ist ein Prototyp: Die Unterschrift ist eine Demo und es entsteht kein rechtsgültiger Vertrag.",
     "contact": {
-      "title": "Ihre Kontaktangaben",
-      "hint": "Für die Police brauchen wir Ihren Namen und wie wir Sie erreichen.",
+      "title": "Ihre Angaben",
+      "hint": "Für die Police brauchen wir Ihren Namen, Ihr Geburtsdatum und wie wir Sie erreichen. Geburtsdatum und Raucherstatus bestimmen die Prämie.",
       "firstName": "Vorname",
       "lastName": "Nachname",
       "birthDate": "Geburtsdatum",
       "email": "E-Mail",
       "phone": "Telefon",
+      "smoker": "Rauchen Sie?",
+      "smokerPartner": "Raucht {name}?",
+      "smokerInsured": "Raucht die versicherte Person?",
+      "smokerHint": "Der Raucherstatus beeinflusst die Prämie.",
+      "smokerChoose": "Bitte wählen",
+      "smokerNo": "Nein, Nichtraucher/in",
+      "smokerYes": "Ja, Raucher/in",
       "privacy": "Pax nutzt diese Angaben nur für Ihre Offerte und Police.",
       "error": "Bitte prüfen Sie Ihre Angaben (Geburtsdatum, E-Mail, Telefon).",
       "submit": "Angaben speichern"
@@ -345,7 +355,8 @@
         "already_signed": "Diese Offerte ist bereits unterschrieben.",
         "suitability_missing": "Für dieses Produkt fehlt eine passende Angemessenheitsprüfung.",
         "contact_missing": "Bitte ergänzen Sie zuerst Ihre Kontaktangaben.",
-        "signature_mismatch": "Der Name stimmt nicht mit Ihren Angaben überein. Tippen Sie: {name}."
+        "signature_mismatch": "Der Name stimmt nicht mit Ihren Angaben überein. Tippen Sie: {name}.",
+        "offer_outdated": "Ihr Geburtsdatum oder Raucherstatus hat sich seit der Offerte geändert. Öffnen Sie «Angaben ändern» und speichern Sie, damit wir die Prämie neu berechnen."
       },
       "submit": "Jetzt unterschreiben",
       "signedMessage": "Ich habe die Offerte für {product} unterschrieben (Police {number})."

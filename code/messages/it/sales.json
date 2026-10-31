@@ -293,6 +293,9 @@
     "demoBadge": "Demo",
     "insured": "Persona assicurata",
     "insuredDetails": "nato/a il {birthDate}, {smoker, select, yes {fumatore} other {non fumatore}}",
+    "birthDateAssumed": "Data di nascita dedotta dall'anno di nascita.",
+    "smokerAssumed": "Stato di fumatore presunto: lo indichi qui sotto.",
+    "repriced": "Abbiamo ricalcolato il premio con la sua data di nascita e il suo stato di fumatore.",
     "period": "Durata del contratto",
     "periodValue": "dal {start} al {end}",
     "fund": "Fondo",
@@ -316,13 +319,20 @@
     },
     "demoNotice": "Questo è un prototipo: la firma è una demo e non viene concluso alcun contratto giuridicamente valido.",
     "contact": {
-      "title": "I suoi dati di contatto",
-      "hint": "Per la polizza ci servono il suo nome e come raggiungerla.",
+      "title": "I suoi dati",
+      "hint": "Per la polizza ci servono il suo nome, la sua data di nascita e come raggiungerla. Data di nascita e stato di fumatore determinano il premio.",
       "firstName": "Nome",
       "lastName": "Cognome",
       "birthDate": "Data di nascita",
       "email": "E-mail",
       "phone": "Telefono",
+      "smoker": "Lei fuma?",
+      "smokerPartner": "{name} fuma?",
+      "smokerInsured": "La persona assicurata fuma?",
+      "smokerHint": "Lo stato di fumatore influisce sul premio.",
+      "smokerChoose": "Scelga",
+      "smokerNo": "No, non fumatore/fumatrice",
+      "smokerYes": "Sì, fumatore/fumatrice",
       "privacy": "Pax utilizza questi dati solo per la sua offerta e la sua polizza.",
       "error": "Verifichi i suoi dati (data di nascita, e-mail, telefono).",
       "submit": "Salvare i dati"
@@ -345,7 +355,8 @@
         "already_signed": "Questa offerta è già stata firmata.",
         "suitability_missing": "Per questo prodotto manca una verifica dell'adeguatezza positiva.",
         "contact_missing": "Completi prima i suoi dati di contatto.",
-        "signature_mismatch": "Il nome non corrisponde ai suoi dati. Digiti: {name}."
+        "signature_mismatch": "Il nome non corrisponde ai suoi dati. Digiti: {name}.",
+        "offer_outdated": "La sua data di nascita o il suo stato di fumatore sono cambiati dopo l'offerta. Apra «Modificare i dati» e salvi, così ricalcoliamo il premio."
       },
       "submit": "Firmare ora",
       "signedMessage": "Ho firmato l'offerta per {product} (polizza {number})."
