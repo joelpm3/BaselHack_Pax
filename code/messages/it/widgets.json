@@ -143,6 +143,7 @@
     "sources": {
       "pillar1": "AVS/AI",
       "pillar2": "Cassa pensione/LAINF",
+      "policies": "Polizze",
       "other": "3° pilastro e risparmi",
       "partner": "Reddito del o della partner",
       "gap": "Lacuna"
@@ -182,6 +183,16 @@
     },
     "estimated": "Le prestazioni della cassa pensione sono stimate; il suo certificato di previdenza le rende più precise.",
     "assumptions": "Fabbisogno: {need} % del reddito in caso di incapacità di guadagno, {deathNeed} % per i superstiti. Visione a lungo termine dal 3° anno. Calcolo di Logismata, senza impegno."
+  },
+  "policyCover": {
+    "death": "Polizze: il capitale in caso di decesso di {capital} è ripartito su {years} anni ({period}) e conta {monthly} al mese.",
+    "deathAnnuity": "Polizze: rendite per i superstiti di {amount} al mese.",
+    "disability": "Polizze: rendite per incapacità di guadagno di {amount} al mese.",
+    "period": {
+      "until_youngest_child_25": "finché il figlio più giovane compie 25 anni",
+      "partner_10_years": "sostegno per il o la partner",
+      "minimum_5_years": "durata minima"
+    }
   },
   "tax": {
     "title": "Risparmiare imposte con il pilastro 3a",

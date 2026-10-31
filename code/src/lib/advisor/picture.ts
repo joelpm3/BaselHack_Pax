@@ -1,9 +1,8 @@
 import "server-only";
-import { and, eq, inArray } from "drizzle-orm";
-import { db, schema } from "@/lib/db";
 import type { LifeSituation } from "@/lib/domain/profile";
-import { type PolicyCategory, THIRD_PILLAR_CATEGORIES } from "@/lib/domain/taxonomy";
+import { THIRD_PILLAR_CATEGORIES } from "@/lib/domain/taxonomy";
 import { getProfile } from "@/lib/profile/service";
+import { currentYear } from "./logismata/checks";
 import { latestCalculation } from "./logismata/latest";
 import {
   householdRiskScenarios,
@@ -14,11 +13,14 @@ import {
   retirementBreakdown,
 } from "./logismata/mapping";
 import { outdatedChecks, PICTURE_CALCULATIONS } from "./picture-refresh";
+import { activeLifePolicies } from "./policies";
+import { type CoverPolicy, policyCoverFor, withPolicyCover } from "./policy-cover";
 import type { PictureScenario, VorsorgebildModel } from "./types";
 
 /**
  * The Vorsorgebild is derived, never stored: profile + the latest real (non-scenario)
- * retirement and risk calculations of the customer.
+ * retirement and risk calculations of the customer, with the death and disability policies of
+ * the person a scenario is about counted on top of the risk figures.
  */
 
 const FACTS: Array<{ key: string; known: (p: LifeSituation) => boolean }> = [
@@ -45,7 +47,11 @@ function completenessOf(profile: LifeSituation): number {
   return Math.round((FACTS.filter((f) => f.known(profile)).length / FACTS.length) * 100);
 }
 
-function scenarios(customerId: string, profile: LifeSituation): PictureScenario[] {
+function scenarios(
+  customerId: string,
+  profile: LifeSituation,
+  policies: CoverPolicy[],
+): PictureScenario[] {
   const result: PictureScenario[] = [];
   const retirement = latestCalculation(customerId, PICTURE_CALCULATIONS.retirement);
   if (retirement?.output) {
@@ -55,6 +61,7 @@ function scenarios(customerId: string, profile: LifeSituation): PictureScenario[
       partnerName: null,
       breakdown: retirementBreakdown(retirement.output as RetirementResponse),
       calculatedAt: retirement.createdAt.getTime(),
+      policyCover: null,
     });
   }
   const risk = latestCalculation(customerId, PICTURE_CALCULATIONS.risk);
@@ -62,13 +69,19 @@ function scenarios(customerId: string, profile: LifeSituation): PictureScenario[
   const summaries =
     (risk.output as { RiskScenarioSummaries?: RiskScenarioSummary[] } | null)
       ?.RiskScenarioSummaries ?? [];
+  const year = currentYear();
+  const covers = policyCoverFor(policies, profile, year);
   for (const scenario of householdRiskScenarios(summaries)) {
+    const cover = covers.find((c) => c.person === scenario.person);
+    const insured = scenario.person === 1 ? profile.person : profile.partner;
+    const breakdown = withPolicyCover(scenario.breakdown, scenario.event, cover, insured, year);
     result.push({
       kind: scenario.event,
       person: scenario.person,
       partnerName: scenario.person === 2 ? (profile.partner?.firstName ?? null) : null,
-      breakdown: scenario.breakdown,
+      breakdown,
       calculatedAt: risk.createdAt.getTime(),
+      policyCover: breakdown.policies > 0 ? (cover ?? null) : null,
     });
   }
   return result;
@@ -76,17 +89,7 @@ function scenarios(customerId: string, profile: LifeSituation): PictureScenario[
 
 export function buildVorsorgebild(customerId: string): VorsorgebildModel {
   const profile = getProfile(customerId);
-  const policies = db
-    .select({ id: schema.policies.id })
-    .from(schema.policies)
-    .where(
-      and(
-        eq(schema.policies.customerId, customerId),
-        eq(schema.policies.status, "active"),
-        inArray(schema.policies.category, THIRD_PILLAR_CATEGORIES as PolicyCategory[]),
-      ),
-    )
-    .all();
+  const policies = activeLifePolicies(customerId);
   const own = profile.person.grossIncome;
   const partner = isJointlyTaxed(profile) ? profile.partner?.grossIncome : undefined;
   return {
@@ -95,14 +98,15 @@ export function buildVorsorgebild(customerId: string): VorsorgebildModel {
     facts: FACTS.map((f) => ({ key: f.key, known: f.known(profile) })),
     missing: missingForPicture(profile),
     pending: outdatedChecks(customerId, profile).length > 0,
-    scenarios: scenarios(customerId, profile),
+    scenarios: scenarios(customerId, profile, policies),
     pillars: {
       incomeToday: own === undefined && partner === undefined ? null : (own ?? 0) + (partner ?? 0),
       hasPensionFund: profile.pillar2.hasPensionFund ?? null,
       pensionCapital: profile.pillar2.currentCapital ?? null,
       pillar3aBalance: profile.pillar3a.balance ?? null,
       pillar3aContribution: profile.pillar3a.annualContribution ?? null,
-      policies: policies.length,
+      // A pension certificate is a 2nd-pillar entry, never a 3rd-pillar policy.
+      policies: policies.filter((p) => THIRD_PILLAR_CATEGORIES.includes(p.category)).length,
     },
   };
 }

@@ -3,7 +3,13 @@ import { tool } from "ai";
 import { z } from "zod";
 import { getProfile } from "@/lib/profile/service";
 import { ensureTaxLocation } from "../location";
-import { runPurchaseP2, runRetirementCheck, runRiskCheck, runSaving3a } from "../logismata/checks";
+import {
+  currentYear,
+  runPurchaseP2,
+  runRetirementCheck,
+  runRiskCheck,
+  runSaving3a,
+} from "../logismata/checks";
 import {
   DEATH_NEED_PERCENT,
   dependentChildren,
@@ -15,6 +21,8 @@ import {
   retirementAge,
   yearsUntilRetirement,
 } from "../logismata/mapping";
+import { policyCoverOf } from "../policies";
+import { applyPolicyCover } from "../policy-cover";
 import type { PensionOverviewOutput, RiskAnalysisOutput, TaxSavingsOutput } from "../types";
 import type { ToolContext } from "./context";
 
@@ -66,17 +74,22 @@ export function createAnalysisTools(ctx: ToolContext) {
       description:
         "Risk check with Logismata: income if the customer (and partner) can no longer work or " +
         "dies, separately for illness and accident, against the need (80% of gross for " +
-        "disability, 70% for survivors). Shows a gap chart like the Pax Vorsorgecheck.",
+        "disability, 70% for survivors). Shows a gap chart like the Pax Vorsorgecheck. Active " +
+        "death and disability policies (Pax and other insurers) are already counted in the " +
+        "`policies` source and reduce the gap; see policyCover for how death capital is spread.",
       inputSchema: z.object({}),
       execute: async (_input, { toolCallId }): Promise<RiskAnalysisOutput> => {
         const profile = getProfile(ctx.customerId);
         const missing = missingFor(profile, "risk");
         if (missing.length) return { status: "missing", missing };
         const check = await runRiskCheck(profile, callContext(toolCallId));
+        const year = currentYear();
+        const policyCover = policyCoverOf(ctx.customerId, profile, year);
         return {
           status: "ok",
-          persons: check.persons,
-          dependentChildren: dependentChildren(profile, new Date().getFullYear()),
+          persons: applyPolicyCover(check.persons, policyCover, profile, year),
+          dependentChildren: dependentChildren(profile, year),
+          policyCover,
           assumptions: {
             needPercent: NEED_PERCENT,
             deathNeedPercent: DEATH_NEED_PERCENT,

@@ -57,6 +57,7 @@
     "sources": {
       "pillar1": "1st pillar: AHV/IV",
       "pillar2": "2nd pillar: pension fund",
+      "policies": "Your policies (Pax and others)",
       "other": "3rd pillar and savings",
       "partner": "Partner's income",
       "gap": "Gap"

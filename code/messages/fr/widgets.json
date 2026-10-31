@@ -143,6 +143,7 @@
     "sources": {
       "pillar1": "AVS/AI",
       "pillar2": "Caisse de pension/LAA",
+      "policies": "Polices",
       "other": "3e pilier et épargne",
       "partner": "Revenu du ou de la partenaire",
       "gap": "Lacune"
@@ -182,6 +183,16 @@
     },
     "estimated": "Les prestations de la caisse de pension sont estimées ; votre certificat de prévoyance permet plus de précision.",
     "assumptions": "Besoin : {need} % du revenu en cas d'incapacité de gain, {deathNeed} % pour les survivants. Vision à long terme dès la 3e année. Calcul de Logismata, sans engagement."
+  },
+  "policyCover": {
+    "death": "Polices : le capital décès de {capital} est réparti sur {years} ans ({period}) et compte pour {monthly} par mois.",
+    "deathAnnuity": "Polices : rentes de survivants de {amount} par mois.",
+    "disability": "Polices : rentes en cas d'incapacité de gain de {amount} par mois.",
+    "period": {
+      "until_youngest_child_25": "jusqu'aux 25 ans du plus jeune enfant",
+      "partner_10_years": "soutien du ou de la partenaire",
+      "minimum_5_years": "durée minimale"
+    }
   },
   "tax": {
     "title": "Économiser des impôts avec le pilier 3a",

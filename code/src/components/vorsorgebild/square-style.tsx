@@ -7,6 +7,7 @@ export const SQUARE_FILL: Record<SquareKind, string> = {
   pillar2: "bg-chart-1 border-chart-1",
   other: "bg-chart-3 border-chart-3",
   partner: "bg-chart-4 border-chart-4",
+  policies: "bg-chart-5 border-chart-5",
   gap: "bg-transparent border-gray-4",
 };
 

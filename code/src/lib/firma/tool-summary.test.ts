@@ -9,6 +9,7 @@ const breakdown = (gap: number): IncomeBreakdown => ({
   pillar2: 20000,
   other: 0,
   partner: 0,
+  policies: 0,
   total: 72000 - gap,
   gap,
   surplus: 0,

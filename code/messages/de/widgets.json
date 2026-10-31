@@ -143,6 +143,7 @@
     "sources": {
       "pillar1": "AHV/IV",
       "pillar2": "Pensionskasse/UVG",
+      "policies": "Policen",
       "other": "3. Säule und Vermögen",
       "partner": "Einkommen Partner/in",
       "gap": "Lücke"
@@ -182,6 +183,16 @@
     },
     "estimated": "Die Leistungen der Pensionskasse sind geschätzt; Ihr Vorsorgeausweis macht es genauer.",
     "assumptions": "Bedarf: {need} % des Einkommens bei Erwerbsunfähigkeit, {deathNeed} % für die Hinterbliebenen. Langfristige Sicht ab dem 3. Jahr. Berechnung von Logismata, unverbindlich."
+  },
+  "policyCover": {
+    "death": "Policen: Das Todesfallkapital von {capital} ist auf {years} Jahre verteilt ({period}) und zählt mit {monthly} pro Monat.",
+    "deathAnnuity": "Policen: Hinterlassenenrenten von {amount} pro Monat.",
+    "disability": "Policen: Erwerbsunfähigkeitsrenten von {amount} pro Monat.",
+    "period": {
+      "until_youngest_child_25": "bis das jüngste Kind 25 ist",
+      "partner_10_years": "Unterstützung für Partnerin oder Partner",
+      "minimum_5_years": "Mindestdauer"
+    }
   },
   "tax": {
     "title": "Steuern sparen mit der Säule 3a",

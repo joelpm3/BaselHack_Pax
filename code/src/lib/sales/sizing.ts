@@ -40,8 +40,17 @@ export interface DeathCover {
   fromIncome: boolean;
 }
 
-/** Death gap × years until the youngest child is 25 (else 10 years with a partner, else 5). */
-export function sizeDeathCover(gapAnnual: number | null, facts: InsuredFacts): DeathCover {
+export type SupportFacts = Pick<
+  InsuredFacts,
+  "age" | "currentYear" | "hasPartner" | "youngestChildBirthYear"
+>;
+
+/**
+ * How long the survivors need support after a death: until the youngest child is 25, else
+ * 10 years with a partner, else 5. Death cover is sized over this period, and existing death
+ * capital is spread over the same period when it counts against the gap.
+ */
+export function deathSupportYears(facts: SupportFacts): { years: number; method: DeathSizing } {
   let years: number;
   let method: DeathSizing;
   if (facts.youngestChildBirthYear !== undefined) {
@@ -54,7 +63,12 @@ export function sizeDeathCover(gapAnnual: number | null, facts: InsuredFacts): D
     years = 5;
     method = "minimum_5_years";
   }
-  years = clamp(years, 5, Math.max(5, 85 - facts.age));
+  return { years: clamp(years, 5, Math.max(5, 85 - facts.age)), method };
+}
+
+/** Death gap × the survivors' support period (see deathSupportYears). */
+export function sizeDeathCover(gapAnnual: number | null, facts: InsuredFacts): DeathCover {
+  const { years, method } = deathSupportYears(facts);
   const fromIncome = !gapAnnual || gapAnnual <= 0;
   const raw = fromIncome ? (facts.grossIncome ?? 60_000) * 3 : gapAnnual * years;
   return {

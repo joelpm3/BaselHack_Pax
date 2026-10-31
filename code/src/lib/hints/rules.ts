@@ -1,4 +1,4 @@
-import { subjectOfPolicy } from "@/lib/domain/policy-subject";
+import { type PolicySubject, subjectOfPolicy } from "@/lib/domain/policy-subject";
 import { type LifeSituation, type Person, pillar2Of } from "@/lib/domain/profile";
 import type { HintSeverity, HintType, PolicyCategory, PolicyStatus } from "@/lib/domain/taxonomy";
 import type { QuoteInput } from "@/lib/pricing/types";
@@ -53,7 +53,7 @@ export const DISABILITY_NEED_SHARE = 0.8;
 /** Maximum full IV pension (CHF 2'520 per month); real IV pensions are often lower. */
 export const MAX_IV_PENSION = 30_240;
 
-type Subject = "self" | "partner";
+type Subject = PolicySubject;
 
 interface Adult {
   subject: Subject;

@@ -1,5 +1,6 @@
 import type { LifeSituation } from "./profile";
 
+/** The customer or the partner: the two adults whose cover the advisor and the cockpit analyse. */
 export type PolicySubject = "self" | "partner";
 
 const fold = (value: string) => value.normalize("NFD").replace(/\p{M}/gu, "").toLowerCase();
