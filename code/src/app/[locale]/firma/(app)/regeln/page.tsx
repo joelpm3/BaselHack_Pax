@@ -5,8 +5,15 @@ import { connection } from "next/server";
 import { useTranslations } from "next-intl";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense, use } from "react";
-import { LoadingBlock, PageBody, PageHeader, Panel } from "@/components/firma/page-parts";
-import { RestoreVersionButton, RulesEditor } from "@/components/firma/rules-editor";
+import { LoadingBlock, PageBody, PageHeader } from "@/components/firma/page-parts";
+import {
+  RestoreVersionButton,
+  RuleMarker,
+  RuleSummary,
+  RulesEditor,
+  ruleListClasses,
+  ruleRowClasses,
+} from "@/components/firma/rules-editor";
 import { hrefWith } from "@/components/firma/url";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
@@ -63,30 +70,35 @@ async function RulesContent({
       ? { id: proposal.id, title: proposal.title, rule: { ...proposal.rule, active: true } }
       : null;
 
+  const dateTime = (d: Date) =>
+    format.dateTime(d, {
+      day: "numeric",
+      month: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
   return (
-    <PageBody className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
-      <div className="grid content-start gap-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <h2 className="text-paragraph-l font-bold">
-            {t("version", { version: selected.version })}
-          </h2>
-          {selected.isActive ? (
-            <Badge tone="success">{t("activeVersion")}</Badge>
-          ) : (
-            <Badge>{t("archived")}</Badge>
-          )}
-          <span className="text-fg-muted">
+    <PageBody className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_17rem] xl:gap-12">
+      <div className="grid content-start gap-5">
+        <div className="grid gap-1">
+          <div className="flex flex-wrap items-center gap-3">
+            <h2 className="text-heading-s font-bold">
+              {t("version", { version: selected.version })}
+            </h2>
+            {selected.isActive ? (
+              <Badge tone="success">{t("activeVersion")}</Badge>
+            ) : (
+              <Badge>{t("archived")}</Badge>
+            )}
+          </div>
+          <p className="text-paragraph-s text-fg-muted">
             {t("createdBy", {
               name: selected.createdBy ?? t("system"),
-              time: format.dateTime(selected.createdAt, {
-                day: "numeric",
-                month: "numeric",
-                year: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-              }),
+              time: dateTime(selected.createdAt),
             })}
-          </span>
+          </p>
         </div>
 
         {proposalDraft ? (
@@ -102,39 +114,41 @@ async function RulesContent({
             proposal={proposalDraft ?? undefined}
           />
         ) : (
-          <div className="grid gap-4">
-            <RestoreVersionButton ruleSetId={selected.id} version={selected.version} />
-            <ol className="grid gap-3">
-              {draft.rules.map((rule, i) => (
-                <li
-                  key={`${i}-${rule.text}`}
-                  className={cn(
-                    "grid gap-2 rounded-xl border border-line p-4 md:grid-cols-[2rem_minmax(0,1fr)_12rem]",
-                    !rule.active && "bg-gray-1 text-fg-muted",
-                  )}
-                >
-                  <span className="text-paragraph-l font-bold text-fg-muted tabular-nums">
-                    {i + 1}
-                  </span>
-                  <p>{rule.text}</p>
-                  <div className="flex flex-wrap content-start gap-1.5">
-                    <Badge tone="info">{tAction(rule.action)}</Badge>
-                    {rule.productCode ? <Badge>{PRODUCTS[rule.productCode].name}</Badge> : null}
-                    {!rule.active ? <Badge>{t("inactive")}</Badge> : null}
-                  </div>
-                </li>
-              ))}
-            </ol>
-            <Panel title={t("leadHints")}>
-              <p className="whitespace-pre-wrap">{draft.leadHints || "–"}</p>
-            </Panel>
+          <div className="grid gap-8">
+            <div className="grid gap-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <RuleSummary rules={draft.rules} />
+                <RestoreVersionButton ruleSetId={selected.id} version={selected.version} />
+              </div>
+              <ol className={ruleListClasses}>
+                {draft.rules.map((rule, i) => (
+                  <li key={`${i}-${rule.text}`} className={ruleRowClasses}>
+                    <RuleMarker n={i + 1} action={rule.action} active={rule.active} />
+                    <div className="grid min-w-0 gap-2">
+                      <p className={cn("max-w-[68ch]", !rule.active && "text-fg-muted")}>
+                        {rule.text}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        <Badge>{tAction(rule.action)}</Badge>
+                        {rule.productCode ? <Badge>{PRODUCTS[rule.productCode].name}</Badge> : null}
+                        {!rule.active ? <Badge>{t("inactive")}</Badge> : null}
+                      </div>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <section className="grid max-w-[68ch] gap-2">
+              <h3 className="text-paragraph-m font-bold">{t("leadHints")}</h3>
+              <p className="whitespace-pre-wrap text-fg-muted">{draft.leadHints || "–"}</p>
+            </section>
           </div>
         )}
       </div>
 
-      <aside className="grid content-start gap-3">
+      <aside className="grid content-start gap-8 xl:sticky xl:top-6 xl:self-start">
         {pendingDrafts.length > 0 ? (
-          <div className="mb-3 grid gap-2">
+          <div className="grid gap-3">
             <h2 className="font-bold">{tDraft("pending")}</h2>
             <ul className="grid gap-2">
               {pendingDrafts.map((p) => (
@@ -155,38 +169,62 @@ async function RulesContent({
             </ul>
           </div>
         ) : null}
-        <h2 className="font-bold">{t("history")}</h2>
-        <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-gray-2">
-          {versions.map((v) => (
-            <li key={v.id}>
-              <Link
-                href={hrefWith("/firma/regeln", { version: v.isActive ? null : v.version })}
-                aria-current={v.id === selected.id ? "page" : undefined}
-                className={cn(
-                  "grid gap-0.5 bg-surface px-4 py-3 hover:bg-gray-1",
-                  v.id === selected.id && "bg-light-purple hover:bg-light-purple",
-                )}
-              >
-                <span className="flex items-center justify-between gap-2">
-                  <span className="font-medium">{t("version", { version: v.version })}</span>
-                  {v.isActive ? <Badge tone="success">{t("activeVersion")}</Badge> : null}
-                </span>
-                <span className="text-paragraph-xs text-fg-muted">
-                  {v.createdBy ?? t("system")} ·{" "}
-                  {format.dateTime(v.createdAt, {
-                    day: "numeric",
-                    month: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-                <span className="text-paragraph-xs text-fg-muted">
-                  {t("versionStats", { rules: v.ruleCount, conversations: v.conversationCount })}
-                </span>
-              </Link>
-            </li>
-          ))}
-        </ol>
+        <div className="grid gap-3">
+          <h2 className="font-bold">{t("history")}</h2>
+          {/* Newest first; the line ties the versions into one history, the filled square is live. */}
+          <ol className="grid">
+            {versions.map((v, i) => {
+              const current = v.id === selected.id;
+              return (
+                <li key={v.id} className="relative grid grid-cols-[0.875rem_minmax(0,1fr)] gap-x-2">
+                  {i < versions.length - 1 ? (
+                    <span
+                      aria-hidden
+                      className="absolute top-5 bottom-0 left-[6.5px] w-px bg-line"
+                    />
+                  ) : null}
+                  <span
+                    aria-hidden
+                    className={cn(
+                      "relative mt-3.5 size-3.5 rounded-[3px] border-[1.5px]",
+                      v.isActive ? "border-pax-purple bg-pax-purple" : "border-gray-4 bg-surface",
+                    )}
+                  />
+                  <Link
+                    href={hrefWith("/firma/regeln", { version: v.isActive ? null : v.version })}
+                    aria-current={current ? "page" : undefined}
+                    className={cn(
+                      "mb-1 grid gap-0.5 rounded-m px-3 py-2 hover:bg-gray-1",
+                      current && "bg-light-purple hover:bg-light-purple",
+                    )}
+                  >
+                    <span className="flex items-center justify-between gap-2">
+                      <span className="font-medium">{t("version", { version: v.version })}</span>
+                      {v.isActive ? <Badge tone="success">{t("activeVersion")}</Badge> : null}
+                    </span>
+                    <span className="text-paragraph-xs text-fg-muted">
+                      {t("createdBy", {
+                        name: v.createdBy ?? t("system"),
+                        time: format.dateTime(v.createdAt, {
+                          day: "numeric",
+                          month: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        }),
+                      })}
+                    </span>
+                    <span className="text-paragraph-xs text-fg-muted">
+                      {t("versionStats", {
+                        rules: v.ruleCount,
+                        conversations: v.conversationCount,
+                      })}
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </aside>
     </PageBody>
   );

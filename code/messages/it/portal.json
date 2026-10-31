@@ -13,7 +13,9 @@
   "empty": {
     "title": "Il Suo cockpit è ancora vuoto",
     "body": "Inizi una consulenza o carichi i Suoi documenti. Poi vedrà qui tutta la Sua previdenza a colpo d’occhio.",
-    "start": "Iniziare la consulenza"
+    "start": "Iniziare la consulenza",
+    "erasedTitle": "I suoi dati sono stati cancellati",
+    "erasedBody": "Abbiamo cancellato le sue conversazioni, il suo profilo, i suoi documenti e tutto ciò che la consulenza ne ha dedotto. Se avvia una nuova consulenza, ricomincia da capo."
   },
   "pillars": {
     "pillar1": "1° pilastro",
@@ -242,6 +244,28 @@
       "student": "In formazione",
       "homemaker": "Lavoro familiare",
       "retired": "Pensionato/a"
+    }
+  },
+  "myData": {
+    "title": "I miei dati",
+    "intro": "Ecco cosa ha salvato Pax durante le sue consulenze. Può scaricare tutto come file o chiederne la cancellazione.",
+    "rows": {
+      "conversations": "Conversazioni",
+      "messages": "Messaggi",
+      "documents": "Documenti",
+      "profileFields": "Dati nel suo profilo",
+      "assessments": "Valutazioni della consulenza"
+    },
+    "download": "Scaricare tutti i dati (JSON)",
+    "erasedAgentic": "I suoi dati di consulenza sono stati cancellati: conversazioni, profilo, documenti e valutazioni. Conserviamo i suoi contratti e le proposte firmate finché la legge lo richiede.",
+    "erase": {
+      "request": "Chiedere la cancellazione dei miei dati",
+      "question": "Cancellare definitivamente tutti i dati di consulenza?",
+      "deletes": "Verranno cancellati le sue conversazioni con Clara, il suo profilo e la sua cronologia, i documenti caricati con i valori letti, i calcoli, le indicazioni, i promemoria previsti e tutte le valutazioni della consulenza. L'operazione è irreversibile.",
+      "keepsContracts": "I suoi contratti Pax e le proposte firmate restano, perché la legge ci obbliga a conservarli.",
+      "keepsNothing": "Non ha contratti con Pax. Dopo non resterà salvato alcun suo dato.",
+      "confirm": "Sì, cancellare definitivamente",
+      "cancel": "Annulla"
     }
   }
 }

@@ -462,7 +462,14 @@
     "current": "Version {version} is active.",
     "restore": "Restore version {version}",
     "history": "Versions",
-    "versionStats": "{rules, plural, one {# rule} other {# rules}}, {conversations, plural, one {# conversation} other {# conversations}}"
+    "versionStats": "{rules, plural, one {# rule} other {# rules}}, {conversations, plural, one {# conversation} other {# conversations}}",
+    "summaryLabel": "Active rules by effect",
+    "summary": {
+      "handover": "{count, plural, one {# handover} other {# handovers}}",
+      "flag": "{count, plural, one {# flag} other {# flags}}",
+      "block_product": "{count, plural, one {# blocked product} other {# blocked products}}",
+      "inactive": "{count} switched off"
+    }
   },
   "simulation": {
     "title": "Simulation",

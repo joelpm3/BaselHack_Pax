@@ -462,7 +462,14 @@
     "current": "La versione {version} è attiva.",
     "restore": "Ripristina la versione {version}",
     "history": "Versioni",
-    "versionStats": "{rules, plural, one {# regola} other {# regole}}, {conversations, plural, one {# conversazione} other {# conversazioni}}"
+    "versionStats": "{rules, plural, one {# regola} other {# regole}}, {conversations, plural, one {# conversazione} other {# conversazioni}}",
+    "summaryLabel": "Regole attive per effetto",
+    "summary": {
+      "handover": "{count, plural, one {# passaggio} other {# passaggi}}",
+      "flag": "{count, plural, one {# segnalazione} other {# segnalazioni}}",
+      "block_product": "{count, plural, one {# prodotto bloccato} other {# prodotti bloccati}}",
+      "inactive": "{count, plural, one {# disattivata} other {# disattivate}}"
+    }
   },
   "simulation": {
     "title": "Simulazione",
