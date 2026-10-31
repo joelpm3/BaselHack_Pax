@@ -31,9 +31,37 @@ export type MaterialPersona = (typeof MATERIAL_PERSONAS)[number];
 
 export type Style = "brief" | "chatty" | "sceptical" | "precise";
 
+/**
+ * Hand-written pitch and test personas (see `demo-personas.ts`). Each one is also a seeded demo
+ * client, so the simulated customer starts with the same CRM data as in the pitch.
+ */
+export const DEMO_PERSONA_KEYS = [
+  "student_first_job",
+  "cohabiting_wedding",
+  "self_employed_8165",
+  "pension_or_lump_sum",
+  "home_saver",
+  "romandie_contract_end",
+  "yearly_checkin",
+] as const;
+export type DemoPersonaKey = (typeof DEMO_PERSONA_KEYS)[number];
+
+/** The richer inner life of a hand-written persona (English; the customer writes in `locale`). */
+export interface PersonaStory {
+  backstory: string;
+  goals: string[];
+  worries: string[];
+  /** How they write: tone, length, du/Sie, dialect, voice dictation. */
+  speakingStyle: string;
+  /** What they reveal and when ("only if asked about X: …", "in the second message: …"). */
+  reveals: string[];
+  /** Replaces the generic pension-fund line when the persona knows their figures. */
+  pensionFund?: string;
+}
+
 export interface SimPersona {
-  /** `material:young_family` or `generated`. */
-  source: `material:${MaterialPersona}` | "generated";
+  /** `material:young_family`, `demo:student_first_job` or `generated`. */
+  source: `material:${MaterialPersona}` | `demo:${DemoPersonaKey}` | "generated";
   locale: Locale;
   mode: ConversationMode;
   firstName: string;
@@ -44,7 +72,7 @@ export interface SimPersona {
   city: string;
   zip: string;
   maritalStatus: "single" | "married" | "cohabiting" | "divorced";
-  employment: "employed" | "self_employed" | "homemaker";
+  employment: "employed" | "self_employed" | "homemaker" | "student";
   workloadPercent: number;
   grossIncome: number;
   partner: { firstName: string; birthYear: number; grossIncome: number } | null;
@@ -58,6 +86,8 @@ export interface SimPersona {
   patience: number | null;
   sharesContact: boolean;
   wantsHuman: boolean;
+  /** Only hand-written demo personas have one. */
+  story?: PersonaStory;
 }
 
 /** Deterministic PRNG (mulberry32). */
@@ -360,7 +390,8 @@ export function summariseCast(cast: SimPersona[]) {
       return acc;
     }, {});
   return {
-    material: cast.filter((p) => p.source !== "generated").length,
+    material: cast.filter((p) => p.source.startsWith("material:")).length,
+    demo: cast.filter((p) => p.source.startsWith("demo:")).length,
     generated: cast.filter((p) => p.source === "generated").length,
     locales: count(cast.map((p) => p.locale)),
     concerns: count(cast.map((p) => p.concern)),

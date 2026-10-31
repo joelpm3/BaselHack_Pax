@@ -5,13 +5,22 @@ import {
   SIMULATION_LIMITS,
   startSimulationRun,
 } from "@/lib/simulation/engine";
+import { DEMO_PERSONA_KEYS } from "@/lib/simulation/personas";
 
 /**
  * Starts (POST) or cancels (DELETE ?runId=) a simulation run, for scripts and demos; the
- * dashboard uses the equivalent server actions. Requires the advisor cookie.
+ * dashboard uses the equivalent server actions. Requires the advisor cookie. `personas` plays
+ * the named demo personas instead of a random cast, e.g.
+ * `{ "personas": ["student_first_job", "self_employed_8165"] }`.
  */
 const startSchema = z.object({
-  size: z.number().int().min(SIMULATION_LIMITS.size.min).max(SIMULATION_LIMITS.size.max),
+  size: z
+    .number()
+    .int()
+    .min(SIMULATION_LIMITS.size.min)
+    .max(SIMULATION_LIMITS.size.max)
+    .default(SIMULATION_LIMITS.size.default),
+  personas: z.array(z.enum(DEMO_PERSONA_KEYS)).min(1).max(SIMULATION_LIMITS.size.max).optional(),
   concurrency: z
     .number()
     .int()

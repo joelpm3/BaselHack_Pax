@@ -11,7 +11,14 @@ import type { ConversationStatus } from "@/lib/domain/taxonomy";
 import { publish } from "@/lib/events/bus";
 import { scheduleAnalysis } from "@/lib/insights";
 import { compactJson, messageItems, messageText } from "@/lib/insights/transcript";
-import { buildCast, personaEmail, type SimPersona, summariseCast } from "./personas";
+import { demoCast } from "./demo-personas";
+import {
+  buildCast,
+  type DemoPersonaKey,
+  personaEmail,
+  type SimPersona,
+  summariseCast,
+} from "./personas";
 import {
   type CustomerTurn,
   conversationSoFar,
@@ -322,19 +329,26 @@ async function executeRun(
   }
 }
 
-/** Starts a run in the background and returns its id immediately. */
+/**
+ * Starts a run in the background and returns its id immediately. With `personas`, the run plays
+ * exactly those hand-written demo personas (to test a feature with a known customer) and `size`
+ * is ignored.
+ */
 export function startSimulationRun(input: {
   size: number;
   concurrency: number;
   advisorId: string | null;
   seed?: number;
+  personas?: DemoPersonaKey[];
 }): string {
   const seed = input.seed ?? Date.now();
-  const cast = buildCast(input.size, seed, new Date().getFullYear());
+  const cast = input.personas?.length
+    ? demoCast(input.personas)
+    : buildCast(input.size, seed, new Date().getFullYear());
   const run = db
     .insert(schema.simulationRuns)
     .values({
-      size: input.size,
+      size: cast.length,
       concurrency: input.concurrency,
       personaMix: { seed, ...summariseCast(cast) },
       stats: emptyStats(),
@@ -348,7 +362,7 @@ export function startSimulationRun(input: {
     action: "simulation.started",
     entityType: "simulation_run",
     entityId: run.id,
-    data: { size: input.size, concurrency: input.concurrency, seed },
+    data: { size: cast.length, concurrency: input.concurrency, seed, personas: input.personas },
   });
   const controller = new AbortController();
   running.set(run.id, controller);
