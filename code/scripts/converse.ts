@@ -16,16 +16,24 @@ import path from "node:path";
 import { generateText, Output, type UIMessage } from "ai";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
-import { createConversation } from "@/lib/advisor/conversations";
+import { createConversation, loadMessageRows } from "@/lib/advisor/conversations";
 import { quickRepliesOf } from "@/lib/advisor/quick-replies";
 import { runAdvisorTurn } from "@/lib/advisor/turn";
+import { widgetValuesOf } from "@/lib/advisor/widget-inputs";
+import { recordWidgetInputs } from "@/lib/advisor/widget-inputs-store";
 import { getModel } from "@/lib/ai/models";
 import { db, schema } from "@/lib/db";
 import { lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
 import { messageItems } from "@/lib/insights/transcript";
 import { getProfile } from "@/lib/profile/service";
 import { asksAboutInsurance, flagsFor, type ToolCall } from "./converse-checks";
-import { type Beat, SCENARIOS, type Scenario, scenarioById } from "./converse-scenarios";
+import {
+  type Beat,
+  SCENARIOS,
+  type Scenario,
+  scenarioById,
+  type WidgetMove,
+} from "./converse-scenarios";
 
 // Opus ignores `temperature`; the SDK would warn on every step.
 (globalThis as { AI_SDK_LOG_WARNINGS?: boolean }).AI_SDK_LOG_WARNINGS = false;
@@ -113,6 +121,8 @@ function createCustomer(scenario: Scenario): string {
 interface Exchange {
   customer: string;
   voice: boolean;
+  /** What the customer set in a widget before writing. */
+  widget: string | null;
   texts: string[];
   tools: ToolCall[];
   quickReplies: string[];
@@ -186,11 +196,28 @@ function beatOf(beat: Beat | undefined): {
   say: string | null;
   intent: string | null;
   voice: boolean;
+  widget: WidgetMove | null;
 } {
-  if (beat === undefined) return { say: null, intent: null, voice: false };
-  if (typeof beat === "string") return { say: beat, intent: null, voice: false };
-  if ("say" in beat) return { say: beat.say, intent: null, voice: beat.voice ?? false };
-  return { say: null, intent: beat.intent, voice: beat.voice ?? false };
+  if (beat === undefined) return { say: null, intent: null, voice: false, widget: null };
+  if (typeof beat === "string") return { say: beat, intent: null, voice: false, widget: null };
+  const widget = beat.widget ?? null;
+  if ("say" in beat) return { say: beat.say, intent: null, voice: beat.voice ?? false, widget };
+  return { say: null, intent: beat.intent, voice: beat.voice ?? false, widget };
+}
+
+/** The customer moves the sliders of the latest widget of that tool; returns what it shows now. */
+function moveWidget(conversationId: string, move: WidgetMove): string {
+  const part = loadMessageRows(conversationId)
+    .filter((row) => row.role === "assistant")
+    .flatMap((row) => row.parts as Array<{ type?: string; toolCallId?: string; output?: unknown }>)
+    .filter((p) => p.type === `tool-${move.tool}` && p.toolCallId && p.output)
+    .at(-1);
+  if (!part?.toolCallId) return `no ${move.tool} widget to move`;
+  const stored = (part.output as { customerInputs?: { values?: Record<string, number> } })
+    .customerInputs?.values;
+  const values = { ...(stored ?? widgetValuesOf(part.output)), ...move.values };
+  const ok = recordWidgetInputs(conversationId, part.toolCallId, move.tool, values);
+  return `${ok ? "set" : "FAILED to set"} ${move.tool} to ${JSON.stringify(values)}`;
 }
 
 const INFORMAL = /\b(du|dir|dich|dein\w*|tu|toi|ton|ta|tes|ti|tuo|tua)\b/i;
@@ -232,6 +259,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       end = sim.end;
     }
     if (!text) break;
+    const widget = beat.widget ? moveWidget(conversation.id, beat.widget) : null;
     informal ||= INFORMAL.test(text);
     history.push({ role: "customer", text });
     const started = Date.now();
@@ -250,6 +278,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       exchanges.push({
         customer: text,
         voice: beat.voice,
+        widget,
         texts: [],
         tools: [],
         quickReplies: [],
@@ -278,6 +307,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
     exchanges.push({
       customer: text,
       voice: beat.voice,
+      widget,
       texts,
       tools,
       quickReplies,
@@ -309,6 +339,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
   let flagCount = 0;
   exchanges.forEach((x, n) => {
     lines.push(`## Turn ${n + 1} (${(x.ms / 1000).toFixed(1)} s)`, "");
+    if (x.widget) lines.push(`_Widget: ${x.widget}_`, "");
     lines.push(`**CUSTOMER${x.voice ? " (voice)" : ""}:** ${x.customer}`, "");
     for (const tool of x.tools) {
       if (tool.name === "suggestReplies") {

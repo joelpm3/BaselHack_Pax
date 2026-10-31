@@ -87,6 +87,7 @@
     "riskAttitude": "Risikobereitschaft",
     "privateCover": "Private Todesfall-/IV-Versicherung",
     "monthlySpending": "Ausgaben pro Monat",
+    "monthlySavings": "Sparbetrag pro Monat",
     "existingPolicies": "Bestehende Versicherungen"
   },
   "enums": {

@@ -1,10 +1,11 @@
 import "server-only";
-import { tool } from "ai";
+import { type JSONValue, tool } from "ai";
 import { z } from "zod";
 import { getProfile } from "@/lib/profile/service";
 import { ensureTaxLocation } from "../location";
 import { computeScenario } from "../scenarios";
 import { SCENARIO_KINDS, type ScenarioOutput } from "../types";
+import { withoutCustomerInputs } from "../widget-inputs";
 import type { ToolContext } from "./context";
 
 export const scenarioInput = z.object({
@@ -48,6 +49,10 @@ export function createScenarioTools(ctx: ToolContext) {
         );
         return computeScenario(scenario, params ?? {}, profile, callCtx);
       },
+      toModelOutput: ({ output }) => ({
+        type: "json",
+        value: withoutCustomerInputs(output) as JSONValue,
+      }),
     }),
   };
 }

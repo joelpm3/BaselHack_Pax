@@ -5,6 +5,7 @@
     "pending": "Je calcule l’exemple",
     "introGeneral": "Un exemple à essayer : déplacez les curseurs et voyez d’où vient l’argent à la fin.",
     "introPillar3a": "Avec vos chiffres du pilier 3a jusqu’à la retraite. Tous les curseurs sont réglables.",
+    "introOwn": "Avec votre épargne et le montant que vous mettez de côté. Déplacez les curseurs et voyez d’où vient l’argent à la fin.",
     "params": {
       "startAmount": "Montant de départ",
       "monthlySaving": "Épargne par mois",

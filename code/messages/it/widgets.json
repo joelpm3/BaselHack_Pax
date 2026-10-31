@@ -87,6 +87,7 @@
     "riskAttitude": "Propensione al rischio",
     "privateCover": "Assicurazione privata decesso/invalidità",
     "monthlySpending": "Spese al mese",
+    "monthlySavings": "Risparmio possibile al mese",
     "existingPolicies": "Assicurazioni esistenti"
   },
   "enums": {

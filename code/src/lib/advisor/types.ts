@@ -5,6 +5,7 @@
 
 import type { ContactChannel, DocumentType } from "@/lib/domain/taxonomy";
 import type { DeathSizing } from "@/lib/sales/sizing";
+import type { WidgetChange } from "./widget-inputs";
 
 /** Income in one situation (retirement, disability, death) split by source, as Logismata returns it. */
 export interface IncomeBreakdown {
@@ -42,6 +43,8 @@ export interface AdvisorMessageMetadata {
   hintId?: string;
   createdAt?: number;
   model?: string;
+  /** Widget values the customer changed before this message (server-set; a note for the model). */
+  widgetChanges?: WidgetChange[];
 }
 
 // ─── Tool outputs ───────────────────────────────────────────────────────────

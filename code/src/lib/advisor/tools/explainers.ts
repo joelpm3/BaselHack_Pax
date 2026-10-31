@@ -31,6 +31,7 @@ import {
 import { currentYear, runRetirementCheck } from "../logismata/checks";
 import { INTEREST_RATE, missingFor } from "../logismata/mapping";
 import { MIN_RETIREMENT_AGE, scenarioContext } from "../scenarios";
+import { withoutCustomerInputs } from "../widget-inputs";
 import type { ToolContext } from "./context";
 
 /**
@@ -43,12 +44,14 @@ const compoundInput = z.object({
     .number()
     .min(0)
     .optional()
-    .describe("Amount saved today, if the customer named one"),
+    .describe("Amount saved today as the customer said it; default: their savings in the profile"),
   monthlySaving: z
     .number()
     .min(0)
     .optional()
-    .describe("Saving per month, if the customer named one"),
+    .describe(
+      "What the customer said they can put aside per month; default: monthlySavings in the profile",
+    ),
   ratePercent: z
     .number()
     .min(0)
@@ -62,6 +65,13 @@ const compoundInput = z.object({
     .describe(
       "true: start from the customer's 3a balance and contribution and save until retirement",
     ),
+  example: z
+    .boolean()
+    .optional()
+    .describe(
+      'true: the customer wants a general example ("Lieber mit einem Beispiel"): labelled ' +
+        "example values, the profile is ignored",
+    ),
 });
 
 /** Years until the retirement the life plan uses (stated age, planned early retirement, 65). */
@@ -73,7 +83,10 @@ function yearsToRetirement(profile: ReturnType<typeof getProfile>): number | und
   return Math.max(1, plan.age - (year - birthYear));
 }
 
-/** Customer values first, then (for 3a) the profile, then the labelled example. */
+/**
+ * Customer values first, then the profile (3a figures, or savings and what they can put aside),
+ * then the labelled example. A requested example ignores the profile.
+ */
 function compoundParams(
   input: z.infer<typeof compoundInput>,
   profile: ReturnType<typeof getProfile>,
@@ -88,7 +101,9 @@ function compoundParams(
             : undefined,
         years: yearsToRetirement(profile),
       }
-    : {};
+    : input.example
+      ? {}
+      : { startAmount: profile.assets.liquid, monthlySaving: profile.monthlySavings };
   const params = {} as CompoundParams;
   const sources = {} as Record<keyof CompoundParams, ValueSource>;
   for (const key of ["startAmount", "monthlySaving", "ratePercent", "years"] as const) {
@@ -105,8 +120,10 @@ function compoundParams(
       sources[key] = "example";
     }
   }
-  const usedProfile = Object.values(sources).includes("profile");
-  return { params: clampCompound(params), sources, basis: usedProfile ? "pillar3a" : "general" };
+  // "Your figures" only when the amounts are theirs, not just a rate or a duration.
+  const own = sources.startAmount !== "example" || sources.monthlySaving !== "example";
+  const basis = !own ? "general" : pillar3a ? "pillar3a" : "own";
+  return { params: clampCompound(params), sources, basis };
 }
 
 const lifePlanInput = z.object({
@@ -114,7 +131,10 @@ const lifePlanInput = z.object({
     .number()
     .min(0)
     .optional()
-    .describe("What the household spends per month, only if the customer said it"),
+    .describe(
+      "What the household spends per month, only if the customer said it; default: " +
+        "monthlySpending in the profile",
+    ),
 });
 
 const drawdownInput = z.object({
@@ -146,7 +166,10 @@ const WRITE_NEXT =
 
 function forModel(value: object): { type: "json"; value: JSONValue } {
   // The outputs are plain JSON data; interfaces just lack JSONValue's index signature.
-  return { type: "json", value: { ...value, nextStep: WRITE_NEXT } as JSONValue };
+  return {
+    type: "json",
+    value: { ...withoutCustomerInputs(value), nextStep: WRITE_NEXT } as JSONValue,
+  };
 }
 
 export function createExplainerTools(ctx: ToolContext) {
@@ -162,9 +185,11 @@ export function createExplainerTools(ctx: ToolContext) {
         "Interactive compound-interest illustration (Zinseszins): growth over the years split into " +
         "own deposits, interest and interest on interest; the customer moves sliders for start " +
         "amount, monthly saving, rate and years. Use it whenever someone asks what compound " +
-        "interest is or how saving grows. Without values it shows a labelled example; with " +
-        "usePillar3a it starts from the customer's 3a figures. The figures are an illustration " +
-        "with an assumed rate, never a promise.",
+        "interest is or how saving grows. It opens with the values you pass (what the customer " +
+        "said), then the profile (savings today, monthlySavings; with usePillar3a their 3a " +
+        "figures), else labelled example values; each slider shows where its value comes from. " +
+        "example: true shows the example only. The figures are an illustration with an assumed " +
+        "rate, never a promise.",
       inputSchema: compoundInput,
       execute: async (input): Promise<CompoundInterestOutput> => {
         const profile = getProfile(ctx.customerId);
@@ -203,7 +228,10 @@ export function createExplainerTools(ctx: ToolContext) {
             ? { status: "ok", breakdown: check.breakdown, pillar2Estimated: check.estimated }
             : { status: "failed" };
         }
-        return buildLifePlan(profile, year, { income, expensesMonthly: monthlyExpenses });
+        return buildLifePlan(profile, year, {
+          income,
+          expensesMonthly: monthlyExpenses ?? profile.monthlySpending,
+        });
       },
       toModelOutput: ({ output }) => forModel(output),
     }),

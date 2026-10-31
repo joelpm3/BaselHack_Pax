@@ -14,6 +14,8 @@ import { EDITABLE_FIELDS } from "@/lib/advisor/profile-fields";
 import { computeScenario } from "@/lib/advisor/scenarios";
 import { scenarioInput } from "@/lib/advisor/tools/scenario";
 import type { ResidencePlace, ScenarioOutput, VorsorgebildModel } from "@/lib/advisor/types";
+import { widgetValuesOf } from "@/lib/advisor/widget-inputs";
+import { recordWidgetInputs } from "@/lib/advisor/widget-inputs-store";
 import { audit } from "@/lib/audit";
 import { getCurrentCustomer, getOrCreateCustomer, setCustomerCookie } from "@/lib/auth/customer";
 import { db, schema } from "@/lib/db";
@@ -226,7 +228,16 @@ export async function recalculateScenario(input: {
     getProfile(customer.id),
     { customerId: customer.id, conversationId: conversation.id, toolCallId: input.toolCallId },
   );
-  if (result.status === "ok") patchToolOutput(conversation.id, input.toolCallId, { ...result });
+  if (result.status === "ok") {
+    // First, while the output still holds the values the advisor saw.
+    recordWidgetInputs(
+      conversation.id,
+      input.toolCallId,
+      "simulateScenario",
+      widgetValuesOf(result),
+    );
+    patchToolOutput(conversation.id, input.toolCallId, { ...result });
+  }
   return result;
 }
 
