@@ -42,10 +42,10 @@ an external AI provider:
 - **Speech-to-text:** our fine-tuned Swiss-German model, on the same GPU.
 
 The setting is `LLM_PROVIDER=openai-compatible` with `LLM_BASE_URL` pointing at the endpoint, and
-`STT_BASE_URL` for speech. The default dev setup uses Claude (`LLM_PROVIDER=anthropic`). The GPU
-runs in Nebius `us-central1` by default; `--region` picks another one
-([`cookbook/nebius-nemotron`](cookbook/nebius-nemotron/README.md)). Calculations (Logismata) and
-pricing (Quicksale) are external services in either mode.
+`STT_BASE_URL` for speech. For the hackathon the GPU runs in Nebius `us-central1`; it can be rented
+in an EU region with `--region` ([`cookbook/nebius-nemotron`](cookbook/nebius-nemotron/README.md)),
+which we did not do because of the price. Calculations (Logismata) and pricing (Quicksale) are
+external services in either mode.
 
 ## The journey
 
@@ -73,7 +73,7 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | Human review stays possible | The advisor hands over when an active company rule applies (it cites the rule ids), when the customer asks, or when the case is complex. Rules are plain language, versioned and edited by Pax | [`code/src/lib/advisor/tools/handover.ts`](code/src/lib/advisor/tools/handover.ts), [`code/src/lib/rules/active.ts`](code/src/lib/rules/active.ts), `/firma/uebergaben`, `/firma/regeln` |
 | Encryption | Uploaded documents are encrypted at rest with AES-256-GCM, the document id bound as authenticated data; the customer can delete them | [`code/src/lib/documents/crypto.ts`](code/src/lib/documents/crypto.ts), [`code/src/app/api/documents/[id]/route.ts`](code/src/app/api/documents/%5Bid%5D/route.ts) |
 | Access protection | Signed HMAC customer cookie; company dashboard behind a password with a constant-time check, server actions re-check the advisor | [`code/src/lib/auth/signing.ts`](code/src/lib/auth/signing.ts), [`code/src/lib/firma/auth.ts`](code/src/lib/firma/auth.ts) |
-| No uncontrolled external AI | Every model call goes through one module. `LLM_PROVIDER=openai-compatible` switches all of them to Nemotron 3.5 Bolt 74B-A9B (24GB), and speech-to-text runs on our fine-tuned Swiss-German model, both on an NVIDIA B200 we rent from Nebius. The default dev setup uses Claude | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
+| No uncontrolled external AI | Every model call goes through one module. `LLM_PROVIDER=openai-compatible` switches all of them to Nemotron 3.5 Bolt 74B-A9B (24GB), and speech-to-text runs on our fine-tuned Swiss-German model, both on an NVIDIA B200 we rent from Nebius (US region for the hackathon; an EU region is possible) | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
 | Formal requirements for the contract | Suitability check before unit-linked products, explicit consent and a signature that must match the customer's name | [`code/src/lib/sales/suitability.ts`](code/src/lib/sales/suitability.ts), [`code/src/lib/sales/application.ts`](code/src/lib/sales/application.ts) |
 
 ## Repository
