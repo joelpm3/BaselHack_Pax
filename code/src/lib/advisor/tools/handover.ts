@@ -5,6 +5,7 @@ import { z } from "zod";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import { publish } from "@/lib/events/bus";
+import { safeQuickReplies } from "../quick-replies";
 import type { FeedbackOutput, HandoverOutput, QuickRepliesOutput } from "../types";
 import type { ToolContext } from "./context";
 
@@ -108,11 +109,14 @@ export function createHandoverTools(ctx: ToolContext) {
     suggestReplies: tool({
       description:
         "Offer 2–4 short tap-to-send answers to the question you just asked, written from the " +
-        "customer's point of view in their language. Call it last, after your text.",
+        "customer's point of view in their language. Call it last, after your text. Never a reply that " +
+        "claims an action the customer does in a card (signing, confirming values, uploading).",
       inputSchema: z.object({
         options: z.array(z.string().min(1).max(60)).min(2).max(4),
       }),
-      execute: async ({ options }): Promise<QuickRepliesOutput> => ({ options }),
+      execute: async ({ options }): Promise<QuickRepliesOutput> => ({
+        options: safeQuickReplies(options),
+      }),
     }),
   };
 }

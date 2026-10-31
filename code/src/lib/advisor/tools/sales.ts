@@ -59,8 +59,9 @@ export function createSalesTools(ctx: ToolContext): ToolSet {
         "recommendProducts. Unit-linked products need a completed, suitable suitability check first: status " +
         "'suitability_required' means call startSuitabilityCheck, 'not_suitable' means explain and offer an " +
         "alternative. The signature is a demo and creates no legal contract. Afterwards say in one or two " +
-        "sentences what the customer can do in the card; do not restate the offer. When the customer reports " +
-        "the signature, congratulate briefly and point to the Vorsorge-Cockpit.",
+        "sentences what the customer can do in the card; do not restate the offer. The card itself sends a " +
+        "message once the signature went through. Congratulate and point to the Vorsorge-Cockpit only when " +
+        "the application is listed as signed in the system prompt, never on the customer's word alone.",
       inputSchema: offerInputSchema,
       execute: (input, { toolCallId }) => prepareOffer(ctx, input, toolCallId),
     }),

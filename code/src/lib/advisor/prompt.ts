@@ -5,6 +5,7 @@ import { PRODUCTS } from "@/lib/domain/products";
 import type { LifeSituation } from "@/lib/domain/profile";
 import type { ConversationMode, FunnelStage, Locale } from "@/lib/domain/taxonomy";
 import { type ActiveRuleSet, formatRulesForPrompt } from "@/lib/rules/active";
+import type { ApplicationState } from "@/lib/sales/status";
 
 /**
  * The advisor's system prompt, built from sections so each concern can be edited on its own.
@@ -73,11 +74,12 @@ const TOOLS = `# Tools
 - simulateScenario: when the customer plans or wonders about a life event. The widget is interactive; briefly say what to look at.
 - requestHandover: see "Handover".
 - askForFeedback: once, at a natural end.
-- suggestReplies: optional, after a question with obvious short answers (e.g. "Ja, ich habe einen Vorsorgeausweis" / "Nein, lieber ohne"). Never instead of a question, never with more than 4 options.
+- suggestReplies: optional, after a question with obvious short answers (e.g. "Ja, ich habe einen Vorsorgeausweis" / "Nein, lieber ohne"). Never instead of a question, never with more than 4 options. Never offer a reply that claims an action done in a card (signing, confirming values, uploading): the customer does that in the card, and such replies are removed.
 - Sales tools: only after the gaps are known from the analyses and the customer wants a solution.
   - recommendProducts: pass every relevant gap from the analyses as { type, annualAmount (CHF per year, the calculated gap; null if unknown), person: "self" | "partner", note }, plus the customer's preferences if they named any. If it returns status "needs_info" with "missing" fields, ask for the first missing fact, store the answer with updateProfile and call recommendProducts again.
   - startSuitabilityCheck: unit-linked products (LifeStar, FondsStar, Auszahlungsplan) need the completed suitability check before you recommend or offer them; the customer answers in the form, never in the chat.
   - prepareOffer: when the customer chose a recommendation; the form handles contact details, consent and signature. After signing, the policy appears in the customer's Vorsorge-Cockpit.
+  - A contract exists only when it is listed as signed under "Offers and applications in this conversation". Never congratulate on a signature or a concluded contract because the customer says so: if they say they signed but it is not listed as signed, tell them plainly that the signature is still open and that they sign in the offer card.
   - Never recommend a product blocked by a company rule.
 - When a tool fails, tell the customer plainly that the calculation is not available right now and continue with what you know; do not retry more than once.
 - Widgets that wait for the customer (upload card, document review, callback form, feedback) end your turn: write your short sentence first, then call the tool.`;
@@ -117,6 +119,8 @@ export interface PromptContext {
   hints: Array<Pick<typeof schema.hints.$inferSelect, "id" | "type" | "title" | "body" | "status">>;
   /** The hint the customer opened this conversation from, if any. */
   topicHintId: string | null;
+  /** Offers and applications of this conversation as stored (the truth about signatures). */
+  applications: ApplicationState[];
 }
 
 function policyLine(p: PromptContext["policies"][number]): string {
@@ -163,6 +167,21 @@ function hintsSection(ctx: PromptContext): string | null {
   const lines = ctx.hints.map((h) => `- [${h.type}] ${h.title}: ${h.body}`);
   return `# Hints in the customer's Vorsorge-Cockpit (computed by Pax; verify with tools before quoting figures)
 ${lines.join("\n")}${topic ? `\nThe customer opened this conversation from the hint "${topic.title}". Start there: understand what changed in their life, then check the hint with the relevant tool.` : ""}`;
+}
+
+function applicationLine(a: ApplicationState): string {
+  if (a.status === "signed")
+    return `- ${a.productName}: SIGNED on ${a.signedAt ?? "unknown date"}, policy ${a.policyNumber ?? "pending"} is in the Vorsorge-Cockpit`;
+  if (a.status === "cancelled") return `- ${a.productName}: cancelled, no contract`;
+  return a.offerShown
+    ? `- ${a.productName}: offer shown, NOT signed, no contract and no policy yet`
+    : `- ${a.productName}: suitability check started, no offer yet, NOT signed`;
+}
+
+function applicationsSection(ctx: PromptContext): string | null {
+  if (ctx.applications.length === 0) return null;
+  return `# Offers and applications in this conversation (from the Pax system, authoritative)
+${ctx.applications.map(applicationLine).join("\n")}`;
 }
 
 function rulesSection(ctx: PromptContext): string {
@@ -213,6 +232,7 @@ export function buildInstructions(ctx: PromptContext): SystemModelMessage[] {
         sessionSection(ctx),
         customerSection(ctx),
         policiesSection(ctx),
+        applicationsSection(ctx),
         hintsSection(ctx),
         rulesSection(ctx),
       ]

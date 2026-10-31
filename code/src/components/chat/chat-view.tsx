@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
 import { VorsorgebildStrip } from "@/components/vorsorgebild/vorsorgebild-strip";
+import { safeQuickReplies } from "@/lib/advisor/quick-replies";
 import type {
   AdvisorMessageMetadata,
   QuickRepliesOutput,
@@ -31,7 +32,10 @@ function quickRepliesOf(message: ChatMessage | undefined): string[] {
     if (part.type !== "tool-suggestReplies" || !isToolUIPart(part)) continue;
     if (part.state !== "output-available") continue;
     const options = (part.output as QuickRepliesOutput | undefined)?.options;
-    return Array.isArray(options) ? options.filter((o) => typeof o === "string").slice(0, 4) : [];
+    // Filtered here too: messages stored before the server-side filter may still carry them.
+    return Array.isArray(options)
+      ? safeQuickReplies(options.filter((o) => typeof o === "string")).slice(0, 4)
+      : [];
   }
   return [];
 }
