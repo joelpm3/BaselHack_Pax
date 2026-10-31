@@ -1,3 +1,5 @@
+import { isDangling } from "@/lib/advisor/message-shape";
+
 /**
  * Heuristic flags for one advisor turn of scripts/converse.ts. They point a human reviewer at
  * likely problems; they are not a test oracle (read the transcript).
@@ -74,5 +76,35 @@ export function flagsFor(turn: TurnView): string[] {
   }
   if (/CHF\s?[\d']+/.test(text) && !turn.analysisShown && !turn.tools.length)
     flags.push("NUMBER_WITHOUT_TOOL: CHF figure without any tool result yet (check source)");
+  if (text && isDangling(lastText))
+    flags.push(`DANGLING_ENDING: «…${lastText.slice(-70).replace(/\s+/g, " ")}»`);
+  const raw = rawQuickReplies(turn.tools);
+  if (raw.length && !lastText.includes("?"))
+    flags.push(
+      `UNMATCHED_QUICK_REPLIES: replies ${raw.map((r) => `[${r}]`).join(" ")} without a question in the final text${turn.quickReplies.length ? "" : " (hidden by the chat)"}`,
+    );
+  const claim = claimedAction(text, turn.tools);
+  if (claim) flags.push(`CLAIMED_ACTION: «${claim}» without a tool that did it`);
   return flags;
+}
+
+/** The options of the last suggestReplies call, whether or not the chat shows them. */
+function rawQuickReplies(tools: ToolCall[]): string[] {
+  const options = (
+    tools.filter((t) => t.name === "suggestReplies").at(-1)?.output as {
+      options?: unknown;
+    } | null
+  )?.options;
+  return Array.isArray(options) ? options.map(String) : [];
+}
+
+const CLAIM =
+  /[^.!?\n]*\b(ergänzt|nachgetragen|hinzugefügt|weitergeleitet|weitergegeben|mitgegeben|geschickt|gesendet|gebucht|ajouté|transmis|envoyé|aggiunto|inoltrato|inviato|added|forwarded|passed on|sent)\b[^.!?\n]*\b(Auftrag|Berater\w*|Rückruf|Übergabe|E-?Mail|Termin|conseill\w*|rappel|demande|consulente|richiesta|advisor|callback|request|e-?mail)\b[^.!?\n]*|[^.!?\n]*\b(Auftrag|Berater\w*|Rückruf|Übergabe|E-?Mail|Termin|conseill\w*|rappel|consulente|advisor|callback)\b[^.!?\n]*\b(ergänzt|nachgetragen|hinzugefügt|weitergeleitet|weitergegeben|mitgegeben|geschickt|gesendet|gebucht|ajouté|transmis|envoyé|aggiunto|inoltrato|inviato|added|forwarded|passed on|sent)\b[^.!?\n]*/i;
+const ACTION_TOOLS = ["requestHandover", "prepareOffer", "askForFeedback"];
+
+/** A sentence saying something was added, sent or booked for a person, with no such tool call. */
+function claimedAction(text: string, tools: ToolCall[]): string | null {
+  if (tools.some((t) => ACTION_TOOLS.includes(t.name))) return null;
+  const match = text.match(CLAIM)?.[0]?.trim();
+  return match ? match.slice(0, 140) : null;
 }
