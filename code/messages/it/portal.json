@@ -50,6 +50,7 @@
     "restore": "Mostrare di nuovo",
     "dismissedCount": "{count, plural, one {# indicazione nascosta} other {# indicazioni nascoste}}",
     "concerns": "Riguarda: {product}, {insurer}",
+    "partnerFallback": "il o la partner",
     "severity": {
       "warning": "Da verificare",
       "opportunity": "Opportunità",
@@ -59,8 +60,9 @@
       "quicksale": "Premio Pax secondo la tariffa attuale, senza impegno. Un cambio richiede un esame dello stato di salute.",
       "estimate": "Premio Pax stimato, senza impegno. Un cambio richiede un esame dello stato di salute.",
       "logismata": "Risparmio fiscale calcolato con Logismata, senza garanzia.",
+      "calculation": "Calcolato con Logismata come il suo quadro previdenziale, incluse le polizze esistenti. Senza impegno.",
       "ruleOfThumb": "Regola empirica: circa tre redditi annui lordi. La lacuna esatta la calcoliamo insieme durante un colloquio.",
-      "ivMax": "Calcolato con la rendita AI massima. La rendita effettiva è spesso più bassa."
+      "ivMax": "Stima approssimativa con la rendita AI massima, rendite per figli incluse. La rendita effettiva è spesso più bassa; la lacuna esatta la calcoliamo insieme durante un colloquio."
     },
     "fallback": {
       "cheaper_equivalent": {
@@ -69,7 +71,11 @@
       },
       "coverage_mismatch_death": {
         "title": "La copertura in caso di decesso è scarsa",
-        "body": "Oggi in caso di decesso verrebbero versati {cover}. Secondo la regola empirica, una famiglia ha bisogno di circa tre redditi annui, qui circa {need}. Faccia calcolare la lacuna esatta durante un colloquio."
+        "body": "Oggi in caso di decesso verrebbe versato un capitale di {cover}, oltre alle rendite di AVS e cassa pensione. Secondo la regola empirica, una famiglia ha bisogno di circa tre redditi annui, qui circa {need}. Faccia calcolare la lacuna esatta durante un colloquio."
+      },
+      "coverage_mismatch_death_calculated": {
+        "title": "Lacuna in caso di decesso: {monthlyGap} al mese",
+        "body": "{subject, select, partner {Se {name} muore} other {Se lei muore}} a causa di una malattia, alla famiglia mancherebbero circa {monthlyGap} al mese, nonostante AVS, cassa pensione e polizze esistenti. È lo stesso calcolo del suo quadro previdenziale."
       },
       "coverage_mismatch_death_without_dependants": {
         "title": "Copertura decesso senza persone a carico",
@@ -77,7 +83,11 @@
       },
       "coverage_mismatch_disability": {
         "title": "Lacuna in caso di incapacità di guadagno",
-        "body": "In caso di incapacità di guadagno prolungata mancherebbero circa {gap} all’anno per raggiungere l’80 per cento del reddito attuale, nonostante AI e cassa pensione. La rendita AI è calcolata al massimo."
+        "body": "In caso di incapacità di guadagno prolungata mancherebbero circa {gap} all’anno per raggiungere l’80 per cento del reddito attuale, nonostante AI, rendite per figli e cassa pensione. La rendita AI è calcolata al massimo."
+      },
+      "coverage_mismatch_disability_calculated": {
+        "title": "Lacuna in caso di incapacità di guadagno: {monthlyGap} al mese",
+        "body": "{subject, select, partner {Se {name} non può più lavorare} other {Se lei non può più lavorare}} a causa di una malattia, mancherebbero circa {monthlyGap} al mese per raggiungere l’80 per cento del reddito attuale, nonostante AI, rendite per figli, cassa pensione e polizze esistenti."
       },
       "double_cover_indemnity": {
         "title": "Assicurato due volte",

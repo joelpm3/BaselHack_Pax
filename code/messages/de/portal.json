@@ -50,6 +50,7 @@
     "restore": "Wieder anzeigen",
     "dismissedCount": "{count, plural, one {# ausgeblendeter Hinweis} other {# ausgeblendete Hinweise}}",
     "concerns": "Betrifft: {product}, {insurer}",
+    "partnerFallback": "Ihre Partnerin oder Ihr Partner",
     "severity": {
       "warning": "Bitte prüfen",
       "opportunity": "Möglichkeit",
@@ -59,8 +60,9 @@
       "quicksale": "Pax-Prämie gemäss aktuellem Tarif, unverbindlich. Ein Wechsel setzt eine Gesundheitsprüfung voraus.",
       "estimate": "Pax-Prämie geschätzt, unverbindlich. Ein Wechsel setzt eine Gesundheitsprüfung voraus.",
       "logismata": "Steuerersparnis berechnet mit Logismata, ohne Gewähr.",
+      "calculation": "Berechnet mit Logismata wie Ihr Vorsorgebild, inklusive Ihrer bestehenden Policen. Unverbindlich.",
       "ruleOfThumb": "Faustregel: etwa drei Bruttojahreseinkommen. Die genaue Lücke berechnen wir im Gespräch.",
-      "ivMax": "Gerechnet mit der maximalen IV-Rente. Die tatsächliche Rente ist oft tiefer."
+      "ivMax": "Grobe Schätzung mit der maximalen IV-Rente inklusive Kinderrenten. Die tatsächliche Rente ist oft tiefer; die genaue Lücke berechnen wir im Gespräch."
     },
     "fallback": {
       "cheaper_equivalent": {
@@ -69,7 +71,11 @@
       },
       "coverage_mismatch_death": {
         "title": "Der Todesfallschutz ist knapp",
-        "body": "Im Todesfall wären heute {cover} versichert. Als Faustregel braucht eine Familie etwa drei Jahreseinkommen, hier rund {need}. Lassen Sie die Lücke im Gespräch genau berechnen."
+        "body": "Im Todesfall wären heute {cover} als Kapital versichert, dazu kämen Renten von AHV und Pensionskasse. Als Faustregel braucht eine Familie etwa drei Jahreseinkommen, hier rund {need}. Lassen Sie die Lücke im Gespräch genau berechnen."
+      },
+      "coverage_mismatch_death_calculated": {
+        "title": "Lücke im Todesfall: {monthlyGap} pro Monat",
+        "body": "{subject, select, partner {Stirbt {name}} other {Sterben Sie}} wegen Krankheit, fehlen der Familie trotz AHV, Pensionskasse und bestehenden Policen rund {monthlyGap} pro Monat. Das ist dieselbe Berechnung wie in Ihrem Vorsorgebild."
       },
       "coverage_mismatch_death_without_dependants": {
         "title": "Todesfallschutz ohne Angehörige",
@@ -77,7 +83,11 @@
       },
       "coverage_mismatch_disability": {
         "title": "Lücke bei Erwerbsunfähigkeit",
-        "body": "Bei längerer Erwerbsunfähigkeit fehlen trotz IV und Pensionskasse rund {gap} pro Jahr bis zu 80 Prozent des heutigen Einkommens. Die IV-Rente ist dabei mit dem Maximum gerechnet."
+        "body": "Bei längerer Erwerbsunfähigkeit fehlen trotz IV, Kinderrenten und Pensionskasse rund {gap} pro Jahr bis zu 80 Prozent des heutigen Einkommens. Die IV-Rente ist dabei mit dem Maximum gerechnet."
+      },
+      "coverage_mismatch_disability_calculated": {
+        "title": "Lücke bei Erwerbsunfähigkeit: {monthlyGap} pro Monat",
+        "body": "{subject, select, partner {Kann {name}} other {Können Sie}} wegen Krankheit nicht mehr arbeiten, fehlen trotz IV, Kinderrenten, Pensionskasse und bestehenden Policen rund {monthlyGap} pro Monat bis zu 80 Prozent des heutigen Einkommens."
       },
       "double_cover_indemnity": {
         "title": "Doppelt versichert",

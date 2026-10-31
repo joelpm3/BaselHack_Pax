@@ -1,6 +1,7 @@
 import "server-only";
 import { createHash } from "node:crypto";
 import { and, eq } from "drizzle-orm";
+import { currentRiskResult, latestCalculation } from "@/lib/advisor/calculations";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import { toIsoDate } from "@/lib/documents/dates";
@@ -23,9 +24,10 @@ import {
 } from "./rules";
 
 /**
- * Detects, explains and stores cockpit hints. Detection is rule-based (./rules); quotes and
- * Logismata figures are reused while their inputs stay the same; the model is only asked to
- * phrase a hint when its facts or the locale changed.
+ * Detects, explains and stores cockpit hints. Detection is rule-based (./rules); gap hints use
+ * the advisor's stored risk check when it still fits the profile, so cockpit, risk card and
+ * Vorsorgebild show the same gap. Quotes and Logismata figures are reused while their inputs
+ * stay the same; the model is only asked to phrase a hint when its facts or the locale changed.
  */
 
 export type HintRow = typeof schema.hints.$inferSelect;
@@ -160,6 +162,7 @@ async function detectAll(
     policies,
     today: toIsoDate(new Date()),
     limits3a: await saving3aLimits(),
+    risk: currentRiskResult(customerId, profile, policies),
   };
   const unsettled = new Set<string>();
   const previous = (key: string, inputKey: string) =>
@@ -314,6 +317,7 @@ function inputsFingerprint(customerId: string, locale: Locale): string {
   return hash([
     profile?.updatedAt.getTime() ?? 0,
     policies.map((p) => `${p.id}:${p.updatedAt.getTime()}`).sort(),
+    latestCalculation(customerId, "APICalc_calculateRisk")?.id ?? null,
     toIsoDate(new Date()),
     locale,
   ]);
