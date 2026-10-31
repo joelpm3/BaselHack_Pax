@@ -106,12 +106,17 @@
     "strip": {
       "gap": "{kind}: Lücke {amount}/Mt.",
       "covered": "{kind}: gedeckt",
-      "building": "{count} von {total} Angaben"
+      "building": "{count} von {total} Angaben",
+      "open": "{kind}: noch offen"
     },
     "partnerContext": {
       "disability": "Wenn {name} wegen Krankheit nicht mehr arbeiten kann",
       "death": "Für Ihre Familie, wenn {name} wegen Krankheit stirbt"
     },
-    "partnerFallback": "Ihre Partnerin oder Ihr Partner"
+    "partnerFallback": "Ihre Partnerin oder Ihr Partner",
+    "focus": {
+      "discussed": "Im Gespräch",
+      "notCalculated": "Für diese Situation ist noch nichts berechnet."
+    }
   }
 }

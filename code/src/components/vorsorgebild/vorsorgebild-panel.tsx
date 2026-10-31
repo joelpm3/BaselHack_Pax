@@ -2,11 +2,12 @@
 
 import { Circle, CircleCheck } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useId, useState } from "react";
+import { useId } from "react";
 import { usePolicyCoverText } from "@/components/widgets/policy-cover-note";
 import { NEED_PERCENT } from "@/lib/advisor/logismata/mapping";
 import type { PictureKind, PictureScenario, VorsorgebildModel } from "@/lib/advisor/types";
 import { cn, formatChf } from "@/lib/utils";
+import type { PictureFocus } from "./focus";
 import { monthlyChf, SOURCES, targetBreakdown } from "./grid";
 import { SquareGrid } from "./square-grid";
 import { LegendSquare } from "./square-style";
@@ -17,25 +18,39 @@ export function pickDefault(model: VorsorgebildModel): PictureKind | null {
   return ORDER.find((k) => model.scenarios.some((s) => s.kind === k)) ?? null;
 }
 
+/** The situation on screen: the focus (Clara's topic or the customer's pick), else the first. */
+export function shownKind(model: VorsorgebildModel, focus: PictureFocus): PictureKind | null {
+  return focus.kind ?? pickDefault(model);
+}
+
+export interface VorsorgebildPanelProps {
+  model: VorsorgebildModel;
+  focus: PictureFocus;
+  onSelect: (kind: PictureKind) => void;
+}
+
 /** The full Vorsorgebild: desktop side panel and the content of the mobile sheet. */
-export function VorsorgebildPanel({ model }: { model: VorsorgebildModel }) {
+export function VorsorgebildPanel({ model, focus, onSelect }: VorsorgebildPanelProps) {
   const t = useTranslations("chat.picture");
-  const [selected, setSelected] = useState<PictureKind | null>(null);
-  const kind =
-    selected && model.scenarios.some((s) => s.kind === selected) ? selected : pickDefault(model);
+  const kind = shownKind(model, focus);
   const scenario = model.scenarios.find((s) => s.kind === kind);
 
   return (
     <div className="flex flex-col gap-6">
       <h2 className="text-heading-s font-bold">{t("title")}</h2>
 
-      {scenario ? (
+      {kind && model.scenarios.length > 0 ? (
         <>
-          <ScenarioTabs model={model} kind={scenario.kind} onSelect={setSelected} />
-          <ScenarioPicture scenario={scenario} />
+          <ScenarioTabs kind={kind} focus={focus} onSelect={onSelect} />
+          {scenario ? (
+            <ScenarioPicture scenario={scenario} />
+          ) : (
+            // Clara talks about a situation that is not calculated yet: it shows as open.
+            <p className="text-paragraph-s text-fg-muted">{t("focus.notCalculated")}</p>
+          )}
         </>
       ) : (
-        <Building model={model} />
+        <Building model={model} focus={focus} />
       )}
 
       <Pillars model={model} />
@@ -43,38 +58,51 @@ export function VorsorgebildPanel({ model }: { model: VorsorgebildModel }) {
   );
 }
 
+/**
+ * Clara's mark (the purple square of her messages) beside the situation she is talking about.
+ * Keyed by her switch count so it fades in again with every switch; no motion when reduced.
+ */
+export function DiscussedMark({ focus }: { focus: PictureFocus }) {
+  const t = useTranslations("chat.picture.focus");
+  return (
+    <span key={focus.seq} className="inline-flex shrink-0 items-center">
+      <span
+        aria-hidden
+        className="block size-1.5 bg-pax-purple transition-[opacity,scale] duration-500 starting:scale-0 starting:opacity-0"
+      />
+      <span className="sr-only">{t("discussed")}</span>
+    </span>
+  );
+}
+
 function ScenarioTabs({
-  model,
   kind,
+  focus,
   onSelect,
 }: {
-  model: VorsorgebildModel;
   kind: PictureKind;
+  focus: PictureFocus;
   onSelect: (kind: PictureKind) => void;
 }) {
   const t = useTranslations("chat.picture.tabs");
   return (
     <div role="tablist" aria-label={t("label")} className="flex gap-1 rounded-m bg-gray-2 p-1">
-      {ORDER.map((k) => {
-        const available = model.scenarios.some((s) => s.kind === k);
-        return (
-          <button
-            key={k}
-            type="button"
-            role="tab"
-            aria-selected={k === kind}
-            disabled={!available}
-            onClick={() => onSelect(k)}
-            className={cn(
-              "flex-1 rounded-sm px-2 py-1.5 text-paragraph-xs font-medium transition-colors",
-              k === kind ? "bg-surface text-ink" : "text-fg-muted hover:text-ink",
-              "disabled:cursor-not-allowed disabled:text-gray-4",
-            )}
-          >
-            {t(k)}
-          </button>
-        );
-      })}
+      {ORDER.map((k) => (
+        <button
+          key={k}
+          type="button"
+          role="tab"
+          aria-selected={k === kind}
+          onClick={() => onSelect(k)}
+          className={cn(
+            "flex flex-1 items-center justify-center gap-1.5 rounded-sm px-2 py-1.5 text-paragraph-xs font-medium transition-colors duration-300",
+            k === kind ? "bg-surface text-ink" : "text-fg-muted hover:text-ink",
+          )}
+        >
+          {k === kind && focus.byAdvisor ? <DiscussedMark focus={focus} /> : null}
+          {t(k)}
+        </button>
+      ))}
     </div>
   );
 }
@@ -166,7 +194,7 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
   );
 }
 
-function Building({ model }: { model: VorsorgebildModel }) {
+function Building({ model, focus }: { model: VorsorgebildModel; focus: PictureFocus }) {
   const t = useTranslations("chat.picture.building");
   const tp = useTranslations("chat.picture");
   const tf = useTranslations("chat.picture.facts");
@@ -212,12 +240,23 @@ function Building({ model }: { model: VorsorgebildModel }) {
           {t("situations")}
         </h3>
         <dl className="mt-2 flex flex-col divide-y divide-line">
-          {ORDER.map((kind) => (
-            <div key={kind} className="flex items-baseline justify-between gap-3 py-2">
-              <dt className="text-paragraph-xs font-medium">{tp(`tabs.${kind}`)}</dt>
-              <dd className="text-paragraph-xs text-fg-muted">{status}</dd>
-            </div>
-          ))}
+          {ORDER.map((kind) => {
+            const discussed = focus.byAdvisor && focus.kind === kind;
+            return (
+              <div key={kind} className="flex items-baseline justify-between gap-3 py-2">
+                <dt
+                  className={cn(
+                    "flex items-center gap-1.5 text-paragraph-xs",
+                    discussed ? "font-bold" : "font-medium",
+                  )}
+                >
+                  {discussed ? <DiscussedMark focus={focus} /> : null}
+                  {tp(`tabs.${kind}`)}
+                </dt>
+                <dd className="text-paragraph-xs text-fg-muted">{status}</dd>
+              </div>
+            );
+          })}
         </dl>
       </section>
 

@@ -4,12 +4,14 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
+import { focusReducer, initialFocus } from "@/components/vorsorgebild/focus";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
 import { VorsorgebildStrip } from "@/components/vorsorgebild/vorsorgebild-strip";
+import { topicOfMessage } from "@/lib/advisor/picture-topic";
 import { quickRepliesOf } from "@/lib/advisor/quick-replies";
-import type { AdvisorMessageMetadata, VorsorgebildModel } from "@/lib/advisor/types";
+import type { AdvisorMessageMetadata, PictureKind, VorsorgebildModel } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
 import { Composer, useEffectiveInputMode } from "./composer";
 import { MessageView } from "./message-view";
@@ -32,6 +34,14 @@ function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
 export function ChatView({ conversationId, initialMessages, initialPicture }: ChatViewProps) {
   const t = useTranslations("chat");
   const [picture, setPicture] = useState(initialPicture);
+  // The situation the Vorsorgebild shows follows Clara's latest message (see picture-topic).
+  const [focus, dispatchFocus] = useReducer(focusReducer, initialMessages, (messages) =>
+    initialFocus(topicOfMessage(messages.findLast((m) => m.role === "assistant")?.parts ?? [])),
+  );
+  const selectSituation = useCallback(
+    (kind: PictureKind) => dispatchFocus({ type: "pick", kind }),
+    [],
+  );
   const stickToBottom = useRef(true);
   const logRef = useRef<HTMLOListElement>(null);
 
@@ -57,7 +67,11 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     messages: initialMessages,
     transport,
     throttle: 50,
-    onFinish: refreshPicture,
+    onFinish: ({ message, isError }) => {
+      refreshPicture();
+      // Once per finished answer, never on a re-render.
+      if (!isError) dispatchFocus({ type: "advisor", kind: topicOfMessage(message.parts) });
+    },
   });
 
   const busy = status === "submitted" || status === "streaming";
@@ -65,6 +79,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   const send = useCallback(
     (text: string, metadata: AdvisorMessageMetadata) => {
       stickToBottom.current = true;
+      dispatchFocus({ type: "send" });
       void sendMessage({ text, metadata });
     },
     [sendMessage],
@@ -136,7 +151,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     <ChatActionsProvider value={chatActions}>
       <PictureProvider value={pictureActions}>
         <div className="sticky top-16 z-20 lg:hidden">
-          <VorsorgebildStrip model={picture} />
+          <VorsorgebildStrip model={picture} focus={focus} onSelect={selectSituation} />
         </div>
         <div className="mx-auto w-full max-w-[1160px] lg:grid lg:grid-cols-[minmax(0,680px)_minmax(320px,380px)] lg:justify-between lg:gap-12 lg:px-8">
           <div className="flex min-h-[calc(100dvh-4rem)] min-w-0 flex-col">
@@ -170,7 +185,10 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
                   <p>{t("error.unavailable")}</p>
                   <button
                     type="button"
-                    onClick={() => void regenerate()}
+                    onClick={() => {
+                      dispatchFocus({ type: "send" });
+                      void regenerate();
+                    }}
                     className="mt-2 inline-flex items-center gap-1.5 font-medium underline underline-offset-2"
                   >
                     <RotateCcw aria-hidden className="size-4" />
@@ -192,7 +210,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
           </div>
           <aside aria-label={t("picture.title")} className="hidden lg:block">
             <div className="sticky top-24 mt-10 max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-xl bg-surface-muted p-6">
-              <VorsorgebildPanel model={picture} />
+              <VorsorgebildPanel model={picture} focus={focus} onSelect={selectSituation} />
             </div>
           </aside>
         </div>

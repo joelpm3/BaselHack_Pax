@@ -3,22 +3,32 @@
 import { ChevronUp, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef } from "react";
-import type { VorsorgebildModel } from "@/lib/advisor/types";
 import { cn, formatChf } from "@/lib/utils";
 import { monthlyChf, targetBreakdown } from "./grid";
 import { SquareGrid } from "./square-grid";
-import { pickDefault, VorsorgebildPanel } from "./vorsorgebild-panel";
+import {
+  DiscussedMark,
+  shownKind,
+  VorsorgebildPanel,
+  type VorsorgebildPanelProps,
+} from "./vorsorgebild-panel";
 
-/** Mobile: a compact strip under the header that opens the full picture as a bottom sheet. */
-export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
+/**
+ * Mobile: a compact strip under the header that opens the full picture as a bottom sheet. It
+ * follows the situation Clara talks about without opening the sheet.
+ */
+export function VorsorgebildStrip({ model, focus, onSelect }: VorsorgebildPanelProps) {
   const t = useTranslations("chat.picture");
   const locale = useLocale();
   const dialog = useRef<HTMLDialogElement>(null);
-  const kind = pickDefault(model);
+  const kind = shownKind(model, focus);
   const scenario = model.scenarios.find((s) => s.kind === kind);
   const known = model.facts.filter((f) => f.known).length;
-  // Before the first calculation the strip shows the open need, like the panel.
-  const squares = scenario?.breakdown ?? targetBreakdown(model.pillars.incomeToday);
+  // Before the first calculation the strip shows the open need (a retirement figure), like the panel.
+  const squares =
+    scenario?.breakdown ??
+    (kind === null || kind === "retirement" ? targetBreakdown(model.pillars.incomeToday) : null);
+  const discussed = focus.byAdvisor && focus.kind === kind;
 
   const summary = scenario
     ? scenario.breakdown.gap > 0
@@ -27,7 +37,9 @@ export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
           amount: formatChf(monthlyChf(scenario.breakdown.gap), locale),
         })
       : t("strip.covered", { kind: t(`tabs.${scenario.kind}`) })
-    : t("strip.building", { count: known, total: model.facts.length });
+    : kind && focus.kind
+      ? t("strip.open", { kind: t(`tabs.${kind}`) })
+      : t("strip.building", { count: known, total: model.facts.length });
 
   return (
     <>
@@ -40,11 +52,21 @@ export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
         <span className="flex min-w-0 flex-1 flex-col gap-1.5">
           <span className="flex items-baseline justify-between gap-2">
             <span className="text-paragraph-xs font-bold">{t("title")}</span>
-            <span className="truncate text-paragraph-xs text-fg-muted">{summary}</span>
+            <span
+              // A new situation fades in, so a switch while the sheet is closed gets noticed.
+              key={`${kind}-${focus.seq}`}
+              className={cn(
+                "flex min-w-0 items-center gap-1.5 text-paragraph-xs transition-opacity duration-500 starting:opacity-0",
+                discussed ? "font-medium text-ink" : "text-fg-muted",
+              )}
+            >
+              {discussed ? <DiscussedMark focus={focus} /> : null}
+              <span className="truncate">{summary}</span>
+            </span>
           </span>
           {squares ? (
             <SquareGrid
-              key={scenario?.calculatedAt ?? squares.need}
+              key={scenario ? `${scenario.kind}-${scenario.calculatedAt}` : squares.need}
               breakdown={squares}
               size="xs"
               animate
@@ -91,7 +113,7 @@ export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
           </button>
         </div>
         <div className="px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))]">
-          <VorsorgebildPanel model={model} />
+          <VorsorgebildPanel model={model} focus={focus} onSelect={onSelect} />
         </div>
       </dialog>
     </>
