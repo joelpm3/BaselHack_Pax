@@ -1,5 +1,5 @@
 import "server-only";
-import { and, desc, eq, ne } from "drizzle-orm";
+import { and, asc, desc, eq, ne } from "drizzle-orm";
 import { PDFDocument } from "pdf-lib";
 import { ZodError } from "zod";
 import { audit } from "@/lib/audit";
@@ -22,6 +22,7 @@ import {
   suggestSubject,
 } from "./mapping";
 import { normalizeValue } from "./normalize";
+import type { DocumentOutcome } from "./outcome";
 import { sniffMimeType } from "./sniff";
 import { readDecrypted, removeStored, storagePathFor, writeEncrypted } from "./storage";
 import type {
@@ -461,6 +462,40 @@ export function confirmExtraction(
   });
   if (policy?.created) publish({ type: "policy.created", policyId: policy.id, customerId });
   return { ok: true, changedPaths: changes.map((c) => c.path), policyId: policy?.id ?? null };
+}
+
+/** What became of the customer's reviewed documents, for the advisor (see outcome.ts). */
+export function getDocumentOutcomes(customerId: string, documentIds: string[]): DocumentOutcome[] {
+  return documentIds.flatMap((id) => {
+    const doc = getDocument(id);
+    if (!doc || doc.customerId !== customerId) return [];
+    const extraction = latestExtraction(id);
+    const subject = extraction?.edits?.[SUBJECT_EDIT_KEY];
+    const applied = db
+      .select({ path: schema.profileEvents.path, value: schema.profileEvents.newValue })
+      .from(schema.profileEvents)
+      .where(
+        and(eq(schema.profileEvents.documentId, id), eq(schema.profileEvents.source, "document")),
+      )
+      .orderBy(asc(schema.profileEvents.createdAt))
+      .all();
+    const inCockpit = db
+      .select({ id: schema.policies.id })
+      .from(schema.policies)
+      .where(eq(schema.policies.documentId, id))
+      .get();
+    return [
+      {
+        documentId: id,
+        docType: extraction?.docType ?? doc.docType,
+        status: doc.status,
+        confirmed: Boolean(extraction?.confirmedAt),
+        subject: subject === "self" || subject === "partner" ? subject : null,
+        applied,
+        inCockpit: Boolean(inCockpit),
+      },
+    ];
+  });
 }
 
 // ─── Deletion ───────────────────────────────────────────────────────────────
