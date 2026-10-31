@@ -13,7 +13,9 @@
   "empty": {
     "title": "Ihr Cockpit ist noch leer",
     "body": "Starten Sie eine Beratung oder laden Sie Ihre Unterlagen hoch. Danach sehen Sie hier Ihre ganze Vorsorge auf einen Blick.",
-    "start": "Beratung starten"
+    "start": "Beratung starten",
+    "erasedTitle": "Ihre Daten sind gelöscht",
+    "erasedBody": "Wir haben Ihre Gespräche, Ihr Profil, Ihre Dokumente und alles, was die Beratung daraus abgeleitet hat, gelöscht. Wenn Sie wieder eine Beratung starten, beginnen Sie von vorn."
   },
   "pillars": {
     "pillar1": "1. Säule",
@@ -242,6 +244,28 @@
       "student": "In Ausbildung",
       "homemaker": "Familienarbeit",
       "retired": "Pensioniert"
+    }
+  },
+  "myData": {
+    "title": "Meine Daten",
+    "intro": "Das hat Pax bei Ihren Beratungen gespeichert. Sie können alles als Datei herunterladen oder die Löschung verlangen.",
+    "rows": {
+      "conversations": "Gespräche",
+      "messages": "Nachrichten",
+      "documents": "Dokumente",
+      "profileFields": "Angaben in Ihrem Profil",
+      "assessments": "Einschätzungen der Beratung"
+    },
+    "download": "Alle Daten herunterladen (JSON)",
+    "erasedAgentic": "Ihre Beratungsdaten sind gelöscht: Gespräche, Profil, Dokumente und Einschätzungen. Ihre Verträge und unterschriebenen Anträge bewahren wir auf, solange das Gesetz es verlangt.",
+    "erase": {
+      "request": "Löschung meiner Daten verlangen",
+      "question": "Alle Beratungsdaten endgültig löschen?",
+      "deletes": "Gelöscht werden Ihre Gespräche mit Clara, Ihr Profil und sein Verlauf, Ihre hochgeladenen Dokumente mit den gelesenen Werten, Berechnungen, Hinweise, geplante Erinnerungen und alle Einschätzungen der Beratung. Das lässt sich nicht rückgängig machen.",
+      "keepsContracts": "Ihre Pax-Verträge und unterschriebenen Anträge bleiben erhalten, weil wir sie von Gesetzes wegen aufbewahren müssen.",
+      "keepsNothing": "Sie haben keinen Vertrag bei Pax. Danach sind keine Daten mehr von Ihnen gespeichert.",
+      "confirm": "Ja, endgültig löschen",
+      "cancel": "Abbrechen"
     }
   }
 }

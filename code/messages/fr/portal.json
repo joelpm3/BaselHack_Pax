@@ -13,7 +13,9 @@
   "empty": {
     "title": "Votre cockpit est encore vide",
     "body": "Commencez un conseil ou téléversez vos documents. Vous verrez ensuite ici toute votre prévoyance d’un coup d’œil.",
-    "start": "Commencer le conseil"
+    "start": "Commencer le conseil",
+    "erasedTitle": "Vos données sont supprimées",
+    "erasedBody": "Nous avons supprimé vos conversations, votre profil, vos documents et tout ce que le conseil en a déduit. Si vous recommencez un conseil, vous partez de zéro."
   },
   "pillars": {
     "pillar1": "1er pilier",
@@ -242,6 +244,28 @@
       "student": "En formation",
       "homemaker": "Travail familial",
       "retired": "Retraité·e"
+    }
+  },
+  "myData": {
+    "title": "Mes données",
+    "intro": "Voici ce que Pax a enregistré lors de vos conseils. Vous pouvez tout télécharger sous forme de fichier ou demander la suppression.",
+    "rows": {
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "documents": "Documents",
+      "profileFields": "Indications dans votre profil",
+      "assessments": "Évaluations du conseil"
+    },
+    "download": "Télécharger toutes les données (JSON)",
+    "erasedAgentic": "Vos données de conseil sont supprimées : conversations, profil, documents et évaluations. Nous conservons vos contrats et vos propositions signées aussi longtemps que la loi l'exige.",
+    "erase": {
+      "request": "Demander la suppression de mes données",
+      "question": "Supprimer définitivement toutes les données de conseil ?",
+      "deletes": "Seront supprimés vos conversations avec Clara, votre profil et son historique, vos documents téléchargés avec les valeurs lues, les calculs, les indications, les rappels prévus et toutes les évaluations du conseil. Cette action est irréversible.",
+      "keepsContracts": "Vos contrats Pax et vos propositions signées sont conservés, car la loi nous oblige à les garder.",
+      "keepsNothing": "Vous n'avez pas de contrat chez Pax. Ensuite, plus aucune donnée vous concernant n'est enregistrée.",
+      "confirm": "Oui, supprimer définitivement",
+      "cancel": "Annuler"
     }
   }
 }

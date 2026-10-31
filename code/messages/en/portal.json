@@ -13,7 +13,9 @@
   "empty": {
     "title": "Your cockpit is still empty",
     "body": "Start a conversation with Clara or upload your documents. Then you'll see your whole pension picture here at a glance.",
-    "start": "Start your advice"
+    "start": "Start your advice",
+    "erasedTitle": "Your data has been deleted",
+    "erasedBody": "We deleted your conversations, your profile, your documents and everything the advice derived from them. If you start a new consultation, you start from scratch."
   },
   "pillars": {
     "pillar1": "1st pillar",
@@ -242,6 +244,28 @@
       "student": "In education",
       "homemaker": "Family work",
       "retired": "Retired"
+    }
+  },
+  "myData": {
+    "title": "My data",
+    "intro": "This is what Pax stored during your consultations. You can download all of it as a file or ask for it to be deleted.",
+    "rows": {
+      "conversations": "Conversations",
+      "messages": "Messages",
+      "documents": "Documents",
+      "profileFields": "Details in your profile",
+      "assessments": "Assessments by the advisor"
+    },
+    "download": "Download all data (JSON)",
+    "erasedAgentic": "Your advice data has been deleted: conversations, profile, documents and assessments. We keep your contracts and signed applications for as long as the law requires.",
+    "erase": {
+      "request": "Request deletion of my data",
+      "question": "Delete all advice data permanently?",
+      "deletes": "This deletes your conversations with Clara, your profile and its history, your uploaded documents with the values read from them, calculations, hints, planned reminders and all assessments by the advisor. This cannot be undone.",
+      "keepsContracts": "Your Pax contracts and signed applications stay, because the law requires us to keep them.",
+      "keepsNothing": "You have no contract with Pax. Afterwards, no data about you is stored.",
+      "confirm": "Yes, delete permanently",
+      "cancel": "Cancel"
     }
   }
 }
