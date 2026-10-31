@@ -16,6 +16,12 @@
   "indicativePrice": "Valore indicativo secondo la tariffa Pax, senza impegno",
   "estimatedPrice": "Stimato, senza impegno",
   "simulated": "Simulato",
+  "notFound": {
+    "title": "Questa pagina non esiste",
+    "body": "Forse il link appartiene a un’altra conversazione oppure la sessione è scaduta. Inizi una nuova consulenza o apra il suo cockpit previdenza.",
+    "start": "Nuova consulenza",
+    "portal": "Cockpit previdenza"
+  },
   "taxonomy": {
     "topics": {
       "retirement": "Previdenza per la vecchiaia",

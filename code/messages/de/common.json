@@ -16,6 +16,12 @@
   "indicativePrice": "Richtwert gemäss Pax-Tarif, unverbindlich",
   "estimatedPrice": "Geschätzt, unverbindlich",
   "simulated": "Simuliert",
+  "notFound": {
+    "title": "Diese Seite gibt es nicht",
+    "body": "Vielleicht gehört der Link zu einem anderen Gespräch oder Ihre Sitzung ist abgelaufen. Starten Sie eine neue Beratung oder öffnen Sie Ihr Vorsorge-Cockpit.",
+    "start": "Neue Beratung",
+    "portal": "Vorsorge-Cockpit"
+  },
   "taxonomy": {
     "topics": {
       "retirement": "Altersvorsorge",
