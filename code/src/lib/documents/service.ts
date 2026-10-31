@@ -137,14 +137,14 @@ export function getExtractionSummary(documentId: string): ExtractionSummary {
 
 // ─── Upload ─────────────────────────────────────────────────────────────────
 
-function cleanFilename(name: string): string {
+export function cleanFilename(name: string): string {
   const base = name.split(/[\\/]/).pop() ?? "";
   // biome-ignore lint/suspicious/noControlCharactersInRegex: strip control characters from user input
   const cleaned = base.replace(/[\u0000-\u001f\u007f"<>|]/g, "").trim();
   return (cleaned || "dokument").slice(0, 120);
 }
 
-async function pdfPageCount(data: Buffer): Promise<number | null> {
+export async function pdfPageCount(data: Buffer): Promise<number | null> {
   try {
     const pdf = await PDFDocument.load(data, { ignoreEncryption: true, updateMetadata: false });
     return pdf.getPageCount();

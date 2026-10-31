@@ -4,6 +4,7 @@ import { createAnalysisTools } from "./analysis";
 import type { ToolContext } from "./context";
 import { createDocumentTools } from "./documents";
 import { createHandoverTools } from "./handover";
+import { createKnowledgeTools } from "./knowledge";
 import { createProfileTools } from "./profile";
 import { createSalesTools } from "./sales";
 import { createScenarioTools } from "./scenario";
@@ -17,6 +18,7 @@ export function createAdvisorTools(ctx: ToolContext): ToolSet {
     ...createDocumentTools(ctx),
     ...createHandoverTools(ctx),
     ...createSalesTools(ctx),
+    ...createKnowledgeTools(ctx),
   };
 }
 
