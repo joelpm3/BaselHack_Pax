@@ -291,7 +291,12 @@
         "reviewDocuments": "Documenti",
         "requestHandover": "Passaggio",
         "askForFeedback": "Feedback",
-        "suggestReplies": "Risposte proposte"
+        "suggestReplies": "Risposte proposte",
+        "explainCompoundInterest": "Interesse composto",
+        "showLifePlan": "Piano di vita",
+        "calculateCapitalDrawdown": "Consumo del capitale",
+        "showReferences": "Link Pax",
+        "lookupProductInfo": "Conoscenze sui prodotti"
       },
       "tools": {
         "profile": "Annotato: {fields}",

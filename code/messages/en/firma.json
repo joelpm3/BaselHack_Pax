@@ -291,7 +291,12 @@
         "reviewDocuments": "Documents",
         "requestHandover": "Handover",
         "askForFeedback": "Feedback",
-        "suggestReplies": "Suggested replies"
+        "suggestReplies": "Suggested replies",
+        "explainCompoundInterest": "Compound interest",
+        "showLifePlan": "Life plan",
+        "calculateCapitalDrawdown": "Capital drawdown",
+        "showReferences": "Pax links",
+        "lookupProductInfo": "Product knowledge"
       },
       "tools": {
         "profile": "Noted: {fields}",

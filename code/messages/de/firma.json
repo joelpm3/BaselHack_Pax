@@ -291,7 +291,12 @@
         "reviewDocuments": "Dokumente",
         "requestHandover": "Übergabe",
         "askForFeedback": "Feedback",
-        "suggestReplies": "Antwortvorschläge"
+        "suggestReplies": "Antwortvorschläge",
+        "explainCompoundInterest": "Zinseszins",
+        "showLifePlan": "Lebensplan",
+        "calculateCapitalDrawdown": "Kapitalverzehr",
+        "showReferences": "Pax-Links",
+        "lookupProductInfo": "Produktwissen"
       },
       "tools": {
         "profile": "Notiert: {fields}",
