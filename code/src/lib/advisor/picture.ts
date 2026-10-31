@@ -5,8 +5,8 @@ import { getProfile } from "@/lib/profile/service";
 import { currentYear } from "./logismata/checks";
 import { latestCalculation } from "./logismata/latest";
 import {
+  hasPartner,
   householdRiskScenarios,
-  isJointlyTaxed,
   missingForPicture,
   type RetirementResponse,
   type RiskScenarioSummary,
@@ -91,7 +91,8 @@ export function buildVorsorgebild(customerId: string): VorsorgebildModel {
   const profile = getProfile(customerId);
   const policies = activeLifePolicies(customerId);
   const own = profile.person.grossIncome;
-  const partner = isJointlyTaxed(profile) ? profile.partner?.grossIncome : undefined;
+  // Same household as the retirement calculation, so the pre-calculation need matches it.
+  const partner = hasPartner(profile) ? profile.partner?.grossIncome : undefined;
   return {
     firstName: profile.person.firstName ?? null,
     completeness: completenessOf(profile),
