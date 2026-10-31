@@ -84,7 +84,10 @@
       "annualContribution": "3a contribution per year"
     },
     "desiredRetirementAge": "Desired retirement age",
-    "riskAttitude": "Risk appetite"
+    "riskAttitude": "Risk appetite",
+    "privateCover": "Private life/disability cover",
+    "monthlySpending": "Spending per month",
+    "existingPolicies": "Existing insurance"
   },
   "enums": {
     "sex": {
@@ -132,6 +135,11 @@
       "divorce": "Divorce",
       "inheritance": "Inheritance",
       "other": "Other"
+    },
+    "privateCover": {
+      "yes": "in place",
+      "no": "none",
+      "unknown": "unknown"
     }
   },
   "breakdown": {

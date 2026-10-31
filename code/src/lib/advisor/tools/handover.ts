@@ -108,11 +108,13 @@ export function createHandoverTools(ctx: ToolContext) {
 
     suggestReplies: tool({
       description:
-        "Offer 2–4 short tap-to-send answers to the question you just asked, written from the " +
-        "customer's point of view in their language. Call it last, after your text. Never a reply that " +
-        "claims an action the customer does in a card (signing, confirming values, uploading).",
+        "Offer 2–4 short tap-to-send answers to the question you just wrote, in the customer's own " +
+        "voice and language; about the partner they speak about the partner ('Sie ist 1990 " +
+        "geboren'). Call it once, after your message text; a later call replaces an earlier " +
+        "one. Never a reply that claims an action the customer does in a card " +
+        "(signing, confirming values, uploading).",
       inputSchema: z.object({
-        options: z.array(z.string().min(1).max(60)).min(2).max(4),
+        options: z.array(z.string().min(1).max(60)).min(1).max(4),
       }),
       execute: async ({ options }): Promise<QuickRepliesOutput> => ({
         options: safeQuickReplies(options),

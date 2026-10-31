@@ -26,6 +26,8 @@ export const employmentSchema = z.enum([
 
 export const sexSchema = z.enum(["male", "female"]);
 
+export const privateCoverSchema = z.enum(["yes", "no", "unknown"]);
+
 export const personSchema = z.object({
   firstName: z.string().optional(),
   birthYear: z.number().int().min(1920).max(2030).optional(),
@@ -137,6 +139,14 @@ export const lifeSituationSchema = z.object({
   concerns: z.array(z.string()).default([]),
   riskAttitude: z.enum(["low", "medium", "high"]).optional(),
   desiredRetirementAge: z.number().int().min(55).max(70).optional(),
+  /**
+   * The answer to "do you or your partner already have private death or disability cover (Pax
+   * or another insurer)?". The policies themselves live in `policies`; `unknown` means the
+   * customer does not know. Asked before the risk analysis.
+   */
+  privateCover: privateCoverSchema.optional(),
+  /** Rough household spending, CHF per MONTH (the only monthly amount in the profile). */
+  monthlySpending: z.number().min(0).optional(),
 });
 export type LifeSituation = z.infer<typeof lifeSituationSchema>;
 

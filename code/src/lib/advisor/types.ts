@@ -79,8 +79,12 @@ export interface UpdateProfileOutput {
    * the card lets the customer pick one (pickResidence), which then fills `location`.
    */
   locationOptions?: PlaceOption[] | null;
-  /** Core fields still needed for the analyses (profile paths). */
+  /** Core fields still needed for the analyses (profile paths, plus `privateCover`). */
   missingForAnalysis: string[];
+  /** Worth one question each before the first analysis (savings, 3a, spending). */
+  askBeforeAnalysis: string[];
+  /** Stored facts this call overwrote with a different value. */
+  replaced: Array<{ path: string; previous: string | number | boolean; value: unknown }>;
   error: string | null;
 }
 

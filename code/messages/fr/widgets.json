@@ -84,7 +84,10 @@
       "annualContribution": "Versement 3a par an"
     },
     "desiredRetirementAge": "Âge de retraite souhaité",
-    "riskAttitude": "Goût du risque"
+    "riskAttitude": "Goût du risque",
+    "privateCover": "Assurance décès/invalidité privée",
+    "monthlySpending": "Dépenses par mois",
+    "existingPolicies": "Assurances existantes"
   },
   "enums": {
     "sex": {
@@ -132,6 +135,11 @@
       "divorce": "Divorce",
       "inheritance": "Héritage",
       "other": "Autre"
+    },
+    "privateCover": {
+      "yes": "existante",
+      "no": "aucune",
+      "unknown": "inconnue"
     }
   },
   "breakdown": {

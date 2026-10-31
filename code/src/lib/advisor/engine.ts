@@ -37,10 +37,11 @@ import {
   saveUserMessage,
 } from "./conversations";
 import { buildInstructions } from "./prompt";
+import { replyNudgeFor, withReplyNudge } from "./reply-nudge";
 import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
 import type { ToolContext } from "./tools/context";
-import { missingForAnalysis } from "./tools/profile";
+import { readinessFor } from "./tools/profile";
 
 /**
  * One advisor turn, shared by /api/chat (streamed to the browser) and runAdvisorTurn
@@ -225,35 +226,44 @@ export async function streamAdvisorTurn(
     assistantMessageId,
   };
   const tools = createAdvisorTools(toolContext);
+  const readiness = readinessFor(conversation.customerId, profile);
 
+  const instructions = buildInstructions({
+    mode: conversation.mode,
+    locale: conversation.locale,
+    today: new Date(),
+    stage: conversation.stage,
+    customer,
+    profile,
+    completeness: profileCompleteness(profile),
+    missingForAnalysis: readiness.missing,
+    askBeforeAnalysis: readiness.askFirst,
+    policies,
+    ruleSet,
+    greeting: greeting ? messageText(greeting) : null,
+    uploadHint: greeting?.metadata?.variant === "upload",
+    hints: listHints(conversation.customerId)
+      .filter((h) => h.status !== "dismissed")
+      .slice(0, 8),
+    topicHintId: greeting?.metadata?.hintId ?? null,
+    applications: applicationStates(conversation.id),
+  });
   const result = streamText({
     model: getModel("chat"),
-    instructions: buildInstructions({
-      mode: conversation.mode,
-      locale: conversation.locale,
-      today: new Date(),
-      stage: conversation.stage,
-      customer,
-      profile,
-      completeness: profileCompleteness(profile),
-      missingForAnalysis: missingForAnalysis(profile),
-      policies,
-      ruleSet,
-      greeting: greeting ? messageText(greeting) : null,
-      uploadHint: greeting?.metadata?.variant === "upload",
-      hints: listHints(conversation.customerId)
-        .filter((h) => h.status !== "dismissed")
-        .slice(0, 8),
-      topicHintId: greeting?.metadata?.hintId ?? null,
-      applications: applicationStates(conversation.id),
-    }),
+    instructions,
     messages: await convertToModelMessages(forModel(history, conversation.customerId), {
       tools,
       ignoreIncompleteToolCalls: true,
     }),
     tools,
     stopWhen: [isStepCount(MAX_STEPS), waitsForCustomer],
+    prepareStep: ({ steps, messages }) => {
+      const nudge = replyNudgeFor(steps, WAITS_FOR_CUSTOMER);
+      return nudge ? { messages: withReplyNudge(messages, nudge) } : undefined;
+    },
     temperature: 0.4,
+    // A failed step ends the turn without text and without a stream error: log it.
+    onStepError: ({ error }) => console.error(`[advisor] step failed in ${conversation.id}`, error),
   });
 
   let usage: { inputTokens?: number; outputTokens?: number } = {};

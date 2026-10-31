@@ -1,19 +1,15 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { DefaultChatTransport, isToolUIPart } from "ai";
+import { DefaultChatTransport } from "ai";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
 import { VorsorgebildStrip } from "@/components/vorsorgebild/vorsorgebild-strip";
-import { safeQuickReplies } from "@/lib/advisor/quick-replies";
-import type {
-  AdvisorMessageMetadata,
-  QuickRepliesOutput,
-  VorsorgebildModel,
-} from "@/lib/advisor/types";
+import { quickRepliesOf } from "@/lib/advisor/quick-replies";
+import type { AdvisorMessageMetadata, VorsorgebildModel } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
 import { Composer, useEffectiveInputMode } from "./composer";
 import { MessageView } from "./message-view";
@@ -27,18 +23,9 @@ export interface ChatViewProps {
   initialPicture: VorsorgebildModel;
 }
 
-function quickRepliesOf(message: ChatMessage | undefined): string[] {
-  if (message?.role !== "assistant") return [];
-  for (const part of message.parts) {
-    if (part.type !== "tool-suggestReplies" || !isToolUIPart(part)) continue;
-    if (part.state !== "output-available") continue;
-    const options = (part.output as QuickRepliesOutput | undefined)?.options;
-    // Filtered here too: messages stored before the server-side filter may still carry them.
-    return Array.isArray(options)
-      ? safeQuickReplies(options.filter((o) => typeof o === "string")).slice(0, 4)
-      : [];
-  }
-  return [];
+function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
+  // Filtered here too: messages stored before the server-side filter may still carry them.
+  return message?.role === "assistant" ? quickRepliesOf(message.parts) : [];
 }
 
 /** The advisor chat with the live Vorsorgebild (side panel on desktop, strip + sheet on mobile). */
@@ -142,7 +129,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   const inputMode = useEffectiveInputMode();
   const answered = messages.some((m) => m.role === "user");
 
-  const quickReplies = status === "ready" ? quickRepliesOf(last) : [];
+  const quickReplies = status === "ready" ? quickRepliesOfMessage(last) : [];
   const waiting = status === "submitted" || (status === "streaming" && last?.role !== "assistant");
 
   return (

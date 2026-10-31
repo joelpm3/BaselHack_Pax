@@ -16,3 +16,28 @@ export function pretendsUiAction(reply: string): boolean {
 export function safeQuickReplies(options: string[]): string[] {
   return options.filter((option) => !pretendsUiAction(option));
 }
+
+interface PartLike {
+  type: string;
+  state?: string;
+  text?: string;
+  output?: unknown;
+}
+
+/**
+ * The quick replies the chat shows under an advisor message: the options of the LAST
+ * suggestReplies call. The model sometimes suggests replies early and corrects them after
+ * writing its question (an early "Ich bin 1990 geboren" under a question about the partner), so
+ * the last call wins. Quick replies only accompany a written message: none without text.
+ */
+export function quickRepliesOf(parts: readonly PartLike[]): string[] {
+  let hasText = false;
+  let options: string[] = [];
+  for (const part of parts) {
+    if (part.type === "text" && part.text?.trim()) hasText = true;
+    if (part.type !== "tool-suggestReplies" || part.state !== "output-available") continue;
+    const output = (part.output as { options?: unknown } | undefined)?.options;
+    if (Array.isArray(output)) options = output.filter((o): o is string => typeof o === "string");
+  }
+  return hasText ? safeQuickReplies(options).slice(0, 4) : [];
+}

@@ -1,0 +1,83 @@
+# Conversation loop log
+
+Findings from looping the example conversations in `scripts/converse-scenarios.ts` through the
+real advisor (`pnpm converse all`), read as a Pax pension expert and as the product team.
+Transcripts land in `data/converse/<run>/` (not committed). Model: claude-opus-5-5 (chat),
+claude-sonnet-5-5 (simulated customer).
+
+## Iteration 0: baseline (before any change)
+
+Live user test (31.10.) and live DB, read before the loop:
+
+| # | Bug | Cause | Fix |
+|---|-----|-------|-----|
+| 1 | Quick replies "Ich bin 1990 geboren" under "Wie alt ist Ihre Partnerin?" | The model called suggestReplies twice in one turn: once before writing its text (for a question it then did not ask), once after. The chat showed the **first** call. | Chat shows only the last suggestReplies call that comes after the text (`quickRepliesOf`); prompt and tool description: replies after the text, in the customer's voice, about the partner when the question is about the partner. |
+| 2 | Customer's and partner's birth years swapped | Follow-on of 1: the stale button "Ich bin 1990 geboren" answered a question about the partner. Nothing told the customer when a stored fact was overwritten. | Fix 1, plus `person`/`partner` described as "ich" vs "meine Frau", a bare number answers the question just asked, and updateProfile returns `replaced` (facts it overwrote) which the advisor must name. |
+| 3 | No quick replies after the "Zinseszins" detour | Prompt called suggestReplies "optional"; after a general question the model answered and re-asked without them. | Prompt: quick replies after every question with typical short answers, including a question repeated after a detour. |
+| 4 | Risk card with an illness gap before existing cover was known | `missingForAnalysis` only listed calculation inputs; the prompt said "as soon as the core facts are known, run the analyses". No way to record cover named in the chat. | New step "what they already have" before the analyses; `privateCover` answer is required for showRiskAnalysis (unless death/disability policies are on file); `addPolicies` stores named policies as chat policies so the risk card counts them; savings, 3a and monthly spending listed as "ask before the first analysis". |
+| 5 | "Danke, Herr." | Style rule allowed "Frau/Herr <last name>" without saying what to do without one. | Never Herr/Frau without the last name; vary openings. |
+| 6 | Voice message "ich bin 31, ich habe eine Frau, ich zahle 3000 in die 3a" stored only the 3a amount, no reply text | Same device had an earlier conversation: the profile already held 1996 and a partner, the prompt still said "Pax knows nothing about this person" and the model silently ignored the contradicting age. Then it called suggestReplies without text and ended the turn empty. | Section "Earlier conversations" for returning visitors; contradictions: the latest statement wins and is named; ages that fit a stored birth year are not a change; every turn ends with text (see 7). |
+
+Loop run `iter0` (10 scenarios, original code):
+
+| # | Bug | Fix |
+|---|-----|-----|
+| 7 | **44 of ~85 turns had no text at all** with Opus: the model called updateProfile and suggestReplies, then ended with an empty step (`end_turn`, 2 output tokens). Same bug as the live "Notiert card without text" and the empty quick-reply turns other agents saw after calculation tools. | See iteration 1 (two attempts) for the fix that worked. |
+| 8 | Analyses ran right after the last calculation input (4 times), before asking about existing insurance or savings. | See 4. |
+| 9 | Advisor narrates the UI ("Ich habe die Upload-Karte geöffnet", "Unten erscheint jetzt ein Upload-Feld", "Ich habe Ihnen einige Bereiche als Antworten vorgeschlagen"). | Prompt: don't describe the interface. |
+| 10 | Two questions in one message ("quanti anni ha oggi? Vive da solo …?"). | Prompt: exactly one question, at the end. |
+| 11 | Customer's sex inferred from "ich habe eine Frau" (stored male) while the partner's sex was not stored. | Prompt: "meine Frau"/"mein Mann" gives the partner's sex, never the customer's. |
+| 12 | Quick replies guessing personal numbers ("[42] [45] [48]" for the exact age, income ranges that need a follow-up). | Prompt: no quick replies for numbers only the customer knows; relative answers for the partner's age. |
+| 13 | Very long messages after results and offers (four bold sections, tables, 200+ words). | Prompt: about 80 words, 120 after an analysis or offer, no tables or headings, one list at most. |
+| 14 | Harness: mode `new_customer` does not exist (it is `new_business`). | Fixed in the harness. |
+
+## Iteration 1: first fixes, then the empty-turn root cause
+
+Run `iter1` (all scenarios) with the iteration-0 fixes: still **almost every turn empty**. Step-level logging showed two separate causes:
+
+| # | Finding | Fix |
+|---|---------|-----|
+| 15 | The iteration-0 fix (adding a system note via `prepareStep` instructions) made the next step **fail**: `Invalid signature in thinking block … The system prompt differs from the one this block was created with`. The failed step ended the turn silently (no stream error). | Never change the instructions within a turn. The note is now appended as a user-side message (`prepareStep` → `messages`), which keeps the prefix and the thinking signatures valid. `onStepError` now logs failed steps. |
+| 16 | A note in the widget tool's result ("write your message now") did not help: Opus still ended with an empty step. | Dropped; only the transcript note works. |
+| 17 | After the note, Opus writes its text after the quick replies, so the "replies only after the text" rule from fix 1 hid them all. | Chat shows the **last** suggestReplies call (a later call replaces an early, wrong one) and only when the message has text. |
+| 18 | suggestReplies with a single option ("Lieber überspringen") failed schema validation and cost a repair step. | Schema allows 1–4 options. |
+
+Check run `iter1c` (voice scenarios): 0 empty turns (before: 4 of 6 per scenario).
+
+## Iteration 2: all scenarios, 12 scenarios (added returning visitor, Swiss run-on)
+
+Run `iter2`: **0 empty turns, 0 analyses before the cover question**, quick replies back after the "Zinseszins" detour, AXA policies stored and counted, contradiction 31 vs 1996 named ("Ich habe deinen Jahrgang von 1996 auf 1995 korrigiert"), du mirrored, voice run-ons fully extracted (name, age, work, partner, child, place in one call). Remaining:
+
+| # | Finding | Fix |
+|---|---------|-----|
+| 19 | "Herr, für Ihre Lücken …" (bare title at the start of a message, last name unknown). The harness check missed it. | Customer section states how to address the person (title + last name, or no name); harness flags a bare title anywhere. |
+| 20 | Echoes of the Notiert card in nearly every message ("Ich habe Ihren Lohn von CHF 92'000 notiert", "Winterthur ist notiert"). | Prompt: the card shows what was stored; only corrections are named, in one clause. |
+| 21 | Corrections listed mechanically for plain news ("Bruttolohn von CHF 0 auf CHF 55'000 geändert", "«nein» durch «ja» ersetzt" for Jane going back to work). | Prompt: news is acknowledged in a few words; old/new values only for real corrections. |
+| 22 | Other agents reported empty turns after calculation tools (calculateTaxSavings, new calculators), not only after widgets. | The note now follows any tool call while the turn has no text (firmer wording after widgets), so tools added by other branches are covered without a list. |
+| 23 | The corrections scenario never produced a swap (the model stored both years correctly). | Scenario now answers with a bare "1994" and then corrects "ich bin 1990 geboren, nicht sie". |
+
+Observed and accepted: the self-employed and the UK-expat cases hand over in the first turn because of company rule efec4209 (complex cases); the advisor keeps advising afterwards. Long but correct explanations when the customer explicitly asks for one (3a rules for students, AHV gaps after moving from the UK).
+
+## Iteration 3: all 12 scenarios after the iteration-2 fixes
+
+Run `iter3` (100 advisor turns): 0 empty turns, 0 bare titles, 0 analyses before the cover
+question, "notiert" echoes down from 17 to 2, about 48 words per advisor message, quick replies
+on 56 of 100 turns (the rest are open or numeric questions). Checked in detail:
+
+- Bare "1994" as an answer to an unrelated question: the advisor asks whose year it is instead
+  of guessing; the correction "ich bin 1990 geboren, nicht sie" stores both years correctly.
+- Married → Konkubinat → married again: each change named in one clause, AHV consequence explained.
+- Detour to "Zinseszins", car insurance and Bitcoin (it): answered briefly, the open question
+  repeated with its quick replies; no investment opinion.
+- Age contradiction (customer says 52, born 1972): stores 1972 and mentions 54 politely.
+- Existing client Jane: no questions about facts on file; May's Pax policy is counted.
+
+Verified in the running app (dev server, `POST /api/chat` with a device cookie): the live voice
+message produces updateProfile, a du-reply ending in a question, and quick replies that render
+under the message on `/de/chat/<id>`.
+
+Open (not fixed here): the greeting for existing clients says "Grüezi Jane, … Sie" (first name
+with Sie; the text lives in `messages/*/chat.json`); the Vorsorgebild side panel runs its own
+risk check before the cover question (outside the advisor turn); explanations stay long when the
+customer explicitly asks for one.
+

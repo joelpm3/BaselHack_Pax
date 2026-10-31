@@ -107,6 +107,8 @@ const NOT_CALCULATED = [
   "plannedEvents",
   "residence",
   "riskAttitude",
+  "privateCover",
+  "monthlySpending",
   "person.firstName",
   "person.occupation",
   "person.smoker",

@@ -1,4 +1,9 @@
-import { employmentSchema, maritalStatusSchema, sexSchema } from "@/lib/domain/profile";
+import {
+  employmentSchema,
+  maritalStatusSchema,
+  privateCoverSchema,
+  sexSchema,
+} from "@/lib/domain/profile";
 
 /**
  * Profile fields the customer can correct inline in the "Ihre Situation" card. Client-safe:
@@ -11,7 +16,7 @@ export type FieldKind = "text" | "year" | "chf" | "percent" | "age" | "count" | 
 export interface FieldSpec {
   kind: FieldKind;
   /** Enum name for labels (`widgets.enums.<name>`) and its values. */
-  enumName?: "sex" | "maritalStatus" | "employment" | "riskAttitude";
+  enumName?: "sex" | "maritalStatus" | "employment" | "riskAttitude" | "privateCover";
   options?: readonly string[];
 }
 
@@ -73,6 +78,8 @@ export const EDITABLE_FIELDS: Record<string, FieldSpec> = {
   "pillar3a.annualContribution": chf,
   desiredRetirementAge: { kind: "age" },
   riskAttitude: { kind: "enum", enumName: "riskAttitude", options: ["low", "medium", "high"] },
+  privateCover: { kind: "enum", enumName: "privateCover", options: privateCoverSchema.options },
+  monthlySpending: chf,
 };
 
 /** Fields the card shows but does not edit inline (lists, place of residence). */
