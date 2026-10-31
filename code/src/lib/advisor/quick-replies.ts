@@ -16,3 +16,28 @@ export function pretendsUiAction(reply: string): boolean {
 export function safeQuickReplies(options: string[]): string[] {
   return options.filter((option) => !pretendsUiAction(option));
 }
+
+interface PartLike {
+  type: string;
+  state?: string;
+  text?: string;
+  output?: unknown;
+}
+
+/**
+ * The quick replies the chat shows under an advisor message: the last suggestReplies call that
+ * comes after the message's text. Replies sent before any text were chosen before the question
+ * was written and often answer a different one, so they are not shown.
+ */
+export function quickRepliesOf(parts: readonly PartLike[]): string[] {
+  let seenText = false;
+  let options: string[] = [];
+  for (const part of parts) {
+    if (part.type === "text" && part.text?.trim()) seenText = true;
+    if (part.type !== "tool-suggestReplies" || part.state !== "output-available") continue;
+    const output = (part.output as { options?: unknown } | undefined)?.options;
+    if (!seenText || !Array.isArray(output)) continue;
+    options = output.filter((o): o is string => typeof o === "string");
+  }
+  return safeQuickReplies(options).slice(0, 4);
+}

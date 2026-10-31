@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pretendsUiAction, safeQuickReplies } from "./quick-replies";
+import { pretendsUiAction, quickRepliesOf, safeQuickReplies } from "./quick-replies";
 
 describe("pretendsUiAction", () => {
   it("catches replies that claim a signature, a confirmation or an upload", () => {
@@ -41,5 +41,46 @@ describe("safeQuickReplies", () => {
     expect(
       safeQuickReplies(["Ich habe die Offerte unterschrieben", "Ich habe noch eine Frage"]),
     ).toEqual(["Ich habe noch eine Frage"]);
+  });
+});
+
+describe("quickRepliesOf", () => {
+  const replies = (options: string[]) => ({
+    type: "tool-suggestReplies",
+    state: "output-available",
+    output: { options },
+  });
+  const text = (value: string) => ({ type: "text", text: value });
+
+  it("shows the last suggestion after the text", () => {
+    expect(
+      quickRepliesOf([
+        text("Wann ist Ihre Partnerin geboren?"),
+        replies(["Sie ist 1990 geboren", "Sie ist 1993 geboren"]),
+      ]),
+    ).toEqual(["Sie ist 1990 geboren", "Sie ist 1993 geboren"]);
+    expect(quickRepliesOf([text("Frage?"), replies(["A", "B"]), replies(["C", "D"])])).toEqual([
+      "C",
+      "D",
+    ]);
+  });
+
+  it("drops suggestions made before the question was written", () => {
+    const early = replies(["Ich bin 1990 geboren", "Ich bin 1993 geboren"]);
+    const question = text("Wann ist Ihre Partnerin geboren?");
+    expect(quickRepliesOf([early, question])).toEqual([]);
+    expect(
+      quickRepliesOf([early, question, replies(["Sie ist 1990 geboren", "Sie ist 1993 geboren"])]),
+    ).toEqual(["Sie ist 1990 geboren", "Sie ist 1993 geboren"]);
+  });
+
+  it("ignores pending calls and filters fake UI actions", () => {
+    expect(
+      quickRepliesOf([
+        text("Passt das?"),
+        { type: "tool-suggestReplies", state: "input-available" },
+        replies(["Ich habe unterschrieben", "Ja, passt"]),
+      ]),
+    ).toEqual(["Ja, passt"]);
   });
 });
