@@ -31,8 +31,7 @@ pnpm dev                     # http://localhost:3000/de
 | `/de/portal` | Vorsorge-Cockpit: policies, documents, hints, conversations |
 | `/de/firma` | Company dashboard  |
 
-More on services, voice and scripts: [`code/README.md`](code/README.md). Demo scripts for the
-seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
+Demo scripts for the seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
 
 ## The journey
 
