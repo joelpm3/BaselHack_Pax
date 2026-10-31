@@ -60,7 +60,7 @@ export const futureEventsSchema = z.object({
 });
 export type FutureEventExtraction = z.infer<typeof futureEventsSchema>;
 
-export const FUTURE_EVENTS_INSTRUCTIONS = `You read a conversation between a customer and Pax's digital pension advisor (Pax is a Swiss life insurer).
+export const FUTURE_EVENTS_INSTRUCTIONS = `You read a conversation between a customer and Clara, Pax's digital pension advisor (Pax is a Swiss life insurer).
 Extract future life events the customer mentions together with a time, so a Pax advisor can follow up when the time comes.
 
 Event kinds: end_of_studies (finishing studies or an apprenticeship), first_job, wedding, child_birth (pregnancy, planned child), home_purchase, retirement (incl. early retirement), child_turns_18, child_turns_25, contract_end (an insurance or pension contract that ends), job_change, self_employment, other (another dated change relevant to pension provision).

@@ -1,7 +1,7 @@
 {
   "knowledge": {
     "title": "Produktwissen",
-    "description": "Produktblätter, AVB und Tarifinformationen, aus denen der digitale Berater Produktdetails nachschlägt. Er nutzt nur die aktive Version jedes Dokuments.",
+    "description": "Produktblätter, AVB und Tarifinformationen, aus denen Clara Produktdetails nachschlägt. Sie nutzt nur die aktive Version jedes Dokuments.",
     "kinds": {
       "product_sheet": "Produktblatt",
       "terms": "AVB",
@@ -15,9 +15,9 @@
       "failed": "Nicht lesbar",
       "deleted": "Gelöscht"
     },
-    "productEmpty": "Keine Dokumente. Detailfragen zu diesem Produkt beantwortet der Berater nicht selbst.",
+    "productEmpty": "Keine Dokumente. Detailfragen zu diesem Produkt beantwortet Clara nicht selbst.",
     "documentCount": "{count, plural, =0 {Keine Dokumente} one {# Dokument} other {# Dokumente}}",
-    "advisorUses": "Berater nutzt v{version}",
+    "advisorUses": "Clara nutzt v{version}",
     "noActive": "Noch nicht aktiv",
     "versionLine": "v{version} · {filename} · {pages} · {time}",
     "pages": "{count, plural, one {# Seite} other {# Seiten}}",
@@ -28,7 +28,7 @@
     "replace": "Neue Version",
     "replacing": "Wird hochgeladen …",
     "delete": "Löschen",
-    "confirmDelete": "«{title}» mit allen Versionen löschen? Der Berater nutzt das Dokument danach nicht mehr.",
+    "confirmDelete": "«{title}» mit allen Versionen löschen? Clara nutzt das Dokument danach nicht mehr.",
     "open": "PDF öffnen",
     "upload": {
       "title": "Dokument hinzufügen",
@@ -41,7 +41,7 @@
       "fileHint": "PDF bis 10 MB und 40 Seiten, verschlüsselt gespeichert.",
       "submit": "Hochladen",
       "uploading": "Wird hochgeladen …",
-      "done": "Hochgeladen. Der Berater nutzt das Dokument, sobald es gelesen ist.",
+      "done": "Hochgeladen. Clara nutzt das Dokument, sobald es gelesen ist.",
       "errors": {
         "empty": "Die Datei ist leer.",
         "too_large": "Die Datei ist grösser als 10 MB.",
@@ -55,11 +55,11 @@
     },
     "test": {
       "title": "Nachschlagen testen",
-      "description": "Zeigt, welche Stellen der Berater zu einer Frage findet.",
+      "description": "Zeigt, welche Stellen Clara zu einer Frage findet.",
       "question": "Stichworte",
       "placeholder": "z. B. Wartefrist Erwerbsunfähigkeit",
       "submit": "Suchen",
-      "none": "Keine passende Stelle gefunden. Der Berater würde das nicht bestätigen.",
+      "none": "Keine passende Stelle gefunden. Clara würde das nicht bestätigen.",
       "noDocuments": "Für dieses Produkt gibt es keine aktiven Dokumente.",
       "page": "Seite {page}"
     }

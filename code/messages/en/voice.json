@@ -41,7 +41,7 @@
     "idle": "Tap “Talk” and tell me.",
     "idleKeys": "Click “Talk” or press the <key>space bar</key>.",
     "listening": "I'm listening. When you have finished, choose “Done”.",
-    "busy": "The advisor is answering. You can already talk.",
+    "busy": "Clara is answering. You can already talk.",
     "reviewing": "Use “Add more” to add to the text."
   },
   "review": {

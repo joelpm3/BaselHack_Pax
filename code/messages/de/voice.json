@@ -41,7 +41,7 @@
     "idle": "Tippen Sie auf «Sprechen» und erzählen Sie.",
     "idleKeys": "Klicken Sie auf «Sprechen» oder drücken Sie die <key>Leertaste</key>.",
     "listening": "Ich höre zu. Sobald Sie fertig sind, wählen Sie «Fertig».",
-    "busy": "Der Berater antwortet. Sie können schon sprechen.",
+    "busy": "Clara antwortet. Sie können schon sprechen.",
     "reviewing": "Mit «Weiter» ergänzen Sie den Text."
   },
   "review": {

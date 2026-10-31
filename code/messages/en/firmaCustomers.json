@@ -51,7 +51,7 @@
     "count": "{count, plural, one {# person} other {# people}}",
     "emptyTitle": "No customers yet.",
     "emptySearch": "Nobody matches “{query}”.",
-    "emptyBody": "People show up here as soon as they talk to the digital advisor.",
+    "emptyBody": "People show up here as soon as they talk to Clara.",
     "openHandovers": "{count, plural, =0 {No handover} one {# handover} other {# handovers}}",
     "openLeads": "{count, plural, =0 {No lead} one {# lead} other {# leads}}",
     "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",

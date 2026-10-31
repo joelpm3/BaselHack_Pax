@@ -1,7 +1,7 @@
 {
   "knowledge": {
     "title": "Conoscenze prodotti",
-    "description": "Schede prodotto, CGA e informazioni tariffarie in cui il consulente digitale verifica i dettagli dei prodotti. Utilizza solo la versione attiva di ogni documento.",
+    "description": "Schede prodotto, CGA e informazioni tariffarie in cui Clara verifica i dettagli dei prodotti. Utilizza solo la versione attiva di ogni documento.",
     "kinds": {
       "product_sheet": "Scheda prodotto",
       "terms": "CGA",
@@ -15,9 +15,9 @@
       "failed": "Non leggibile",
       "deleted": "Eliminato"
     },
-    "productEmpty": "Nessun documento. Il consulente non risponde da solo a domande di dettaglio su questo prodotto.",
+    "productEmpty": "Nessun documento. Clara non risponde da sola a domande di dettaglio su questo prodotto.",
     "documentCount": "{count, plural, =0 {Nessun documento} one {# documento} other {# documenti}}",
-    "advisorUses": "Il consulente usa v{version}",
+    "advisorUses": "Clara usa v{version}",
     "noActive": "Non ancora attivo",
     "versionLine": "v{version} · {filename} · {pages} · {time}",
     "pages": "{count, plural, one {# pagina} other {# pagine}}",
@@ -28,7 +28,7 @@
     "replace": "Nuova versione",
     "replacing": "Caricamento …",
     "delete": "Elimina",
-    "confirmDelete": "Eliminare «{title}» con tutte le versioni? Il consulente non lo utilizzerà più.",
+    "confirmDelete": "Eliminare «{title}» con tutte le versioni? Clara non lo utilizzerà più.",
     "open": "Apri PDF",
     "upload": {
       "title": "Aggiungi documento",
@@ -41,7 +41,7 @@
       "fileHint": "PDF fino a 10 MB e 40 pagine, salvato in forma cifrata.",
       "submit": "Carica",
       "uploading": "Caricamento …",
-      "done": "Caricato. Il consulente userà il documento non appena sarà stato letto.",
+      "done": "Caricato. Clara userà il documento non appena sarà stato letto.",
       "errors": {
         "empty": "Il file è vuoto.",
         "too_large": "Il file supera i 10 MB.",
@@ -55,11 +55,11 @@
     },
     "test": {
       "title": "Prova la ricerca",
-      "description": "Mostra quali passaggi trova il consulente per una domanda.",
+      "description": "Mostra quali passaggi trova Clara per una domanda.",
       "question": "Parole chiave",
       "placeholder": "p. es. Wartefrist Erwerbsunfähigkeit",
       "submit": "Cerca",
-      "none": "Nessun passaggio corrispondente. Il consulente non lo confermerebbe.",
+      "none": "Nessun passaggio corrispondente. Clara non lo confermerebbe.",
       "noDocuments": "Nessun documento attivo per questo prodotto.",
       "page": "pagina {page}"
     }

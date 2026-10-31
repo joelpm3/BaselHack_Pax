@@ -1,7 +1,7 @@
 {
   "knowledge": {
     "title": "Product knowledge",
-    "description": "Product sheets, general terms and tariff information the digital advisor looks up product details in. It only uses the active version of each document.",
+    "description": "Product sheets, general terms and tariff information Clara looks up product details in. She only uses the active version of each document.",
     "kinds": {
       "product_sheet": "Product sheet",
       "terms": "General terms",
@@ -15,9 +15,9 @@
       "failed": "Unreadable",
       "deleted": "Deleted"
     },
-    "productEmpty": "No documents. The advisor does not answer detailed questions about this product itself.",
+    "productEmpty": "No documents. Clara does not answer detailed questions about this product itself.",
     "documentCount": "{count, plural, =0 {No documents} one {# document} other {# documents}}",
-    "advisorUses": "Advisor uses v{version}",
+    "advisorUses": "Clara uses v{version}",
     "noActive": "Not active yet",
     "versionLine": "v{version} · {filename} · {pages} · {time}",
     "pages": "{count, plural, one {# page} other {# pages}}",
@@ -28,7 +28,7 @@
     "replace": "New version",
     "replacing": "Uploading …",
     "delete": "Delete",
-    "confirmDelete": "Delete “{title}” with all its versions? The advisor will no longer use it.",
+    "confirmDelete": "Delete “{title}” with all its versions? Clara will no longer use it.",
     "open": "Open PDF",
     "upload": {
       "title": "Add a document",
@@ -41,7 +41,7 @@
       "fileHint": "PDF up to 10 MB and 40 pages, stored encrypted.",
       "submit": "Upload",
       "uploading": "Uploading …",
-      "done": "Uploaded. The advisor uses the document as soon as it has been read.",
+      "done": "Uploaded. Clara uses the document as soon as it has been read.",
       "errors": {
         "empty": "The file is empty.",
         "too_large": "The file is larger than 10 MB.",
@@ -55,11 +55,11 @@
     },
     "test": {
       "title": "Test the lookup",
-      "description": "Shows which passages the advisor finds for a question.",
+      "description": "Shows which passages Clara finds for a question.",
       "question": "Keywords",
       "placeholder": "e.g. Wartefrist Erwerbsunfähigkeit",
       "submit": "Search",
-      "none": "No matching passage. The advisor would not confirm this.",
+      "none": "No matching passage. Clara would not confirm this.",
       "noDocuments": "There are no active documents for this product.",
       "page": "page {page}"
     }

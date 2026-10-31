@@ -41,7 +41,7 @@
     "idle": "Tocchi «Parlare» e racconti.",
     "idleKeys": "Clicchi su «Parlare» o prema la <key>barra spaziatrice</key>.",
     "listening": "La sto ascoltando. Quando ha finito, scelga «Fatto».",
-    "busy": "Il consulente sta rispondendo. Può già parlare.",
+    "busy": "Clara sta rispondendo. Può già parlare.",
     "reviewing": "Con «Continua» può completare il testo."
   },
   "review": {

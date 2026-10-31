@@ -23,7 +23,7 @@ const SHARED_RULES = `Rules:
 - Short: at most 120 words in the body. Warm, personal, never pushy.
 - Sign off as "Ihr Pax-Beratungsteam" (translated into the email's language). No advisor names, phone numbers or URLs.
 - Never invent products, prices, premiums, legal figures or promises. Do not recommend a product.
-- Invite the customer to reply to this email, or to continue in their Pax Vorsorge-Cockpit / with the digital advisor.`;
+- Invite the customer to reply to this email, or to continue in their Pax Vorsorge-Cockpit / with Clara, Pax's digital pension advisor.`;
 
 const emailSchema = z.object({
   subject: z.string().describe("Email subject, at most 70 characters."),
@@ -81,7 +81,7 @@ export async function writeFollowUp(input: FollowUpInput): Promise<FollowUpText>
   const { output } = await generateText({
     model: getModel("analysis"),
     instructions: `You write a personal follow-up email for Pax, a Swiss life insurer, in ${LANGUAGE[input.locale]}.
-The customer talked to Pax's digital pension advisor and mentioned a future life event. Its time has come now.
+The customer talked to Clara, Pax's digital pension advisor, and mentioned a future life event. Its time has come now.
 Structure: "On <date> we talked about <topic>; you mentioned <plan> around <time>. Is that now the case?" Then one sentence on why a short review of their pension provision makes sense at this moment (in general terms), and the invitation.
 Refer to the expected time as loosely as the customer did (a season or month, not an exact day, unless the precision is "day").
 ${SHARED_RULES}
@@ -98,7 +98,7 @@ export async function writeReminder(input: FollowUpInput): Promise<EmailText> {
   const { output } = await generateText({
     model: getModel("analysis"),
     instructions: `You write a short, friendly reminder email for Pax, a Swiss life insurer, in ${LANGUAGE[input.locale]}.
-Two weeks ago Pax wrote to the customer about a life event they had mentioned in a conversation with the digital pension advisor and got no answer. Mention that briefly, ask again in one sentence whether the event has happened or is still planned, and make clear that a reply is enough. At most 70 words.
+Two weeks ago Pax wrote to the customer about a life event they had mentioned in a conversation with Clara, Pax's digital pension advisor, and got no answer. Mention that briefly, ask again in one sentence whether the event has happened or is still planned, and make clear that a reply is enough. At most 70 words.
 ${SHARED_RULES}`,
     prompt: facts(input),
     output: Output.object({ schema: emailSchema, name: "reminder" }),

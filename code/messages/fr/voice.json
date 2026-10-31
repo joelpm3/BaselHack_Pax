@@ -41,7 +41,7 @@
     "idle": "Touchez « Parler » et racontez.",
     "idleKeys": "Cliquez sur « Parler » ou appuyez sur la <key>barre d'espace</key>.",
     "listening": "Je vous écoute. Quand vous avez fini, choisissez « Terminé ».",
-    "busy": "Le conseiller répond. Vous pouvez déjà parler.",
+    "busy": "Clara répond. Vous pouvez déjà parler.",
     "reviewing": "Avec « Continuer », vous complétez le texte."
   },
   "review": {

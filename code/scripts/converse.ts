@@ -157,7 +157,7 @@ async function simulatedMessage(
 ): Promise<{ text: string; end: boolean }> {
   const { output } = await generateText({
     model: getModel("simulation"),
-    instructions: `You role-play a private customer chatting with the digital pension advisor of Pax, a Swiss life insurer. Stay in character; never write like an assistant, no lists.
+    instructions: `You role-play a private customer chatting with Clara, the digital pension advisor of Pax, a Swiss life insurer. Stay in character; never write like an assistant, no lists.
 ## Who you are
 ${scenario.persona}
 ## Rules

@@ -51,7 +51,7 @@
     "count": "{count, plural, one {# persona} other {# persone}}",
     "emptyTitle": "Ancora nessun cliente.",
     "emptySearch": "Nessuno corrisponde a «{query}».",
-    "emptyBody": "Le persone compaiono qui non appena parlano con il consulente digitale.",
+    "emptyBody": "Le persone compaiono qui non appena parlano con Clara.",
     "openHandovers": "{count, plural, =0 {Nessun passaggio} one {# passaggio} other {# passaggi}}",
     "openLeads": "{count, plural, =0 {Nessun lead} one {# lead} other {# lead}}",
     "openLeadsScore": "{count, plural, one {# lead} other {# lead}}, punteggio {score}",

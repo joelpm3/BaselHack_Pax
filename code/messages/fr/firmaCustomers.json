@@ -51,7 +51,7 @@
     "count": "{count, plural, one {# personne} other {# personnes}}",
     "emptyTitle": "Pas encore de clientes ni de clients.",
     "emptySearch": "Personne ne correspond à « {query} ».",
-    "emptyBody": "Les personnes apparaissent ici dès qu’elles parlent au conseiller numérique.",
+    "emptyBody": "Les personnes apparaissent ici dès qu’elles parlent à Clara.",
     "openHandovers": "{count, plural, =0 {Aucun transfert} one {# transfert} other {# transferts}}",
     "openLeads": "{count, plural, =0 {Aucun lead} one {# lead} other {# leads}}",
     "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",

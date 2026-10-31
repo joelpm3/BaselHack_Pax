@@ -1,7 +1,7 @@
 {
   "knowledge": {
     "title": "Connaissances produits",
-    "description": "Fiches produits, CGA et informations tarifaires dans lesquelles le conseiller numérique vérifie les détails des produits. Il n'utilise que la version active de chaque document.",
+    "description": "Fiches produits, CGA et informations tarifaires dans lesquelles Clara vérifie les détails des produits. Elle n'utilise que la version active de chaque document.",
     "kinds": {
       "product_sheet": "Fiche produit",
       "terms": "CGA",
@@ -15,9 +15,9 @@
       "failed": "Illisible",
       "deleted": "Supprimé"
     },
-    "productEmpty": "Aucun document. Le conseiller ne répond pas lui-même aux questions de détail sur ce produit.",
+    "productEmpty": "Aucun document. Clara ne répond pas elle-même aux questions de détail sur ce produit.",
     "documentCount": "{count, plural, =0 {Aucun document} one {# document} other {# documents}}",
-    "advisorUses": "Le conseiller utilise v{version}",
+    "advisorUses": "Clara utilise v{version}",
     "noActive": "Pas encore actif",
     "versionLine": "v{version} · {filename} · {pages} · {time}",
     "pages": "{count, plural, one {# page} other {# pages}}",
@@ -28,7 +28,7 @@
     "replace": "Nouvelle version",
     "replacing": "Téléversement …",
     "delete": "Supprimer",
-    "confirmDelete": "Supprimer « {title} » avec toutes ses versions ? Le conseiller ne l'utilisera plus.",
+    "confirmDelete": "Supprimer « {title} » avec toutes ses versions ? Clara ne l'utilisera plus.",
     "open": "Ouvrir le PDF",
     "upload": {
       "title": "Ajouter un document",
@@ -41,7 +41,7 @@
       "fileHint": "PDF jusqu'à 10 Mo et 40 pages, enregistré de manière chiffrée.",
       "submit": "Téléverser",
       "uploading": "Téléversement …",
-      "done": "Téléversé. Le conseiller utilisera le document dès qu'il aura été lu.",
+      "done": "Téléversé. Clara utilisera le document dès qu'il aura été lu.",
       "errors": {
         "empty": "Le fichier est vide.",
         "too_large": "Le fichier dépasse 10 Mo.",
@@ -55,11 +55,11 @@
     },
     "test": {
       "title": "Tester la recherche",
-      "description": "Montre les passages que le conseiller trouve pour une question.",
+      "description": "Montre les passages que Clara trouve pour une question.",
       "question": "Mots-clés",
       "placeholder": "p. ex. Wartefrist Erwerbsunfähigkeit",
       "submit": "Rechercher",
-      "none": "Aucun passage correspondant. Le conseiller ne le confirmerait pas.",
+      "none": "Aucun passage correspondant. Clara ne le confirmerait pas.",
       "noDocuments": "Aucun document actif pour ce produit.",
       "page": "page {page}"
     }
