@@ -29,17 +29,33 @@
     "premium": "{amount} pro Jahr",
     "legendPax": "Vertrag bei Pax",
     "legendExternal": "Vertrag bei einem anderen Versicherer",
-    "legendState": "Staatliche Vorsorge"
+    "legendState": "Staatliche Vorsorge",
+    "legendAdvice": "Aus Ihren Angaben in der Beratung",
+    "advice": {
+      "pensionFundCapital": "Guthaben {amount}",
+      "pensionFund": "Pensionskasse vorhanden",
+      "noPensionFund": "Keine Pensionskasse",
+      "pillar3aBalance": "3a-Guthaben {amount}",
+      "pillar3aContribution": "3a: {amount} pro Jahr"
+    }
   },
   "figures": {
     "premiums": "Prämien pro Jahr",
     "premiumsDetail": "davon {pax} bei Pax",
-    "perYear": "pro Jahr",
     "death": "Todesfallkapital",
-    "deathNote": "aus allen Verträgen",
     "disability": "Rente bei Erwerbsunfähigkeit",
     "retirement": "Pensionskassenrente ab {age}",
-    "unknown": "Noch nicht bekannt"
+    "unknown": "Noch nicht bekannt",
+    "survivors": "Renten für Hinterbliebene",
+    "notes": {
+      "perYear": "pro Jahr",
+      "allContracts": "aus allen Verträgen",
+      "fromProfile": "aus Ihren Angaben",
+      "estimated": "pro Jahr, geschätzt",
+      "estimatedWithState": "pro Jahr mit IV, geschätzt",
+      "noPensionFund": "Keine Pensionskasse"
+    },
+    "estimatedFootnote": "Geschätzt: in Ihrer Beratung mit Logismata berechnet, ohne Gewähr. Massgebend sind Ihre Verträge und Ihr Vorsorgeausweis."
   },
   "hints": {
     "title": "Hinweise für Sie",

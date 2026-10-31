@@ -1,13 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import { formatChf } from "@/lib/utils";
-import { groupOf, type PolicyGroup, type PolicyRow } from "./cockpit";
+import { type AdviceEntry, groupOf, type PolicyGroup, type PolicyRow } from "./cockpit";
 
 /**
  * The cockpit's opening picture: the three pillars (plus non-life) drawn as columns of Pax
- * squares, one square per contract. Green = Pax, outlined = another insurer.
+ * squares, one square per contract. Green = Pax, outlined = another insurer, dashed = known
+ * from the advice but without a contract on file (e.g. the pension fund named in the chat).
  */
 
 const MAX_SQUARES = 8;
+
+const hasSquare = (entry: AdviceEntry | null) => entry !== null && entry.kind !== "noPensionFund";
 
 type Column = "pillar1" | "pillar2" | "pillar3" | "other";
 const COLUMN_OF: Record<PolicyGroup, Column> = {
@@ -21,10 +24,12 @@ const COLUMN_OF: Record<PolicyGroup, Column> = {
 function Squares({
   policies,
   automatic,
+  fromAdvice,
   rows,
 }: {
   policies: PolicyRow[];
   automatic?: boolean;
+  fromAdvice?: boolean;
   rows: number;
 }) {
   const shown = policies.slice(0, MAX_SQUARES);
@@ -35,6 +40,7 @@ function Squares({
       aria-hidden
     >
       {automatic ? <span className="size-(--sq) bg-white/25" /> : null}
+      {fromAdvice ? <span className="size-(--sq) border-2 border-dashed border-white/80" /> : null}
       {shown.map((p) => (
         <span
           key={p.id}
@@ -54,22 +60,31 @@ export async function PillarOverview({
   locale,
   firstName,
   policies,
+  advice,
 }: {
   locale: string;
   firstName: string | null;
   policies: PolicyRow[];
+  advice: { pillar2: AdviceEntry | null; pillar3: AdviceEntry | null };
 }) {
   const t = await getTranslations("portal");
   const active = policies.filter((p) => p.status === "active");
   const byColumn = (column: Column) => active.filter((p) => COLUMN_OF[groupOf(p)] === column);
   const premium = (list: PolicyRow[]) => list.reduce((s, p) => s + (p.premiumAnnual ?? 0), 0);
-  const columns: Array<{ id: Column; policies: PolicyRow[] }> = [
-    { id: "pillar1", policies: [] },
-    { id: "pillar2", policies: byColumn("pillar2") },
-    { id: "pillar3", policies: byColumn("pillar3") },
-    { id: "other", policies: byColumn("other") },
+  const columns: Array<{ id: Column; policies: PolicyRow[]; advice: AdviceEntry | null }> = [
+    { id: "pillar1", policies: [], advice: null },
+    { id: "pillar2", policies: byColumn("pillar2"), advice: advice.pillar2 },
+    { id: "pillar3", policies: byColumn("pillar3"), advice: advice.pillar3 },
+    { id: "other", policies: byColumn("other"), advice: null },
   ];
-  const rows = Math.max(2, ...columns.map((c) => Math.min(c.policies.length, MAX_SQUARES)));
+  const squares = (c: (typeof columns)[number]) =>
+    Math.min(c.policies.length, MAX_SQUARES) + Number(hasSquare(c.advice));
+  const rows = Math.max(2, ...columns.map(squares));
+  const adviceText = (entry: AdviceEntry) =>
+    "amount" in entry
+      ? t(`pillars.advice.${entry.kind}`, { amount: formatChf(entry.amount, locale) })
+      : t(`pillars.advice.${entry.kind}`);
+  const showLegendAdvice = columns.some((c) => hasSquare(c.advice));
 
   return (
     <section className="bg-pax-purple text-white" aria-labelledby="cockpit-title">
@@ -88,6 +103,7 @@ export async function PillarOverview({
                 <Squares
                   policies={column.policies}
                   automatic={column.id === "pillar1"}
+                  fromAdvice={hasSquare(column.advice)}
                   rows={rows}
                 />
                 <div className="mt-2 border-t border-white/30 pt-2">
@@ -95,11 +111,19 @@ export async function PillarOverview({
                   <p className="text-paragraph-xs text-white/70 max-sm:hidden">
                     {t(`pillars.${column.id}Detail`)}
                   </p>
-                  <p className="mt-1 text-paragraph-xs text-white/90">
-                    {column.id === "pillar1"
-                      ? t("pillars.automatic")
-                      : t("pillars.contracts", { count: column.policies.length })}
-                  </p>
+                  {column.id === "pillar1" ? (
+                    <p className="mt-1 text-paragraph-xs text-white/90">{t("pillars.automatic")}</p>
+                  ) : null}
+                  {column.id !== "pillar1" && (column.policies.length > 0 || !column.advice) ? (
+                    <p className="mt-1 text-paragraph-xs text-white/90">
+                      {t("pillars.contracts", { count: column.policies.length })}
+                    </p>
+                  ) : null}
+                  {column.advice ? (
+                    <p className="mt-1 text-paragraph-xs text-white/90 tabular-nums">
+                      {adviceText(column.advice)}
+                    </p>
+                  ) : null}
                   {sum > 0 ? (
                     <p className="text-paragraph-xs text-white/70 tabular-nums">
                       {t("pillars.premium", { amount: formatChf(sum, locale) })}
@@ -124,6 +148,12 @@ export async function PillarOverview({
             <span className="size-3 bg-white/25" aria-hidden />
             {t("pillars.legendState")}
           </li>
+          {showLegendAdvice ? (
+            <li className="flex items-center gap-2">
+              <span className="size-3 border-2 border-dashed border-white/80" aria-hidden />
+              {t("pillars.legendAdvice")}
+            </li>
+          ) : null}
         </ul>
       </div>
     </section>

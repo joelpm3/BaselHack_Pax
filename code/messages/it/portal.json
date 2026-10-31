@@ -29,17 +29,33 @@
     "premium": "{amount} all’anno",
     "legendPax": "Contratto presso Pax",
     "legendExternal": "Contratto presso un altro assicuratore",
-    "legendState": "Previdenza statale"
+    "legendState": "Previdenza statale",
+    "legendAdvice": "Dai suoi dati nella consulenza",
+    "advice": {
+      "pensionFundCapital": "Avere {amount}",
+      "pensionFund": "Cassa pensione presente",
+      "noPensionFund": "Nessuna cassa pensione",
+      "pillar3aBalance": "Avere 3a {amount}",
+      "pillar3aContribution": "3a: {amount} all’anno"
+    }
   },
   "figures": {
     "premiums": "Premi all’anno",
     "premiumsDetail": "di cui {pax} presso Pax",
-    "perYear": "all’anno",
     "death": "Capitale in caso di decesso",
-    "deathNote": "da tutti i contratti",
     "disability": "Rendita per incapacità di guadagno",
     "retirement": "Rendita della cassa pensione dai {age} anni",
-    "unknown": "Non ancora noto"
+    "unknown": "Non ancora noto",
+    "survivors": "Rendite per i superstiti",
+    "notes": {
+      "perYear": "all’anno",
+      "allContracts": "da tutti i contratti",
+      "fromProfile": "dai suoi dati",
+      "estimated": "all’anno, stima",
+      "estimatedWithState": "all’anno, AI inclusa, stima",
+      "noPensionFund": "Nessuna cassa pensione"
+    },
+    "estimatedFootnote": "Stima: calcolata con Logismata durante la consulenza, senza garanzia. Fanno stato i suoi contratti e il suo certificato di previdenza."
   },
   "hints": {
     "title": "Aspetti da verificare",

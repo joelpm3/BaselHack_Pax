@@ -29,17 +29,33 @@
     "premium": "{amount} a year",
     "legendPax": "Contract with Pax",
     "legendExternal": "Contract with another insurer",
-    "legendState": "State pension"
+    "legendState": "State pension",
+    "legendAdvice": "From what you told us in the advice",
+    "advice": {
+      "pensionFundCapital": "Savings {amount}",
+      "pensionFund": "Has a pension fund",
+      "noPensionFund": "No pension fund",
+      "pillar3aBalance": "3a savings {amount}",
+      "pillar3aContribution": "3a: {amount} a year"
+    }
   },
   "figures": {
     "premiums": "Premiums per year",
     "premiumsDetail": "of which {pax} with Pax",
-    "perYear": "per year",
     "death": "Lump sum on death",
-    "deathNote": "from all contracts",
     "disability": "Pension if unable to work",
     "retirement": "Pension fund pension from {age}",
-    "unknown": "Not known yet"
+    "unknown": "Not known yet",
+    "survivors": "Survivors' pensions",
+    "notes": {
+      "perYear": "per year",
+      "allContracts": "from all contracts",
+      "fromProfile": "from what you told us",
+      "estimated": "per year, estimated",
+      "estimatedWithState": "per year incl. IV, estimated",
+      "noPensionFund": "No pension fund"
+    },
+    "estimatedFootnote": "Estimated: calculated with Logismata during your advice, without guarantee. Your contracts and pension certificate are what count."
   },
   "hints": {
     "title": "Things to look at",

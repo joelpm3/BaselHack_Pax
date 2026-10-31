@@ -1,6 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { lifeSituationSchema } from "@/lib/domain/profile";
-import { groupOf, keyFigures, type PolicyRow, upcomingDates, visiblePolicies } from "./cockpit";
+import {
+  adviceEntries,
+  calculatedFigures,
+  groupOf,
+  keyFigures,
+  type PolicyRow,
+  upcomingDates,
+  visiblePolicies,
+} from "./cockpit";
 
 let n = 0;
 function row(overrides: Partial<PolicyRow>): PolicyRow {
@@ -60,12 +68,76 @@ describe("cockpit", () => {
     expect(keyFigures(policies, profile)).toEqual({
       premiums: 4724.8,
       paxPremiums: 2084.8,
-      deathCover: 400000,
-      disabilityPension: 41420,
-      retirementPension: 32934,
-      retirementAge: 65,
+      death: { kind: "capital", value: 400000, note: "allContracts" },
+      disability: { value: 41420, note: "perYear" },
+      retirement: { value: 32934, note: "perYear", age: 65 },
       contracts: 4,
+      estimated: false,
     });
+  });
+
+  it("falls back to the profile and then to the advice calculations", () => {
+    const fromChat = lifeSituationSchema.parse({
+      pillar2: { hasPensionFund: true, currentCapital: 80000 },
+    });
+    const calculated = calculatedFigures({
+      retirementBase: { Person1: { Pension: 37044 } },
+      risk: {
+        RiskScenarioSummaries: [
+          { Scenario: 1, ErrorCode: 0, IncomePillar1: 29268, IncomePillar2: 18000 },
+          { Scenario: 3, ErrorCode: 0, IncomePillar1: 0, IncomePillar2: 0 },
+          { Scenario: 5, ErrorCode: 0, IncomePillar1: 1, IncomePillar2: 1 },
+        ],
+      },
+    });
+    expect(calculated).toEqual({
+      retirementPension: 37044,
+      disabilityPension: 47268,
+      survivorsPension: 0,
+    });
+    const figures = keyFigures(
+      [row({ category: "risk_disability", annuityAnnual: 12000 })],
+      {
+        ...fromChat,
+        pillar2: { ...fromChat.pillar2, deathLumpSum: 120000 },
+      },
+      calculated,
+    );
+    expect(figures.death).toEqual({ kind: "capital", value: 120000, note: "fromProfile" });
+    expect(figures.disability).toEqual({ value: 59268, note: "estimatedWithState" });
+    expect(figures.retirement).toEqual({ value: 37044, note: "estimated", age: 65 });
+    expect(figures.estimated).toBe(true);
+
+    const survivors = keyFigures([], fromChat, calculated);
+    expect(survivors.death).toEqual({ kind: "survivorsPension", value: 0, note: "estimated" });
+    expect(keyFigures([], profile).death).toBeNull();
+  });
+
+  it("knows when there is no pension fund and ignores retired risk figures", () => {
+    const noFund = lifeSituationSchema.parse({ pillar2: { hasPensionFund: false } });
+    expect(keyFigures([], noFund, { retirementPension: 1000 }).retirement).toEqual({
+      value: 0,
+      note: "noPensionFund",
+      age: 65,
+    });
+    expect(
+      calculatedFigures({ risk: { RiskScenarioSummaries: [{ Scenario: 1, ErrorCode: 8 }] } }),
+    ).toEqual({});
+  });
+
+  it("shows pillars known from the advice when no contract covers them", () => {
+    const fromChat = lifeSituationSchema.parse({
+      pillar2: { hasPensionFund: true, currentCapital: 80000 },
+      pillar3a: { annualContribution: 7258 },
+    });
+    expect(adviceEntries([], fromChat)).toEqual({
+      pillar2: { kind: "pensionFundCapital", amount: 80000 },
+      pillar3: { kind: "pillar3aContribution", amount: 7258 },
+    });
+    const covered = [row({ category: "pension_fund" }), row({ category: "pillar3a" })];
+    expect(adviceEntries(covered, fromChat)).toEqual({ pillar2: null, pillar3: null });
+    const noFund = lifeSituationSchema.parse({ pillar2: { hasPensionFund: false } });
+    expect(adviceEntries([], noFund).pillar2).toEqual({ kind: "noPensionFund" });
   });
 
   it("lists upcoming deadlines soonest first and hides cancelled contracts", () => {

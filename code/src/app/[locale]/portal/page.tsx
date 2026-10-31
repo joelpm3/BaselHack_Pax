@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { connection } from "next/server";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense, use } from "react";
-import { keyFigures, upcomingDates } from "@/components/portal/cockpit";
+import { adviceEntries, keyFigures, upcomingDates } from "@/components/portal/cockpit";
 import { ConversationList } from "@/components/portal/conversation-list";
 import { DocumentList } from "@/components/portal/document-list";
 import { HintList, HintListSkeleton } from "@/components/portal/hint-list";
@@ -47,15 +47,22 @@ async function Cockpit({ locale }: { locale: Locale }) {
   if (!customer) return <EmptyCockpit />;
   const t = await getTranslations("portal");
   const today = toIsoDate(new Date());
-  const { profile, policies, documents, conversations, documentPaths } = loadCockpit(customer.id);
+  const { profile, policies, calculated, documents, conversations, documentPaths } = loadCockpit(
+    customer.id,
+  );
   const firstName = profile.person.firstName ?? customer.firstName;
 
   return (
     <>
-      <PillarOverview locale={locale} firstName={firstName} policies={policies} />
+      <PillarOverview
+        locale={locale}
+        firstName={firstName}
+        policies={policies}
+        advice={adviceEntries(policies, profile)}
+      />
       <div className="mx-auto max-w-6xl px-4 lg:px-8">
         <div className="-mt-px pt-6 lg:pt-8">
-          <KeyFigures figures={keyFigures(policies, profile)} locale={locale} />
+          <KeyFigures figures={keyFigures(policies, profile, calculated)} locale={locale} />
         </div>
 
         {/* Mobile: one column in reading order. Desktop: main column and a side column. */}
