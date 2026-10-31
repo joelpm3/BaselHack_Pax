@@ -29,17 +29,33 @@
     "premium": "{amount} par an",
     "legendPax": "Contrat chez Pax",
     "legendExternal": "Contrat chez un autre assureur",
-    "legendState": "Prévoyance étatique"
+    "legendState": "Prévoyance étatique",
+    "legendAdvice": "Selon vos indications lors du conseil",
+    "advice": {
+      "pensionFundCapital": "Avoir {amount}",
+      "pensionFund": "Caisse de pension existante",
+      "noPensionFund": "Pas de caisse de pension",
+      "pillar3aBalance": "Avoir 3a {amount}",
+      "pillar3aContribution": "3a : {amount} par an"
+    }
   },
   "figures": {
     "premiums": "Primes par an",
     "premiumsDetail": "dont {pax} chez Pax",
-    "perYear": "par an",
     "death": "Capital-décès",
-    "deathNote": "de tous les contrats",
     "disability": "Rente en cas d’incapacité de gain",
     "retirement": "Rente de la caisse de pension dès {age} ans",
-    "unknown": "Pas encore connu"
+    "unknown": "Pas encore connu",
+    "survivors": "Rentes de survivants",
+    "notes": {
+      "perYear": "par an",
+      "allContracts": "de tous les contrats",
+      "fromProfile": "selon vos indications",
+      "estimated": "par an, estimation",
+      "estimatedWithState": "par an, AI comprise, estimation",
+      "noPensionFund": "Pas de caisse de pension"
+    },
+    "estimatedFootnote": "Estimation : calculée avec Logismata lors de votre conseil, sans garantie. Vos contrats et votre certificat de prévoyance font foi."
   },
   "hints": {
     "title": "Points à examiner",

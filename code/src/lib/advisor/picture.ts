@@ -1,10 +1,10 @@
 import "server-only";
-import { and, desc, eq, inArray, isNull, notLike, or } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import type { LifeSituation } from "@/lib/domain/profile";
 import { type PolicyCategory, THIRD_PILLAR_CATEGORIES } from "@/lib/domain/taxonomy";
 import { getProfile } from "@/lib/profile/service";
-import { SCENARIO_SUFFIX } from "./logismata/checks";
+import { latestCalculation } from "./logismata/latest";
 import {
   describeRiskScenario,
   isJointlyTaxed,
@@ -37,26 +37,6 @@ const FACTS: Array<{ key: string; known: (p: LifeSituation) => boolean }> = [
 
 function completenessOf(profile: LifeSituation): number {
   return Math.round((FACTS.filter((f) => f.known(profile)).length / FACTS.length) * 100);
-}
-
-function latestCalculation(customerId: string, operation: string) {
-  return db
-    .select()
-    .from(schema.calculations)
-    .where(
-      and(
-        eq(schema.calculations.customerId, customerId),
-        eq(schema.calculations.operation, operation),
-        eq(schema.calculations.status, "ok"),
-        or(
-          isNull(schema.calculations.toolCallId),
-          notLike(schema.calculations.toolCallId, `%${SCENARIO_SUFFIX}`),
-        ),
-      ),
-    )
-    .orderBy(desc(schema.calculations.createdAt))
-    .limit(1)
-    .get();
 }
 
 function scenarios(customerId: string): PictureScenario[] {

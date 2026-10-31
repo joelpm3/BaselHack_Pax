@@ -1,7 +1,8 @@
 import "server-only";
 import { and, desc, eq } from "drizzle-orm";
-import { visiblePolicies } from "@/components/portal/cockpit";
+import { calculatedFigures, visiblePolicies } from "@/components/portal/cockpit";
 import type { PortalDocument } from "@/components/portal/document-list";
+import { latestCalculation } from "@/lib/advisor/logismata/latest";
 import { db, schema } from "@/lib/db";
 import { toIsoDate } from "@/lib/documents/dates";
 import { getExtractionSummary, listCustomerDocuments } from "@/lib/documents/service";
@@ -55,5 +56,10 @@ export function loadCockpit(customerId: string) {
   for (const event of events) if (!latest.has(event.path)) latest.set(event.path, event.source);
   const documentPaths = [...latest].filter(([, source]) => source === "document").map(([p]) => p);
 
-  return { profile, policies, documents, conversations, documentPaths };
+  const calculated = calculatedFigures({
+    retirementBase: latestCalculation(customerId, "APICalc_calculateRetirementBase")?.output,
+    risk: latestCalculation(customerId, "APICalc_calculateRisk")?.output,
+  });
+
+  return { profile, policies, calculated, documents, conversations, documentPaths };
 }
