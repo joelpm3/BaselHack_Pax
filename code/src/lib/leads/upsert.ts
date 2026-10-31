@@ -1,5 +1,5 @@
 import "server-only";
-import { and, eq, isNotNull, isNull, ne } from "drizzle-orm";
+import { and, eq, isNotNull, isNull, ne, notExists } from "drizzle-orm";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import type { IdentifiedGap, ProductInterest } from "@/lib/db/schema";
@@ -128,10 +128,21 @@ export function upsertLeadForConversation(
     serviceRequest: signals.serviceRequest,
   });
 
+  // Wiedervorlage leads belong to their future event; a later conversation gets its own lead.
   const customerLeads = db
     .select()
     .from(schema.leads)
-    .where(eq(schema.leads.customerId, customer.id))
+    .where(
+      and(
+        eq(schema.leads.customerId, customer.id),
+        notExists(
+          db
+            .select({ id: schema.futureEvents.id })
+            .from(schema.futureEvents)
+            .where(eq(schema.futureEvents.leadId, schema.leads.id)),
+        ),
+      ),
+    )
     .all();
   const existing = type ? leadToUpdate(customerLeads, conversation.id, type) : undefined;
   const changed = withdrawUntouchedLeads(conversation.id, existing?.id);

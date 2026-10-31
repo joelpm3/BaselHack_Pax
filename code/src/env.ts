@@ -35,6 +35,11 @@ const schema = z.object({
   SESSION_SECRET: z.string().min(32),
   /** 32-byte hex/base64 key for AES-256-GCM document encryption at rest. */
   DOCUMENT_ENCRYPTION_KEY: z.string().min(32),
+
+  /** Days before a future life event the Wiedervorlage opens and the first email goes out. */
+  FOLLOW_UP_LEAD_DAYS: z.coerce.number().int().min(0).max(365).default(7),
+  /** Quiet days before the reminder email, and after it before the lead counts as lost. */
+  FOLLOW_UP_REMINDER_DAYS: z.coerce.number().int().min(1).max(365).default(14),
 });
 
 export const env = schema.parse(process.env);

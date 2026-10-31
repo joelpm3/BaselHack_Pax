@@ -1,0 +1,139 @@
+{
+  "kind": {
+    "end_of_studies": "End of studies",
+    "first_job": "First job",
+    "wedding": "Wedding",
+    "child_birth": "Birth",
+    "home_purchase": "Home purchase",
+    "retirement": "Retirement",
+    "child_turns_18": "Child turns 18",
+    "child_turns_25": "Child turns 25",
+    "contract_end": "Contract ends",
+    "job_change": "Job change",
+    "self_employment": "Self-employment",
+    "other": "Life event"
+  },
+  "status": {
+    "upcoming": "Planned",
+    "due": "Due",
+    "responded": "Replied",
+    "lost": "No response",
+    "dismissed": "Dismissed"
+  },
+  "season": {
+    "spring": "Spring {year}",
+    "summer": "Summer {year}",
+    "autumn": "Autumn {year}",
+    "winter": "Winter {year}"
+  },
+  "page": {
+    "title": "Follow-ups",
+    "description": "Life events customers announced in a conversation. A week before, Pax gets in touch on its own with a personal email. Unlike a handover, nobody asked to speak to a person here.",
+    "tabs": "Follow-up status"
+  },
+  "tab": {
+    "due": "Due",
+    "upcoming": "Planned",
+    "responded": "Replied",
+    "lost": "No response"
+  },
+  "empty": {
+    "due": {
+      "title": "Nothing is due right now",
+      "body": "Use time travel to move forward so planned events become due."
+    },
+    "upcoming": {
+      "title": "No announced events yet",
+      "body": "As soon as someone says in the chat something like “I'll graduate in two years”, it shows up here."
+    },
+    "responded": {
+      "title": "No replies yet",
+      "body": "Follow-ups land here once someone replied or came back to the chat."
+    },
+    "lost": {
+      "title": "No lost follow-ups",
+      "body": "If two emails go unanswered, the lead counts as lost. It reopens when the person gets in touch later."
+    }
+  },
+  "clock": {
+    "label": "Time travel for the demo",
+    "simulated": "Simulated date",
+    "real": "Today's date",
+    "plusWeek": "+1 week",
+    "plusMonth": "+1 month",
+    "plusHalfYear": "+6 months",
+    "plusYear": "+1 year",
+    "jumpTo": "Choose a date",
+    "jump": "Go",
+    "run": "Check follow-ups now",
+    "back": "Back to today",
+    "reset": "Reset demo",
+    "resetConfirm": "Delete all generated follow-up leads and emails and return to today's date?",
+    "working": "Pax is checking follow-ups and writing the emails …",
+    "nothing": "Nothing new is due.",
+    "invalid": "This date is not valid.",
+    "summary": {
+      "opened": "{count, plural, one {# follow-up opened} other {# follow-ups opened}}",
+      "reminded": "{count, plural, one {# reminder sent} other {# reminders sent}}",
+      "lost": "{count, plural, one {# lead lost without response} other {# leads lost without response}}",
+      "reopened": "{count, plural, one {# lead reopened} other {# leads reopened}}",
+      "responded": "{count, plural, one {# reply recorded} other {# replies recorded}}",
+      "checkins": "{count, plural, one {# yearly check-in sent} other {# yearly check-ins sent}}",
+      "failed": "{count, plural, one {# email could not be written, please check again} other {# emails could not be written, please check again}}"
+    }
+  },
+  "timeline": {
+    "caption": "{count, plural, =0 {No planned follow-ups} one {# planned follow-up from today} other {# planned follow-ups from today}}",
+    "today": "Today",
+    "anonymous": "Anonymous"
+  },
+  "card": {
+    "expected": "Expected:",
+    "fromConversation": "From the conversation on",
+    "followUpOn": "Follow-up from",
+    "dueNow": "Due",
+    "confidence": "Confidence {value} %",
+    "noEmail": "No email address on file: please call.",
+    "recordReply": "Record reply",
+    "dismiss": "Dismiss"
+  },
+  "outbox": {
+    "title": "Outbox",
+    "description": "Simulated: Pax sends nothing, the emails only live here.",
+    "empty": "No emails yet.",
+    "to": "To {address}",
+    "replied": "Replied",
+    "kind": {
+      "event_follow_up": "Follow-up",
+      "reminder": "Reminder",
+      "yearly_checkin": "Yearly check-in"
+    }
+  },
+  "checkin": {
+    "title": "Yearly check-in",
+    "description": "Once a year Pax asks whether anything changed in family, work, home or income. Customers can switch it off in their pension cockpit.",
+    "next": "Next on",
+    "dueNow": "due",
+    "off": "Opted out",
+    "turnOff": "Opt out",
+    "turnOn": "Opt back in",
+    "empty": "No customers with an email address yet.",
+    "noEmail": "Yearly check-in: no email address on file."
+  },
+  "customer": {
+    "title": "Follow-ups and mail",
+    "description": "Announced life events and the emails Pax wrote about them.",
+    "events": "Announced life events",
+    "noEvents": "No announced events yet."
+  },
+  "portal": {
+    "title": "Yearly check-in",
+    "body": "Once a year we briefly ask by email whether anything changed in your family, work, home or income. That keeps your pension planning up to date.",
+    "on": "On",
+    "off": "Off",
+    "turnOff": "Switch off",
+    "turnOn": "Switch on",
+    "next": "Next check-in:",
+    "noEmail": "We don't have your email address yet. You can give it in the conversation with the advisor."
+  }
+}

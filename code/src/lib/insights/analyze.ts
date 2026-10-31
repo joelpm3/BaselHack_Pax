@@ -6,6 +6,7 @@ import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import type { HandoverVerdict } from "@/lib/db/schema";
 import { publish } from "@/lib/events/bus";
+import { updateFutureEvents } from "@/lib/followups/from-conversation";
 import { upsertLeadForConversation } from "@/lib/leads/upsert";
 import { getProfile } from "@/lib/profile/service";
 import { formatRulesForPrompt, getActiveRuleSet } from "@/lib/rules/active";
@@ -270,13 +271,16 @@ async function analyzeUnlocked(
     .map((m) => messageText(m.parts))
     .filter(Boolean);
 
-  const [classified, faqs] = await Promise.allSettled([
+  const [classified, faqs, futureEvents] = await Promise.allSettled([
     classify(ctx, formatRulesForPrompt(ruleSet), ruleSet.leadHints),
     extractFaqs(newUserTexts),
+    updateFutureEvents(ctx),
   ]);
   if (faqs.status === "fulfilled" && faqs.value) storeFaqs(conversationId, faqs.value);
   else if (faqs.status === "rejected")
     console.error("[insights] FAQ extraction failed", faqs.reason);
+  if (futureEvents.status === "rejected")
+    console.error("[insights] future event extraction failed", futureEvents.reason);
   if (classified.status === "rejected") throw classified.reason;
   const c = classified.value;
 
