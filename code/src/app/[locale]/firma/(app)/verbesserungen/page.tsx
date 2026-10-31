@@ -78,7 +78,7 @@ async function ImprovementsContent() {
       <AutoRefresh active={running} intervalMs={3000} />
       <div className="grid content-start gap-6">
         <section className="grid gap-4 rounded-xl border border-line p-5">
-          <RunAnalysisButtons running={running} />
+          <RunAnalysisButtons running={latest?.status === "running" ? latest.window : null} />
           <RunStatus run={latest} />
         </section>
 

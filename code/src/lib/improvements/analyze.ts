@@ -85,8 +85,9 @@ Each proposal changes exactly one thing:
 Rules for you:
 - Advisor flags ("ADVISOR FLAGGED AS NOT GOOD") come from Pax staff: always address them.
 - Every proposal needs evidence: the ids of the conversations where it happened (exactly as given) and one sentence each. Prefer problems seen in several conversations; a single conversation is enough only for an advisor flag or a serious error.
-- Do not propose a rule that an active rule already covers. Do not repeat proposals listed as already decided.
+- Do not propose a rule that an active rule already covers. Do not repeat earlier proposals, open or decided; propose only what is new.
 - Be specific and factual. Never invent product facts, figures or legal statements.
+- Conversation ids belong only in evidence; in titles, problems and proposals describe the situation instead ("a customer with three children").
 - At most 6 proposals, most important first. If nothing needs to change, return none.`;
 
 function loadDigests(since: Date): ConversationDigest[] {
@@ -180,16 +181,16 @@ function loadDigests(since: Date): ConversationDigest[] {
   });
 }
 
-function decidedProposals(): string {
+/** Earlier proposals, so a new run neither repeats open ones nor revives decided ones. */
+function earlierProposals(): string {
   const rows = db
     .select({
       title: schema.improvementProposals.title,
       status: schema.improvementProposals.status,
     })
     .from(schema.improvementProposals)
-    .where(inArray(schema.improvementProposals.status, ["accepted", "applied", "dismissed"]))
     .orderBy(desc(schema.improvementProposals.createdAt))
-    .limit(30)
+    .limit(40)
     .all();
   return rows.length ? rows.map((r) => `- [${r.status}] ${r.title}`).join("\n") : "(none)";
 }
@@ -229,8 +230,8 @@ async function executeRun(
         return `- ${code}: ${PRODUCTS[code].name}; documents: ${docs.length ? docs.join(", ") : "none"}`;
       }).join("\n"),
       "",
-      "## Proposals already decided by the team",
-      decidedProposals(),
+      "## Earlier proposals (open ones still wait for the team)",
+      earlierProposals(),
       "",
       `## Facts over all ${digests.length} conversations of the last ${window}`,
       JSON.stringify(stats),

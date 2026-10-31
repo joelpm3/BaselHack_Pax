@@ -2,17 +2,23 @@
 
 import { Check, RotateCcw, Sparkles, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { decideImprovement, startImprovementAnalysis } from "@/app/[locale]/firma/learning-actions";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { useRouter } from "@/i18n/navigation";
-import { IMPROVEMENT_WINDOWS, type ImprovementKind } from "@/lib/domain/learning";
+import {
+  IMPROVEMENT_WINDOWS,
+  type ImprovementKind,
+  type ImprovementWindow,
+} from "@/lib/domain/learning";
 
-export function RunAnalysisButtons({ running }: { running: boolean }) {
+/** `running` is the window of the analysis in progress, if any. */
+export function RunAnalysisButtons({ running }: { running: ImprovementWindow | null }) {
   const t = useTranslations("learning.improvements");
   const [pending, start] = useTransition();
-  const busy = pending || running;
+  const [clicked, setClicked] = useState<ImprovementWindow | null>(null);
+  const active = running ?? (pending ? clicked : null);
   return (
     <fieldset className="flex flex-wrap gap-2" aria-label={t("runLabel")}>
       {IMPROVEMENT_WINDOWS.map((window, i) => (
@@ -20,10 +26,13 @@ export function RunAnalysisButtons({ running }: { running: boolean }) {
           key={window}
           variant={i === 0 ? "primary" : "secondary"}
           size="sm"
-          disabled={busy}
-          onClick={() => start(() => startImprovementAnalysis(window))}
+          disabled={active !== null}
+          onClick={() => {
+            setClicked(window);
+            start(() => startImprovementAnalysis(window));
+          }}
         >
-          {busy && i === 0 ? <Spinner label={t(`run.${window}`)} /> : <Sparkles aria-hidden />}
+          {active === window ? <Spinner /> : <Sparkles aria-hidden />}
           {t(`run.${window}`)}
         </Button>
       ))}

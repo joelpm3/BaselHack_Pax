@@ -18,14 +18,21 @@ export interface ProductInfoOutput {
   next: string;
 }
 
+/** Widgets such as suggestReplies end the turn, so the answer has to be written first. */
+const WRITE_FIRST =
+  " Write this as text in your next step, before calling any other tool: suggestReplies and other widgets end your turn.";
+
 const NEXT: Record<ProductInfoOutput["status"], string> = {
   ok:
-    "The customer cannot see these excerpts. Answer their question now in your message, in your own words from the excerpts, " +
-    "and name the document. If the excerpts do not contain the answer, say plainly that the documents do not say this and offer a personal advisor.",
+    "The customer cannot see these excerpts. Answer their question in your own words from the excerpts and name the document. " +
+    "If the excerpts do not contain the answer, say plainly that the documents do not say this and offer a personal advisor." +
+    WRITE_FIRST,
   no_match:
-    "Nothing matched. Retry once with words from `headings`; if that fails, tell the customer plainly that you cannot confirm this detail here and offer a personal advisor.",
+    "Nothing matched. Retry once with words from `headings`; if that fails, tell the customer plainly that you cannot confirm this detail here and offer a personal advisor." +
+    WRITE_FIRST,
   no_documents:
-    "Pax has not uploaded documents for this product. Tell the customer plainly that you cannot confirm this detail here and offer a personal advisor.",
+    "Pax has not uploaded documents for this product. Tell the customer plainly that you cannot confirm this detail here and offer a personal advisor." +
+    WRITE_FIRST,
 };
 
 /**

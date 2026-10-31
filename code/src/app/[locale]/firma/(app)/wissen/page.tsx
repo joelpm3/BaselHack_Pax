@@ -66,11 +66,13 @@ async function KnowledgeContent() {
             <li key={code} className="grid gap-3 p-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="text-base font-bold">{PRODUCTS[code].name}</h2>
-                <span className="text-fg-muted">
-                  {t("documentCount", {
-                    count: productEntries.filter((e) => e.active).length,
-                  })}
-                </span>
+                {productEntries.length > 0 ? (
+                  <span className="text-fg-muted">
+                    {t("documentCount", {
+                      count: productEntries.filter((e) => e.active).length,
+                    })}
+                  </span>
+                ) : null}
               </div>
               {productEntries.length === 0 ? (
                 <p className="text-fg-muted">{t("productEmpty")}</p>
