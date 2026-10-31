@@ -24,6 +24,7 @@ import { db, schema } from "@/lib/db";
 import { lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
 import { messageItems } from "@/lib/insights/transcript";
 import { getProfile } from "@/lib/profile/service";
+import { actInCard, pendingCard } from "./converse-cards";
 import { asksAboutInsurance, explainsOptions, flagsFor, type ToolCall } from "./converse-checks";
 import { type Beat, SCENARIOS, type Scenario, scenarioById } from "./converse-scenarios";
 
@@ -112,6 +113,8 @@ function createCustomer(scenario: Scenario): string {
 
 interface Exchange {
   customer: string;
+  /** What the harness did in a card before this message. */
+  cardNote?: string;
   voice: boolean;
   texts: string[];
   tools: ToolCall[];
@@ -222,9 +225,19 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
   let analysisShown = false;
   let insuranceAsked = false;
   let optionsExplained = false;
+  let lastTools: ToolCall[] = [];
+  let beatIndex = 0;
 
   for (let i = 0; i < scenario.maxTurns; i++) {
-    const beat = beatOf(scenario.script[i]);
+    // The customer acts in a suitability or offer card first, as in the chat.
+    const card = scenario.card ? pendingCard(lastTools) : null;
+    const acted =
+      card && scenario.card
+        ? await actInCard(card, customerId, conversation.id, scenario.card)
+        : null;
+    const beat = acted
+      ? { say: acted.message, intent: null, voice: false }
+      : beatOf(scenario.script[beatIndex++]);
     let text = beat.say;
     let end = false;
     if (!text) {
@@ -245,6 +258,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
           role: "user",
           parts: [{ type: "text", text }],
           ...(beat.voice ? { metadata: { inputMode: "voice" } } : {}),
+          ...(acted ? { metadata: { inputMode: "widget" } } : {}),
         } as UIMessage,
       });
     } catch (error) {
@@ -261,6 +275,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       break;
     }
     const { texts, tools } = toolsOf(reply);
+    lastTools = tools;
     // What the chat shows.
     quickReplies = quickRepliesOf(reply.parts as Array<{ type: string }>);
     analysisShown ||= tools.some((t) =>
@@ -290,6 +305,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
     insuranceAsked ||= texts.some(asksAboutInsurance);
     exchanges.push({
       customer: text,
+      cardNote: acted?.note,
       voice: beat.voice,
       texts,
       tools,
@@ -322,6 +338,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
   let flagCount = 0;
   exchanges.forEach((x, n) => {
     lines.push(`## Turn ${n + 1} (${(x.ms / 1000).toFixed(1)} s)`, "");
+    if (x.cardNote) lines.push(`_${x.cardNote}_`, "");
     lines.push(`**CUSTOMER${x.voice ? " (voice)" : ""}:** ${x.customer}`, "");
     for (const tool of x.tools) {
       if (tool.name === "suggestReplies") {

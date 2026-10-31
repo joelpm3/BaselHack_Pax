@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/domain/taxonomy";
+import { type CardCustomer, DEFAULT_SUITABILITY } from "./converse-cards";
 import { PERSONA_SCENARIOS } from "./persona-scenarios";
 
 /**
@@ -16,6 +17,8 @@ export interface Scenario {
   locale: Locale;
   /** Seeded demo client to copy (profile + policies); otherwise a new anonymous customer. */
   demoClient?: string;
+  /** How the customer acts in the suitability and offer cards (harness signs when set). */
+  card?: CardCustomer;
   /** Profile of an anonymous returning visitor (facts from an earlier conversation). */
   knownProfile?: Record<string, unknown>;
   /** Facts and behaviour of the simulated customer (English is fine; it writes in `locale`). */
@@ -263,6 +266,111 @@ export const SCENARIOS: Scenario[] = [
       { intent: "Answer the advisor's question." },
     ],
     maxTurns: 7,
+  },
+  // The challenge's official personas (challenge_context/material/text/personas.txt) as NEW
+  // customers: the full journey from getting to know them to a signed policy.
+  {
+    id: "jury-young-family",
+    title: "Jury persona: Jane Müller, young family, new customer, full journey to signing",
+    locale: "de",
+    persona: `You are Jane Müller, born 01.06.1986, married to May Müller (born 16.09.1984). You live in 4053 Basel. You do not work since the baby was born; your baby is 5 months old (born May 2026). May works 100% as an employee, CHF 100'000 gross per year, with a pension fund (figures unknown, no certificate at hand). Savings CHF 20'000. No 3a, no private life insurance. You worry what happens to you and the baby if May dies or cannot work. Beginner: everyday words. Uses Sie. When the advisor recommends something that fits, you want an offer and sign it in the card. May does not smoke.`,
+    script: [
+      "Grüezi. Wir haben vor fünf Monaten ein Baby bekommen und ich arbeite im Moment nicht. Mein Mann verdient allein. Ich frage mich, was passiert, wenn ihm etwas zustösst.",
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer; if a solution was shown, say you would like to see an offer." },
+      { intent: "Answer the advisor's question; go ahead with the offer if it fits." },
+    ],
+    card: {
+      contact: {
+        firstName: "Jane",
+        lastName: "Müller",
+        birthDate: "1986-06-01",
+        email: "jane.mueller@example.ch",
+        phone: "+41 79 000 00 11",
+      },
+      smoker: false,
+      suitability: { ...DEFAULT_SUITABILITY, netIncome: "75k_150k", netAssets: "10k_50k" },
+    },
+    maxTurns: 14,
+  },
+  {
+    id: "jury-affluent-couple",
+    title: "Jury persona: Lily Smith, affluent couple, new customer, full journey to signing",
+    locale: "de",
+    persona: `You are Lily Smith, born 08.08.1976, married to Wilson Smith (born 16.09.1967). You live in 4125 Riehen. Wilson works 100% as an employee, CHF 200'000 gross per year; you work 80%, CHF 80'000 gross. Both have a pension fund (no certificates at hand). Assets CHF 500'000 (savings and securities). You both pay the 3a maximum at a bank. No private life insurance. Wilson retires in a few years; you wonder about lump sum vs pension, a pension-fund buy-in and how to invest part of the savings for retirement income. Informed: you know the basic terms. Uses Sie. When a recommendation fits, you want an offer and complete what the card asks.`,
+    script: [
+      "Guten Tag. Mein Mann wird in ein paar Jahren pensioniert, ich arbeite noch länger. Wir haben einiges gespart und möchten wissen, wie wir das für die Pension am besten aufstellen.",
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Ask which solution the advisor recommends for investing part of the savings." },
+      { intent: "Answer; go ahead with the recommended solution if it fits." },
+    ],
+    card: {
+      contact: {
+        firstName: "Lily",
+        lastName: "Smith",
+        birthDate: "1976-08-08",
+        email: "lily.smith@example.ch",
+        phone: "+41 79 000 00 12",
+      },
+      smoker: false,
+      suitability: {
+        annualPremium: null,
+        singlePremium: 100000,
+        netIncome: "150k_250k",
+        netAssets: "gt300k",
+        savingCapacity: "gt7k",
+        oneOffCapacity: "gt300k",
+        goal: "moderate_gains",
+        horizon: "10_15",
+        knowledge: "experience",
+        drawdown: "hold",
+        guaranteedSharePercent: 0,
+      },
+    },
+    maxTurns: 14,
+  },
+  {
+    id: "jury-single-professional",
+    title: "Jury persona: Taylor Johnson, single professional, new customer, full journey",
+    locale: "de",
+    persona: `You are Taylor Johnson, born 16.09.1995, single, no children, live in 8004 Zürich. You work 90% as an employee, CHF 100'000 gross per year, with a pension fund (no certificate at hand). Assets CHF 500'000 (inheritance, mostly on a savings account). No 3a yet, no private life insurance. You want to know how to use the money sensibly for your retirement and maybe a flat later, and whether you need any insurance at all. Informed, likes numbers. Uses Sie. When a recommendation fits, you want an offer and complete what the card asks.`,
+    script: [
+      "Hallo. Ich bin 31, Single, arbeite 90 Prozent und habe ziemlich viel Geld auf dem Sparkonto, rund 500'000 Franken. Was sollte ich für meine Vorsorge damit machen?",
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Answer the advisor's question." },
+      { intent: "Ask which solution the advisor recommends and whether you can start it now." },
+      { intent: "Answer; go ahead with the recommended solution if it fits." },
+    ],
+    card: {
+      contact: {
+        firstName: "Taylor",
+        lastName: "Johnson",
+        birthDate: "1995-09-16",
+        email: "taylor.johnson@example.ch",
+        phone: "+41 79 000 00 13",
+      },
+      smoker: false,
+      suitability: {
+        ...DEFAULT_SUITABILITY,
+        netAssets: "gt300k",
+        oneOffCapacity: "gt300k",
+        goal: "high_gains",
+        knowledge: "experience",
+        drawdown: "buy_more",
+      },
+    },
+    maxTurns: 14,
   },
   ...PERSONA_SCENARIOS,
 ];
