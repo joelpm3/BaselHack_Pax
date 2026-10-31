@@ -5,11 +5,12 @@ import { refresh } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createConversation } from "@/lib/advisor/conversations";
-import { getCurrentCustomer } from "@/lib/auth/customer";
+import { clearCustomerCookie, getCurrentCustomer } from "@/lib/auth/customer";
 import { db, schema } from "@/lib/db";
 import { deleteDocument } from "@/lib/documents/service";
 import { LOCALES } from "@/lib/domain/taxonomy";
 import { setHintStatus } from "@/lib/hints/service";
+import { eraseCustomerData } from "@/lib/privacy/service";
 
 /** Cockpit mutations. Each one checks ownership through the device cookie. */
 
@@ -61,4 +62,14 @@ export async function discussHintAction(formData: FormData): Promise<void> {
     mode: customer.lifecycle === "client" || customer.isDemo ? "existing_customer" : "new_business",
   });
   redirect(`/${locale}/chat/${conversation.id}?hint=${hint.id}`);
+}
+
+/** "Meine Daten löschen": erases the advisor's data and returns to the cockpit with a notice. */
+export async function eraseMyDataAction(formData: FormData): Promise<void> {
+  const customer = await getCurrentCustomer();
+  const locale = z.enum(LOCALES).catch("de").parse(formData.get("locale"));
+  if (!customer) redirect(`/${locale}/portal`);
+  const scope = await eraseCustomerData(customer.id);
+  if (scope === "full") await clearCustomerCookie();
+  redirect(`/${locale}/portal?erased=${scope}`);
 }

@@ -8,6 +8,7 @@ import { ConversationList } from "@/components/portal/conversation-list";
 import { DocumentList } from "@/components/portal/document-list";
 import { HintList, HintListSkeleton } from "@/components/portal/hint-list";
 import { KeyFigures } from "@/components/portal/key-figures";
+import { MyData } from "@/components/portal/my-data";
 import { PillarOverview } from "@/components/portal/pillar-overview";
 import { PolicyList } from "@/components/portal/policy-list";
 import { PortalHeader } from "@/components/portal/portal-header";
@@ -29,23 +30,26 @@ export async function generateMetadata({
   return { title: t("metaTitle") };
 }
 
-export default function PortalPage({ params }: PageProps<"/[locale]/portal">) {
+export default function PortalPage({ params, searchParams }: PageProps<"/[locale]/portal">) {
   const { locale } = use(params);
   setRequestLocale(locale);
   return (
     <div className="min-h-dvh pb-16">
       <PortalHeader />
       <Suspense fallback={<CockpitSkeleton />}>
-        <Cockpit locale={locale as Locale} />
+        <Cockpit locale={locale as Locale} searchParams={searchParams} />
       </Suspense>
     </div>
   );
 }
 
-async function Cockpit({ locale }: { locale: Locale }) {
+type SearchParams = PageProps<"/[locale]/portal">["searchParams"];
+
+async function Cockpit({ locale, searchParams }: { locale: Locale; searchParams: SearchParams }) {
   await connection();
+  const { erased } = await searchParams;
   const customer = await getCurrentCustomer();
-  if (!customer) return <EmptyCockpit />;
+  if (!customer) return <EmptyCockpit erased={erased === "full"} />;
   const t = await getTranslations("portal");
   const tFollowUps = await getTranslations("followups.portal");
   const today = toIsoDate(new Date());
@@ -63,6 +67,11 @@ async function Cockpit({ locale }: { locale: Locale }) {
         advice={adviceEntries(policies, profile)}
       />
       <div className="mx-auto max-w-6xl px-4 lg:px-8">
+        {erased === "agentic" ? (
+          <output className="mt-6 block rounded-xl bg-light-purple p-5 text-paragraph-s">
+            {t("myData.erasedAgentic")}
+          </output>
+        ) : null}
         <div className="-mt-px pt-6 lg:pt-8">
           <KeyFigures figures={keyFigures(policies, profile, calculated)} locale={locale} />
         </div>
@@ -95,6 +104,9 @@ async function Cockpit({ locale }: { locale: Locale }) {
             <Section id="checkin" title={tFollowUps("title")} className="order-7">
               <CheckinSetting customerId={customer.id} />
             </Section>
+            <Section id="my-data" title={t("myData.title")} className="order-8">
+              <MyData customerId={customer.id} />
+            </Section>
           </div>
         </div>
       </div>
@@ -102,7 +114,7 @@ async function Cockpit({ locale }: { locale: Locale }) {
   );
 }
 
-async function EmptyCockpit() {
+async function EmptyCockpit({ erased }: { erased: boolean }) {
   const t = await getTranslations("portal.empty");
   return (
     <section className="bg-pax-purple text-white">
@@ -112,8 +124,12 @@ async function EmptyCockpit() {
           <span className="size-5 border-2 border-white" />
           <span className="size-5 bg-pax-green" />
         </div>
-        <h1 className="text-heading-xl font-bold text-pax-green">{t("title")}</h1>
-        <p className="mt-3 max-w-xl text-paragraph-l text-white/80">{t("body")}</p>
+        <h1 className="text-heading-xl font-bold text-pax-green">
+          {erased ? t("erasedTitle") : t("title")}
+        </h1>
+        <p className="mt-3 max-w-xl text-paragraph-l text-white/80">
+          {erased ? t("erasedBody") : t("body")}
+        </p>
         <Link href="/" className={buttonClasses("inverse", "lg", "mt-8")}>
           {t("start")}
         </Link>
