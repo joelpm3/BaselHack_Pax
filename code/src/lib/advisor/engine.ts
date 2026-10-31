@@ -16,6 +16,7 @@ import {
 import { asc, eq } from "drizzle-orm";
 import { getModel, modelName } from "@/lib/ai/models";
 import { db, schema } from "@/lib/db";
+import { documentNotesForAdvisor } from "@/lib/documents";
 import { profileCompleteness } from "@/lib/domain/profile";
 import { LIFE_AND_PENSION_CATEGORIES } from "@/lib/domain/taxonomy";
 import { publish } from "@/lib/events/bus";
@@ -73,17 +74,21 @@ const waitsForCustomer: StopCondition<ToolSet> = ({ steps }) => {
 /**
  * Prepares the stored transcript for the model: drops the greeting (it is in the instructions)
  * and old reasoning (its signature is bound to the previous, different system prompt), and adds
- * context the model needs but the customer should not see.
+ * context the model needs but the customer should not see. After the review card, the note
+ * states what the server already did with each document (values applied, discarded).
  */
-function forModel(messages: AdvisorUIMessage[]): AdvisorUIMessage[] {
+function forModel(messages: AdvisorUIMessage[], customerId: string): AdvisorUIMessage[] {
   return messages
     .filter((m) => m.metadata?.kind !== "greeting")
     .map((m) => {
       if (m.role === "assistant") return { ...m, parts: m.parts.filter(isTranscriptPart) };
       if (m.role !== "user") return m;
       const notes: string[] = [];
-      if (m.metadata?.documentIds?.length)
-        notes.push(`[Uploaded document ids: ${m.metadata.documentIds.join(", ")}]`);
+      const documentIds = m.metadata?.documentIds ?? [];
+      if (documentIds.length > 0 && m.metadata?.inputMode === "upload")
+        notes.push(`[Uploaded document ids: ${documentIds.join(", ")}]`);
+      else if (documentIds.length > 0)
+        notes.push(...documentNotesForAdvisor(customerId, documentIds));
       if (m.metadata?.inputMode === "voice")
         notes.push("[Dictated by voice: the transcript may contain recognition errors]");
       return notes.length
@@ -242,7 +247,7 @@ export async function streamAdvisorTurn(
       topicHintId: greeting?.metadata?.hintId ?? null,
       applications: applicationStates(conversation.id),
     }),
-    messages: await convertToModelMessages(forModel(history), {
+    messages: await convertToModelMessages(forModel(history, conversation.customerId), {
       tools,
       ignoreIncompleteToolCalls: true,
     }),
