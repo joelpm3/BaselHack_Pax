@@ -6,8 +6,10 @@ import {
   type FunnelStage,
   type IntentStage,
   type LeadType,
+  type PolicyCategory,
   type Priority,
   stageIndex,
+  THIRD_PILLAR_CATEGORIES,
 } from "@/lib/domain/taxonomy";
 
 /**
@@ -136,13 +138,32 @@ export interface LeadTypeInput {
   lifecycle: CustomerLifecycle;
   /** Holds at least one (non-external) Pax policy. */
   hasPaxPolicy: boolean;
-  /** External life/pension policy in the cockpit or mentioned in the conversation. */
-  hasExternalPolicy: boolean;
+  /**
+   * A 3rd-pillar policy at another insurer (never a pension fund): talked about in this
+   * conversation, only on file in the cockpit, or none.
+   */
+  externalPolicy: "discussed" | "on_file" | "none";
   intentStage: IntentStage;
   gaps: IdentifiedGap[];
   productInterest: ProductInterest[];
   /** Pure service concern (change of beneficiary, payment, policy question), if any. */
   serviceRequest: string | null;
+}
+
+/**
+ * Whether a switch is possible at all: only a 3rd-pillar policy at another insurer counts. A
+ * pension fund (e.g. an uploaded pension certificate) cannot be switched, and Pax does not
+ * replace non-life contracts.
+ */
+export function externalPolicyState(
+  policies: Array<{ isExternal: boolean; category: PolicyCategory; status: string }>,
+  discussed: { category: PolicyCategory } | null,
+): LeadTypeInput["externalPolicy"] {
+  if (discussed && THIRD_PILLAR_CATEGORIES.includes(discussed.category)) return "discussed";
+  const onFile = policies.some(
+    (p) => p.status === "active" && p.isExternal && THIRD_PILLAR_CATEGORIES.includes(p.category),
+  );
+  return onFile ? "on_file" : "none";
 }
 
 /** Sales potential: a concrete gap, a product of interest, or someone actively comparing. */
@@ -158,17 +179,18 @@ export function hasSalesPotential(
 }
 
 /**
- * Which leads a conversation produces. A conversation can be several things at once, e.g. an
- * existing client with a new need who also holds an expensive external policy.
+ * The one lead a conversation produces, or null. A conversation can touch several things (a new
+ * need and an external policy); the advisor gets a single lead with the most specific reason:
+ * an external policy the customer talked about makes it a switch, otherwise the sales need
+ * decides, and a policy that is only on file is a switch reason without any other need.
  */
-export function determineLeadTypes(input: LeadTypeInput): LeadType[] {
-  const types: LeadType[] = [];
+export function determineLeadType(input: LeadTypeInput): LeadType | null {
   const sales = hasSalesPotential(input);
+  const engaged = sales || input.intentStage !== "informing";
   const isClient = input.lifecycle === "client" || input.hasPaxPolicy;
-  if (sales) types.push(isClient ? "existing_upsell" : "new_business");
-  if (input.hasExternalPolicy && (sales || input.intentStage !== "informing")) {
-    types.push("switch_opportunity");
-  }
-  if (input.serviceRequest && !sales) types.push("service");
-  return types;
+  if (input.externalPolicy === "discussed" && engaged) return "switch_opportunity";
+  if (sales) return isClient ? "existing_upsell" : "new_business";
+  if (input.externalPolicy === "on_file" && engaged) return "switch_opportunity";
+  if (input.serviceRequest) return "service";
+  return null;
 }

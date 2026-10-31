@@ -314,7 +314,9 @@
       "rescored": "Rivalutato: punteggio {from} → {to}",
       "statusChange": "Stato cambiato da «{from}» a «{to}»",
       "assigned": "Assegnato a {name}",
-      "unassigned": "Assegnazione rimossa"
+      "unassigned": "Assegnazione rimossa",
+      "retyped": "Tipo di lead modificato: {from} → {to}",
+      "merged": "Unito a un altro colloquio"
     },
     "handovers": {
       "title": "Passaggi"

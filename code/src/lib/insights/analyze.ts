@@ -6,7 +6,7 @@ import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import type { HandoverVerdict } from "@/lib/db/schema";
 import { publish } from "@/lib/events/bus";
-import { upsertLeadsForConversation } from "@/lib/leads/upsert";
+import { upsertLeadForConversation } from "@/lib/leads/upsert";
 import { getProfile } from "@/lib/profile/service";
 import { formatRulesForPrompt, getActiveRuleSet } from "@/lib/rules/active";
 import {
@@ -328,7 +328,7 @@ async function analyzeUnlocked(
     db.query.conversations
       .findFirst({ where: eq(schema.conversations.id, conversationId) })
       .sync() ?? conversation;
-  const leadIds = upsertLeadsForConversation(fresh, customer, {
+  const leadIds = upsertLeadForConversation(fresh, customer, {
     intentStage: c.intentStage,
     gaps: c.gaps,
     productInterest: c.productInterest,

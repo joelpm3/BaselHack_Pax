@@ -16,7 +16,9 @@ import {
   INTENT_STAGES,
   type IntentStage,
   LEAD_STATUSES,
+  LEAD_TYPES,
   type LeadStatus,
+  type LeadType,
 } from "@/lib/domain/taxonomy";
 import type { ConversationDetail } from "@/lib/firma/conversations";
 import { SCORE_FACTORS, type ScoreFactor } from "@/lib/leads/scoring";
@@ -65,13 +67,16 @@ export async function LeadsSection({
   detail: ConversationDetail;
   locale: string;
 }) {
-  const [t, tStatus, format] = await Promise.all([
+  const [t, tStatus, tType, format] = await Promise.all([
     getTranslations("firma"),
     getTranslations("common.taxonomy.leadStatus"),
+    getTranslations("common.taxonomy.leadType"),
     getFormatter(),
   ]);
   const statusLabel = (value: unknown) =>
     LEAD_STATUSES.includes(value as LeadStatus) ? tStatus(value as LeadStatus) : String(value);
+  const typeLabel = (value: unknown) =>
+    LEAD_TYPES.includes(value as LeadType) ? tType(value as LeadType) : String(value);
   const advisorName = new Map(detail.advisors.map((a) => [a.id, a.name]));
 
   return (
@@ -167,6 +172,13 @@ export async function LeadsSection({
                               from: Number(data.fromScore),
                               to: Number(data.score),
                             });
+                          } else if (a.type === "system" && data.event === "retyped") {
+                            text = t("conversation.activity.retyped", {
+                              from: typeLabel(data.fromType),
+                              to: typeLabel(data.type),
+                            });
+                          } else if (a.type === "system" && data.event === "merged") {
+                            text = t("conversation.activity.merged");
                           } else if (a.type === "system" && data.event === "assigned") {
                             text = data.to
                               ? t("conversation.activity.assigned", {

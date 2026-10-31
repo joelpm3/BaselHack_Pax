@@ -314,7 +314,9 @@
       "rescored": "Rescored: score {from} → {to}",
       "statusChange": "Status changed from “{from}” to “{to}”",
       "assigned": "Assigned to {name}",
-      "unassigned": "Assignment removed"
+      "unassigned": "Assignment removed",
+      "retyped": "Lead type changed: {from} → {to}",
+      "merged": "Merged with another conversation"
     },
     "handovers": {
       "title": "Handovers"

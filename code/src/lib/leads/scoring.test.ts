@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
-  determineLeadTypes,
+  determineLeadType,
+  externalPolicyState,
   gapPoints,
   type LeadScoreInput,
   type LeadTypeInput,
@@ -115,49 +116,80 @@ describe("leadPriority", () => {
   });
 });
 
-describe("determineLeadTypes", () => {
+describe("determineLeadType", () => {
   const input: LeadTypeInput = {
     lifecycle: "anonymous",
     hasPaxPolicy: false,
-    hasExternalPolicy: false,
+    externalPolicy: "none",
     intentStage: "informing",
     gaps: [],
     productInterest: [],
     serviceRequest: null,
   };
+  const gap = { gap: "death" as const, amountAnnual: null, note: "" };
 
   it("creates no lead for general information without potential", () => {
-    expect(determineLeadTypes(input)).toEqual([]);
+    expect(determineLeadType(input)).toBeNull();
   });
 
   it("separates new business from upsell by client status", () => {
     const sales = { ...input, intentStage: "comparing" as const };
-    expect(determineLeadTypes(sales)).toEqual(["new_business"]);
-    expect(determineLeadTypes({ ...sales, lifecycle: "client" })).toEqual(["existing_upsell"]);
-    expect(determineLeadTypes({ ...sales, hasPaxPolicy: true })).toEqual(["existing_upsell"]);
+    expect(determineLeadType(sales)).toBe("new_business");
+    expect(determineLeadType({ ...sales, lifecycle: "client" })).toBe("existing_upsell");
+    expect(determineLeadType({ ...sales, hasPaxPolicy: true })).toBe("existing_upsell");
   });
 
-  it("adds a switch opportunity for an external policy", () => {
+  it("makes one switch lead, not two, when the customer talks about an external policy", () => {
     expect(
-      determineLeadTypes({
+      determineLeadType({
         ...input,
-        hasExternalPolicy: true,
-        gaps: [{ gap: "death", amountAnnual: null, note: "" }],
+        lifecycle: "client",
+        externalPolicy: "discussed",
+        gaps: [gap],
       }),
-    ).toEqual(["new_business", "switch_opportunity"]);
-    expect(determineLeadTypes({ ...input, hasExternalPolicy: true })).toEqual([]);
+    ).toBe("switch_opportunity");
+    expect(determineLeadType({ ...input, externalPolicy: "discussed" })).toBeNull();
+  });
+
+  it("keeps the sales lead when an external policy is only on file", () => {
+    expect(
+      determineLeadType({ ...input, lifecycle: "client", externalPolicy: "on_file", gaps: [gap] }),
+    ).toBe("existing_upsell");
+    expect(
+      determineLeadType({ ...input, externalPolicy: "on_file", intentStage: "exploring" }),
+    ).toBe("switch_opportunity");
+  });
+
+  it("never makes a switch lead without an external policy", () => {
+    expect(
+      determineLeadType({ ...input, lifecycle: "client", intentStage: "exploring", gaps: [gap] }),
+    ).toBe("existing_upsell");
+    expect(determineLeadType({ ...input, intentStage: "exploring" })).toBeNull();
+  });
+
+  it("does not treat a pension certificate or non-life cover as switchable", () => {
+    const fund = { isExternal: true, category: "pension_fund" as const, status: "active" };
+    const household = {
+      isExternal: true,
+      category: "nonlife_household" as const,
+      status: "active",
+    };
+    const term = { isExternal: true, category: "risk_death" as const, status: "active" };
+    expect(externalPolicyState([fund, household], null)).toBe("none");
+    expect(externalPolicyState([fund], { category: "pension_fund" })).toBe("none");
+    expect(externalPolicyState([fund, term], null)).toBe("on_file");
+    expect(externalPolicyState([{ ...term, status: "ended" }], null)).toBe("none");
+    expect(externalPolicyState([], { category: "pillar3a" })).toBe("discussed");
   });
 
   it("creates a service lead only without sales potential", () => {
-    expect(determineLeadTypes({ ...input, serviceRequest: "Begünstigung ändern" })).toEqual([
-      "service",
-    ]);
+    expect(determineLeadType({ ...input, serviceRequest: "Begünstigung ändern" })).toBe("service");
     expect(
-      determineLeadTypes({
+      determineLeadType({
         ...input,
         serviceRequest: "Begünstigung ändern",
         productInterest: [{ productCode: "pax3a", strength: "medium" }],
       }),
-    ).toEqual(["new_business"]);
+    ).toBe("new_business");
   });
 });
