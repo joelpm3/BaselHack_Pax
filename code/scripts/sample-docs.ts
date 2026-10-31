@@ -433,29 +433,20 @@ function projectedCapital(p: PensionPerson, insured: number, age: number): numbe
   return round05(capital);
 }
 
+/** Margins of the letter-style documents (pension certificate, policy). */
+const L = 48;
+const R = A4[0] - 48;
+
 const round05 = (value: number) => Math.round(value * 20) / 20;
 const pad = (n: number) => String(n).padStart(2, "0");
 const lastDay = (month: number, year: number) => new Date(Date.UTC(year, month, 0)).getUTCDate();
 
-async function pensionCertificate(p: PensionPerson) {
-  const { pdf, addPage } = await newDocument(
-    `Vorsorgeausweis 2026 ${p.name}`,
-    "Vorsorgeausweis Pensionskasse Muster, Muster",
-  );
-  const ACCENT = rgb(0.11, 0.33, 0.52);
-  const L = 48;
-  const R = A4[0] - 48;
-  const coordination = round05(PLAN.coordination * (p.workload / 100));
-  const insured = p.salary - coordination;
-  const { month, year } = birth(p);
-  const savings = savingsRate(2026 - year);
-  const disability = round05(insured * PLAN.disabilityShare);
-  const retirementDate = `${lastDay(month, year + 65)}.${pad(month)}.${year + 65}`;
-
+/** Section bands, label/value rows and a two-column grid for letter-style documents. */
+function letterHelpers(accent: RGB) {
   /** Section heading with a tinted band; returns the next top. */
   const section = (c: Canvas, label: string, top: number) => {
     c.rect(L, top, R - L, 17, { fill: TINT });
-    c.rect(L, top, 3, 17, { fill: ACCENT });
+    c.rect(L, top, 3, 17, { fill: accent });
     c.text(label, L + 10, top + 4.5, { size: 9.5, bold: true });
     return top + 24;
   };
@@ -490,6 +481,22 @@ async function pensionCertificate(p: PensionPerson) {
     });
     return y + 6;
   };
+  return { section, rows, grid };
+}
+
+async function pensionCertificate(p: PensionPerson) {
+  const { pdf, addPage } = await newDocument(
+    `Vorsorgeausweis 2026 ${p.name}`,
+    "Vorsorgeausweis Pensionskasse Muster, Muster",
+  );
+  const ACCENT = rgb(0.11, 0.33, 0.52);
+  const { section, rows, grid } = letterHelpers(ACCENT);
+  const coordination = round05(PLAN.coordination * (p.workload / 100));
+  const insured = p.salary - coordination;
+  const { month, year } = birth(p);
+  const savings = savingsRate(2026 - year);
+  const disability = round05(insured * PLAN.disabilityShare);
+  const retirementDate = `${lastDay(month, year + 65)}.${pad(month)}.${year + 65}`;
 
   // Page 1
   const c = addPage();
@@ -669,6 +676,101 @@ async function pensionCertificate(p: PensionPerson) {
   await save(pdf, p.file);
 }
 
+// ─── Police einer anderen Versicherung ──────────────────────────────────────
+
+/** A term life policy May took out in 2017 with another insurer, next to his Pax policy. */
+async function termLifePolicy() {
+  const { pdf, addPage } = await newDocument(
+    "Police ML-2017-0048213 May Müller",
+    "Risiko-Lebensversicherung Muster Leben AG, Muster",
+  );
+  const ACCENT = rgb(0.6, 0.13, 0.17);
+  const { section, rows, grid } = letterHelpers(ACCENT);
+  const premium = 648;
+
+  const c = addPage();
+  c.specimen("Seite 1 von 1");
+  c.rect(L, 40, 16, 16, { fill: ACCENT });
+  c.text("Muster Leben AG", L + 24, 41, { size: 14, bold: true });
+  c.text("Lebensversicherungen", L + 24, 60, { size: 8, color: MUTED });
+  c.text("Beispielweg 12, 8001 Zürich", L + 24, 71, { size: 8, color: MUTED });
+  c.text("Kundendienst 044 000 00 00, service@muster-leben.example", L + 24, 82, {
+    size: 8,
+    color: MUTED,
+  });
+
+  [MAY.salutation, MAY.name, MAY.street, MAY.town].forEach((line, i) => {
+    c.text(line, 330, 120 + i * 13, { size: 10 });
+  });
+
+  c.text("Zürich, 15. April 2017", L, 210, { size: 9 });
+  c.text("Police Nr. ML-2017-0048213", L, 232, { size: 16, bold: true });
+  c.text("Risiko-Lebensversicherung «Familienschutz Konstant», freie Vorsorge (Säule 3b)", L, 253, {
+    size: 9,
+    color: MUTED,
+  });
+
+  let y = section(c, "Vertragsparteien", 276);
+  y = grid(c, y, [
+    ["Versicherungsnehmer", `${MAY.salutation} ${MAY.name}`],
+    ["Versicherte Person", MAY.name],
+    ["Adresse", `${MAY.street}, ${MAY.town}`],
+    ["Geburtsdatum", MAY.birthDate],
+    ["Tarif", "Nichtraucher"],
+    ["Kundennummer", "K-5520-1987"],
+  ]);
+
+  y = section(c, "Vertragsdauer", y);
+  y = rows(c, y, [
+    ["Versicherungsbeginn", "01.05.2017"],
+    ["Vertragsablauf", "30.04.2049"],
+    ["Versicherungsjahr", "jeweils vom 01.05. bis 30.04."],
+  ]);
+
+  y = section(c, "Versicherte Leistungen", y);
+  y = rows(c, y, [
+    [
+      "Todesfallkapital, konstant über die ganze Dauer",
+      "CHF 200'000.00",
+      { bold: true, note: "fällig beim Tod der versicherten Person vor dem Vertragsablauf" },
+    ],
+    ["Leistung im Erlebensfall", "keine"],
+    ["Rückkaufswert", "keiner (reine Risikoversicherung)"],
+    ["Begünstigung", "1. die Ehegattin, 2. die Nachkommen zu gleichen Teilen"],
+  ]);
+
+  y = section(c, "Prämie", y);
+  y = rows(c, y, [
+    [
+      "Prämie halbjährlich",
+      `CHF ${amount(premium)}`,
+      { bold: true, note: "fällig jeweils am 01.05. und am 01.11." },
+    ],
+    ["Jahresprämie", `CHF ${amount(premium * 2)}`],
+    ["Überschussbeteiligung", "nicht garantiert, mit der Prämie verrechnet"],
+  ]);
+
+  y = section(c, "Kündigung", y);
+  y += c.paragraph(
+    "Der Versicherungsnehmer kann den Vertrag jeweils auf das Ende eines Versicherungsjahres (30.04.) unter Einhaltung einer Kündigungsfrist von 3 Monaten schriftlich kündigen. Ohne Kündigung läuft der Vertrag bis zum Vertragsablauf weiter.",
+    L + 10,
+    y,
+    R - L - 20,
+    { size: 9 },
+  );
+  y += 12;
+  y += c.paragraph(
+    "Es gelten die Allgemeinen Versicherungsbedingungen (AVB) für Risiko-Lebensversicherungen, Ausgabe 2017. Diese Police ersetzt alle früheren Policen zu diesem Vertrag.",
+    L,
+    y,
+    R - L,
+    { size: 8, color: MUTED },
+  );
+  c.text("Muster Leben AG", L, y + 14, { size: 9, bold: true });
+
+  await save(pdf, "police-muster-leben-todesfall-may-mueller.pdf");
+}
+
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log(`Writing demo documents to ${OUT_DIR}`);
@@ -711,6 +813,7 @@ async function main() {
     deathLumpSum: 0,
     maxBuyIn: 132600,
   });
+  await termLifePolicy();
 }
 
 main().catch((error) => {
