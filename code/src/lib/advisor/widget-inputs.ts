@@ -49,7 +49,7 @@ export interface SaveCandidate {
 export interface WidgetChange {
   toolCallId: string;
   tool: WidgetInputTool;
-  /** Compound interest: pillar3a / savings / general; what-if: the scenario kind. */
+  /** Compound interest: the account (pillar3a / savings); what-if: the scenario kind. */
   variant: string | null;
   values: WidgetValues;
   changed: string[];
@@ -75,8 +75,8 @@ export function changedKeys(values: WidgetValues, reported: WidgetValues): strin
 }
 
 export function variantOf(tool: WidgetInputTool, output: unknown): string | null {
-  const o = output as { basis?: unknown; scenario?: unknown } | null;
-  const variant = tool === "simulateScenario" ? o?.scenario : o?.basis;
+  const o = output as { account?: unknown; basis?: unknown; scenario?: unknown } | null;
+  const variant = tool === "simulateScenario" ? o?.scenario : (o?.account ?? o?.basis);
   return typeof variant === "string" ? variant : null;
 }
 

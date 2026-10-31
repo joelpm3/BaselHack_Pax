@@ -90,7 +90,7 @@ function yearsToRetirement(profile: ReturnType<typeof getProfile>): number | und
 function compoundParams(
   input: z.infer<typeof compoundInput>,
   profile: ReturnType<typeof getProfile>,
-): Pick<CompoundInterestOutput, "params" | "sources" | "basis"> {
+): Pick<CompoundInterestOutput, "params" | "sources" | "basis" | "account"> {
   const pillar3a = input.usePillar3a === true;
   const fromProfile: Partial<CompoundParams> = pillar3a
     ? {
@@ -123,7 +123,12 @@ function compoundParams(
   // "Your figures" only when the amounts are theirs, not just a rate or a duration.
   const own = sources.startAmount !== "example" || sources.monthlySaving !== "example";
   const basis = !own ? "general" : pillar3a ? "pillar3a" : "own";
-  return { params: clampCompound(params), sources, basis };
+  return {
+    params: clampCompound(params),
+    sources,
+    basis,
+    account: pillar3a ? "pillar3a" : "savings",
+  };
 }
 
 const lifePlanInput = z.object({

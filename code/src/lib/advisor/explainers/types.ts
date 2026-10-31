@@ -20,6 +20,8 @@ export interface CompoundInterestOutput {
    * general example.
    */
   basis: "pillar3a" | "own" | "general";
+  /** Which money the sliders stand for, even while they show example values. */
+  account?: "pillar3a" | "savings";
   /** The customer's latest slider values (see widget-inputs.ts); absent until they move one. */
   customerInputs?: CustomerInputs;
   summary: CompoundSummary;

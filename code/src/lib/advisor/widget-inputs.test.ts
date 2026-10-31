@@ -147,6 +147,18 @@ describe("widgetChange", () => {
     expect(change?.variant).toBe("general");
     expect(change?.candidates.map((c) => c.path)).toEqual(["monthlySavings"]);
   });
+
+  it("keeps a 3a widget on the 3a fields while it shows example values", () => {
+    const change = widgetChange({
+      toolCallId: "t1",
+      tool: "explainCompoundInterest",
+      output: { ...compoundOutput, basis: "general", account: "pillar3a" },
+      inputs: inputs({ ...compoundOutput.params, startAmount: 12_000 }),
+      profile: profileWith({}),
+      askedPaths: new Set(),
+    });
+    expect(change?.candidates.map((c) => c.path)).toEqual(["pillar3a.balance"]);
+  });
 });
 
 describe("widgetChangeNote", () => {
