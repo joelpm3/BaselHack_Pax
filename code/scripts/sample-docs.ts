@@ -1,382 +1,378 @@
 /**
- * Generates fictional demo documents for the upload flow (Q38) into public/samples/:
- * two pension certificates, an external term-life policy and a salary certificate.
- * All companies and people are invented ("Muster"); numbers follow Swiss conventions.
+ * Generates the demo documents for the upload flow into public/samples/. They tell one story:
+ * May Müller (born 16.09.1984, married to the seeded demo customer Jane Müller, one child born
+ * 2026, Basel 4053) works full time at Muster Logistik AG for CHF 100'000 a year. His salary
+ * certificate, pension fund certificate and an older term life policy agree with each other
+ * and with the seed. A second pension certificate belongs to the seeded Taylor Johnson.
+ * Every company and person is invented; each page carries a "Muster" watermark and footer.
  * Run: pnpm exec tsx scripts/sample-docs.ts
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { PDFDocument, type PDFFont, type PDFPage, rgb, StandardFonts } from "pdf-lib";
+import {
+  degrees,
+  PDFDocument,
+  type PDFFont,
+  type PDFPage,
+  type RGB,
+  rgb,
+  StandardFonts,
+} from "pdf-lib";
 
 const OUT_DIR = path.join(process.cwd(), "public", "samples");
 const A4: [number, number] = [595.28, 841.89];
-const MARGIN = 56;
-const INK = rgb(0.07, 0.07, 0.07);
-const MUTED = rgb(0.42, 0.42, 0.42);
-const RULE = rgb(0.83, 0.83, 0.83);
+const INK = rgb(0.08, 0.08, 0.08);
+const MUTED = rgb(0.4, 0.4, 0.4);
+const RULE = rgb(0.75, 0.75, 0.75);
+const TINT = rgb(0.94, 0.94, 0.94);
 
-/** CHF 1'234.50 */
-function chf(amount: number): string {
-  const [int, dec] = amount.toFixed(2).split(".");
-  return `CHF ${int.replace(/\B(?=(\d{3})+(?!\d))/g, "'")}.${dec}`;
+const DISCLAIMER =
+  "Muster: fiktives Dokument für die Demo des Pax Vorsorge-Beraters (BaselHack 2026). Firmen, Personen und Nummern sind erfunden.";
+
+// ─── Formatting ─────────────────────────────────────────────────────────────
+
+/** 1'234.50 (Swiss grouping) */
+function amount(value: number, decimals = 2): string {
+  const [int, dec] = value.toFixed(decimals).split(".");
+  const grouped = int.replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+  return dec ? `${grouped}.${dec}` : grouped;
 }
+
+
+// ─── Drawing primitives (y measured from the top of the page) ───────────────
 
 interface Fonts {
   regular: PDFFont;
   bold: PDFFont;
 }
 
-/** Minimal flowing layout: a cursor that moves down the page. */
-class Sheet {
-  y: number;
+interface TextOptions {
+  size?: number;
+  bold?: boolean;
+  color?: RGB;
+  align?: "left" | "right";
+}
+
+class Canvas {
   constructor(
     readonly page: PDFPage,
     readonly fonts: Fonts,
-    readonly accent: ReturnType<typeof rgb>,
-  ) {
-    this.y = A4[1] - MARGIN;
+  ) {}
+
+  width(value: string, size: number, bold = false): number {
+    return (bold ? this.fonts.bold : this.fonts.regular).widthOfTextAtSize(value, size);
   }
 
-  text(
-    value: string,
-    opts: { x?: number; size?: number; bold?: boolean; color?: ReturnType<typeof rgb> } = {},
-  ) {
+  text(value: string, x: number, top: number, opts: TextOptions = {}) {
+    const size = opts.size ?? 9;
+    const font = opts.bold ? this.fonts.bold : this.fonts.regular;
+    const left = opts.align === "right" ? x - font.widthOfTextAtSize(value, size) : x;
     this.page.drawText(value, {
-      x: opts.x ?? MARGIN,
-      y: this.y,
-      size: opts.size ?? 10,
-      font: opts.bold ? this.fonts.bold : this.fonts.regular,
+      x: left,
+      y: A4[1] - top - size,
+      size,
+      font,
       color: opts.color ?? INK,
     });
   }
 
-  gap(points: number) {
-    this.y -= points;
-  }
-
-  letterhead(company: string, lines: string[]) {
-    this.page.drawRectangle({
-      x: MARGIN,
-      y: this.y - 4,
-      width: 14,
-      height: 14,
-      color: this.accent,
-    });
-    this.text(company, { x: MARGIN + 22, size: 14, bold: true });
-    this.gap(16);
-    for (const line of lines) {
-      this.text(line, { x: MARGIN + 22, size: 8.5, color: MUTED });
-      this.gap(11);
-    }
-    this.gap(18);
-  }
-
-  title(value: string, subtitle?: string) {
-    this.text(value, { size: 17, bold: true });
-    this.gap(18);
-    if (subtitle) {
-      this.text(subtitle, { size: 10, color: MUTED });
-      this.gap(14);
-    }
-    this.gap(8);
-  }
-
-  section(label: string) {
-    this.gap(6);
-    this.page.drawRectangle({
-      x: MARGIN,
-      y: this.y - 5,
-      width: A4[0] - 2 * MARGIN,
-      height: 18,
-      color: rgb(0.95, 0.95, 0.95),
-    });
-    this.text(label, { x: MARGIN + 6, size: 10, bold: true });
-    this.gap(22);
-  }
-
-  /** Label left, value right-aligned, hairline below. */
-  row(label: string, value: string, note?: string) {
-    const size = 9.5;
-    this.text(label, { size });
-    const width = this.fonts.regular.widthOfTextAtSize(value, size);
-    this.text(value, { x: A4[0] - MARGIN - width, size });
-    if (note) {
-      this.gap(11);
-      this.text(note, { size: 7.5, color: MUTED });
-    }
-    this.page.drawLine({
-      start: { x: MARGIN, y: this.y - 5 },
-      end: { x: A4[0] - MARGIN, y: this.y - 5 },
-      thickness: 0.4,
-      color: RULE,
-    });
-    this.gap(17);
-  }
-
-  paragraph(value: string, size = 8.5, color = MUTED) {
-    const maxWidth = A4[0] - 2 * MARGIN;
+  /** Wraps on spaces; returns the height used. */
+  paragraph(value: string, x: number, top: number, maxWidth: number, opts: TextOptions = {}) {
+    const size = opts.size ?? 8.5;
+    const lineHeight = size * 1.35;
     let line = "";
+    let y = top;
     for (const word of value.split(" ")) {
       const next = line ? `${line} ${word}` : word;
-      if (this.fonts.regular.widthOfTextAtSize(next, size) > maxWidth) {
-        this.text(line, { size, color });
-        this.gap(size + 3);
+      if (this.width(next, size, opts.bold) > maxWidth && line) {
+        this.text(line, x, y, opts);
+        y += lineHeight;
         line = word;
       } else line = next;
     }
     if (line) {
-      this.text(line, { size, color });
-      this.gap(size + 3);
+      this.text(line, x, y, opts);
+      y += lineHeight;
+    }
+    return y - top;
+  }
+
+  line(x1: number, top1: number, x2: number, top2: number, thickness = 0.5, color = RULE) {
+    this.page.drawLine({
+      start: { x: x1, y: A4[1] - top1 },
+      end: { x: x2, y: A4[1] - top2 },
+      thickness,
+      color,
+    });
+  }
+
+  rect(
+    x: number,
+    top: number,
+    w: number,
+    h: number,
+    opts: { fill?: RGB; border?: RGB; thickness?: number } = {},
+  ) {
+    this.page.drawRectangle({
+      x,
+      y: A4[1] - top - h,
+      width: w,
+      height: h,
+      color: opts.fill,
+      borderColor: opts.border,
+      borderWidth: opts.border ? (opts.thickness ?? 0.6) : 0,
+    });
+  }
+
+  checkbox(x: number, top: number, checked: boolean) {
+    this.rect(x, top, 8, 8, { border: INK, thickness: 0.7 });
+    if (checked) {
+      this.line(x + 1.5, top + 1.5, x + 6.5, top + 6.5, 0.9, INK);
+      this.line(x + 6.5, top + 1.5, x + 1.5, top + 6.5, 0.9, INK);
     }
   }
 
-  footer(value: string) {
-    this.page.drawText(value, {
-      x: MARGIN,
-      y: 32,
-      size: 7,
-      font: this.fonts.regular,
-      color: MUTED,
+  /** The specimen mark: a large diagonal "MUSTER" behind the content and a footer line. */
+  specimen(pageLabel?: string) {
+    const size = 120;
+    const word = "MUSTER";
+    const w = this.fonts.bold.widthOfTextAtSize(word, size);
+    const angle = 35;
+    const rad = (angle * Math.PI) / 180;
+    this.page.drawText(word, {
+      x: A4[0] / 2 - (w / 2) * Math.cos(rad) + (size / 3) * Math.sin(rad),
+      y: A4[1] / 2 - (w / 2) * Math.sin(rad) - (size / 3) * Math.cos(rad),
+      size,
+      font: this.fonts.bold,
+      color: rgb(0.85, 0.85, 0.85),
+      opacity: 0.35,
+      rotate: degrees(angle),
     });
+    this.text(DISCLAIMER, 36, A4[1] - 30, { size: 6.5, color: MUTED });
+    if (pageLabel) this.text(pageLabel, A4[0] - 36, A4[1] - 30, { size: 6.5, align: "right" });
   }
 }
 
-const DISCLAIMER =
-  "Fiktives Musterdokument für die Demo des Pax Vorsorge-Beraters (BaselHack 2026). Firmen und Personen sind erfunden.";
-
-async function newDocument(title: string, accent: ReturnType<typeof rgb>) {
+async function newDocument(title: string, subject: string) {
   const pdf = await PDFDocument.create();
   pdf.setTitle(title);
-  pdf.setAuthor("BaselHack 2026 Demo");
-  pdf.setCreationDate(new Date("2026-01-15T09:00:00Z"));
+  pdf.setSubject(subject);
+  pdf.setAuthor("Muster (BaselHack 2026 Demo)");
+  pdf.setCreator("scripts/sample-docs.ts");
+  pdf.setCreationDate(new Date("2026-01-20T09:00:00Z"));
+  pdf.setModificationDate(new Date("2026-01-20T09:00:00Z"));
   const fonts = {
     regular: await pdf.embedFont(StandardFonts.Helvetica),
     bold: await pdf.embedFont(StandardFonts.HelveticaBold),
   };
-  return { pdf, newSheet: () => new Sheet(pdf.addPage(A4), fonts, accent) };
+  return { pdf, addPage: () => new Canvas(pdf.addPage(A4), fonts) };
 }
 
-// ─── Vorsorgeausweis ────────────────────────────────────────────────────────
-
-interface PensionPerson {
-  file: string;
-  salutation: string;
-  name: string;
-  birthDate: string;
-  civilStatus: string;
-  insuranceNumber: string;
-  employer: string;
-  entry: string;
-  workload: number;
-  salary: number;
-  coordination: number;
-  capital: number;
-  projectedCapital: number;
-  retirementYear: string;
-  disability: number;
-  partner: number;
-  child: number;
-  deathLumpSum: number;
-  employee: number;
-  employer_: number;
-  maxBuyIn: number;
+async function save(pdf: PDFDocument, file: string) {
+  writeFileSync(path.join(OUT_DIR, file), await pdf.save());
+  console.log(`  ${file}`);
 }
 
-async function pensionCertificate(p: PensionPerson) {
-  const { pdf, newSheet } = await newDocument(
-    `Vorsorgeausweis 2026 ${p.name}`,
-    rgb(0.13, 0.35, 0.55),
-  );
-  const s = newSheet();
-  s.letterhead("Pensionskasse Muster", [
-    "Vorsorgestiftung der Muster-Gruppe",
-    "Musterstrasse 1, 4000 Basel, Telefon 061 000 00 00",
-  ]);
-  s.title("Persönlicher Vorsorgeausweis", "Stand per 01.01.2026, alle Beträge in CHF");
+// ─── The demo story ─────────────────────────────────────────────────────────
 
-  s.section("Versicherte Person");
-  s.row("Name", `${p.salutation} ${p.name}`);
-  s.row("Geburtsdatum", p.birthDate);
-  s.row("Zivilstand", p.civilStatus);
-  s.row("Versicherten-Nr.", p.insuranceNumber);
-  s.row("Arbeitgeber", p.employer);
-  s.row("Eintritt in die Vorsorgeeinrichtung", p.entry);
-  s.row("Beschäftigungsgrad", `${p.workload}%`);
+const MAY = {
+  name: "May Müller",
+  salutation: "Herr",
+  street: "Musterweg 5",
+  town: "4053 Basel",
+  birthDate: "16.09.1984",
+  ahv: "756.1234.5678.97",
+};
 
-  s.section("Lohndaten");
-  s.row("Massgebender Jahreslohn (AHV-Lohn)", chf(p.salary));
-  s.row(
-    "Koordinationsabzug",
-    chf(p.coordination),
-    p.workload < 100 ? "dem Beschäftigungsgrad angepasst" : undefined,
-  );
-  s.row("Versicherter Lohn", chf(p.salary - p.coordination));
+const EMPLOYER = {
+  name: "Muster Logistik AG",
+  street: "Musterstrasse 10",
+  town: "4057 Basel",
+  phone: "061 000 00 00",
+};
 
-  s.section("Altersleistungen");
-  s.row("Altersguthaben per 01.01.2026", chf(p.capital));
-  s.row(
-    `Projiziertes Altersguthaben mit 65 (${p.retirementYear})`,
-    chf(p.projectedCapital),
-    "mit einem Projektionszins von 1.25%",
-  );
-  s.row("Umwandlungssatz mit 65", "6.00%");
-  s.row("Projizierte jährliche Altersrente mit 65", chf(Math.round(p.projectedCapital * 0.06)));
-  s.row("Ordentliches Rentenalter", "65");
+/** Salary 2025: AHV/IV/EO 5.3%, ALV 1.1%, NBUV 0.5%; BVG employee share from the fund plan. */
+const SALARY_2025 = {
+  gross: 100000,
+  social: 6900,
+  /** 6% of the insured salary (100'000 – 26'460), whole francs as on the form. */
+  pension: 4412,
+};
 
-  s.section("Leistungen bei Invalidität und Tod");
-  s.row("Jährliche Invalidenrente", chf(p.disability), "nach einer Wartefrist von 24 Monaten");
-  s.row("Jährliche Invaliden-Kinderrente je Kind", chf(p.child));
-  s.row("Jährliche Ehegatten- oder Lebenspartnerrente", chf(p.partner));
-  s.row("Jährliche Waisenrente je Kind", chf(p.child));
-  s.row("Zusätzliches Todesfallkapital", p.deathLumpSum > 0 ? chf(p.deathLumpSum) : "keines");
-
-  s.section("Finanzierung und Einkauf");
-  s.row("Beiträge Arbeitnehmer pro Jahr", chf(p.employee));
-  s.row("Beiträge Arbeitgeber pro Jahr", chf(p.employer_));
-  s.row(
-    "Maximal möglicher Einkauf per 01.01.2026",
-    chf(p.maxBuyIn),
-    "Einkäufe sind vom steuerbaren Einkommen abziehbar. Kapitalbezug frühestens 3 Jahre nach dem Einkauf.",
-  );
-
-  s.gap(8);
-  s.paragraph(
-    "Massgebend sind das Reglement der Pensionskasse Muster und die gesetzlichen Bestimmungen. Die projizierten Leistungen sind unverbindlich und beruhen auf dem aktuellen versicherten Lohn.",
-  );
-  s.footer(DISCLAIMER);
-  writeFileSync(path.join(OUT_DIR, p.file), await pdf.save());
-}
-
-// ─── Fremdpolice ────────────────────────────────────────────────────────────
-
-async function termLifePolicy() {
-  const { pdf, newSheet } = await newDocument("Police HML-2017-0048213", rgb(0.62, 0.12, 0.16));
-  const s = newSheet();
-  s.letterhead("Helvetic Muster Leben AG", [
-    "Beispielweg 12, 8000 Zürich",
-    "Kundendienst 044 000 00 00, service@helvetic-muster.example",
-  ]);
-  s.title(
-    "Police Nr. HML-2017-0048213",
-    "Risiko-Lebensversicherung «Basic Protect», freie Vorsorge (Säule 3b)",
-  );
-
-  s.section("Vertragsparteien");
-  s.row("Versicherungsnehmer", "Herr May Müller, Musterweg 5, 4053 Basel");
-  s.row("Versicherte Person", "Herr May Müller");
-  s.row("Geburtsdatum", "16.09.1984");
-  s.row("Tarif", "Nichtraucher");
-
-  s.section("Laufzeit");
-  s.row("Versicherungsbeginn", "01.05.2017");
-  s.row("Vertragsablauf", "30.04.2049");
-  s.row("Versicherungsjahr", "jeweils 01.05. bis 30.04.");
-
-  s.section("Versicherte Leistungen");
-  s.row("Todesfallkapital (konstant)", chf(200000));
-  s.row("Rückkaufswert", "keiner (reine Risikoversicherung)");
-  s.row("Begünstigung", "1. die Ehegattin, 2. die Nachkommen zu gleichen Teilen");
-
-  s.section("Prämie");
-  s.row("Prämie halbjährlich", chf(1320), "fällig jeweils am 01.05. und 01.11.");
-  s.row("Jahresprämie", chf(2640));
-  s.row("Überschussbeteiligung", "keine garantierte Überschussbeteiligung");
-
-  s.section("Kündigung");
-  s.paragraph(
-    "Der Versicherungsnehmer kann den Vertrag jeweils auf das Ende eines Versicherungsjahres (30.04.) unter Einhaltung einer Kündigungsfrist von 3 Monaten schriftlich kündigen. Ohne Kündigung läuft der Vertrag bis zum Vertragsablauf weiter.",
-    9,
-    INK,
-  );
-
-  s.gap(10);
-  s.paragraph(
-    "Es gelten die Allgemeinen Versicherungsbedingungen (AVB) Ausgabe 2017. Ausgestellt in Zürich am 15.04.2017.",
-  );
-  s.footer(DISCLAIMER);
-  writeFileSync(
-    path.join(OUT_DIR, "police-helvetic-muster-todesfall-may-mueller.pdf"),
-    await pdf.save(),
-  );
-}
-
-// ─── Lohnausweis ────────────────────────────────────────────────────────────
+// ─── Lohnausweis (Formular 11) ──────────────────────────────────────────────
 
 async function salaryCertificate() {
-  const { pdf, newSheet } = await newDocument("Lohnausweis 2025 May Müller", rgb(0.2, 0.2, 0.2));
-  const s = newSheet();
-  s.title("Lohnausweis", "Formular 11, Jahr 2025 (01.01.2025 bis 31.12.2025)");
-  s.row("C  AHV-Nr.", "756.****.****.**");
-  s.row("H  Arbeitnehmer", "May Müller, Musterweg 5, 4053 Basel");
-  s.row("I  Arbeitgeber", "Muster Logistik AG, Musterstrasse 10, 4000 Basel");
-  s.gap(6);
+  const { pdf, addPage } = await newDocument(
+    "Lohnausweis 2025 May Müller",
+    "Lohnausweis Formular 11, Muster",
+  );
+  const c = addPage();
+  c.specimen();
+  const L = 36;
+  const R = A4[0] - 36;
 
-  s.section("Lohn und Abzüge");
-  s.row("1.  Lohn", chf(100000));
-  s.row("8.  Bruttolohn total", chf(100000));
-  s.row("9.  Beiträge AHV/IV/EO/ALV/NBUV", `– ${chf(6900)}`);
-  s.row("10.1  Berufliche Vorsorge, ordentliche Beiträge", `– ${chf(4412.4)}`);
-  s.row("11.  Nettolohn", chf(88687.6));
-  s.row("13.  Spesenvergütungen", chf(0));
-  s.row("15.  Bemerkungen", "Beschäftigungsgrad 100%");
+  // Title band
+  c.text("Lohnausweis", L, 34, { size: 15, bold: true });
+  c.text("Certificat de salaire / Certificato di salario", L, 52, { size: 8, color: MUTED });
+  c.text("Formular 11", R, 36, { size: 8, align: "right", color: MUTED });
 
-  s.gap(10);
-  s.paragraph("Ort und Datum: Basel, 20.01.2026. Muster Logistik AG, Personalabteilung.");
-  s.footer(DISCLAIMER);
-  writeFileSync(path.join(OUT_DIR, "lohnausweis-2025-may-mueller.pdf"), await pdf.save());
+  // A–G
+  let y = 80;
+  c.checkbox(L, y, true);
+  c.text("A", L + 14, y, { bold: true });
+  c.text("Lohnausweis", L + 26, y);
+  c.checkbox(L + 120, y, false);
+  c.text("B", L + 134, y, { bold: true });
+  c.text("Rentenbescheinigung", L + 146, y);
+
+  y += 22;
+  c.text("C", L, y, { bold: true });
+  c.text("AHV-Nr.", L + 14, y, { color: MUTED, size: 8 });
+  c.text(MAY.ahv, L + 60, y, { size: 10 });
+  y += 20;
+  c.text("D", L, y, { bold: true });
+  c.text("Jahr", L + 14, y, { color: MUTED, size: 8 });
+  c.text("2025", L + 60, y, { size: 10 });
+  c.text("E", L + 110, y, { bold: true });
+  c.text("von", L + 124, y, { color: MUTED, size: 8 });
+  c.text("01.01.2025", L + 142, y, { size: 10 });
+  c.text("bis", L + 204, y, { color: MUTED, size: 8 });
+  c.text("31.12.2025", L + 220, y, { size: 10 });
+  y += 24;
+  c.checkbox(L, y, false);
+  c.text("F", L + 14, y, { bold: true });
+  c.text("Unentgeltliche Beförderung zwischen Wohn- und Arbeitsort", L + 26, y, { size: 8 });
+  y += 16;
+  c.checkbox(L, y, false);
+  c.text("G", L + 14, y, { bold: true });
+  c.text("Kantinenverpflegung / Lunch-Checks", L + 26, y, { size: 8 });
+
+  // H: employee address in the envelope window
+  c.text("H", 330, 80, { bold: true });
+  c.rect(344, 76, R - 344, 86, { border: RULE });
+  [MAY.salutation, MAY.name, MAY.street, MAY.town].forEach((line, i) => {
+    c.text(line, 356, 90 + i * 14, { size: 10 });
+  });
+
+  // Rows 1–15
+  type Row = {
+    no: string;
+    label: string;
+    sign?: "–" | "=";
+    value?: number;
+    sub?: boolean;
+    bold?: boolean;
+  };
+  const rows: Row[] = [
+    {
+      no: "1.",
+      label: "Lohn soweit nicht unter Ziffer 2–7 aufzuführen / Rente",
+      value: SALARY_2025.gross,
+    },
+    { no: "2.", label: "Gehaltsnebenleistungen" },
+    { no: "2.1", label: "Verpflegung, Unterkunft", sub: true },
+    { no: "2.2", label: "Privatanteil Geschäftsfahrzeug", sub: true },
+    { no: "2.3", label: "Andere (Art angeben)", sub: true },
+    { no: "3.", label: "Unregelmässige Leistungen (Art angeben)" },
+    { no: "4.", label: "Kapitalleistungen (Art angeben)" },
+    { no: "5.", label: "Beteiligungsrechte gemäss Beiblatt" },
+    { no: "6.", label: "Verwaltungsratsentschädigungen" },
+    { no: "7.", label: "Andere Leistungen (Art angeben)" },
+    {
+      no: "8.",
+      label: "Bruttolohn total / Rente",
+      sign: "=",
+      value: SALARY_2025.gross,
+      bold: true,
+    },
+    { no: "9.", label: "Beiträge AHV/IV/EO/ALV/NBUV", sign: "–", value: SALARY_2025.social },
+    { no: "10.", label: "Berufliche Vorsorge 2. Säule" },
+    { no: "10.1", label: "Ordentliche Beiträge", sign: "–", value: SALARY_2025.pension, sub: true },
+    { no: "10.2", label: "Beiträge für den Einkauf", sign: "–", sub: true },
+    {
+      no: "11.",
+      label: "Nettolohn / Rente (in die Steuererklärung übertragen)",
+      sign: "=",
+      value: SALARY_2025.gross - SALARY_2025.social - SALARY_2025.pension,
+      bold: true,
+    },
+    { no: "12.", label: "Quellensteuerabzug" },
+    { no: "13.", label: "Spesenvergütungen (nicht im Bruttolohn enthalten)" },
+    { no: "13.1", label: "Effektive Spesen: Reise, Verpflegung, Übernachtung / Übrige", sub: true },
+    { no: "13.2", label: "Pauschalspesen: Repräsentation / Auto / Übrige", sub: true },
+    { no: "13.3", label: "Beiträge an die Weiterbildung", sub: true },
+    { no: "14.", label: "Weitere Gehaltsnebenleistungen (Art angeben)" },
+  ];
+
+  y = 200;
+  const colNo = L;
+  const colLabel = L + 34;
+  const colSign = 432;
+  const colValue = R;
+  c.text("Nur ganze Frankenbeträge", colValue, y - 13, {
+    size: 7,
+    align: "right",
+    color: MUTED,
+  });
+  c.line(L, y, R, y, 0.9, INK);
+  c.line(colSign - 6, y, colSign - 6, y + rows.length * 18, 0.5, RULE);
+  for (const row of rows) {
+    if (row.bold) c.rect(L, y, R - L, 18, { fill: TINT });
+    c.text(row.no, colNo + (row.sub ? 10 : 0), y + 5, { size: 8.5, bold: !row.sub });
+    c.text(row.label, colLabel + (row.sub ? 14 : 0), y + 5, { size: 8.5, bold: row.bold });
+    if (row.sign) c.text(row.sign, colSign, y + 5, { size: 9 });
+    if (row.value !== undefined)
+      c.text(amount(row.value, 0), colValue - 4, y + 4.5, {
+        size: 10,
+        bold: row.bold,
+        align: "right",
+      });
+    y += 18;
+    c.line(L, y, R, y, row.bold ? 0.8 : 0.4, row.bold ? INK : RULE);
+  }
+
+  // 15. Bemerkungen
+  y += 8;
+  c.text("15.", colNo, y + 2, { size: 8.5, bold: true });
+  c.text("Bemerkungen", colLabel, y + 2, { size: 8.5, bold: true });
+  c.rect(colLabel, y + 16, R - colLabel, 42, { border: RULE });
+  c.paragraph(
+    "Beschäftigungsgrad 100 %. Versicherter Lohn berufliche Vorsorge CHF 73'540. Pensionskasse Muster, Versicherten-Nr. PKM-104-2231.",
+    colLabel + 8,
+    y + 23,
+    R - colLabel - 16,
+    { size: 8.5 },
+  );
+
+  // I: place, date, employer
+  y += 76;
+  c.text("I", L, y, { bold: true });
+  c.text("Ort und Datum", colLabel, y, { size: 7.5, color: MUTED });
+  c.text("Basel, 20.01.2026", colLabel, y + 12, { size: 10 });
+  const confirm = c.paragraph(
+    "Die richtige und vollständige Angabe bestätigt, inkl. genauer Adresse und Telefonnummer des Arbeitgebers",
+    250,
+    y,
+    R - 250,
+    { size: 7.5, color: MUTED },
+  );
+  [
+    EMPLOYER.name,
+    `${EMPLOYER.street}, ${EMPLOYER.town}`,
+    `Telefon ${EMPLOYER.phone}, Personalabteilung`,
+  ].forEach((line, i) => {
+    c.text(line, 250, y + confirm + 2 + i * 12, { size: 9, bold: i === 0 });
+  });
+  c.line(250, y + confirm + 70, R, y + confirm + 70, 0.5, INK);
+  c.text("Unterschrift", 250, y + confirm + 74, { size: 7, color: MUTED });
+
+  await save(pdf, "lohnausweis-2025-may-mueller.pdf");
 }
 
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
-  await pensionCertificate({
-    file: "vorsorgeausweis-2026-may-mueller.pdf",
-    salutation: "Herr",
-    name: "May Müller",
-    birthDate: "16.09.1984",
-    civilStatus: "verheiratet",
-    insuranceNumber: "PKM-104-2231",
-    employer: "Muster Logistik AG, Basel",
-    entry: "01.03.2014",
-    workload: 100,
-    salary: 100000,
-    coordination: 26460,
-    capital: 185400,
-    projectedCapital: 548900,
-    retirementYear: "2049",
-    disability: 29416,
-    partner: 17650,
-    child: 5883,
-    deathLumpSum: 50000,
-    employee: 4412.4,
-    employer_: 5516,
-    maxBuyIn: 86350,
-  });
-  await pensionCertificate({
-    file: "vorsorgeausweis-2026-taylor-johnson.pdf",
-    salutation: "Herr",
-    name: "Taylor Johnson",
-    birthDate: "16.09.1995",
-    civilStatus: "ledig",
-    insuranceNumber: "PKM-311-0457",
-    employer: "Beispiel Software AG, Zürich",
-    entry: "01.08.2020",
-    workload: 90,
-    salary: 100000,
-    coordination: 23814,
-    capital: 41870,
-    projectedCapital: 468300,
-    retirementYear: "2060",
-    disability: 30474,
-    partner: 18285,
-    child: 6095,
-    deathLumpSum: 0,
-    employee: 3428.4,
-    employer_: 4190.25,
-    maxBuyIn: 132600,
-  });
-  await termLifePolicy();
+  console.log(`Writing demo documents to ${OUT_DIR}`);
   await salaryCertificate();
-  console.log(`Sample documents written to ${OUT_DIR}`);
 }
 
 main().catch((error) => {
