@@ -1,0 +1,139 @@
+{
+  "kind": {
+    "end_of_studies": "Studienabschluss",
+    "first_job": "Erste Stelle",
+    "wedding": "Heirat",
+    "child_birth": "Geburt",
+    "home_purchase": "Eigenheim",
+    "retirement": "Pensionierung",
+    "child_turns_18": "Kind wird 18",
+    "child_turns_25": "Kind wird 25",
+    "contract_end": "Vertragsende",
+    "job_change": "Stellenwechsel",
+    "self_employment": "Selbstständigkeit",
+    "other": "Lebensereignis"
+  },
+  "status": {
+    "upcoming": "Geplant",
+    "due": "Fällig",
+    "responded": "Beantwortet",
+    "lost": "Keine Reaktion",
+    "dismissed": "Verworfen"
+  },
+  "season": {
+    "spring": "Frühling {year}",
+    "summer": "Sommer {year}",
+    "autumn": "Herbst {year}",
+    "winter": "Winter {year}"
+  },
+  "page": {
+    "title": "Wiedervorlagen",
+    "description": "Lebensereignisse, die Kundinnen und Kunden im Gespräch angekündigt haben. Eine Woche vorher meldet sich Pax von sich aus mit einer persönlichen E-Mail. Anders als bei einer Übergabe hat hier niemand nach einer Person gefragt.",
+    "tabs": "Status der Wiedervorlagen"
+  },
+  "tab": {
+    "due": "Fällig",
+    "upcoming": "Geplant",
+    "responded": "Beantwortet",
+    "lost": "Keine Reaktion"
+  },
+  "empty": {
+    "due": {
+      "title": "Gerade ist nichts fällig",
+      "body": "Springen Sie mit der Zeitreise nach vorne, um geplante Ereignisse fällig werden zu lassen."
+    },
+    "upcoming": {
+      "title": "Noch keine angekündigten Ereignisse",
+      "body": "Sobald jemand im Chat etwa «in zwei Jahren bin ich fertig» sagt, erscheint es hier."
+    },
+    "responded": {
+      "title": "Noch keine Antworten",
+      "body": "Hier landen Wiedervorlagen, auf die jemand geantwortet hat oder nach denen jemand wieder im Chat war."
+    },
+    "lost": {
+      "title": "Keine verlorenen Wiedervorlagen",
+      "body": "Bleiben zwei E-Mails unbeantwortet, gilt der Lead als verloren. Meldet sich die Person später, öffnet er sich wieder."
+    }
+  },
+  "clock": {
+    "label": "Zeitreise für die Demo",
+    "simulated": "Simuliertes Datum",
+    "real": "Heutiges Datum",
+    "plusWeek": "+1 Woche",
+    "plusMonth": "+1 Monat",
+    "plusHalfYear": "+6 Monate",
+    "plusYear": "+1 Jahr",
+    "jumpTo": "Datum wählen",
+    "jump": "Springen",
+    "run": "Wiedervorlagen jetzt prüfen",
+    "back": "Zurück zu heute",
+    "reset": "Demo zurücksetzen",
+    "resetConfirm": "Alle erzeugten Wiedervorlagen-Leads und E-Mails löschen und zum heutigen Datum zurückkehren?",
+    "working": "Pax prüft die Wiedervorlagen und schreibt die E-Mails …",
+    "nothing": "Nichts Neues fällig.",
+    "invalid": "Dieses Datum ist ungültig.",
+    "summary": {
+      "opened": "{count, plural, one {# Wiedervorlage eröffnet} other {# Wiedervorlagen eröffnet}}",
+      "reminded": "{count, plural, one {# Erinnerung verschickt} other {# Erinnerungen verschickt}}",
+      "lost": "{count, plural, one {# Lead ohne Reaktion verloren} other {# Leads ohne Reaktion verloren}}",
+      "reopened": "{count, plural, one {# Lead wieder geöffnet} other {# Leads wieder geöffnet}}",
+      "responded": "{count, plural, one {# Antwort verbucht} other {# Antworten verbucht}}",
+      "checkins": "{count, plural, one {# jährlicher Check-in verschickt} other {# jährliche Check-ins verschickt}}",
+      "failed": "{count, plural, one {# E-Mail konnte nicht geschrieben werden, bitte erneut prüfen} other {# E-Mails konnten nicht geschrieben werden, bitte erneut prüfen}}"
+    }
+  },
+  "timeline": {
+    "caption": "{count, plural, =0 {Keine geplanten Wiedervorlagen} one {# geplante Wiedervorlage ab heute} other {# geplante Wiedervorlagen ab heute}}",
+    "today": "Heute",
+    "anonymous": "Anonym"
+  },
+  "card": {
+    "expected": "Erwartet:",
+    "fromConversation": "Aus dem Gespräch vom",
+    "followUpOn": "Wiedervorlage ab",
+    "dueNow": "Fällig",
+    "confidence": "Sicherheit {value} %",
+    "noEmail": "Keine E-Mail-Adresse hinterlegt: bitte anrufen.",
+    "recordReply": "Antwort erfassen",
+    "dismiss": "Verwerfen"
+  },
+  "outbox": {
+    "title": "Postausgang",
+    "description": "Simuliert: Pax verschickt nichts, die E-Mails liegen nur hier.",
+    "empty": "Noch keine E-Mails.",
+    "to": "An {address}",
+    "replied": "Beantwortet",
+    "kind": {
+      "event_follow_up": "Wiedervorlage",
+      "reminder": "Erinnerung",
+      "yearly_checkin": "Jährlicher Check-in"
+    }
+  },
+  "checkin": {
+    "title": "Jährlicher Check-in",
+    "description": "Einmal im Jahr fragt Pax nach, ob sich bei Familie, Beruf, Wohnen oder Einkommen etwas verändert hat. Kundinnen und Kunden können das im Vorsorge-Cockpit abschalten.",
+    "next": "Nächster am",
+    "dueNow": "fällig",
+    "off": "Abgemeldet",
+    "turnOff": "Abmelden",
+    "turnOn": "Wieder anmelden",
+    "empty": "Noch keine Kundinnen und Kunden mit E-Mail-Adresse.",
+    "noEmail": "Jährlicher Check-in: keine E-Mail-Adresse hinterlegt."
+  },
+  "customer": {
+    "title": "Wiedervorlagen und Post",
+    "description": "Angekündigte Lebensereignisse und die E-Mails, die Pax dazu geschrieben hat.",
+    "events": "Angekündigte Lebensereignisse",
+    "noEvents": "Noch keine angekündigten Ereignisse."
+  },
+  "portal": {
+    "title": "Jährlicher Check-in",
+    "body": "Einmal im Jahr fragen wir per E-Mail kurz nach, ob sich bei Familie, Beruf, Wohnen oder Einkommen etwas verändert hat. So bleibt Ihre Vorsorge aktuell.",
+    "on": "Eingeschaltet",
+    "off": "Ausgeschaltet",
+    "turnOff": "Ausschalten",
+    "turnOn": "Einschalten",
+    "next": "Nächste Nachfrage:",
+    "noEmail": "Wir haben noch keine E-Mail-Adresse von Ihnen. Sie können sie im Gespräch mit dem Berater angeben."
+  }
+}

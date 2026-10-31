@@ -13,7 +13,8 @@
     "leads": "Leads",
     "handovers": "Transferts",
     "rules": "Règles",
-    "simulation": "Simulation"
+    "simulation": "Simulation",
+    "followUps": "Relances"
   },
   "login": {
     "title": "Se connecter au cockpit entreprise",
