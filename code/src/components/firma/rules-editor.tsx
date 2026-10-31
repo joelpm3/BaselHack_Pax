@@ -67,7 +67,7 @@ export function RulesEditor({ initial, version }: { initial: RuleSetDraft; versi
             <li
               key={rule.key}
               className={cn(
-                "grid gap-3 rounded-xl border border-line p-4 md:grid-cols-[2rem_minmax(0,1fr)_14rem]",
+                "grid gap-3 rounded-xl border border-line p-4 md:grid-cols-[2rem_minmax(0,1fr)_19rem]",
                 !rule.active && "bg-gray-1",
               )}
             >

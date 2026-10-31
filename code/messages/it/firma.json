@@ -447,9 +447,9 @@
       "score": "Punteggio",
       "reason": "Motivo della chiamata",
       "status": "Stato",
-      "assignee": "Responsabile",
-      "updated": "Aggiornato"
-    }
+      "assignee": "Responsabile"
+    },
+    "updatedAt": "Aggiornato il {date}"
   },
   "handovers": {
     "title": "Passaggi",

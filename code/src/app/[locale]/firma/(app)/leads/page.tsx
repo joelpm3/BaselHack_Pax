@@ -183,39 +183,36 @@ async function LeadsContent({
           <table className="w-full min-w-[60rem] border-collapse">
             <thead className="bg-gray-1 text-left text-xs text-fg-muted">
               <tr>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.priority")}
                 </th>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.customer")}
                 </th>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.score")}
                 </th>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.reason")}
                 </th>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.status")}
                 </th>
-                <th scope="col" className="px-4 py-2.5 font-medium">
+                <th scope="col" className="px-3 py-2.5 font-medium">
                   {t("col.assignee")}
-                </th>
-                <th scope="col" className="px-4 py-2.5 text-right font-medium">
-                  {t("col.updated")}
                 </th>
               </tr>
             </thead>
             <tbody>
               {leads.map((l) => (
                 <tr key={l.id} className="border-t border-gray-2 align-top hover:bg-gray-1">
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3">
                     <div className="grid justify-items-start gap-1.5">
                       <PriorityBadge priority={l.priority} />
                       <LeadTypeBadge type={l.type} />
                     </div>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3">
                     <div className="grid gap-1">
                       <span className="flex items-center gap-1.5">
                         <CustomerLabel
@@ -258,7 +255,7 @@ async function LeadsContent({
                       </span>
                     </div>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3">
                     <div className="grid w-20 gap-1">
                       <span className="text-lg font-bold leading-none tabular-nums">{l.score}</span>
                       <span className="h-1.5 bg-gray-2">
@@ -269,7 +266,7 @@ async function LeadsContent({
                       </span>
                     </div>
                   </td>
-                  <td className="max-w-sm px-4 py-3">
+                  <td className="min-w-56 px-3 py-3">
                     {l.conversationId ? (
                       <Link
                         href={`/firma/gespraeche/${l.conversationId}#lead-${l.id}`}
@@ -281,29 +278,33 @@ async function LeadsContent({
                       <p className="line-clamp-2">{l.reasonToCall}</p>
                     )}
                     {l.topics?.length ? (
-                      <p className="mt-1 truncate text-xs text-fg-muted">
+                      <p className="mt-1 line-clamp-1 text-xs text-fg-muted">
                         {l.topics.map((x) => tTopic(x)).join(", ")}
                       </p>
                     ) : null}
                   </td>
-                  <td className="px-4 py-3">
-                    <LeadStatusSelect leadId={l.id} status={l.status} />
+                  <td className="px-3 py-3">
+                    <div className="grid justify-items-start gap-1">
+                      <LeadStatusSelect leadId={l.id} status={l.status} />
+                      <span className="text-xs whitespace-nowrap text-fg-muted tabular-nums">
+                        {t("updatedAt", {
+                          date: format.dateTime(l.updatedAt, {
+                            day: "numeric",
+                            month: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }),
+                        })}
+                      </span>
+                    </div>
                   </td>
-                  <td className="px-4 py-3">
+                  <td className="px-3 py-3">
                     <AssignSelect
                       kind="lead"
                       id={l.id}
                       value={l.assignedAdvisorId}
                       advisors={advisors}
                     />
-                  </td>
-                  <td className="px-4 py-3 text-right text-xs whitespace-nowrap text-fg-muted tabular-nums">
-                    {format.dateTime(l.updatedAt, {
-                      day: "numeric",
-                      month: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
                   </td>
                 </tr>
               ))}

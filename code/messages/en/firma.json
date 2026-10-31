@@ -447,9 +447,9 @@
       "score": "Score",
       "reason": "Reason to call",
       "status": "Status",
-      "assignee": "Owner",
-      "updated": "Updated"
-    }
+      "assignee": "Owner"
+    },
+    "updatedAt": "Updated {date}"
   },
   "handovers": {
     "title": "Handovers",
