@@ -25,6 +25,8 @@ export interface QuoteInput {
   guaranteedSharePercent?: number;
   /** Unit-linked products: fund chosen after the suitability check (Pax fund name). */
   fundName?: string;
+  /** Contract start (ISO, first of a month); default: the first of next month. */
+  startDate?: string;
 }
 
 /**

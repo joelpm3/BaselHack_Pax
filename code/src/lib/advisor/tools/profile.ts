@@ -19,7 +19,7 @@ import { resolveResidence } from "../location";
 import { hasRiskPolicies } from "../policies";
 import { replacedFacts } from "../profile-diff";
 import { type AnalysisReadiness, analysisReadiness } from "../readiness";
-import { saveStatedPolicies } from "../stated-policies";
+import { endPolicies, saveStatedPolicies } from "../stated-policies";
 import { statedPolicySchema } from "../stated-policy-row";
 import type { ResidencePlace, UpdateProfileOutput } from "../types";
 import type { ToolContext } from "./context";
@@ -115,7 +115,23 @@ export const updateProfileInput = z.object({
     .max(6)
     .optional()
     .describe(
-      "Death or disability policies the customer says they or their partner already have: new ones, or amounts for one stored from the chat earlier (same insurer, type and person updates it)",
+      "Death, disability or insurance-based 3a policies the customer says they or their partner already have (insurer may be unknown): new ones, or amounts, end date or notice for one stored from the chat earlier (same insurer, type and person updates it)",
+    ),
+  endPolicies: z
+    .array(
+      z.object({
+        policy: z.string().min(1).describe("The [reference] of a policy under 'Policies on file'"),
+        endDate: z
+          .string()
+          .regex(/^\d{4}-\d{2}-\d{2}$/)
+          .describe("Last day of cover, e.g. 2026-12-31"),
+        cancelled: z.boolean().optional().describe("True when the customer has given notice"),
+      }),
+    )
+    .max(6)
+    .optional()
+    .describe(
+      "A policy on file that the customer cancelled or that ends: its premiums and cover stop after endDate",
     ),
   monthlySpending: z.number().min(0).optional().describe("Rough household spending, CHF PER MONTH"),
   contact: z
@@ -265,9 +281,14 @@ export function createProfileTools(ctx: ToolContext) {
             conversationId: ctx.conversationId,
             messageId: ctx.assistantMessageId,
           });
-          const policies = input.addPolicies?.length
-            ? saveStatedPolicies(ctx.customerId, input.addPolicies, profile, ctx.locale)
-            : [];
+          const policies = [
+            ...(input.addPolicies?.length
+              ? saveStatedPolicies(ctx.customerId, input.addPolicies, profile, ctx.locale)
+              : []),
+            ...(input.endPolicies?.length
+              ? endPolicies(ctx.customerId, input.endPolicies, ctx.locale)
+              : []),
+          ];
           const readiness = readinessFor(ctx.customerId, profile);
           return {
             status: "ok",

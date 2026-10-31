@@ -147,6 +147,18 @@ export interface QsStep {
 
 export const STEPS: QsStep[] = [
   {
+    // First, so the technical age and the tariff checks use the chosen start (verified live:
+    // Quicksale accepts starts up to at least 13 months ahead and warns beyond 3 months).
+    name: "startDate",
+    plan: (p, input) => {
+      if (!input.startDate) return null;
+      const target = toSwissDate(input.startDate);
+      return p.beginnDatum === target
+        ? null
+        : { aktion: { key: "BEGINNDATUM_AENDERN" }, beginnDatum: target };
+    },
+  },
+  {
     name: "sex",
     plan: (p, input) => {
       const target = input.sex === "female" ? "FRAU" : "MANN";

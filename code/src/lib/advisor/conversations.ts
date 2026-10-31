@@ -6,6 +6,7 @@ import type { ConversationMode, Locale } from "@/lib/domain/taxonomy";
 import { publish } from "@/lib/events/bus";
 import { getActiveRuleSet } from "@/lib/rules/active";
 import { type GreetingVariant, greetingText } from "./greeting";
+import { detectLanguage } from "./language";
 import type { AdvisorMessageMetadata } from "./types";
 
 export type Conversation = typeof schema.conversations.$inferSelect;
@@ -269,4 +270,28 @@ export async function attachHint(conversation: Conversation, hintId: string): Pr
     })
     .where(eq(schema.messages.id, greeting.id))
     .run();
+}
+
+/**
+ * The conversation (and the customer's contact language) follows the language the customer
+ * writes in, so tool texts and cards match it. Only typed or dictated messages count: card
+ * messages are written in the interface language.
+ */
+export function followCustomerLanguage(
+  conversation: Conversation,
+  message: AdvisorUIMessage,
+): Conversation {
+  const mode = message.metadata?.inputMode ?? "text";
+  if (mode !== "text" && mode !== "voice") return conversation;
+  const locale = detectLanguage(messageText(message));
+  if (!locale || locale === conversation.locale) return conversation;
+  db.update(schema.conversations)
+    .set({ locale })
+    .where(eq(schema.conversations.id, conversation.id))
+    .run();
+  db.update(schema.customers)
+    .set({ locale })
+    .where(eq(schema.customers.id, conversation.customerId))
+    .run();
+  return { ...conversation, locale };
 }

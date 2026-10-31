@@ -79,6 +79,8 @@ export interface RecommendOutput {
   ruleSetVersion: number;
   /** Patched by widget actions ("Nicht passend"). */
   statuses?: Record<string, RecommendationStatus>;
+  /** For the advisor: how the offer terms were applied (start date, premium, 3a room). */
+  notes?: string[];
 }
 
 export interface SuitabilityRecord {

@@ -9,6 +9,14 @@ import type { QuoteInput, QuoteIssue } from "./types";
 
 /** Maximum tax-deductible 3a contribution for employees with a pension fund (2026). */
 export const PILLAR_3A_MAX = 7258;
+
+/**
+ * 3a maximum (with a pension fund) for a calendar year. The federal council sets it every two
+ * years; until a later amount is published, later years use the latest known one.
+ */
+export function pillar3aMaxFor(_year: number): number {
+  return PILLAR_3A_MAX;
+}
 /** Disability pensions up to this amount are sum insurance (no proof of income loss). */
 export const DISABILITY_SUM_INSURANCE_MAX = 36_000;
 
@@ -107,6 +115,42 @@ export function contractStartDate(today: Date): string {
   const year = today.getUTCFullYear() + (today.getUTCMonth() === 11 ? 1 : 0);
   const month = ((today.getUTCMonth() + 1) % 12) + 1;
   return `${year}-${pad(month)}-01`;
+}
+
+/** Latest contract start: 12 months after today. */
+export const MAX_START_MONTHS_AHEAD = 12;
+
+export type StartDateProblem = "not_first_of_month" | "in_the_past" | "too_far_ahead" | "invalid";
+
+/**
+ * The contract start for a requested date: the first of a month, today or later and at most
+ * 12 months ahead (Quicksale accepts later starts but the application questions are only valid
+ * for 3 months). Without a request it is the first of next month. A date that is not the first
+ * of a month moves to the next first; an impossible one falls back to the default.
+ */
+export function resolveStartDate(
+  requested: string | undefined,
+  today: Date,
+): { startDate: string; problem?: StartDateProblem } {
+  const fallback = contractStartDate(today);
+  if (!requested) return { startDate: fallback };
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(requested);
+  const month = match ? Number(match[2]) : 0;
+  const day = match ? Number(match[3]) : 0;
+  if (!match || month < 1 || month > 12 || day < 1 || day > 31)
+    return { startDate: fallback, problem: "invalid" };
+  let year = Number(match[1]);
+  let startMonth = month;
+  if (day !== 1) {
+    startMonth = month === 12 ? 1 : month + 1;
+    if (month === 12) year++;
+  }
+  const startDate = `${year}-${pad(startMonth)}-01`;
+  const todayIso = today.toISOString().slice(0, 10);
+  if (startDate < todayIso) return { startDate: fallback, problem: "in_the_past" };
+  if (monthsBetween(todayIso, startDate) > MAX_START_MONTHS_AHEAD)
+    return { startDate: fallback, problem: "too_far_ahead" };
+  return day === 1 ? { startDate } : { startDate, problem: "not_first_of_month" };
 }
 
 /** Whole months between two ISO dates (date part only). */

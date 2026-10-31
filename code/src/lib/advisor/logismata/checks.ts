@@ -2,6 +2,8 @@ import "server-only";
 import type { LifeSituation } from "@/lib/domain/profile";
 import type { Locale } from "@/lib/domain/taxonomy";
 import { type CallContext, callLogismata, LOGISMATA } from "@/lib/logismata/client";
+import { type Pillar3aSaving, pillar3aSaving } from "../pillar3a";
+import { activeLifePolicies } from "../policies";
 import {
   buildGrowthRequest,
   buildSavingRequest,
@@ -92,6 +94,8 @@ export interface RetirementCheck {
   retirementAge: number;
   retirementYear: number;
   estimated: boolean;
+  /** How the yearly 3a saving was derived (null when the caller set the saving). */
+  saving: Pillar3aSaving | null;
 }
 
 export async function runRetirementCheck(
@@ -102,9 +106,17 @@ export async function runRetirementCheck(
 ): Promise<RetirementCheck> {
   const year = currentYear();
   const resolved = pensions ?? (await retirementPensions(profile, ctx, year));
+  // Only the saved part of the 3a counts: insurance 3a risk premiums and policies that end don't.
+  const saving =
+    overrides.saving === undefined && ctx.customerId
+      ? pillar3aSaving(profile, activeLifePolicies(ctx.customerId), year)
+      : null;
   const response = await callLogismata<RetirementResponse>(
     "APICalc_calculateRetirement",
-    buildRetirementRequest(profile, year, resolved, overrides),
+    buildRetirementRequest(profile, year, resolved, {
+      ...overrides,
+      ...(saving ? { saving: saving.annualSaving } : {}),
+    }),
     ctx,
   );
   if (response.ErrorCode === 2) throw new Error("Logismata retirement check failed (2)");
@@ -115,6 +127,7 @@ export async function runRetirementCheck(
     retirementAge: age,
     retirementYear: (profile.person.birthYear ?? year) + age,
     estimated: resolved.estimated,
+    saving,
   };
 }
 

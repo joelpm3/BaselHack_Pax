@@ -2,6 +2,8 @@ import "server-only";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { patchToolOutput } from "@/lib/advisor/conversations";
+import { type Pillar3aPolicy, pillar3aContributionIn } from "@/lib/advisor/pillar3a";
+import { activeLifePolicies } from "@/lib/advisor/policies";
 import type { ToolContext } from "@/lib/advisor/tools/context";
 import { modelName } from "@/lib/ai/models";
 import { audit } from "@/lib/audit";
@@ -10,12 +12,14 @@ import { PRODUCTS, type Product, type ProductCode, productsClosing } from "@/lib
 import { type LifeSituation, pillar2Of } from "@/lib/domain/profile";
 import { GAP_TYPES, type GapType } from "@/lib/domain/taxonomy";
 import { type Quote, type QuoteInput, quotePremium } from "@/lib/pricing";
-import { contractStartDate, technicalAge } from "@/lib/pricing/limits";
+import { resolveStartDate, technicalAge } from "@/lib/pricing/limits";
 import { getProfile } from "@/lib/profile/service";
 import { type SalesTexts, salesTexts } from "./i18n";
 import {
   type InsuredFacts,
   occupationGroup,
+  pillar3aRoom,
+  SAVINGS_MIN_PREMIUM,
   sizeDeathCover,
   sizeDisabilityCover,
   sizeSavings,
@@ -76,6 +80,22 @@ export const recommendInputSchema = z.object({
         ),
     })
     .default({}),
+  annualPremium: z
+    .number()
+    .positive()
+    .optional()
+    .describe(
+      "Savings products only: the yearly premium the customer wants (e.g. the 3a maximum). " +
+        "Kept within the 3a room of the start year and the tariff minimum of CHF 1'200",
+    ),
+  startDate: z
+    .string()
+    .optional()
+    .describe(
+      "Contract start yyyy-mm-01, from next month up to 12 months ahead (default: first of next " +
+        "month). E.g. 2027-01-01 when this year's 3a room is used up; the 3a room is computed " +
+        "for the start year",
+    ),
 });
 export type RecommendInput = z.infer<typeof recommendInputSchema>;
 
@@ -121,6 +141,8 @@ interface Insured {
 
 interface Draft {
   need: Need;
+  /** Savings: the 3a room in the start year. */
+  room3a?: number;
   product: Product;
   insured: Insured;
   input: QuoteInput;
@@ -185,6 +207,7 @@ function insuredFor(
   profile: LifeSituation,
   customer: typeof schema.customers.$inferSelect,
   startDate: string,
+  contributionIn: (year: number) => number,
 ): Insured | { missing: string[] } {
   const person = who === "partner" ? profile.partner : profile.person;
   const prefix = who === "partner" ? "partner" : "person";
@@ -224,7 +247,8 @@ function insuredFor(
       hasPartner: who === "partner" || Boolean(profile.partner),
       youngestChildBirthYear: youngest,
       hasPensionFund: pillar2Of(profile, who).hasPensionFund,
-      pillar3aContribution: who === "self" ? profile.pillar3a.annualContribution : undefined,
+      pillar3aContribution:
+        who === "self" ? contributionIn(Number(startDate.slice(0, 4))) : undefined,
       retirementAge: profile.desiredRetirementAge ?? 65,
     },
   };
@@ -269,8 +293,16 @@ export async function recommendProducts(
 ): Promise<RecommendOutput> {
   const input = recommendInputSchema.parse(raw);
   const { t, chf } = await salesTexts(ctx.locale);
-  const startDate = contractStartDate(new Date());
+  const today = new Date();
+  const start = resolveStartDate(input.startDate, today);
+  const startDate = start.startDate;
+  const explicitStart =
+    Boolean(input.startDate) && (!start.problem || start.problem === "not_first_of_month");
   const profile = getProfile(ctx.customerId);
+  const policies: Pillar3aPolicy[] = activeLifePolicies(ctx.customerId);
+  const thisYear = today.getFullYear();
+  const contributionIn = (year: number) =>
+    pillar3aContributionIn(year, profile, policies, thisYear);
   const customer = db.query.customers
     .findFirst({ where: eq(schema.customers.id, ctx.customerId) })
     .sync();
@@ -282,11 +314,17 @@ export async function recommendProducts(
     recommendations: [],
     excluded: [],
     ruleSetVersion: ctx.ruleSet.version,
+    notes: [],
   };
+  if (start.problem)
+    base.notes?.push(
+      `startDate ${input.startDate}: ${start.problem.replaceAll("_", " ")}, used ${startDate}. ` +
+        "Allowed: the first of a month from next month up to 12 months ahead.",
+    );
   const needs = needsFrom(input.gaps);
   const insuredByWho = new Map<Who, Insured>();
   for (const who of new Set(needs.map((n) => n.who))) {
-    const insured = insuredFor(who, profile, customer, startDate);
+    const insured = insuredFor(who, profile, customer, startDate, contributionIn);
     if ("missing" in insured) base.missing.push(...insured.missing);
     else insuredByWho.set(who, insured);
   }
@@ -338,13 +376,39 @@ export async function recommendProducts(
     }
     const [primary, ...others] = eligible;
     if (!primary) continue;
-    const draft = buildDraft(need, primary, insured, prefs, ctx, { t, chf });
+    const draft = buildDraft(
+      need,
+      primary,
+      insured,
+      prefs,
+      { annualPremium: input.annualPremium, startDate: explicitStart ? startDate : undefined },
+      ctx,
+      { t, chf },
+    );
     if ("excluded" in draft) {
       base.excluded.push(draft.excluded);
       continue;
     }
     draft.alternatives = alternativesFor(need, primary, others, profile, t);
     drafts.push(draft);
+    const year = insured.facts.currentYear;
+    if (draft.room3a !== undefined && draft.input.pillar === "3a") {
+      if (input.annualPremium !== undefined && draft.input.annualPremium !== input.annualPremium)
+        base.notes?.push(
+          `annualPremium ${input.annualPremium} became ${draft.input.annualPremium}: the 3a room ` +
+            `in ${year} is CHF ${draft.room3a}, the tariff minimum CHF ${SAVINGS_MIN_PREMIUM}.`,
+        );
+      const nextRoom = pillar3aRoom({
+        ...insured.facts,
+        currentYear: year + 1,
+        pillar3aContribution: contributionIn(year + 1),
+      });
+      if (draft.room3a < SAVINGS_MIN_PREMIUM && nextRoom >= SAVINGS_MIN_PREMIUM)
+        base.notes?.push(
+          `The 3a room in ${year} is used up (CHF ${draft.room3a}); in ${year + 1} it is ` +
+            `CHF ${nextRoom}. To start the 3a then, call again with startDate ${year + 1}-01-01.`,
+        );
+    }
   }
 
   // Price all recommendations at once (the pricing module limits concurrency).
@@ -429,16 +493,29 @@ export async function recommendProducts(
   return { ...base, recommendations: views };
 }
 
+interface Terms {
+  annualPremium?: number;
+  /** Set only when the advisor chose the start; the default start stays implicit. */
+  startDate?: string;
+}
+
 function buildDraft(
   need: Need,
   product: Product,
   insured: Insured,
   prefs: RecommendInput["preferences"],
+  terms: Terms,
   ctx: ToolContext,
   { t, chf }: SalesTexts,
 ): Draft | { excluded: ExcludedProduct } {
   const facts = insured.facts;
-  const person = { birthDate: insured.birthDate, sex: insured.sex, smoker: insured.smoker };
+  const person = {
+    birthDate: insured.birthDate,
+    sex: insured.sex,
+    smoker: insured.smoker,
+    ...(terms.startDate ? { startDate: terms.startDate } : {}),
+  };
+  let room3a: number | undefined;
   const gapValue =
     need.annual && need.annual > 0
       ? t("server.criteria.gapValue", {
@@ -623,7 +700,9 @@ function buildDraft(
         includeTax,
         facts,
         prefs.maxAnnualBudget,
+        terms.annualPremium,
       );
+      room3a = plan.room3a;
       const pillar = product.code === "pax3a" ? "3a" : (prefs.pillar ?? plan.pillar);
       input = {
         productCode: product.code,
@@ -634,21 +713,30 @@ function buildDraft(
       };
       criteria.push({
         criterion: t("server.criteria.room3a"),
-        value:
-          plan.room3a > 0
+        value: terms.startDate
+          ? plan.room3a > 0
+            ? t("server.criteria.room3aYearValue", {
+                room: chf(plan.room3a),
+                year: String(facts.currentYear),
+              })
+            : t("server.criteria.room3aYearFull", { year: String(facts.currentYear) })
+          : plan.room3a > 0
             ? t("server.criteria.room3aValue", { room: chf(plan.room3a) })
             : t("server.criteria.room3aFull"),
         met: pillar === "3b" || plan.room3a >= plan.annualPremium,
       });
+      const desired = terms.annualPremium !== undefined && !plan.desiredAdjusted;
       criteria.push({
         criterion: t("server.criteria.premium"),
-        value: plan.closesGapFully
-          ? t("server.criteria.premiumValue", { premium: chf(plan.annualPremium) })
-          : t("server.criteria.premiumPartial", {
-              premium: chf(plan.annualPremium),
-              required: chf(plan.requiredPremium),
-            }),
-        met: plan.closesGapFully,
+        value: desired
+          ? t("server.criteria.premiumDesired", { premium: chf(plan.annualPremium) })
+          : plan.closesGapFully
+            ? t("server.criteria.premiumValue", { premium: chf(plan.annualPremium) })
+            : t("server.criteria.premiumPartial", {
+                premium: chf(plan.annualPremium),
+                required: chf(plan.requiredPremium),
+              }),
+        met: desired || plan.closesGapFully,
       });
       rationaleKey =
         need.gap === "tax"
@@ -665,6 +753,14 @@ function buildDraft(
     }
   }
 
+  if (terms.startDate) {
+    const [y, m, d] = terms.startDate.split("-");
+    criteria.push({
+      criterion: t("server.criteria.start"),
+      value: t("server.criteria.startValue", { date: `${d}.${m}.${y}` }),
+      met: true,
+    });
+  }
   if (["todesfall", "lifestar", "fondsstar", "pax3a"].includes(product.code)) {
     criteria.push({
       criterion: t("server.criteria.smoker"),
@@ -700,6 +796,7 @@ function buildDraft(
   }
   return {
     need,
+    room3a,
     budget: prefs.maxAnnualBudget,
     product,
     insured,

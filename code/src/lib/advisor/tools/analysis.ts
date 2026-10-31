@@ -21,8 +21,9 @@ import {
   retirementAge,
   yearsUntilRetirement,
 } from "../logismata/mapping";
-import { hasRiskPolicies, policyCoverOf } from "../policies";
-import { applyPolicyCover } from "../policy-cover";
+import { pillar3aSavingNote } from "../pillar3a";
+import { activeLifePolicies, hasRiskPolicies } from "../policies";
+import { applyPolicyCover, coverEndingFor, policyCoverFor } from "../policy-cover";
 import { privateCoverKnown } from "../readiness";
 import { riskResultForModel } from "../risk-model-output";
 import type { PensionOverviewOutput, RiskAnalysisOutput, TaxSavingsOutput } from "../types";
@@ -43,7 +44,9 @@ export function createAnalysisTools(ctx: ToolContext) {
         "Retirement check across all three pillars (AHV, pension fund, savings/3a) with Logismata: " +
         "income need in retirement (80% of today's gross), what each pillar pays and the gap. " +
         "Shows the three-pillar overview and fills the Vorsorgebild. Needs birth year, sex, " +
-        "marital status and income (and the partner's for couples).",
+        "marital status and income (and the partner's for couples). Only the saved part of the 3a " +
+        "counts: when `pillar3a.note` is set (insurance 3a risk premiums, an unknown savings share, " +
+        "a 3a policy that ends), say plainly what the projection assumes.",
       inputSchema: z.object({}),
       execute: async (_input, { toolCallId }): Promise<PensionOverviewOutput> => {
         const profile = getProfile(ctx.customerId);
@@ -60,7 +63,14 @@ export function createAnalysisTools(ctx: ToolContext) {
           capitalNeed: n(check.response.CapitalNeed),
           pillar3a: {
             balance: profile.pillar3a.balance ?? null,
-            annualContribution: profile.pillar3a.annualContribution ?? null,
+            annualContribution:
+              check.saving?.annualContribution ?? profile.pillar3a.annualContribution ?? null,
+            ...(check.saving
+              ? {
+                  countedAsSaving: check.saving.annualSaving,
+                  note: pillar3aSavingNote(check.saving),
+                }
+              : {}),
           },
           assumptions: {
             needPercent: NEED_PERCENT,
@@ -79,7 +89,8 @@ export function createAnalysisTools(ctx: ToolContext) {
         "disability, 70% for survivors). Shows a gap chart like the Pax Vorsorgecheck. Active " +
         "death and disability policies (Pax and other insurers) are already counted in the " +
         "`policies` figure and reduce the gap. Needs the answer about existing private cover " +
-        "(privateCover) first. The result gives the card's monthly figures; follow its readingGuide.",
+        "(privateCover) first. The result gives the card's monthly figures; follow its readingGuide. " +
+        "`coverEnding` lists cover that a cancellation or expiry ends soon: name what is lost then.",
       inputSchema: z.object({}),
       execute: async (_input, { toolCallId }): Promise<RiskAnalysisOutput> => {
         const profile = getProfile(ctx.customerId);
@@ -89,12 +100,15 @@ export function createAnalysisTools(ctx: ToolContext) {
         if (missing.length) return { status: "missing", missing };
         const check = await runRiskCheck(profile, callContext(toolCallId));
         const year = currentYear();
-        const policyCover = policyCoverOf(ctx.customerId, profile, year);
+        const policies = activeLifePolicies(ctx.customerId);
+        const policyCover = policyCoverFor(policies, profile, year);
+        const today = new Date().toISOString().slice(0, 10);
         return {
           status: "ok",
           persons: applyPolicyCover(check.persons, policyCover, profile, year),
           dependentChildren: dependentChildren(profile, year),
           policyCover,
+          coverEnding: coverEndingFor(policies, profile, today),
           assumptions: {
             needPercent: NEED_PERCENT,
             deathNeedPercent: DEATH_NEED_PERCENT,
