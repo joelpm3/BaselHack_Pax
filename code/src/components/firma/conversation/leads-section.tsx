@@ -6,7 +6,9 @@ import {
   LeadNoteForm,
   LeadStatusSelect,
 } from "@/components/firma/controls";
+import { KindMark } from "@/components/firma/kind-mark";
 import { Panel } from "@/components/firma/page-parts";
+import { Link } from "@/i18n/navigation";
 import type { ScoreBreakdown } from "@/lib/db/schema";
 import {
   CONVERSATION_MODES,
@@ -60,17 +62,45 @@ async function breakdownNote(b: ScoreBreakdown, locale: string, t: Translate): P
       return "";
   }
 }
+/** Conversation id → title; when given, every item links to the conversation it came from. */
+type ConversationTitles = Record<string, string | null>;
+
+function FromConversation({
+  conversationId,
+  titles,
+  label,
+}: {
+  conversationId: string | null;
+  titles: ConversationTitles | undefined;
+  label: (title: string) => string;
+}) {
+  if (!titles || !conversationId || !(conversationId in titles)) return null;
+  return (
+    <Link
+      href={`/firma/gespraeche/${conversationId}`}
+      className="justify-self-start text-xs text-contrast-green hover:underline"
+    >
+      {label(titles[conversationId] ?? "")}
+    </Link>
+  );
+}
+
 export async function LeadsSection({
   detail,
   locale,
+  conversationTitles,
+  emptyLabel,
 }: {
-  detail: ConversationDetail;
+  detail: Pick<ConversationDetail, "leads" | "activities" | "advisors">;
   locale: string;
+  conversationTitles?: ConversationTitles;
+  emptyLabel?: string;
 }) {
-  const [t, tStatus, tType, format] = await Promise.all([
+  const [t, tStatus, tType, tKinds, format] = await Promise.all([
     getTranslations("firma"),
     getTranslations("common.taxonomy.leadStatus"),
     getTranslations("common.taxonomy.leadType"),
+    getTranslations("firmaCustomers.kinds"),
     getFormatter(),
   ]);
   const statusLabel = (value: unknown) =>
@@ -80,9 +110,17 @@ export async function LeadsSection({
   const advisorName = new Map(detail.advisors.map((a) => [a.id, a.name]));
 
   return (
-    <Panel title={t("conversation.leads.title")}>
+    <Panel
+      title={
+        <span className="flex items-center gap-2.5">
+          <KindMark kind="lead" />
+          {t("conversation.leads.title")}
+        </span>
+      }
+      description={tKinds("lead.definition")}
+    >
       {detail.leads.length === 0 ? (
-        <p className="text-fg-muted">{t("conversation.leads.none")}</p>
+        <p className="text-fg-muted">{emptyLabel ?? t("conversation.leads.none")}</p>
       ) : (
         <ul className="grid gap-5">
           {
@@ -104,6 +142,11 @@ export async function LeadsSection({
                       <span className="ml-auto text-2xl font-bold">{lead.score}</span>
                     </div>
                     <p className="font-medium">{lead.reasonToCall}</p>
+                    <FromConversation
+                      conversationId={lead.conversationId}
+                      titles={conversationTitles}
+                      label={(title) => tKinds("fromConversation", { title })}
+                    />
                     {lead.talkingPoints.length > 0 ? (
                       <ul className="grid gap-1">
                         {lead.talkingPoints.map((p) => (
@@ -216,16 +259,35 @@ export async function LeadsSection({
   );
 }
 
-export async function HandoversSection({ detail }: { detail: ConversationDetail }) {
-  const [t, tChannel, format] = await Promise.all([
+export async function HandoversSection({
+  detail,
+  conversationTitles,
+  emptyLabel,
+}: {
+  detail: Pick<ConversationDetail, "handovers" | "rules" | "advisors">;
+  conversationTitles?: ConversationTitles;
+  /** Without it the section is left out when there are no handovers. */
+  emptyLabel?: string;
+}) {
+  const [t, tChannel, tKinds, format] = await Promise.all([
     getTranslations("firma"),
     getTranslations("firma.taxonomy.channel"),
+    getTranslations("firmaCustomers.kinds"),
     getFormatter(),
   ]);
-  if (detail.handovers.length === 0) return null;
+  if (detail.handovers.length === 0 && !emptyLabel) return null;
   return (
-    <Panel title={t("conversation.handovers.title")}>
-      <ul className="grid gap-4">
+    <Panel
+      title={
+        <span className="flex items-center gap-2.5">
+          <KindMark kind="handover" />
+          {t("conversation.handovers.title")}
+        </span>
+      }
+      description={tKinds("handover.definition")}
+    >
+      {detail.handovers.length === 0 ? <p className="text-fg-muted">{emptyLabel}</p> : null}
+      <ul className="grid gap-4 empty:hidden">
         {detail.handovers.map((h) => (
           <li key={h.id} className="grid gap-2">
             <div className="flex flex-wrap items-center gap-2">
@@ -243,6 +305,11 @@ export async function HandoversSection({ detail }: { detail: ConversationDetail 
               </span>
             </div>
             <p>{h.reason}</p>
+            <FromConversation
+              conversationId={h.conversationId}
+              titles={conversationTitles}
+              label={(title) => tKinds("fromConversation", { title })}
+            />
             {h.preferredChannel || h.preferredTime ? (
               <p className="text-fg-muted">
                 {[h.preferredChannel ? tChannel(h.preferredChannel) : null, h.preferredTime]

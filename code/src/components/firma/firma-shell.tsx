@@ -10,6 +10,7 @@ import {
   Radio,
   ScrollText,
   Target,
+  UsersRound,
   X,
 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -24,6 +25,7 @@ const NAV = [
   { href: "/firma", key: "overview", icon: LayoutDashboard },
   { href: "/firma/live", key: "live", icon: Radio },
   { href: "/firma/gespraeche", key: "conversations", icon: MessagesSquare },
+  { href: "/firma/kunden", key: "customers", icon: UsersRound },
   { href: "/firma/leads", key: "leads", icon: Target },
   { href: "/firma/uebergaben", key: "handovers", icon: Handshake },
   { href: "/firma/regeln", key: "rules", icon: ScrollText },
@@ -37,12 +39,24 @@ function isActive(pathname: string | null, href: string): boolean {
     : pathname === href || pathname.startsWith(`${href}/`);
 }
 
+/** Labels for entries added after the original nav, and the short "what is this" hints. */
+const EXTRA_LABEL: Partial<Record<(typeof NAV)[number]["key"], "customers">> = {
+  customers: "customers",
+};
+const HINT: Partial<Record<(typeof NAV)[number]["key"], "leadsHint" | "handoversHint">> = {
+  leads: "leadsHint",
+  handovers: "handoversHint",
+};
+
 function NavList({ pathname, onNavigate }: { pathname: string | null; onNavigate: () => void }) {
   const t = useTranslations("firma.nav");
+  const tExtra = useTranslations("firmaCustomers.nav");
   return (
     <ul className="flex flex-col gap-0.5">
       {NAV.map(({ href, key, icon: Icon }) => {
         const active = isActive(pathname, href);
+        const extra = EXTRA_LABEL[key];
+        const hint = HINT[key];
         return (
           <li key={key}>
             <Link
@@ -50,14 +64,17 @@ function NavList({ pathname, onNavigate }: { pathname: string | null; onNavigate
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(
-                "flex h-10 items-center gap-3 rounded-m px-3 text-[15px] transition-colors",
+                "flex min-h-10 items-center gap-3 rounded-m px-3 py-1 text-[15px] transition-colors",
                 active
                   ? "bg-white/12 text-white"
                   : "text-white/75 hover:bg-white/8 hover:text-white",
               )}
             >
               <Icon aria-hidden className="size-[18px]" strokeWidth={1.75} />
-              <span className="flex-1">{t(key)}</span>
+              <span className="grid flex-1 leading-tight">
+                {extra ? tExtra(extra) : t(key as Exclude<typeof key, "customers">)}
+                {hint ? <span className="text-xs text-white/60">{tExtra(hint)}</span> : null}
+              </span>
               {active ? <span aria-hidden className="size-2 bg-pax-green" /> : null}
             </Link>
           </li>

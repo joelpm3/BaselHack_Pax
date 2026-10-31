@@ -26,3 +26,6 @@ export const customerColumns = {
   lifecycle: schema.customers.lifecycle,
   city: sql<string | null>`json_extract(${schema.profiles.data}, '$.residence.city')`,
 };
+
+/** Leads that still need sales work (not won or lost). */
+export const OPEN_LEAD_SQL = sql`${schema.leads.status} not in ('won', 'lost')`;

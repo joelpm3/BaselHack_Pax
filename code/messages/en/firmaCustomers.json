@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "customers": "Customers",
+    "leadsHint": "Sales opportunities",
+    "handoversHint": "Wants to talk to a person"
+  },
+  "kinds": {
+    "handover": {
+      "name": "Handover",
+      "definition": "The person wants to talk to a human, or a company rule requires a specialist. Handle these first.",
+      "alsoOpen": "Handover open"
+    },
+    "lead": {
+      "name": "Lead",
+      "definition": "A sales opportunity Pax can follow up on. The person has not asked to be contacted.",
+      "alsoOpen": "{count, plural, one {# open lead} other {# open leads}}"
+    },
+    "fromConversation": "From the conversation “{title}”",
+    "openConversation": "Open conversation"
+  },
+  "overview": {
+    "description": "Where you need to act now: who wants to talk to a person, whom to call, and the figures below.",
+    "actNow": "Act now",
+    "figures": "Figures",
+    "openConversation": "Open conversation",
+    "openLeads": "Open leads",
+    "toPipeline": "Go to pipeline",
+    "handovers": {
+      "title": "{count, plural, =0 {No open handovers} one {# open handover} other {# open handovers}}",
+      "counts": "{urgent} urgent, {unassigned} unassigned",
+      "empty": "Nobody is waiting for a specialist.",
+      "urgent": "Urgent",
+      "waiting": "Waiting since {time}",
+      "alsoLead": "Also a lead: {type}, score {score}",
+      "all": "All {count} open handovers"
+    },
+    "leads": {
+      "title": "{count, plural, =0 {No hot leads} one {# hot lead} other {# hot leads}}",
+      "empty": "No open high-priority leads.",
+      "score": "Score",
+      "all": "All leads",
+      "withHandover": "{count, plural, one {# more lead belongs} other {# more leads belong}} to an open handover"
+    }
+  },
+  "list": {
+    "title": "Customers",
+    "description": "Everyone with a conversation or a lead. People with an open handover come first.",
+    "search": "Search",
+    "searchPlaceholder": "Name, email or town",
+    "count": "{count, plural, one {# person} other {# people}}",
+    "emptyTitle": "No customers yet.",
+    "emptySearch": "Nobody matches “{query}”.",
+    "emptyBody": "People show up here as soon as they talk to the digital advisor.",
+    "openHandovers": "{count, plural, =0 {No handover} one {# handover} other {# handovers}}",
+    "openLeads": "{count, plural, =0 {No lead} one {# lead} other {# leads}}",
+    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",
+    "conversations": "{count, plural, one {# conversation} other {# conversations}}"
+  },
+  "detail": {
+    "title": "Customer view",
+    "open": "Customer view",
+    "back": "All customers",
+    "age": "{age} years old",
+    "since": "known since {date}",
+    "facts": {
+      "handovers": "{count, plural, one {open handover} other {open handovers}}",
+      "leads": "{count, plural, one {open lead} other {open leads}}",
+      "conversations": "{count, plural, one {conversation} other {conversations}}",
+      "lastContact": "Last contact"
+    },
+    "noLeads": "No lead has come out of this person's conversations (yet).",
+    "noHandovers": "This person has not asked for a human so far."
+  },
+  "conversations": {
+    "title": "{count, plural, =0 {Conversations} one {# conversation} other {# conversations}}",
+    "description": "Newest first, each with its analysis",
+    "none": "No conversations yet.",
+    "untitled": "Untitled conversation",
+    "meta": "{date}, {mode}, {count, plural, one {# message} other {# messages}}",
+    "gaps": "Gaps",
+    "perYear": "{amount} per year",
+    "painPoints": "Pain points",
+    "nextBestAction": "Next step",
+    "noAnalysis": "Not analysed yet."
+  },
+  "applications": {
+    "title": "Offers and applications",
+    "description": "What the person applied for or signed",
+    "status": {
+      "draft": "Offer",
+      "signed": "Signed",
+      "cancelled": "Withdrawn"
+    },
+    "premium": "{amount} per year"
+  },
+  "communications": {
+    "title": "Communication",
+    "description": "Emails and calls with this person, newest first",
+    "noContact": "No contact details yet.",
+    "none": "No emails or calls logged yet. Log a call or an email on the lead; automated follow-up emails also show up here.",
+    "channel": {
+      "email": "Email",
+      "call": "Call"
+    },
+    "direction": {
+      "outbound": "sent",
+      "inbound": "received"
+    },
+    "system": "Automatic"
+  },
+  "timeline": {
+    "title": "History",
+    "description": "Everything that happened with this person, across all conversations",
+    "none": "Nothing has happened yet.",
+    "untitled": "untitled",
+    "inConversation": "In the conversation “{title}”",
+    "openConversation": "Open conversation",
+    "kind": {
+      "conversation": "Conversation",
+      "handover": "Handover",
+      "lead": "Lead",
+      "communication": "Communication",
+      "offer": "Recommendation or contract",
+      "document": "Document",
+      "feedback": "Rating",
+      "other": "Other"
+    },
+    "event": {
+      "conversationStarted": "Conversation started",
+      "handoverCreated": "Handover to a specialist triggered",
+      "handoverStatus": "Handover set to “{status}”",
+      "handoverAssigned": "Handover reassigned",
+      "leadCreated": "Lead detected: {type}, score {score}",
+      "leadWithdrawn": "Lead withdrawn",
+      "leadStatus": "Lead moved from “{from}” to “{to}”",
+      "leadAssigned": "Lead reassigned",
+      "leadNote": "Note on the lead",
+      "call": "Call",
+      "email": "Email",
+      "recommendation": "Recommendation: {product}",
+      "recommendationDeclined": "Recommendation declined",
+      "suitabilityCompleted": "Suitability check completed",
+      "offerPrepared": "Offer prepared",
+      "applicationSigned": "Application signed: {product}",
+      "policyCreated": "New contract: {product}",
+      "documentUploaded": "Document uploaded: {filename}",
+      "documentConfirmed": "Document values confirmed",
+      "documentDeleted": "Document deleted",
+      "contactSaved": "Contact details left",
+      "feedback": "Rating given: {nps} out of 10"
+    }
+  }
+}

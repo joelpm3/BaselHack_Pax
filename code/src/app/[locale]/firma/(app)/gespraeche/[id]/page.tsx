@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
@@ -16,9 +16,11 @@ import {
   RecommendationsSection,
 } from "@/components/firma/conversation/records-section";
 import { Transcript } from "@/components/firma/conversation/transcript";
+import { customerHref } from "@/components/firma/customer-link";
 import { LiveRefresh, LiveStatus } from "@/components/firma/live-events";
 import { LoadingBlock, PageBody, Panel } from "@/components/firma/page-parts";
 import { StageSquares } from "@/components/firma/stage-squares";
+import { buttonClasses } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { getConversationDetail } from "@/lib/firma/conversations";
@@ -58,8 +60,9 @@ async function ConversationContent({
   await connection();
   const detail = getConversationDetail(id);
   if (!detail) notFound();
-  const [t, tStage, tMode, tCommon, format, locale] = await Promise.all([
+  const [t, tCustomer, tStage, tMode, tCommon, format, locale] = await Promise.all([
     getTranslations("firma.conversation"),
+    getTranslations("firmaCustomers.detail"),
     getTranslations("common.taxonomy.stages"),
     getTranslations("firma.taxonomy.mode"),
     getTranslations("firma.common"),
@@ -89,10 +92,20 @@ async function ConversationContent({
       <header className="grid gap-3 border-b border-line px-4 py-5 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="grid gap-1">
-            <h1 className="text-2xl font-bold leading-tight">{name}</h1>
+            <h1 className="text-2xl font-bold leading-tight">
+              <Link href={customerHref(customer.id)} className="hover:underline">
+                {name}
+              </Link>
+            </h1>
             <p className="text-fg-muted">{conversation.title ?? t("untitled")}</p>
           </div>
-          <RerunAnalysisButton conversationId={conversation.id} />
+          <div className="flex flex-wrap items-center gap-2">
+            <Link href={customerHref(customer.id)} className={buttonClasses("secondary", "sm")}>
+              <UserRound aria-hidden />
+              {tCustomer("open")}
+            </Link>
+            <RerunAnalysisButton conversationId={conversation.id} />
+          </div>
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="inline-flex items-center gap-2">
@@ -136,7 +149,7 @@ async function ConversationContent({
             />
             <LeadsSection detail={detail} locale={locale} />
             <HandoversSection detail={detail} />
-            <ProfileSection detail={detail} locale={locale} />
+            <ProfileSection detail={detail} locale={locale} asOf={conversation.createdAt} />
           </div>
         </div>
         <RecommendationsSection detail={detail} locale={locale} />

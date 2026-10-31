@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "customers": "Kundinnen und Kunden",
+    "leadsHint": "Verkaufschancen",
+    "handoversHint": "Will einen Menschen sprechen"
+  },
+  "kinds": {
+    "handover": {
+      "name": "Übergabe",
+      "definition": "Die Person will mit einem Menschen sprechen oder eine Firmenregel verlangt eine Fachperson. Zuerst bearbeiten.",
+      "alsoOpen": "Übergabe offen"
+    },
+    "lead": {
+      "name": "Lead",
+      "definition": "Eine Verkaufschance, die Pax aktiv ansprechen kann. Die Person hat keinen Kontakt verlangt.",
+      "alsoOpen": "{count, plural, one {# offener Lead} other {# offene Leads}}"
+    },
+    "fromConversation": "Aus dem Gespräch «{title}»",
+    "openConversation": "Gespräch öffnen"
+  },
+  "overview": {
+    "description": "Wo Sie jetzt handeln müssen: wer einen Menschen sprechen will, wen Sie anrufen sollten, und darunter die Kennzahlen.",
+    "actNow": "Jetzt handeln",
+    "figures": "Kennzahlen",
+    "openConversation": "Gespräch öffnen",
+    "openLeads": "Offene Leads",
+    "toPipeline": "Zur Pipeline",
+    "handovers": {
+      "title": "{count, plural, =0 {Keine offenen Übergaben} one {# offene Übergabe} other {# offene Übergaben}}",
+      "counts": "{urgent} dringend, {unassigned} ohne Zuständigkeit",
+      "empty": "Niemand wartet auf eine Fachperson.",
+      "urgent": "Dringend",
+      "waiting": "Wartet seit {time}",
+      "alsoLead": "Auch Lead: {type}, Score {score}",
+      "all": "Alle {count} offenen Übergaben"
+    },
+    "leads": {
+      "title": "{count, plural, =0 {Keine heissen Leads} one {# heisser Lead} other {# heisse Leads}}",
+      "empty": "Keine offenen Leads mit hoher Priorität.",
+      "score": "Score",
+      "all": "Alle Leads",
+      "withHandover": "{count, plural, one {# weiterer Lead hängt} other {# weitere Leads hängen}} an einer offenen Übergabe"
+    }
+  },
+  "list": {
+    "title": "Kundinnen und Kunden",
+    "description": "Alle Personen mit Gespräch oder Lead. Wer eine offene Übergabe hat, steht oben.",
+    "search": "Suchen",
+    "searchPlaceholder": "Name, E-Mail oder Ort",
+    "count": "{count, plural, one {# Person} other {# Personen}}",
+    "emptyTitle": "Noch keine Kundinnen und Kunden.",
+    "emptySearch": "Niemand passt zu «{query}».",
+    "emptyBody": "Personen erscheinen hier, sobald sie mit dem digitalen Berater sprechen.",
+    "openHandovers": "{count, plural, =0 {Keine Übergabe} one {# Übergabe} other {# Übergaben}}",
+    "openLeads": "{count, plural, =0 {Kein Lead} one {# Lead} other {# Leads}}",
+    "openLeadsScore": "{count, plural, one {# Lead} other {# Leads}}, Score {score}",
+    "conversations": "{count, plural, one {# Gespräch} other {# Gespräche}}"
+  },
+  "detail": {
+    "title": "Kundenansicht",
+    "open": "Kundenansicht",
+    "back": "Alle Kundinnen und Kunden",
+    "age": "{age} Jahre",
+    "since": "bekannt seit {date}",
+    "facts": {
+      "handovers": "{count, plural, one {offene Übergabe} other {offene Übergaben}}",
+      "leads": "{count, plural, one {offener Lead} other {offene Leads}}",
+      "conversations": "{count, plural, one {Gespräch} other {Gespräche}}",
+      "lastContact": "Letzter Kontakt"
+    },
+    "noLeads": "Aus den Gesprächen dieser Person ist (noch) kein Lead entstanden.",
+    "noHandovers": "Diese Person hat bisher keinen Menschen verlangt."
+  },
+  "conversations": {
+    "title": "{count, plural, =0 {Gespräche} one {# Gespräch} other {# Gespräche}}",
+    "description": "Neueste zuerst, mit der Auswertung jedes Gesprächs",
+    "none": "Noch keine Gespräche.",
+    "untitled": "Gespräch ohne Titel",
+    "meta": "{date}, {mode}, {count, plural, one {# Nachricht} other {# Nachrichten}}",
+    "gaps": "Lücken",
+    "perYear": "{amount} pro Jahr",
+    "painPoints": "Pain-Points",
+    "nextBestAction": "Nächster Schritt",
+    "noAnalysis": "Noch nicht ausgewertet."
+  },
+  "applications": {
+    "title": "Offerten und Anträge",
+    "description": "Was die Person beantragt oder unterschrieben hat",
+    "status": {
+      "draft": "Offerte",
+      "signed": "Unterschrieben",
+      "cancelled": "Zurückgezogen"
+    },
+    "premium": "{amount} pro Jahr"
+  },
+  "communications": {
+    "title": "Kommunikation",
+    "description": "E-Mails und Anrufe mit dieser Person, neueste zuerst",
+    "noContact": "Noch keine Kontaktdaten.",
+    "none": "Noch keine E-Mails oder Anrufe erfasst. Erfassen Sie einen Anruf oder eine E-Mail beim Lead; automatische Follow-up-E-Mails erscheinen ebenfalls hier.",
+    "channel": {
+      "email": "E-Mail",
+      "call": "Anruf"
+    },
+    "direction": {
+      "outbound": "gesendet",
+      "inbound": "erhalten"
+    },
+    "system": "Automatisch"
+  },
+  "timeline": {
+    "title": "Verlauf",
+    "description": "Alles, was mit dieser Person passiert ist, über alle Gespräche",
+    "none": "Noch nichts passiert.",
+    "untitled": "ohne Titel",
+    "inConversation": "Im Gespräch «{title}»",
+    "openConversation": "Gespräch öffnen",
+    "kind": {
+      "conversation": "Gespräch",
+      "handover": "Übergabe",
+      "lead": "Lead",
+      "communication": "Kommunikation",
+      "offer": "Empfehlung oder Vertrag",
+      "document": "Dokument",
+      "feedback": "Bewertung",
+      "other": "Sonstiges"
+    },
+    "event": {
+      "conversationStarted": "Gespräch begonnen",
+      "handoverCreated": "Übergabe an eine Fachperson ausgelöst",
+      "handoverStatus": "Übergabe auf «{status}» gesetzt",
+      "handoverAssigned": "Übergabe neu zugewiesen",
+      "leadCreated": "Lead erkannt: {type}, Score {score}",
+      "leadWithdrawn": "Lead zurückgezogen",
+      "leadStatus": "Lead von «{from}» auf «{to}» gesetzt",
+      "leadAssigned": "Lead neu zugewiesen",
+      "leadNote": "Notiz zum Lead",
+      "call": "Anruf",
+      "email": "E-Mail",
+      "recommendation": "Empfehlung: {product}",
+      "recommendationDeclined": "Empfehlung abgelehnt",
+      "suitabilityCompleted": "Angemessenheitsprüfung abgeschlossen",
+      "offerPrepared": "Offerte erstellt",
+      "applicationSigned": "Antrag unterschrieben: {product}",
+      "policyCreated": "Neuer Vertrag: {product}",
+      "documentUploaded": "Dokument hochgeladen: {filename}",
+      "documentConfirmed": "Dokumentwerte bestätigt",
+      "documentDeleted": "Dokument gelöscht",
+      "contactSaved": "Kontaktdaten hinterlassen",
+      "feedback": "Bewertung abgegeben: {nps} von 10"
+    }
+  }
+}

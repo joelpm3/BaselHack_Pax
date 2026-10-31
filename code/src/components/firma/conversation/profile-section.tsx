@@ -20,9 +20,12 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 export async function ProfileSection({
   detail,
   locale,
+  asOf,
 }: {
-  detail: ConversationDetail;
+  detail: Pick<ConversationDetail, "customer" | "profile" | "policies">;
   locale: string;
+  /** Date the age is computed for (the conversation start, or today in the customer view). */
+  asOf: Date;
 }) {
   const [t, tx] = await Promise.all([
     getTranslations("firma.conversation.profile"),
@@ -30,7 +33,7 @@ export async function ProfileSection({
   ]);
   const { customer, profile } = detail;
   const p = profile.person;
-  const year = new Date(detail.conversation.createdAt).getFullYear();
+  const year = asOf.getFullYear();
   const chf = (n: number | undefined) => (n === undefined ? null : formatChf(n, locale));
   const completeness = profileCompleteness(profile);
 

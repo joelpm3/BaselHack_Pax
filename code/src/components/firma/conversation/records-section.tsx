@@ -14,7 +14,7 @@ export async function RecommendationsSection({
   detail,
   locale,
 }: {
-  detail: ConversationDetail;
+  detail: Pick<ConversationDetail, "recommendations">;
   locale: string;
 }) {
   const [t, tGap, tx] = await Promise.all([
@@ -152,7 +152,11 @@ export async function CalculationsSection({ detail }: { detail: ConversationDeta
   );
 }
 
-export async function DocumentsSection({ detail }: { detail: ConversationDetail }) {
+export async function DocumentsSection({
+  detail,
+}: {
+  detail: Pick<ConversationDetail, "documents">;
+}) {
   const [t, tDoc, tx, format] = await Promise.all([
     getTranslations("firma.conversation.documents"),
     getTranslations("common.taxonomy.docType"),

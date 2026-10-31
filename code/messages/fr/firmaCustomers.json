@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "customers": "Clientes et clients",
+    "leadsHint": "Opportunités de vente",
+    "handoversHint": "Veut parler à une personne"
+  },
+  "kinds": {
+    "handover": {
+      "name": "Transfert",
+      "definition": "La personne veut parler à un être humain, ou une règle de l’entreprise exige un spécialiste. À traiter en premier.",
+      "alsoOpen": "Transfert ouvert"
+    },
+    "lead": {
+      "name": "Lead",
+      "definition": "Une opportunité de vente que Pax peut saisir. La personne n’a pas demandé à être contactée.",
+      "alsoOpen": "{count, plural, one {# lead ouvert} other {# leads ouverts}}"
+    },
+    "fromConversation": "Issu de l’entretien « {title} »",
+    "openConversation": "Ouvrir l’entretien"
+  },
+  "overview": {
+    "description": "Là où vous devez agir maintenant : qui veut parler à une personne, qui appeler, puis les indicateurs.",
+    "actNow": "Agir maintenant",
+    "figures": "Indicateurs",
+    "openConversation": "Ouvrir l’entretien",
+    "openLeads": "Leads ouverts",
+    "toPipeline": "Vers le pipeline",
+    "handovers": {
+      "title": "{count, plural, =0 {Aucun transfert ouvert} one {# transfert ouvert} other {# transferts ouverts}}",
+      "counts": "{urgent} urgent(s), {unassigned} sans responsable",
+      "empty": "Personne n’attend de spécialiste.",
+      "urgent": "Urgent",
+      "waiting": "Attend depuis {time}",
+      "alsoLead": "Aussi un lead : {type}, score {score}",
+      "all": "Les {count} transferts ouverts"
+    },
+    "leads": {
+      "title": "{count, plural, =0 {Aucun lead chaud} one {# lead chaud} other {# leads chauds}}",
+      "empty": "Aucun lead ouvert à haute priorité.",
+      "score": "Score",
+      "all": "Tous les leads",
+      "withHandover": "{count, plural, one {# autre lead est lié} other {# autres leads sont liés}} à un transfert ouvert"
+    }
+  },
+  "list": {
+    "title": "Clientes et clients",
+    "description": "Toutes les personnes avec un entretien ou un lead. Celles avec un transfert ouvert figurent en haut.",
+    "search": "Rechercher",
+    "searchPlaceholder": "Nom, e-mail ou localité",
+    "count": "{count, plural, one {# personne} other {# personnes}}",
+    "emptyTitle": "Pas encore de clientes ni de clients.",
+    "emptySearch": "Personne ne correspond à « {query} ».",
+    "emptyBody": "Les personnes apparaissent ici dès qu’elles parlent au conseiller numérique.",
+    "openHandovers": "{count, plural, =0 {Aucun transfert} one {# transfert} other {# transferts}}",
+    "openLeads": "{count, plural, =0 {Aucun lead} one {# lead} other {# leads}}",
+    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",
+    "conversations": "{count, plural, one {# entretien} other {# entretiens}}"
+  },
+  "detail": {
+    "title": "Vue client",
+    "open": "Vue client",
+    "back": "Toutes les clientes et tous les clients",
+    "age": "{age} ans",
+    "since": "connu·e depuis le {date}",
+    "facts": {
+      "handovers": "{count, plural, one {transfert ouvert} other {transferts ouverts}}",
+      "leads": "{count, plural, one {lead ouvert} other {leads ouverts}}",
+      "conversations": "{count, plural, one {entretien} other {entretiens}}",
+      "lastContact": "Dernier contact"
+    },
+    "noLeads": "Aucun lead n’est (encore) issu des entretiens de cette personne.",
+    "noHandovers": "Cette personne n’a pas encore demandé à parler à un être humain."
+  },
+  "conversations": {
+    "title": "{count, plural, =0 {Entretiens} one {# entretien} other {# entretiens}}",
+    "description": "Les plus récents d’abord, avec l’analyse de chaque entretien",
+    "none": "Pas encore d’entretiens.",
+    "untitled": "Entretien sans titre",
+    "meta": "{date}, {mode}, {count, plural, one {# message} other {# messages}}",
+    "gaps": "Lacunes",
+    "perYear": "{amount} par an",
+    "painPoints": "Points sensibles",
+    "nextBestAction": "Prochaine étape",
+    "noAnalysis": "Pas encore analysé."
+  },
+  "applications": {
+    "title": "Offres et propositions",
+    "description": "Ce que la personne a demandé ou signé",
+    "status": {
+      "draft": "Offre",
+      "signed": "Signée",
+      "cancelled": "Retirée"
+    },
+    "premium": "{amount} par an"
+  },
+  "communications": {
+    "title": "Communication",
+    "description": "E-mails et appels avec cette personne, les plus récents d’abord",
+    "noContact": "Pas encore de coordonnées.",
+    "none": "Aucun e-mail ni appel saisi. Saisissez un appel ou un e-mail sur le lead ; les e-mails de suivi automatiques apparaissent aussi ici.",
+    "channel": {
+      "email": "E-mail",
+      "call": "Appel"
+    },
+    "direction": {
+      "outbound": "envoyé",
+      "inbound": "reçu"
+    },
+    "system": "Automatique"
+  },
+  "timeline": {
+    "title": "Historique",
+    "description": "Tout ce qui s’est passé avec cette personne, sur tous les entretiens",
+    "none": "Rien ne s’est encore passé.",
+    "untitled": "sans titre",
+    "inConversation": "Dans l’entretien « {title} »",
+    "openConversation": "Ouvrir l’entretien",
+    "kind": {
+      "conversation": "Entretien",
+      "handover": "Transfert",
+      "lead": "Lead",
+      "communication": "Communication",
+      "offer": "Recommandation ou contrat",
+      "document": "Document",
+      "feedback": "Évaluation",
+      "other": "Autre"
+    },
+    "event": {
+      "conversationStarted": "Entretien commencé",
+      "handoverCreated": "Transfert à un spécialiste déclenché",
+      "handoverStatus": "Transfert passé à « {status} »",
+      "handoverAssigned": "Transfert réattribué",
+      "leadCreated": "Lead détecté : {type}, score {score}",
+      "leadWithdrawn": "Lead retiré",
+      "leadStatus": "Lead passé de « {from} » à « {to} »",
+      "leadAssigned": "Lead réattribué",
+      "leadNote": "Note sur le lead",
+      "call": "Appel",
+      "email": "E-mail",
+      "recommendation": "Recommandation : {product}",
+      "recommendationDeclined": "Recommandation refusée",
+      "suitabilityCompleted": "Test d’adéquation terminé",
+      "offerPrepared": "Offre établie",
+      "applicationSigned": "Proposition signée : {product}",
+      "policyCreated": "Nouveau contrat : {product}",
+      "documentUploaded": "Document téléversé : {filename}",
+      "documentConfirmed": "Valeurs du document confirmées",
+      "documentDeleted": "Document supprimé",
+      "contactSaved": "Coordonnées laissées",
+      "feedback": "Évaluation donnée : {nps} sur 10"
+    }
+  }
+}
