@@ -16,7 +16,7 @@ import {
 import { applyProfileChanges, getProfile, type ProfileChange } from "@/lib/profile/service";
 import { resolveResidence } from "../location";
 import { missingFor } from "../logismata/mapping";
-import type { UpdateProfileOutput } from "../types";
+import type { ResidencePlace, UpdateProfileOutput } from "../types";
 import type { ToolContext } from "./context";
 
 const chf = (what: string) => z.number().min(0).describe(`${what}, CHF per year`);
@@ -179,6 +179,15 @@ function saveContact(customerId: string, contact: NonNullable<UpdateProfileInput
     .run();
 }
 
+function sameResidence(stored: LifeSituation["residence"], place: ResidencePlace): boolean {
+  return (
+    stored.city === place.city &&
+    (stored.zip ?? null) === place.zip &&
+    stored.canton === place.canton &&
+    (stored.taxLocationId ?? null) === place.taxLocationId
+  );
+}
+
 export function missingForAnalysis(profile: LifeSituation): string[] {
   return [...new Set([...missingFor(profile, "risk"), ...missingFor(profile, "tax")])];
 }
@@ -205,8 +214,11 @@ export function createProfileTools(ctx: ToolContext) {
             toolCallId,
           });
           if (result.status === "resolved") {
-            location = result.location;
-            changes.push(...result.changes);
+            // Repeating the place the customer just picked in the card adds no second card.
+            if (!sameResidence(current.residence, result.location)) {
+              location = result.location;
+              changes.push(...result.changes);
+            }
           } else if (result.status === "ambiguous") {
             locationOptions = result.options;
           } else {
