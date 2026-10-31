@@ -66,10 +66,12 @@
     },
     "building": {
       "title": "Your picture is taking shape",
-      "body": "As soon as I know your age, your family and your income, I calculate your pension picture.",
       "known": "{count} of {total} facts known",
       "factKnown": "known",
-      "factOpen": "still open"
+      "factOpen": "still open",
+      "missing": "I still need: {fields}.",
+      "calculating": "I have everything I need. I'm calculating your pension picture now.",
+      "unavailable": "I have everything I need, but the calculation isn't available right now. I'll try again during our conversation."
     },
     "facts": {
       "age": "Age",
@@ -100,6 +102,11 @@
       "gap": "{kind}: gap {amount}/month",
       "covered": "{kind}: covered",
       "building": "{count} of {total} facts"
-    }
+    },
+    "partnerContext": {
+      "disability": "If illness stops {name} from working",
+      "death": "For your family if {name} dies of an illness"
+    },
+    "partnerFallback": "your partner"
   }
 }

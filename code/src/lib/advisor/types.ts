@@ -194,6 +194,12 @@ export interface QuickRepliesOutput {
 
 export interface PictureScenario {
   kind: PictureKind;
+  /**
+   * Whose disability or death: 1 = the customer, 2 = the partner (household view when the
+   * family lives from the partner's income). Retirement is always the household (1).
+   */
+  person: 1 | 2;
+  partnerName: string | null;
   breakdown: IncomeBreakdown;
   calculatedAt: number;
 }
@@ -203,6 +209,10 @@ export interface VorsorgebildModel {
   completeness: number;
   /** Which of the core facts are known (profile paths), in display order. */
   facts: Array<{ key: string; known: boolean }>;
+  /** Profile paths still needed before the picture can be calculated. */
+  missing: string[];
+  /** All inputs are there but the calculation is missing or older than the profile. */
+  pending: boolean;
   scenarios: PictureScenario[];
   pillars: {
     /** Gross income today (person + partner). */

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { type LifeSituation, lifeSituationSchema } from "@/lib/domain/profile";
 import {
+  affectsCalculations,
   buildPurchaseP2Request,
   buildRetirementRequest,
   buildRiskRequest,
@@ -10,9 +11,11 @@ import {
   dependentChildren,
   describeRiskScenario,
   householdIncome,
+  householdRiskScenarios,
   max3a,
   mergeRiskPensions,
   missingFor,
+  missingForPicture,
   NEED_PERCENT,
   relationshipCode,
   relationshipSinceYear,
@@ -121,6 +124,23 @@ describe("missingFor", () => {
       "partner.grossIncome",
     ]);
     expect(missingFor(p, "tax")).toEqual(["partner.grossIncome", "residence.zip"]);
+  });
+
+  it("lists what the Vorsorgebild still needs, without the place of residence", () => {
+    expect(missingForPicture(youngFamily)).toEqual([]);
+    expect(missingForPicture(profile({ person: { birthYear: 1990, grossIncome: 1 } }))).toEqual([
+      "person.sex",
+      "person.maritalStatus",
+    ]);
+  });
+
+  it("knows which profile changes make the calculations outdated", () => {
+    expect(affectsCalculations("person.grossIncome")).toBe(true);
+    expect(affectsCalculations("children")).toBe(true);
+    expect(affectsCalculations("pillar2.currentCapital")).toBe(true);
+    expect(affectsCalculations("goals")).toBe(false);
+    expect(affectsCalculations("residence.taxLocationId")).toBe(false);
+    expect(affectsCalculations("partner.firstName")).toBe(false);
   });
 });
 
@@ -237,5 +257,34 @@ describe("responses", () => {
     expect(describeRiskScenario(4)).toEqual({ person: 1, event: "death", cause: "accident" });
     expect(describeRiskScenario(7)).toEqual({ person: 2, event: "death", cause: "illness" });
     expect(describeRiskScenario(9)).toBeNull();
+  });
+
+  it("shows the partner's risk when the household lives from the partner's income", () => {
+    const summaries = [
+      { Scenario: 1, IncomeNeed: 0 },
+      { Scenario: 2, IncomeNeed: 0 },
+      { Scenario: 3, IncomeNeed: 0 },
+      { Scenario: 5, IncomeNeed: 80000, IncomeGap: 20000 },
+      { Scenario: 7, IncomeNeed: 70000 },
+    ];
+    expect(
+      householdRiskScenarios(summaries).map((s) => [s.event, s.person, s.breakdown.need]),
+    ).toEqual([
+      ["disability", 2, 80000],
+      ["death", 2, 70000],
+    ]);
+  });
+
+  it("keeps the customer's own risk when they have an income need", () => {
+    const summaries = [
+      { Scenario: 1, IncomeNeed: 64000 },
+      { Scenario: 3, IncomeNeed: 0 },
+      { Scenario: 5, IncomeNeed: 80000 },
+      { Scenario: 7, IncomeNeed: 0 },
+    ];
+    expect(householdRiskScenarios(summaries).map((s) => [s.event, s.person])).toEqual([
+      ["disability", 1],
+      ["death", 1],
+    ]);
   });
 });

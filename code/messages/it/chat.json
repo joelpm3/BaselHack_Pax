@@ -66,10 +66,12 @@
     },
     "building": {
       "title": "Il suo quadro prende forma",
-      "body": "Appena conosco la sua età, la sua famiglia e il suo reddito, calcolo il suo quadro previdenziale.",
       "known": "{count} dati su {total} noti",
       "factKnown": "noto",
-      "factOpen": "ancora aperto"
+      "factOpen": "ancora aperto",
+      "missing": "Mi manca ancora: {fields}.",
+      "calculating": "Tutti i dati necessari ci sono. Ora calcolo il suo quadro previdenziale.",
+      "unavailable": "Tutti i dati necessari ci sono, ma al momento il calcolo non è disponibile. Riproverò durante il colloquio."
     },
     "facts": {
       "age": "Età",
@@ -100,6 +102,11 @@
       "gap": "{kind}: lacuna {amount}/mese",
       "covered": "{kind}: coperto",
       "building": "{count} dati su {total}"
-    }
+    },
+    "partnerContext": {
+      "disability": "Se a causa di una malattia {name} non può più lavorare",
+      "death": "Per la sua famiglia, se {name} muore a causa di una malattia"
+    },
+    "partnerFallback": "la sua o il suo partner"
   }
 }

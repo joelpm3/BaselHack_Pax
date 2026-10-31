@@ -88,6 +88,12 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   );
   const pictureActions = useMemo(() => ({ setPicture, refreshPicture }), [refreshPicture]);
 
+  // Every input is known but nothing is calculated yet (e.g. an existing customer opening a new
+  // conversation, or a corrected value): the route runs the checks, no turn needed.
+  useEffect(() => {
+    if (picture.pending) refreshPicture();
+  }, [picture.pending, refreshPicture]);
+
   useEffect(() => {
     const onScroll = () => {
       const distance = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
