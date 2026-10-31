@@ -28,7 +28,6 @@
   },
   "page": {
     "title": "Relances",
-    "description": "Événements de vie que la clientèle a annoncés pendant l'entretien. Une semaine avant, Pax reprend contact de lui-même par un e-mail personnel. Contrairement à un transfert, personne n'a demandé à parler à quelqu'un.",
     "tabs": "Statut des relances"
   },
   "tab": {
@@ -82,24 +81,15 @@
       "failed": "{count, plural, one {# e-mail n'a pas pu être rédigé, veuillez revérifier} other {# e-mails n'ont pas pu être rédigés, veuillez revérifier}}"
     }
   },
-  "timeline": {
-    "caption": "{count, plural, =0 {Aucune relance prévue} one {# relance prévue à partir d'aujourd'hui} other {# relances prévues à partir d'aujourd'hui}}",
-    "today": "Aujourd'hui",
-    "anonymous": "Anonyme"
-  },
   "card": {
-    "expected": "Prévu :",
-    "fromConversation": "Tiré de l'entretien du",
     "followUpOn": "Relance dès le",
     "dueNow": "À traiter",
-    "confidence": "Fiabilité {value} %",
     "noEmail": "Aucune adresse e-mail enregistrée : veuillez appeler.",
     "recordReply": "Enregistrer la réponse",
     "dismiss": "Écarter"
   },
   "outbox": {
     "title": "Boîte d'envoi",
-    "description": "Simulation : Pax n'envoie rien, les e-mails restent ici.",
     "empty": "Pas encore d'e-mails.",
     "to": "À {address}",
     "replied": "Répondu",
@@ -111,13 +101,10 @@
   },
   "checkin": {
     "title": "Check-in annuel",
-    "description": "Une fois par an, Pax demande si quelque chose a changé dans la famille, le travail, le logement ou le revenu. La clientèle peut le désactiver dans son cockpit de prévoyance.",
     "next": "Prochain le",
-    "dueNow": "à envoyer",
     "off": "Désinscrit",
     "turnOff": "Désinscrire",
     "turnOn": "Réinscrire",
-    "empty": "Pas encore de clientèle avec une adresse e-mail.",
     "noEmail": "Check-in annuel : aucune adresse e-mail enregistrée."
   },
   "customer": {

@@ -1,3 +1,6 @@
+// One job: understand what this customer needed and act on it. The open handover, the lead and
+// the analysis' next step come first, next to the transcript; profile, records and the audit
+// trail are collapsed below.
 import { ArrowLeft, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -72,6 +75,13 @@ async function ConversationContent({
   ]);
   const { conversation, customer } = detail;
   const name = displayName(customer) ?? detail.profile.person.firstName ?? tCommon("anonymous");
+  const facts = [
+    tMode(conversation.mode),
+    conversation.locale.toUpperCase(),
+    detail.ruleSetVersion !== null ? t("ruleSet", { version: detail.ruleSetVersion }) : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <>
@@ -116,7 +126,6 @@ async function ConversationContent({
           <ConversationStatusBadge status={conversation.status} />
           {conversation.isSimulated ? <SimulatedBadge /> : null}
           <span className="text-fg-muted">
-            {tMode(conversation.mode)} · {conversation.locale.toUpperCase()} ·{" "}
             {t("started", {
               time: format.dateTime(conversation.createdAt, {
                 day: "numeric",
@@ -126,40 +135,39 @@ async function ConversationContent({
                 minute: "2-digit",
               }),
             })}
-            {detail.ruleSetVersion !== null
-              ? ` · ${t("ruleSet", { version: detail.ruleSetVersion })}`
-              : ""}
           </span>
         </div>
       </header>
 
       <PageBody className="grid gap-6">
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
-          <Panel
-            title={t("transcript.title")}
-            description={t("transcript.description", { count: detail.messages.length })}
-          >
-            <Transcript messages={detail.messages} />
-          </Panel>
-          <div className="grid content-start gap-6">
+          <div className="grid content-start gap-6 lg:order-2">
+            <HandoversSection detail={detail} />
+            {detail.leads.length > 0 ? <LeadsSection detail={detail} locale={locale} /> : null}
             <AnalysisSection
               analysis={detail.analysis}
               rules={detail.rules}
               pending={isAnalysisPending(conversation.id)}
               locale={locale}
+              facts={facts}
             />
-            <LeadsSection detail={detail} locale={locale} />
-            <HandoversSection detail={detail} />
-            <ProfileSection detail={detail} locale={locale} asOf={conversation.createdAt} />
-            <FlagSection conversationId={conversation.id} />
           </div>
+          <Panel
+            className="lg:order-1"
+            title={t("transcript.title")}
+            description={t("transcript.description", { count: detail.messages.length })}
+          >
+            <Transcript messages={detail.messages} />
+          </Panel>
         </div>
-        <RecommendationsSection detail={detail} locale={locale} />
-        <div className="grid gap-6 xl:grid-cols-2">
-          <CalculationsSection detail={detail} />
-          <DocumentsSection detail={detail} />
+        <div className="grid content-start gap-3">
+          <ProfileSection detail={detail} locale={locale} asOf={conversation.createdAt} collapsed />
+          <RecommendationsSection detail={detail} locale={locale} collapsed />
+          <CalculationsSection detail={detail} collapsed />
+          <DocumentsSection detail={detail} collapsed />
+          <AuditSection detail={detail} collapsed />
+          <FlagSection conversationId={conversation.id} />
         </div>
-        <AuditSection detail={detail} />
       </PageBody>
     </>
   );

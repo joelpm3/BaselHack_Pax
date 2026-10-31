@@ -28,7 +28,6 @@
   },
   "page": {
     "title": "Wiedervorlagen",
-    "description": "Lebensereignisse, die Kundinnen und Kunden im Gespräch angekündigt haben. Eine Woche vorher meldet sich Pax von sich aus mit einer persönlichen E-Mail. Anders als bei einer Übergabe hat hier niemand nach einer Person gefragt.",
     "tabs": "Status der Wiedervorlagen"
   },
   "tab": {
@@ -82,24 +81,15 @@
       "failed": "{count, plural, one {# E-Mail konnte nicht geschrieben werden, bitte erneut prüfen} other {# E-Mails konnten nicht geschrieben werden, bitte erneut prüfen}}"
     }
   },
-  "timeline": {
-    "caption": "{count, plural, =0 {Keine geplanten Wiedervorlagen} one {# geplante Wiedervorlage ab heute} other {# geplante Wiedervorlagen ab heute}}",
-    "today": "Heute",
-    "anonymous": "Anonym"
-  },
   "card": {
-    "expected": "Erwartet:",
-    "fromConversation": "Aus dem Gespräch vom",
     "followUpOn": "Wiedervorlage ab",
     "dueNow": "Fällig",
-    "confidence": "Sicherheit {value} %",
     "noEmail": "Keine E-Mail-Adresse hinterlegt: bitte anrufen.",
     "recordReply": "Antwort erfassen",
     "dismiss": "Verwerfen"
   },
   "outbox": {
     "title": "Postausgang",
-    "description": "Simuliert: Pax verschickt nichts, die E-Mails liegen nur hier.",
     "empty": "Noch keine E-Mails.",
     "to": "An {address}",
     "replied": "Beantwortet",
@@ -111,13 +101,10 @@
   },
   "checkin": {
     "title": "Jährlicher Check-in",
-    "description": "Einmal im Jahr fragt Pax nach, ob sich bei Familie, Beruf, Wohnen oder Einkommen etwas verändert hat. Kundinnen und Kunden können das im Vorsorge-Cockpit abschalten.",
     "next": "Nächster am",
-    "dueNow": "fällig",
     "off": "Abgemeldet",
     "turnOff": "Abmelden",
     "turnOn": "Wieder anmelden",
-    "empty": "Noch keine Kundinnen und Kunden mit E-Mail-Adresse.",
     "noEmail": "Jährlicher Check-in: keine E-Mail-Adresse hinterlegt."
   },
   "customer": {

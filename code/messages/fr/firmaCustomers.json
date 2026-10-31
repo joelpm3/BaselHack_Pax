@@ -19,33 +19,8 @@
     "fromConversation": "Issu de l’entretien « {title} »",
     "openConversation": "Ouvrir l’entretien"
   },
-  "overview": {
-    "description": "Là où vous devez agir maintenant : qui veut parler à une personne, qui appeler, puis les indicateurs.",
-    "actNow": "Agir maintenant",
-    "figures": "Indicateurs",
-    "openConversation": "Ouvrir l’entretien",
-    "openLeads": "Leads ouverts",
-    "toPipeline": "Vers le pipeline",
-    "handovers": {
-      "title": "{count, plural, =0 {Aucun transfert ouvert} one {# transfert ouvert} other {# transferts ouverts}}",
-      "counts": "{urgent} urgent(s), {unassigned} sans responsable",
-      "empty": "Personne n’attend de spécialiste.",
-      "urgent": "Urgent",
-      "waiting": "Attend depuis {time}",
-      "alsoLead": "Aussi un lead : {type}, score {score}",
-      "all": "Les {count} transferts ouverts"
-    },
-    "leads": {
-      "title": "{count, plural, =0 {Aucun lead chaud} one {# lead chaud} other {# leads chauds}}",
-      "empty": "Aucun lead ouvert à haute priorité.",
-      "score": "Score",
-      "all": "Tous les leads",
-      "withHandover": "{count, plural, one {# autre lead est lié} other {# autres leads sont liés}} à un transfert ouvert"
-    }
-  },
   "list": {
     "title": "Clientes et clients",
-    "description": "Toutes les personnes avec un entretien ou un lead. Celles avec un transfert ouvert figurent en haut.",
     "search": "Rechercher",
     "searchPlaceholder": "Nom, e-mail ou localité",
     "count": "{count, plural, one {# personne} other {# personnes}}",
@@ -54,35 +29,19 @@
     "emptyBody": "Les personnes apparaissent ici dès qu’elles parlent à Clara.",
     "openHandovers": "{count, plural, =0 {Aucun transfert} one {# transfert} other {# transferts}}",
     "openLeads": "{count, plural, =0 {Aucun lead} one {# lead} other {# leads}}",
-    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",
-    "conversations": "{count, plural, one {# entretien} other {# entretiens}}"
+    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}"
   },
   "detail": {
     "title": "Vue client",
     "open": "Vue client",
     "back": "Clientèle",
     "age": "{age} ans",
-    "since": "connu·e depuis le {date}",
-    "facts": {
-      "handovers": "{count, plural, one {transfert ouvert} other {transferts ouverts}}",
-      "leads": "{count, plural, one {lead ouvert} other {leads ouverts}}",
-      "conversations": "{count, plural, one {entretien} other {entretiens}}",
-      "lastContact": "Dernier contact"
-    },
-    "noLeads": "Aucun lead n’est (encore) issu des entretiens de cette personne.",
-    "noHandovers": "Cette personne n’a pas encore demandé à parler à un être humain."
+    "since": "connu·e depuis le {date}"
   },
   "conversations": {
     "title": "{count, plural, =0 {Entretiens} one {# entretien} other {# entretiens}}",
-    "description": "Les plus récents d’abord, avec l’analyse de chaque entretien",
     "none": "Pas encore d’entretiens.",
-    "untitled": "Entretien sans titre",
-    "meta": "{date}, {mode}, {count, plural, one {# message} other {# messages}}",
-    "gaps": "Lacunes",
-    "perYear": "{amount} par an",
-    "painPoints": "Points sensibles",
-    "nextBestAction": "Prochaine étape",
-    "noAnalysis": "Pas encore analysé."
+    "untitled": "Entretien sans titre"
   },
   "applications": {
     "title": "Offres et propositions",

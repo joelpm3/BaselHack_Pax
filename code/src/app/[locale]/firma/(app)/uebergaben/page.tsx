@@ -1,4 +1,6 @@
-import { Bot, Mail, Phone } from "lucide-react";
+// One job: work the queue of people waiting for a human: urgent first, then whoever has waited
+// longest. Rules, summary and contact details live on the conversation and customer pages.
+import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
@@ -6,7 +8,7 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { Suspense, use } from "react";
 import { AssignSelect, HandoverStatusSelect } from "@/components/firma/controls";
 import { CustomerLink, customerHref } from "@/components/firma/customer-link";
-import { KindMark } from "@/components/firma/kind-mark";
+import { KindDefinition, KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh } from "@/components/firma/live-events";
 import {
   EmptyState,
@@ -14,14 +16,13 @@ import {
   PageBody,
   PageHeader,
   SegmentedLinks,
+  ShowMore,
 } from "@/components/firma/page-parts";
 import { ScopeSwitch } from "@/components/firma/scope-switch";
-import { StageSquares } from "@/components/firma/stage-squares";
 import { hrefWith } from "@/components/firma/url";
-import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { HANDOVER_STATUSES } from "@/lib/domain/taxonomy";
-import { parseScope } from "@/lib/firma/aggregate";
+import { PAGE_SIZE, parseLimit, parseScope } from "@/lib/firma/aggregate";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { listAdvisors } from "@/lib/firma/conversations";
 import { handoverCounts, listHandovers, parseHandoverStatus } from "@/lib/firma/handovers";
@@ -51,8 +52,7 @@ export default function HandoversPage({
         }
         description={
           <>
-            {t("description")}
-            <span className="mt-1 block">{tKinds("handover.contrast")}</span>
+            <KindDefinition kind="handover" className="inline" /> {tKinds("handover.contrast")}
           </>
         }
       />
@@ -62,6 +62,8 @@ export default function HandoversPage({
     </>
   );
 }
+
+const PATH = "/firma/uebergaben";
 
 async function HandoversContent({
   searchParams,
@@ -73,45 +75,45 @@ async function HandoversContent({
   const params = await searchParams;
   const scope = parseScope(params.scope);
   const status = parseHandoverStatus(params.status);
-  const { rows, rules } = listHandovers(status, scope);
+  const limit = parseLimit(params.limit);
+  const rows = listHandovers(status, scope, limit);
   const counts = handoverCounts(scope);
   const advisors = listAdvisors();
-  const [t, tKinds, tStatus, tStage, tChannel, tAction, tCommon, format] = await Promise.all([
+  const [t, tKinds, tStatus, tChannel, tFocus, tCommon, format] = await Promise.all([
     getTranslations("firma.handovers"),
     getTranslations("firmaCustomers.kinds"),
     getTranslations("firma.taxonomy.handoverStatus"),
-    getTranslations("common.taxonomy.stages"),
     getTranslations("firma.taxonomy.channel"),
-    getTranslations("firma.taxonomy.ruleAction"),
+    getTranslations("firmaFocus.handovers"),
     getTranslations("firma.common"),
     getFormatter(),
   ]);
+  const now = new Date();
+  const current = {
+    scope: scope === "all" ? null : scope,
+    status: status === "open" ? null : status,
+  };
 
   return (
     <PageBody className="grid gap-5">
       <LiveRefresh types={["handover", "conversation.updated"]} intervalMs={2000} />
       <div className="flex flex-wrap items-center gap-3">
-        <SegmentedLinks
-          label={t("statusFilter")}
-          items={HANDOVER_STATUSES.map((s) => ({
-            key: s,
-            label: (
-              <>
-                {tStatus(s)} <span className="tabular-nums text-fg-muted">{counts[s]}</span>
-              </>
-            ),
-            href: hrefWith("/firma/uebergaben", {
-              scope: scope === "all" ? null : scope,
-              status: s === "open" ? null : s,
-            }),
-            active: s === status,
-          }))}
-        />
-        <ScopeSwitch
-          path="/firma/uebergaben"
-          scope={scope}
-          extra={{ status: status === "open" ? null : status }}
-        />
+        <div className="max-w-full overflow-x-auto">
+          <SegmentedLinks
+            label={t("statusFilter")}
+            items={HANDOVER_STATUSES.map((s) => ({
+              key: s,
+              label: (
+                <span className="whitespace-nowrap">
+                  {tStatus(s)} <span className="tabular-nums text-fg-muted">{counts[s]}</span>
+                </span>
+              ),
+              href: hrefWith(PATH, { ...current, status: s === "open" ? null : s }),
+              active: s === status,
+            }))}
+          />
+        </div>
+        <ScopeSwitch path={PATH} scope={scope} extra={{ status: current.status }} />
       </div>
 
       {rows.length === 0 ? (
@@ -119,22 +121,27 @@ async function HandoversContent({
           {t("emptyBody")}
         </EmptyState>
       ) : (
-        <ul className="grid gap-3">
+        <ul className="divide-y divide-gray-2 rounded-xl border border-line">
           {rows.map((h) => (
             <li
               key={h.id}
-              className="grid gap-4 rounded-xl border border-line p-4 lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)_auto]"
+              className="grid gap-3 px-4 py-4 lg:grid-cols-[minmax(0,14rem)_minmax(0,1fr)_auto] lg:gap-6"
             >
-              <div className="grid content-start gap-1.5">
-                <span className="flex items-center gap-2">
+              <div className="grid content-start gap-1">
+                <span className="flex min-w-0 items-center gap-2">
                   {h.urgency === "high" ? (
-                    <span aria-hidden className="size-2 shrink-0 bg-error" />
+                    <span
+                      role="img"
+                      aria-label={t("urgency.high")}
+                      title={t("urgency.high")}
+                      className="size-2.5 shrink-0 bg-error"
+                    />
                   ) : null}
                   <CustomerLink
                     customerId={h.customerId}
                     firstName={h.firstName}
                     lastName={h.lastName}
-                    city={h.city}
+                    city={null}
                     section="handovers"
                   />
                   {h.isSimulated ? (
@@ -144,40 +151,25 @@ async function HandoversContent({
                     />
                   ) : null}
                 </span>
-                <span className="flex flex-wrap gap-x-3 gap-y-1 text-fg-muted">
-                  {h.phone ? (
-                    <a
-                      href={`tel:${h.phone}`}
-                      className="inline-flex items-center gap-1 hover:text-fg"
-                    >
-                      <Phone aria-hidden className="size-3.5" />
-                      {h.phone}
-                    </a>
+                <span
+                  className="text-xs text-fg-muted"
+                  title={format.dateTime(h.createdAt, { dateStyle: "medium", timeStyle: "short" })}
+                >
+                  {status === "open"
+                    ? tFocus("waiting", { time: format.relativeTime(h.createdAt, now) })
+                    : format.relativeTime(h.createdAt, now)}
+                </span>
+              </div>
+              <div className="grid min-w-0 content-start gap-1.5">
+                <p className="line-clamp-2">{h.reason}</p>
+                <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-fg-muted">
+                  {h.preferredChannel || h.preferredTime ? (
+                    <span>
+                      {[h.preferredChannel ? tChannel(h.preferredChannel) : null, h.preferredTime]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </span>
                   ) : null}
-                  {h.email ? (
-                    <a
-                      href={`mailto:${h.email}`}
-                      className="inline-flex min-w-0 items-center gap-1 hover:text-fg"
-                    >
-                      <Mail aria-hidden className="size-3.5 shrink-0" />
-                      <span className="truncate">{h.email}</span>
-                    </a>
-                  ) : null}
-                  {!h.phone && !h.email ? <span>{t("noContact")}</span> : null}
-                </span>
-                <span className="flex items-center gap-2 text-xs text-fg-muted">
-                  <StageSquares stage={h.stage} label={tStage(h.stage)} />
-                  {tStage(h.stage)}
-                </span>
-                <span className="text-xs text-fg-muted tabular-nums">
-                  {format.dateTime(h.createdAt, {
-                    day: "numeric",
-                    month: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}
-                </span>
-                <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
                   <Link
                     href={`/firma/gespraeche/${h.conversationId}`}
                     className="text-contrast-green hover:underline"
@@ -192,48 +184,9 @@ async function HandoversContent({
                       {tKinds("lead.alsoOpen", { count: h.openLeads })}
                     </Link>
                   ) : null}
-                </span>
+                </p>
               </div>
-              <div className="grid min-w-0 content-start gap-2">
-                <div className="flex flex-wrap items-center gap-2">
-                  <Badge tone={h.urgency === "high" ? "error" : "neutral"}>
-                    {t(`urgency.${h.urgency}`)}
-                  </Badge>
-                  {h.preferredChannel ? (
-                    <Badge tone="info">{tChannel(h.preferredChannel)}</Badge>
-                  ) : null}
-                  {h.preferredTime ? (
-                    <span className="text-fg-muted">{h.preferredTime}</span>
-                  ) : null}
-                </div>
-                <p className="font-medium">{h.reason}</p>
-                {h.summary ? <p className="line-clamp-3 text-fg-muted">{h.summary}</p> : null}
-                {h.ruleIds.length > 0 ? (
-                  <ul className="grid gap-1.5">
-                    {h.ruleIds.map((id) => {
-                      const rule = rules[id];
-                      return (
-                        <li key={id} className="rounded-m bg-gray-1 px-3 py-2">
-                          {rule ? (
-                            <>
-                              <span className="text-xs text-fg-muted">
-                                {tAction(rule.action)} ·{" "}
-                                {t("ruleVersion", { version: rule.version })}
-                              </span>
-                              <p>{rule.text}</p>
-                            </>
-                          ) : (
-                            <span className="text-fg-muted">{t("unknownRule")}</span>
-                          )}
-                        </li>
-                      );
-                    })}
-                  </ul>
-                ) : (
-                  <p className="text-xs text-fg-muted">{t("noRule")}</p>
-                )}
-              </div>
-              <div className="flex flex-wrap content-start items-start gap-2 lg:grid lg:justify-items-end">
+              <div className="flex flex-wrap content-start items-start gap-2 lg:justify-end">
                 <HandoverStatusSelect handoverId={h.id} status={h.status} />
                 <AssignSelect
                   kind="handover"
@@ -246,6 +199,11 @@ async function HandoversContent({
           ))}
         </ul>
       )}
+      <ShowMore
+        shown={rows.length}
+        total={counts[status]}
+        href={hrefWith(PATH, { ...current, limit: limit + PAGE_SIZE })}
+      />
     </PageBody>
   );
 }

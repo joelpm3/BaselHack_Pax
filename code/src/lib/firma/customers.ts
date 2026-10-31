@@ -16,7 +16,7 @@ const openHandoverCount = sql<number>`(select count(*) from ${h} where ${h.custo
 const openLeadCount = sql<number>`(select count(*) from ${l} where ${l.customerId} = ${cu.id} and ${OPEN_LEAD_SQL})`;
 
 /** Customers the dashboard knows something about: at least one conversation or lead. */
-export function listCustomers(scope: Scope, query: string) {
+export function listCustomers(scope: Scope, query: string, limit: number) {
   const q = query.trim().slice(0, 80);
   const lastContact =
     sql<Date | null>`(select max(coalesce(${c.lastMessageAt}, ${c.createdAt})) from ${c} where ${c.customerId} = ${cu.id})`.mapWith(
@@ -31,13 +31,15 @@ export function listCustomers(scope: Scope, query: string) {
         like(sql`json_extract(${schema.profiles.data}, '$.residence.city')`, `%${q}%`),
       )
     : undefined;
-  return db
+  const where = and(
+    scopeWhere(cu.isSimulated, scope),
+    sql`(exists (select 1 from ${c} where ${c.customerId} = ${cu.id}) or exists (select 1 from ${l} where ${l.customerId} = ${cu.id}))`,
+    search,
+  );
+  const rows = db
     .select({
       ...customerColumns,
       isSimulated: cu.isSimulated,
-      email: cu.email,
-      phone: cu.phone,
-      conversationCount: sql<number>`(select count(*) from ${c} where ${c.customerId} = ${cu.id})`,
       openHandovers: openHandoverCount,
       openLeads: openLeadCount,
       topLeadScore: sql<
@@ -47,19 +49,19 @@ export function listCustomers(scope: Scope, query: string) {
     })
     .from(cu)
     .leftJoin(schema.profiles, eq(schema.profiles.customerId, cu.id))
-    .where(
-      and(
-        scopeWhere(cu.isSimulated, scope),
-        sql`(exists (select 1 from ${c} where ${c.customerId} = ${cu.id}) or exists (select 1 from ${l} where ${l.customerId} = ${cu.id}))`,
-        search,
-      ),
-    )
+    .where(where)
     .orderBy(desc(openHandoverCount), desc(openLeadCount), desc(lastContact))
-    .limit(300)
+    .limit(limit)
     .all();
+  const total =
+    db
+      .select({ count: sql<number>`count(*)` })
+      .from(cu)
+      .leftJoin(schema.profiles, eq(schema.profiles.customerId, cu.id))
+      .where(where)
+      .get()?.count ?? 0;
+  return { rows, total };
 }
-
-export type CustomerListRow = ReturnType<typeof listCustomers>[number];
 
 /** Everything Pax knows about one person, across all of their conversations. */
 export function getCustomerDetail(id: string) {

@@ -13,9 +13,11 @@ const dateTime = { day: "numeric", month: "numeric", hour: "2-digit", minute: "2
 export async function RecommendationsSection({
   detail,
   locale,
+  collapsed,
 }: {
   detail: Pick<ConversationDetail, "recommendations">;
   locale: string;
+  collapsed?: boolean;
 }) {
   const [t, tGap, tx] = await Promise.all([
     getTranslations("firma.conversation.recommendations"),
@@ -23,7 +25,12 @@ export async function RecommendationsSection({
     getTranslations("firma.taxonomy"),
   ]);
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={collapsed}
+      meta={detail.recommendations.length}
+    >
       {detail.recommendations.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (
@@ -99,13 +106,24 @@ export async function RecommendationsSection({
   );
 }
 
-export async function CalculationsSection({ detail }: { detail: ConversationDetail }) {
+export async function CalculationsSection({
+  detail,
+  collapsed,
+}: {
+  detail: ConversationDetail;
+  collapsed?: boolean;
+}) {
   const [t, format] = await Promise.all([
     getTranslations("firma.conversation.calculations"),
     getFormatter(),
   ]);
   return (
-    <Panel title={t("title")} description={t("description", { count: detail.calculations.length })}>
+    <Panel
+      title={t("title")}
+      description={t("description", { count: detail.calculations.length })}
+      collapsed={collapsed}
+      meta={detail.calculations.length}
+    >
       {detail.calculations.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (
@@ -154,8 +172,10 @@ export async function CalculationsSection({ detail }: { detail: ConversationDeta
 
 export async function DocumentsSection({
   detail,
+  collapsed,
 }: {
   detail: Pick<ConversationDetail, "documents">;
+  collapsed?: boolean;
 }) {
   const [t, tDoc, tx, format] = await Promise.all([
     getTranslations("firma.conversation.documents"),
@@ -164,7 +184,7 @@ export async function DocumentsSection({
     getFormatter(),
   ]);
   return (
-    <Panel title={t("title")}>
+    <Panel title={t("title")} collapsed={collapsed} meta={detail.documents.length}>
       {detail.documents.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (
@@ -201,7 +221,13 @@ export async function DocumentsSection({
   );
 }
 
-export async function AuditSection({ detail }: { detail: ConversationDetail }) {
+export async function AuditSection({
+  detail,
+  collapsed,
+}: {
+  detail: ConversationDetail;
+  collapsed?: boolean;
+}) {
   const [t, format] = await Promise.all([
     getTranslations("firma.conversation.audit"),
     getFormatter(),
@@ -235,7 +261,12 @@ export async function AuditSection({ detail }: { detail: ConversationDetail }) {
   ].sort((a, b) => b.at.getTime() - a.at.getTime());
 
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={collapsed}
+      meta={entries.length}
+    >
       {entries.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (

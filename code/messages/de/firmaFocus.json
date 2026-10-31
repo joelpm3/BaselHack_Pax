@@ -1,0 +1,76 @@
+{
+  "list": {
+    "showMore": "Mehr anzeigen",
+    "shown": "{shown} von {total}",
+    "clearFilter": "Filter entfernen",
+    "search": "Suchen",
+    "simulated": "Simuliert"
+  },
+  "overview": {
+    "periodLabel": "Zeitraum",
+    "period": {
+      "7": "7 Tage",
+      "30": "30 Tage",
+      "all": "Gesamt"
+    },
+    "periodLong": {
+      "7": "Letzte 7 Tage",
+      "30": "Letzte 30 Tage",
+      "all": "Seit Beginn"
+    },
+    "noConversations": "Noch keine Gespräche in diesem Zeitraum.",
+    "funnelLabel": "Gespräche nach erreichter Phase",
+    "today": {
+      "title": "Heute zu tun",
+      "handovers": "{count, plural, one {offene Übergabe} other {offene Übergaben}}",
+      "oldest": "älteste eingegangen {time}",
+      "urgent": "{count} dringend",
+      "nobodyWaiting": "Niemand wartet auf eine Fachperson.",
+      "followUps": "{count, plural, one {Wiedervorlage fällig} other {Wiedervorlagen fällig}}",
+      "followUpsNote": "Angekündigte Lebensereignisse, die jetzt anstehen.",
+      "hotLeads": "{count, plural, one {heisser Lead} other {heisse Leads}}",
+      "hotLeadsNote": "Offen, hohe Priorität oder Score ab 70."
+    },
+    "clara": {
+      "title": "So läuft Clara: {period}",
+      "conversations": "Gespräche",
+      "finished": "zu Ende geführt",
+      "finishedNote": "abgeschlossen oder übergeben",
+      "nps": "NPS",
+      "npsCount": "{count, plural, one {# Bewertung} other {# Bewertungen}}",
+      "dropOff": "Grösster Abbruch",
+      "dropOffValue": "Nach «{stage}»: {count, plural, one {# Gespräch endet} other {# Gespräche enden}} hier ({share})",
+      "allConversations": "Gespräche im Zeitraum ansehen"
+    },
+    "moves": {
+      "title": "Was Kunden bewegt",
+      "topics": "Top-Themen",
+      "questions": "Häufigste Fragen",
+      "painPoints": "Neueste Pain-Points",
+      "empty": "Noch nichts erkannt.",
+      "emptyQuestions": "Noch keine Fragen erfasst."
+    }
+  },
+  "conversations": {
+    "searchPlaceholder": "Titel oder Name",
+    "topic": "Thema: {topic}",
+    "question": "Frage: {question}"
+  },
+  "handovers": {
+    "waiting": "eingegangen {time}"
+  },
+  "leads": {
+    "hot": "Nur heisse Leads"
+  },
+  "conversation": {
+    "analysisDetails": "Alle Details der Analyse",
+    "activity": "{count, plural, one {# Eintrag im Verlauf} other {# Einträge im Verlauf}}"
+  },
+  "customer": {
+    "nextStep": "Nächster Schritt aus dem letzten Gespräch",
+    "nothingOpen": "Keine offene Übergabe und kein Lead."
+  },
+  "improvements": {
+    "runFigures": "Zahlen zur letzten Analyse"
+  }
+}

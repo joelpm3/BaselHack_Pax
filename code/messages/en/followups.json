@@ -28,7 +28,6 @@
   },
   "page": {
     "title": "Follow-ups",
-    "description": "Life events customers announced in a conversation. A week before, Pax gets in touch on its own with a personal email. Unlike a handover, nobody asked to speak to a person here.",
     "tabs": "Follow-up status"
   },
   "tab": {
@@ -82,24 +81,15 @@
       "failed": "{count, plural, one {# email could not be written, please check again} other {# emails could not be written, please check again}}"
     }
   },
-  "timeline": {
-    "caption": "{count, plural, =0 {No planned follow-ups} one {# planned follow-up from today} other {# planned follow-ups from today}}",
-    "today": "Today",
-    "anonymous": "Anonymous"
-  },
   "card": {
-    "expected": "Expected:",
-    "fromConversation": "From the conversation on",
     "followUpOn": "Follow-up from",
     "dueNow": "Due",
-    "confidence": "Confidence {value} %",
     "noEmail": "No email address on file: please call.",
     "recordReply": "Record reply",
     "dismiss": "Dismiss"
   },
   "outbox": {
     "title": "Outbox",
-    "description": "Simulated: Pax sends nothing, the emails only live here.",
     "empty": "No emails yet.",
     "to": "To {address}",
     "replied": "Replied",
@@ -111,13 +101,10 @@
   },
   "checkin": {
     "title": "Yearly check-in",
-    "description": "Once a year Pax asks whether anything changed in family, work, home or income. Customers can switch it off in their pension cockpit.",
     "next": "Next on",
-    "dueNow": "due",
     "off": "Opted out",
     "turnOff": "Opt out",
     "turnOn": "Opt back in",
-    "empty": "No customers with an email address yet.",
     "noEmail": "Yearly check-in: no email address on file."
   },
   "customer": {

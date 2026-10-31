@@ -145,7 +145,6 @@
   },
   "live": {
     "title": "Live",
-    "description": "Running conversations, stage changes and new messages in real time.",
     "status": {
       "connecting": "Connecting …",
       "open": "Live",
@@ -173,88 +172,16 @@
     }
   },
   "overview": {
-    "title": "Overview",
-    "description": "What customers discuss with Clara, where they drop off and whom Pax should call.",
-    "kpi": {
-      "label": "Key figures",
-      "conversations": "Conversations",
-      "today": "{count} today",
-      "live": "Live now",
-      "openLive": "Watch live",
-      "leads": "Leads",
-      "handoversOpen": "Open handovers",
-      "openHandovers": "Go to the queue",
-      "nps": "NPS",
-      "npsDetail": "Avg. {average} from {count, plural, one {# rating} other {# ratings}}",
-      "npsNone": "No ratings yet"
-    },
-    "funnel": {
-      "title": "Progress and drop-offs",
-      "description": "How far conversations get. {abandoned, plural, =0 {No drop-offs yet.} one {# conversation dropped off.} other {# conversations dropped off.}}",
-      "caption": "Conversations by stage reached",
-      "stage": "Stage",
-      "reached": "Reached",
-      "dropOff": "Lost",
-      "leftHere": "Left here",
-      "empty": "No conversations yet."
-    },
-    "trend": {
-      "title": "Conversations per day",
-      "description": "Last 14 days"
-    },
-    "sentiment": {
-      "title": "Sentiment",
-      "empty": "No analysed conversations yet."
-    },
-    "topics": {
-      "title": "Top topics",
-      "description": "Conversations per topic",
-      "empty": "No analysed conversations yet."
-    },
-    "faq": {
-      "title": "Most frequent questions",
-      "description": "Customer questions, grouped",
-      "empty": "No questions recorded yet."
-    },
-    "painPoints": {
-      "title": "Pain points",
-      "description": "What recently confused or bothered customers",
-      "empty": "No pain points detected yet."
-    },
-    "lifeEvents": {
-      "title": "Life events",
-      "empty": "No life events detected yet."
-    },
-    "intent": {
-      "title": "Intent",
-      "description": "How close conversations are to a decision",
-      "empty": "No analysed conversations yet."
-    },
-    "recent": {
-      "title": "Latest conversations",
-      "all": "All conversations",
-      "empty": "No conversations yet."
-    }
+    "title": "Overview"
   },
   "conversations": {
     "title": "Conversations",
-    "description": "Every conversation with Clara, newest first.",
     "statusFilter": "Status",
     "allStatuses": "All",
     "count": "{count, plural, one {# conversation} other {# conversations}}",
     "emptyTitle": "No conversations for this filter.",
     "emptyBody": "Change the filter or start a simulation.",
-    "messages": "{count, plural, one {# message} other {# messages}}",
-    "notAnalysed": "Not analysed yet",
-    "handover": "Handover",
-    "col": {
-      "customer": "Customer",
-      "topic": "What it is about",
-      "stage": "Stage",
-      "signals": "Signals",
-      "status": "Status",
-      "last": "Last activity"
-    }
+    "notAnalysed": "Not analysed yet"
   },
   "conversation": {
     "title": "Conversation",
@@ -473,14 +400,12 @@
   },
   "leads": {
     "title": "Leads",
-    "description": "Whom Pax should call now, ranked by score and urgency. Change status and owner right here.",
     "count": "{count, plural, one {# lead} other {# leads}}",
     "emptyTitle": "No leads for this filter.",
     "emptyBody": "Leads are created automatically as soon as a conversation shows potential.",
     "changeStatus": "Change status",
     "unassigned": "Unassigned",
     "simulated": "Simulated",
-    "noContact": "No contact details yet",
     "filter": {
       "type": "Type",
       "minScore": "Score",
@@ -495,37 +420,21 @@
       "label": "View",
       "table": "Table",
       "kanban": "Pipeline"
-    },
-    "col": {
-      "priority": "Priority",
-      "customer": "Customer",
-      "score": "Score",
-      "reason": "Reason to call",
-      "status": "Status",
-      "assignee": "Owner"
-    },
-    "updatedAt": "Updated {date}"
+    }
   },
   "handovers": {
     "title": "Handovers",
-    "description": "Conversations a specialist should take over, triggered by a company rule or by the customer's wish.",
     "statusFilter": "Status",
     "changeStatus": "Change status",
     "emptyTitle": "No handovers with status “{status}”.",
     "emptyBody": "New handovers appear here automatically.",
-    "noContact": "No contact details",
-    "ruleVersion": "Rules v{version}",
-    "unknownRule": "Rule no longer exists",
-    "noRule": "No rule: at the customer's request",
     "urgency": {
-      "normal": "Normal",
       "high": "Urgent"
     }
   },
   "rules": {
     "title": "Rules",
     "description": "When Clara hands over to a specialist, what she flags and which products she does not recommend. Written in your own words, effective immediately for new conversations.",
-    "languages": "Rules may be written in German, French, Italian or English.",
     "version": "Version {version}",
     "activeVersion": "Active",
     "archived": "Archived",
@@ -553,7 +462,6 @@
     "current": "Version {version} is active.",
     "restore": "Restore version {version}",
     "history": "Versions",
-    "historyHelp": "Old versions are kept: every conversation knows which rules it was judged by.",
     "versionStats": "{rules, plural, one {# rule} other {# rules}}, {conversations, plural, one {# conversation} other {# conversations}}"
   },
   "simulation": {

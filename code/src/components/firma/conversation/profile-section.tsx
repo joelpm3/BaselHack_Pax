@@ -21,11 +21,13 @@ export async function ProfileSection({
   detail,
   locale,
   asOf,
+  collapsed,
 }: {
   detail: Pick<ConversationDetail, "customer" | "profile" | "policies">;
   locale: string;
   /** Date the age is computed for (the conversation start, or today in the customer view). */
   asOf: Date;
+  collapsed?: boolean;
 }) {
   const [t, tx] = await Promise.all([
     getTranslations("firma.conversation.profile"),
@@ -40,6 +42,7 @@ export async function ProfileSection({
   return (
     <Panel
       title={t("title")}
+      collapsed={collapsed}
       actions={
         <Badge tone={customer.lifecycle === "client" ? "success" : "neutral"}>
           {tx(`lifecycle.${customer.lifecycle}`)}

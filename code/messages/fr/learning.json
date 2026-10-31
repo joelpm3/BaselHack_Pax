@@ -147,7 +147,6 @@
     "banner": "Projet de règle issu des améliorations : « {title} ». Vérifiez-le et adaptez-le. Il ne devient actif que lorsque vous enregistrez la nouvelle version.",
     "proposed": "Proposée",
     "pending": "Projets issus des améliorations",
-    "pendingHelp": "Propositions acceptées qui ne figurent encore dans aucune version.",
     "openDraft": "Ouvrir dans l'éditeur"
   }
 }

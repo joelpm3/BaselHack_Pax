@@ -1,3 +1,4 @@
+import { ChevronRight } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { HandoverStatusBadge, LeadTypeBadge, PriorityBadge } from "@/components/firma/badges";
 import {
@@ -96,11 +97,12 @@ export async function LeadsSection({
   conversationTitles?: ConversationTitles;
   emptyLabel?: string;
 }) {
-  const [t, tStatus, tType, tKinds, format] = await Promise.all([
+  const [t, tStatus, tType, tKinds, tFocus, format] = await Promise.all([
     getTranslations("firma"),
     getTranslations("common.taxonomy.leadStatus"),
     getTranslations("common.taxonomy.leadType"),
     getTranslations("firmaCustomers.kinds"),
+    getTranslations("firmaFocus.conversation"),
     getFormatter(),
   ]);
   const statusLabel = (value: unknown) =>
@@ -117,7 +119,6 @@ export async function LeadsSection({
           {t("conversation.leads.title")}
         </span>
       }
-      description={tKinds("lead.definition")}
     >
       {detail.leads.length === 0 ? (
         <p className="text-fg-muted">{emptyLabel ?? t("conversation.leads.none")}</p>
@@ -197,56 +198,65 @@ export async function LeadsSection({
                     </div>
                     <LeadNoteForm leadId={lead.id} />
                     {activities.length > 0 ? (
-                      <ol className="grid gap-2 border-l-2 border-gray-2 pl-3">
-                        {activities.map((a) => {
-                          const data = (a.data ?? {}) as Record<string, string | number | null>;
-                          let text: string;
-                          if (a.type === "status_change") {
-                            text = t("conversation.activity.statusChange", {
-                              from: statusLabel(data.from),
-                              to: statusLabel(data.to),
-                            });
-                          } else if (a.type === "system" && data.event === "created") {
-                            text = t("conversation.activity.created", {
-                              score: Number(data.score),
-                            });
-                          } else if (a.type === "system" && data.event === "rescored") {
-                            text = t("conversation.activity.rescored", {
-                              from: Number(data.fromScore),
-                              to: Number(data.score),
-                            });
-                          } else if (a.type === "system" && data.event === "retyped") {
-                            text = t("conversation.activity.retyped", {
-                              from: typeLabel(data.fromType),
-                              to: typeLabel(data.type),
-                            });
-                          } else if (a.type === "system" && data.event === "merged") {
-                            text = t("conversation.activity.merged");
-                          } else if (a.type === "system" && data.event === "assigned") {
-                            text = data.to
-                              ? t("conversation.activity.assigned", {
-                                  name: advisorName.get(String(data.to)) ?? "?",
-                                })
-                              : t("conversation.activity.unassigned");
-                          } else {
-                            text = `${t(`conversation.leadNote.${a.type === "call" || a.type === "email" ? a.type : "note"}`)}: ${a.body ?? ""}`;
-                          }
-                          return (
-                            <li key={a.id} className="grid gap-0.5">
-                              <span className="text-xs text-fg-muted">
-                                {a.advisorName ?? t("conversation.activity.system")} ·{" "}
-                                {format.dateTime(a.createdAt, {
-                                  day: "numeric",
-                                  month: "numeric",
-                                  hour: "2-digit",
-                                  minute: "2-digit",
-                                })}
-                              </span>
-                              <span className="whitespace-pre-wrap">{text}</span>
-                            </li>
-                          );
-                        })}
-                      </ol>
+                      <details className="group">
+                        <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-xs font-medium [&::-webkit-details-marker]:hidden">
+                          <ChevronRight
+                            aria-hidden
+                            className="size-3.5 transition-transform group-open:rotate-90 motion-reduce:transition-none"
+                          />
+                          {tFocus("activity", { count: activities.length })}
+                        </summary>
+                        <ol className="mt-2 grid gap-2 border-l-2 border-gray-2 pl-3">
+                          {activities.map((a) => {
+                            const data = (a.data ?? {}) as Record<string, string | number | null>;
+                            let text: string;
+                            if (a.type === "status_change") {
+                              text = t("conversation.activity.statusChange", {
+                                from: statusLabel(data.from),
+                                to: statusLabel(data.to),
+                              });
+                            } else if (a.type === "system" && data.event === "created") {
+                              text = t("conversation.activity.created", {
+                                score: Number(data.score),
+                              });
+                            } else if (a.type === "system" && data.event === "rescored") {
+                              text = t("conversation.activity.rescored", {
+                                from: Number(data.fromScore),
+                                to: Number(data.score),
+                              });
+                            } else if (a.type === "system" && data.event === "retyped") {
+                              text = t("conversation.activity.retyped", {
+                                from: typeLabel(data.fromType),
+                                to: typeLabel(data.type),
+                              });
+                            } else if (a.type === "system" && data.event === "merged") {
+                              text = t("conversation.activity.merged");
+                            } else if (a.type === "system" && data.event === "assigned") {
+                              text = data.to
+                                ? t("conversation.activity.assigned", {
+                                    name: advisorName.get(String(data.to)) ?? "?",
+                                  })
+                                : t("conversation.activity.unassigned");
+                            } else {
+                              text = `${t(`conversation.leadNote.${a.type === "call" || a.type === "email" ? a.type : "note"}`)}: ${a.body ?? ""}`;
+                            }
+                            return (
+                              <li key={a.id} className="grid gap-0.5">
+                                <span className="text-xs text-fg-muted">
+                                  {a.advisorName ?? t("conversation.activity.system")} ·{" "}
+                                  {format.dateTime(a.createdAt, {
+                                    day: "numeric",
+                                    month: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  })}
+                                </span>
+                                <span className="whitespace-pre-wrap">{text}</span>
+                              </li>
+                            );
+                          })}
+                        </ol>
+                      </details>
                     ) : null}
                   </li>
                 );
@@ -284,7 +294,6 @@ export async function HandoversSection({
           {t("conversation.handovers.title")}
         </span>
       }
-      description={tKinds("handover.definition")}
     >
       {detail.handovers.length === 0 ? <p className="text-fg-muted">{emptyLabel}</p> : null}
       <ul className="grid gap-4 empty:hidden">

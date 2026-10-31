@@ -28,7 +28,6 @@
   },
   "page": {
     "title": "Promemoria",
-    "description": "Eventi di vita che la clientela ha annunciato durante il colloquio. Una settimana prima Pax si fa vivo di sua iniziativa con un'e-mail personale. A differenza di un passaggio, qui nessuno ha chiesto di parlare con una persona.",
     "tabs": "Stato dei promemoria"
   },
   "tab": {
@@ -82,24 +81,15 @@
       "failed": "{count, plural, one {# e-mail non è stata scritta, controllare di nuovo} other {# e-mail non sono state scritte, controllare di nuovo}}"
     }
   },
-  "timeline": {
-    "caption": "{count, plural, =0 {Nessun promemoria previsto} one {# promemoria previsto da oggi} other {# promemoria previsti da oggi}}",
-    "today": "Oggi",
-    "anonymous": "Anonimo"
-  },
   "card": {
-    "expected": "Previsto:",
-    "fromConversation": "Dal colloquio del",
     "followUpOn": "Promemoria dal",
     "dueNow": "Da trattare",
-    "confidence": "Affidabilità {value} %",
     "noEmail": "Nessun indirizzo e-mail registrato: si prega di telefonare.",
     "recordReply": "Registrare la risposta",
     "dismiss": "Scartare"
   },
   "outbox": {
     "title": "Posta in uscita",
-    "description": "Simulazione: Pax non invia nulla, le e-mail restano qui.",
     "empty": "Ancora nessuna e-mail.",
     "to": "A {address}",
     "replied": "Risposto",
@@ -111,13 +101,10 @@
   },
   "checkin": {
     "title": "Check-in annuale",
-    "description": "Una volta all'anno Pax chiede se è cambiato qualcosa in famiglia, nel lavoro, nell'abitazione o nel reddito. La clientela può disattivarlo nel proprio cockpit previdenziale.",
     "next": "Prossimo il",
-    "dueNow": "da inviare",
     "off": "Disiscritto",
     "turnOff": "Disiscrivere",
     "turnOn": "Iscrivere di nuovo",
-    "empty": "Ancora nessun cliente con indirizzo e-mail.",
     "noEmail": "Check-in annuale: nessun indirizzo e-mail registrato."
   },
   "customer": {

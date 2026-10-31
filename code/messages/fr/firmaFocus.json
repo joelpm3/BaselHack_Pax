@@ -1,0 +1,76 @@
+{
+  "list": {
+    "showMore": "Afficher plus",
+    "shown": "{shown} sur {total}",
+    "clearFilter": "Retirer le filtre",
+    "search": "Rechercher",
+    "simulated": "Simulé"
+  },
+  "overview": {
+    "periodLabel": "Période",
+    "period": {
+      "7": "7 jours",
+      "30": "30 jours",
+      "all": "Total"
+    },
+    "periodLong": {
+      "7": "7 derniers jours",
+      "30": "30 derniers jours",
+      "all": "Depuis le début"
+    },
+    "noConversations": "Aucun entretien sur cette période.",
+    "funnelLabel": "Entretiens par étape atteinte",
+    "today": {
+      "title": "À faire aujourd'hui",
+      "handovers": "{count, plural, one {transfert ouvert} other {transferts ouverts}}",
+      "oldest": "le plus ancien reçu {time}",
+      "urgent": "{count, plural, one {# urgent} other {# urgents}}",
+      "nobodyWaiting": "Personne n'attend de spécialiste.",
+      "followUps": "{count, plural, one {relance échue} other {relances échues}}",
+      "followUpsNote": "Événements de vie annoncés qui arrivent maintenant.",
+      "hotLeads": "{count, plural, one {lead chaud} other {leads chauds}}",
+      "hotLeadsNote": "Ouverts, priorité élevée ou score dès 70."
+    },
+    "clara": {
+      "title": "Comment va Clara : {period}",
+      "conversations": "Entretiens",
+      "finished": "menés à terme",
+      "finishedNote": "terminés ou transférés",
+      "nps": "NPS",
+      "npsCount": "{count, plural, one {# évaluation} other {# évaluations}}",
+      "dropOff": "Plus grand abandon",
+      "dropOffValue": "Après « {stage} » : {count, plural, one {# entretien s'arrête} other {# entretiens s'arrêtent}} ici ({share})",
+      "allConversations": "Voir les entretiens de la période"
+    },
+    "moves": {
+      "title": "Ce qui préoccupe la clientèle",
+      "topics": "Thèmes principaux",
+      "questions": "Questions fréquentes",
+      "painPoints": "Derniers points sensibles",
+      "empty": "Rien de détecté pour l'instant.",
+      "emptyQuestions": "Aucune question enregistrée pour l'instant."
+    }
+  },
+  "conversations": {
+    "searchPlaceholder": "Titre ou nom",
+    "topic": "Thème : {topic}",
+    "question": "Question : {question}"
+  },
+  "handovers": {
+    "waiting": "reçu {time}"
+  },
+  "leads": {
+    "hot": "Leads chauds uniquement"
+  },
+  "conversation": {
+    "analysisDetails": "Tous les détails de l'analyse",
+    "activity": "{count, plural, one {# entrée dans l'historique} other {# entrées dans l'historique}}"
+  },
+  "customer": {
+    "nextStep": "Prochaine étape du dernier entretien",
+    "nothingOpen": "Aucun transfert ouvert et aucun lead."
+  },
+  "improvements": {
+    "runFigures": "Chiffres de la dernière analyse"
+  }
+}

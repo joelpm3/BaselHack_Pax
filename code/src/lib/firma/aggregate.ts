@@ -8,26 +8,39 @@ export function parseScope(value: unknown): Scope {
   return SCOPES.includes(value as Scope) ? (value as Scope) : "all";
 }
 
+/** Reporting periods of the overview, in days; "all" counts everything. */
+export const PERIODS = ["7", "30", "all"] as const;
+export type Period = (typeof PERIODS)[number];
+
+export function parsePeriod(value: unknown): Period {
+  return PERIODS.includes(value as Period) ? (value as Period) : "30";
+}
+
+/** Lists show this many rows and grow by the same step ("show more"). */
+export const PAGE_SIZE = 50;
+const MAX_ROWS = 1000;
+
+export function parseLimit(value: unknown): number {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n <= PAGE_SIZE) return PAGE_SIZE;
+  return Math.min(MAX_ROWS, Math.ceil(n / PAGE_SIZE) * PAGE_SIZE);
+}
+
 export interface FunnelRow {
   stage: FunnelStage;
   /** Conversations that reached at least this stage. */
   reached: number;
   /** Share of all started conversations (0–1). */
   shareOfStarted: number;
-  /** Share lost since the previous stage (0–1); 0 for the first stage. */
-  dropOff: number;
-  /** Conversations that were abandoned exactly at this stage. */
-  abandonedHere: number;
+  /** Conversations whose furthest stage is this one (they went no further). */
+  stoppedHere: number;
 }
 
 /**
  * A conversation's `stage` is the furthest stage it reached (it only moves forward), so the
  * number that reached stage i is the number whose stage index is ≥ i.
  */
-export function buildFunnel(
-  stageCounts: Partial<Record<FunnelStage, number>>,
-  abandonedCounts: Partial<Record<FunnelStage, number>> = {},
-): FunnelRow[] {
+export function buildFunnel(stageCounts: Partial<Record<FunnelStage, number>>): FunnelRow[] {
   const counts = FUNNEL_STAGES.map((stage) => stageCounts[stage] ?? 0);
   const reached = counts.map((_, i) => counts.slice(i).reduce((sum, n) => sum + n, 0));
   const started = reached[0];
@@ -35,9 +48,25 @@ export function buildFunnel(
     stage,
     reached: reached[i],
     shareOfStarted: started ? reached[i] / started : 0,
-    dropOff: i === 0 || reached[i - 1] === 0 ? 0 : 1 - reached[i] / reached[i - 1],
-    abandonedHere: abandonedCounts[stage] ?? 0,
+    stoppedHere: counts[i],
   }));
+}
+
+/**
+ * The stage after which most conversations went no further. The last stage (signed) is the goal
+ * and never counts as a drop-off. Null when nothing stopped early.
+ */
+export function biggestDropOff(
+  funnel: FunnelRow[],
+): { stage: FunnelStage; count: number; share: number } | null {
+  const started = funnel[0]?.reached ?? 0;
+  let best: FunnelRow | null = null;
+  for (const row of funnel.slice(0, -1)) {
+    if (row.stoppedHere > 0 && (!best || row.stoppedHere > best.stoppedHere)) best = row;
+  }
+  return best && started
+    ? { stage: best.stage, count: best.stoppedHere, share: best.stoppedHere / started }
+    : null;
 }
 
 export interface NpsSummary {
@@ -58,25 +87,13 @@ export function summariseNps(scores: number[]): NpsSummary {
   };
 }
 
-const TIME_ZONE = "Europe/Zurich";
-const dayKeyFormat = new Intl.DateTimeFormat("en-CA", {
-  timeZone: TIME_ZONE,
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
 const clockFormat = new Intl.DateTimeFormat("en-GB", {
-  timeZone: TIME_ZONE,
+  timeZone: "Europe/Zurich",
   hour: "2-digit",
   minute: "2-digit",
   second: "2-digit",
   hourCycle: "h23",
 });
-
-/** `YYYY-MM-DD` of the Zurich calendar day. */
-export function zurichDayKey(date: Date): string {
-  return dayKeyFormat.format(date);
-}
 
 /** Midnight (Zurich) of the day `now` falls on. */
 export function startOfZurichDay(now: Date): Date {
@@ -84,21 +101,8 @@ export function startOfZurichDay(now: Date): Date {
   return new Date(now.getTime() - ((h * 60 + m) * 60 + s) * 1000 - now.getMilliseconds());
 }
 
-/** Counts per Zurich day for the last `days` days (oldest first, today last). */
-export function bucketByDay(
-  dates: Date[],
-  days: number,
-  now: Date,
-): Array<{ day: string; count: number }> {
-  const today = startOfZurichDay(now);
-  const keys = Array.from({ length: days }, (_, i) =>
-    zurichDayKey(new Date(today.getTime() - (days - 1 - i) * 86_400_000 + 12 * 3_600_000)),
-  );
-  const counts = new Map(keys.map((k) => [k, 0]));
-  for (const date of dates) {
-    const key = zurichDayKey(date);
-    const current = counts.get(key);
-    if (current !== undefined) counts.set(key, current + 1);
-  }
-  return keys.map((day) => ({ day, count: counts.get(day) ?? 0 }));
+/** Start of a reporting period: midnight `days - 1` days before today, or null for "all". */
+export function periodStart(period: Period, now: Date): Date | null {
+  if (period === "all") return null;
+  return new Date(startOfZurichDay(now).getTime() - (Number(period) - 1) * 86_400_000);
 }

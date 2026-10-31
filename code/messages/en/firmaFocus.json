@@ -1,0 +1,76 @@
+{
+  "list": {
+    "showMore": "Show more",
+    "shown": "{shown} of {total}",
+    "clearFilter": "Remove filter",
+    "search": "Search",
+    "simulated": "Simulated"
+  },
+  "overview": {
+    "periodLabel": "Period",
+    "period": {
+      "7": "7 days",
+      "30": "30 days",
+      "all": "All time"
+    },
+    "periodLong": {
+      "7": "Last 7 days",
+      "30": "Last 30 days",
+      "all": "Since the start"
+    },
+    "noConversations": "No conversations in this period yet.",
+    "funnelLabel": "Conversations by stage reached",
+    "today": {
+      "title": "To do today",
+      "handovers": "{count, plural, one {open handover} other {open handovers}}",
+      "oldest": "oldest came in {time}",
+      "urgent": "{count} urgent",
+      "nobodyWaiting": "Nobody is waiting for a specialist.",
+      "followUps": "{count, plural, one {follow-up due} other {follow-ups due}}",
+      "followUpsNote": "Announced life events that are coming up now.",
+      "hotLeads": "{count, plural, one {hot lead} other {hot leads}}",
+      "hotLeadsNote": "Open, high priority or a score of 70 and up."
+    },
+    "clara": {
+      "title": "How Clara is doing: {period}",
+      "conversations": "Conversations",
+      "finished": "seen through",
+      "finishedNote": "completed or handed over",
+      "nps": "NPS",
+      "npsCount": "{count, plural, one {# rating} other {# ratings}}",
+      "dropOff": "Biggest drop-off",
+      "dropOffValue": "After “{stage}”: {count, plural, one {# conversation ends} other {# conversations end}} here ({share})",
+      "allConversations": "See the period's conversations"
+    },
+    "moves": {
+      "title": "What moves customers",
+      "topics": "Top topics",
+      "questions": "Most frequent questions",
+      "painPoints": "Latest pain points",
+      "empty": "Nothing detected yet.",
+      "emptyQuestions": "No questions recorded yet."
+    }
+  },
+  "conversations": {
+    "searchPlaceholder": "Title or name",
+    "topic": "Topic: {topic}",
+    "question": "Question: {question}"
+  },
+  "handovers": {
+    "waiting": "came in {time}"
+  },
+  "leads": {
+    "hot": "Hot leads only"
+  },
+  "conversation": {
+    "analysisDetails": "All analysis details",
+    "activity": "{count, plural, one {# history entry} other {# history entries}}"
+  },
+  "customer": {
+    "nextStep": "Next step from the latest conversation",
+    "nothingOpen": "No open handover and no lead."
+  },
+  "improvements": {
+    "runFigures": "Figures from the latest analysis"
+  }
+}

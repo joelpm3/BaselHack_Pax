@@ -26,6 +26,14 @@ const PRIORITY_TONE: Record<Priority, Tone> = {
   low: "neutral",
 };
 
+/** Priority as one coloured square, for dense rows where a badge would be noise. */
+export const PRIORITY_MARK: Record<Priority, string> = {
+  urgent: "bg-error",
+  high: "bg-warning",
+  medium: "bg-gray-4",
+  low: "bg-gray-3",
+};
+
 const CONVERSATION_STATUS_TONE: Record<ConversationStatus, Tone> = {
   active: "success",
   idle: "neutral",
