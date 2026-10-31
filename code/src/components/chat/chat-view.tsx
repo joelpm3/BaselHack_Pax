@@ -41,6 +41,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   const t = useTranslations("chat");
   const [picture, setPicture] = useState(initialPicture);
   const stickToBottom = useRef(true);
+  const logRef = useRef<HTMLOListElement>(null);
 
   const refreshPicture = useCallback(() => {
     fetch(`/api/chat/${conversationId}/vorsorgebild`, { cache: "no-store" })
@@ -88,21 +89,45 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   );
   const pictureActions = useMemo(() => ({ setPicture, refreshPicture }), [refreshPicture]);
 
+  // Follow the transcript while it grows (streaming, widgets loading) unless the person scrolled
+  // up. On open, ignore scroll events until they interact: the router's scroll reset and
+  // widgets settling would otherwise leave a reopened conversation at the greeting.
   useEffect(() => {
+    const log = logRef.current;
+    if (!log) return;
+    let settling = true;
+    const intents = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+    const settle = () => {
+      settling = false;
+      for (const type of intents) window.removeEventListener(type, settle);
+    };
+    for (const type of intents) window.addEventListener(type, settle, { passive: true });
+    const timer = window.setTimeout(settle, 2000);
+
+    const toBottom = () => window.scrollTo({ top: document.documentElement.scrollHeight });
     const onScroll = () => {
+      if (settling) return;
       const distance = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
       stickToBottom.current = distance < 160;
     };
+    const observer = new ResizeObserver(() => {
+      if (stickToBottom.current) toBottom();
+    });
+    observer.observe(log);
+    // The composer grows too when quick replies appear under the last message.
+    if (log.nextElementSibling) observer.observe(log.nextElementSibling);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const frame = requestAnimationFrame(toBottom);
+    return () => {
+      settle();
+      window.clearTimeout(timer);
+      cancelAnimationFrame(frame);
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   const last = messages.at(-1);
-  const lastLength = last?.parts.length ?? 0;
-  // biome-ignore lint/correctness/useExhaustiveDependencies: scroll whenever the transcript grows
-  useEffect(() => {
-    if (stickToBottom.current) window.scrollTo({ top: document.documentElement.scrollHeight });
-  }, [messages.length, lastLength, status]);
 
   const quickReplies = status === "ready" ? quickRepliesOf(last) : [];
   const waiting = status === "submitted" || (status === "streaming" && last?.role !== "assistant");
@@ -116,6 +141,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
         <div className="mx-auto w-full max-w-[1160px] lg:grid lg:grid-cols-[minmax(0,680px)_minmax(320px,380px)] lg:justify-between lg:gap-12 lg:px-8">
           <div className="flex min-h-[calc(100dvh-4rem)] min-w-0 flex-col">
             <ol
+              ref={logRef}
               role="log"
               aria-label={t("transcript")}
               className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-8 lg:px-0 lg:pt-10"
