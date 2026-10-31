@@ -3,6 +3,7 @@ import type { ToolSet } from "ai";
 import { createAnalysisTools } from "./analysis";
 import type { ToolContext } from "./context";
 import { createDocumentTools } from "./documents";
+import { createExplainerTools } from "./explainers";
 import { createHandoverTools } from "./handover";
 import { createProfileTools } from "./profile";
 import { createSalesTools } from "./sales";
@@ -17,6 +18,7 @@ export function createAdvisorTools(ctx: ToolContext): ToolSet {
     ...createDocumentTools(ctx),
     ...createHandoverTools(ctx),
     ...createSalesTools(ctx),
+    ...createExplainerTools(ctx),
   };
 }
 

@@ -1,9 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { lifeSituationSchema } from "@/lib/domain/profile";
 import { buildLifePlan, phaseAt, planRetirement } from "./life-plan";
+import type { LifePlanRetirement } from "./types";
 
 const YEAR = 2026;
-const noIncome = { status: "missing", missing: [] } as const;
+const noIncome: LifePlanRetirement["income"] = { status: "missing", missing: [] };
 
 function profile(data: Record<string, unknown>) {
   return lifeSituationSchema.parse(data);
@@ -11,8 +12,9 @@ function profile(data: Record<string, unknown>) {
 
 describe("planRetirement", () => {
   it("uses the stated age, then a planned early retirement, then 65", () => {
-    expect(planRetirement(profile({ person: { birthYear: 1990 }, desiredRetirementAge: 60 }), YEAR))
-      .toEqual({ age: 60, year: 2050, basis: "profile" });
+    expect(
+      planRetirement(profile({ person: { birthYear: 1990 }, desiredRetirementAge: 60 }), YEAR),
+    ).toEqual({ age: 60, year: 2050, basis: "profile" });
     expect(
       planRetirement(
         profile({

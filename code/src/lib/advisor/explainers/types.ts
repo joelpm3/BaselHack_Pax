@@ -91,43 +91,28 @@ export type LifePlanOutput =
       needPercent: number;
     };
 
-// ─── Capital withdrawal ─────────────────────────────────────────────────────
+// ─── Capital drawdown ───────────────────────────────────────────────────────
 
-export const WITHDRAWAL_PURPOSES = ["retirement_lump_sum", "pillar3a_payout", "home_purchase"] as const;
-export type WithdrawalPurpose = (typeof WITHDRAWAL_PURPOSES)[number];
+export const DRAWDOWN_SOURCES = ["pension_fund", "pillar3a", "savings"] as const;
+export type DrawdownSource = (typeof DRAWDOWN_SOURCES)[number];
 
-export type CapitalWithdrawalOutput =
-  | (MissingOutput & { purpose: WithdrawalPurpose })
+export type CapitalDrawdownOutput =
+  | (MissingOutput & { source: DrawdownSource })
   | {
       status: "ok";
-      purpose: WithdrawalPurpose;
-      amount: number;
-      amountSource: ValueSource | "default";
-      paymentAge: number;
-      paymentYear: number;
-      location: string | null;
-      tax: {
-        total: number;
-        federal: number;
-        cantonal: number;
-        communal: number;
-        church: number;
-        netCapital: number;
-        /** Tax as a percentage of the amount. */
-        percent: number;
-      };
-      /** How long the net capital lasts with a monthly withdrawal (lump sums only). */
-      drawdown: {
-        monthlyWithdrawal: number;
-        /** customer: the amount they named; calculated: what lasts until `lastsUntilAge`. */
-        withdrawalSource: "customer" | "calculated";
-        years: number;
-        months: number;
-        /** Remaining capital at the start of each year, from the payout on. */
-        capitalByYear: number[];
-        lastsUntilAge: number;
-        interestRate: number;
-      } | null;
+      source: DrawdownSource;
+      capital: number;
+      capitalSource: "customer" | "profile";
+      startAge: number;
+      monthlyWithdrawal: number;
+      /** customer: the amount they named; calculated: what lasts until `lastsUntilAge`. */
+      withdrawalSource: "customer" | "calculated";
+      years: number;
+      months: number;
+      /** Remaining capital at the start of each year of the drawdown. */
+      capitalByYear: number[];
+      lastsUntilAge: number;
+      interestRate: number;
     };
 
 // ─── References ─────────────────────────────────────────────────────────────

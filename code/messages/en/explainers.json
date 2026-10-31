@@ -1,0 +1,144 @@
+{
+  "discuss": "Discuss with the advisor",
+  "compound": {
+    "title": "Compound interest",
+    "pending": "Calculating the example",
+    "introGeneral": "An example to try: move the sliders and see where the money comes from in the end.",
+    "introPillar3a": "With your pillar 3a figures until retirement. You can change every slider.",
+    "params": {
+      "startAmount": "Starting amount",
+      "monthlySaving": "Saving per month",
+      "ratePercent": "Interest per year",
+      "years": "Duration"
+    },
+    "years": "{years, plural, one {# year} other {# years}}",
+    "rate": "{rate}%",
+    "sources": {
+      "profile": "from your profile",
+      "customer": "your figure",
+      "example": "example value"
+    },
+    "total": "After {years, plural, one {# year} other {# years}}",
+    "parts": {
+      "deposits": "Your deposits",
+      "interest": "Interest on deposits",
+      "interestOnInterest": "Interest on interest"
+    },
+    "share": "Interest on interest makes up {share}% of the final amount. This part grows the longer the money stays invested.",
+    "noInterest": "Without interest, only what you pay in yourself grows.",
+    "unit": "1 square = {amount}",
+    "axis": "Years from today",
+    "chartSummary": "After {years} years: {total}, of which deposits {deposits}, interest {interest}, interest on interest {interestOnInterest}.",
+    "reset": "Reset",
+    "discussMessage": "In the compound interest example I set {params} and end up with {total}. What does that mean for me?",
+    "disclaimer": "Illustration with an assumed interest rate of {rate}% per year, compounded monthly, without fees, taxes or inflation. No guarantee: interest and returns fluctuate and can also be negative."
+  },
+  "lifePlan": {
+    "title": "Your life plan",
+    "pending": "Drawing your life plan",
+    "gridCaption": "One square per year of life, from today until {age}",
+    "decade": "{age}s",
+    "phases": {
+      "work": "Working life",
+      "sabbatical": "Time off",
+      "retirement": "Retirement"
+    },
+    "events": {
+      "today": "Today",
+      "child": "A child is born",
+      "child_adult": "A child turns 18",
+      "home_purchase": "Home ownership",
+      "marriage": "Marriage",
+      "sabbatical": "Time off",
+      "self_employment": "Self-employment",
+      "divorce": "Separation",
+      "inheritance": "Inheritance",
+      "other": "Plan",
+      "retirement": "Retirement",
+      "partner_retirement": "Partner retires"
+    },
+    "when": "{year}, at {age}",
+    "noYear": "Year still open",
+    "sources": {
+      "profile": "your figure",
+      "derived": "derived",
+      "assumption": "assumption",
+      "calculation": "Logismata"
+    },
+    "assumptions": {
+      "retirement": "reference age 65",
+      "partner_retirement": "reference age 65",
+      "sabbatical": "assumed to last one year"
+    },
+    "money": "Per month",
+    "incomeToday": "Income today, gross",
+    "incomeTodayHousehold": "Household income today, gross",
+    "expenses": "Spending today, your figure",
+    "retirementIncome": "Income from {age}, Logismata",
+    "retirementNeed": "Need from {age}: {amount}",
+    "retirementGap": "Gap {amount}",
+    "retirementCovered": "covered",
+    "expensesGap": "Compared with your spending today, about {amount} per month is missing in retirement.",
+    "expensesCovered": "Your income in retirement covers your spending today.",
+    "retirementMissing": "Income in retirement still needs: {fields}.",
+    "retirementTooEarly": "Before 58, pension funds usually pay no retirement benefits. Until then you need your own savings.",
+    "retirementFailed": "Income in retirement cannot be calculated right now.",
+    "unit": "1 square = CHF 500 per month",
+    "estimated": "Pension fund values estimated.",
+    "finePrint": "Only figures from your profile and this conversation; assumptions are marked. Income in retirement calculated with Logismata (need {need}% of today's gross income), not binding. Your pension picture stays unchanged."
+  },
+  "drawdown": {
+    "pending": "Calculating how long the capital lasts",
+    "titles": {
+      "pension_fund": "Pension fund capital: how long it lasts",
+      "pillar3a": "Pillar 3a: how long it lasts",
+      "savings": "Savings: how long they last"
+    },
+    "capital": "{amount} from {age}",
+    "capitalSources": {
+      "customer": "your figure",
+      "profile": "from your profile"
+    },
+    "lastsCustomer": "With {amount} per month it lasts {years, plural, one {# year} other {# years}}{months, plural, =0 {} one { and # month} other { and # months}}, until about {age}.",
+    "lastsCalculated": "Until {age} it lasts for about {amount} per month.",
+    "unit": "1 square = {amount}",
+    "axis": "Capital at the start of each year, by age",
+    "chartSummary": "The capital falls from {start} at {startAge} to {end} at {endAge}.",
+    "finePrint": "Logismata calculation with {interest}% interest on the remaining capital, before tax on a payout, without inflation. Not binding."
+  },
+  "references": {
+    "title": "More from Pax",
+    "inGerman": "in German",
+    "articles": {
+      "compound_interest": "Building wealth over the long term",
+      "pension_system": "The Swiss pension system",
+      "social_security": "Social security in Switzerland",
+      "retirement_planning": "Planning for retirement",
+      "pillar3a_tax": "Saving tax with pillar 3a",
+      "pillar3a_bank_or_insurance": "Pillar 3a with a bank or an insurer?",
+      "pillar3a_staggered_withdrawal": "Withdrawing pillar 3a in stages",
+      "pillar3a_premium_waiver": "What is a premium waiver in pillar 3a?",
+      "life_insurance": "What is life insurance?",
+      "pillar2_basics": "The second pillar (BVG) at a glance",
+      "conversion_rate": "What is the BVG conversion rate?",
+      "coordination_deduction": "What is the coordination deduction?",
+      "pension_certificate": "Reading your pension certificate",
+      "pension_fund_buy_in": "What does a pension fund buy-in bring?",
+      "pension_gaps": "Finding and closing pension gaps",
+      "unpaid_leave": "Pension cover during unpaid leave",
+      "early_retirement": "Can I afford to retire early?",
+      "pension_or_lump_sum": "Pension or lump sum?",
+      "retirement_budget": "Your budget after retirement",
+      "couples_and_cohabiting": "Pensions as a couple: protecting your partner",
+      "protect_family": "Protecting your family",
+      "death_and_disability": "Cover for death and disability",
+      "children": "Providing for your children",
+      "parental_leave": "Baby break: planning your return and your pension",
+      "divorce": "How does divorce affect my pension?",
+      "estate_planning": "Estate planning",
+      "home_ownership": "How do I finance my home?",
+      "home_with_pension_money": "Financing a home with pension money",
+      "self_employment": "Becoming self-employed"
+    }
+  }
+}

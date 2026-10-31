@@ -17,7 +17,12 @@ describe("compoundGrowth", () => {
   });
 
   it("grows a start amount like yearly compounding", () => {
-    const rows = compoundGrowth({ startAmount: 10_000, monthlySaving: 0, ratePercent: 5, years: 20 });
+    const rows = compoundGrowth({
+      startAmount: 10_000,
+      monthlySaving: 0,
+      ratePercent: 5,
+      years: 20,
+    });
     const last = rows.at(-1);
     expect(last?.total).toBeCloseTo(10_000 * 1.05 ** 20, 6);
     expect(rows[1]?.total).toBeCloseTo(10_500, 6);
@@ -25,9 +30,12 @@ describe("compoundGrowth", () => {
 
   it("splits interest into simple interest on deposits and interest on interest", () => {
     const r = 1.05 ** (1 / 12) - 1;
-    const s = compoundGrowth({ startAmount: 10_000, monthlySaving: 0, ratePercent: 5, years: 20 }).at(
-      -1,
-    );
+    const s = compoundGrowth({
+      startAmount: 10_000,
+      monthlySaving: 0,
+      ratePercent: 5,
+      years: 20,
+    }).at(-1);
     // Simple interest on 10'000 for 240 months at the monthly rate.
     expect(s?.interest).toBeCloseTo(10_000 * r * 240, 6);
     expect(s?.interestOnInterest).toBeCloseTo((s?.total ?? 0) - 10_000 - 10_000 * r * 240, 6);
@@ -54,7 +62,9 @@ describe("compoundGrowth", () => {
     const r = 1.02 ** (1 / 12) - 1;
     const n = 12 * 30;
     const expected = 200 * (((1 + r) ** n - 1) / r) * (1 + r);
-    const s = compoundGrowth({ startAmount: 0, monthlySaving: 200, ratePercent: 2, years: 30 }).at(-1);
+    const s = compoundGrowth({ startAmount: 0, monthlySaving: 200, ratePercent: 2, years: 30 }).at(
+      -1,
+    );
     expect(s?.total).toBeCloseTo(expected, 4);
   });
 });
@@ -84,13 +94,21 @@ describe("square chart", () => {
   });
 
   it("keeps each column's squares equal to its rounded total", () => {
-    const rows = compoundGrowth({ startAmount: 10_000, monthlySaving: 200, ratePercent: 2, years: 30 });
+    const rows = compoundGrowth({
+      startAmount: 10_000,
+      monthlySaving: 200,
+      ratePercent: 2,
+      years: 30,
+    });
     const { unit, columns } = compoundColumns(rows, { maxColumns: 10, maxSquares: 18 });
     for (const column of columns) {
       const row = rows[column.year];
-      const count = column.squares.deposits + column.squares.interest + column.squares.interestOnInterest;
+      const count =
+        column.squares.deposits + column.squares.interest + column.squares.interestOnInterest;
       expect(count).toBe(Math.round((row?.total ?? 0) / unit));
     }
-    expect(Math.max(...columns.map((c) => Object.values(c.squares).reduce((a, b) => a + b)))).toBeLessThanOrEqual(18);
+    expect(
+      Math.max(...columns.map((c) => Object.values(c.squares).reduce((a, b) => a + b))),
+    ).toBeLessThanOrEqual(18);
   });
 });

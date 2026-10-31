@@ -55,10 +55,7 @@ export function planRetirement(
 }
 
 function horizonFor(currentAge: number, retirementAge: number): number {
-  return Math.min(
-    MAX_HORIZON_AGE,
-    Math.max(MIN_HORIZON_AGE, retirementAge + 20, currentAge + 10),
-  );
+  return Math.min(MAX_HORIZON_AGE, Math.max(MIN_HORIZON_AGE, retirementAge + 20, currentAge + 10));
 }
 
 function plannedEvents(profile: LifeSituation, year: number, birthYear: number): LifeEvent[] {
@@ -205,9 +202,7 @@ export function buildLifePlan(
       });
     }
   }
-  const visible = events
-    .filter((e) => e.age === null || e.age <= horizonAge)
-    .sort(compareEvents);
+  const visible = events.filter((e) => e.age === null || e.age <= horizonAge).sort(compareEvents);
 
   const own = profile.person.grossIncome;
   const partnerIncome = hasPartner(profile) ? profile.partner?.grossIncome : undefined;

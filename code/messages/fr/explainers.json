@@ -1,0 +1,144 @@
+{
+  "discuss": "En parler avec le conseiller",
+  "compound": {
+    "title": "Intérêts composés",
+    "pending": "Je calcule l’exemple",
+    "introGeneral": "Un exemple à essayer : déplacez les curseurs et voyez d’où vient l’argent à la fin.",
+    "introPillar3a": "Avec vos chiffres du pilier 3a jusqu’à la retraite. Tous les curseurs sont réglables.",
+    "params": {
+      "startAmount": "Montant de départ",
+      "monthlySaving": "Épargne par mois",
+      "ratePercent": "Intérêt par an",
+      "years": "Durée"
+    },
+    "years": "{years, plural, one {# an} other {# ans}}",
+    "rate": "{rate} %",
+    "sources": {
+      "profile": "de votre profil",
+      "customer": "votre indication",
+      "example": "valeur d’exemple"
+    },
+    "total": "Après {years, plural, one {# an} other {# ans}}",
+    "parts": {
+      "deposits": "Vos versements",
+      "interest": "Intérêts sur les versements",
+      "interestOnInterest": "Intérêts sur les intérêts"
+    },
+    "share": "Les intérêts sur les intérêts représentent {share} % du montant final. Cette part grandit plus l’argent reste placé longtemps.",
+    "noInterest": "Sans intérêt, seul ce que vous versez vous-même augmente.",
+    "unit": "1 carré = {amount}",
+    "axis": "Années à partir d’aujourd’hui",
+    "chartSummary": "Après {years} ans : {total}, dont versements {deposits}, intérêts {interest}, intérêts sur les intérêts {interestOnInterest}.",
+    "reset": "Réinitialiser",
+    "discussMessage": "Dans l’exemple des intérêts composés, j’ai réglé {params} et j’arrive à {total}. Qu’est-ce que cela signifie pour moi ?",
+    "disclaimer": "Illustration avec un intérêt supposé de {rate} % par an, capitalisé mensuellement, sans frais, impôts ni inflation. Aucune garantie : les intérêts et rendements varient et peuvent aussi être négatifs."
+  },
+  "lifePlan": {
+    "title": "Votre plan de vie",
+    "pending": "Je dessine votre plan de vie",
+    "gridCaption": "Un carré par année de vie, d’aujourd’hui jusqu’à {age} ans",
+    "decade": "{age} ans",
+    "phases": {
+      "work": "Vie active",
+      "sabbatical": "Pause",
+      "retirement": "Retraite"
+    },
+    "events": {
+      "today": "Aujourd’hui",
+      "child": "Naissance d’un enfant",
+      "child_adult": "Un enfant a 18 ans",
+      "home_purchase": "Propriété du logement",
+      "marriage": "Mariage",
+      "sabbatical": "Pause",
+      "self_employment": "Activité indépendante",
+      "divorce": "Séparation",
+      "inheritance": "Héritage",
+      "other": "Projet",
+      "retirement": "Retraite",
+      "partner_retirement": "Retraite du/de la partenaire"
+    },
+    "when": "{year}, à {age} ans",
+    "noYear": "Année encore ouverte",
+    "sources": {
+      "profile": "votre indication",
+      "derived": "déduit",
+      "assumption": "hypothèse",
+      "calculation": "Logismata"
+    },
+    "assumptions": {
+      "retirement": "âge de référence 65 ans",
+      "partner_retirement": "âge de référence 65 ans",
+      "sabbatical": "durée supposée d’un an"
+    },
+    "money": "Par mois",
+    "incomeToday": "Revenu actuel, brut",
+    "incomeTodayHousehold": "Revenu du ménage actuel, brut",
+    "expenses": "Dépenses actuelles, votre indication",
+    "retirementIncome": "Revenu dès {age} ans, Logismata",
+    "retirementNeed": "Besoin dès {age} ans : {amount}",
+    "retirementGap": "Lacune {amount}",
+    "retirementCovered": "couvert",
+    "expensesGap": "Par rapport à vos dépenses actuelles, il manque à la retraite environ {amount} par mois.",
+    "expensesCovered": "Le revenu à la retraite couvre vos dépenses actuelles.",
+    "retirementMissing": "Pour le revenu à la retraite, il manque encore : {fields}.",
+    "retirementTooEarly": "Avant 58 ans, la caisse de pension ne verse en général pas de prestation de vieillesse. Jusque-là, il faut sa propre fortune.",
+    "retirementFailed": "Le revenu à la retraite ne peut pas être calculé pour le moment.",
+    "unit": "1 carré = CHF 500 par mois",
+    "estimated": "Valeurs de la caisse de pension estimées.",
+    "finePrint": "Uniquement des données de votre profil et de l’entretien ; les hypothèses sont signalées. Revenu à la retraite calculé avec Logismata (besoin {need} % du revenu brut actuel), sans engagement. Votre image de prévoyance reste inchangée."
+  },
+  "drawdown": {
+    "pending": "Je calcule combien de temps le capital suffit",
+    "titles": {
+      "pension_fund": "Capital de la caisse de pension : combien de temps il suffit",
+      "pillar3a": "Pilier 3a : combien de temps il suffit",
+      "savings": "Épargne : combien de temps elle suffit"
+    },
+    "capital": "{amount} dès {age} ans",
+    "capitalSources": {
+      "customer": "votre indication",
+      "profile": "de votre profil"
+    },
+    "lastsCustomer": "Avec {amount} par mois, il suffit pour {years, plural, one {# an} other {# ans}}{months, plural, =0 {} one { et # mois} other { et # mois}}, jusqu’à environ {age} ans.",
+    "lastsCalculated": "Jusqu’à {age} ans, il suffit pour environ {amount} par mois.",
+    "unit": "1 carré = {amount}",
+    "axis": "Capital au début de chaque année, par âge",
+    "chartSummary": "Le capital passe de {start} à {startAge} ans à {end} à {endAge} ans.",
+    "finePrint": "Calcul Logismata avec {interest} % d’intérêt sur le capital restant, avant impôts sur un versement, sans inflation. Sans engagement."
+  },
+  "references": {
+    "title": "En savoir plus chez Pax",
+    "inGerman": "en allemand",
+    "articles": {
+      "compound_interest": "Construire un patrimoine à long terme",
+      "pension_system": "Comprendre la prévoyance suisse",
+      "social_security": "La prévoyance sociale en Suisse",
+      "retirement_planning": "Planifier la retraite",
+      "pillar3a_tax": "Économiser des impôts avec le pilier 3a",
+      "pillar3a_bank_or_insurance": "3e pilier auprès d’une banque ou d’une assurance ?",
+      "pillar3a_staggered_withdrawal": "Retirer le pilier 3a de manière échelonnée",
+      "pillar3a_premium_waiver": "Qu’est-ce que l’exonération des primes du pilier 3a ?",
+      "life_insurance": "Qu’est-ce qu’une assurance-vie ?",
+      "pillar2_basics": "Le 2e pilier (LPP) en un coup d’œil",
+      "conversion_rate": "Qu’est-ce que le taux de conversion LPP ?",
+      "coordination_deduction": "Qu’est-ce que la déduction de coordination ?",
+      "pension_certificate": "Lire le certificat de prévoyance",
+      "pension_fund_buy_in": "Que m’apporte un rachat dans la caisse de pension ?",
+      "pension_gaps": "Identifier et combler les lacunes de prévoyance",
+      "unpaid_leave": "La prévoyance pendant un congé non payé",
+      "early_retirement": "Puis-je me permettre une retraite anticipée ?",
+      "pension_or_lump_sum": "Rente ou capital ?",
+      "retirement_budget": "Le budget après le départ à la retraite",
+      "couples_and_cohabiting": "Prévoyance en couple : protéger son partenaire",
+      "protect_family": "Protéger sa famille",
+      "death_and_disability": "Se protéger en cas de décès et d’invalidité",
+      "children": "Bien prévoir pour ses enfants",
+      "parental_leave": "Pause maternité : planifier le retour et la prévoyance",
+      "divorce": "Quel est l’impact d’un divorce sur ma rente ?",
+      "estate_planning": "Planification successorale",
+      "home_ownership": "Financer son logement",
+      "home_with_pension_money": "Financer un logement avec l’argent de la prévoyance",
+      "self_employment": "Se mettre à son compte"
+    }
+  }
+}

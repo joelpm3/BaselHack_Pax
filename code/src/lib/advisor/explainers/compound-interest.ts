@@ -120,8 +120,8 @@ export interface CompoundColumn {
 }
 
 const NICE_UNITS = [
-  100, 200, 250, 500, 1_000, 2_000, 2_500, 5_000, 10_000, 20_000, 25_000, 50_000, 100_000,
-  200_000, 250_000, 500_000, 1_000_000,
+  100, 200, 250, 500, 1_000, 2_000, 2_500, 5_000, 10_000, 20_000, 25_000, 50_000, 100_000, 200_000,
+  250_000, 500_000, 1_000_000,
 ];
 
 /** The smallest round CHF amount per square that keeps the tallest column within maxSquares. */
