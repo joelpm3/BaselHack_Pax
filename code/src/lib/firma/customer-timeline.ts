@@ -28,7 +28,6 @@ export const TIMELINE_EVENTS = [
   "handoverStatus",
   "handoverAssigned",
   "leadCreated",
-  "leadWithdrawn",
   "leadStatus",
   "leadAssigned",
   "leadNote",
@@ -214,7 +213,6 @@ const COVERED_AUDIT_ACTIONS = new Set([
 ]);
 
 const AUDIT_EVENTS: Record<string, { kind: TimelineKind; event: TimelineEvent }> = {
-  "lead.withdrawn": { kind: "lead", event: "leadWithdrawn" },
   "recommendation.declined": { kind: "offer", event: "recommendationDeclined" },
   "suitability.completed": { kind: "offer", event: "suitabilityCompleted" },
   "offer.prepared": { kind: "offer", event: "offerPrepared" },
@@ -264,13 +262,31 @@ export function buildTimeline(input: TimelineInput): TimelineEntry[] {
       conversationId: h.conversationId,
     });
   }
+  // The lead row holds today's type and score; the creation entry shows them as first detected.
+  const original = new Map<string, { type?: string; score?: number }>();
+  for (const a of input.activities.toSorted(
+    (x, y) => x.createdAt.getTime() - y.createdAt.getTime(),
+  )) {
+    if (a.type !== "system") continue;
+    const first = original.get(a.leadId) ?? {};
+    const score = a.data?.event === "created" ? a.data.score : a.data?.fromScore;
+    if (first.score === undefined && typeof score === "number") first.score = score;
+    if (
+      first.type === undefined &&
+      a.data?.event === "retyped" &&
+      typeof a.data.fromType === "string"
+    )
+      first.type = a.data.fromType;
+    original.set(a.leadId, first);
+  }
   for (const l of input.leads) {
+    const first = original.get(l.id);
     push({
       id: `lead-${l.id}`,
       at: l.createdAt,
       kind: "lead",
       event: "leadCreated",
-      params: { type: l.type, score: l.score },
+      params: { type: first?.type ?? l.type, score: first?.score ?? l.score },
       conversationId: l.conversationId,
     });
   }

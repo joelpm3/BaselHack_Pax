@@ -132,7 +132,6 @@
       "handoverStatus": "Handover set to “{status}”",
       "handoverAssigned": "Handover reassigned",
       "leadCreated": "Lead detected: {type}, score {score}",
-      "leadWithdrawn": "Lead withdrawn",
       "leadStatus": "Lead moved from “{from}” to “{to}”",
       "leadAssigned": "Lead reassigned",
       "leadNote": "Note on the lead",

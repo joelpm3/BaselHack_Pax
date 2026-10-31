@@ -132,7 +132,6 @@
       "handoverStatus": "Passaggio impostato su «{status}»",
       "handoverAssigned": "Passaggio riassegnato",
       "leadCreated": "Lead rilevato: {type}, punteggio {score}",
-      "leadWithdrawn": "Lead ritirato",
       "leadStatus": "Lead spostato da «{from}» a «{to}»",
       "leadAssigned": "Lead riassegnato",
       "leadNote": "Nota sul lead",

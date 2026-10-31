@@ -132,7 +132,6 @@
       "handoverStatus": "Transfert passé à « {status} »",
       "handoverAssigned": "Transfert réattribué",
       "leadCreated": "Lead détecté : {type}, score {score}",
-      "leadWithdrawn": "Lead retiré",
       "leadStatus": "Lead passé de « {from} » à « {to} »",
       "leadAssigned": "Lead réattribué",
       "leadNote": "Note sur le lead",

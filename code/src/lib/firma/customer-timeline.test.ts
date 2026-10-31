@@ -181,6 +181,33 @@ describe("buildTimeline", () => {
     expect(timeline[0]).toMatchObject({ kind: "communication", text: "Termin" });
   });
 
+  it("shows the lead as first detected, not as rescored or retyped later", () => {
+    const system = (id: string, minute: number, data: Record<string, unknown>) => ({
+      id,
+      leadId: "l1",
+      type: "system" as const,
+      body: null,
+      data,
+      createdAt: at(minute),
+      advisorName: null,
+    });
+    const timeline = buildTimeline({
+      ...empty,
+      leads: [
+        { id: "l1", conversationId: null, type: "switch_opportunity", score: 50, createdAt: at(1) },
+      ],
+      activities: [
+        system("a3", 9, { event: "retyped", fromType: "new_business", type: "switch_opportunity" }),
+        system("a2", 8, { event: "rescored", fromScore: 15, score: 50 }),
+        system("a1", 1, { event: "created", score: 15 }),
+      ],
+    });
+    expect(timeline.find((e) => e.event === "leadCreated")?.params).toEqual({
+      type: "new_business",
+      score: 15,
+    });
+  });
+
   it("only shows signed applications and non-seeded policies", () => {
     const timeline = buildTimeline({
       ...empty,

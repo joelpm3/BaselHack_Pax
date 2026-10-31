@@ -132,7 +132,6 @@
       "handoverStatus": "Übergabe auf «{status}» gesetzt",
       "handoverAssigned": "Übergabe neu zugewiesen",
       "leadCreated": "Lead erkannt: {type}, Score {score}",
-      "leadWithdrawn": "Lead zurückgezogen",
       "leadStatus": "Lead von «{from}» auf «{to}» gesetzt",
       "leadAssigned": "Lead neu zugewiesen",
       "leadNote": "Notiz zum Lead",
