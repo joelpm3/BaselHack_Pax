@@ -266,7 +266,16 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
     analysisShown ||= tools.some((t) =>
       ["showRiskAnalysis", "showPensionOverview"].includes(t.name),
     );
-    optionsExplained ||= texts.some(explainsOptions);
+    // Only text written before a recommendation counts as explaining the options first.
+    const items = messageItems(reply.parts);
+    const recommendAt = items.findIndex(
+      (i) => i.kind === "tool" && i.tool.name === "recommendProducts",
+    );
+    const explainedBefore =
+      optionsExplained ||
+      items
+        .slice(0, Math.max(0, recommendAt))
+        .some((i) => i.kind === "text" && explainsOptions(i.text));
     const flags = flagsFor({
       customer: text,
       texts,
@@ -275,8 +284,9 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       customerUsesInformal: informal,
       analysisShown,
       insuranceAsked,
-      optionsExplained,
+      optionsExplained: explainedBefore,
     });
+    optionsExplained ||= texts.some(explainsOptions);
     insuranceAsked ||= texts.some(asksAboutInsurance);
     exchanges.push({
       customer: text,
