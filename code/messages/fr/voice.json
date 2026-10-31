@@ -1,9 +1,7 @@
 {
   "start": "Démarrer la saisie vocale",
-  "startHint": "Parlez en suisse allemand, jusqu'à 60 secondes. Le texte apparaît dans le champ de saisie.",
   "stop": "Arrêter l'enregistrement et le convertir en texte",
   "cancel": "Supprimer l'enregistrement",
-  "recording": "Enregistrement en cours. Échap pour supprimer.",
   "elapsedLabel": "Durée de l'enregistrement",
   "requesting": "Activation du microphone …",
   "transcribing": "Conversion en texte …",
@@ -25,5 +23,46 @@
     "unreadable": "L'enregistrement n'a pas pu être lu. Veuillez réessayer.",
     "unauthorized": "Votre session a expiré. Veuillez recharger la page.",
     "failed": "La reconnaissance vocale n'a pas répondu. Veuillez réessayer."
+  },
+  "talk": {
+    "start": "Parler",
+    "done": "Terminé",
+    "wait": "Un instant",
+    "more": "Continuer",
+    "moreLabel": "Continuer à parler et compléter le texte",
+    "discard": "Supprimer",
+    "document": "Document",
+    "write": "Écrire",
+    "writeLabel": "Écrire au lieu de parler",
+    "writeInstead": "Écrire plutôt",
+    "speakLabel": "Parler au lieu d'écrire",
+    "stopReply": "Arrêter",
+    "stopReplyLabel": "Arrêter la réponse",
+    "idle": "Touchez « Parler » et racontez.",
+    "idleKeys": "Cliquez sur « Parler » ou appuyez sur la <key>barre d'espace</key>.",
+    "listening": "Je vous écoute. Touchez « Terminé » quand vous avez fini.",
+    "busy": "Le conseiller répond. Vous pouvez déjà parler.",
+    "reviewing": "Vérifiez le texte. Il sera envoyé dans un instant."
+  },
+  "review": {
+    "title": "Voici ce que j'ai compris",
+    "edit": "Modifier",
+    "editLabel": "Corriger le texte",
+    "discard": "Supprimer",
+    "send": "Envoyer",
+    "sendingIn": "Envoi dans {seconds} s",
+    "held": "Envoi en pause",
+    "editing": "Corrigez le texte et touchez « Envoyer ».",
+    "afterReply": "Sera envoyé dès que la réponse est terminée"
+  },
+  "invite": {
+    "title": "Racontez, tout simplement.",
+    "body": "Touchez « Parler » en bas et racontez avec vos propres mots. La reconnaissance vocale comprend le suisse allemand. Vous voyez le texte avant qu'il ne soit envoyé.",
+    "examplesLabel": "Par exemple :",
+    "examples": {
+      "family": "« Nous attendons notre deuxième enfant au printemps. »",
+      "work": "« Je me mets à mon compte l'année prochaine. »",
+      "retirement": "« J'ai 52 ans et je me demande si ma rente suffira. »"
+    }
   }
 }

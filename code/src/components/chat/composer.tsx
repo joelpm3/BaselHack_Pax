@@ -1,14 +1,19 @@
 "use client";
 
-import { ArrowUp, Square } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { type FormEvent, type KeyboardEvent, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   DocumentUploadButton,
   type UploadedDocument,
 } from "@/components/documents/document-upload-button";
-import { MicButton } from "@/components/voice/mic-button";
+import { type InputMode, setInputMode, useInputMode } from "@/components/voice/input-mode";
+import { appendTranscript } from "@/components/voice/talk";
+import { TalkDock } from "@/components/voice/talk-dock";
+import { TranscriptReview } from "@/components/voice/transcript-review";
+import { useSpaceToTalk } from "@/components/voice/use-space-to-talk";
+import { useRecordingSupported, useVoiceRecorder } from "@/components/voice/use-voice-recorder";
 import type { AdvisorMessageMetadata } from "@/lib/advisor/types";
+import { TextComposer } from "./text-composer";
 
 export interface ComposerProps {
   conversationId: string;
@@ -18,38 +23,100 @@ export interface ComposerProps {
   onStop: () => void;
 }
 
-/** Text, voice (transcript goes into the field, never auto-sent) and the upload paperclip. */
+/** Talking first: browsers that cannot record fall back to writing. */
+export function useEffectiveInputMode(): InputMode {
+  const preferred = useInputMode();
+  return useRecordingSupported() ? preferred : "text";
+}
+
+/**
+ * Voice-first composer. Talking goes through the talk square: the transcript is shown for a
+ * few seconds to fix, then sent. Writing is one tap away and remembered per device. Quick
+ * replies and the paperclip work in both modes.
+ */
 export function Composer({ conversationId, busy, quickReplies, onSend, onStop }: ComposerProps) {
   const t = useTranslations("chat.composer");
+  const mode = useEffectiveInputMode();
+  const canRecord = useRecordingSupported();
   const [text, setText] = useState("");
-  const [voice, setVoice] = useState(false);
-  const field = useRef<HTMLTextAreaElement>(null);
+  // The typed text came from a transcript moved over from the voice review.
+  const [textFromVoice, setTextFromVoice] = useState(false);
+  const [review, setReview] = useState<string | null>(null);
+  // Bumped on every new transcript so the review restarts its countdown.
+  const [reviewKey, setReviewKey] = useState(0);
+  const [focusText, setFocusText] = useState(false);
+  const meter = useRef<HTMLDivElement>(null);
 
-  function send(value: string, metadata: AdvisorMessageMetadata) {
+  const modeRef = useRef(mode);
+  useEffect(() => {
+    modeRef.current = mode;
+  }, [mode]);
+
+  const onTranscript = useCallback((transcript: string) => {
+    // Switched to writing while the recording was still being transcribed.
+    if (modeRef.current === "text") {
+      setText((current) => appendTranscript(current, transcript));
+      setTextFromVoice(true);
+      return;
+    }
+    setReview((current) => appendTranscript(current ?? "", transcript));
+    setReviewKey((k) => k + 1);
+  }, []);
+  const onLevel = useCallback((level: number) => {
+    meter.current?.style.setProperty("--level", level.toFixed(3));
+  }, []);
+  const recorder = useVoiceRecorder({ onTranscript, onLevel });
+  const recording = recorder.phase === "recording";
+  const idle = recorder.phase === "idle";
+
+  function send(value: string, metadata: AdvisorMessageMetadata): boolean {
     const trimmed = value.trim();
-    if (!trimmed || busy) return;
+    if (!trimmed || busy) return false;
     onSend(trimmed, metadata);
-    setText("");
-    setVoice(false);
+    return true;
   }
 
-  function submit(event: FormEvent) {
-    event.preventDefault();
-    send(text, { inputMode: voice ? "voice" : "text" });
+  function sendReview() {
+    if (review !== null && send(review, { inputMode: "voice" })) setReview(null);
   }
 
-  function onKeyDown(event: KeyboardEvent<HTMLTextAreaElement>) {
-    if (event.key === "Enter" && !event.shiftKey && !event.nativeEvent.isComposing) {
-      event.preventDefault();
-      send(text, { inputMode: voice ? "voice" : "text" });
+  function sendText() {
+    if (send(text, { inputMode: textFromVoice ? "voice" : "text" })) {
+      setText("");
+      setTextFromVoice(false);
     }
   }
 
-  function onTranscript(transcript: string) {
-    setText((current) => (current.trim() ? `${current.trim()} ${transcript}` : transcript));
-    setVoice(true);
-    field.current?.focus();
+  function talk() {
+    if (!idle) return;
+    // Anything typed so far is kept and the spoken part is added to it.
+    if (text.trim()) {
+      setReview((current) => appendTranscript(current ?? "", text));
+      setText("");
+      setTextFromVoice(false);
+    }
+    setInputMode("voice");
+    void recorder.start();
   }
+
+  function write() {
+    if (recording) recorder.cancel();
+    recorder.clearError();
+    if (review !== null) {
+      setText((current) => appendTranscript(current, review));
+      setTextFromVoice(true);
+      setReview(null);
+    }
+    setFocusText(true);
+    setInputMode("text");
+  }
+
+  useSpaceToTalk(mode === "voice", {
+    onToggle: () => (recording ? recorder.stop() : talk()),
+    onEscape: () => {
+      if (recording) recorder.cancel();
+    },
+  });
 
   function onUploaded(documents: UploadedDocument[]) {
     if (documents.length === 0) return;
@@ -62,16 +129,26 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
     );
   }
 
+  const upload = (
+    <DocumentUploadButton
+      conversationId={conversationId}
+      onUploaded={onUploaded}
+      disabled={busy || recording}
+    />
+  );
+
+  const showReplies = quickReplies.length > 0 && !busy && review === null && idle;
+
   return (
-    <div className="flex flex-col gap-2">
-      {quickReplies.length > 0 && !busy ? (
+    <div className="flex flex-col gap-3">
+      {showReplies ? (
         <ul aria-label={t("quickReplies")} className="flex flex-wrap gap-1.5">
           {quickReplies.map((reply) => (
             <li key={reply}>
               <button
                 type="button"
                 onClick={() => send(reply, { inputMode: "widget" })}
-                className="rounded-full border-[1.5px] border-pax-purple bg-surface px-3.5 py-1.5 text-paragraph-xs font-medium text-pax-purple transition-colors hover:bg-light-purple"
+                className="min-h-9 rounded-full border-[1.5px] border-pax-purple bg-surface px-3.5 py-1.5 text-paragraph-xs font-medium text-pax-purple transition-colors hover:bg-light-purple"
               >
                 {reply}
               </button>
@@ -79,53 +156,51 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
           ))}
         </ul>
       ) : null}
-      <form
-        onSubmit={submit}
-        className="flex items-end gap-1 rounded-[20px] border-[1.2px] border-line-strong bg-surface p-1.5 focus-within:border-pax-purple"
-      >
-        <DocumentUploadButton
-          conversationId={conversationId}
-          onUploaded={onUploaded}
-          disabled={busy}
-        />
-        <label htmlFor="chat-input" className="sr-only">
-          {t("label")}
-        </label>
-        <textarea
-          ref={field}
-          id="chat-input"
-          rows={1}
-          value={text}
-          onChange={(event) => {
-            setText(event.target.value);
-            if (!event.target.value.trim()) setVoice(false);
+
+      {mode === "voice" ? (
+        <>
+          {review !== null ? (
+            <TranscriptReview
+              key={reviewKey}
+              text={review}
+              onChange={setReview}
+              onSend={sendReview}
+              onDiscard={() => setReview(null)}
+              paused={!idle}
+              busy={busy}
+            />
+          ) : null}
+          <TalkDock
+            phase={recorder.phase}
+            error={recorder.error}
+            elapsedMs={recorder.elapsedMs}
+            meterRef={meter}
+            reviewing={review !== null}
+            busy={busy}
+            onTalk={talk}
+            onDone={recorder.stop}
+            onCancel={recorder.cancel}
+            onWrite={write}
+            onStopReply={onStop}
+            onDismissError={recorder.clearError}
+            upload={upload}
+          />
+        </>
+      ) : (
+        <TextComposer
+          text={text}
+          onChange={(value) => {
+            setText(value);
+            if (!value.trim()) setTextFromVoice(false);
           }}
-          onKeyDown={onKeyDown}
-          placeholder={t("placeholder")}
-          enterKeyHint="send"
-          className="max-h-40 min-h-10 flex-1 resize-none [field-sizing:content] bg-transparent px-2 py-2 text-[1rem] leading-6 placeholder:text-fg-subtle focus:outline-none"
+          onSend={sendText}
+          onStop={onStop}
+          onTalk={canRecord ? talk : undefined}
+          busy={busy}
+          autoFocus={focusText}
+          upload={upload}
         />
-        <MicButton onTranscript={onTranscript} disabled={busy} />
-        {busy ? (
-          <button
-            type="button"
-            onClick={onStop}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-ink text-white"
-          >
-            <Square aria-hidden className="size-3.5 fill-current" />
-            <span className="sr-only">{t("stop")}</span>
-          </button>
-        ) : (
-          <button
-            type="submit"
-            disabled={!text.trim()}
-            className="grid size-10 shrink-0 place-items-center rounded-full bg-pax-purple text-white transition-colors hover:bg-deep-purple disabled:bg-gray-3"
-          >
-            <ArrowUp aria-hidden className="size-5" />
-            <span className="sr-only">{t("send")}</span>
-          </button>
-        )}
-      </form>
+      )}
     </div>
   );
 }

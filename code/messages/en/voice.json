@@ -1,9 +1,7 @@
 {
   "start": "Start voice input",
-  "startHint": "Speak Swiss German, up to 60 seconds. The text appears in the input field.",
   "stop": "Stop recording and convert to text",
   "cancel": "Discard recording",
-  "recording": "Recording. Press Escape to discard.",
   "elapsedLabel": "Recording length",
   "requesting": "Turning on the microphone …",
   "transcribing": "Converting to text …",
@@ -25,5 +23,46 @@
     "unreadable": "The recording could not be read. Please try again.",
     "unauthorized": "Your session has expired. Please reload the page.",
     "failed": "Speech recognition did not respond. Please try again."
+  },
+  "talk": {
+    "start": "Talk",
+    "done": "Done",
+    "wait": "One moment",
+    "more": "Add more",
+    "moreLabel": "Keep talking and add to the text",
+    "discard": "Discard",
+    "document": "Document",
+    "write": "Type",
+    "writeLabel": "Type instead of talking",
+    "writeInstead": "Type instead",
+    "speakLabel": "Talk instead of typing",
+    "stopReply": "Stop",
+    "stopReplyLabel": "Stop the answer",
+    "idle": "Tap “Talk” and tell me.",
+    "idleKeys": "Click “Talk” or press the <key>space bar</key>.",
+    "listening": "I'm listening. Tap “Done” when you have finished.",
+    "busy": "The advisor is answering. You can already talk.",
+    "reviewing": "Check the text. It will be sent in a moment."
+  },
+  "review": {
+    "title": "This is what I understood",
+    "edit": "Edit",
+    "editLabel": "Correct the text",
+    "discard": "Discard",
+    "send": "Send",
+    "sendingIn": "Sending in {seconds} s",
+    "held": "Sending paused",
+    "editing": "Correct the text and tap “Send”.",
+    "afterReply": "Will be sent as soon as the answer is complete"
+  },
+  "invite": {
+    "title": "Just tell me.",
+    "body": "Tap “Talk” below and tell me in your own words. Speech recognition understands Swiss German. You see the text before it is sent.",
+    "examplesLabel": "For example:",
+    "examples": {
+      "family": "“We are expecting our second child in the spring.”",
+      "work": "“I am going self-employed next year.”",
+      "retirement": "“I am 52 and wonder whether my pension will be enough.”"
+    }
   }
 }

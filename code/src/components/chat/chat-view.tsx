@@ -15,10 +15,11 @@ import type {
   VorsorgebildModel,
 } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
-import { Composer } from "./composer";
+import { Composer, useEffectiveInputMode } from "./composer";
 import { MessageView } from "./message-view";
 import { PictureProvider } from "./picture-context";
 import type { ChatMessage } from "./types";
+import { VoiceInvite } from "./voice-invite";
 
 export interface ChatViewProps {
   conversationId: string;
@@ -138,6 +139,8 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   }, []);
 
   const last = messages.at(-1);
+  const inputMode = useEffectiveInputMode();
+  const answered = messages.some((m) => m.role === "user");
 
   const quickReplies = status === "ready" ? quickRepliesOf(last) : [];
   const waiting = status === "submitted" || (status === "streaming" && last?.role !== "assistant");
@@ -161,6 +164,11 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
                   <MessageView message={message} />
                 </li>
               ))}
+              {!answered && inputMode === "voice" ? (
+                <li>
+                  <VoiceInvite />
+                </li>
+              ) : null}
               {waiting ? (
                 <li className="flex gap-3">
                   <span aria-hidden className="mt-2 block size-2.5 shrink-0 bg-pax-purple" />

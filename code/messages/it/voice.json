@@ -1,9 +1,7 @@
 {
   "start": "Avvia l'inserimento vocale",
-  "startHint": "Parli in svizzero tedesco, fino a 60 secondi. Il testo appare nel campo di inserimento.",
   "stop": "Termina la registrazione e converti in testo",
   "cancel": "Elimina la registrazione",
-  "recording": "Registrazione in corso. Esc per eliminare.",
   "elapsedLabel": "Durata della registrazione",
   "requesting": "Attivazione del microfono …",
   "transcribing": "Conversione in testo …",
@@ -25,5 +23,46 @@
     "unreadable": "Non è stato possibile leggere la registrazione. Riprovi, per favore.",
     "unauthorized": "La sessione è scaduta. Ricarichi la pagina.",
     "failed": "Il riconoscimento vocale non ha risposto. Riprovi, per favore."
+  },
+  "talk": {
+    "start": "Parlare",
+    "done": "Fatto",
+    "wait": "Un attimo",
+    "more": "Continua",
+    "moreLabel": "Continuare a parlare e aggiungere al testo",
+    "discard": "Scartare",
+    "document": "Documento",
+    "write": "Scrivere",
+    "writeLabel": "Scrivere invece di parlare",
+    "writeInstead": "Scrivere invece",
+    "speakLabel": "Parlare invece di scrivere",
+    "stopReply": "Fermare",
+    "stopReplyLabel": "Fermare la risposta",
+    "idle": "Tocchi «Parlare» e racconti.",
+    "idleKeys": "Clicchi su «Parlare» o prema la <key>barra spaziatrice</key>.",
+    "listening": "La sto ascoltando. Tocchi «Fatto» quando ha finito.",
+    "busy": "Il consulente sta rispondendo. Può già parlare.",
+    "reviewing": "Controlli il testo. Verrà inviato tra poco."
+  },
+  "review": {
+    "title": "Ecco cosa ho capito",
+    "edit": "Modificare",
+    "editLabel": "Correggere il testo",
+    "discard": "Scartare",
+    "send": "Inviare",
+    "sendingIn": "Invio tra {seconds} s",
+    "held": "Invio in pausa",
+    "editing": "Corregga il testo e tocchi «Inviare».",
+    "afterReply": "Verrà inviato appena la risposta è completa"
+  },
+  "invite": {
+    "title": "Racconti semplicemente.",
+    "body": "Tocchi «Parlare» qui sotto e racconti con parole sue. Il riconoscimento vocale capisce lo svizzero tedesco. Vede il testo prima che venga inviato.",
+    "examplesLabel": "Per esempio:",
+    "examples": {
+      "family": "«In primavera aspettiamo il nostro secondo figlio.»",
+      "work": "«L'anno prossimo mi metto in proprio.»",
+      "retirement": "«Ho 52 anni e mi chiedo se la mia rendita basterà.»"
+    }
   }
 }
