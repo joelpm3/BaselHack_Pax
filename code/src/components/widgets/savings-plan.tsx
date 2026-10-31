@@ -46,7 +46,7 @@ function SavingsPlanBody({
 }) {
   const t = useTranslations("savingsPlan");
   const chf = useChf();
-  const { conversationId } = useChatActions();
+  const { conversationId, busy } = useChatActions();
   const [result, setResult] = useState(initial);
   const [params, setParams] = useState(initial.params);
   const [failed, setFailed] = useState(false);
@@ -96,7 +96,8 @@ function SavingsPlanBody({
         <p className="text-paragraph-s text-fg-muted">{t("goal", { amount: chf(goal), years })}</p>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3">
+      {/* While the advisor answers, its message is not stored yet: a new plan could not be kept. */}
+      <fieldset disabled={busy} className="mt-4 flex flex-col gap-3">
         <Slider
           label={t("params.goal")}
           display={chf(params.goal)}
@@ -124,7 +125,7 @@ function SavingsPlanBody({
           value={params.startCapital}
           onChange={(v) => change("startCapital", v)}
         />
-      </div>
+      </fieldset>
 
       {failed ? (
         <p role="alert" className="mt-3 text-paragraph-xs text-error-dark">
