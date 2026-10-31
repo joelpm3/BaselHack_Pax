@@ -11,6 +11,7 @@ import { Link } from "@/i18n/navigation";
 import { PRODUCTS } from "@/lib/domain/products";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { getRuleSetForEditor } from "@/lib/firma/rules";
+import { getProposal, listProposals } from "@/lib/improvements/service";
 import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
@@ -40,15 +41,25 @@ async function RulesContent({
 }) {
   await requireAdvisor();
   await connection();
-  const requested = Number((await searchParams).version);
+  const query = await searchParams;
+  const requested = Number(query.version);
   const data = getRuleSetForEditor(Number.isInteger(requested) ? requested : null);
-  const [t, tAction, format] = await Promise.all([
+  const [t, tAction, tDraft, format] = await Promise.all([
     getTranslations("firma.rules"),
     getTranslations("firma.taxonomy.ruleAction"),
+    getTranslations("learning.ruleDraft"),
     getFormatter(),
   ]);
   if (!data) return <PageBody>{t("missing")}</PageBody>;
   const { versions, selected, draft } = data;
+  // Accepted improvement proposals wait here as unsaved drafts until someone saves a version.
+  const pendingDrafts = listProposals(["accepted"]).filter((p) => p.kind === "rule" && p.rule);
+  const proposalId = typeof query.proposal === "string" ? query.proposal : null;
+  const proposal = proposalId ? getProposal(proposalId) : undefined;
+  const proposalDraft =
+    selected.isActive && proposal?.status === "accepted" && proposal.rule
+      ? { id: proposal.id, title: proposal.title, rule: { ...proposal.rule, active: true } }
+      : null;
 
   return (
     <PageBody className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
@@ -75,8 +86,18 @@ async function RulesContent({
         </div>
         <p className="text-fg-muted">{t("languages")}</p>
 
+        {proposalDraft ? (
+          <p className="rounded-m bg-light-purple px-4 py-3 text-deep-purple">
+            {tDraft("banner", { title: proposalDraft.title })}
+          </p>
+        ) : null}
         {selected.isActive ? (
-          <RulesEditor key={selected.id} initial={draft} version={selected.version} />
+          <RulesEditor
+            key={`${selected.id}-${proposalDraft?.id ?? ""}`}
+            initial={draft}
+            version={selected.version}
+            proposal={proposalDraft ?? undefined}
+          />
         ) : (
           <div className="grid gap-4">
             <RestoreVersionButton ruleSetId={selected.id} version={selected.version} />
@@ -107,6 +128,29 @@ async function RulesContent({
       </div>
 
       <aside className="grid content-start gap-3">
+        {pendingDrafts.length > 0 ? (
+          <div className="mb-3 grid gap-2">
+            <h2 className="font-bold">{tDraft("pending")}</h2>
+            <p className="text-fg-muted">{tDraft("pendingHelp")}</p>
+            <ul className="grid gap-2">
+              {pendingDrafts.map((p) => (
+                <li key={p.id}>
+                  <Link
+                    href={hrefWith("/firma/regeln", { proposal: p.id })}
+                    aria-current={p.id === proposalDraft?.id ? "page" : undefined}
+                    className={cn(
+                      "grid gap-0.5 rounded-m border border-line px-3 py-2 hover:bg-gray-1",
+                      p.id === proposalDraft?.id && "border-pax-purple bg-light-purple",
+                    )}
+                  >
+                    <span className="font-medium">{p.title}</span>
+                    <span className="text-xs text-fg-muted">{tDraft("openDraft")}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         <h2 className="font-bold">{t("history")}</h2>
         <p className="text-fg-muted">{t("historyHelp")}</p>
         <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-gray-2">

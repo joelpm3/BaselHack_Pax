@@ -13,7 +13,9 @@
     "leads": "Leads",
     "handovers": "Übergaben",
     "rules": "Regeln",
-    "simulation": "Simulation"
+    "simulation": "Simulation",
+    "knowledge": "Produktwissen",
+    "improvements": "Verbesserungen"
   },
   "login": {
     "title": "Im Firmencockpit anmelden",

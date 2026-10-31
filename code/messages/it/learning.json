@@ -1,0 +1,152 @@
+{
+  "knowledge": {
+    "title": "Conoscenze prodotti",
+    "description": "Schede prodotto, CGA e informazioni tariffarie in cui il consulente digitale verifica i dettagli dei prodotti. Utilizza solo la versione attiva di ogni documento.",
+    "kinds": {
+      "product_sheet": "Scheda prodotto",
+      "terms": "CGA",
+      "tariff": "Informazione tariffaria",
+      "other": "Altro documento"
+    },
+    "status": {
+      "processing": "Lettura in corso",
+      "active": "Attivo",
+      "superseded": "Sostituito",
+      "failed": "Non leggibile",
+      "deleted": "Eliminato"
+    },
+    "productEmpty": "Nessun documento. Il consulente non risponde da solo a domande di dettaglio su questo prodotto.",
+    "documentCount": "{count, plural, =0 {Nessun documento} one {# documento} other {# documenti}}",
+    "advisorUses": "Il consulente usa v{version}",
+    "noActive": "Non ancora attivo",
+    "versionLine": "v{version} · {filename} · {pages} · {time}",
+    "pages": "{count, plural, one {# pagina} other {# pagine}}",
+    "sections": "{count, plural, one {# sezione letta} other {# sezioni lette}}",
+    "versionSquare": "Versione {version}: {status}",
+    "processingHint": "La v{version} è in lettura. Di solito ci vuole meno di un minuto.",
+    "failedHint": "Non è stato possibile leggere la v{version}: {error}",
+    "replace": "Nuova versione",
+    "replacing": "Caricamento …",
+    "delete": "Elimina",
+    "confirmDelete": "Eliminare «{title}» con tutte le versioni? Il consulente non lo utilizzerà più.",
+    "open": "Apri PDF",
+    "upload": {
+      "title": "Aggiungi documento",
+      "description": "Un nuovo documento diventa attivo non appena è stato letto. Per aggiornarne uno esistente, carica lì una nuova versione.",
+      "product": "Prodotto",
+      "kind": "Tipo",
+      "docTitle": "Titolo",
+      "titlePlaceholder": "p. es. Scheda prodotto 2026",
+      "file": "File PDF",
+      "fileHint": "PDF fino a 10 MB e 40 pagine, salvato in forma cifrata.",
+      "submit": "Carica",
+      "uploading": "Caricamento …",
+      "done": "Caricato. Il consulente userà il documento non appena sarà stato letto.",
+      "errors": {
+        "empty": "Il file è vuoto.",
+        "too_large": "Il file supera i 10 MB.",
+        "not_pdf": "Sono ammessi solo file PDF.",
+        "unreadable": "Il PDF non si può aprire.",
+        "too_many_pages": "Il PDF ha più di 40 pagine.",
+        "unknown_entry": "Questo documento non esiste più.",
+        "invalid_fields": "Indica prodotto, tipo e titolo.",
+        "generic": "Il caricamento non è riuscito. Riprova."
+      }
+    },
+    "test": {
+      "title": "Prova la ricerca",
+      "description": "Mostra quali passaggi trova il consulente per una domanda.",
+      "question": "Parole chiave",
+      "placeholder": "p. es. Wartefrist Erwerbsunfähigkeit",
+      "submit": "Cerca",
+      "none": "Nessun passaggio corrispondente. Il consulente non lo confermerebbe.",
+      "noDocuments": "Nessun documento attivo per questo prodotto.",
+      "page": "pagina {page}"
+    }
+  },
+  "improvements": {
+    "title": "Miglioramenti",
+    "description": "Pax legge le conversazioni, individua problemi ricorrenti e propone modifiche. Nulla si attiva automaticamente: decidi tu su ogni proposta.",
+    "runLabel": "Analizza le conversazioni",
+    "run": {
+      "24h": "Analizza le ultime 24 ore",
+      "7d": "Analizza gli ultimi 7 giorni"
+    },
+    "window": {
+      "24h": "24 ore",
+      "7d": "7 giorni"
+    },
+    "running": "Le conversazioni delle ultime {window} sono in analisi. Ci vuole circa un minuto.",
+    "failed": "L'analisi non è riuscita: {error}",
+    "lastRun": "Analisi delle ultime {window}, {time}",
+    "noRun": "Ancora nessuna analisi. Avviane una per ricevere proposte.",
+    "noConversations": "In questo periodo non ci sono state conversazioni.",
+    "stats": {
+      "conversations": "Conversazioni",
+      "simulated": "di cui {count} simulate",
+      "dropped": "interrotte prima della raccomandazione",
+      "nps": "NPS medio",
+      "npsCount": "{count, plural, =0 {nessuna valutazione} one {# valutazione} other {# valutazioni}}",
+      "flagged": "segnalate da consulenti",
+      "missedHandovers": "passaggi mancati"
+    },
+    "open": "Proposte aperte",
+    "openEmpty": "Nessuna proposta aperta. Avvia un'analisi quando ci sono nuove conversazioni.",
+    "accepted": "Accettate",
+    "applied": "Applicata",
+    "dismissed": "Scartate",
+    "category": {
+      "unanswered_question": "Domanda senza risposta",
+      "drop_off": "Abbandono",
+      "wrong_numbers": "Cifre errate o premature",
+      "confusing_reply": "Risposta poco chiara",
+      "missed_handover": "Passaggio mancato",
+      "other": "Altro"
+    },
+    "kind": {
+      "rule": "Regola",
+      "knowledge": "Conoscenze prodotti",
+      "prompt": "Conduzione del colloquio"
+    },
+    "problem": "Problema",
+    "proposal": "Proposta",
+    "ruleDraft": "Bozza di regola",
+    "evidence": "{count, plural, one {Visto in # conversazione} other {Visto in # conversazioni}}",
+    "untitled": "Conversazione senza titolo",
+    "acceptRule": "Riprendi come bozza di regola",
+    "accept": "Accetta",
+    "dismiss": "Scarta",
+    "reopen": "Riapri",
+    "reviewInEditor": "Verifica nell'editor delle regole",
+    "appliedIn": "Attiva nelle regole v{version}",
+    "acceptedRule": "In attesa nell'editor delle regole. Attiva solo quando salvi una nuova versione.",
+    "acceptedKnowledge": "Completa di conseguenza le conoscenze prodotti.",
+    "acceptedPrompt": "Segnalata al team che cura la conduzione del colloquio.",
+    "openKnowledge": "Apri conoscenze prodotti",
+    "flags": {
+      "title": "Conversazioni segnalate",
+      "description": "Segnalate come non riuscite dai consulenti. Confluiscono in ogni analisi finché non sono evase.",
+      "empty": "Nessuna segnalazione aperta.",
+      "by": "{name}, {time}"
+    }
+  },
+  "flag": {
+    "title": "Qualità della conversazione",
+    "description": "La conversazione non è andata bene? Segnalala con una breve nota. La nota confluisce nell'analisi sotto Miglioramenti.",
+    "label": "Che cosa non è andato bene?",
+    "placeholder": "p. es. Ha indicato premi prima che la situazione fosse chiara",
+    "submit": "Segnala come non riuscita",
+    "error": "Descrivi in poche parole che cosa non è andato bene.",
+    "resolve": "Evasa",
+    "resolved": "Evasa",
+    "by": "{name}, {time}",
+    "unknownAdvisor": "Consulente"
+  },
+  "ruleDraft": {
+    "banner": "Bozza di regola dai miglioramenti: «{title}». Verificala e adattala. Diventa attiva solo quando salvi la nuova versione.",
+    "proposed": "Proposta",
+    "pending": "Bozze dai miglioramenti",
+    "pendingHelp": "Proposte accettate che non figurano ancora in nessuna versione.",
+    "openDraft": "Apri nell'editor"
+  }
+}

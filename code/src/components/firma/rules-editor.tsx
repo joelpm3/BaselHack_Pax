@@ -4,6 +4,8 @@ import { ArrowDown, ArrowUp, Plus, RotateCcw, Trash } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useId, useState, useTransition } from "react";
 import { restoreRuleSet, type SaveRulesResult, saveRuleSet } from "@/app/[locale]/firma/actions";
+import { saveRuleSetWithProposal } from "@/app/[locale]/firma/learning-actions";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Select, Textarea } from "@/components/ui/field";
 import { PRODUCT_CODES, PRODUCTS, type ProductCode } from "@/lib/domain/products";
@@ -26,14 +28,27 @@ const strip = (rules: EditableRule[]): RuleDraft[] =>
  * Edits the active rule set. Nothing is changed in place: saving stores a new version and
  * activates it, so every past decision still points at the exact rules it used.
  */
-export function RulesEditor({ initial, version }: { initial: RuleSetDraft; version: number }) {
+const PROPOSAL_KEY = "proposal";
+
+export function RulesEditor({
+  initial,
+  version,
+  proposal,
+}: {
+  initial: RuleSetDraft;
+  version: number;
+  /** An accepted improvement proposal, added as an unsaved rule until the version is saved. */
+  proposal?: { id: string; rule: RuleDraft };
+}) {
   const t = useTranslations("firma.rules");
+  const tDraft = useTranslations("learning.ruleDraft");
   const tAction = useTranslations("firma.taxonomy.ruleAction");
   const baseId = useId();
   const [leadHints, setLeadHints] = useState(initial.leadHints);
-  const [rules, setRules] = useState<EditableRule[]>(() =>
-    initial.rules.map((r, i) => ({ ...r, key: `r${i}` })),
-  );
+  const [rules, setRules] = useState<EditableRule[]>(() => [
+    ...initial.rules.map((r, i) => ({ ...r, key: `r${i}` })),
+    ...(proposal ? [{ ...proposal.rule, key: PROPOSAL_KEY }] : []),
+  ]);
   const [counter, setCounter] = useState(initial.rules.length);
   const [result, setResult] = useState<SaveRulesResult | null>(null);
   const [pending, start] = useTransition();
@@ -69,10 +84,16 @@ export function RulesEditor({ initial, version }: { initial: RuleSetDraft; versi
               className={cn(
                 "grid gap-3 rounded-xl border border-line p-4 md:grid-cols-[2rem_minmax(0,1fr)_19rem]",
                 !rule.active && "bg-gray-1",
+                rule.key === PROPOSAL_KEY && "border-pax-purple",
               )}
             >
               <span className="text-lg font-bold text-fg-muted tabular-nums">{index + 1}</span>
-              <div className="grid gap-1">
+              <div className="grid content-start gap-1">
+                {rule.key === PROPOSAL_KEY ? (
+                  <Badge tone="info" className="justify-self-start">
+                    {tDraft("proposed")}
+                  </Badge>
+                ) : null}
                 <label htmlFor={`${id}-text`} className="sr-only">
                   {t("ruleText", { n: index + 1 })}
                 </label>
@@ -206,7 +227,12 @@ export function RulesEditor({ initial, version }: { initial: RuleSetDraft; versi
           disabled={!dirty || invalid || pending}
           onClick={() =>
             start(async () => {
-              setResult(await saveRuleSet(draft));
+              const withProposal = proposal && rules.some((r) => r.key === PROPOSAL_KEY);
+              setResult(
+                withProposal
+                  ? await saveRuleSetWithProposal(draft, proposal.id)
+                  : await saveRuleSet(draft),
+              );
             })
           }
         >

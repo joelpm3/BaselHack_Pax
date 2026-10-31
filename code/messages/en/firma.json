@@ -13,7 +13,9 @@
     "leads": "Leads",
     "handovers": "Handovers",
     "rules": "Rules",
-    "simulation": "Simulation"
+    "simulation": "Simulation",
+    "knowledge": "Product knowledge",
+    "improvements": "Improvements"
   },
   "login": {
     "title": "Sign in to the company cockpit",

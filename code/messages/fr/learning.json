@@ -1,0 +1,152 @@
+{
+  "knowledge": {
+    "title": "Connaissances produits",
+    "description": "Fiches produits, CGA et informations tarifaires dans lesquelles le conseiller numérique vérifie les détails des produits. Il n'utilise que la version active de chaque document.",
+    "kinds": {
+      "product_sheet": "Fiche produit",
+      "terms": "CGA",
+      "tariff": "Information tarifaire",
+      "other": "Autre document"
+    },
+    "status": {
+      "processing": "Lecture en cours",
+      "active": "Actif",
+      "superseded": "Remplacé",
+      "failed": "Illisible",
+      "deleted": "Supprimé"
+    },
+    "productEmpty": "Aucun document. Le conseiller ne répond pas lui-même aux questions de détail sur ce produit.",
+    "documentCount": "{count, plural, =0 {Aucun document} one {# document} other {# documents}}",
+    "advisorUses": "Le conseiller utilise v{version}",
+    "noActive": "Pas encore actif",
+    "versionLine": "v{version} · {filename} · {pages} · {time}",
+    "pages": "{count, plural, one {# page} other {# pages}}",
+    "sections": "{count, plural, one {# section lue} other {# sections lues}}",
+    "versionSquare": "Version {version} : {status}",
+    "processingHint": "La v{version} est en cours de lecture. Cela prend généralement moins d'une minute.",
+    "failedHint": "La v{version} n'a pas pu être lue : {error}",
+    "replace": "Nouvelle version",
+    "replacing": "Téléversement …",
+    "delete": "Supprimer",
+    "confirmDelete": "Supprimer « {title} » avec toutes ses versions ? Le conseiller ne l'utilisera plus.",
+    "open": "Ouvrir le PDF",
+    "upload": {
+      "title": "Ajouter un document",
+      "description": "Un nouveau document devient actif dès qu'il a été lu. Pour mettre à jour un document existant, téléversez-y une nouvelle version.",
+      "product": "Produit",
+      "kind": "Type",
+      "docTitle": "Titre",
+      "titlePlaceholder": "p. ex. Fiche produit 2026",
+      "file": "Fichier PDF",
+      "fileHint": "PDF jusqu'à 10 Mo et 40 pages, enregistré de manière chiffrée.",
+      "submit": "Téléverser",
+      "uploading": "Téléversement …",
+      "done": "Téléversé. Le conseiller utilisera le document dès qu'il aura été lu.",
+      "errors": {
+        "empty": "Le fichier est vide.",
+        "too_large": "Le fichier dépasse 10 Mo.",
+        "not_pdf": "Seuls les fichiers PDF sont acceptés.",
+        "unreadable": "Le PDF ne peut pas être ouvert.",
+        "too_many_pages": "Le PDF compte plus de 40 pages.",
+        "unknown_entry": "Ce document n'existe plus.",
+        "invalid_fields": "Veuillez indiquer le produit, le type et le titre.",
+        "generic": "Le téléversement a échoué. Veuillez réessayer."
+      }
+    },
+    "test": {
+      "title": "Tester la recherche",
+      "description": "Montre les passages que le conseiller trouve pour une question.",
+      "question": "Mots-clés",
+      "placeholder": "p. ex. Wartefrist Erwerbsunfähigkeit",
+      "submit": "Rechercher",
+      "none": "Aucun passage correspondant. Le conseiller ne le confirmerait pas.",
+      "noDocuments": "Aucun document actif pour ce produit.",
+      "page": "page {page}"
+    }
+  },
+  "improvements": {
+    "title": "Améliorations",
+    "description": "Pax lit les conversations, détecte les problèmes récurrents et propose des modifications. Rien ne s'active automatiquement : vous décidez de chaque proposition.",
+    "runLabel": "Analyser les conversations",
+    "run": {
+      "24h": "Analyser les dernières 24 heures",
+      "7d": "Analyser les 7 derniers jours"
+    },
+    "window": {
+      "24h": "24 heures",
+      "7d": "7 jours"
+    },
+    "running": "Les conversations des derniers {window} sont en cours d'analyse. Cela prend environ une minute.",
+    "failed": "L'analyse a échoué : {error}",
+    "lastRun": "Analyse des derniers {window}, {time}",
+    "noRun": "Aucune analyse pour l'instant. Lancez-en une pour obtenir des propositions.",
+    "noConversations": "Aucune conversation pendant cette période.",
+    "stats": {
+      "conversations": "Conversations",
+      "simulated": "dont {count} simulées",
+      "dropped": "interrompues avant la recommandation",
+      "nps": "NPS moyen",
+      "npsCount": "{count, plural, =0 {aucune évaluation} one {# évaluation} other {# évaluations}}",
+      "flagged": "signalées par des conseillers",
+      "missedHandovers": "transferts manqués"
+    },
+    "open": "Propositions ouvertes",
+    "openEmpty": "Aucune proposition ouverte. Lancez une analyse lorsque de nouvelles conversations ont eu lieu.",
+    "accepted": "Acceptées",
+    "applied": "Appliquée",
+    "dismissed": "Rejetées",
+    "category": {
+      "unanswered_question": "Question sans réponse",
+      "drop_off": "Abandon",
+      "wrong_numbers": "Chiffres faux ou prématurés",
+      "confusing_reply": "Réponse peu claire",
+      "missed_handover": "Transfert manqué",
+      "other": "Autre"
+    },
+    "kind": {
+      "rule": "Règle",
+      "knowledge": "Connaissances produits",
+      "prompt": "Conduite de l'entretien"
+    },
+    "problem": "Problème",
+    "proposal": "Proposition",
+    "ruleDraft": "Projet de règle",
+    "evidence": "{count, plural, one {Constaté dans # conversation} other {Constaté dans # conversations}}",
+    "untitled": "Conversation sans titre",
+    "acceptRule": "Reprendre comme projet de règle",
+    "accept": "Accepter",
+    "dismiss": "Rejeter",
+    "reopen": "Rouvrir",
+    "reviewInEditor": "Vérifier dans l'éditeur de règles",
+    "appliedIn": "Active dans les règles v{version}",
+    "acceptedRule": "En attente dans l'éditeur de règles. Active seulement lorsque vous enregistrez une nouvelle version.",
+    "acceptedKnowledge": "Complétez les connaissances produits en conséquence.",
+    "acceptedPrompt": "Transmise à l'équipe qui gère la conduite de l'entretien.",
+    "openKnowledge": "Ouvrir les connaissances produits",
+    "flags": {
+      "title": "Conversations signalées",
+      "description": "Signalées comme insatisfaisantes par des conseillers. Prises en compte dans chaque analyse jusqu'à ce qu'elles soient traitées.",
+      "empty": "Aucun signalement ouvert.",
+      "by": "{name}, {time}"
+    }
+  },
+  "flag": {
+    "title": "Qualité de la conversation",
+    "description": "La conversation ne s'est pas bien passée ? Signalez-la avec une courte note. La note est prise en compte dans l'analyse sous Améliorations.",
+    "label": "Qu'est-ce qui n'a pas fonctionné ?",
+    "placeholder": "p. ex. A cité des primes avant que la situation soit claire",
+    "submit": "Signaler comme insatisfaisante",
+    "error": "Décrivez en quelques mots ce qui n'a pas fonctionné.",
+    "resolve": "Traité",
+    "resolved": "Traité",
+    "by": "{name}, {time}",
+    "unknownAdvisor": "Conseiller"
+  },
+  "ruleDraft": {
+    "banner": "Projet de règle issu des améliorations : « {title} ». Vérifiez-le et adaptez-le. Il ne devient actif que lorsque vous enregistrez la nouvelle version.",
+    "proposed": "Proposée",
+    "pending": "Projets issus des améliorations",
+    "pendingHelp": "Propositions acceptées qui ne figurent encore dans aucune version.",
+    "openDraft": "Ouvrir dans l'éditeur"
+  }
+}

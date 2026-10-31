@@ -13,7 +13,9 @@
     "leads": "Lead",
     "handovers": "Passaggi",
     "rules": "Regole",
-    "simulation": "Simulazione"
+    "simulation": "Simulazione",
+    "knowledge": "Conoscenze prodotti",
+    "improvements": "Miglioramenti"
   },
   "login": {
     "title": "Accedi al cockpit aziendale",

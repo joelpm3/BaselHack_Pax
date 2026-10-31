@@ -1,0 +1,152 @@
+{
+  "knowledge": {
+    "title": "Product knowledge",
+    "description": "Product sheets, general terms and tariff information the digital advisor looks up product details in. It only uses the active version of each document.",
+    "kinds": {
+      "product_sheet": "Product sheet",
+      "terms": "General terms",
+      "tariff": "Tariff information",
+      "other": "Other document"
+    },
+    "status": {
+      "processing": "Reading",
+      "active": "Active",
+      "superseded": "Replaced",
+      "failed": "Unreadable",
+      "deleted": "Deleted"
+    },
+    "productEmpty": "No documents. The advisor does not answer detailed questions about this product itself.",
+    "documentCount": "{count, plural, =0 {No documents} one {# document} other {# documents}}",
+    "advisorUses": "Advisor uses v{version}",
+    "noActive": "Not active yet",
+    "versionLine": "v{version} · {filename} · {pages} · {time}",
+    "pages": "{count, plural, one {# page} other {# pages}}",
+    "sections": "{count, plural, one {# section read} other {# sections read}}",
+    "versionSquare": "Version {version}: {status}",
+    "processingHint": "v{version} is being read. This usually takes less than a minute.",
+    "failedHint": "v{version} could not be read: {error}",
+    "replace": "New version",
+    "replacing": "Uploading …",
+    "delete": "Delete",
+    "confirmDelete": "Delete “{title}” with all its versions? The advisor will no longer use it.",
+    "open": "Open PDF",
+    "upload": {
+      "title": "Add a document",
+      "description": "A new document becomes active as soon as it has been read. To update an existing one, upload a new version there.",
+      "product": "Product",
+      "kind": "Type",
+      "docTitle": "Title",
+      "titlePlaceholder": "e.g. Product sheet 2026",
+      "file": "PDF file",
+      "fileHint": "PDF up to 10 MB and 40 pages, stored encrypted.",
+      "submit": "Upload",
+      "uploading": "Uploading …",
+      "done": "Uploaded. The advisor uses the document as soon as it has been read.",
+      "errors": {
+        "empty": "The file is empty.",
+        "too_large": "The file is larger than 10 MB.",
+        "not_pdf": "Only PDF files are possible.",
+        "unreadable": "The PDF cannot be opened.",
+        "too_many_pages": "The PDF has more than 40 pages.",
+        "unknown_entry": "This document no longer exists.",
+        "invalid_fields": "Please enter product, type and title.",
+        "generic": "The upload did not work. Please try again."
+      }
+    },
+    "test": {
+      "title": "Test the lookup",
+      "description": "Shows which passages the advisor finds for a question.",
+      "question": "Keywords",
+      "placeholder": "e.g. Wartefrist Erwerbsunfähigkeit",
+      "submit": "Search",
+      "none": "No matching passage. The advisor would not confirm this.",
+      "noDocuments": "There are no active documents for this product.",
+      "page": "page {page}"
+    }
+  },
+  "improvements": {
+    "title": "Improvements",
+    "description": "Pax reads the conversations, finds recurring problems and proposes changes. Nothing becomes active by itself: you decide on every proposal.",
+    "runLabel": "Analyse conversations",
+    "run": {
+      "24h": "Analyse the last 24 hours",
+      "7d": "Analyse the last 7 days"
+    },
+    "window": {
+      "24h": "24 hours",
+      "7d": "7 days"
+    },
+    "running": "Analysing the conversations of the last {window}. This takes about a minute.",
+    "failed": "The analysis failed: {error}",
+    "lastRun": "Analysis of the last {window}, {time}",
+    "noRun": "No analysis yet. Start one to get proposals.",
+    "noConversations": "There were no conversations in this period.",
+    "stats": {
+      "conversations": "Conversations",
+      "simulated": "{count} of them simulated",
+      "dropped": "stopped before the recommendation",
+      "nps": "Average NPS",
+      "npsCount": "{count, plural, =0 {no ratings} one {# rating} other {# ratings}}",
+      "flagged": "flagged by advisors",
+      "missedHandovers": "missed handovers"
+    },
+    "open": "Open proposals",
+    "openEmpty": "No open proposals. Start an analysis once new conversations have come in.",
+    "accepted": "Accepted",
+    "applied": "Applied",
+    "dismissed": "Dismissed",
+    "category": {
+      "unanswered_question": "Unanswered question",
+      "drop_off": "Drop-off",
+      "wrong_numbers": "Wrong or premature figures",
+      "confusing_reply": "Unclear reply",
+      "missed_handover": "Missed handover",
+      "other": "Other"
+    },
+    "kind": {
+      "rule": "Rule",
+      "knowledge": "Product knowledge",
+      "prompt": "Conversation design"
+    },
+    "problem": "Problem",
+    "proposal": "Proposal",
+    "ruleDraft": "Rule draft",
+    "evidence": "{count, plural, one {Seen in # conversation} other {Seen in # conversations}}",
+    "untitled": "Untitled conversation",
+    "acceptRule": "Use as rule draft",
+    "accept": "Accept",
+    "dismiss": "Dismiss",
+    "reopen": "Reopen",
+    "reviewInEditor": "Review in the rule editor",
+    "appliedIn": "Active in rules v{version}",
+    "acceptedRule": "Waiting in the rule editor. Active only once you save a new version.",
+    "acceptedKnowledge": "Add the missing facts to the product knowledge.",
+    "acceptedPrompt": "Noted for the team that maintains the conversation design.",
+    "openKnowledge": "Open product knowledge",
+    "flags": {
+      "title": "Flagged conversations",
+      "description": "Flagged as not good by advisors. Included in every analysis until resolved.",
+      "empty": "No open flags.",
+      "by": "{name}, {time}"
+    }
+  },
+  "flag": {
+    "title": "Conversation quality",
+    "description": "Did the conversation not go well? Flag it with a short note. The note feeds into the analysis under Improvements.",
+    "label": "What did not go well?",
+    "placeholder": "e.g. Quoted premiums before the situation was clear",
+    "submit": "Flag as not good",
+    "error": "Describe in a few words what did not go well.",
+    "resolve": "Resolve",
+    "resolved": "Resolved",
+    "by": "{name}, {time}",
+    "unknownAdvisor": "Advisor"
+  },
+  "ruleDraft": {
+    "banner": "Rule draft from Improvements: “{title}”. Review and adjust it. It only becomes active once you save the new version.",
+    "proposed": "Proposed",
+    "pending": "Drafts from Improvements",
+    "pendingHelp": "Accepted proposals that are not in any version yet.",
+    "openDraft": "Open in the editor"
+  }
+}

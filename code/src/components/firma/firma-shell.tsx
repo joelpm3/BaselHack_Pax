@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BookOpen,
   Bot,
   Handshake,
   LayoutDashboard,
@@ -9,6 +10,7 @@ import {
   MessagesSquare,
   Radio,
   ScrollText,
+  Sparkles,
   Target,
   X,
 } from "lucide-react";
@@ -28,6 +30,8 @@ const NAV = [
   { href: "/firma/uebergaben", key: "handovers", icon: Handshake },
   { href: "/firma/regeln", key: "rules", icon: ScrollText },
   { href: "/firma/simulation", key: "simulation", icon: Bot },
+  { href: "/firma/wissen", key: "knowledge", icon: BookOpen },
+  { href: "/firma/verbesserungen", key: "improvements", icon: Sparkles },
 ] as const;
 
 function isActive(pathname: string | null, href: string): boolean {
