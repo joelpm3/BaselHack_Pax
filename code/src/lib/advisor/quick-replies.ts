@@ -28,16 +28,17 @@ interface PartLike {
  * The quick replies the chat shows under an advisor message: the options of the LAST
  * suggestReplies call. The model sometimes suggests replies early and corrects them after
  * writing its question (an early "Ich bin 1990 geboren" under a question about the partner), so
- * the last call wins. Quick replies only accompany a written message: none without text.
+ * the last call wins. Quick replies answer a question: none unless the message's final text
+ * asks one ("Wählen Sie Ihren Ort in der Karte." gets none).
  */
 export function quickRepliesOf(parts: readonly PartLike[]): string[] {
-  let hasText = false;
+  let lastText = "";
   let options: string[] = [];
   for (const part of parts) {
-    if (part.type === "text" && part.text?.trim()) hasText = true;
+    if (part.type === "text" && part.text?.trim()) lastText = part.text;
     if (part.type !== "tool-suggestReplies" || part.state !== "output-available") continue;
     const output = (part.output as { options?: unknown } | undefined)?.options;
     if (Array.isArray(output)) options = output.filter((o): o is string => typeof o === "string");
   }
-  return hasText ? safeQuickReplies(options).slice(0, 4) : [];
+  return lastText.includes("?") ? safeQuickReplies(options).slice(0, 4) : [];
 }

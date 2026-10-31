@@ -37,7 +37,7 @@ import {
   saveUserMessage,
 } from "./conversations";
 import { buildInstructions } from "./prompt";
-import { replyNudgeFor, withReplyNudge } from "./reply-nudge";
+import { readyToWait, replyNudgeFor, withReplyNudge } from "./reply-nudge";
 import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
 import type { ToolContext } from "./tools/context";
@@ -66,11 +66,8 @@ export interface TurnResult {
   error: string | null;
 }
 
-const waitsForCustomer: StopCondition<ToolSet> = ({ steps }) => {
-  const last = steps.at(-1);
-  if (!last?.toolCalls.some((call) => WAITS_FOR_CUSTOMER.includes(call.toolName))) return false;
-  return steps.some((step) => step.text.trim().length > 0);
-};
+const waitsForCustomer: StopCondition<ToolSet> = ({ steps }) =>
+  readyToWait(steps, WAITS_FOR_CUSTOMER);
 
 /**
  * Prepares the stored transcript for the model: drops the greeting (it is in the instructions)
