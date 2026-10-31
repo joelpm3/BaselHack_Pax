@@ -42,5 +42,5 @@ Locales: `de`, `fr`, `it`, `en`.
 | `pnpm check` | Typecheck, Biome, Vitest |
 | `pnpm db:reset` / `pnpm db:seed` | Fresh demo database / seed if empty |
 | `pnpm db:generate --name <x>` | New Drizzle migration after a schema change |
-| `pnpm exec tsx scripts/sample-docs.ts` | Regenerate the fictional sample PDFs in `public/samples/` |
+| `pnpm exec tsx scripts/sample-docs.ts` | Regenerate the fictional demo PDFs in `public/samples/` (May Müller: Lohnausweis, Vorsorgeausweis, Police; Taylor Johnson: Vorsorgeausweis) |
 | `node scripts/pwa-icons.mjs` | Regenerate PWA icons and favicon from the Pax mark |
