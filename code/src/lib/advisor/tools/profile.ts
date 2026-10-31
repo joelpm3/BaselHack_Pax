@@ -112,7 +112,7 @@ export const updateProfileInput = z.object({
     .max(6)
     .optional()
     .describe(
-      "Death or disability policies the customer says they or their partner already have and that are not under 'Policies on file'",
+      "Death or disability policies the customer says they or their partner already have: new ones, or amounts for one stored from the chat earlier (same insurer, type and person updates it)",
     ),
   monthlySpending: z.number().min(0).optional().describe("Rough household spending, CHF PER MONTH"),
   contact: z
