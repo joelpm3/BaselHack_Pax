@@ -65,13 +65,17 @@ describe("quickRepliesOf", () => {
     ]);
   });
 
-  it("drops suggestions made before the question was written", () => {
+  it("lets a later call replace early suggestions", () => {
     const early = replies(["Ich bin 1990 geboren", "Ich bin 1993 geboren"]);
     const question = text("Wann ist Ihre Partnerin geboren?");
-    expect(quickRepliesOf([early, question])).toEqual([]);
     expect(
       quickRepliesOf([early, question, replies(["Sie ist 1990 geboren", "Sie ist 1993 geboren"])]),
     ).toEqual(["Sie ist 1990 geboren", "Sie ist 1993 geboren"]);
+    expect(quickRepliesOf([replies(["Ja", "Nein"]), text("Rauchen Sie?")])).toEqual(["Ja", "Nein"]);
+  });
+
+  it("shows no quick replies without a message", () => {
+    expect(quickRepliesOf([replies(["Ja", "Nein"])])).toEqual([]);
   });
 
   it("ignores pending calls and filters fake UI actions", () => {

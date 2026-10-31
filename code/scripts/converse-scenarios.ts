@@ -15,6 +15,8 @@ export interface Scenario {
   locale: Locale;
   /** Seeded demo client to copy (profile + policies); otherwise a new anonymous customer. */
   demoClient?: "Jane" | "Lily" | "Taylor";
+  /** Profile of an anonymous returning visitor (facts from an earlier conversation). */
+  knownProfile?: Record<string, unknown>;
   /** Facts and behaviour of the simulated customer (English is fine; it writes in `locale`). */
   persona: string;
   script: Beat[];
@@ -57,6 +59,57 @@ export const SCENARIOS: Scenario[] = [
       },
       {
         intent: "Answer the advisor's question in a long voice-style run-on message.",
+        voice: true,
+      },
+      { intent: "Answer the advisor's question.", voice: true },
+    ],
+    maxTurns: 8,
+  },
+  {
+    id: "returning-voice",
+    title: "Live bug 31.10.: returning visitor dictates age (contradicting), wife and 3a, du",
+    locale: "de",
+    knownProfile: {
+      person: {
+        birthYear: 1996,
+        sex: "male",
+        maritalStatus: "married",
+        employment: "employed",
+        grossIncome: 80000,
+      },
+      partner: {
+        birthYear: 1996,
+        sex: "female",
+        maritalStatus: "married",
+        employment: "employed",
+        grossIncome: 75000,
+      },
+      residence: { zip: "8165", city: "Oberweningen", canton: "ZH", taxLocationId: 816500003 },
+    },
+    persona: `Man, born 1995 (31), married, wife born 1996 works full time CHF 75'000, he earns CHF 80'000, lives in 8165. Pays CHF 3'000 per year into 3a. No private life insurance. Savings CHF 30'000. ${VOICE} Uses du.`,
+    script: [
+      {
+        say: "Also ich bin 31, ich habe eine Frau, ich zahle maximal 3000 Franken in die Säule 3a ein. Was brauchst du sonst noch für Informationen?",
+        voice: true,
+      },
+      { intent: "Answer the advisor's question.", voice: true },
+    ],
+    maxTurns: 6,
+  },
+  {
+    id: "swiss-runon",
+    title: "Voice run-on in Swiss German flavour, many facts at once, then impatient for numbers",
+    locale: "de",
+    persona: `Woman, born 1983, works 70% as a pharmacy assistant, CHF 58'000, lives with her boyfriend (not married) in 5000 Aarau, boyfriend born 1980, self-employed electrician, CHF 95'000, no pension fund. One child together born 2017. She has a 3a account with CHF 22'000. Her boyfriend has a term life insurance at Helvetia of CHF 300'000 for her benefit. ${VOICE}`,
+    script: [
+      {
+        say: "grüezi also ich bin d sandra ich bin 43 schaffe 70 prozent in einer apotheke und verdiene so öppe 58000 im jahr mein freund ist selbständig elektriker und hat keine pensionskasse wir sind nicht verheiratet und haben eine tochter die ist 2017 geboren und wir wohnen in aarau ich mache mir halt sorgen was passiert wenn ihm was passiert",
+        voice: true,
+      },
+      { intent: "Answer the advisor's question.", voice: true },
+      {
+        intent:
+          "Say impatiently that you just want to see the numbers now, without more questions.",
         voice: true,
       },
       { intent: "Answer the advisor's question.", voice: true },

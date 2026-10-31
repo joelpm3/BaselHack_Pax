@@ -76,7 +76,7 @@ function createCustomer(scenario: Scenario): string {
       })
       .returning()
       .get();
-    let profile = lifeSituationSchema.parse({});
+    let profile = lifeSituationSchema.parse(scenario.knownProfile ?? {});
     if (demo) {
       const row = tx
         .select()
@@ -260,7 +260,7 @@ async function runScenario(scenario: Scenario): Promise<{ markdown: string; flag
       break;
     }
     const { texts, tools } = toolsOf(reply);
-    // What the chat shows (replies sent before the text are hidden).
+    // What the chat shows.
     quickReplies = quickRepliesOf(reply.parts as Array<{ type: string }>);
     analysisShown ||= tools.some((t) =>
       ["showRiskAnalysis", "showPensionOverview"].includes(t.name),

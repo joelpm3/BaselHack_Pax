@@ -25,19 +25,19 @@ interface PartLike {
 }
 
 /**
- * The quick replies the chat shows under an advisor message: the last suggestReplies call that
- * comes after the message's text. Replies sent before any text were chosen before the question
- * was written and often answer a different one, so they are not shown.
+ * The quick replies the chat shows under an advisor message: the options of the LAST
+ * suggestReplies call. The model sometimes suggests replies early and corrects them after
+ * writing its question (an early "Ich bin 1990 geboren" under a question about the partner), so
+ * the last call wins. Quick replies only accompany a written message: none without text.
  */
 export function quickRepliesOf(parts: readonly PartLike[]): string[] {
-  let seenText = false;
+  let hasText = false;
   let options: string[] = [];
   for (const part of parts) {
-    if (part.type === "text" && part.text?.trim()) seenText = true;
+    if (part.type === "text" && part.text?.trim()) hasText = true;
     if (part.type !== "tool-suggestReplies" || part.state !== "output-available") continue;
     const output = (part.output as { options?: unknown } | undefined)?.options;
-    if (!seenText || !Array.isArray(output)) continue;
-    options = output.filter((o): o is string => typeof o === "string");
+    if (Array.isArray(output)) options = output.filter((o): o is string => typeof o === "string");
   }
-  return safeQuickReplies(options).slice(0, 4);
+  return hasText ? safeQuickReplies(options).slice(0, 4) : [];
 }

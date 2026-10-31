@@ -52,7 +52,9 @@ export function flagsFor(turn: TurnView): string[] {
   )
     flags.push("BARE_TITLE: Herr/Frau without a surname");
   if (/^(Danke|Merci|Grazie|Thank)/i.test(text)) flags.push("THANKS_OPENING (watch repetition)");
-  if (turn.customerUsesInformal && /\b(Sie|Ihnen|Ihr|Ihre|vous|Lei)\b/.test(text))
+  // Formal pronouns mid-sentence (a sentence-initial "Sie" may mean "she/it").
+  const formal = /(?<![.!?:]\s|^|\n)\bSie\b|\b(Ihnen|Ihrer?|Ihre[mns]?|vous|Lei)\b/;
+  if (turn.customerUsesInformal && formal.test(text))
     flags.push("FORMALITY: customer uses du/tu, advisor uses Sie/vous/Lei");
   const lastText = turn.texts.at(-1)?.trim() ?? "";
   if (lastText.endsWith("?") && turn.quickReplies.length === 0)

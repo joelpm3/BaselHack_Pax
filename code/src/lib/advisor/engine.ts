@@ -37,6 +37,7 @@ import {
   saveUserMessage,
 } from "./conversations";
 import { buildInstructions } from "./prompt";
+import { needsReplyNudge, withReplyNudge } from "./reply-nudge";
 import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
 import type { ToolContext } from "./tools/context";
@@ -70,23 +71,6 @@ const waitsForCustomer: StopCondition<ToolSet> = ({ steps }) => {
   if (!last?.toolCalls.some((call) => WAITS_FOR_CUSTOMER.includes(call.toolName))) return false;
   return steps.some((step) => step.text.trim().length > 0);
 };
-
-/**
- * The model sometimes calls a waiting tool (quick replies, upload card) before it has written
- * its reply, and then ends the turn without any text, or asks a different question than the
- * quick replies answer. The chat only shows quick replies that follow the text, so the next
- * step is told to write its message and call suggestReplies again.
- */
-const TEXT_FIRST_NOTE = `# Your reply text is missing
-You called a widget tool before writing your message. Write your message to the customer now (one question). Quick replies sent before your text are not shown: if quick replies fit, call suggestReplies again after the text, answering exactly the question you ask, in the customer's voice.`;
-
-type StepLike = { text: string; toolCalls: ReadonlyArray<{ toolName: string }> };
-
-export function calledWidgetBeforeText(steps: ReadonlyArray<StepLike>): boolean {
-  const last = steps.at(-1);
-  if (!last?.toolCalls.some((call) => WAITS_FOR_CUSTOMER.includes(call.toolName))) return false;
-  return !steps.some((step) => step.text.trim().length > 0);
-}
 
 /**
  * Prepares the stored transcript for the model: drops the greeting (it is in the instructions)
@@ -273,11 +257,13 @@ export async function streamAdvisorTurn(
     }),
     tools,
     stopWhen: [isStepCount(MAX_STEPS), waitsForCustomer],
-    prepareStep: ({ steps }) =>
-      calledWidgetBeforeText(steps)
-        ? { instructions: [...instructions, { role: "system", content: TEXT_FIRST_NOTE }] }
+    prepareStep: ({ steps, messages }) =>
+      needsReplyNudge(steps, WAITS_FOR_CUSTOMER)
+        ? { messages: withReplyNudge(messages) }
         : undefined,
     temperature: 0.4,
+    // A failed step ends the turn without text and without a stream error: log it.
+    onStepError: ({ error }) => console.error(`[advisor] step failed in ${conversation.id}`, error),
   });
 
   let usage: { inputTokens?: number; outputTokens?: number } = {};
