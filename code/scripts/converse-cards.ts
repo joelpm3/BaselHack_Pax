@@ -43,6 +43,7 @@ interface Output {
   applicationId?: string | null;
   productName?: string;
   offer?: { productName?: string } | null;
+  signed?: unknown;
 }
 
 /** The card the advisor just showed that the customer acts in next, if any. */
@@ -51,7 +52,7 @@ export function pendingCard(
 ): { kind: "suitability" | "offer"; output: Output } | null {
   for (const tool of [...tools].reverse()) {
     const output = (tool.output ?? {}) as Output;
-    if (output.status !== "ok" || !output.applicationId) continue;
+    if (output.status !== "ok" || !output.applicationId || output.signed) continue;
     if (tool.name === "startSuitabilityCheck") return { kind: "suitability", output };
     if (tool.name === "prepareOffer") return { kind: "offer", output };
   }
@@ -66,7 +67,7 @@ export async function actInCard(
   who: CardCustomer,
 ): Promise<{ message: string; note: string } | null> {
   const app = ownedApplication(conversationId, card.output.applicationId as string);
-  if (!app) return null;
+  if (!app || app.status !== "draft") return null;
   if (card.kind === "suitability") {
     const record = saveSuitability(customerId, app, who.suitability, "");
     if (!record) return null;

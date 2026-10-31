@@ -35,7 +35,7 @@ const INSURANCE_WORDS =
 
 /** Text that compares kinds of solutions (bank vs insurance 3a, guarantee vs return, flexibility). */
 const COMPARISON =
-  /(bank|konto|compte|conto)[^.?!]{0,160}(versicherung|police|assurance|assicurazion|insurance)|(versicherung|police|assurance|assicurazion|insurance)[^.?!]{0,160}(bank|konto|compte|conto)|garant\w*[^.?!]{0,160}(rendite|schwank|rendement|rendimento|return)|(flexibel|aussetzen|flexible|pause)[^.?!]{0,160}(verpflicht|gebunden|fest|engag|vincol|commit)|alternativ|selbst (zu )?tragen|vorerst nichts|nichts (zu )?tun|reine Risiko/i;
+  /(bank|konto|compte|conto)[^.?!]{0,160}(versicherung|police|assurance|assicurazion|insurance)|(versicherung|police|assurance|assicurazion|insurance)[^.?!]{0,160}(bank|konto|compte|conto)|garant\w*[^.?!]{0,160}(rendite|schwank|rendement|rendimento|return)|(flexibel|aussetzen|flexible|pause)[^.?!]{0,160}(verpflicht|gebunden|fest|engag|vincol|commit)|alternative\w*\s+(ist|wäre|sind|wären|is|are|would)\b|selbst (zu )?tragen|vorerst nichts|nichts (zu )?tun|reine Risiko/i;
 
 export function explainsOptions(text: string): boolean {
   return COMPARISON.test(text);
