@@ -1,0 +1,28 @@
+{
+  "title": "Impôt sur le retrait en capital",
+  "pending": "Je calcule l'impôt sur le retrait en capital",
+  "lead": "Retrait de {amount} {sources} à {age} ans",
+  "leadStaggered": "{amount} retirés de manière échelonnée, sur {count} années fiscales",
+  "place": ", domicile {place}",
+  "tax": "{amount} d'impôts",
+  "net": "Il vous reste {amount} après impôts",
+  "rate": "Taux d'imposition",
+  "authorities": {
+    "federal": "Confédération",
+    "state": "Canton",
+    "community": "Commune",
+    "church": "Église"
+  },
+  "sources": {
+    "pension_fund": "de la caisse de pension",
+    "pillar3a": "du pilier 3a"
+  },
+  "and": " et ",
+  "atAge": "À {age} ans ({year})",
+  "yearPayout": "{amount} {sources}",
+  "comparison": {
+    "saving": "Tout retirer en une fois à {age} ans coûte {tax} d'impôts. L'échelonnement vous fait économiser {saving}.",
+    "none": "Tout retirer en une fois à {age} ans coûte {tax} d'impôts. L'échelonnement n'apporte ici aucune économie."
+  },
+  "assumptions": "{joint, select, yes {Imposition commune} other {Imposition individuelle}}, {children, plural, =0 {sans enfant} one {avec # enfant} other {avec # enfants}}, sans confession, selon le barème fiscal actuel. Les retraits d'une même année sont additionnés. Calcul de Logismata, sans engagement, pas un conseil fiscal."
+}

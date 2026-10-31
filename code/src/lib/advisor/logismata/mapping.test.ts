@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { type LifeSituation, lifeSituationSchema } from "@/lib/domain/profile";
 import {
   affectsCalculations,
+  buildCapitalTaxRequest,
   buildPurchaseP2Request,
   buildRetirementRequest,
   buildRiskRequest,
@@ -127,6 +128,16 @@ describe("missingFor", () => {
       "partner.grossIncome",
     ]);
     expect(missingFor(p, "tax")).toEqual(["partner.grossIncome", "residence.zip"]);
+    expect(missingFor(p, "capitalTax")).toEqual(["residence.zip"]);
+  });
+
+  it("does not need any income for the tax on a lump-sum payout", () => {
+    const retiree = profile({
+      person: { birthYear: 1961, sex: "male", maritalStatus: "single" },
+      residence: { zip: "4053" },
+    });
+    expect(missingFor(retiree, "tax")).toEqual(["person.grossIncome"]);
+    expect(missingFor(retiree, "capitalTax")).toEqual([]);
   });
 
   it("lists what the Vorsorgebild still needs, without the place of residence", () => {
@@ -296,6 +307,24 @@ describe("requests", () => {
       TaxLocationID: 800400000,
       Confession1: 4,
     });
+    expect(buildCapitalTaxRequest(single, YEAR, { amount: 80000.4, age: 65 })).toEqual({
+      CapitalPayment: 80000,
+      PaymentAge: 65,
+      TaxLocationID: 800400000,
+      Relationship: 1,
+      Confession1: 4,
+      Confession2: 4,
+      NumberOfChildren: 0,
+      Sex: 1,
+      BirthYear: 1995,
+    });
+    // Children count as dependants in the payout year, not today.
+    expect(
+      buildCapitalTaxRequest(youngFamily, YEAR, { amount: 50000, age: 60 }).NumberOfChildren,
+    ).toBe(0);
+    expect(
+      buildCapitalTaxRequest(youngFamily, YEAR, { amount: 50000, age: 40 }).NumberOfChildren,
+    ).toBe(1);
     expect(buildPurchaseP2Request(single, YEAR, { amount: 20000, years: 0 })).toMatchObject({
       Investment: 20000,
       PaymentDuration: 1,

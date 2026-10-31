@@ -1,0 +1,28 @@
+{
+  "title": "Tax on a lump-sum withdrawal",
+  "pending": "Calculating the tax on the lump sum",
+  "lead": "Withdrawing {amount} from {sources} at {age}",
+  "leadStaggered": "{amount} withdrawn in stages, spread over {count} tax years",
+  "place": ", living in {place}",
+  "tax": "{amount} in tax",
+  "net": "{amount} is left for you after tax",
+  "rate": "Tax rate",
+  "authorities": {
+    "federal": "Federal",
+    "state": "Cantonal",
+    "community": "Communal",
+    "church": "Church"
+  },
+  "sources": {
+    "pension_fund": "the pension fund",
+    "pillar3a": "pillar 3a"
+  },
+  "and": " and ",
+  "atAge": "At {age} ({year})",
+  "yearPayout": "{amount} from {sources}",
+  "comparison": {
+    "saving": "Taking everything at once at {age} costs {tax} in tax. Staggering saves you {saving}.",
+    "none": "Taking everything at once at {age} costs {tax} in tax. Staggering saves nothing here."
+  },
+  "assumptions": "{joint, select, yes {Taxed jointly} other {Taxed individually}}, {children, plural, =0 {no children} one {# child} other {# children}}, no church affiliation, at today's tax rates. Withdrawals in the same year are added up. Calculated by Logismata, not binding, not tax advice."
+}

@@ -2,6 +2,7 @@
 
 import { type DynamicToolUIPart, getToolName, type ToolUIPart } from "ai";
 import type { ComponentType } from "react";
+import { CapitalPayoutTaxWidget } from "./capital-payout-tax";
 import { DocumentReviewWidget, DocumentUploadPrompt } from "./document-widgets";
 import { FeedbackWidget } from "./feedback-widget";
 import { HandoverWidget } from "./handover-widget";
@@ -20,6 +21,7 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
   showRiskAnalysis: RiskAnalysisWidget,
   simulateScenario: ScenarioWidget,
   calculateTaxSavings: TaxSavingsWidget,
+  calculateCapitalPayoutTax: CapitalPayoutTaxWidget,
   suggestDocumentUpload: DocumentUploadPrompt,
   reviewDocuments: DocumentReviewWidget,
   requestHandover: HandoverWidget,
