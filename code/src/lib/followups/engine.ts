@@ -559,6 +559,15 @@ export function resetFollowUps(): void {
       .all()
       .map((r) => r.leadId as string);
     tx.delete(schema.outboxEmails).run();
+    // Check-in emails are also recorded as audit entries for the customer view.
+    tx.delete(schema.auditLog)
+      .where(
+        and(
+          eq(schema.auditLog.action, "email.sent"),
+          sql`json_extract(${schema.auditLog.data}, '$.outboxId') is not null`,
+        ),
+      )
+      .run();
     tx.update(schema.futureEvents).set({ status: "upcoming", leadId: null }).run();
     if (leadIds.length > 0) tx.delete(schema.leads).where(inArray(schema.leads.id, leadIds)).run();
   });
