@@ -6,7 +6,7 @@ import { type FormEvent, useId, useState, useTransition } from "react";
 import { useChatActions } from "@/components/chat/chat-actions";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonClasses } from "@/components/ui/button";
-import { Field, Input } from "@/components/ui/field";
+import { Field, Input, Select } from "@/components/ui/field";
 import { Link } from "@/i18n/navigation";
 import { saveContactAction, signApplicationAction } from "@/lib/sales/actions";
 import type { ContactPrefill, OfferOutput, OfferView, SignedInfo } from "@/lib/sales/types";
@@ -35,7 +35,7 @@ export function OfferWidget({ toolCallId, state, output }: WidgetProps) {
     <OfferBody
       toolCallId={toolCallId}
       data={data}
-      offer={data.offer}
+      initialOffer={data.offer}
       applicationId={data.applicationId}
     />
   );
@@ -44,12 +44,12 @@ export function OfferWidget({ toolCallId, state, output }: WidgetProps) {
 function OfferBody({
   toolCallId,
   data,
-  offer,
+  initialOffer,
   applicationId,
 }: {
   toolCallId: string;
   data: OfferOutput;
-  offer: OfferView;
+  initialOffer: OfferView;
   applicationId: string;
 }) {
   const t = useTranslations("sales.offer");
@@ -60,6 +60,9 @@ function OfferBody({
     Boolean(data.contactSaved) || !data.needsContact,
   );
   const [signed, setSigned] = useState<SignedInfo | undefined>(data.signed);
+  // The form re-prices the offer when the birth date or smoker status change.
+  const [offer, setOffer] = useState(initialOffer);
+  const [repriced, setRepriced] = useState(false);
   const date = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
   const unitLinked = UNIT_LINKED.has(offer.productCode);
   // The policyholder's name can change in the contact step; a partner keeps the offer's name.
@@ -97,6 +100,16 @@ function OfferBody({
                       smoker: offer.insured.smoker ? "yes" : "no",
                     })}
                   </span>
+                  {offer.insured.birthDateAssumed || offer.insured.smokerAssumed ? (
+                    <span className="mt-1 block text-paragraph-xs font-normal text-deep-purple">
+                      {[
+                        offer.insured.birthDateAssumed ? t("birthDateAssumed") : null,
+                        offer.insured.smokerAssumed ? t("smokerAssumed") : null,
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    </span>
+                  ) : null}
                 </>
               ),
             },
@@ -125,6 +138,9 @@ function OfferBody({
 
         <div className="flex flex-col gap-3 rounded-m bg-surface-muted p-4">
           <PriceTag price={offer.price} />
+          {repriced ? (
+            <output className="block text-paragraph-xs text-deep-purple">{t("repriced")}</output>
+          ) : null}
           {offer.price.maturity ? (
             <ScenarioList
               title={tPrice("maturityTitle")}
@@ -179,9 +195,13 @@ function OfferBody({
             ) : (
               <ContactForm
                 toolCallId={toolCallId}
+                applicationId={applicationId}
                 initial={contact}
-                onSaved={(saved) => {
+                insured={offer.insured}
+                onSaved={(saved, result) => {
                   setContact(saved);
+                  if (result.offer) setOffer(result.offer);
+                  setRepriced(result.repriced);
                   setContactSaved(true);
                 }}
               />
@@ -195,12 +215,19 @@ function OfferBody({
 
 function ContactForm({
   toolCallId,
+  applicationId,
   initial,
+  insured,
   onSaved,
 }: {
   toolCallId: string;
+  applicationId: string;
   initial: ContactPrefill;
-  onSaved: (contact: ContactPrefill) => void;
+  insured: OfferView["insured"];
+  onSaved: (
+    contact: ContactPrefill,
+    result: { offer: OfferView | null; repriced: boolean },
+  ) => void;
 }) {
   const t = useTranslations("sales.offer.contact");
   const { conversationId, busy } = useChatActions();
@@ -218,16 +245,21 @@ function ContactForm({
       email: String(form.get("email") ?? "").trim(),
       phone: String(form.get("phone") ?? "").trim(),
     };
+    const smoker = form.get("smoker") === "yes";
     setFailed(false);
     startTransition(async () => {
-      const result = await saveContactAction({ conversationId, toolCallId, contact }).catch(() => ({
-        ok: false,
-      }));
+      const result = await saveContactAction({
+        conversationId,
+        toolCallId,
+        applicationId,
+        contact,
+        smoker,
+      }).catch(() => ({ ok: false as const }));
       if (!result.ok) {
         setFailed(true);
         return;
       }
-      onSaved(contact);
+      onSaved(contact, result);
     });
   }
 
@@ -290,6 +322,31 @@ function ContactForm({
             placeholder="+41 79 123 45 67"
             defaultValue={initial.phone}
           />
+        </Field>
+        <Field
+          label={
+            insured.who === "self"
+              ? t("smoker")
+              : insured.name
+                ? t("smokerPartner", { name: insured.name })
+                : t("smokerInsured")
+          }
+          htmlFor={`${id}-smoker`}
+          hint={t("smokerHint")}
+          className="sm:col-span-2"
+        >
+          <Select
+            id={`${id}-smoker`}
+            name="smoker"
+            required
+            defaultValue={insured.smokerAssumed ? "" : insured.smoker ? "yes" : "no"}
+          >
+            <option value="" disabled>
+              {t("smokerChoose")}
+            </option>
+            <option value="no">{t("smokerNo")}</option>
+            <option value="yes">{t("smokerYes")}</option>
+          </Select>
         </Field>
       </div>
       <p className="text-paragraph-xs text-fg-muted">{t("privacy")}</p>

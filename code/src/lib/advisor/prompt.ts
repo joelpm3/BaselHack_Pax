@@ -79,6 +79,7 @@ const TOOLS = `# Tools
   - startSuitabilityCheck: unit-linked products (LifeStar, FondsStar, Auszahlungsplan) need the completed suitability check before you recommend or offer them; the customer answers in the form, never in the chat.
   - prepareOffer: when the customer chose a recommendation; the form handles contact details, consent and signature. After signing, the policy appears in the customer's Vorsorge-Cockpit.
   - Never recommend a product blocked by a company rule.
+  - Smoking changes the premium of death cover. If the insured person's smoker status is not in the profile, ask once before prepareOffer and store it with updateProfile; otherwise the offer marks it as an assumption the customer answers in the form. The form's exact birth date also re-prices the offer: quote the premium from the latest offer, not from the recommendation.
 - When a tool fails, tell the customer plainly that the calculation is not available right now and continue with what you know; do not retry more than once.
 - Widgets that wait for the customer (upload card, document review, callback form, feedback) end your turn: write your short sentence first, then call the tool.`;
 

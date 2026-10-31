@@ -293,6 +293,9 @@
     "demoBadge": "Demo",
     "insured": "Insured person",
     "insuredDetails": "born {birthDate}, {smoker, select, yes {smoker} other {non-smoker}}",
+    "birthDateAssumed": "Birth date assumed from the year of birth.",
+    "smokerAssumed": "Smoker status assumed: please state it below.",
+    "repriced": "We recalculated the premium with your birth date and smoker status.",
     "period": "Contract period",
     "periodValue": "{start} to {end}",
     "fund": "Fund",
@@ -316,13 +319,20 @@
     },
     "demoNotice": "This is a prototype: the signature is a demo and no legally binding contract is concluded.",
     "contact": {
-      "title": "Your contact details",
-      "hint": "For the policy we need your name and how to reach you.",
+      "title": "Your details",
+      "hint": "For the policy we need your name, your birth date and how to reach you. Birth date and smoker status determine the premium.",
       "firstName": "First name",
       "lastName": "Last name",
       "birthDate": "Date of birth",
       "email": "Email",
       "phone": "Phone",
+      "smoker": "Do you smoke?",
+      "smokerPartner": "Does {name} smoke?",
+      "smokerInsured": "Does the insured person smoke?",
+      "smokerHint": "The smoker status affects the premium.",
+      "smokerChoose": "Please choose",
+      "smokerNo": "No, non-smoker",
+      "smokerYes": "Yes, smoker",
       "privacy": "Pax only uses these details for your offer and policy.",
       "error": "Please check your details (date of birth, email, phone).",
       "submit": "Save details"
@@ -345,7 +355,8 @@
         "already_signed": "This offer has already been signed.",
         "suitability_missing": "This product is missing a matching suitability check.",
         "contact_missing": "Please add your contact details first.",
-        "signature_mismatch": "The name does not match your details. Type: {name}."
+        "signature_mismatch": "The name does not match your details. Type: {name}.",
+        "offer_outdated": "Your birth date or smoker status changed since the offer. Open “Change details” and save so we can recalculate the premium."
       },
       "submit": "Sign now",
       "signedMessage": "I signed the offer for {product} (policy {number})."
