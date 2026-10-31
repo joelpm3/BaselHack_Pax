@@ -214,6 +214,13 @@ function sessionSection(ctx: PromptContext): string {
   return lines.join("\n");
 }
 
+const EXPLAINERS = `# Showing instead of telling (explainer tools)
+When a picture explains better than words, show it and write one or two sentences on what to look at in the same turn: a widget alone is no answer, so write them before any suggestReplies. Don't repeat the widget's figures in a list.
+- explainCompoundInterest: whenever someone asks what compound interest (Zinseszins) is, how saving grows, or why starting early matters. Without values it shows a labelled example; pass values the customer named; set usePillar3a when they ask about their own 3a. The rate is an assumption, never a forecast: say that returns are not guaranteed. The customer moves the sliders themselves.
+- showLifePlan: when the customer talks about their life ahead (children, buying a home, a sabbatical, early retirement at 50 or 60, self-employment) or asks for an overview over time. First store new plans and their years with updateProfile (addPlannedEvents, desiredRetirementAge), then call it. Pass monthlyExpenses only if the customer said what they spend. The widget marks assumptions (reference age 65, a sabbatical of one year); repeat them when you comment. For retirement before 58 it shows no pension: the pension fund does not pay yet. For the details of one event, offer simulateScenario.
+- calculateCapitalDrawdown: how long a capital lasts when the customer lives from it (pension-fund capital instead of a pension, the 3a balance, savings), with their monthly amount or the amount that lasts until 85. It ignores the tax on a payout; say so if the customer asks about the net amount.
+- showReferences: after explaining a concept (3a, Zinseszins, Konkubinat, WEF, Umwandlungssatz, Rente oder Kapital …), attach up to three matching Pax pages by id. Only the ids in the tool exist; never write a URL or name a page yourself. If no id fits, explain the concept yourself without a link.`;
+
 const STATIC_PROMPT = [
   PERSONA,
   CONVERSATION_DESIGN,
@@ -221,6 +228,7 @@ const STATIC_PROMPT = [
   NUMBERS,
   TOOLS,
   HANDOVER,
+  EXPLAINERS,
 ].join("\n\n");
 
 export function buildInstructions(ctx: PromptContext): SystemModelMessage[] {

@@ -1,0 +1,144 @@
+{
+  "discuss": "Mit dem Berater besprechen",
+  "compound": {
+    "title": "Zinseszins",
+    "pending": "Ich rechne das Beispiel",
+    "introGeneral": "Ein Beispiel zum Ausprobieren: Verschieben Sie die Regler und sehen Sie, woher das Geld am Ende kommt.",
+    "introPillar3a": "Mit Ihren Zahlen zur Säule 3a bis zur Pensionierung. Alle Regler lassen sich verstellen.",
+    "params": {
+      "startAmount": "Startbetrag",
+      "monthlySaving": "Sparbetrag pro Monat",
+      "ratePercent": "Zins pro Jahr",
+      "years": "Dauer"
+    },
+    "years": "{years, plural, one {# Jahr} other {# Jahre}}",
+    "rate": "{rate} %",
+    "sources": {
+      "profile": "aus Ihrem Profil",
+      "customer": "Ihre Angabe",
+      "example": "Beispielwert"
+    },
+    "total": "Nach {years, plural, one {# Jahr} other {# Jahren}}",
+    "parts": {
+      "deposits": "Ihre Einzahlungen",
+      "interest": "Zins auf Einzahlungen",
+      "interestOnInterest": "Zins auf Zins"
+    },
+    "share": "Zins auf Zins macht {share} % des Endbetrags aus. Dieser Teil wächst, je länger das Geld liegen bleibt.",
+    "noInterest": "Ohne Zins wächst nur, was Sie selbst einzahlen.",
+    "unit": "1 Quadrat = {amount}",
+    "axis": "Jahre ab heute",
+    "chartSummary": "Nach {years} Jahren: {total}, davon Einzahlungen {deposits}, Zins {interest}, Zins auf Zins {interestOnInterest}.",
+    "reset": "Zurücksetzen",
+    "discussMessage": "Ich habe im Zinseszins-Beispiel {params} eingestellt und komme auf {total}. Was bedeutet das für mich?",
+    "disclaimer": "Illustration mit einem angenommenen Zins von {rate} % pro Jahr, monatlich verzinst, ohne Gebühren, Steuern und Teuerung. Keine Garantie: Zinsen und Renditen schwanken und können auch negativ sein."
+  },
+  "lifePlan": {
+    "title": "Ihr Lebensplan",
+    "pending": "Ich zeichne Ihren Lebensplan",
+    "gridCaption": "Ein Quadrat pro Lebensjahr, von heute bis {age}",
+    "decade": "{age}er",
+    "phases": {
+      "work": "Erwerbsleben",
+      "sabbatical": "Auszeit",
+      "retirement": "Pension"
+    },
+    "events": {
+      "today": "Heute",
+      "child": "Kind kommt zur Welt",
+      "child_adult": "Kind wird 18",
+      "home_purchase": "Wohneigentum",
+      "marriage": "Heirat",
+      "sabbatical": "Auszeit",
+      "self_employment": "Selbständigkeit",
+      "divorce": "Trennung",
+      "inheritance": "Erbschaft",
+      "other": "Vorhaben",
+      "retirement": "Pensionierung",
+      "partner_retirement": "Pensionierung Partner/in"
+    },
+    "when": "{year}, mit {age}",
+    "noYear": "Jahr noch offen",
+    "sources": {
+      "profile": "Ihre Angabe",
+      "derived": "abgeleitet",
+      "assumption": "Annahme",
+      "calculation": "Logismata"
+    },
+    "assumptions": {
+      "retirement": "Referenzalter 65",
+      "partner_retirement": "Referenzalter 65",
+      "sabbatical": "Dauer 1 Jahr angenommen"
+    },
+    "money": "Pro Monat",
+    "incomeToday": "Einkommen heute, brutto",
+    "incomeTodayHousehold": "Haushaltseinkommen heute, brutto",
+    "expenses": "Ausgaben heute, Ihre Angabe",
+    "retirementIncome": "Einkommen ab {age}, Logismata",
+    "retirementNeed": "Bedarf ab {age}: {amount}",
+    "retirementGap": "Lücke {amount}",
+    "retirementCovered": "gedeckt",
+    "expensesGap": "Gegenüber Ihren heutigen Ausgaben fehlen im Alter rund {amount} pro Monat.",
+    "expensesCovered": "Das Einkommen im Alter deckt Ihre heutigen Ausgaben.",
+    "retirementMissing": "Für das Einkommen im Alter fehlen noch Angaben: {fields}.",
+    "retirementTooEarly": "Vor 58 zahlt die Pensionskasse in der Regel keine Altersleistung. Bis dahin braucht es eigenes Vermögen.",
+    "retirementFailed": "Das Einkommen im Alter lässt sich gerade nicht berechnen.",
+    "unit": "1 Quadrat = CHF 500 pro Monat",
+    "estimated": "Pensionskassenwerte geschätzt.",
+    "finePrint": "Nur Angaben aus Ihrem Profil und dem Gespräch; Annahmen sind markiert. Einkommen im Alter mit Logismata gerechnet (Bedarf {need} % des heutigen Bruttoeinkommens), unverbindlich. Ihr Vorsorgebild bleibt unverändert."
+  },
+  "drawdown": {
+    "pending": "Ich rechne, wie lange das Kapital reicht",
+    "titles": {
+      "pension_fund": "Pensionskassenkapital: so lange reicht es",
+      "pillar3a": "Säule 3a: so lange reicht es",
+      "savings": "Ersparnisse: so lange reicht es"
+    },
+    "capital": "{amount} ab {age}",
+    "capitalSources": {
+      "customer": "Ihre Angabe",
+      "profile": "aus Ihrem Profil"
+    },
+    "lastsCustomer": "Mit {amount} pro Monat reicht es {years, plural, one {# Jahr} other {# Jahre}}{months, plural, =0 {} one { und # Monat} other { und # Monate}}, bis etwa {age}.",
+    "lastsCalculated": "Bis {age} reicht es für rund {amount} pro Monat.",
+    "unit": "1 Quadrat = {amount}",
+    "axis": "Kapital zu Beginn jedes Jahres, nach Alter",
+    "chartSummary": "Das Kapital sinkt von {start} mit {startAge} auf {end} mit {endAge}.",
+    "finePrint": "Logismata-Berechnung mit {interest} % Zins auf dem Restkapital, vor Steuern auf einer Auszahlung, ohne Teuerung. Unverbindlich."
+  },
+  "references": {
+    "title": "Mehr dazu bei Pax",
+    "inGerman": "auf Deutsch",
+    "articles": {
+      "compound_interest": "Langfristiger Vermögensaufbau",
+      "pension_system": "Das Vorsorgesystem der Schweiz",
+      "social_security": "Soziale Vorsorge der Schweiz",
+      "retirement_planning": "Planung der Altersvorsorge",
+      "pillar3a_tax": "Steuern sparen mit der Säule 3a",
+      "pillar3a_bank_or_insurance": "3. Säule bei der Bank oder bei der Versicherung?",
+      "pillar3a_staggered_withdrawal": "Säule 3a gestaffelt beziehen",
+      "pillar3a_premium_waiver": "Was ist eine Prämienbefreiung bei der Säule 3a?",
+      "life_insurance": "Was ist eine Lebensversicherung?",
+      "pillar2_basics": "Die 2. Säule (BVG) auf einen Blick",
+      "conversion_rate": "Was ist der BVG-Umwandlungssatz?",
+      "coordination_deduction": "Was ist der Koordinationsabzug?",
+      "pension_certificate": "Den Vorsorgeausweis lesen",
+      "pension_fund_buy_in": "Was bringt ein Einkauf in die Pensionskasse?",
+      "pension_gaps": "Vorsorgelücken erkennen und schliessen",
+      "unpaid_leave": "Vorsorge im unbezahlten Urlaub",
+      "early_retirement": "Kann ich mir eine Frühpensionierung leisten?",
+      "pension_or_lump_sum": "Rente oder Kapital?",
+      "retirement_budget": "Das Budget nach der Pensionierung",
+      "couples_and_cohabiting": "Vorsorge als Paar: den Partner absichern",
+      "protect_family": "Die Familie absichern",
+      "death_and_disability": "Absicherung bei Tod und Invalidität",
+      "children": "Für die Kinder richtig vorsorgen",
+      "parental_leave": "Babypause: Wiedereinstieg und Vorsorge planen",
+      "divorce": "Wie wirkt sich eine Scheidung auf die Rente aus?",
+      "estate_planning": "Nachlassplanung",
+      "home_ownership": "Wie finanziere ich mein Zuhause?",
+      "home_with_pension_money": "Wohneigentum mit Vorsorgegeld finanzieren",
+      "self_employment": "Selbständigkeit aufnehmen"
+    }
+  }
+}

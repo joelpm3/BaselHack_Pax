@@ -1,0 +1,144 @@
+{
+  "discuss": "Parlarne con il consulente",
+  "compound": {
+    "title": "Interesse composto",
+    "pending": "Calcolo l’esempio",
+    "introGeneral": "Un esempio da provare: sposti i cursori e veda da dove viene il denaro alla fine.",
+    "introPillar3a": "Con i Suoi dati del pilastro 3a fino al pensionamento. Tutti i cursori sono regolabili.",
+    "params": {
+      "startAmount": "Importo iniziale",
+      "monthlySaving": "Risparmio al mese",
+      "ratePercent": "Interesse annuo",
+      "years": "Durata"
+    },
+    "years": "{years, plural, one {# anno} other {# anni}}",
+    "rate": "{rate} %",
+    "sources": {
+      "profile": "dal Suo profilo",
+      "customer": "Sua indicazione",
+      "example": "valore d’esempio"
+    },
+    "total": "Dopo {years, plural, one {# anno} other {# anni}}",
+    "parts": {
+      "deposits": "I Suoi versamenti",
+      "interest": "Interessi sui versamenti",
+      "interestOnInterest": "Interessi sugli interessi"
+    },
+    "share": "Gli interessi sugli interessi sono il {share} % dell’importo finale. Questa parte cresce quanto più a lungo il denaro resta investito.",
+    "noInterest": "Senza interessi cresce solo ciò che versa Lei.",
+    "unit": "1 quadrato = {amount}",
+    "axis": "Anni da oggi",
+    "chartSummary": "Dopo {years} anni: {total}, di cui versamenti {deposits}, interessi {interest}, interessi sugli interessi {interestOnInterest}.",
+    "reset": "Ripristina",
+    "discussMessage": "Nell’esempio dell’interesse composto ho impostato {params} e arrivo a {total}. Cosa significa per me?",
+    "disclaimer": "Illustrazione con un interesse ipotetico del {rate} % annuo, capitalizzato mensilmente, senza costi, imposte e inflazione. Nessuna garanzia: interessi e rendimenti variano e possono anche essere negativi."
+  },
+  "lifePlan": {
+    "title": "Il Suo piano di vita",
+    "pending": "Disegno il Suo piano di vita",
+    "gridCaption": "Un quadrato per anno di vita, da oggi fino a {age} anni",
+    "decade": "{age} anni",
+    "phases": {
+      "work": "Vita lavorativa",
+      "sabbatical": "Pausa",
+      "retirement": "Pensione"
+    },
+    "events": {
+      "today": "Oggi",
+      "child": "Nascita di un figlio",
+      "child_adult": "Un figlio compie 18 anni",
+      "home_purchase": "Casa di proprietà",
+      "marriage": "Matrimonio",
+      "sabbatical": "Pausa",
+      "self_employment": "Attività indipendente",
+      "divorce": "Separazione",
+      "inheritance": "Eredità",
+      "other": "Progetto",
+      "retirement": "Pensionamento",
+      "partner_retirement": "Pensionamento del/della partner"
+    },
+    "when": "{year}, a {age} anni",
+    "noYear": "Anno ancora aperto",
+    "sources": {
+      "profile": "Sua indicazione",
+      "derived": "dedotto",
+      "assumption": "ipotesi",
+      "calculation": "Logismata"
+    },
+    "assumptions": {
+      "retirement": "età di riferimento 65 anni",
+      "partner_retirement": "età di riferimento 65 anni",
+      "sabbatical": "durata ipotizzata di un anno"
+    },
+    "money": "Al mese",
+    "incomeToday": "Reddito attuale, lordo",
+    "incomeTodayHousehold": "Reddito attuale dell’economia domestica, lordo",
+    "expenses": "Spese attuali, Sua indicazione",
+    "retirementIncome": "Reddito dai {age} anni, Logismata",
+    "retirementNeed": "Fabbisogno dai {age} anni: {amount}",
+    "retirementGap": "Lacuna {amount}",
+    "retirementCovered": "coperto",
+    "expensesGap": "Rispetto alle Sue spese attuali, in pensione mancano circa {amount} al mese.",
+    "expensesCovered": "Il reddito in pensione copre le Sue spese attuali.",
+    "retirementMissing": "Per il reddito in pensione mancano ancora dati: {fields}.",
+    "retirementTooEarly": "Prima dei 58 anni la cassa pensione di regola non versa prestazioni di vecchiaia. Fino ad allora serve un patrimonio proprio.",
+    "retirementFailed": "Al momento il reddito in pensione non può essere calcolato.",
+    "unit": "1 quadrato = CHF 500 al mese",
+    "estimated": "Valori della cassa pensione stimati.",
+    "finePrint": "Solo dati del Suo profilo e del colloquio; le ipotesi sono indicate. Reddito in pensione calcolato con Logismata (fabbisogno {need} % del reddito lordo attuale), senza impegno. Il Suo quadro previdenziale resta invariato."
+  },
+  "drawdown": {
+    "pending": "Calcolo per quanto basta il capitale",
+    "titles": {
+      "pension_fund": "Capitale della cassa pensione: per quanto basta",
+      "pillar3a": "Pilastro 3a: per quanto basta",
+      "savings": "Risparmi: per quanto bastano"
+    },
+    "capital": "{amount} dai {age} anni",
+    "capitalSources": {
+      "customer": "Sua indicazione",
+      "profile": "dal Suo profilo"
+    },
+    "lastsCustomer": "Con {amount} al mese basta per {years, plural, one {# anno} other {# anni}}{months, plural, =0 {} one { e # mese} other { e # mesi}}, fino a circa {age} anni.",
+    "lastsCalculated": "Fino a {age} anni basta per circa {amount} al mese.",
+    "unit": "1 quadrato = {amount}",
+    "axis": "Capitale all’inizio di ogni anno, per età",
+    "chartSummary": "Il capitale scende da {start} a {startAge} anni a {end} a {endAge} anni.",
+    "finePrint": "Calcolo Logismata con interesse del {interest} % sul capitale residuo, prima delle imposte su un versamento, senza inflazione. Senza impegno."
+  },
+  "references": {
+    "title": "Per saperne di più da Pax",
+    "inGerman": "in tedesco",
+    "articles": {
+      "compound_interest": "Costruire il patrimonio a lungo termine",
+      "pension_system": "Comprendere la previdenza svizzera",
+      "social_security": "La previdenza sociale in Svizzera",
+      "retirement_planning": "Pianificare il pensionamento",
+      "pillar3a_tax": "Risparmiare imposte con il pilastro 3a",
+      "pillar3a_bank_or_insurance": "Terzo pilastro: banca o assicurazione?",
+      "pillar3a_staggered_withdrawal": "Prelevare il pilastro 3a in modo scaglionato",
+      "pillar3a_premium_waiver": "Che cos’è l’esenzione dai premi del pilastro 3a?",
+      "life_insurance": "Che cos’è un’assicurazione sulla vita?",
+      "pillar2_basics": "Il secondo pilastro (LPP) in sintesi",
+      "conversion_rate": "Qual è il tasso di conversione LPP?",
+      "coordination_deduction": "Che cos’è la trattenuta di coordinamento?",
+      "pension_certificate": "Leggere il certificato di previdenza",
+      "pension_fund_buy_in": "Cosa porta un riscatto nella cassa pensione?",
+      "pension_gaps": "Riconoscere e colmare le lacune previdenziali",
+      "unpaid_leave": "La previdenza durante il congedo non pagato",
+      "early_retirement": "Posso permettermi il pensionamento anticipato?",
+      "pension_or_lump_sum": "Rendita o capitale?",
+      "retirement_budget": "Il budget dopo il pensionamento",
+      "couples_and_cohabiting": "Previdenza per la coppia: tutelare il partner",
+      "protect_family": "Tutelare la famiglia",
+      "death_and_disability": "Protezione in caso di decesso e invalidità",
+      "children": "La giusta previdenza per i figli",
+      "parental_leave": "Congedo di maternità: pianificare rientro e previdenza",
+      "divorce": "Che impatto ha il divorzio sulla mia previdenza?",
+      "estate_planning": "Pianificazione della successione",
+      "home_ownership": "Come finanziare la propria casa?",
+      "home_with_pension_money": "Finanziare la casa con i fondi previdenziali",
+      "self_employment": "Avviare un’attività indipendente"
+    }
+  }
+}

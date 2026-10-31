@@ -4,6 +4,7 @@ import { type DynamicToolUIPart, getToolName, type ToolUIPart } from "ai";
 import type { ComponentType } from "react";
 import { CapitalPayoutTaxWidget } from "./capital-payout-tax";
 import { DocumentReviewWidget, DocumentUploadPrompt } from "./document-widgets";
+import { explainerWidgets } from "./explainers";
 import { FeedbackWidget } from "./feedback-widget";
 import { HandoverWidget } from "./handover-widget";
 import { PensionOverviewWidget } from "./pension-overview";
@@ -29,6 +30,7 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
   askForFeedback: FeedbackWidget,
   calculateSavingsPlan: SavingsPlanWidget,
   ...salesWidgets,
+  ...explainerWidgets,
 };
 
 /**

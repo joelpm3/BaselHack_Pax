@@ -4,6 +4,7 @@ import { createAnalysisTools } from "./analysis";
 import { createCapitalPayoutTools } from "./capital-payout";
 import type { ToolContext } from "./context";
 import { createDocumentTools } from "./documents";
+import { createExplainerTools } from "./explainers";
 import { createHandoverTools } from "./handover";
 import { createProfileTools } from "./profile";
 import { createSalesTools } from "./sales";
@@ -21,6 +22,7 @@ export function createAdvisorTools(ctx: ToolContext): ToolSet {
     ...createHandoverTools(ctx),
     ...createSalesTools(ctx),
     ...createSavingsPlanTools(ctx),
+    ...createExplainerTools(ctx),
   };
 }
 
