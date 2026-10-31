@@ -37,7 +37,7 @@ import {
   saveUserMessage,
 } from "./conversations";
 import { buildInstructions } from "./prompt";
-import { needsReplyNudge, withReplyNudge } from "./reply-nudge";
+import { replyNudgeFor, withReplyNudge } from "./reply-nudge";
 import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
 import type { ToolContext } from "./tools/context";
@@ -257,10 +257,10 @@ export async function streamAdvisorTurn(
     }),
     tools,
     stopWhen: [isStepCount(MAX_STEPS), waitsForCustomer],
-    prepareStep: ({ steps, messages }) =>
-      needsReplyNudge(steps, WAITS_FOR_CUSTOMER)
-        ? { messages: withReplyNudge(messages) }
-        : undefined,
+    prepareStep: ({ steps, messages }) => {
+      const nudge = replyNudgeFor(steps, WAITS_FOR_CUSTOMER);
+      return nudge ? { messages: withReplyNudge(messages, nudge) } : undefined;
+    },
     temperature: 0.4,
     // A failed step ends the turn without text and without a stream error: log it.
     onStepError: ({ error }) => console.error(`[advisor] step failed in ${conversation.id}`, error),

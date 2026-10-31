@@ -170,11 +170,8 @@ export const SCENARIOS: Scenario[] = [
     script: [
       "Grüezi, ich bin verheiratet und möchte wissen, ob wir gut abgesichert sind.",
       { intent: "Answer the advisor's question." },
-      { intent: "Answer the advisor's question." },
-      {
-        intent:
-          "If the advisor has noted any birth year, correct it: 'nein, ich bin 1990 geboren, nicht sie, sie ist 1994'. Otherwise give both birth years in that wording.",
-      },
+      "1994",
+      "nein sorry, ich bin 1990 geboren, nicht sie. sie ist 1994",
       {
         intent:
           "Answer the question, then add that you were wrong earlier: you are actually not married but live together (Konkubinat).",

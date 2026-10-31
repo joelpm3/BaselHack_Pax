@@ -46,7 +46,7 @@ export function flagsFor(turn: TurnView): string[] {
   if (suggestCalls > 1) flags.push(`DOUBLE_REPLIES: suggestReplies called ${suggestCalls} times`);
   if (questionCount(text) > 1) flags.push(`MULTI_QUESTION: ${questionCount(text)} question marks`);
   if (
-    /\b(Danke|Merci|Grazie|Thanks?|Hallo|Grüezi|Guten Tag|Bonjour|Buongiorno),?\s+(Herr|Frau|Monsieur|Madame|Signor|Signora)\s*[.,!?:;]/.test(
+    /(^|[\n.!?]\s*|\b(Danke|Merci|Grazie|Thanks?|Hallo|Grüezi|Guten Tag|Bonjour|Buongiorno),?\s+)(Herr|Frau|Monsieur|Madame|Signor|Signora)\s*[.,!?:;]/.test(
       text,
     )
   )
