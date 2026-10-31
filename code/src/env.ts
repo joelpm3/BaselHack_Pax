@@ -34,7 +34,7 @@ const schema = z.object({
   STT_BASE_URL: z.url().default("http://127.0.0.1:8000"),
 
   /** Shared password for the company dashboard. */
-  COMPANY_PASSWORD: z.string().min(4).default("pax-demo"),
+  COMPANY_PASSWORD: z.string().min(4),
   /** HMAC secret for cookies (customer device id, advisor session). */
   SESSION_SECRET: z.string().min(32),
   /** 32-byte hex/base64 key for AES-256-GCM document encryption at rest. */

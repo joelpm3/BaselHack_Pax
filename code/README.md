@@ -19,7 +19,7 @@ Production build: `pnpm build && PORT=3210 pnpm start`.
 |---|---|
 | `/de` | Customer entry: start an advice conversation or pick a demo customer |
 | `/de/portal` | Vorsorge-Cockpit (policies, documents, hints, conversations) |
-| `/de/firma` | Company dashboard (password `COMPANY_PASSWORD`, default `pax-demo`) |
+| `/de/firma` | Company dashboard (password from `COMPANY_PASSWORD`, required) |
 | `/de/firma/simulation` | Run simulated customers against the real advisor |
 
 Locales: `de`, `fr`, `it`, `en`.
