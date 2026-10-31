@@ -1,0 +1,19 @@
+{
+  "title": "Épargner pour votre objectif",
+  "pending": "Je calcule votre plan d'épargne",
+  "recalculating": "Nouveau calcul en cours",
+  "monthly": "Épargner {amount} par mois",
+  "reached": "Votre capital de départ suffit sans épargne supplémentaire",
+  "goal": "Pour disposer de {amount} dans {years, plural, one {# an} other {# ans}}",
+  "params": {
+    "goal": "Objectif d'épargne",
+    "years": "Durée d'épargne",
+    "startCapital": "Déjà épargné"
+  },
+  "yearsValue": "{years, plural, one {# an} other {# ans}}",
+  "deposits": "Versements",
+  "interest": "Intérêts",
+  "endCapital": "Capital final",
+  "failed": "Le nouveau calcul n'a pas abouti. Veuillez réessayer.",
+  "assumptions": "Hypothèse : rendement de {interest} % par an comme dans le calculateur d'épargne de Pax, versement mensuel, sans frais ni impôts. Les rendements ne sont pas garantis. Calcul de Logismata, sans engagement."
+}

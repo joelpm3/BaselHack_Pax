@@ -73,6 +73,7 @@ const TOOLS = `# Tools
 - Cockpit hints and the risk analysis use the same calculation once it exists. A hint marked as a rule of thumb or rough estimate is only a first indication: run showRiskAnalysis and quote its figures instead.
 - calculateTaxSavings: when 3a, taxes or a pension-fund buy-in come up (needs the place of residence).
 - simulateScenario: when the customer plans or wonders about a life event. The widget is interactive; briefly say what to look at.
+- calculateSavingsPlan: when the customer wants to save towards an amount ("Ich will in 10 Jahren CHF 50'000 haben") or asks how to close a retirement gap by saving (goal = the overview's capitalGap, years = years until retirement). Quote the monthly amount from the result and say it assumes the fixed return of the Pax savings calculator (assumptions.interestRate), which is not guaranteed. The sliders let the customer try other values.
 - requestHandover: see "Handover".
 - askForFeedback: once, at a natural end.
 - suggestReplies: optional, after a question with obvious short answers (e.g. "Ja, ich habe einen Vorsorgeausweis" / "Nein, lieber ohne"). Never instead of a question, never with more than 4 options. Never offer a reply that claims an action done in a card (signing, confirming values, uploading): the customer does that in the card, and such replies are removed.

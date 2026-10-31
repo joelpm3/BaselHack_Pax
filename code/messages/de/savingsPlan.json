@@ -1,0 +1,19 @@
+{
+  "title": "Sparen für Ihr Ziel",
+  "pending": "Ich rechne Ihren Sparplan",
+  "recalculating": "Wird neu gerechnet",
+  "monthly": "{amount} pro Monat sparen",
+  "reached": "Ihr Startkapital reicht ohne weiteres Sparen",
+  "goal": "Damit Sie in {years, plural, one {# Jahr} other {# Jahren}} {amount} haben",
+  "params": {
+    "goal": "Sparziel",
+    "years": "Spardauer",
+    "startCapital": "Bereits gespart"
+  },
+  "yearsValue": "{years, plural, one {# Jahr} other {# Jahre}}",
+  "deposits": "Einzahlungen",
+  "interest": "Zinsertrag",
+  "endCapital": "Endkapital",
+  "failed": "Das konnte gerade nicht neu gerechnet werden. Versuchen Sie es nochmals.",
+  "assumptions": "Annahme: {interest} % Rendite pro Jahr wie im Sparrechner von Pax, monatliche Einzahlung, ohne Kosten und Steuern. Renditen sind nicht garantiert. Berechnung von Logismata, unverbindlich."
+}

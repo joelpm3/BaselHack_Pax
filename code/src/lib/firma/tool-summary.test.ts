@@ -30,6 +30,19 @@ describe("summarizeTool", () => {
     );
   });
 
+  it("sums up a savings plan with goal, years and monthly amount", () => {
+    const output = {
+      status: "ok",
+      params: { goal: 50000, years: 10, startCapital: 0 },
+      monthly: 367,
+    };
+    expect(summarizeTool("calculateSavingsPlan", output)).toEqual({
+      key: "savingsPlan",
+      values: { years: 10 },
+      amounts: { goal: 50000, monthly: 367 },
+    });
+  });
+
   it("reports the largest monthly risk gap across persons and scenarios", () => {
     const output = {
       status: "ok",

@@ -1,0 +1,19 @@
+{
+  "title": "Risparmiare per il suo obiettivo",
+  "pending": "Calcolo il suo piano di risparmio",
+  "recalculating": "Nuovo calcolo in corso",
+  "monthly": "Risparmiare {amount} al mese",
+  "reached": "Il suo capitale iniziale basta senza risparmiare altro",
+  "goal": "Per avere {amount} tra {years, plural, one {# anno} other {# anni}}",
+  "params": {
+    "goal": "Obiettivo di risparmio",
+    "years": "Durata del risparmio",
+    "startCapital": "Già risparmiato"
+  },
+  "yearsValue": "{years, plural, one {# anno} other {# anni}}",
+  "deposits": "Versamenti",
+  "interest": "Interessi",
+  "endCapital": "Capitale finale",
+  "failed": "Il nuovo calcolo non è riuscito. Riprovi.",
+  "assumptions": "Ipotesi: rendimento del {interest} % all'anno come nel calcolatore di risparmio di Pax, versamento mensile, senza costi e imposte. I rendimenti non sono garantiti. Calcolo di Logismata, non vincolante."
+}

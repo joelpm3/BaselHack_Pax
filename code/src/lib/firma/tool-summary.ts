@@ -84,6 +84,14 @@ export function summarizeTool(name: string, output: unknown): ToolLine | null {
       if (o.status !== "ok") return { ...missingLine(o), key: "scenarioMissing" };
       return line("scenario", { scenario: o.scenario });
     }
+    case "calculateSavingsPlan": {
+      const params = isObject(output.params) ? output.params : {};
+      return line(
+        "savingsPlan",
+        { years: Number(params.years) },
+        { goal: Number(params.goal), monthly: Number(output.monthly) },
+      );
+    }
     case "recommendProducts": {
       const o = output as unknown as RecommendOutput;
       if (o.status !== "ok") return missingLine(o);

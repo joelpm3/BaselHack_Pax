@@ -6,6 +6,7 @@ import { createDocumentTools } from "./documents";
 import { createHandoverTools } from "./handover";
 import { createProfileTools } from "./profile";
 import { createSalesTools } from "./sales";
+import { createSavingsPlanTools } from "./savings-plan";
 import { createScenarioTools } from "./scenario";
 
 /** The advisor's full tool set: its own tools plus the sales tools of the pricing area. */
@@ -17,6 +18,7 @@ export function createAdvisorTools(ctx: ToolContext): ToolSet {
     ...createDocumentTools(ctx),
     ...createHandoverTools(ctx),
     ...createSalesTools(ctx),
+    ...createSavingsPlanTools(ctx),
   };
 }
 

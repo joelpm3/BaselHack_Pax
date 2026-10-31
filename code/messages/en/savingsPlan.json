@@ -1,0 +1,19 @@
+{
+  "title": "Saving for your goal",
+  "pending": "Calculating your savings plan",
+  "recalculating": "Recalculating",
+  "monthly": "Save {amount} a month",
+  "reached": "Your starting capital is enough without saving more",
+  "goal": "To have {amount} in {years, plural, one {# year} other {# years}}",
+  "params": {
+    "goal": "Savings goal",
+    "years": "Saving period",
+    "startCapital": "Already saved"
+  },
+  "yearsValue": "{years, plural, one {# year} other {# years}}",
+  "deposits": "Paid in",
+  "interest": "Interest",
+  "endCapital": "Final capital",
+  "failed": "The recalculation did not work. Please try again.",
+  "assumptions": "Assumes a {interest}% yearly return, as in the Pax savings calculator, monthly payments, no costs or taxes. Returns are not guaranteed. Calculated by Logismata, not binding."
+}
