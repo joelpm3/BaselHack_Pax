@@ -81,10 +81,12 @@ export function createKnowledgeTools(ctx: ToolContext) {
           action: "knowledge.lookup",
           entityType: "conversation",
           entityId: ctx.conversationId,
+          // Readable versions first: the audit table shows only the start of `data`.
           data: {
+            versions: [...new Set(result.excerpts.map((e) => label(e.source)))],
+            status,
             productCode,
             question,
-            status,
             used: result.excerpts.map((e) => ({
               documentId: e.source.documentId,
               title: e.source.title,
