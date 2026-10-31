@@ -280,6 +280,7 @@ export const SCENARIOS: Scenario[] = [
       { intent: "React briefly to the answer." },
     ],
     maxTurns: 2,
+  },
   {
     id: "cancelled-insurance-3a",
     title:
