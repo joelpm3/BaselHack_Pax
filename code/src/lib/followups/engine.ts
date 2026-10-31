@@ -182,23 +182,30 @@ function storeEmail(values: typeof schema.outboxEmails.$inferInsert): string {
     .values(values)
     .returning({ id: schema.outboxEmails.id })
     .all();
+  // The company's customer view lists emails from lead activities of type "email" and from
+  // `email.*` audit entries on the customer; each email is recorded in exactly one of them.
+  const shown = {
+    subject: values.subject,
+    body: values.body,
+    to: values.toAddress,
+    direction: "outbound",
+    outboxId: row.id,
+    sequence: values.sequence,
+    sentOn: values.sentOn,
+  };
   if (values.leadId) {
     db.insert(schema.leadActivities)
-      .values({
-        leadId: values.leadId,
-        type: "email",
-        body: `${values.subject}\n\n${values.body}`,
-        data: { outboxId: row.id, sequence: values.sequence, sentOn: values.sentOn },
-      })
+      .values({ leadId: values.leadId, type: "email", body: values.body, data: shown })
       .run();
+  } else {
+    audit({
+      actorType: "system",
+      action: "email.sent",
+      entityType: "customer",
+      entityId: values.customerId,
+      data: { ...shown, kind: values.kind },
+    });
   }
-  audit({
-    actorType: "system",
-    action: "outbox.email_created",
-    entityType: "outbox_email",
-    entityId: row.id,
-    data: { kind: values.kind, sequence: values.sequence, sentOn: values.sentOn },
-  });
   return row.id;
 }
 

@@ -137,17 +137,23 @@ export function storeFutureEvents(
       const moment = `${SAME_MOMENT[event.kind] ?? event.kind}|${resolved.date}|${(event.subject ?? "").toLowerCase()}`;
       if (moments.has(moment)) continue;
       moments.add(moment);
+      const quote = event.quote.slice(0, 500);
+      const candidates = existing.filter(
+        (e) => e.kind === event.kind && sameSubject(e.subject, event.subject) && !kept.has(e.id),
+      );
+      const sameWords = candidates.find((e) => e.sourceQuote === quote);
+      const match =
+        sameWords ?? candidates.find((e) => e.expectedDate === resolved.date) ?? candidates[0];
       const values = {
-        expectedDate: resolved.date,
-        precision: resolved.precision,
+        // The same words keep the date they had when said: a later turn must not move "in zwei
+        // Jahren" along with the conversation's last message.
+        expectedDate: sameWords?.expectedDate ?? resolved.date,
+        precision: sameWords?.precision ?? resolved.precision,
         confidence: Math.min(1, Math.max(0, event.confidence)),
-        sourceQuote: event.quote.slice(0, 500),
+        sourceQuote: quote,
         note: event.note.slice(0, 300),
         conversationId: ctx.conversationId,
       };
-      const match = existing.find(
-        (e) => e.kind === event.kind && sameSubject(e.subject, event.subject),
-      );
       if (match && match.status === "upcoming") {
         tx.update(fe).set(values).where(eq(fe.id, match.id)).run();
         kept.add(match.id);
@@ -155,7 +161,7 @@ export function storeFutureEvents(
         continue;
       }
       // Already followed up on: only a new date makes it a new event.
-      if (match && match.expectedDate === resolved.date) {
+      if (match && match.expectedDate === values.expectedDate) {
         kept.add(match.id);
         continue;
       }
@@ -177,7 +183,11 @@ export function storeFutureEvents(
         action: "future_event.created",
         entityType: "future_event",
         entityId: row.id,
-        data: { kind: event.kind, expectedDate: resolved.date, conversationId: ctx.conversationId },
+        data: {
+          kind: event.kind,
+          expectedDate: values.expectedDate,
+          conversationId: ctx.conversationId,
+        },
       });
     }
     const stale = existing

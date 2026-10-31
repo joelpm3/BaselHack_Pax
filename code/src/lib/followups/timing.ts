@@ -97,8 +97,13 @@ export function resolveTiming(timing: Timing, conversationDate: string): Resolve
     }
     case "date": {
       if (!isMonth(timing.month) || !timing.day) return null;
-      const year = timing.year ?? yearForMonth(ref, timing.month, timing.which);
-      const iso = `${year}-${pad(timing.month)}-${pad(timing.day)}`;
+      const md = `${pad(timing.month)}-${pad(timing.day)}`;
+      // Next occurrence of the full date: "am 15. November" said on 1 November is this year.
+      const year =
+        timing.year ??
+        (timing.which === "this" || md > ref.slice(5) ? parts(ref).year : parts(ref).year + 1) +
+          (timing.which === "after_next" ? 1 : 0);
+      const iso = `${year}-${md}`;
       // Reject impossible dates like 31 February.
       if (addDays(iso, 0) !== iso) return null;
       return { date: iso, precision: "day" };
@@ -194,6 +199,16 @@ export function parseGermanTiming(phrase: string): Timing | null {
       season: SEASON_WORDS[m[2]],
       year: m[3] ? Number(m[3]) : null,
       which: whichFrom(m[1]),
+    };
+  }
+
+  m = text.match(/\b(\d{1,2})\.(\d{1,2})\.(\d{4})?/);
+  if (m) {
+    return {
+      kind: "date",
+      day: Number(m[1]),
+      month: Number(m[2]),
+      year: m[3] ? Number(m[3]) : null,
     };
   }
 

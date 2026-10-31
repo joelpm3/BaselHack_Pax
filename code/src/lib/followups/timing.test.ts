@@ -48,6 +48,19 @@ describe("German phrases relative to the conversation date", () => {
     expect(resolve("im März", "2026-01-05")).toEqual({ date: "2026-03-01", precision: "month" });
     expect(resolve("im Juni 2029")).toEqual({ date: "2029-06-01", precision: "month" });
     expect(resolve("am 15. März 2027")).toEqual({ date: "2027-03-15", precision: "day" });
+    expect(resolve("am 15.11.2026")).toEqual({ date: "2026-11-15", precision: "day" });
+    expect(resolve("am 20.10.")).toEqual({ date: "2026-10-20", precision: "day" });
+  });
+
+  it("a date later in the current month is this year", () => {
+    expect(resolve("am 15. November", "2026-11-01")).toEqual({
+      date: "2026-11-15",
+      precision: "day",
+    });
+    expect(resolve("am 15. November", "2026-11-20")).toEqual({
+      date: "2027-11-15",
+      precision: "day",
+    });
   });
 
   it("years and parts of a year", () => {
