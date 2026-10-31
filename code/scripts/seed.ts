@@ -10,6 +10,7 @@ import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import * as schema from "@/lib/db/schema";
 import { type LifeSituation, lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
+import { seedFollowUps } from "./seed-follow-ups";
 
 const dataDir = process.env.DATA_DIR ?? "./data";
 mkdirSync(dataDir, { recursive: true });
@@ -260,4 +261,8 @@ for (const { customer, profile, policies } of demo) {
     .run();
 }
 
-console.log(`Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers.`);
+const futureEvents = seedFollowUps(db);
+
+console.log(
+  `Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers, ${futureEvents} future events.`,
+);

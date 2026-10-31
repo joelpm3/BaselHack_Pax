@@ -6,7 +6,7 @@ import { getModel } from "@/lib/ai/models";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import { toIsoDate } from "@/lib/documents/dates";
-import { FUTURE_EVENT_KINDS } from "./taxonomy";
+import { FUTURE_EVENT_KINDS, type FutureEventKind } from "./taxonomy";
 import { RELATIVE_WHICH, resolveExpression, SEASONS, type Timing } from "./timing";
 
 const MAX_EVENTS = 6;
@@ -71,7 +71,7 @@ Rules:
 - quote: the customer's words, verbatim, in their language. expression: only the time part, verbatim.
 - timing: the structure of the expression. "in zwei Jahren" → duration 2 years; "nächsten Sommer" → season summer, which next; "Ende nächsten Jahres" → year, which next, part end; "im März 2028" → month 3, year 2028; "wenn ich 65 werde" → age 65 with birthYear. Leave fields that do not apply null.
 - Never compute calendar dates yourself; the system does that from the conversation date.
-- At most ${MAX_EVENTS} events; one per real-world event.`;
+- At most ${MAX_EVENTS} events; one per real-world event (finishing studies and starting work at the same time is one end_of_studies event).`;
 
 interface Context {
   conversationId: string;
@@ -102,6 +102,11 @@ export async function extractFutureEvents(ctx: Context): Promise<FutureEventExtr
   return output;
 }
 
+/** Kinds that describe the same moment when they fall on the same date. */
+const SAME_MOMENT: Partial<Record<FutureEventKind, FutureEventKind>> = {
+  first_job: "end_of_studies",
+};
+
 const sameSubject = (a: string | null, b: string | null) =>
   (a ?? "").trim().toLowerCase() === (b ?? "").trim().toLowerCase();
 
@@ -120,6 +125,7 @@ export function storeFutureEvents(
   db.transaction((tx) => {
     const existing = tx.select().from(fe).where(eq(fe.customerId, ctx.customerId)).all();
     const kept = new Set<string>();
+    const moments = new Set<string>();
     for (const event of extraction.events.slice(0, MAX_EVENTS)) {
       const resolved = resolveExpression(
         event.expression || event.quote,
@@ -127,6 +133,10 @@ export function storeFutureEvents(
         ctx.conversationDate,
       );
       if (!resolved || resolved.date <= ctx.conversationDate) continue;
+      // "In zwei Jahren bin ich fertig und fange an zu arbeiten" is one moment, not two follow-ups.
+      const moment = `${SAME_MOMENT[event.kind] ?? event.kind}|${resolved.date}|${(event.subject ?? "").toLowerCase()}`;
+      if (moments.has(moment)) continue;
+      moments.add(moment);
       const values = {
         expectedDate: resolved.date,
         precision: resolved.precision,
