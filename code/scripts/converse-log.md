@@ -115,3 +115,30 @@ and the one flagged turn is a continue step that the API rejected for the limit,
 only its tool calls. Follow-up: a step that fails after tool calls still ends the turn silently
 (logged, no error shown to the customer).
 
+## Iteration 7: Clara leads and teaches (Sonnet, 2 scenarios once)
+
+Review of the live case 140bc36e (35-year-old cashier, insurance 3a that saves little): the
+advisor followed instead of leading (straight to product cards on "können wir heute
+abschliessen?"), never compared bank 3a and insurance 3a, did not clarify "voll investieren, ganz
+wenig Risiko", gave LifeStar vs FondsStar one line each, never answered the early-retirement
+question with numbers, and did not name the "gut abgedeckt mit 65" contradiction.
+
+Prompt: new section "Clara leads the conversation / Explain so the customer can decide / Talk at
+the customer's level / Clarify before acting / Consistency"; step 6 of the conversation design
+asks for the trade-off and neutral alternatives before the first recommendation. Harness: flag
+`PRODUCT_WITHOUT_EXPLANATION`; scenarios `case-140bc36e` (voice, du) and `product-choice-expert`.
+
+Run `teach1` (claude-sonnet-5-5): 0 product-without-explanation, 0 dangling/unmatched/claimed.
+- Case: asks what "voll investieren und ganz wenig Risiko" means ("kaum Kursschwankungen … oder
+  möglichst wenig Versicherungsschutz?"), explains bank 3a vs insurance 3a and defines
+  Rückkaufswert before any product, says "Eine Anlage-3a und der Schutz bei Invalidität sind zwei
+  getrennte Themen", and on "heute abschliessen" names what comes first (the suitability check)
+  instead of refusing. LifeStar vs FondsStar compared on guarantee vs fluctuation, with the bank
+  3a as the flexible alternative.
+- Expert: figures and trade-offs first, clarifies "sicher, aber mit Rendite" (capital guarantee
+  vs few fluctuations), no basics; over-explained "Rückkaufswert" once.
+
+Follow-up prompt fixes after the run (not re-run, testing budget): terms the customer already
+uses are not defined again; the original question (early retirement) is answered in numbers right
+after the first analysis, which the case still deferred within its 10 turns.
+
