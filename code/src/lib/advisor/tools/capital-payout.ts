@@ -74,7 +74,7 @@ export function createCapitalPayoutTools(ctx: ToolContext) {
         "then compares it with taking everything in one year. Payouts at the same age are taxed " +
         "together. Use only amounts from the customer or the profile.",
       inputSchema: z.object({
-        payouts: z.array(payoutInput).min(1).max(5),
+        payouts: z.array(payoutInput).min(1).max(10),
       }),
       execute: async (input, { toolCallId }): Promise<CapitalPayoutTaxOutput> => {
         const callCtx = {
@@ -91,25 +91,18 @@ export function createCapitalPayoutTools(ctx: ToolContext) {
         const missing = missingFor(profile, "capitalTax");
         const year = currentYear();
         const currentAge = year - (profile.person.birthYear ?? year);
+        // Without an age: at retirement, or now for someone already past the retirement age.
+        const defaultAge = Math.min(MAX_PAYOUT_AGE, Math.max(retirementAge(profile), currentAge));
         const payouts: PayoutRequest[] = [];
         for (const payout of input.payouts) {
           const amount = payout.amount ?? defaultAmount(profile, payout.source);
           if (amount === undefined) missing.push(DEFAULT_AMOUNT_PATH[payout.source]);
-          else
-            payouts.push({
-              amount,
-              source: payout.source,
-              // A payout cannot lie in the past.
-              age: Math.min(
-                MAX_PAYOUT_AGE,
-                Math.max(payout.age ?? retirementAge(profile), currentAge),
-              ),
-            });
+          else payouts.push({ amount, source: payout.source, age: payout.age ?? defaultAge });
         }
         if (missing.length) return { status: "missing", missing: [...new Set(missing)] };
 
         const years = groupPayoutsByAge(payouts);
-        const lastAge = years.at(-1)?.age ?? retirementAge(profile);
+        const lastAge = years.at(-1)?.age ?? defaultAge;
         const totalAmount = years.reduce((sum, y) => sum + y.amount, 0);
         const [results, single] = await Promise.all([
           Promise.all(years.map((y) => runCapitalTax(profile, callCtx, y))),
