@@ -2,7 +2,7 @@
 
 import { CircleAlert, Keyboard, Mic, Square, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import type { CSSProperties, ReactNode, RefObject } from "react";
+import type { ReactNode } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { cn } from "@/lib/utils";
 import { LevelMeter } from "./level-meter";
@@ -20,8 +20,6 @@ export interface TalkDockProps {
   phase: RecorderPhase;
   error: RecorderError | null;
   elapsedMs: number;
-  /** Receives `--level` from the recorder for the square meter. */
-  meterRef: RefObject<HTMLDivElement | null>;
   /** A transcript waits for review: the talk button then adds to it. */
   reviewing: boolean;
   /** The advisor is answering: talking is allowed, sending waits. */
@@ -45,7 +43,6 @@ export function TalkDock({
   phase,
   error,
   elapsedMs,
-  meterRef,
   reviewing,
   busy,
   onTalk,
@@ -111,11 +108,7 @@ export function TalkDock({
         </div>
       ) : null}
 
-      <div
-        ref={meterRef}
-        className="grid grid-cols-[4rem_minmax(0,1fr)_auto_minmax(0,1fr)_4rem] items-start gap-x-2"
-        style={{ "--level": 0 } as CSSProperties}
-      >
+      <div className="grid grid-cols-[4rem_minmax(0,1fr)_auto_minmax(0,1fr)_4rem] items-start gap-x-2">
         <div className="flex flex-col items-center gap-0.5">
           {recording ? (
             <>
@@ -141,7 +134,7 @@ export function TalkDock({
           )}
         </div>
 
-        <div className="flex h-[4.5rem] items-center justify-end">
+        <div className="flex h-16 items-center justify-end">
           <LevelMeter side="left" active={recording} />
         </div>
 
@@ -153,7 +146,7 @@ export function TalkDock({
             aria-label={recording ? t("stop") : reviewing ? t("talk.moreLabel") : t("start")}
             aria-keyshortcuts="Space"
             className={cn(
-              "grid size-[4.5rem] place-items-center rounded-m text-white transition-colors",
+              "grid size-16 place-items-center rounded-m text-white transition-colors",
               recording
                 ? "bg-deep-purple outline-[3px] outline-offset-2 outline-pax-green outline-solid"
                 : "bg-pax-purple hover:bg-deep-purple",
@@ -165,7 +158,7 @@ export function TalkDock({
             ) : working ? (
               <Spinner label={status} />
             ) : (
-              <Mic aria-hidden className="size-8" strokeWidth={1.75} />
+              <Mic aria-hidden className="size-7" strokeWidth={1.75} />
             )}
           </button>
           <span aria-hidden className="text-paragraph-xs leading-4 font-medium text-pax-purple">
@@ -173,7 +166,7 @@ export function TalkDock({
           </span>
         </div>
 
-        <div className="flex h-[4.5rem] items-center justify-start">
+        <div className="flex h-16 items-center justify-start">
           <LevelMeter side="right" active={recording} />
         </div>
 

@@ -9,11 +9,12 @@ import { Spinner } from "@/components/ui/spinner";
 import { focusReducer, initialFocus } from "@/components/vorsorgebild/focus";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
 import { VorsorgebildStrip } from "@/components/vorsorgebild/vorsorgebild-strip";
+import { answerMood, type RequestMood } from "@/lib/advisor/mood";
 import { topicOfMessage } from "@/lib/advisor/picture-topic";
 import { quickRepliesOf } from "@/lib/advisor/quick-replies";
 import type { AdvisorMessageMetadata, PictureKind, VorsorgebildModel } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
-import { Composer, useEffectiveInputMode } from "./composer";
+import { type ClaraTurn, Composer, useEffectiveInputMode } from "./composer";
 import { MessageView } from "./message-view";
 import { PictureProvider } from "./picture-context";
 import type { ChatMessage } from "./types";
@@ -44,6 +45,8 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   );
   const stickToBottom = useRef(true);
   const logRef = useRef<HTMLOListElement>(null);
+  // How the customer's latest message reads (sent by the server once classified).
+  const [requestMood, setRequestMood] = useState<RequestMood>("neutral");
 
   const refreshPicture = useCallback(() => {
     fetch(`/api/chat/${conversationId}/vorsorgebild`, { cache: "no-store" })
@@ -67,6 +70,9 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     messages: initialMessages,
     transport,
     throttle: 50,
+    onData: (part) => {
+      if (part.type === "data-mood") setRequestMood(part.data);
+    },
     onFinish: ({ message, isError, isAbort }) => {
       refreshPicture();
       // Once per finished answer, never on a re-render; a stopped answer is not finished.
@@ -81,6 +87,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     (text: string, metadata: AdvisorMessageMetadata) => {
       stickToBottom.current = true;
       dispatchFocus({ type: "send" });
+      setRequestMood("neutral");
       void sendMessage({ text, metadata });
     },
     [sendMessage],
@@ -159,6 +166,11 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
 
   const quickReplies = status === "ready" ? quickRepliesOfMessage(last) : [];
   const waiting = status === "submitted" || (status === "streaming" && last?.role !== "assistant");
+  const answering = status === "streaming" && last?.role === "assistant";
+  const clara: ClaraTurn = {
+    activity: waiting ? "thinking" : answering ? "answering" : null,
+    mood: answering ? answerMood(requestMood, last.parts) : requestMood,
+  };
 
   return (
     <ChatActionsProvider value={chatActions}>
@@ -220,6 +232,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               <Composer
                 conversationId={conversationId}
                 busy={busy}
+                clara={clara}
                 quickReplies={quickReplies}
                 onSend={send}
                 onStop={() => void stop()}

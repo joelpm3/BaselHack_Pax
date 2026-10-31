@@ -1,0 +1,152 @@
+/*
+ * Clara's face (plain CSS: the Turbopack CSS rule in next.config.ts does not build CSS modules). The mood sets the resting expression through custom properties; the activity
+ * (listening, thinking, answering) adds motion on top. Listening reads `--level` (0–1), which
+ * the recorder sets on an ancestor every frame.
+ */
+
+.clara-avatar {
+  --eye-scale: 1;
+  --eye-lift: 0px;
+  --smile-width: 7;
+  --smile-curve: 4;
+  --tilt: 0deg;
+  --baseline: 1;
+  overflow: visible;
+}
+
+.clara-avatar[data-mood="happy"] {
+  --eye-scale: 0.55;
+  --eye-lift: -2px;
+  --smile-width: 10;
+  --smile-curve: 8;
+}
+.clara-avatar[data-mood="curious"] {
+  --eye-scale: 1.12;
+  --eye-lift: -1px;
+  --smile-width: 5;
+  --smile-curve: 3;
+  --tilt: 6deg;
+  --baseline: 0.7;
+}
+.clara-avatar[data-mood="empathetic"] {
+  --eye-scale: 0.85;
+  --eye-lift: 2px;
+  --smile-width: 6;
+  --smile-curve: 1.5;
+  --tilt: -4deg;
+  --baseline: 0.5;
+}
+.clara-avatar[data-mood="confident"] {
+  --eye-scale: 0.9;
+  --smile-width: 9;
+  --smile-curve: 5.5;
+}
+
+.clara-face {
+  transform-origin: 60px 60px;
+  transform: rotate(var(--tilt));
+  transition: transform 0.5s ease;
+}
+
+.clara-eyes,
+.clara-drift,
+.clara-blink,
+.clara-baseline-mood,
+.clara-baseline {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.clara-eyes {
+  transform: translateY(var(--eye-lift)) scaleY(var(--eye-scale));
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clara-blink {
+  animation: clara-blink 5.2s infinite;
+}
+
+/* The path is a unit arc around the origin, stretched to the mood's width and curve. */
+.clara-mouth {
+  transform: translate(60px, 76px) scale(var(--smile-width), var(--smile-curve));
+  transition: transform 0.5s ease;
+}
+
+.clara-baseline-mood {
+  transform: scaleX(var(--baseline));
+  transition: transform 0.5s ease;
+}
+
+.clara-avatar[data-state="listening"] {
+  --eye-scale: 1.08;
+  --eye-lift: 3px;
+  --smile-width: 6;
+  --smile-curve: 3;
+  --tilt: 0deg;
+  --baseline: 1;
+}
+.clara-avatar[data-state="listening"] .clara-baseline {
+  transform: scaleX(calc(0.25 + var(--level, 0) * 0.75));
+  transition: transform 80ms linear;
+}
+
+.clara-avatar[data-state="thinking"] .clara-face {
+  transform: rotate(calc(var(--tilt) * 0.6));
+}
+.clara-avatar[data-state="thinking"] .clara-eyes {
+  transform: translateY(calc(var(--eye-lift) - 4px)) scaleY(calc(var(--eye-scale) * 0.85));
+}
+.clara-avatar[data-state="thinking"] .clara-drift {
+  animation: clara-drift 2.6s ease-in-out infinite;
+}
+.clara-avatar[data-state="thinking"] .clara-blink {
+  animation: none;
+}
+.clara-avatar[data-state="thinking"] .clara-baseline {
+  animation: clara-ponder 2.4s ease-in-out infinite;
+}
+
+.clara-avatar[data-state="answering"] .clara-baseline {
+  animation: clara-breathe 2.6s ease-in-out infinite;
+}
+
+@keyframes clara-blink {
+  0%,
+  95%,
+  100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.08);
+  }
+}
+
+@keyframes clara-drift {
+  0%,
+  100% {
+    transform: translateX(-4px);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+@keyframes clara-ponder {
+  0%,
+  100% {
+    transform: scaleX(0.28);
+  }
+  50% {
+    transform: scaleX(0.42);
+  }
+}
+
+@keyframes clara-breathe {
+  0%,
+  100% {
+    transform: scaleX(0.88);
+  }
+  50% {
+    transform: scaleX(1);
+  }
+}

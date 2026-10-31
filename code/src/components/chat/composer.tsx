@@ -1,23 +1,32 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { type CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import {
   DocumentUploadButton,
   type UploadedDocument,
 } from "@/components/documents/document-upload-button";
+import { type ClaraActivity, ClaraAvatar } from "@/components/voice/clara-avatar";
 import { type InputMode, setInputMode, useInputMode } from "@/components/voice/input-mode";
 import { appendTranscript } from "@/components/voice/talk";
 import { TalkDock } from "@/components/voice/talk-dock";
 import { TranscriptReview } from "@/components/voice/transcript-review";
 import { useSpaceToTalk } from "@/components/voice/use-space-to-talk";
 import { useRecordingSupported, useVoiceRecorder } from "@/components/voice/use-voice-recorder";
+import type { ClaraMood } from "@/lib/advisor/mood";
 import type { AdvisorMessageMetadata } from "@/lib/advisor/types";
 import { TextComposer } from "./text-composer";
+
+/** What Clara is doing with the turn, and the mood she does it in (see ClaraAvatar). */
+export interface ClaraTurn {
+  activity: "thinking" | "answering" | null;
+  mood: ClaraMood;
+}
 
 export interface ComposerProps {
   conversationId: string;
   busy: boolean;
+  clara: ClaraTurn;
   quickReplies: string[];
   onSend: (text: string, metadata: AdvisorMessageMetadata) => void;
   onStop: () => void;
@@ -35,7 +44,14 @@ export function useEffectiveInputMode(): InputMode {
  * corrected. Writing is one tap away and remembered per device. Quick replies and the paperclip
  * work in both modes.
  */
-export function Composer({ conversationId, busy, quickReplies, onSend, onStop }: ComposerProps) {
+export function Composer({
+  conversationId,
+  busy,
+  clara,
+  quickReplies,
+  onSend,
+  onStop,
+}: ComposerProps) {
   const t = useTranslations("chat.composer");
   const mode = useEffectiveInputMode();
   const canRecord = useRecordingSupported();
@@ -68,6 +84,12 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
   const recorder = useVoiceRecorder({ onTranscript, onLevel });
   const recording = recorder.phase === "recording";
   const idle = recorder.phase === "idle";
+  // The customer speaking comes first: Clara listens with an open face, even mid-answer.
+  const avatarActivity: ClaraActivity | null = recording
+    ? "listening"
+    : recorder.phase === "requesting" || recorder.phase === "transcribing"
+      ? "thinking"
+      : clara.activity;
 
   function send(value: string, metadata: AdvisorMessageMetadata): boolean {
     const trimmed = value.trim();
@@ -185,21 +207,24 @@ export function Composer({ conversationId, busy, quickReplies, onSend, onStop }:
               busy={busy}
             />
           ) : null}
-          <TalkDock
-            phase={recorder.phase}
-            error={recorder.error}
-            elapsedMs={recorder.elapsedMs}
-            meterRef={meter}
-            reviewing={review !== null}
-            busy={busy}
-            onTalk={talk}
-            onDone={recorder.stop}
-            onCancel={recorder.cancel}
-            onWrite={write}
-            onStopReply={onStop}
-            onDismissError={recorder.clearError}
-            upload={upload}
-          />
+          {/* The recorder sets `--level` here; the avatar and the square meter both read it. */}
+          <div ref={meter} style={{ "--level": 0 } as CSSProperties}>
+            <ClaraAvatar activity={avatarActivity} mood={recording ? "neutral" : clara.mood} />
+            <TalkDock
+              phase={recorder.phase}
+              error={recorder.error}
+              elapsedMs={recorder.elapsedMs}
+              reviewing={review !== null}
+              busy={busy}
+              onTalk={talk}
+              onDone={recorder.stop}
+              onCancel={recorder.cancel}
+              onWrite={write}
+              onStopReply={onStop}
+              onDismissError={recorder.clearError}
+              upload={upload}
+            />
+          </div>
         </>
       ) : (
         <TextComposer

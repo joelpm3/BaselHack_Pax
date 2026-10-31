@@ -5,6 +5,7 @@
 
 import type { ContactChannel, DocumentType } from "@/lib/domain/taxonomy";
 import type { DeathSizing } from "@/lib/sales/sizing";
+import type { RequestMood } from "./mood";
 import type { WidgetChange } from "./widget-inputs";
 
 /** Income in one situation (retirement, disability, death) split by source, as Logismata returns it. */
@@ -46,6 +47,12 @@ export interface AdvisorMessageMetadata {
   /** Widget values the customer changed before this message (server-set; a note for the model). */
   widgetChanges?: WidgetChange[];
 }
+
+/** Custom data chunks of an advisor turn. `mood` is transient: the chat sees it, history does not. */
+// A type alias, not an interface: UIMessage requires the data types to be a plain record.
+export type AdvisorDataParts = {
+  mood: RequestMood;
+};
 
 // ─── Tool outputs ───────────────────────────────────────────────────────────
 
