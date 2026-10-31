@@ -34,14 +34,17 @@ export function TranscriptReview({
   const total = autoSendSeconds(text);
   const [left, setLeft] = useState(total);
   const [editing, setEditing] = useState(false);
-  const [holding, setHolding] = useState(false);
+  // Hover and focus each hold the countdown, so they are tracked apart.
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const holding = hovered || focused;
   const field = useRef<HTMLTextAreaElement>(null);
   const send = useRef(onSend);
   useEffect(() => {
     send.current = onSend;
   });
 
-  const waiting = editing || paused || holding;
+  const waiting = editing || paused || busy || holding;
 
   useEffect(() => {
     if (waiting) {
@@ -81,11 +84,11 @@ export function TranscriptReview({
   return (
     <section
       aria-label={t("title")}
-      onPointerEnter={(event) => event.pointerType === "mouse" && setHolding(true)}
-      onPointerLeave={(event) => event.pointerType === "mouse" && setHolding(false)}
-      onFocus={() => setHolding(true)}
+      onPointerEnter={(event) => event.pointerType === "mouse" && setHovered(true)}
+      onPointerLeave={(event) => event.pointerType === "mouse" && setHovered(false)}
+      onFocus={() => setFocused(true)}
       onBlur={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setHolding(false);
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setFocused(false);
       }}
       className="rounded-xl border-[1.5px] border-pax-purple bg-surface p-3"
     >
