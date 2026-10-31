@@ -11,7 +11,11 @@ const schema = z.object({
   // LLM: "anthropic" today, "openai-compatible" for a self-hosted vLLM endpoint later.
   LLM_PROVIDER: z.enum(["anthropic", "openai-compatible"]).default("anthropic"),
   ANTHROPIC_API_KEY: z.string().optional(),
-  ANTHROPIC_MODEL: z.string().default("claude-haiku-5-5"),
+  ANTHROPIC_MODEL: z.string().default("claude-opus-5-5"),
+  /** Fast mode (beta, ~2.5x output speed at premium price); only Opus 5.5 / 5 / 4.8 support it. */
+  ANTHROPIC_SPEED: z.enum(["fast", "standard"]).default("fast"),
+  /** Standard-speed model used when fast mode is rate limited or overloaded. */
+  ANTHROPIC_FALLBACK_MODEL: z.string().default("claude-sonnet-5-5"),
   LLM_BASE_URL: z.url().optional(),
   LLM_API_KEY: z.string().optional(),
   /** Per-role model overrides; fall back to ANTHROPIC_MODEL / LLM_MODEL. */
