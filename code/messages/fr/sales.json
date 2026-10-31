@@ -364,10 +364,12 @@
         "offer_outdated": "Votre date de naissance ou votre statut de fumeur a changé depuis l'offre. Ouvrez « Modifier les données » et enregistrez pour que nous recalculions la prime."
       },
       "submit": "Signer maintenant",
-      "signedMessage": "J'ai signé l'offre pour {product} (police {number})."
+      "signedMessage": "J'ai signé la proposition pour {product} (proposition {number})."
     },
     "signed": {
-      "title": "Signé. Votre police {number} commence le {date}.",
+      "title": "Signé et validé. Votre police {number} commence le {date}.",
+      "reviewTitle": "Signé. Votre proposition {number} est maintenant en cours d’examen chez Pax.",
+      "reviewBody": "Une conseillère ou un conseiller Pax vérifie les montants et les données et vous contacte si quelque chose doit être adapté. Après validation, votre police commence le {date}. D’ici là, elle apparaît « En examen » dans votre Cockpit prévoyance.",
       "body": "Vous la trouvez maintenant dans votre Cockpit prévoyance, avec vos autres polices.",
       "portal": "Vers le Cockpit prévoyance"
     }

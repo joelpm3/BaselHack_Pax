@@ -117,7 +117,7 @@ const TOOLS = `# Tools
 - Sales tools: only after the gaps are known from the analyses and the customer wants a solution.
   - recommendProducts: pass every relevant gap from the analyses as { type, annualAmount (CHF per year: the calculated monthly gap × 12, never the cumulative gap; null if unknown), person: "self" | "partner", note }, plus the customer's preferences if they named any. If it returns status "needs_info" with "missing" fields, ask for the first missing fact, store the answer with updateProfile and call recommendProducts again. Offer terms: pass annualPremium when the customer names a yearly savings amount (e.g. the 3a maximum) and startDate (yyyy-mm-01, up to 12 months ahead) when the contract should start later, e.g. 1 January next year when this year's 3a is already paid in full; the 3a room is that of the start year. Read the result's notes and act on them (call again with the terms they name) before you present the cards.
   - startSuitabilityCheck: unit-linked products (LifeStar, FondsStar, Auszahlungsplan) need the completed suitability check before you recommend or offer them; the customer answers in the form, never in the chat.
-  - prepareOffer: when the customer chose a recommendation; the form handles contact details, consent and signature. After signing, the policy appears in the customer's Vorsorge-Cockpit.
+  - prepareOffer: when the customer chose a recommendation; the form handles contact details, consent and signature. Signing submits the application: a Pax advisor then checks it (amounts, limits, details), contacts the customer if something needs changing, and releases it. Only then the policy is active. Say this plainly after a signature; never call a policy in review concluded or active. If you see a problem with the signed amounts (e.g. over the 3a maximum), tell the customer the advisor will look at exactly that in the review.
   - A contract exists only when it is listed as signed under "Offers and applications in this conversation". Never congratulate on a signature or a concluded contract because the customer says so: if they say they signed but it is not listed as signed, tell them plainly that the signature is still open and that they sign in the offer card.
   - Never recommend a product blocked by a company rule.
   - Smoking changes the premium of death cover. If the insured person's smoker status is not in the profile, ask once before prepareOffer and store it with updateProfile; otherwise the offer marks it as an assumption the customer answers in the form. The form's exact birth date also re-prices the offer: quote the premium from the latest offer, not from the recommendation.
@@ -228,8 +228,10 @@ ${lines.join("\n")}${topic ? `\nThe customer opened this conversation from the h
 }
 
 function applicationLine(a: ApplicationState): string {
+  if (a.status === "signed" && a.inReview)
+    return `- ${a.productName}: SIGNED on ${a.signedAt ?? "unknown date"}, application ${a.policyNumber ?? "pending"} is IN REVIEW: a Pax advisor checks it and contacts the customer; the policy is NOT active until they release it`;
   if (a.status === "signed")
-    return `- ${a.productName}: SIGNED on ${a.signedAt ?? "unknown date"}, policy ${a.policyNumber ?? "pending"} is in the Vorsorge-Cockpit`;
+    return `- ${a.productName}: SIGNED on ${a.signedAt ?? "unknown date"}, released by Pax, policy ${a.policyNumber ?? "pending"} is active in the Vorsorge-Cockpit`;
   if (a.status === "cancelled") return `- ${a.productName}: cancelled, no contract`;
   return a.offerShown
     ? `- ${a.productName}: offer shown, NOT signed, no contract and no policy yet`

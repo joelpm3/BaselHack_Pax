@@ -12,6 +12,7 @@ import { advisorOrThrow, isCompanyPassword } from "@/lib/firma/auth";
 import * as mutations from "@/lib/firma/mutations";
 import { draftFromVersion, ruleSetDraftSchema } from "@/lib/firma/rule-sets";
 import { analyzeConversation } from "@/lib/insights";
+import { approveApplication as approveSignedApplication } from "@/lib/sales/application";
 import {
   cancelSimulationRun,
   SIMULATION_LIMITS,
@@ -92,6 +93,14 @@ export async function assignHandover(handoverId: string, advisorId: string | nul
     assignedAdvisorId: advisorRef.parse(advisorId),
   });
   refresh();
+}
+
+/** Release a signed application after the advisor checked it: the policy becomes active. */
+export async function approveApplication(applicationId: string): Promise<{ ok: boolean }> {
+  const advisor = await advisorOrThrow();
+  const result = approveSignedApplication(advisor.id, id.parse(applicationId));
+  refresh();
+  return { ok: result.ok };
 }
 
 export type SaveRulesResult =

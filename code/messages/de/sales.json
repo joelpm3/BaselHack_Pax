@@ -364,10 +364,12 @@
         "offer_outdated": "Ihr Geburtsdatum oder Raucherstatus hat sich seit der Offerte geändert. Öffnen Sie «Angaben ändern» und speichern Sie, damit wir die Prämie neu berechnen."
       },
       "submit": "Jetzt unterschreiben",
-      "signedMessage": "Ich habe die Offerte für {product} unterschrieben (Police {number})."
+      "signedMessage": "Ich habe den Antrag für {product} unterschrieben (Antrag {number})."
     },
     "signed": {
-      "title": "Unterschrieben. Ihre Police {number} beginnt am {date}.",
+      "title": "Unterschrieben und freigegeben. Ihre Police {number} beginnt am {date}.",
+      "reviewTitle": "Unterschrieben. Ihr Antrag {number} ist jetzt bei Pax zur Prüfung.",
+      "reviewBody": "Eine Pax-Beraterin oder ein Pax-Berater prüft die Beträge und Angaben und meldet sich bei Ihnen, falls etwas angepasst werden muss. Nach der Freigabe beginnt Ihre Police am {date}. Bis dahin sehen Sie sie im Vorsorge-Cockpit als «In Prüfung».",
       "body": "Sie finden sie jetzt in Ihrem Vorsorge-Cockpit, zusammen mit Ihren anderen Policen.",
       "portal": "Zum Vorsorge-Cockpit"
     }

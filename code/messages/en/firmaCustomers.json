@@ -49,9 +49,12 @@
     "status": {
       "draft": "Offer",
       "signed": "Signed",
+      "inReview": "In review",
       "cancelled": "Withdrawn"
     },
-    "premium": "{amount} per year"
+    "premium": "{amount} per year",
+    "approve": "Review and release",
+    "approveFailed": "Could not release. Please reload the page."
   },
   "communications": {
     "title": "Communication",
@@ -101,6 +104,7 @@
       "suitabilityCompleted": "Suitability check completed",
       "offerPrepared": "Offer prepared",
       "applicationSigned": "Application signed: {product}",
+      "applicationApproved": "Application released by Pax",
       "policyCreated": "New contract: {product}",
       "documentUploaded": "Document uploaded: {filename}",
       "documentConfirmed": "Document values confirmed",

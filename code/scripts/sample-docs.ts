@@ -132,7 +132,7 @@ class Canvas {
   }
 
   /** The specimen mark: a large diagonal "MUSTER" behind the content and a footer line. */
-  specimen(pageLabel?: string) {
+  specimen(pageLabel?: string, disclaimer = DISCLAIMER) {
     const size = 120;
     const word = "MUSTER";
     const w = this.fonts.bold.widthOfTextAtSize(word, size);
@@ -147,7 +147,7 @@ class Canvas {
       opacity: 0.35,
       rotate: degrees(angle),
     });
-    this.text(DISCLAIMER, 36, A4[1] - 30, { size: 6.5, color: MUTED });
+    this.text(disclaimer, 36, A4[1] - 30, { size: 6.5, color: MUTED });
     if (pageLabel) this.text(pageLabel, A4[0] - 36, A4[1] - 30, { size: 6.5, align: "right" });
   }
 }
@@ -771,6 +771,119 @@ async function termLifePolicy() {
   await save(pdf, "police-muster-leben-todesfall-may-mueller.pdf");
 }
 
+// ─── Test persona Adrian Hofstetter (not seeded) ────────────────────────────
+
+/**
+ * Adrian Hofstetter (born 19.04.1988, Basel 4053, married to Julia, children born 2018 and 2021)
+ * is a new customer for chat tests: his pension certificate and the family's health insurance
+ * policy at CSS, plus the message in public/samples/persona-adrian-hofstetter.md.
+ */
+const ADRIAN = {
+  salutation: "Herr",
+  name: "Adrian Hofstetter",
+  street: "Beispielstrasse 21",
+  town: "4053 Basel",
+  birthDate: "19.04.1988",
+  ahv: "756.4321.8765.02",
+};
+
+/** CSS is real; the policy is not. The footer says so instead of "companies are invented". */
+const CSS_DISCLAIMER =
+  "Muster: fiktive Police für Tests von Pax Clara (BaselHack 2026), kein Originaldokument der CSS. Personen, Nummern und Prämien sind erfunden.";
+
+async function healthPolicy() {
+  const { pdf, addPage } = await newDocument(
+    "Versicherungspolice 2026 Familie Hofstetter",
+    "Krankenversicherung CSS, Muster",
+  );
+  const ACCENT = rgb(0.2, 0.45, 0.4);
+  const { section, rows, grid } = letterHelpers(ACCENT);
+
+  const c = addPage();
+  c.specimen("Seite 1 von 1", CSS_DISCLAIMER);
+  c.rect(L, 40, 16, 16, { fill: ACCENT });
+  c.text("CSS", L + 24, 41, { size: 14, bold: true });
+  c.text("Kranken- und Unfallversicherung", L + 24, 60, { size: 8, color: MUTED });
+  c.text("Muster-Police für Testzwecke", L + 24, 71, { size: 8, color: MUTED });
+
+  [ADRIAN.salutation, ADRIAN.name, ADRIAN.street, ADRIAN.town].forEach((line, i) => {
+    c.text(line, 330, 120 + i * 13, { size: 10 });
+  });
+
+  c.text("Luzern, 20. Oktober 2025", L, 210, { size: 9 });
+  c.text("Versicherungspolice 2026", L, 232, { size: 16, bold: true });
+  c.text("Police Nr. 88317402, gültig vom 01.01.2026 bis 31.12.2026. Beträge in CHF.", L, 253, {
+    size: 9,
+    color: MUTED,
+  });
+
+  let y = section(c, "Versicherungsnehmer", 276);
+  y = grid(c, y, [
+    ["Name", `${ADRIAN.salutation} ${ADRIAN.name}`],
+    ["Kundennummer", "CSS-4053-88317"],
+    ["Adresse", `${ADRIAN.street}, ${ADRIAN.town}`],
+    ["Prämienregion", "BS, Region 0"],
+  ]);
+
+  y = section(c, "Versicherte Personen und Deckungen", y);
+  const cols = [L + 10, L + 150, R - 120, R - 6];
+  ["Person", "Deckung", "Franchise", "Prämie pro Monat"].forEach((h, i) => {
+    c.text(h, cols[i], y, { size: 7.5, color: MUTED, align: i >= 2 ? "right" : "left" });
+  });
+  y += 12;
+  c.line(L, y - 2, R, y - 2, 0.6, INK);
+  const lines: Array<[string, string, string, number]> = [
+    ["Adrian Hofstetter, 19.04.1988", "Grundversicherung KVG, Hausarztmodell", "2'500", 430.0],
+    ["", "Spitalversicherung halbprivat (VVG)", "", 115.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 24.5],
+    ["Julia Hofstetter, 02.11.1990", "Grundversicherung KVG, Hausarztmodell", "1'500", 470.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 24.5],
+    ["Noah Hofstetter, 14.06.2018", "Grundversicherung KVG, Hausarztmodell", "0", 124.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 9.8],
+    ["Mia Hofstetter, 03.02.2021", "Grundversicherung KVG, Hausarztmodell", "0", 124.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 9.8],
+  ];
+  let monthly = 0;
+  for (const [person, cover, deductible, premium] of lines) {
+    monthly += premium;
+    [person, cover, deductible, amount(premium)].forEach((cell, i) => {
+      c.text(cell, cols[i], y + 2, { size: 8.5, align: i >= 2 ? "right" : "left" });
+    });
+    y += 14;
+    c.line(L, y - 1, R, y - 1, 0.3);
+  }
+  ["Total pro Monat", "", "", amount(monthly)].forEach((cell, i) => {
+    c.text(cell, cols[i], y + 2, { size: 8.5, bold: true, align: i >= 2 ? "right" : "left" });
+  });
+  y += 24;
+
+  y = section(c, "Prämie", y);
+  y = rows(c, y, [
+    ["Prämie pro Monat", amount(monthly), { bold: true }],
+    ["Prämie pro Jahr", amount(monthly * 12)],
+    ["Zahlungsweise", "monatlich, eBill"],
+  ]);
+
+  y = section(c, "Kündigung", y);
+  y += c.paragraph(
+    "Die Grundversicherung kann mit einer Frist von einem Monat auf Ende Jahr gekündigt werden (Eingang bis 30. November). Die Zusatzversicherungen nach VVG können mit einer Frist von drei Monaten auf Ende Jahr gekündigt werden (Eingang bis 30. September). Unfall ist in der Grundversicherung ausgeschlossen, da alle erwachsenen Personen über den Arbeitgeber nach UVG versichert sind; die Kinder sind mit Unfalldeckung versichert.",
+    L + 10,
+    y,
+    R - L - 20,
+    { size: 9 },
+  );
+  y += 12;
+  c.paragraph(
+    "Diese Police enthält keine Leistungen bei Erwerbsunfähigkeit oder Tod (kein Krankentaggeld, kein Todesfallkapital).",
+    L,
+    y,
+    R - L,
+    { size: 8, color: MUTED },
+  );
+
+  await save(pdf, "police-css-2026-adrian-hofstetter.pdf");
+}
+
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log(`Writing demo documents to ${OUT_DIR}`);
@@ -814,6 +927,21 @@ async function main() {
     maxBuyIn: 132600,
   });
   await termLifePolicy();
+  await pensionCertificate({
+    file: "vorsorgeausweis-2026-adrian-hofstetter.pdf",
+    ...ADRIAN,
+    civilStatus: "verheiratet",
+    insuranceNumber: "PKM-208-7716",
+    employer: "Muster Pharma AG, Basel",
+    entry: "01.09.2016",
+    workload: 100,
+    salary: 118000,
+    capital: 186000,
+    bvgCapital: 112400,
+    deathLumpSum: 0,
+    maxBuyIn: 142000,
+  });
+  await healthPolicy();
 }
 
 main().catch((error) => {

@@ -13,6 +13,8 @@ export interface ApplicationState {
   /** True once the offer was priced (a draft may only carry the suitability check). */
   offerShown: boolean;
   policyNumber: string | null;
+  /** Signed but not yet released by a Pax advisor (policy status `offer`). */
+  inReview: boolean;
   signedAt: string | null;
 }
 
@@ -24,6 +26,7 @@ export function applicationStates(conversationId: string): ApplicationState[] {
       offer: schema.applications.offer,
       signedAt: schema.applications.signedAt,
       policyNumber: schema.policies.policyNumber,
+      policyStatus: schema.policies.status,
     })
     .from(schema.applications)
     .leftJoin(schema.policies, eq(schema.policies.id, schema.applications.policyId))
@@ -35,6 +38,7 @@ export function applicationStates(conversationId: string): ApplicationState[] {
       status: row.status,
       offerShown: "price" in row.offer,
       policyNumber: row.policyNumber,
+      inReview: row.policyStatus === "offer",
       signedAt: row.signedAt ? row.signedAt.toISOString().slice(0, 10) : null,
     }));
 }

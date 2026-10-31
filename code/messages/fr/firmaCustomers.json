@@ -49,9 +49,12 @@
     "status": {
       "draft": "Offre",
       "signed": "Signée",
+      "inReview": "En examen",
       "cancelled": "Retirée"
     },
-    "premium": "{amount} par an"
+    "premium": "{amount} par an",
+    "approve": "Vérifier et valider",
+    "approveFailed": "Validation impossible. Veuillez recharger la page."
   },
   "communications": {
     "title": "Communication",
@@ -101,6 +104,7 @@
       "suitabilityCompleted": "Test d’adéquation terminé",
       "offerPrepared": "Offre établie",
       "applicationSigned": "Proposition signée : {product}",
+      "applicationApproved": "Proposition validée par Pax",
       "policyCreated": "Nouveau contrat : {product}",
       "documentUploaded": "Document téléversé : {filename}",
       "documentConfirmed": "Valeurs du document confirmées",

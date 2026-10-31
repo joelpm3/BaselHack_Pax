@@ -49,9 +49,12 @@
     "status": {
       "draft": "Offerte",
       "signed": "Unterschrieben",
+      "inReview": "In Prüfung",
       "cancelled": "Zurückgezogen"
     },
-    "premium": "{amount} pro Jahr"
+    "premium": "{amount} pro Jahr",
+    "approve": "Prüfen und freigeben",
+    "approveFailed": "Freigabe nicht möglich. Bitte Seite neu laden."
   },
   "communications": {
     "title": "Kommunikation",
@@ -101,6 +104,7 @@
       "suitabilityCompleted": "Angemessenheitsprüfung abgeschlossen",
       "offerPrepared": "Offerte erstellt",
       "applicationSigned": "Antrag unterschrieben: {product}",
+      "applicationApproved": "Antrag von Pax freigegeben",
       "policyCreated": "Neuer Vertrag: {product}",
       "documentUploaded": "Dokument hochgeladen: {filename}",
       "documentConfirmed": "Dokumentwerte bestätigt",

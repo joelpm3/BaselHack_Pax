@@ -174,7 +174,7 @@
     "maxBuyIn": "Possible buy-in",
     "fromDocument": "From your document",
     "status": {
-      "offer": "Offer",
+      "offer": "In review",
       "active": "Active",
       "ended": "Expired",
       "cancelled": "Cancelled"

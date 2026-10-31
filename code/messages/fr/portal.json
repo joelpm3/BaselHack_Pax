@@ -174,7 +174,7 @@
     "maxBuyIn": "Rachat possible",
     "fromDocument": "Tiré de votre document",
     "status": {
-      "offer": "Offre",
+      "offer": "En examen",
       "active": "Actif",
       "ended": "Échu",
       "cancelled": "Résilié"

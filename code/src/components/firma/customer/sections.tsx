@@ -1,6 +1,7 @@
 import { ArrowDownLeft, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { ConversationStatusBadge } from "@/components/firma/badges";
+import { ApproveApplicationButton } from "@/components/firma/controls";
 import { productName } from "@/components/firma/conversation/analysis-section";
 import { Panel } from "@/components/firma/page-parts";
 import { StageSquares } from "@/components/firma/stage-squares";
@@ -71,6 +72,12 @@ export async function ApplicationsSection({
   collapsed?: boolean;
 }) {
   if (detail.applications.length === 0) return null;
+  // Signed applications whose policy waits for an advisor's release.
+  const inReviewIds = new Set(
+    detail.policies
+      .filter((p) => p.status === "offer" && p.applicationId)
+      .map((p) => p.applicationId),
+  );
   const [t, format] = await Promise.all([
     getTranslations("firmaCustomers.applications"),
     getFormatter(),
@@ -79,31 +86,43 @@ export async function ApplicationsSection({
     <Panel
       title={t("title")}
       description={t("description")}
-      collapsed={collapsed}
+      collapsed={collapsed && inReviewIds.size === 0}
       meta={detail.applications.length}
     >
       <ul className="grid gap-2">
-        {detail.applications.map((a) => (
-          <li
-            key={a.id}
-            className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-m bg-gray-1 px-3 py-2"
-          >
-            <span className="font-medium">{productName(a.productCode)}</span>
-            <Badge
-              tone={a.status === "signed" ? "success" : a.status === "draft" ? "info" : "neutral"}
+        {detail.applications.map((a) => {
+          const inReview = inReviewIds.has(a.id);
+          return (
+            <li
+              key={a.id}
+              className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-m bg-gray-1 px-3 py-2"
             >
-              {t(`status.${a.status}`)}
-            </Badge>
-            {a.premiumAnnual ? (
-              <span className="text-fg-muted">
-                {t("premium", { amount: formatChf(a.premiumAnnual, locale) })}
+              <span className="font-medium">{productName(a.productCode)}</span>
+              <Badge
+                tone={
+                  inReview
+                    ? "warning"
+                    : a.status === "signed"
+                      ? "success"
+                      : a.status === "draft"
+                        ? "info"
+                        : "neutral"
+                }
+              >
+                {t(inReview ? "status.inReview" : `status.${a.status}`)}
+              </Badge>
+              {a.premiumAnnual ? (
+                <span className="text-fg-muted">
+                  {t("premium", { amount: formatChf(a.premiumAnnual, locale) })}
+                </span>
+              ) : null}
+              <span className="ml-auto text-paragraph-xs text-fg-muted tabular-nums">
+                {format.dateTime(a.signedAt ?? a.createdAt, dateTime)}
               </span>
-            ) : null}
-            <span className="ml-auto text-paragraph-xs text-fg-muted tabular-nums">
-              {format.dateTime(a.signedAt ?? a.createdAt, dateTime)}
-            </span>
-          </li>
-        ))}
+              {inReview ? <ApproveApplicationButton applicationId={a.id} /> : null}
+            </li>
+          );
+        })}
       </ul>
     </Panel>
   );

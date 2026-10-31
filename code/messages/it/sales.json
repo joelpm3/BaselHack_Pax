@@ -364,10 +364,12 @@
         "offer_outdated": "La sua data di nascita o il suo stato di fumatore sono cambiati dopo l'offerta. Apra «Modificare i dati» e salvi, così ricalcoliamo il premio."
       },
       "submit": "Firmare ora",
-      "signedMessage": "Ho firmato l'offerta per {product} (polizza {number})."
+      "signedMessage": "Ho firmato la proposta per {product} (proposta {number})."
     },
     "signed": {
-      "title": "Firmato. La sua polizza {number} inizia il {date}.",
+      "title": "Firmato e approvato. La sua polizza {number} inizia il {date}.",
+      "reviewTitle": "Firmato. La sua proposta {number} è ora in verifica presso Pax.",
+      "reviewBody": "Una consulente o un consulente Pax verifica importi e dati e la contatta se qualcosa va adattato. Dopo l’approvazione la sua polizza inizia il {date}. Fino ad allora la vede nel Cockpit previdenza come «In verifica».",
       "body": "Ora la trova nel suo Cockpit previdenza, insieme alle sue altre polizze.",
       "portal": "Al Cockpit previdenza"
     }

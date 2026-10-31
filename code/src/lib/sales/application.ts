@@ -10,6 +10,7 @@ import { publish } from "@/lib/events/bus";
 import { quotePremium } from "@/lib/pricing";
 import { addYears, contractStartDate } from "@/lib/pricing/limits";
 import { applyProfileChanges, getProfile } from "@/lib/profile/service";
+import { formatChf } from "@/lib/utils";
 import { type OfferInputs, offerDiffers, offerInputs } from "./offer-inputs";
 import { type RecommendationParameters, syncRecommendationCard } from "./recommend";
 import { advanceConversationStage } from "./stage";
@@ -335,6 +336,7 @@ export async function prepareOffer(
         policyId: app.policyId,
         policyNumber: policy?.policyNumber ?? "",
         startDate: policy?.startDate ?? "",
+        inReview: policy?.status === "offer",
       },
     };
   }
@@ -539,8 +541,9 @@ function policyNumber(startDate: string): string {
 }
 
 /**
- * Demo signature: the typed name must match the customer. Signing creates the Pax policy
- * (cockpit), makes the customer a client and accepts the recommendation, in one transaction.
+ * Demo signature: the typed name must match the customer. Signing submits the application: the
+ * Pax policy is created "in review" (status `offer`) and a handover asks a Pax advisor to check
+ * and release it ({@link approveApplication}). Only the release activates the policy.
  */
 export function signApplication(
   customerId: string,
@@ -593,7 +596,7 @@ export function signApplication(
         productCode: app.productCode,
         productName: product.name,
         pillar: offer.pillar,
-        status: "active",
+        status: "offer",
         startDate,
         endDate: years ? addYears(startDate, years) : null,
         premiumAnnual: offer.price.annualGross,
@@ -626,9 +629,19 @@ export function signApplication(
       .set({ status: "signed", signatureName, signedAt: now, policyId: row.id })
       .where(eq(schema.applications.id, app.id))
       .run();
-    tx.update(schema.customers)
-      .set({ lifecycle: "client" })
-      .where(eq(schema.customers.id, customerId))
+    const handover = tx
+      .insert(schema.handovers)
+      .values({
+        conversationId,
+        customerId,
+        reason: reviewReason(product.name, number, offer),
+        ruleIds: [],
+      })
+      .returning()
+      .get();
+    tx.update(schema.policies)
+      .set({ details: { ...row.details, reviewHandoverId: handover.id } })
+      .where(eq(schema.policies.id, row.id))
       .run();
     if (app.recommendationId) {
       tx.update(schema.recommendations)
@@ -636,7 +649,7 @@ export function signApplication(
         .where(eq(schema.recommendations.id, app.recommendationId))
         .run();
     }
-    return row;
+    return { ...row, handoverId: handover.id };
   });
 
   audit({
@@ -659,8 +672,98 @@ export function signApplication(
     entityId: policy.id,
     data: { applicationId: app.id, source: "chat", lifecycleBefore: customer.lifecycle },
   });
+  audit({
+    actorType: "system",
+    action: "handover.requested",
+    entityType: "handover",
+    entityId: policy.handoverId,
+    data: { reason: "application_review", applicationId: app.id, policyId: policy.id },
+  });
   advanceConversationStage(conversationId, "signed");
   if (app.recommendationId) syncRecommendationCard(conversationId, app.recommendationId);
   publish({ type: "policy.created", policyId: policy.id, customerId });
-  return { ok: true, signed: { policyId: policy.id, policyNumber: number, startDate } };
+  publish({ type: "handover.created", handoverId: policy.handoverId, conversationId });
+  return {
+    ok: true,
+    signed: { policyId: policy.id, policyNumber: number, startDate, inReview: true },
+  };
+}
+
+/** What the advisor team reads in the handover queue for a signed application. */
+function reviewReason(productName: string, number: string, offer: OfferView): string {
+  const premium = formatChf(offer.price.annualGross, "de");
+  const single = offer.price.singlePremium
+    ? `, Einmalanlage ${formatChf(offer.price.singlePremium, "de")}`
+    : "";
+  return `Antrag ${productName} unterschrieben (Police ${number}, Prämie ${premium} pro Jahr${single}). Bitte Beträge und Angaben prüfen und den Antrag freigeben oder mit der Kundin oder dem Kunden anpassen.`;
+}
+
+export type ApproveError = "not_found" | "not_in_review";
+
+/**
+ * A Pax advisor releases a signed application after checking it: the policy becomes active,
+ * the customer a client, and the review handover is closed.
+ */
+export function approveApplication(
+  advisorId: string,
+  applicationId: string,
+): { ok: true } | { ok: false; error: ApproveError } {
+  const app = db
+    .select()
+    .from(schema.applications)
+    .where(eq(schema.applications.id, applicationId))
+    .get();
+  if (!app || app.status !== "signed" || !app.policyId) return { ok: false, error: "not_found" };
+  const policy = db
+    .select()
+    .from(schema.policies)
+    .where(eq(schema.policies.id, app.policyId))
+    .get();
+  if (!policy) return { ok: false, error: "not_found" };
+  if (policy.status !== "offer") return { ok: false, error: "not_in_review" };
+  const handoverId =
+    typeof policy.details?.reviewHandoverId === "string" ? policy.details.reviewHandoverId : null;
+  const customer = db
+    .select({ lifecycle: schema.customers.lifecycle })
+    .from(schema.customers)
+    .where(eq(schema.customers.id, app.customerId))
+    .get();
+
+  db.transaction((tx) => {
+    tx.update(schema.policies)
+      .set({
+        status: "active",
+        details: { ...policy.details, approvedBy: advisorId, approvedAt: new Date().toISOString() },
+      })
+      .where(eq(schema.policies.id, policy.id))
+      .run();
+    tx.update(schema.customers)
+      .set({ lifecycle: "client" })
+      .where(eq(schema.customers.id, app.customerId))
+      .run();
+    if (handoverId) {
+      tx.update(schema.handovers)
+        .set({ status: "done", assignedAdvisorId: advisorId })
+        .where(eq(schema.handovers.id, handoverId))
+        .run();
+    }
+  });
+
+  audit({
+    actorType: "advisor",
+    actorId: advisorId,
+    action: "application.approved",
+    entityType: "application",
+    entityId: app.id,
+    data: {
+      policyId: policy.id,
+      policyNumber: policy.policyNumber,
+      handoverId,
+      lifecycleBefore: customer?.lifecycle,
+    },
+  });
+  if (app.conversationId)
+    publish({ type: "conversation.updated", conversationId: app.conversationId });
+  publish({ type: "policy.created", policyId: policy.id, customerId: app.customerId });
+  return { ok: true };
 }

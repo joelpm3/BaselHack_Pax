@@ -49,9 +49,12 @@
     "status": {
       "draft": "Offerta",
       "signed": "Firmata",
+      "inReview": "In verifica",
       "cancelled": "Ritirata"
     },
-    "premium": "{amount} all’anno"
+    "premium": "{amount} all’anno",
+    "approve": "Verificare e approvare",
+    "approveFailed": "Approvazione non riuscita. Ricarichi la pagina."
   },
   "communications": {
     "title": "Comunicazione",
@@ -101,6 +104,7 @@
       "suitabilityCompleted": "Verifica di adeguatezza completata",
       "offerPrepared": "Offerta allestita",
       "applicationSigned": "Proposta firmata: {product}",
+      "applicationApproved": "Proposta approvata da Pax",
       "policyCreated": "Nuovo contratto: {product}",
       "documentUploaded": "Documento caricato: {filename}",
       "documentConfirmed": "Valori del documento confermati",

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useActionState, useEffect, useRef, useState, useTransition } from "react";
 import {
   addLeadNote,
+  approveApplication,
   assignHandover,
   assignLead,
   rerunAnalysis,
@@ -175,5 +176,34 @@ export function RerunAnalysisButton({ conversationId }: { conversationId: string
         {t("rerun")}
       </Button>
     </div>
+  );
+}
+
+/** The advisor's release of a signed application; only this activates the customer's policy. */
+export function ApproveApplicationButton({ applicationId }: { applicationId: string }) {
+  const t = useTranslations("firmaCustomers.applications");
+  const [pending, start] = useTransition();
+  const [failed, setFailed] = useState(false);
+  return (
+    <span className="flex items-center gap-2">
+      <Button
+        size="sm"
+        disabled={pending}
+        onClick={() =>
+          start(async () => {
+            const result = await approveApplication(applicationId).catch(() => ({ ok: false }));
+            setFailed(!result.ok);
+          })
+        }
+      >
+        {pending ? <Spinner /> : null}
+        {t("approve")}
+      </Button>
+      {failed ? (
+        <span role="alert" className="text-paragraph-xs text-error-dark">
+          {t("approveFailed")}
+        </span>
+      ) : null}
+    </span>
   );
 }

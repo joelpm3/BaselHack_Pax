@@ -364,10 +364,12 @@
         "offer_outdated": "Your birth date or smoker status changed since the offer. Open “Change details” and save so we can recalculate the premium."
       },
       "submit": "Sign now",
-      "signedMessage": "I signed the offer for {product} (policy {number})."
+      "signedMessage": "I signed the application for {product} (application {number})."
     },
     "signed": {
-      "title": "Signed. Your policy {number} starts on {date}.",
+      "title": "Signed and released. Your policy {number} starts on {date}.",
+      "reviewTitle": "Signed. Your application {number} is now being reviewed by Pax.",
+      "reviewBody": "A Pax advisor checks the amounts and details and contacts you if anything needs to change. Once released, your policy starts on {date}. Until then it shows as “In review” in your pension cockpit.",
       "body": "You can now find it in your pension cockpit, together with your other policies.",
       "portal": "Go to pension cockpit"
     }

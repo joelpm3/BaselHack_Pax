@@ -483,18 +483,20 @@ function SignForm({
   );
 }
 
+/** After the signature: in review until a Pax advisor releases the application, then active. */
 function Signed({ signed, date }: { signed: SignedInfo; date: (iso: string) => string }) {
   const t = useTranslations("sales.offer.signed");
+  const values = {
+    number: signed.policyNumber,
+    date: signed.startDate ? date(signed.startDate) : "",
+  };
   return (
     <div className="flex flex-col gap-3 rounded-m bg-light-green p-4">
       <p className="flex items-start gap-2 text-paragraph-s font-medium">
         <CircleCheck aria-hidden className="mt-0.5 size-5 shrink-0 text-contrast-green" />
-        {t("title", {
-          number: signed.policyNumber,
-          date: signed.startDate ? date(signed.startDate) : "",
-        })}
+        {t(signed.inReview ? "reviewTitle" : "title", values)}
       </p>
-      <p className="text-paragraph-xs">{t("body")}</p>
+      <p className="text-paragraph-xs">{signed.inReview ? t("reviewBody", values) : t("body")}</p>
       <div>
         <Link href="/portal" className={buttonClasses("primary", "sm")}>
           {t("portal")}

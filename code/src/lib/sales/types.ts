@@ -140,6 +140,8 @@ export interface SignedInfo {
   policyId: string;
   policyNumber: string;
   startDate: string;
+  /** Signed, but a Pax advisor still has to check and release it before the policy starts. */
+  inReview: boolean;
 }
 
 export type OfferStatus = "ok" | "suitability_required" | "not_suitable" | "not_found";
