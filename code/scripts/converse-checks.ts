@@ -25,11 +25,21 @@ export interface TurnView {
   analysisShown: boolean;
   /** The advisor already asked about existing insurance before this turn. */
   insuranceAsked: boolean;
+  /** The advisor explained the kind of solution and its trade-off before or in this turn. */
+  optionsExplained: boolean;
 }
 
 const ANALYSIS = ["showRiskAnalysis", "showPensionOverview"];
 const INSURANCE_WORDS =
   /versicher|police|assurance|assicura|insurance|policy|todesfall|erwerbsunfähig|invalidit|décès|decesso/i;
+
+/** Text that compares kinds of solutions (bank vs insurance 3a, guarantee vs return, flexibility). */
+const COMPARISON =
+  /(bank|konto|compte|conto)[^.?!]{0,160}(versicherung|police|assurance|assicurazion|insurance)|(versicherung|police|assurance|assicurazion|insurance)[^.?!]{0,160}(bank|konto|compte|conto)|garant\w*[^.?!]{0,160}(rendite|schwank|rendement|rendimento|return)|(flexibel|aussetzen|flexible|pause)[^.?!]{0,160}(verpflicht|gebunden|fest|engag|vincol|commit)|alternative\w*\s+(ist|wäre|sind|wären|is|are|would)\b|selbst (zu )?tragen|vorerst nichts|nichts (zu )?tun|reine Risiko/i;
+
+export function explainsOptions(text: string): boolean {
+  return COMPARISON.test(text);
+}
 
 export function asksAboutInsurance(text: string): boolean {
   return INSURANCE_WORDS.test(text) && text.includes("?");
@@ -83,6 +93,8 @@ export function flagsFor(turn: TurnView): string[] {
     flags.push(
       `UNMATCHED_QUICK_REPLIES: replies ${raw.map((r) => `[${r}]`).join(" ")} without a question in the final text${turn.quickReplies.length ? "" : " (hidden by the chat)"}`,
     );
+  if (turn.tools.some((t) => t.name === "recommendProducts") && !turn.optionsExplained)
+    flags.push("PRODUCT_WITHOUT_EXPLANATION: recommendProducts before any comparison of options");
   const claim = claimedAction(text, turn.tools);
   if (claim) flags.push(`CLAIMED_ACTION: «${claim}» without a tool that did it`);
   return flags;

@@ -115,3 +115,57 @@ and the one flagged turn is a continue step that the API rejected for the limit,
 only its tool calls. Follow-up: a step that fails after tool calls still ends the turn silently
 (logged, no error shown to the customer).
 
+## Iteration 7: Clara leads and teaches (Sonnet, 2 scenarios once)
+
+Review of the live case 140bc36e (35-year-old cashier, insurance 3a that saves little): the
+advisor followed instead of leading (straight to product cards on "können wir heute
+abschliessen?"), never compared bank 3a and insurance 3a, did not clarify "voll investieren, ganz
+wenig Risiko", gave LifeStar vs FondsStar one line each, never answered the early-retirement
+question with numbers, and did not name the "gut abgedeckt mit 65" contradiction.
+
+Prompt: new section "Clara leads the conversation / Explain so the customer can decide / Talk at
+the customer's level / Clarify before acting / Consistency"; step 6 of the conversation design
+asks for the trade-off and neutral alternatives before the first recommendation. Harness: flag
+`PRODUCT_WITHOUT_EXPLANATION`; scenarios `case-140bc36e` (voice, du) and `product-choice-expert`.
+
+Run `teach1` (claude-sonnet-5-5): 0 product-without-explanation, 0 dangling/unmatched/claimed.
+- Case: asks what "voll investieren und ganz wenig Risiko" means ("kaum Kursschwankungen … oder
+  möglichst wenig Versicherungsschutz?"), explains bank 3a vs insurance 3a and defines
+  Rückkaufswert before any product, says "Eine Anlage-3a und der Schutz bei Invalidität sind zwei
+  getrennte Themen", and on "heute abschliessen" names what comes first (the suitability check)
+  instead of refusing. LifeStar vs FondsStar compared on guarantee vs fluctuation, with the bank
+  3a as the flexible alternative.
+- Expert: figures and trade-offs first, clarifies "sicher, aber mit Rendite" (capital guarantee
+  vs few fluctuations), no basics; over-explained "Rückkaufswert" once.
+
+Follow-up prompt fixes after the run (not re-run, testing budget): terms the customer already
+uses are not defined again; the original question (early retirement) is answered in numbers right
+after the first analysis, which the case still deferred within its 10 turns.
+
+Talking at the customer's level: the prompt section "Talk at the customer's level" reads the
+level from cues (words, questions, documents, reactions), uses three levels, and scales the
+teaching above to it. The expert scenario shows no basics and trade-offs in one or two lines.
+
+Sol review (1 round): a premium waiver was presented as closing a disability gap (fixed: only a
+disability pension replaces income), and the product flag counted text written after
+recommendProducts (fixed: order-aware).
+
+## Iteration 8: the challenge's official personas as new customers (Sonnet, once each)
+
+New scenarios `jury-young-family` (Jane Müller), `jury-affluent-couple` (Lily Smith),
+`jury-single-professional` (Taylor Johnson), up to 14 turns. The harness now acts in the
+suitability and offer cards (answers, contact form, signature via the same server functions as
+the card actions) and sends the card's message, so a journey can end with a signed policy.
+
+| Persona | Got to | Recommended, why | Problems found |
+|---|---|---|---|
+| Jane Müller | Signed Pax Todesfallversicherung (CHF 460'000, 25 years, ~CHF 1'850/year) for May; then explained the disability pension (CHF 15'000/year after 24 months, ~CHF 740/year) and offered it | Death gap CHF 1'529/month and disability gap CHF 1'239/month for May (both from showRiskAnalysis); alternatives named: decreasing capital, doing nothing, checking the pension certificate first | Product explanation came in the same message as the recommendation, not before (flag). Figures match the tool results; occupation group 2 matches the tool. |
+| Lily Smith (run 1) | Handover in turn 8, no analysis | none | Rule "Vermögen über CHF 300'000: persönliche Beratung anbieten" was applied as an immediate handover; first message repeated after a tool call. |
+| Lily Smith (run 2, after the fixes) | Callback offered and accepted only in turn 11; pension overview, capital drawdown, life plan, buy-in rules explained | No product: CHF 500'000 at ~CHF 960/month covers the gap to their actual spending, so "nicht zwingend in ein Produkt binden"; names the contradiction between the 80 %-of-income gap (CHF 10'600/month) and their actual spending | Stored the husband's retirement as a planned event, so the life plan showed her retiring at 56; the advisor admitted it. Fixed: planned events are the customer's or household's, never the partner's retirement. |
+| Taylor Johnson | Signed Pax Erwerbsunfähigkeitsversicherung (CHF 32'000/year, 24 months waiting period, re-priced to CHF 1'208/year); then home-purchase simulation and life plan | Disability gap ~CHF 2'600/month (tool); no retirement gap when assets count; alternatives: carry the risk with own assets, do nothing | Handover forced in turn 1 (same rule, fixed). Scenario had no sex (the official persona is a man; fixed). Mortgage rules of thumb correct (20 % equity, 10 % hard equity, imputed rate about 5 %, one third of income). |
+
+Fixes: rules that say "anbieten" offer the callback and call requestHandover once the customer
+accepts, while Clara keeps advising within the rule's limits; a message the model repeats after a
+tool call is dropped where messages are stored and shown (`repeated-text.ts`); planned events
+describe the customer's or household's plans only.
+
