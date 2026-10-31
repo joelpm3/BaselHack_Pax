@@ -67,7 +67,7 @@ their policies and focuses on life changes and gaps.
 
 | Concern | Module | Notes |
 |---|---|---|
-| LLM | `lib/ai/models.ts` | `getModel(role)`, roles chat / analysis / extraction / simulation. Anthropic Haiku now; `LLM_PROVIDER=openai-compatible` for self-hosted vLLM on Nebius |
+| LLM | `lib/ai/models.ts` | `getModel(role)`, roles chat / analysis / extraction / simulation. Anthropic Claude Opus 5.5 in fast mode (Sonnet 5.5 when fast mode is busy), background analysis on Sonnet 5.5; `LLM_PROVIDER=openai-compatible` for self-hosted vLLM on Nebius |
 | Calculations | `lib/logismata` | Logismata APICalc (risk, retirement, 3a, buy-in, tax location) |
 | Pricing | `lib/pricing` | Pax Quicksale live tariff (server-side session, one change per request), fitted estimate fallback |
 | Speech | `/api/transcribe` | Proxy to the Swiss-German Nemotron server (`STT_BASE_URL`, OpenAI-style `/v1/audio/transcriptions`) |

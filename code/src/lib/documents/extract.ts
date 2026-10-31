@@ -14,7 +14,7 @@ import {
 import { normalizeExtractedFields, type RawField } from "./normalize";
 
 /**
- * Two model calls on the original file (Haiku reads PDFs and images natively):
+ * Two model calls on the original file (Claude reads PDFs and images natively):
  * 1. classify the document, 2. extract the typed fields for that type with page and quote.
  * Values the document does not print are left out; nothing is inferred.
  */
