@@ -1,0 +1,28 @@
+{
+  "title": "Imposta sul prelievo di capitale",
+  "pending": "Calcolo l'imposta sul prelievo di capitale",
+  "lead": "Prelievo di {amount} {sources} a {age} anni",
+  "leadStaggered": "{amount} prelevati in modo scaglionato, su {count} anni fiscali",
+  "place": ", domicilio {place}",
+  "tax": "{amount} di imposte",
+  "net": "Dopo le imposte le restano {amount}",
+  "rate": "Aliquota",
+  "authorities": {
+    "federal": "Confederazione",
+    "state": "Cantone",
+    "community": "Comune",
+    "church": "Chiesa"
+  },
+  "sources": {
+    "pension_fund": "dalla cassa pensione",
+    "pillar3a": "dal pilastro 3a"
+  },
+  "and": " e ",
+  "atAge": "A {age} anni ({year})",
+  "yearPayout": "{amount} {sources}",
+  "comparison": {
+    "saving": "Prelevare tutto in una volta a {age} anni costa {tax} di imposte. Scaglionando risparmia {saving}.",
+    "none": "Prelevare tutto in una volta a {age} anni costa {tax} di imposte. Qui lo scaglionamento non fa risparmiare nulla."
+  },
+  "assumptions": "{joint, select, yes {Tassazione congiunta} other {Tassazione individuale}}, {children, plural, =0 {senza figli} one {con # figlio} other {con # figli}}, senza confessione, secondo la tariffa fiscale attuale. I prelievi dello stesso anno vengono sommati. Calcolo di Logismata, non vincolante, non è una consulenza fiscale."
+}

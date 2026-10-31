@@ -4,6 +4,7 @@ import type { Locale } from "@/lib/domain/taxonomy";
 import { type CallContext, callLogismata, LOGISMATA } from "@/lib/logismata/client";
 import type { IncomeBreakdown, RiskPersonResult } from "../types";
 import {
+  buildCapitalTaxRequest,
   buildPurchaseP2Request,
   buildRetirementBaseRequest,
   buildRetirementRequest,
@@ -208,6 +209,29 @@ export async function runPurchaseP2(
   return callLogismata<PurchaseP2Response>(
     "APICalc_calculatePurchaseP2",
     buildPurchaseP2Request(profile, currentYear(), options),
+    ctx,
+  );
+}
+
+export interface CapitalTaxResponse {
+  CapitalTaxes?: number;
+  FederalTax?: number;
+  StateTax?: number;
+  CommunityTax?: number;
+  ChurchTax?: number;
+  NetCapital?: number;
+  TaxPercentage?: number;
+}
+
+/** Tax on a lump-sum payout (pension fund or 3a) at the customer's place of residence. */
+export async function runCapitalTax(
+  profile: LifeSituation,
+  ctx: CallContext,
+  options: { amount: number; age: number },
+) {
+  return callLogismata<CapitalTaxResponse>(
+    "APICalc_calculateCapitalTax",
+    buildCapitalTaxRequest(profile, currentYear(), options),
     ctx,
   );
 }

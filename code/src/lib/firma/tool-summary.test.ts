@@ -82,6 +82,16 @@ describe("summarizeTool", () => {
     });
   });
 
+  it("sums up a lump-sum payout with its tax", () => {
+    expect(
+      summarizeTool("calculateCapitalPayoutTax", {
+        status: "ok",
+        totalAmount: 80000,
+        totalTax: 3826,
+      }),
+    ).toEqual({ key: "capitalTax", values: {}, amounts: { amount: 80000, tax: 3826 } });
+  });
+
   it("returns null for unknown tools and unfinished calls", () => {
     expect(summarizeTool("somethingNew", { a: 1 })).toBeNull();
     expect(summarizeTool("showRiskAnalysis", null)).toBeNull();

@@ -8,6 +8,7 @@ export const NAMESPACES = [
   "home",
   "chat",
   "widgets",
+  "capitalPayout",
   "portal",
   "documents",
   "voice",

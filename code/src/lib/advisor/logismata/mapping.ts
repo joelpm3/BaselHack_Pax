@@ -69,7 +69,8 @@ function incomeOf(person: Person | undefined): number | undefined {
   return person.employment && NO_INCOME_EMPLOYMENT.has(person.employment) ? 0 : undefined;
 }
 
-export type Check = "retirement" | "risk" | "tax";
+/** capitalTax: tax on a lump-sum payout, which does not depend on income. */
+export type Check = "retirement" | "risk" | "tax" | "capitalTax";
 
 /** Profile paths that must be known before a Logismata check can run. */
 export function missingFor(profile: LifeSituation, check: Check): string[] {
@@ -78,14 +79,14 @@ export function missingFor(profile: LifeSituation, check: Check): string[] {
   if (person.birthYear === undefined) missing.push("person.birthYear");
   if (person.sex === undefined) missing.push("person.sex");
   if (person.maritalStatus === undefined) missing.push("person.maritalStatus");
-  if (incomeOf(person) === undefined) missing.push("person.grossIncome");
-  if (check !== "tax" && hasPartner(profile)) {
+  if (check !== "capitalTax" && incomeOf(person) === undefined) missing.push("person.grossIncome");
+  if ((check === "retirement" || check === "risk") && hasPartner(profile)) {
     if (partner?.birthYear === undefined) missing.push("partner.birthYear");
     if (partner?.sex === undefined) missing.push("partner.sex");
     if (incomeOf(partner) === undefined) missing.push("partner.grossIncome");
   }
-  if (check === "tax") {
-    if (isJointlyTaxed(profile) && incomeOf(partner) === undefined)
+  if (check === "tax" || check === "capitalTax") {
+    if (check === "tax" && isJointlyTaxed(profile) && incomeOf(partner) === undefined)
       missing.push("partner.grossIncome");
     const { residence } = profile;
     if (residence.taxLocationId === undefined && !residence.zip && !residence.city)
@@ -364,9 +365,12 @@ export function buildRiskBaseRequest(profile: LifeSituation, year: number) {
 }
 
 function taxFields(profile: LifeSituation, year: number) {
+  return { IncomeType: 1, Income: householdIncome(profile), ...taxpayerFields(profile, year) };
+}
+
+/** Who pays the tax and where; `year` decides which children still count as dependants. */
+function taxpayerFields(profile: LifeSituation, year: number) {
   return {
-    IncomeType: 1,
-    Income: householdIncome(profile),
     TaxLocationID: profile.residence.taxLocationId ?? 0,
     Relationship: relationshipCode(profile),
     Confession1: NO_CONFESSION,
@@ -402,6 +406,20 @@ export function buildPurchaseP2Request(
     InterestRate: INTEREST_RATE,
     ConversionRate: CONVERSION_RATE,
     ...taxFields(profile, year),
+  };
+}
+
+/** Lump-sum payout in the year the customer reaches `age` (APICalc_calculateCapitalTax). */
+export function buildCapitalTaxRequest(
+  profile: LifeSituation,
+  year: number,
+  options: { amount: number; age: number },
+) {
+  const payoutYear = Math.max(year, (profile.person.birthYear ?? 1980) + options.age);
+  return {
+    CapitalPayment: Math.max(0, Math.round(options.amount)),
+    PaymentAge: options.age,
+    ...taxpayerFields(profile, payoutYear),
   };
 }
 

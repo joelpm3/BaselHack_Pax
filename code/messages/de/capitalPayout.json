@@ -1,0 +1,28 @@
+{
+  "title": "Steuer bei Kapitalbezug",
+  "pending": "Ich rechne die Steuer auf den Kapitalbezug",
+  "lead": "Bezug von {amount} aus {sources} mit {age}",
+  "leadStaggered": "{amount} gestaffelt bezogen, verteilt auf {count} Steuerjahre",
+  "place": ", Wohnort {place}",
+  "tax": "{amount} Steuern",
+  "net": "{amount} bleiben Ihnen nach Steuern",
+  "rate": "Steuersatz",
+  "authorities": {
+    "federal": "Bund",
+    "state": "Kanton",
+    "community": "Gemeinde",
+    "church": "Kirche"
+  },
+  "sources": {
+    "pension_fund": "der Pensionskasse",
+    "pillar3a": "der Säule 3a"
+  },
+  "and": " und ",
+  "atAge": "Mit {age} ({year})",
+  "yearPayout": "{amount} aus {sources}",
+  "comparison": {
+    "saving": "Alles auf einmal mit {age} kostet {tax} Steuern. Gestaffelt sparen Sie {saving}.",
+    "none": "Alles auf einmal mit {age} kostet {tax} Steuern. Die Staffelung spart hier nichts."
+  },
+  "assumptions": "{joint, select, yes {Gemeinsam veranlagt} other {Allein veranlagt}}, {children, plural, =0 {ohne Kinder} one {mit # Kind} other {mit # Kindern}}, ohne Konfession, nach heutigem Steuertarif. Bezüge im selben Jahr werden zusammengezählt. Berechnung von Logismata, unverbindlich, keine Steuerberatung."
+}

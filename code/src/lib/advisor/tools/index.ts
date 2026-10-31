@@ -1,6 +1,7 @@
 import "server-only";
 import type { ToolSet } from "ai";
 import { createAnalysisTools } from "./analysis";
+import { createCapitalPayoutTools } from "./capital-payout";
 import type { ToolContext } from "./context";
 import { createDocumentTools } from "./documents";
 import { createHandoverTools } from "./handover";
@@ -13,6 +14,7 @@ export function createAdvisorTools(ctx: ToolContext): ToolSet {
   return {
     ...createProfileTools(ctx),
     ...createAnalysisTools(ctx),
+    ...createCapitalPayoutTools(ctx),
     ...createScenarioTools(ctx),
     ...createDocumentTools(ctx),
     ...createHandoverTools(ctx),

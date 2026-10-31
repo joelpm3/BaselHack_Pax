@@ -1,3 +1,4 @@
+import type { CapitalPayoutTaxOutput } from "@/lib/advisor/capital-payout";
 import type {
   FeedbackOutput,
   HandoverOutput,
@@ -78,6 +79,11 @@ export function summarizeTool(name: string, output: unknown): ToolLine | null {
         {},
         { amount: o.saving3a.yearlyAmount, saving: o.saving3a.yearlyTaxSavings },
       );
+    }
+    case "calculateCapitalPayoutTax": {
+      const o = output as unknown as CapitalPayoutTaxOutput;
+      if (o.status !== "ok") return missingLine(o);
+      return line("capitalTax", {}, { amount: o.totalAmount, tax: o.totalTax });
     }
     case "simulateScenario": {
       const o = output as unknown as ScenarioOutput;
