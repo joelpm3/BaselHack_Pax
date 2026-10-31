@@ -3,7 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { patchToolOutput } from "@/lib/advisor/conversations";
 import { type Pillar3aPolicy, pillar3aContributionIn } from "@/lib/advisor/pillar3a";
-import { activeLifePolicies } from "@/lib/advisor/policies";
+import { pillar3aPolicies } from "@/lib/advisor/policies";
 import type { ToolContext } from "@/lib/advisor/tools/context";
 import { modelName } from "@/lib/ai/models";
 import { audit } from "@/lib/audit";
@@ -299,7 +299,7 @@ export async function recommendProducts(
   const explicitStart =
     Boolean(input.startDate) && (!start.problem || start.problem === "not_first_of_month");
   const profile = getProfile(ctx.customerId);
-  const policies: Pillar3aPolicy[] = activeLifePolicies(ctx.customerId);
+  const policies: Pillar3aPolicy[] = pillar3aPolicies(ctx.customerId);
   const thisYear = today.getFullYear();
   const contributionIn = (year: number) =>
     pillar3aContributionIn(year, profile, policies, thisYear);
@@ -392,8 +392,12 @@ export async function recommendProducts(
     draft.alternatives = alternativesFor(need, primary, others, profile, t);
     drafts.push(draft);
     const year = insured.facts.currentYear;
-    if (draft.room3a !== undefined && draft.input.pillar === "3a") {
-      if (input.annualPremium !== undefined && draft.input.annualPremium !== input.annualPremium)
+    if (draft.room3a !== undefined) {
+      if (
+        draft.input.pillar === "3a" &&
+        input.annualPremium !== undefined &&
+        draft.input.annualPremium !== input.annualPremium
+      )
         base.notes?.push(
           `annualPremium ${input.annualPremium} became ${draft.input.annualPremium}: the 3a room ` +
             `in ${year} is CHF ${draft.room3a}, the tariff minimum CHF ${SAVINGS_MIN_PREMIUM}.`,

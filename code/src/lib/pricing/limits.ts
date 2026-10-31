@@ -117,9 +117,6 @@ export function contractStartDate(today: Date): string {
   return `${year}-${pad(month)}-01`;
 }
 
-/** Latest contract start: 12 months after today. */
-export const MAX_START_MONTHS_AHEAD = 12;
-
 export type StartDateProblem = "not_first_of_month" | "in_the_past" | "too_far_ahead" | "invalid";
 
 /**
@@ -148,8 +145,7 @@ export function resolveStartDate(
   const startDate = `${year}-${pad(startMonth)}-01`;
   const todayIso = today.toISOString().slice(0, 10);
   if (startDate < todayIso) return { startDate: fallback, problem: "in_the_past" };
-  if (monthsBetween(todayIso, startDate) > MAX_START_MONTHS_AHEAD)
-    return { startDate: fallback, problem: "too_far_ahead" };
+  if (startDate > addYears(todayIso, 1)) return { startDate: fallback, problem: "too_far_ahead" };
   return day === 1 ? { startDate } : { startDate, problem: "not_first_of_month" };
 }
 

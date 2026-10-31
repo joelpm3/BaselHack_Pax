@@ -3,7 +3,7 @@ import type { LifeSituation } from "@/lib/domain/profile";
 import type { Locale } from "@/lib/domain/taxonomy";
 import { type CallContext, callLogismata, LOGISMATA } from "@/lib/logismata/client";
 import { type Pillar3aSaving, pillar3aSaving } from "../pillar3a";
-import { activeLifePolicies } from "../policies";
+import { pillar3aPolicies } from "../policies";
 import {
   buildGrowthRequest,
   buildSavingRequest,
@@ -109,7 +109,7 @@ export async function runRetirementCheck(
   // Only the saved part of the 3a counts: insurance 3a risk premiums and policies that end don't.
   const saving =
     overrides.saving === undefined && ctx.customerId
-      ? pillar3aSaving(profile, activeLifePolicies(ctx.customerId), year)
+      ? pillar3aSaving(profile, pillar3aPolicies(ctx.customerId), year)
       : null;
   const response = await callLogismata<RetirementResponse>(
     "APICalc_calculateRetirement",

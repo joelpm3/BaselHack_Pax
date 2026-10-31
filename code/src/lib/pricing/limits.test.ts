@@ -48,6 +48,7 @@ describe("resolveStartDate", () => {
       startDate: "2026-11-01",
       problem: "in_the_past",
     });
+    expect(resolveStartDate("2027-11-01", today).problem).toBe("too_far_ahead");
     expect(resolveStartDate("2027-12-01", today)).toEqual({
       startDate: "2026-11-01",
       problem: "too_far_ahead",

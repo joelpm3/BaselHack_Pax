@@ -23,6 +23,24 @@ export function activeLifePolicies(customerId: string) {
     .filter((p) => !p.endDate || p.endDate >= today);
 }
 
+/**
+ * The customer's 3a policies including ended ones: the stated 3a contribution may still count
+ * the premium of a policy that ended, which must not turn into bank 3a saving after its end.
+ */
+export function pillar3aPolicies(customerId: string) {
+  return db
+    .select()
+    .from(schema.policies)
+    .where(
+      and(
+        eq(schema.policies.customerId, customerId),
+        eq(schema.policies.status, "active"),
+        eq(schema.policies.category, "pillar3a"),
+      ),
+    )
+    .all();
+}
+
 /** True when the household has an active death or disability policy on file. */
 export function hasRiskPolicies(customerId: string): boolean {
   return activeLifePolicies(customerId).some(

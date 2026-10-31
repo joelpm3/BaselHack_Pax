@@ -46,13 +46,19 @@ export function paysIn(policy: Pillar3aPolicy, year: number): boolean {
 const premiumsIn = (policies: Pillar3aPolicy[], year: number) =>
   policies.filter((p) => paysIn(p, year)).reduce((s, p) => s + (p.premiumAnnual ?? 0), 0);
 
-/** 3a contributions without a policy behind them (bank 3a), assumed to continue. */
+/**
+ * 3a contributions without a policy behind them (bank 3a), assumed to continue. The stated
+ * figure includes every 3a policy that has started, also one that has ended since (its premium
+ * must not turn into bank saving once the policy is over).
+ */
 function otherContributions(
   profile: LifeSituation,
   own: Pillar3aPolicy[],
   currentYear: number,
 ): number {
-  return Math.max(0, (profile.pillar3a.annualContribution ?? 0) - premiumsIn(own, currentYear));
+  const started = own.filter((p) => (yearOf(p.startDate) ?? currentYear) <= currentYear);
+  const premiums = started.reduce((s, p) => s + (p.premiumAnnual ?? 0), 0);
+  return Math.max(0, (profile.pillar3a.annualContribution ?? 0) - premiums);
 }
 
 /** The customer's 3a contributions in a calendar year (for the 3a room of that year). */

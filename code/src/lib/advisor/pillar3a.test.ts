@@ -42,6 +42,12 @@ describe("pillar3aContributionIn", () => {
     expect(pillar3aContributionIn(2027, profile, policies, 2026)).toBe(4258 + 7258);
   });
 
+  it("does not turn an ended policy's premium into bank 3a after the year rolls over", () => {
+    const policies = [insurance3a({ endDate: "2026-12-31", details: { cancelled: true } })];
+    expect(pillar3aContributionIn(2027, cashier, policies, 2027)).toBe(0);
+    expect(pillar3aSaving(cashier, policies, 2027).annualSaving).toBe(0);
+  });
+
   it("uses the policy premiums when the profile has no 3a figure", () => {
     const profile = lifeSituationSchema.parse({ person: { birthYear: 1991 } });
     expect(pillar3aContributionIn(2026, profile, [insurance3a()], 2026)).toBe(7258);
