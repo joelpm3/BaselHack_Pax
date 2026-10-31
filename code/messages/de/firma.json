@@ -14,7 +14,9 @@
     "handovers": "Übergaben",
     "rules": "Regeln",
     "simulation": "Simulation",
-    "followUps": "Wiedervorlagen"
+    "followUps": "Wiedervorlagen",
+    "knowledge": "Produktwissen",
+    "improvements": "Verbesserungen"
   },
   "login": {
     "title": "Im Firmencockpit anmelden",

@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  BookOpen,
   Bot,
   CalendarClock,
   Handshake,
@@ -10,6 +11,7 @@ import {
   MessagesSquare,
   Radio,
   ScrollText,
+  Sparkles,
   Target,
   UsersRound,
   X,
@@ -32,6 +34,8 @@ const NAV = [
   { href: "/firma/wiedervorlagen", key: "followUps", icon: CalendarClock },
   { href: "/firma/regeln", key: "rules", icon: ScrollText },
   { href: "/firma/simulation", key: "simulation", icon: Bot },
+  { href: "/firma/wissen", key: "knowledge", icon: BookOpen },
+  { href: "/firma/verbesserungen", key: "improvements", icon: Sparkles },
 ] as const;
 
 function isActive(pathname: string | null, href: string): boolean {

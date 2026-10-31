@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { ConversationStatusBadge, SimulatedBadge } from "@/components/firma/badges";
 import { RerunAnalysisButton } from "@/components/firma/controls";
 import { AnalysisSection } from "@/components/firma/conversation/analysis-section";
+import { FlagSection } from "@/components/firma/conversation/flag-section";
 import { HandoversSection, LeadsSection } from "@/components/firma/conversation/leads-section";
 import { ProfileSection } from "@/components/firma/conversation/profile-section";
 import {
@@ -150,6 +151,7 @@ async function ConversationContent({
             <LeadsSection detail={detail} locale={locale} />
             <HandoversSection detail={detail} />
             <ProfileSection detail={detail} locale={locale} asOf={conversation.createdAt} />
+            <FlagSection conversationId={conversation.id} />
           </div>
         </div>
         <RecommendationsSection detail={detail} locale={locale} />

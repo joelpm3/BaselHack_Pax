@@ -1,0 +1,153 @@
+{
+  "knowledge": {
+    "title": "Produktwissen",
+    "description": "Produktblätter, AVB und Tarifinformationen, aus denen der digitale Berater Produktdetails nachschlägt. Er nutzt nur die aktive Version jedes Dokuments.",
+    "kinds": {
+      "product_sheet": "Produktblatt",
+      "terms": "AVB",
+      "tariff": "Tarifinformation",
+      "other": "Weiteres Dokument"
+    },
+    "status": {
+      "processing": "Wird gelesen",
+      "active": "Aktiv",
+      "superseded": "Ersetzt",
+      "failed": "Nicht lesbar",
+      "deleted": "Gelöscht"
+    },
+    "productEmpty": "Keine Dokumente. Detailfragen zu diesem Produkt beantwortet der Berater nicht selbst.",
+    "documentCount": "{count, plural, =0 {Keine Dokumente} one {# Dokument} other {# Dokumente}}",
+    "advisorUses": "Berater nutzt v{version}",
+    "noActive": "Noch nicht aktiv",
+    "versionLine": "v{version} · {filename} · {pages} · {time}",
+    "pages": "{count, plural, one {# Seite} other {# Seiten}}",
+    "sections": "{count, plural, one {# Abschnitt gelesen} other {# Abschnitte gelesen}}",
+    "versionSquare": "Version {version}: {status}",
+    "processingHint": "v{version} wird gelesen. Das dauert meist unter einer Minute.",
+    "failedHint": "v{version} konnte nicht gelesen werden: {error}",
+    "replace": "Neue Version",
+    "replacing": "Wird hochgeladen …",
+    "delete": "Löschen",
+    "confirmDelete": "«{title}» mit allen Versionen löschen? Der Berater nutzt das Dokument danach nicht mehr.",
+    "open": "PDF öffnen",
+    "upload": {
+      "title": "Dokument hinzufügen",
+      "description": "Ein neues Dokument wird aktiv, sobald es gelesen ist. Um ein bestehendes zu aktualisieren, laden Sie dort eine neue Version hoch.",
+      "product": "Produkt",
+      "kind": "Art",
+      "docTitle": "Titel",
+      "titlePlaceholder": "z. B. Produktblatt 2026",
+      "file": "PDF-Datei",
+      "fileHint": "PDF bis 10 MB und 40 Seiten, verschlüsselt gespeichert.",
+      "submit": "Hochladen",
+      "uploading": "Wird hochgeladen …",
+      "done": "Hochgeladen. Der Berater nutzt das Dokument, sobald es gelesen ist.",
+      "errors": {
+        "empty": "Die Datei ist leer.",
+        "too_large": "Die Datei ist grösser als 10 MB.",
+        "not_pdf": "Nur PDF-Dateien sind möglich.",
+        "unreadable": "Das PDF lässt sich nicht öffnen.",
+        "too_many_pages": "Das PDF hat mehr als 40 Seiten.",
+        "unknown_entry": "Dieses Dokument gibt es nicht mehr.",
+        "invalid_fields": "Bitte Produkt, Art und Titel angeben.",
+        "generic": "Das Hochladen hat nicht geklappt. Bitte erneut versuchen."
+      }
+    },
+    "test": {
+      "title": "Nachschlagen testen",
+      "description": "Zeigt, welche Stellen der Berater zu einer Frage findet.",
+      "question": "Stichworte",
+      "placeholder": "z. B. Wartefrist Erwerbsunfähigkeit",
+      "submit": "Suchen",
+      "none": "Keine passende Stelle gefunden. Der Berater würde das nicht bestätigen.",
+      "noDocuments": "Für dieses Produkt gibt es keine aktiven Dokumente.",
+      "page": "Seite {page}"
+    }
+  },
+  "improvements": {
+    "title": "Verbesserungen",
+    "description": "Pax liest die Gespräche, findet wiederkehrende Probleme und schlägt Änderungen vor. Nichts wird automatisch aktiv: Sie entscheiden über jeden Vorschlag.",
+    "runLabel": "Gespräche analysieren",
+    "run": {
+      "24h": "Letzte 24 Stunden analysieren",
+      "7d": "Letzte 7 Tage analysieren"
+    },
+    "window": {
+      "24h": "24 Stunden",
+      "7d": "7 Tage"
+    },
+    "running": "Die Gespräche der letzten {window} werden analysiert. Das dauert etwa eine Minute.",
+    "failed": "Die Analyse ist fehlgeschlagen: {error}",
+    "interrupted": "Die Analyse wurde unterbrochen. Starten Sie sie erneut.",
+    "lastRun": "Analyse der letzten {window}, {time}",
+    "noRun": "Noch keine Analyse. Starten Sie eine, um Vorschläge zu erhalten.",
+    "noConversations": "In diesem Zeitraum gab es keine Gespräche.",
+    "stats": {
+      "conversations": "Gespräche",
+      "simulated": "davon {count} simuliert",
+      "dropped": "vor der Empfehlung abgebrochen",
+      "nps": "NPS im Schnitt",
+      "npsCount": "{count, plural, =0 {keine Bewertung} one {# Bewertung} other {# Bewertungen}}",
+      "flagged": "von Beratern markiert",
+      "missedHandovers": "verpasste Übergaben"
+    },
+    "open": "Offene Vorschläge",
+    "openEmpty": "Keine offenen Vorschläge. Starten Sie eine Analyse, wenn neue Gespräche dazugekommen sind.",
+    "accepted": "Angenommen",
+    "applied": "Umgesetzt",
+    "dismissed": "Verworfen",
+    "category": {
+      "unanswered_question": "Unbeantwortete Frage",
+      "drop_off": "Abbruch",
+      "wrong_numbers": "Falsche oder verfrühte Zahlen",
+      "confusing_reply": "Unklare Antwort",
+      "missed_handover": "Verpasste Übergabe",
+      "other": "Weiteres"
+    },
+    "kind": {
+      "rule": "Regel",
+      "knowledge": "Produktwissen",
+      "prompt": "Gesprächsführung"
+    },
+    "problem": "Problem",
+    "proposal": "Vorschlag",
+    "ruleDraft": "Regelentwurf",
+    "evidence": "{count, plural, one {Gesehen in # Gespräch} other {Gesehen in # Gesprächen}}",
+    "untitled": "Gespräch ohne Titel",
+    "acceptRule": "Als Regelentwurf übernehmen",
+    "accept": "Annehmen",
+    "dismiss": "Verwerfen",
+    "reopen": "Wieder öffnen",
+    "reviewInEditor": "Im Regeleditor prüfen",
+    "appliedIn": "In Regeln v{version} aktiv",
+    "acceptedRule": "Wartet im Regeleditor. Aktiv erst, wenn Sie eine neue Version speichern.",
+    "acceptedKnowledge": "Ergänzen Sie dazu das Produktwissen.",
+    "acceptedPrompt": "Für das Team vorgemerkt, das die Gesprächsführung pflegt.",
+    "openKnowledge": "Produktwissen öffnen",
+    "flags": {
+      "title": "Markierte Gespräche",
+      "description": "Von Beratern als nicht gut markiert. Fliessen in jede Analyse ein, bis sie erledigt sind.",
+      "empty": "Keine offenen Markierungen.",
+      "by": "{name}, {time}"
+    }
+  },
+  "flag": {
+    "title": "Gesprächsqualität",
+    "description": "Lief das Gespräch nicht gut? Markieren Sie es mit einer kurzen Notiz. Die Notiz fliesst in die Analyse unter Verbesserungen ein.",
+    "label": "Was lief nicht gut?",
+    "placeholder": "z. B. Hat Prämien genannt, bevor die Situation klar war",
+    "submit": "Als nicht gut markieren",
+    "error": "Beschreiben Sie in ein paar Worten, was nicht gut lief.",
+    "resolve": "Erledigt",
+    "resolved": "Erledigt",
+    "by": "{name}, {time}",
+    "unknownAdvisor": "Berater"
+  },
+  "ruleDraft": {
+    "banner": "Regelentwurf aus Verbesserungen: «{title}». Prüfen und passen Sie ihn an. Er wird erst aktiv, wenn Sie die neue Version speichern.",
+    "proposed": "Vorgeschlagen",
+    "pending": "Entwürfe aus Verbesserungen",
+    "pendingHelp": "Angenommene Vorschläge, die noch in keiner Version stehen.",
+    "openDraft": "Im Editor öffnen"
+  }
+}

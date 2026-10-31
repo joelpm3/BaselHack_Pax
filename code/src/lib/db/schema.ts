@@ -7,6 +7,16 @@ import {
   text,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core";
+import {
+  CONVERSATION_FLAG_STATUSES,
+  IMPROVEMENT_CATEGORIES,
+  IMPROVEMENT_KINDS,
+  IMPROVEMENT_WINDOWS,
+  KNOWLEDGE_KINDS,
+  KNOWLEDGE_STATUSES,
+  type KnowledgeSection,
+  PROPOSAL_STATUSES,
+} from "@/lib/domain/learning";
 import { PRODUCT_CODES } from "@/lib/domain/products";
 import type { LifeSituation } from "@/lib/domain/profile";
 import {
@@ -656,3 +666,112 @@ export const contactPreferences = sqliteTable("contact_preferences", {
   updatedBy: text("updated_by", { enum: ACTOR_TYPES }).notNull(),
   updatedAt: updatedAt(),
 });
+// ─── Company product knowledge (uploaded product sheets, terms, tariff info) ─
+
+/**
+ * One row per uploaded version. Versions of the same document share `entryId` (the first
+ * version's id); at most one version per entry is `active`, and only active versions reach the
+ * advisor. The original PDF is stored encrypted like customer documents.
+ */
+export const knowledgeDocuments = sqliteTable(
+  "knowledge_documents",
+  {
+    id: id(),
+    entryId: text("entry_id").notNull(),
+    version: integer("version").notNull(),
+    productCode: text("product_code", { enum: PRODUCT_CODES }).notNull(),
+    kind: text("kind", { enum: KNOWLEDGE_KINDS }).notNull(),
+    title: text("title").notNull(),
+    filename: text("filename").notNull(),
+    sizeBytes: integer("size_bytes").notNull(),
+    sha256: text("sha256").notNull(),
+    /** Path of the AES-256-GCM encrypted file, relative to DATA_DIR. */
+    storagePath: text("storage_path").notNull(),
+    pageCount: integer("page_count"),
+    status: text("status", { enum: KNOWLEDGE_STATUSES }).notNull().default("processing"),
+    sections: json<KnowledgeSection[]>("sections"),
+    error: text("error"),
+    model: text("model"),
+    uploadedByAdvisorId: text("uploaded_by_advisor_id").references(() => advisors.id),
+    createdAt: createdAt(),
+    activatedAt: timestamp("activated_at"),
+    deletedAt: timestamp("deleted_at"),
+  },
+  (t) => [
+    index("knowledge_documents_product_idx").on(t.productCode, t.status),
+    uniqueIndex("knowledge_documents_entry_version_idx").on(t.entryId, t.version),
+  ],
+);
+
+// ─── Learning loop: advisor flags and human-approved improvement proposals ───
+
+/** An advisor marks a conversation as "not good"; open flags feed the improvement analysis. */
+export const conversationFlags = sqliteTable(
+  "conversation_flags",
+  {
+    id: id(),
+    conversationId: text("conversation_id")
+      .notNull()
+      .references(() => conversations.id, { onDelete: "cascade" }),
+    advisorId: text("advisor_id").references(() => advisors.id),
+    note: text("note").notNull(),
+    status: text("status", { enum: CONVERSATION_FLAG_STATUSES }).notNull().default("open"),
+    createdAt: createdAt(),
+    resolvedAt: timestamp("resolved_at"),
+  },
+  (t) => [index("conversation_flags_conversation_idx").on(t.conversationId)],
+);
+
+export const improvementRuns = sqliteTable("improvement_runs", {
+  id: id(),
+  window: text("window", { enum: IMPROVEMENT_WINDOWS }).notNull(),
+  status: text("status", { enum: ["running", "completed", "failed"] })
+    .notNull()
+    .default("running"),
+  conversationCount: integer("conversation_count").notNull().default(0),
+  /** Facts computed without the model (drop-off by stage, NPS, flags). */
+  stats: json<Record<string, unknown>>("stats"),
+  summary: text("summary"),
+  model: text("model"),
+  error: text("error"),
+  startedByAdvisorId: text("started_by_advisor_id").references(() => advisors.id),
+  startedAt: createdAt(),
+  finishedAt: timestamp("finished_at"),
+});
+
+export interface ProposalEvidence {
+  conversationId: string;
+  note: string;
+}
+
+export interface ProposedRule {
+  text: string;
+  action: (typeof RULE_ACTIONS)[number];
+  productCode: (typeof PRODUCT_CODES)[number] | null;
+}
+
+export const improvementProposals = sqliteTable(
+  "improvement_proposals",
+  {
+    id: id(),
+    runId: text("run_id")
+      .notNull()
+      .references(() => improvementRuns.id, { onDelete: "cascade" }),
+    category: text("category", { enum: IMPROVEMENT_CATEGORIES }).notNull(),
+    kind: text("kind", { enum: IMPROVEMENT_KINDS }).notNull(),
+    title: text("title").notNull(),
+    problem: text("problem").notNull(),
+    proposal: text("proposal").notNull(),
+    /** For `rule` proposals: the rule as it would be added in the rule editor. */
+    rule: json<ProposedRule>("rule"),
+    evidence: json<ProposalEvidence[]>("evidence").notNull(),
+    occurrences: integer("occurrences").notNull(),
+    status: text("status", { enum: PROPOSAL_STATUSES }).notNull().default("open"),
+    decidedByAdvisorId: text("decided_by_advisor_id").references(() => advisors.id),
+    decidedAt: timestamp("decided_at"),
+    /** Rule-set version that first contained the accepted rule. */
+    appliedRuleSetVersion: integer("applied_rule_set_version"),
+    createdAt: createdAt(),
+  },
+  (t) => [index("improvement_proposals_run_idx").on(t.runId)],
+);

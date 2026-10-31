@@ -14,7 +14,9 @@
     "handovers": "Transferts",
     "rules": "Règles",
     "simulation": "Simulation",
-    "followUps": "Relances"
+    "followUps": "Relances",
+    "knowledge": "Connaissances produits",
+    "improvements": "Améliorations"
   },
   "login": {
     "title": "Se connecter au cockpit entreprise",

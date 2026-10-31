@@ -14,7 +14,9 @@
     "handovers": "Passaggi",
     "rules": "Regole",
     "simulation": "Simulazione",
-    "followUps": "Promemoria"
+    "followUps": "Promemoria",
+    "knowledge": "Conoscenze prodotti",
+    "improvements": "Miglioramenti"
   },
   "login": {
     "title": "Accedi al cockpit aziendale",
