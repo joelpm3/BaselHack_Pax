@@ -1,9 +1,15 @@
 import { FileText, Mic, Wrench } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
+import {
+  formatProfileValue,
+  profileFieldLabelKey,
+  visibleProfileChanges,
+} from "@/components/widgets/profile-format";
 import type { ConversationDetail } from "@/lib/firma/conversations";
+import { summarizeTool } from "@/lib/firma/tool-summary";
 import { compactJson, messageItems, type ToolSummary } from "@/lib/insights/transcript";
-import { cn } from "@/lib/utils";
+import { cn, formatChf } from "@/lib/utils";
 import { SimpleMarkdown } from "./simple-markdown";
 
 /** `recommendProducts` → `Recommend products`. */
@@ -22,17 +28,45 @@ function pretty(value: unknown): string {
   return text.length > 4000 ? `${text.slice(0, 4000)}\n…` : text;
 }
 
+type Translate = Awaited<ReturnType<typeof getTranslations>>;
+
+/** The readable part of a tool call ("Notiert: Kinder: 2 (2026, 2027)"), raw JSON as fallback. */
+function toolDetail(tool: ToolSummary, t: Translate, tw: Translate): string {
+  const summary = tool.state === "output-available" ? summarizeTool(tool.name, tool.output) : null;
+  if (!summary) return compactJson(tool.output ?? tool.input, 120);
+  const chf = (amount: number) => formatChf(Math.round(amount));
+  if (summary.changes) {
+    const fields = visibleProfileChanges(summary.changes)
+      .map(
+        (c) =>
+          `${tw(profileFieldLabelKey(c.path))}: ${formatProfileValue(c.path, c.value, tw, chf)}`,
+      )
+      .join(" · ");
+    return fields ? t("tools.profile", { fields }) : t("tools.profileEmpty");
+  }
+  const values: Record<string, string | number> = { ...summary.values };
+  for (const [key, amount] of Object.entries(summary.amounts)) values[key] = chf(amount);
+  if (summary.key === "scenario") values.scenario = tw(`scenario.titles.${values.scenario}`);
+  return t(`tools.${summary.key}`, values);
+}
+
 async function ToolCall({ tool }: { tool: ToolSummary }) {
-  const t = await getTranslations("firma.conversation.transcript");
+  const [t, tw] = await Promise.all([
+    getTranslations("firma.conversation.transcript"),
+    getTranslations("widgets"),
+  ]);
   const failed = tool.state === "output-error" || Boolean(tool.errorText);
   const done = tool.state === "output-available";
+  const name = t.has(`toolNames.${tool.name}`)
+    ? t(`toolNames.${tool.name}`)
+    : humanizeToolName(tool.name);
   return (
     <details className="group rounded-m border border-line bg-gray-1 text-xs">
-      <summary className="flex cursor-pointer list-none items-center gap-2 px-3 py-2 [&::-webkit-details-marker]:hidden">
-        <Wrench aria-hidden className="size-3.5 shrink-0 text-pax-purple" />
-        <span className="font-medium">{humanizeToolName(tool.name)}</span>
-        <span className="min-w-0 flex-1 truncate text-fg-muted">
-          {failed ? tool.errorText : compactJson(tool.output ?? tool.input, 120)}
+      <summary className="flex cursor-pointer list-none items-start gap-2 px-3 py-2 [&::-webkit-details-marker]:hidden">
+        <Wrench aria-hidden className="mt-px size-3.5 shrink-0 text-pax-purple" />
+        <span className="shrink-0 font-medium">{name}</span>
+        <span className="line-clamp-2 min-w-0 flex-1 text-fg-muted">
+          {failed ? tool.errorText : toolDetail(tool, t, tw)}
         </span>
         <Badge tone={failed ? "error" : done ? "success" : "neutral"}>
           {failed ? t("toolFailed") : done ? t("toolDone") : t("toolPending")}
