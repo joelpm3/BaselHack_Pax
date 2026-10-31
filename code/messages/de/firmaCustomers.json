@@ -60,7 +60,7 @@
   "detail": {
     "title": "Kundenansicht",
     "open": "Kundenansicht",
-    "back": "Alle Kundinnen und Kunden",
+    "back": "Zur Kundschaft",
     "age": "{age} Jahre",
     "since": "bekannt seit {date}",
     "facts": {

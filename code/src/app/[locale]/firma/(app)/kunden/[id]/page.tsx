@@ -81,7 +81,7 @@ function Fact({
       {kind ? <KindMark kind={kind} /> : null}
       <span className="grid min-w-0">
         <span className="text-xl leading-tight font-bold tabular-nums">{value}</span>
-        <span className="truncate text-fg-muted">{label}</span>
+        <span className="leading-tight text-fg-muted">{label}</span>
       </span>
     </a>
   );
