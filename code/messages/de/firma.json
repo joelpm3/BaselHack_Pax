@@ -447,9 +447,9 @@
       "score": "Score",
       "reason": "Grund für den Anruf",
       "status": "Status",
-      "assignee": "Zuständig",
-      "updated": "Aktualisiert"
-    }
+      "assignee": "Zuständig"
+    },
+    "updatedAt": "Aktualisiert {date}"
   },
   "handovers": {
     "title": "Übergaben",

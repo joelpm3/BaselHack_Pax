@@ -447,9 +447,9 @@
       "score": "Score",
       "reason": "Raison de l'appel",
       "status": "Statut",
-      "assignee": "Responsable",
-      "updated": "Mis à jour"
-    }
+      "assignee": "Responsable"
+    },
+    "updatedAt": "Mis à jour le {date}"
   },
   "handovers": {
     "title": "Transferts",
