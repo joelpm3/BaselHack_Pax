@@ -9,7 +9,7 @@ import { FinePrint, useChf, WidgetCard, WidgetFailed, WidgetPending } from "../w
 import { SquareColumns } from "./square-columns";
 
 const MAX_COLUMNS = 12;
-const MAX_ROWS = 16;
+const MAX_ROWS = 18;
 const ORDER = ["capital"] as const;
 const FILL = { capital: "bg-pax-purple border-pax-purple" };
 
@@ -26,10 +26,15 @@ export function DrawdownWidget({ state, input, output }: WidgetProps) {
 
   const series = data.capitalByYear;
   const unit = squareUnit(series[0] ?? data.capital, MAX_ROWS);
-  const columns = columnYears(series.length, MAX_COLUMNS).map((n) => ({
-    key: n,
-    label: String(data.startAge + n - 1),
-    squares: { capital: Math.round((series[n - 1] ?? 0) / unit) },
+  // Always start with the full capital, then evenly spaced years up to the last one.
+  const indices = [
+    0,
+    ...(series.length > 1 ? columnYears(series.length - 1, MAX_COLUMNS - 1) : []),
+  ];
+  const columns = indices.map((i) => ({
+    key: i,
+    label: String(data.startAge + i),
+    squares: { capital: Math.round((series[i] ?? 0) / unit) },
   }));
   const endAge = data.startAge + Math.max(0, series.length - 1);
 
