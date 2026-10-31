@@ -14,7 +14,7 @@ import {
   sexSchema,
 } from "@/lib/domain/profile";
 import { applyProfileChanges, getProfile, type ProfileChange } from "@/lib/profile/service";
-import { resolveTaxLocation } from "../logismata/checks";
+import { resolveResidence } from "../location";
 import { missingFor } from "../logismata/mapping";
 import type { UpdateProfileOutput } from "../types";
 import type { ToolContext } from "./context";
@@ -65,7 +65,10 @@ export const updateProfileInput = z.object({
   residence: z
     .object({ zip: z.string().optional(), city: z.string().optional() })
     .optional()
-    .describe("Place of residence; resolved to a tax location automatically"),
+    .describe(
+      "Place of residence exactly as the customer said it (never add a town to a postcode " +
+        "yourself); resolved from the official locality directory",
+    ),
   assets: z
     .object({
       liquid: z.number().min(0).optional().describe("Savings accounts, CHF"),
@@ -193,21 +196,19 @@ export function createProfileTools(ctx: ToolContext) {
         const changes = toProfileChanges(input, current);
         let location: UpdateProfileOutput["location"] = null;
         let locationNotFound: string | null = null;
+        let locationOptions: UpdateProfileOutput["locationOptions"] = null;
         if (input.residence?.zip || input.residence?.city) {
           const query = input.residence;
-          const resolved = await resolveTaxLocation(query, ctx.locale, {
+          const result = await resolveResidence(query, current.residence, ctx.locale, {
             customerId: ctx.customerId,
             conversationId: ctx.conversationId,
             toolCallId,
-          }).catch(() => null);
-          if (resolved) {
-            location = resolved;
-            changes.push(
-              { path: "residence.zip", value: resolved.zip },
-              { path: "residence.city", value: resolved.city },
-              { path: "residence.canton", value: resolved.canton },
-              { path: "residence.taxLocationId", value: resolved.taxLocationId },
-            );
+          });
+          if (result.status === "resolved") {
+            location = result.location;
+            changes.push(...result.changes);
+          } else if (result.status === "ambiguous") {
+            locationOptions = result.options;
           } else {
             locationNotFound = [query.zip, query.city].filter(Boolean).join(" ");
             if (query.zip) changes.push({ path: "residence.zip", value: query.zip });
@@ -227,6 +228,7 @@ export function createProfileTools(ctx: ToolContext) {
             completeness: profileCompleteness(profile),
             location,
             locationNotFound,
+            locationOptions,
             missingForAnalysis: missingForAnalysis(profile),
             error: null,
           };
@@ -237,6 +239,7 @@ export function createProfileTools(ctx: ToolContext) {
             completeness: profileCompleteness(current),
             location: null,
             locationNotFound,
+            locationOptions,
             missingForAnalysis: missingForAnalysis(current),
             error: error instanceof Error ? error.message.slice(0, 500) : "invalid profile",
           };

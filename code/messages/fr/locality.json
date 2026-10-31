@@ -1,0 +1,7 @@
+{
+  "questionZip": "Le code postal {zip} couvre plusieurs localités. Laquelle est la vôtre ?",
+  "question": "Ce nom de localité existe plusieurs fois en Suisse. Laquelle est la vôtre ?",
+  "options": "Choisir le lieu de domicile",
+  "pickedMessage": "J'habite à {place}.",
+  "failed": "La localité n'a pas pu être enregistrée. Choisissez-la à nouveau ou saisissez-la dans le champ de message."
+}

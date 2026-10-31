@@ -1,0 +1,7 @@
+{
+  "questionZip": "Postcode {zip} covers several places. Which one is yours?",
+  "question": "There are several places with this name in Switzerland. Which one is yours?",
+  "options": "Choose your place of residence",
+  "pickedMessage": "I live in {place}.",
+  "failed": "The place could not be saved. Choose it again or type it in the message field."
+}

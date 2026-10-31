@@ -1,5 +1,5 @@
 import { EDITABLE_FIELDS, type FieldSpec, HIDDEN_FIELDS } from "@/lib/advisor/profile-fields";
-import type { ProfileFieldChange } from "@/lib/advisor/types";
+import type { ProfileFieldChange, ResidencePlace } from "@/lib/advisor/types";
 
 /** A `widgets` translator; shared by the chat card (client) and the company transcript (server). */
 export type WidgetsTranslate = (key: string, values?: Record<string, string | number>) => string;
@@ -54,6 +54,18 @@ function formatSpec(
     default:
       return String(value);
   }
+}
+
+/** "8165 Schöfflisdorf" (or "Zürich" for a town with several postcodes); "" without a place. */
+export function residenceLabel(
+  changes: ProfileFieldChange[],
+  location?: Pick<ResidencePlace, "zip" | "city"> | null,
+): string {
+  const value = (path: string) => changes.find((c) => c.path === path)?.value;
+  const parts = location
+    ? [location.zip, location.city]
+    : [value("residence.zip"), value("residence.city")];
+  return parts.filter((p): p is string => typeof p === "string" && p !== "").join(" ");
 }
 
 /** `partner` alone (removed) has its own label; every other path maps to `fields.<path>`. */

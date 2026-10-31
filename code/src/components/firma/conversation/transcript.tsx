@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   formatProfileValue,
   profileFieldLabelKey,
+  residenceLabel,
   visibleProfileChanges,
 } from "@/components/widgets/profile-format";
 import type { ConversationDetail } from "@/lib/firma/conversations";
@@ -38,10 +39,7 @@ function toolDetail(tool: ToolSummary, t: Translate, tw: Translate): string {
   if (summary.changes) {
     const changes = visibleProfileChanges(summary.changes);
     // Like the customer's card: postcode and town read as one place of residence.
-    const place = changes
-      .filter((c) => c.path === "residence.zip" || c.path === "residence.city")
-      .map((c) => String(c.value))
-      .join(" ");
+    const place = residenceLabel(changes);
     const fields = [
       ...changes
         .filter((c) => !c.path.startsWith("residence."))
