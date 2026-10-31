@@ -28,7 +28,8 @@ export function createSalesTools(ctx: ToolContext): ToolSet {
         "up to the deductible maximum), checks entry ages and the active company rules (blocked products are " +
         "returned in `excluded` with the rule text) and stores each recommendation with its criteria for audit. " +
         "If `status` is 'needs_info', ask for the `missing` profile fields, save them with updateProfile and call " +
-        "again. Unit-linked products (LifeStar, FondsStar, Auszahlungsplan) come back with " +
+        "again. If `status` is 'needs_analysis', run the tools in `analysisNeeded` first and call again with " +
+        "their gaps: products are never priced before the analysis. Unit-linked products (LifeStar, FondsStar, Auszahlungsplan) come back with " +
         "`requiresSuitability: true`: present them as possible only after the suitability check " +
         "(startSuitabilityCheck). Afterwards explain briefly: the gap, why this product (its criteria), that the " +
         "price is indicative and not binding, and one alternative. Do not repeat all numbers of the cards.",

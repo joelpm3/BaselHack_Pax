@@ -17,6 +17,10 @@ import { env } from "@/env";
  * - analysis: classifier, lead scoring, FAQ normalisation, hint explanations
  * - extraction: document classification + field extraction (needs PDF/image input)
  * - simulation: simulated customers talking to the advisor
+ *
+ * The provider decides where customer data goes, because the prompts carry the full context
+ * (names, family, figures). `openai-compatible` keeps it on our own model on the Nebius GPU, the
+ * self-hosted path; production rents that GPU in an EU region.
  */
 export type ModelRole = "chat" | "analysis" | "extraction" | "simulation";
 

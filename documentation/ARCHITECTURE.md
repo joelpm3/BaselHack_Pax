@@ -74,11 +74,35 @@ their policies and focuses on life changes and gaps.
 | Insights | `lib/insights` | Debounced background classification and lead scoring after each turn |
 | Live updates | `lib/events/bus.ts` + `/api/events` | In-process event bus → SSE |
 
-## Privacy and compliance notes (pitch, not implemented as UI)
+## Privacy and compliance
 
-- Full customer context goes into the model because the target deployment is a self-hosted LLM
-  (and Nemotron STT) on Nebius GPUs; the provider switch is one env variable.
-- Every recommendation is stored with criteria, inputs, calculations, model id and rule version.
-- Human review is triggered by company-editable rules; the handover queue is auditable.
-- Documents are encrypted at rest and deletable by the customer.
-- Not production auth: the company dashboard uses a shared password for the demo.
+**Products only after the analysis.** The challenge's main no-go is product-first selling, so it
+is enforced in code, not only in the prompt: `recommendProducts` returns `needs_analysis` until a
+stored Logismata result backs each gap (risk check for death and disability, retirement check for
+retirement and payout, 3a calculation for tax), and Clara then runs that analysis first. A customer
+who asks to skip it still gets cover sized from their own figures. The gap amounts are still passed
+in by the model from that result; reading them from the stored calculation is the next step.
+
+**Every recommendation can be traced.** Each one is stored with its gap, criteria, alternatives,
+premium and source, the model id and the rule-set version it ran under; every Logismata and
+Quicksale call is in `calculations` with input and output. Company rules (`handover`, `flag`,
+`block_product`) are versioned, so a later review sees which rules applied at the time.
+
+**The customer controls their data.** "Meine Daten" in the portal lists what is stored, exports it
+as JSON and erases it (`lib/privacy`). Signed Pax contracts are kept because an insurer must keep
+them; everything the advisor collected or derived goes, and one pseudonymous audit entry records
+the erasure. Documents are encrypted at rest (AES-256-GCM), deletable one by one, and extracted
+values are only used after the customer confirms them.
+
+**Where the data goes.** The full customer context goes to the model, because Clara needs names,
+family and figures to advise; pseudonymising it would cost advice quality for little gain. That
+makes the model's location the real decision, so Clara runs on our own model on a rented Nebius
+GPU (`LLM_PROVIDER=openai-compatible`, see "Self-hosted mode" in the README) and customer data does
+not go to an external AI provider. For the hackathon the GPU is in `us-central1` because of the
+price; production rents it in an EU region. Logismata receives only the calculation inputs
+(birth year, income, marital status, pension figures), Quicksale only the pricing inputs.
+
+**Not production-ready, on purpose.** The company dashboard uses one shared password plus picking a
+seeded advisor, so notes and status changes have an author; production would put Pax's SSO in
+front of `lib/auth/advisor.ts` and keep the rest. Customers are recognised by a signed device
+cookie, and the "Ich bin bereits Pax-Kunde" picker stands in for a real customer login.
