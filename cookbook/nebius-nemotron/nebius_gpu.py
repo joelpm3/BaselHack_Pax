@@ -142,7 +142,9 @@ def up(args):
     cloud_init = ('#cloud-config\nusers:\n  - name: ubuntu\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    shell: /bin/bash\n'
                   f'    ssh_authorized_keys:\n      - {pathlib.Path(KEY + ".pub").read_text().strip()}\n')
     # Preemptible at the spot price by default: Nebius may stop the VM at any time (STOP, never delete).
-    pricing = ['--on-demand'] if args.on_demand else ['--follows-spot-price', '--preemptible-on-preemption', 'stop']
+    # Nebius accepts only the FAIL recovery policy for preemptible instances (since 2026-10-31).
+    pricing = ['--on-demand'] if args.on_demand else ['--follows-spot-price', '--preemptible-on-preemption', 'stop',
+                                                      '--recovery-policy', 'fail']
     print(f'creating {name}: {platform} {preset} in {region} ({project}), '
           f'{"on-demand" if args.on_demand else "preemptible"}', flush=True)
     inst = nebius('compute', 'instance', 'create', '--parent-id', project, '--name', name, *pricing,
