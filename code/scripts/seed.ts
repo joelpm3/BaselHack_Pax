@@ -1,6 +1,6 @@
 /**
  * Seeds advisors, the first company rule set and the demo existing customers (personas from
- * challenge_context/material/personas.pdf). Idempotent: does nothing if advisors exist.
+ * documentation/challenge_context/material/personas.pdf). Idempotent: does nothing if advisors exist.
  * Run: pnpm db:seed   (or pnpm db:reset to start from an empty database)
  */
 import { mkdirSync } from "node:fs";

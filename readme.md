@@ -80,7 +80,7 @@ an external AI provider:
 
 The setting is `LLM_PROVIDER=openai-compatible` with `LLM_BASE_URL` pointing at the endpoint, and
 `STT_BASE_URL` for speech. For the hackathon the GPU runs in Nebius `us-central1`; it can be rented
-in an EU region with `--region` ([`cookbook/nebius-nemotron`](cookbook/nebius-nemotron/README.md)),
+in an EU region with `--region` ([`documentation/cookbook/nebius-nemotron`](documentation/cookbook/nebius-nemotron/README.md)),
 which we did not do because of the price. Calculations (Logismata) and pricing (Quicksale) are
 external services in either mode.
 
@@ -118,6 +118,6 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | Folder | Content |
 |---|---|
 | [`code/`](code) | Next.js app (customer PWA and company dashboard) |
-| [`documentation/`](documentation) | Architecture and demo personas |
-| [`challenge_context/`](challenge_context) | Challenge brief, Pax brand, API notes |
+| [`documentation/`](documentation) | Architecture, demo personas, GPU cookbook |
+| [`documentation/challenge_context/`](documentation/challenge_context) | Challenge brief, Pax brand, API notes |
 | [`assets/`](assets) | Screenshots |

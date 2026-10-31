@@ -25,9 +25,9 @@ Model: the fine-tuned Nemotron 3.5 Transcribe **v4-mid** (17.38% held-out ASGDTS
 ## Use
 
 ```bash
-python cookbook/nebius-nemotron/nebius_gpu.py up --gpu b200          # or --gpu b300; --on-demand, --bolt
-python cookbook/nebius-nemotron/nebius_gpu.py transcribe rec1.m4a rec2.wav --out transcripts/
-python cookbook/nebius-nemotron/nebius_gpu.py down
+python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --gpu b200          # or --gpu b300; --on-demand, --bolt
+python documentation/cookbook/nebius-nemotron/nebius_gpu.py transcribe rec1.m4a rec2.wav --out transcripts/
+python documentation/cookbook/nebius-nemotron/nebius_gpu.py down
 ```
 
 `up` prints progress every 30 s and returns when the APIs answer, with an SSH tunnel open to

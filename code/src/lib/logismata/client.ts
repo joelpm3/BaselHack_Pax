@@ -5,7 +5,7 @@ import { db, schema } from "@/lib/db";
 /**
  * Thin client for the Logismata APICalc engine (Swiss pension/tax calculations).
  * Every call is recorded in `calculations` so recommendations stay auditable.
- * Operation reference: challenge_context/LOGISMATA_API.md, examples in challenge_context/api/examples.
+ * Operation reference: documentation/challenge_context/LOGISMATA_API.md, examples in documentation/challenge_context/api/examples.
  */
 
 export class LogismataError extends Error {

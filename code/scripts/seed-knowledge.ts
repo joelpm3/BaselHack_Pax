@@ -1,7 +1,7 @@
 /**
  * Loads Pax's own product documents into the product knowledge base (/firma/wissen), so the
  * advisor's lookupProductInfo answers from real brochures, tariff sheets and product pages.
- * Uses the text extracts already in challenge_context (no model calls); the original PDF, or the
+ * Uses the text extracts already in documentation/challenge_context (no model calls); the original PDF, or the
  * website page for products without a brochure, is stored encrypted like an upload. Idempotent:
  * a document whose product and title already exist is skipped.
  * Run: pnpm tsx --require=./scripts/server-only-stub.cjs --env-file=.env.local scripts/seed-knowledge.ts
@@ -17,7 +17,7 @@ import type { KnowledgeKind } from "@/lib/domain/learning";
 import type { ProductCode } from "@/lib/domain/products";
 import { sectionsFromMarkdown, sectionsFromPdfText } from "@/lib/knowledge/plain-text";
 
-const CONTEXT = path.join(process.cwd(), "..", "challenge_context");
+const CONTEXT = path.join(process.cwd(), "..", "documentation", "challenge_context");
 const WEBSITE = "pax_website/private-vorsorge/produkte";
 
 type Source =

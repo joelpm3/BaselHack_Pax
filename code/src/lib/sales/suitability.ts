@@ -3,7 +3,7 @@ import type { ProductCode } from "@/lib/domain/products";
 
 /**
  * Angemessenheitsprüfung for qualified (unit-linked) life insurance, as on Pax form
- * 0054/PMPV/03.2026 (challenge_context/material/text/pax-angemessenheitspruefung.txt).
+ * 0054/PMPV/03.2026 (documentation/challenge_context/material/text/pax-angemessenheitspruefung.txt).
  * Pure and deterministic so the result is auditable and unit-tested.
  */
 

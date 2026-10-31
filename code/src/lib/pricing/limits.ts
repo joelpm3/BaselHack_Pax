@@ -2,7 +2,7 @@ import type { ProductCode } from "@/lib/domain/products";
 import type { QuoteInput, QuoteIssue } from "./types";
 
 /**
- * Tariff limits from Pax's "Technische Tarifbestimmungen" (challenge_context/quicksale/pdf_text)
+ * Tariff limits from Pax's "Technische Tarifbestimmungen" (documentation/challenge_context/quicksale/pdf_text)
  * and the product pages. Pure: shared by the Quicksale adapter, the estimate model and the
  * recommendation logic.
  */

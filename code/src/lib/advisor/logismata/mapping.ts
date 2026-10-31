@@ -3,7 +3,7 @@ import type { IncomeBreakdown, RiskCause, RiskPersonResult } from "../types";
 
 /**
  * Pure mapping between the customer's LifeSituation and Logismata APICalc requests/responses.
- * Assumptions follow the Pax Vorsorgecheck (challenge_context/MATERIAL.md §3): long-term need
+ * Assumptions follow the Pax Vorsorgecheck (documentation/challenge_context/MATERIAL.md §3): long-term need
  * 80% of gross income, survivors' need 70%, BVG interest 1%.
  */
 

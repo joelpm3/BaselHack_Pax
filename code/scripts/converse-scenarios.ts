@@ -345,7 +345,7 @@ export const SCENARIOS: Scenario[] = [
     ],
     maxTurns: 7,
   },
-  // The challenge's official personas (challenge_context/material/text/personas.txt) as NEW
+  // The challenge's official personas (documentation/challenge_context/material/text/personas.txt) as NEW
   // customers: the full journey from getting to know them to a signed policy.
   {
     id: "jury-young-family",

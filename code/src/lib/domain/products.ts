@@ -2,7 +2,7 @@ import type { GapType, PolicyCategory } from "./taxonomy";
 
 /**
  * Pax private-pension catalogue (source: pax.ch product pages and the sample offers in
- * challenge_context/material). Products are deliberately secondary: the advisor only reaches
+ * documentation/challenge_context/material). Products are deliberately secondary: the advisor only reaches
  * for this list after the life situation and the gaps are understood.
  */
 

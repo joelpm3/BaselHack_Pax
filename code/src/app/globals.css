@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /*
- * Pax UI tokens (challenge_context/DESIGN.md, ui.pax.ch) rebuilt as a Tailwind 4 theme.
+ * Pax UI tokens (documentation/challenge_context/DESIGN.md, ui.pax.ch) rebuilt as a Tailwind 4 theme.
  * Semantic tokens are the default; brand/accents are used sparingly.
  * Contrast Green (#5ca700) is the only green allowed for text on light surfaces.
  */

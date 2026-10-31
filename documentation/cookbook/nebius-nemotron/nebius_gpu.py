@@ -1,10 +1,10 @@
 """Spawn a Nebius B200/B300, serve the fine-tuned Nemotron 3.5 Transcribe (and, with --bolt, Nemotron 3.5 Bolt
 as a chat LLM) as HTTP APIs, and tear it down.
 
-  python cookbook/nebius-nemotron/nebius_gpu.py up [--gpu b200|b300] [--model v4-mid|v4-mid-fp8] [--on-demand] [--bolt]
+  python documentation/cookbook/nebius-nemotron/nebius_gpu.py up [--gpu b200|b300] [--model v4-mid|v4-mid-fp8] [--on-demand] [--bolt]
                                                     [--idle-minutes 60]
-  python cookbook/nebius-nemotron/nebius_gpu.py transcribe a.m4a b.wav --out transcripts/
-  python cookbook/nebius-nemotron/nebius_gpu.py status | tunnel | ssh | logs | down
+  python documentation/cookbook/nebius-nemotron/nebius_gpu.py transcribe a.m4a b.wav --out transcripts/
+  python documentation/cookbook/nebius-nemotron/nebius_gpu.py status | tunnel | ssh | logs | down
 
 `up` creates the VM, bootstraps it (remote/bootstrap.sh, remote/bolt.sh), waits until the APIs answer and opens
 an SSH tunnel: STT at http://127.0.0.1:8000, with --bolt also Bolt (OpenAI chat API) at http://127.0.0.1:8001/v1.
@@ -23,7 +23,7 @@ import time
 import urllib.request
 import uuid
 
-REPO = pathlib.Path(__file__).resolve().parents[2]
+REPO = pathlib.Path(__file__).resolve().parents[3]
 HERE = pathlib.Path(__file__).resolve().parent
 STATE = REPO / '.state/nebius-nemotron.json'
 KNOWN_HOSTS = REPO / '.state/nebius-nemotron-known_hosts'
