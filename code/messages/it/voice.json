@@ -40,9 +40,9 @@
     "stopReplyLabel": "Fermare la risposta",
     "idle": "Tocchi «Parlare» e racconti.",
     "idleKeys": "Clicchi su «Parlare» o prema la <key>barra spaziatrice</key>.",
-    "listening": "La sto ascoltando. Tocchi «Fatto» quando ha finito.",
+    "listening": "La sto ascoltando. Quando ha finito, scelga «Fatto».",
     "busy": "Il consulente sta rispondendo. Può già parlare.",
-    "reviewing": "Controlli il testo. Verrà inviato tra poco."
+    "reviewing": "Con «Continua» può completare il testo."
   },
   "review": {
     "title": "Ecco cosa ho capito",
@@ -52,12 +52,12 @@
     "send": "Inviare",
     "sendingIn": "Invio tra {seconds} s",
     "held": "Invio in pausa",
-    "editing": "Corregga il testo e tocchi «Inviare».",
+    "editing": "Corregga il testo e scelga «Inviare».",
     "afterReply": "Verrà inviato appena la risposta è completa"
   },
   "invite": {
     "title": "Racconti semplicemente.",
-    "body": "Tocchi «Parlare» qui sotto e racconti con parole sue. Il riconoscimento vocale capisce lo svizzero tedesco. Vede il testo prima che venga inviato.",
+    "body": "Scelga «Parlare» qui sotto e racconti con parole sue. Il riconoscimento vocale capisce lo svizzero tedesco. Vede il testo prima che venga inviato.",
     "examplesLabel": "Per esempio:",
     "examples": {
       "family": "«In primavera aspettiamo il nostro secondo figlio.»",

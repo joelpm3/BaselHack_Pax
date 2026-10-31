@@ -40,9 +40,9 @@
     "stopReplyLabel": "Antwort stoppen",
     "idle": "Tippen Sie auf «Sprechen» und erzählen Sie.",
     "idleKeys": "Klicken Sie auf «Sprechen» oder drücken Sie die <key>Leertaste</key>.",
-    "listening": "Ich höre zu. Tippen Sie auf «Fertig», wenn Sie fertig sind.",
+    "listening": "Ich höre zu. Sobald Sie fertig sind, wählen Sie «Fertig».",
     "busy": "Der Berater antwortet. Sie können schon sprechen.",
-    "reviewing": "Prüfen Sie den Text. Er wird gleich gesendet."
+    "reviewing": "Mit «Weiter» ergänzen Sie den Text."
   },
   "review": {
     "title": "Das habe ich verstanden",
@@ -52,12 +52,12 @@
     "send": "Senden",
     "sendingIn": "Wird in {seconds} s gesendet",
     "held": "Senden angehalten",
-    "editing": "Korrigieren Sie den Text und tippen Sie auf «Senden».",
+    "editing": "Korrigieren Sie den Text und wählen Sie «Senden».",
     "afterReply": "Wird gesendet, sobald die Antwort fertig ist"
   },
   "invite": {
     "title": "Erzählen Sie einfach.",
-    "body": "Tippen Sie unten auf «Sprechen» und erzählen Sie in Ihren Worten, gerne auf Schweizerdeutsch. Sie sehen den Text, bevor er gesendet wird.",
+    "body": "Wählen Sie unten «Sprechen» und erzählen Sie in Ihren Worten, gerne auf Schweizerdeutsch. Sie sehen den Text, bevor er gesendet wird.",
     "examplesLabel": "Zum Beispiel:",
     "examples": {
       "family": "«Wir erwarten im Frühling unser zweites Kind.»",

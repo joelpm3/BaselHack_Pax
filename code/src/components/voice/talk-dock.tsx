@@ -145,7 +145,7 @@ export function TalkDock({
           <LevelMeter side="left" active={recording} />
         </div>
 
-        <div className="flex flex-col items-center gap-0.5">
+        <div className="flex flex-col items-center gap-2">
           <button
             type="button"
             onClick={recording ? onDone : onTalk}
@@ -155,7 +155,7 @@ export function TalkDock({
             className={cn(
               "grid size-[4.5rem] place-items-center rounded-m text-white transition-colors",
               recording
-                ? "bg-deep-purple outline-[3px] outline-offset-[3px] outline-pax-green outline-solid"
+                ? "bg-deep-purple outline-[3px] outline-offset-2 outline-pax-green outline-solid"
                 : "bg-pax-purple hover:bg-deep-purple",
               working && "bg-light-purple",
             )}

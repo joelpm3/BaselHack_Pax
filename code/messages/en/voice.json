@@ -40,9 +40,9 @@
     "stopReplyLabel": "Stop the answer",
     "idle": "Tap “Talk” and tell me.",
     "idleKeys": "Click “Talk” or press the <key>space bar</key>.",
-    "listening": "I'm listening. Tap “Done” when you have finished.",
+    "listening": "I'm listening. When you have finished, choose “Done”.",
     "busy": "The advisor is answering. You can already talk.",
-    "reviewing": "Check the text. It will be sent in a moment."
+    "reviewing": "Use “Add more” to add to the text."
   },
   "review": {
     "title": "This is what I understood",
@@ -52,12 +52,12 @@
     "send": "Send",
     "sendingIn": "Sending in {seconds} s",
     "held": "Sending paused",
-    "editing": "Correct the text and tap “Send”.",
+    "editing": "Correct the text and choose “Send”.",
     "afterReply": "Will be sent as soon as the answer is complete"
   },
   "invite": {
     "title": "Just tell me.",
-    "body": "Tap “Talk” below and tell me in your own words. Speech recognition understands Swiss German. You see the text before it is sent.",
+    "body": "Choose “Talk” below and tell me in your own words. Speech recognition understands Swiss German. You see the text before it is sent.",
     "examplesLabel": "For example:",
     "examples": {
       "family": "“We are expecting our second child in the spring.”",

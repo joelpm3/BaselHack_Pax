@@ -139,10 +139,11 @@ export function TranscriptReview({
           <button
             type="button"
             onClick={onDiscard}
-            className="inline-flex h-9 items-center gap-1.5 rounded-m px-2.5 text-paragraph-s text-fg hover:bg-gray-1"
+            title={t("discard")}
+            className="inline-flex size-9 items-center justify-center rounded-m text-fg hover:bg-gray-1"
           >
             <Trash2 aria-hidden className="size-4" />
-            {t("discard")}
+            <span className="sr-only">{t("discard")}</span>
           </button>
           {!editing ? (
             <button
