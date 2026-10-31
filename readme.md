@@ -33,6 +33,17 @@ pnpm dev                     # http://localhost:3000/de
 
 Demo scripts for the seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
 
+## Deployed version: data stays on our platform
+
+The deployed version runs both models on our own GPU, so no customer data goes to an external AI
+service:
+
+- **Conversation:** Nemotron 3.5 Bolt 74B-A9B (24GB) on an NVIDIA B200.
+- **Speech-to-text:** our fine-tuned Swiss-German model, on the same platform.
+
+For testing we rented the GPU. Switching the app to it is one setting: `LLM_PROVIDER=openai-compatible`
+with `LLM_BASE_URL` pointing at the endpoint, and `STT_BASE_URL` for speech.
+
 ## The journey
 
 **advisory → recommendation → contract → policy in the portal**, end to end:
@@ -59,7 +70,7 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | Human review stays possible | The advisor hands over when an active company rule applies (it cites the rule ids), when the customer asks, or when the case is complex. Rules are plain language, versioned and edited by Pax | [`code/src/lib/advisor/tools/handover.ts`](code/src/lib/advisor/tools/handover.ts), [`code/src/lib/rules/active.ts`](code/src/lib/rules/active.ts), `/firma/uebergaben`, `/firma/regeln` |
 | Encryption | Uploaded documents are encrypted at rest with AES-256-GCM, the document id bound as authenticated data; the customer can delete them | [`code/src/lib/documents/crypto.ts`](code/src/lib/documents/crypto.ts), [`code/src/app/api/documents/[id]/route.ts`](code/src/app/api/documents/%5Bid%5D/route.ts) |
 | Access protection | Signed HMAC customer cookie; company dashboard behind a password with a constant-time check, server actions re-check the advisor | [`code/src/lib/auth/signing.ts`](code/src/lib/auth/signing.ts), [`code/src/lib/firma/auth.ts`](code/src/lib/firma/auth.ts) |
-| No uncontrolled external AI | Every model call goes through one module; `LLM_PROVIDER=openai-compatible` points it at a self-hosted vLLM endpoint. Swiss-German speech recognition runs on a Nemotron server we operate ourselves (Nebius GPU) | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
+| No uncontrolled external AI | In the deployed version the conversation runs on Nemotron 3.5 Bolt 74B-A9B (24GB) and speech-to-text on our fine-tuned Swiss-German model, both on our own NVIDIA B200, so no data leaves our platform. Every model call goes through one module, and `LLM_PROVIDER=openai-compatible` points it at the self-hosted endpoint | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
 | Formal requirements for the contract | Suitability check before unit-linked products, explicit consent and a signature that must match the customer's name | [`code/src/lib/sales/suitability.ts`](code/src/lib/sales/suitability.ts), [`code/src/lib/sales/application.ts`](code/src/lib/sales/application.ts) |
 
 ## Repository
