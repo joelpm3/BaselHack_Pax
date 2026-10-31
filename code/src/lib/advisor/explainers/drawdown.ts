@@ -1,5 +1,6 @@
 import type { LifeSituation } from "@/lib/domain/profile";
-import { INTEREST_RATE, retirementAge } from "../logismata/mapping";
+import { INTEREST_RATE } from "../logismata/mapping";
+import { planRetirement } from "./life-plan";
 import type { DrawdownSource } from "./types";
 
 /**
@@ -30,9 +31,8 @@ export function profileCapitalFor(
 
 /** Withdrawals start at retirement, or today for someone already past that age. */
 export function drawdownStartAge(profile: LifeSituation, year: number): number | undefined {
-  const birthYear = profile.person.birthYear;
-  if (birthYear === undefined) return undefined;
-  return Math.max(year - birthYear, retirementAge(profile));
+  // The same retirement age as the life plan, including a planned early retirement.
+  return planRetirement(profile, year)?.age;
 }
 
 /**

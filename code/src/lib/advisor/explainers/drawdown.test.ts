@@ -29,6 +29,11 @@ describe("drawdown helpers", () => {
     expect(drawdownStartAge(profile, 2026)).toBe(63);
     expect(drawdownStartAge(profile, 2040)).toBe(70);
     expect(drawdownStartAge(lifeSituationSchema.parse({}), 2026)).toBeUndefined();
+    const early = lifeSituationSchema.parse({
+      person: { birthYear: 1986 },
+      plannedEvents: [{ type: "early_retirement", year: 2036 }],
+    });
+    expect(drawdownStartAge(early, 2026)).toBe(50);
   });
 
   it("asks for the duration with a monthly amount, otherwise for the amount until 85", () => {

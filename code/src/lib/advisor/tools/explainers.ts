@@ -29,7 +29,7 @@ import {
   type ValueSource,
 } from "../explainers/types";
 import { currentYear, runRetirementCheck } from "../logismata/checks";
-import { INTEREST_RATE, missingFor, yearsUntilRetirement } from "../logismata/mapping";
+import { INTEREST_RATE, missingFor } from "../logismata/mapping";
 import { MIN_RETIREMENT_AGE, scenarioContext } from "../scenarios";
 import type { ToolContext } from "./context";
 
@@ -64,6 +64,15 @@ const compoundInput = z.object({
     ),
 });
 
+/** Years until the retirement the life plan uses (stated age, planned early retirement, 65). */
+function yearsToRetirement(profile: ReturnType<typeof getProfile>): number | undefined {
+  const year = currentYear();
+  const plan = planRetirement(profile, year);
+  const birthYear = profile.person.birthYear;
+  if (!plan || birthYear === undefined) return undefined;
+  return Math.max(1, plan.age - (year - birthYear));
+}
+
 /** Customer values first, then (for 3a) the profile, then the labelled example. */
 function compoundParams(
   input: z.infer<typeof compoundInput>,
@@ -77,10 +86,7 @@ function compoundParams(
           profile.pillar3a.annualContribution !== undefined
             ? profile.pillar3a.annualContribution / 12
             : undefined,
-        years:
-          profile.person.birthYear !== undefined
-            ? yearsUntilRetirement(profile, currentYear())
-            : undefined,
+        years: yearsToRetirement(profile),
       }
     : {};
   const params = {} as CompoundParams;
@@ -183,8 +189,8 @@ export function createExplainerTools(ctx: ToolContext) {
         let income: LifePlanRetirement["income"];
         const missing = missingFor(profile, "retirement");
         if (!plan) income = { status: "missing", missing: ["person.birthYear"] };
-        else if (missing.length) income = { status: "missing", missing };
         else if (plan.age < MIN_RETIREMENT_AGE) income = { status: "too_early" };
+        else if (missing.length) income = { status: "missing", missing };
         else {
           // Same check as the early-retirement scenario, logged as a what-if so it never
           // replaces the customer's real Vorsorgebild.

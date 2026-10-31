@@ -2,7 +2,7 @@
 
 import { MessageSquareText, RotateCcw, Sprout } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import { useChatActions } from "@/components/chat/chat-actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -193,7 +193,7 @@ function Slider({
   source: string | null;
   onChange: (value: number) => void;
 }) {
-  const id = `compound-${name}`;
+  const id = `${useId()}-${name}`;
   const { min, max, step } = COMPOUND_LIMITS[name];
   return (
     <div className="flex flex-col gap-1">
