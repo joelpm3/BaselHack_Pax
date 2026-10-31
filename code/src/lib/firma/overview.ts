@@ -1,16 +1,9 @@
 import "server-only";
 import { and, desc, eq, gte, type SQL, sql } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
-import type {
-  FunnelStage,
-  IntentStage,
-  LeadType,
-  LifeEvent,
-  Sentiment,
-  Topic,
-} from "@/lib/domain/taxonomy";
+import type { FunnelStage, Sentiment, Topic } from "@/lib/domain/taxonomy";
 import { bucketByDay, buildFunnel, type Scope, startOfZurichDay, summariseNps } from "./aggregate";
-import { customerColumns, scopeSql, scopeWhere } from "./common";
+import { OPEN_LEAD_SQL, scopeSql, scopeWhere } from "./common";
 
 /** A conversation counts as "live" while its last message is this recent. */
 export const LIVE_WINDOW_MS = 5 * 60_000;
@@ -39,16 +32,11 @@ export function getOverview(scope: Scope, now: Date) {
     .where(scopeWhere(c.isSimulated, scope))
     .get() ?? { total: 0, today: 0, live: 0, abandoned: 0 };
 
-  const leadsByType = groupCount<LeadType>(sql`
-    select ${schema.leads.type} as key, count(*) as count from ${schema.leads}
-    where ${scopeSql(schema.leads.isSimulated, scope)} group by 1`);
-
-  const handoversOpen =
+  const openLeads =
     db
       .select({ count: sql<number>`count(*)` })
-      .from(schema.handovers)
-      .innerJoin(c, eq(c.id, schema.handovers.conversationId))
-      .where(and(eq(schema.handovers.status, "open"), scopeWhere(c.isSimulated, scope)))
+      .from(schema.leads)
+      .where(and(OPEN_LEAD_SQL, scopeWhere(schema.leads.isSimulated, scope)))
       .get()?.count ?? 0;
 
   const npsScores = db
@@ -71,23 +59,13 @@ export function getOverview(scope: Scope, now: Date) {
   );
 
   const a = schema.analyses;
-  const jsonCounts = <K extends string>(
-    column: typeof a.topics | typeof a.lifeEvents,
-    limit: number,
-  ) =>
-    groupCount<K>(sql`
-      select je.value as key, count(*) as count
-      from ${a} join ${c} on ${c.id} = ${a.conversationId}, json_each(${column}) je
-      where ${convScope} group by 1 order by 2 desc, 1 limit ${limit}`);
-
-  const topTopics = jsonCounts<Topic>(a.topics, 8);
-  const topLifeEvents = jsonCounts<LifeEvent>(a.lifeEvents, 6);
+  const topTopics = groupCount<Topic>(sql`
+    select je.value as key, count(*) as count
+    from ${a} join ${c} on ${c.id} = ${a.conversationId}, json_each(${a.topics}) je
+    where ${convScope} group by 1 order by 2 desc, 1 limit 8`);
 
   const sentiment = groupCount<Sentiment>(sql`
     select ${a.sentiment} as key, count(*) as count from ${a} join ${c} on ${c.id} = ${a.conversationId}
-    where ${convScope} group by 1`);
-  const intent = groupCount<IntentStage>(sql`
-    select ${a.intentStage} as key, count(*) as count from ${a} join ${c} on ${c.id} = ${a.conversationId}
     where ${convScope} group by 1`);
 
   const topFaq = db
@@ -130,41 +108,16 @@ export function getOverview(scope: Scope, now: Date) {
     now,
   );
 
-  const recent = db
-    .select({
-      id: c.id,
-      title: c.title,
-      stage: c.stage,
-      status: c.status,
-      isSimulated: c.isSimulated,
-      lastMessageAt: c.lastMessageAt,
-      createdAt: c.createdAt,
-      intentStage: a.intentStage,
-      ...customerColumns,
-    })
-    .from(c)
-    .innerJoin(schema.customers, eq(schema.customers.id, c.customerId))
-    .leftJoin(schema.profiles, eq(schema.profiles.customerId, c.customerId))
-    .leftJoin(a, eq(a.conversationId, c.id))
-    .where(scopeWhere(c.isSimulated, scope))
-    .orderBy(desc(sql`coalesce(${c.lastMessageAt}, ${c.createdAt})`))
-    .limit(8)
-    .all();
-
   return {
     totals,
-    leadsByType,
-    handoversOpen,
+    openLeads,
     nps: summariseNps(npsScores),
     funnel: buildFunnel(stageCounts, abandonedCounts),
     topTopics,
-    topLifeEvents,
     sentiment,
-    intent,
     topFaq,
     painPoints,
     perDay,
-    recent,
   };
 }
 

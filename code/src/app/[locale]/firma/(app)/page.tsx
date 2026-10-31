@@ -1,30 +1,33 @@
-import { Bot } from "lucide-react";
+import { Bot, Phone } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
 import { getFormatter, getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import { type ReactNode, Suspense, use } from "react";
-import { ConversationStatusBadge } from "@/components/firma/badges";
+import { LeadTypeBadge, PriorityBadge } from "@/components/firma/badges";
 import { BarList, ColumnChart, type Segment, SegmentBar } from "@/components/firma/charts";
-import { CustomerLabel } from "@/components/firma/customer-label";
+import { CustomerLink, customerHref } from "@/components/firma/customer-link";
 import { Funnel } from "@/components/firma/funnel";
+import { KindDefinition, KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh, LiveStatus } from "@/components/firma/live-events";
 import { LoadingBlock, PageBody, PageHeader, Panel } from "@/components/firma/page-parts";
 import { ScopeSwitch } from "@/components/firma/scope-switch";
-import { StageSquares } from "@/components/firma/stage-squares";
+import { hrefWith } from "@/components/firma/url";
+import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import {
   LEAD_TYPES,
+  type LeadType,
   type Locale,
   SENTIMENTS,
   type Sentiment,
   TOPICS,
   type Topic,
 } from "@/lib/domain/taxonomy";
-import { parseScope } from "@/lib/firma/aggregate";
+import { type ActionQueue, getActionQueue } from "@/lib/firma/action-queue";
+import { parseScope, type Scope } from "@/lib/firma/aggregate";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { getOverview, type Overview } from "@/lib/firma/overview";
-import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -36,9 +39,10 @@ export async function generateMetadata({
 export default function OverviewPage({ params, searchParams }: PageProps<"/[locale]/firma">) {
   setRequestLocale(use(params).locale);
   const t = useTranslations("firma.overview");
+  const tQueue = useTranslations("firmaCustomers.overview");
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} actions={<LiveStatus />} />
+      <PageHeader title={t("title")} description={tQueue("description")} actions={<LiveStatus />} />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <OverviewContent searchParams={searchParams} />
       </Suspense>
@@ -61,49 +65,225 @@ async function OverviewContent({
   await requireAdvisor();
   await connection();
   const scope = parseScope((await searchParams).scope);
-  const data = getOverview(scope, new Date());
-  const locale = (await getLocale()) as Locale;
+  const now = new Date();
+  const queue = getActionQueue(scope);
+  const data = getOverview(scope, now);
+  const [locale, t] = await Promise.all([
+    getLocale() as Promise<Locale>,
+    getTranslations("firmaCustomers.overview"),
+  ]);
   return (
-    <PageBody className="grid gap-6">
+    <PageBody className="grid gap-8">
       <LiveRefresh types={["conversation", "analysis", "lead", "handover"]} intervalMs={3000} />
       <div>
         <ScopeSwitch path="/firma" scope={scope} />
       </div>
-      <Kpis data={data} />
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
-        <FunnelPanel data={data} />
-        <div className="grid content-start gap-6">
-          <TrendPanel data={data} locale={locale} />
-          <SentimentPanel data={data} />
+      <ActNow queue={queue} scope={scope} now={now} />
+      <section aria-labelledby="overview-figures" className="grid gap-6">
+        <h2 id="overview-figures" className="text-lg font-bold">
+          {t("figures")}
+        </h2>
+        <Kpis data={data} />
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+          <FunnelPanel data={data} />
+          <div className="grid content-start gap-6">
+            <TrendPanel data={data} locale={locale} />
+            <SentimentPanel data={data} />
+          </div>
         </div>
-      </div>
-      <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
-        <FaqPanel data={data} locale={locale} />
-        <TopicsPanel data={data} />
-      </div>
-      <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
-        <PainPointsPanel data={data} />
-        <LifeEventsPanel data={data} />
-        <IntentPanel data={data} />
-      </div>
-      <RecentPanel data={data} />
+        <div className="grid gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+          <FaqPanel data={data} locale={locale} />
+          <div className="grid content-start gap-6">
+            <TopicsPanel data={data} />
+            <PainPointsPanel data={data} />
+          </div>
+        </div>
+      </section>
     </PageBody>
   );
 }
 
-function Kpi({
-  label,
-  value,
-  children,
-  className,
-}: {
-  label: string;
-  value: string;
-  children?: ReactNode;
-  className?: string;
-}) {
+const waitFormat = {
+  day: "numeric",
+  month: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+} as const;
+
+/** The first thing on the dashboard: who needs a person now, then whom to call for sales. */
+async function ActNow({ queue, scope, now }: { queue: ActionQueue; scope: Scope; now: Date }) {
+  const [t, tChannel, tType, tCommon, format] = await Promise.all([
+    getTranslations("firmaCustomers.overview"),
+    getTranslations("firma.taxonomy.channel"),
+    getTranslations("common.taxonomy.leadType"),
+    getTranslations("firma.common"),
+    getFormatter(),
+  ]);
+  const scopeParam = { scope: scope === "all" ? null : scope };
+  const counts = queue.handoverCounts;
+  const typeLabel = (type: string) =>
+    LEAD_TYPES.includes(type as LeadType) ? tType(type as LeadType) : type;
   return (
-    <div className={cn("grid content-start gap-1 bg-surface px-5 py-4", className)}>
+    <section aria-labelledby="act-now" className="grid gap-4">
+      <h2 id="act-now" className="text-lg font-bold">
+        {t("actNow")}
+      </h2>
+      <div className="grid gap-6 xl:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
+        <section
+          aria-labelledby="queue-handovers"
+          className="grid min-w-0 content-start gap-4 rounded-xl border-2 border-warning p-4 sm:p-5"
+        >
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="flex min-w-0 gap-3">
+              <KindMark kind="handover" />
+              <div className="grid min-w-0 gap-0.5">
+                <h3 id="queue-handovers" className="text-base font-bold">
+                  {t("handovers.title", { count: counts.open })}
+                </h3>
+                <KindDefinition kind="handover" />
+              </div>
+            </div>
+            {counts.open > 0 ? (
+              <p className="text-fg-muted">
+                {t("handovers.counts", { urgent: counts.urgent, unassigned: counts.unassigned })}
+              </p>
+            ) : null}
+          </div>
+          {queue.handovers.length === 0 ? (
+            <p className="rounded-m bg-gray-1 px-4 py-3">{t("handovers.empty")}</p>
+          ) : (
+            <ol className="-my-1 divide-y divide-gray-2">
+              {queue.handovers.map((h) => (
+                <li key={h.id} className="grid gap-1.5 py-3">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                    {h.urgency === "high" ? (
+                      <Badge tone="error">{t("handovers.urgent")}</Badge>
+                    ) : null}
+                    <CustomerLink
+                      customerId={h.customerId}
+                      firstName={h.firstName}
+                      lastName={h.lastName}
+                      city={h.city}
+                      section="handovers"
+                    />
+                    {h.isSimulated ? (
+                      <Bot aria-label={tCommon("simulated")} className="size-3.5 text-fg-muted" />
+                    ) : null}
+                    <span
+                      className="ml-auto text-xs whitespace-nowrap text-fg-muted"
+                      title={format.dateTime(h.createdAt, waitFormat)}
+                    >
+                      {t("handovers.waiting", { time: format.relativeTime(h.createdAt, now) })}
+                    </span>
+                  </div>
+                  <p className="line-clamp-2">{h.reason}</p>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-fg-muted">
+                    {h.preferredChannel || h.preferredTime ? (
+                      <span className="inline-flex items-center gap-1">
+                        <Phone aria-hidden className="size-3.5" />
+                        {[h.preferredChannel ? tChannel(h.preferredChannel) : null, h.preferredTime]
+                          .filter(Boolean)
+                          .join(", ")}
+                      </span>
+                    ) : null}
+                    <span>{h.assignee ?? tCommon("unassigned")}</span>
+                    {h.leads.map((lead) => (
+                      <Link
+                        key={lead.id}
+                        href={customerHref(h.customerId, "leads")}
+                        className="rounded-full bg-light-purple px-2.5 py-0.5 text-xs font-medium text-deep-purple hover:underline"
+                      >
+                        {t("handovers.alsoLead", { type: typeLabel(lead.type), score: lead.score })}
+                      </Link>
+                    ))}
+                    <Link
+                      href={`/firma/gespraeche/${h.conversationId}`}
+                      className="text-contrast-green hover:underline sm:ml-auto"
+                    >
+                      {t("openConversation")}
+                    </Link>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+          {counts.open > queue.handovers.length ? (
+            <Link
+              href={hrefWith("/firma/uebergaben", scopeParam)}
+              className="justify-self-start font-medium text-contrast-green hover:underline"
+            >
+              {t("handovers.all", { count: counts.open })}
+            </Link>
+          ) : null}
+        </section>
+
+        <section
+          aria-labelledby="queue-leads"
+          className="grid min-w-0 content-start gap-4 rounded-xl border border-line p-4 sm:p-5"
+        >
+          <div className="flex min-w-0 gap-3">
+            <KindMark kind="lead" />
+            <div className="grid min-w-0 gap-0.5">
+              <h3 id="queue-leads" className="text-base font-bold">
+                {t("leads.title", { count: queue.hotLeadCount })}
+              </h3>
+              <KindDefinition kind="lead" />
+            </div>
+          </div>
+          {queue.hotLeads.length === 0 ? (
+            <p className="rounded-m bg-gray-1 px-4 py-3">{t("leads.empty")}</p>
+          ) : (
+            <ol className="-my-1 divide-y divide-gray-2">
+              {queue.hotLeads.map((lead) => (
+                <li key={lead.id} className="grid gap-1.5 py-3">
+                  <div className="flex items-center gap-3">
+                    <CustomerLink
+                      customerId={lead.customerId}
+                      firstName={lead.firstName}
+                      lastName={lead.lastName}
+                      city={lead.city}
+                      section="leads"
+                    />
+                    {lead.isSimulated ? (
+                      <Bot aria-label={tCommon("simulated")} className="size-3.5 text-fg-muted" />
+                    ) : null}
+                    <span className="ml-auto text-lg leading-none font-bold tabular-nums">
+                      <span className="sr-only">{t("leads.score")} </span>
+                      {lead.score}
+                    </span>
+                  </div>
+                  <p className="line-clamp-2">{lead.reasonToCall}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <PriorityBadge priority={lead.priority} />
+                    <LeadTypeBadge type={lead.type} />
+                    <span className="text-fg-muted">{lead.assignee ?? tCommon("unassigned")}</span>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          )}
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <Link
+              href={hrefWith("/firma/leads", scopeParam)}
+              className="font-medium text-contrast-green hover:underline"
+            >
+              {t("leads.all")}
+            </Link>
+            {queue.hotLeadsWithHandover > 0 ? (
+              <span className="text-xs text-fg-muted">
+                {t("leads.withHandover", { count: queue.hotLeadsWithHandover })}
+              </span>
+            ) : null}
+          </div>
+        </section>
+      </div>
+    </section>
+  );
+}
+
+function Kpi({ label, value, children }: { label: string; value: string; children?: ReactNode }) {
+  return (
+    <div className="grid content-start gap-1 bg-surface px-5 py-4">
       <span className="text-fg-muted">{label}</span>
       <span className="text-3xl font-bold leading-tight">{value}</span>
       {children ? <div className="text-xs text-fg-muted">{children}</div> : null}
@@ -113,13 +293,11 @@ function Kpi({
 
 function Kpis({ data }: { data: Overview }) {
   const t = useTranslations("firma.overview.kpi");
-  const tType = useTranslations("common.taxonomy.leadType");
-  const leads = Object.fromEntries(data.leadsByType.map((l) => [l.key, l.count]));
-  const leadTotal = data.leadsByType.reduce((s, l) => s + l.count, 0);
+  const tQueue = useTranslations("firmaCustomers.overview");
   return (
     <section
       aria-label={t("label")}
-      className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-5"
+      className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-4"
     >
       <Kpi label={t("conversations")} value={String(data.totals.total)}>
         {t("today", { count: data.totals.today })}
@@ -129,26 +307,12 @@ function Kpis({ data }: { data: Overview }) {
           {t("openLive")}
         </Link>
       </Kpi>
-      <Kpi label={t("leads")} value={String(leadTotal)}>
-        <ul className="grid gap-0.5">
-          {LEAD_TYPES.map((type) => (
-            <li key={type} className="flex justify-between gap-2">
-              <span>{tType(type)}</span>
-              <span className="tabular-nums text-fg">{leads[type] ?? 0}</span>
-            </li>
-          ))}
-        </ul>
-      </Kpi>
-      <Kpi label={t("handoversOpen")} value={String(data.handoversOpen)}>
-        <Link href="/firma/uebergaben" className="text-contrast-green hover:underline">
-          {t("openHandovers")}
+      <Kpi label={tQueue("openLeads")} value={String(data.openLeads)}>
+        <Link href="/firma/leads" className="text-contrast-green hover:underline">
+          {tQueue("toPipeline")}
         </Link>
       </Kpi>
-      <Kpi
-        label={t("nps")}
-        value={data.nps.nps === null ? "–" : String(data.nps.nps)}
-        className="max-md:col-span-2"
-      >
+      <Kpi label={t("nps")} value={data.nps.nps === null ? "–" : String(data.nps.nps)}>
         {data.nps.responses > 0
           ? t("npsDetail", { average: data.nps.average ?? 0, count: data.nps.responses })
           : t("npsNone")}
@@ -267,103 +431,6 @@ function PainPointsPanel({ data }: { data: Overview }) {
               <span aria-hidden className="mt-1.5 size-1.5 shrink-0 bg-chart-6" />
               <Link href={`/firma/gespraeche/${p.conversationId}`} className="hover:underline">
                 {p.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
-    </Panel>
-  );
-}
-
-function LifeEventsPanel({ data }: { data: Overview }) {
-  const t = useTranslations("firma.overview.lifeEvents");
-  const tEvent = useTranslations("common.taxonomy.lifeEvent");
-  return (
-    <Panel title={t("title")}>
-      <BarList
-        emptyLabel={t("empty")}
-        items={data.topLifeEvents.map((x) => ({
-          key: x.key,
-          label: tEvent(x.key),
-          value: x.count,
-        }))}
-      />
-    </Panel>
-  );
-}
-
-function IntentPanel({ data }: { data: Overview }) {
-  const t = useTranslations("firma.overview.intent");
-  const tIntent = useTranslations("common.taxonomy.intent");
-  const counts = Object.fromEntries(data.intent.map((s) => [s.key, s.count]));
-  const order = ["informing", "exploring", "comparing", "ready"] as const;
-  const hasData = data.intent.length > 0;
-  return (
-    <Panel title={t("title")} description={t("description")}>
-      <BarList
-        emptyLabel={t("empty")}
-        items={
-          hasData ? order.map((k) => ({ key: k, label: tIntent(k), value: counts[k] ?? 0 })) : []
-        }
-      />
-    </Panel>
-  );
-}
-
-async function RecentPanel({ data }: { data: Overview }) {
-  const [t, tStage, tCommon, format] = await Promise.all([
-    getTranslations("firma.overview.recent"),
-    getTranslations("common.taxonomy.stages"),
-    getTranslations("firma.common"),
-    getFormatter(),
-  ]);
-  return (
-    <Panel
-      title={t("title")}
-      actions={
-        <Link href="/firma/gespraeche" className="text-contrast-green hover:underline">
-          {t("all")}
-        </Link>
-      }
-    >
-      {data.recent.length === 0 ? (
-        <p className="py-4 text-fg-muted">{t("empty")}</p>
-      ) : (
-        <ul className="-my-2 divide-y divide-gray-2">
-          {data.recent.map((c) => (
-            <li key={c.id}>
-              <Link
-                href={`/firma/gespraeche/${c.id}`}
-                className="grid items-center gap-x-4 gap-y-1 py-2.5 hover:bg-gray-1 md:grid-cols-[minmax(0,14rem)_auto_minmax(0,1fr)_auto_auto]"
-              >
-                <span className="flex min-w-0 items-center gap-2">
-                  <CustomerLabel
-                    firstName={c.firstName}
-                    lastName={c.lastName}
-                    city={c.city}
-                    className="font-medium"
-                  />
-                  {c.isSimulated ? (
-                    <Bot
-                      aria-label={tCommon("simulated")}
-                      className="size-3.5 shrink-0 text-fg-muted"
-                    />
-                  ) : null}
-                </span>
-                <StageSquares stage={c.stage} label={tStage(c.stage)} />
-                <span className="min-w-0 truncate text-fg-muted">{c.title ?? tStage(c.stage)}</span>
-                <span>
-                  <ConversationStatusBadge status={c.status} />
-                </span>
-                <span className="text-xs whitespace-nowrap text-fg-muted tabular-nums">
-                  {format.dateTime(c.lastMessageAt ?? c.createdAt, {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    day: "numeric",
-                    month: "numeric",
-                  })}
-                </span>
               </Link>
             </li>
           ))}
