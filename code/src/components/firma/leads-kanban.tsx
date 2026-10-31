@@ -12,6 +12,7 @@ import {
   type Priority,
 } from "@/lib/domain/taxonomy";
 import { cn } from "@/lib/utils";
+import { PRIORITY_MARK } from "./badges";
 import { LeadStatusSelect } from "./controls";
 import { customerHref } from "./customer-link";
 
@@ -24,20 +25,12 @@ export interface KanbanLead {
   name: string;
   city: string | null;
   reasonToCall: string;
-  conversationId: string | null;
   customerId: string;
   /** The person also has an open handover (wants a human). */
   hasOpenHandover: boolean;
   isSimulated: boolean;
   assignee: string | null;
 }
-
-const PRIORITY_MARK: Record<Priority, string> = {
-  urgent: "bg-error",
-  high: "bg-warning",
-  medium: "bg-gray-4",
-  low: "bg-gray-3",
-};
 
 /** Pipeline board: drag a card to another column (or use its status menu) to move the lead. */
 export function LeadsKanban({ leads }: { leads: KanbanLead[] }) {

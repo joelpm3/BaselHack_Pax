@@ -1,3 +1,5 @@
+// One job: decide on the improvement proposals Pax found in recent conversations. The run
+// figures, flagged conversations and past decisions are collapsed below.
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
@@ -77,45 +79,35 @@ async function ImprovementsContent() {
   const [t, format] = await Promise.all([getTranslations("learning.improvements"), getFormatter()]);
 
   return (
-    <PageBody className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_22rem]">
+    <PageBody className="grid max-w-5xl gap-6">
       <AutoRefresh active={running} intervalMs={3000} />
-      <div className="grid content-start gap-6">
-        <section className="grid gap-4 rounded-xl border border-line p-5">
-          <RunAnalysisButtons running={running && latest ? latest.window : null} />
-          <RunStatus run={latest} running={running} />
-        </section>
+      <section className="grid gap-4 rounded-xl border border-line p-5">
+        <RunAnalysisButtons running={running && latest ? latest.window : null} />
+        <RunStatus run={latest} running={running} />
+      </section>
 
-        <section className="grid gap-3" aria-labelledby="open-proposals">
-          <h2 id="open-proposals" className="text-lg font-bold">
-            {t("open")} <span className="font-normal text-fg-muted">{open.length}</span>
-          </h2>
-          {open.length === 0 ? (
-            <EmptyState title={t("openEmpty")} />
-          ) : (
-            <ol className="grid gap-4">
-              {open.map((proposal) => (
-                <ProposalCard key={proposal.id} proposal={proposal} titles={titles} />
-              ))}
-            </ol>
-          )}
-        </section>
+      <section className="grid gap-3" aria-labelledby="open-proposals">
+        <h2 id="open-proposals" className="text-lg font-bold">
+          {t("open")} <span className="font-normal text-fg-muted">{open.length}</span>
+        </h2>
+        {open.length === 0 ? (
+          <EmptyState title={t("openEmpty")} />
+        ) : (
+          <ol className="grid gap-4">
+            {open.map((proposal) => (
+              <ProposalCard key={proposal.id} proposal={proposal} titles={titles} />
+            ))}
+          </ol>
+        )}
+      </section>
 
-        {decided.length > 0 ? (
-          <section className="grid gap-3" aria-labelledby="decided-proposals">
-            <h2 id="decided-proposals" className="text-lg font-bold">
-              {t("accepted")} / {t("dismissed")}
-            </h2>
-            <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-gray-2">
-              {decided.map((proposal) => (
-                <DecidedRow key={proposal.id} proposal={proposal} />
-              ))}
-            </ol>
-          </section>
-        ) : null}
-      </div>
-
-      <aside className="grid content-start gap-6">
-        <Panel title={t("flags.title")} description={t("flags.description")}>
+      <div className="grid gap-3">
+        <Panel
+          title={t("flags.title")}
+          description={t("flags.description")}
+          collapsed
+          meta={flags.length}
+        >
           {flags.length === 0 ? (
             <p className="text-fg-muted">{t("flags.empty")}</p>
           ) : (
@@ -140,13 +132,26 @@ async function ImprovementsContent() {
             </ul>
           )}
         </Panel>
-      </aside>
+        {decided.length > 0 ? (
+          <Panel title={`${t("accepted")} / ${t("dismissed")}`} collapsed meta={decided.length}>
+            <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-gray-2">
+              {decided.map((proposal) => (
+                <DecidedRow key={proposal.id} proposal={proposal} />
+              ))}
+            </ol>
+          </Panel>
+        ) : null}
+      </div>
     </PageBody>
   );
 }
 
 async function RunStatus({ run, running }: { run: ImprovementRun | null; running: boolean }) {
-  const [t, format] = await Promise.all([getTranslations("learning.improvements"), getFormatter()]);
+  const [t, tFocus, format] = await Promise.all([
+    getTranslations("learning.improvements"),
+    getTranslations("firmaFocus.improvements"),
+    getFormatter(),
+  ]);
   if (!run) return <p className="text-fg-muted">{t("noRun")}</p>;
   const window = t(`window.${run.window}`);
   if (run.status === "running")
@@ -168,22 +173,24 @@ async function RunStatus({ run, running }: { run: ImprovementRun | null; running
         <p>{t("noConversations")}</p>
       ) : (
         <>
-          <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-5">
-            <Stat
-              value={String(stats.conversations)}
-              label={t("stats.conversations")}
-              note={stats.simulated ? t("stats.simulated", { count: stats.simulated }) : null}
-            />
-            <Stat value={String(stats.droppedBeforeRecommendation)} label={t("stats.dropped")} />
-            <Stat
-              value={stats.npsAverage === null ? "–" : format.number(stats.npsAverage)}
-              label={t("stats.nps")}
-              note={t("stats.npsCount", { count: stats.npsCount })}
-            />
-            <Stat value={String(stats.flagged)} label={t("stats.flagged")} />
-            <Stat value={String(stats.missedHandovers)} label={t("stats.missedHandovers")} />
-          </dl>
           {run.summary ? <p className="max-w-3xl">{run.summary}</p> : null}
+          <Panel title={tFocus("runFigures")} collapsed>
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-5">
+              <Stat
+                value={String(stats.conversations)}
+                label={t("stats.conversations")}
+                note={stats.simulated ? t("stats.simulated", { count: stats.simulated }) : null}
+              />
+              <Stat value={String(stats.droppedBeforeRecommendation)} label={t("stats.dropped")} />
+              <Stat
+                value={stats.npsAverage === null ? "–" : format.number(stats.npsAverage)}
+                label={t("stats.nps")}
+                note={t("stats.npsCount", { count: stats.npsCount })}
+              />
+              <Stat value={String(stats.flagged)} label={t("stats.flagged")} />
+              <Stat value={String(stats.missedHandovers)} label={t("stats.missedHandovers")} />
+            </dl>
+          </Panel>
         </>
       )}
     </div>

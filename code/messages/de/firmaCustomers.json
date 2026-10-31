@@ -19,33 +19,8 @@
     "fromConversation": "Aus dem Gespräch «{title}»",
     "openConversation": "Gespräch öffnen"
   },
-  "overview": {
-    "description": "Wo Sie jetzt handeln müssen: wer einen Menschen sprechen will, wen Sie anrufen sollten, und darunter die Kennzahlen.",
-    "actNow": "Jetzt handeln",
-    "figures": "Kennzahlen",
-    "openConversation": "Gespräch öffnen",
-    "openLeads": "Offene Leads",
-    "toPipeline": "Zur Pipeline",
-    "handovers": {
-      "title": "{count, plural, =0 {Keine offenen Übergaben} one {# offene Übergabe} other {# offene Übergaben}}",
-      "counts": "{urgent} dringend, {unassigned} ohne Zuständigkeit",
-      "empty": "Niemand wartet auf eine Fachperson.",
-      "urgent": "Dringend",
-      "waiting": "Wartet seit {time}",
-      "alsoLead": "Auch Lead: {type}, Score {score}",
-      "all": "Alle {count} offenen Übergaben"
-    },
-    "leads": {
-      "title": "{count, plural, =0 {Keine heissen Leads} one {# heisser Lead} other {# heisse Leads}}",
-      "empty": "Keine offenen Leads mit hoher Priorität.",
-      "score": "Score",
-      "all": "Alle Leads",
-      "withHandover": "{count, plural, one {# weiterer Lead hängt} other {# weitere Leads hängen}} an einer offenen Übergabe"
-    }
-  },
   "list": {
     "title": "Kundinnen und Kunden",
-    "description": "Alle Personen mit Gespräch oder Lead. Wer eine offene Übergabe hat, steht oben.",
     "search": "Suchen",
     "searchPlaceholder": "Name, E-Mail oder Ort",
     "count": "{count, plural, one {# Person} other {# Personen}}",
@@ -54,35 +29,19 @@
     "emptyBody": "Personen erscheinen hier, sobald sie mit Clara sprechen.",
     "openHandovers": "{count, plural, =0 {Keine Übergabe} one {# Übergabe} other {# Übergaben}}",
     "openLeads": "{count, plural, =0 {Kein Lead} one {# Lead} other {# Leads}}",
-    "openLeadsScore": "{count, plural, one {# Lead} other {# Leads}}, Score {score}",
-    "conversations": "{count, plural, one {# Gespräch} other {# Gespräche}}"
+    "openLeadsScore": "{count, plural, one {# Lead} other {# Leads}}, Score {score}"
   },
   "detail": {
     "title": "Kundenansicht",
     "open": "Kundenansicht",
     "back": "Zur Kundschaft",
     "age": "{age} Jahre",
-    "since": "bekannt seit {date}",
-    "facts": {
-      "handovers": "{count, plural, one {offene Übergabe} other {offene Übergaben}}",
-      "leads": "{count, plural, one {offener Lead} other {offene Leads}}",
-      "conversations": "{count, plural, one {Gespräch} other {Gespräche}}",
-      "lastContact": "Letzter Kontakt"
-    },
-    "noLeads": "Aus den Gesprächen dieser Person ist (noch) kein Lead entstanden.",
-    "noHandovers": "Diese Person hat bisher keinen Menschen verlangt."
+    "since": "bekannt seit {date}"
   },
   "conversations": {
     "title": "{count, plural, =0 {Gespräche} one {# Gespräch} other {# Gespräche}}",
-    "description": "Neueste zuerst, mit der Auswertung jedes Gesprächs",
     "none": "Noch keine Gespräche.",
-    "untitled": "Gespräch ohne Titel",
-    "meta": "{date}, {mode}, {count, plural, one {# Nachricht} other {# Nachrichten}}",
-    "gaps": "Lücken",
-    "perYear": "{amount} pro Jahr",
-    "painPoints": "Pain-Points",
-    "nextBestAction": "Nächster Schritt",
-    "noAnalysis": "Noch nicht ausgewertet."
+    "untitled": "Gespräch ohne Titel"
   },
   "applications": {
     "title": "Offerten und Anträge",

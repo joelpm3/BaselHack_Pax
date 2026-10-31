@@ -1,14 +1,12 @@
 import { ArrowDownLeft, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
-import { ConversationStatusBadge, SentimentBadge } from "@/components/firma/badges";
+import { ConversationStatusBadge } from "@/components/firma/badges";
 import { productName } from "@/components/firma/conversation/analysis-section";
 import { Panel } from "@/components/firma/page-parts";
 import { StageSquares } from "@/components/firma/stage-squares";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import {
-  GAP_TYPES,
-  type GapType,
   HANDOVER_STATUSES,
   type HandoverStatus,
   LEAD_STATUSES,
@@ -22,104 +20,40 @@ import { cn, formatChf } from "@/lib/utils";
 
 const dateTime = { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" } as const;
 
-/** Every conversation of the person with what the classifier made of it. */
-export async function ConversationsSection({
-  detail,
-  locale,
-}: {
-  detail: CustomerDetail;
-  locale: string;
-}) {
-  const [t, tStage, tMode, tIntent, tTopic, tGap, format] = await Promise.all([
+/** Every conversation of the person, one row each; the analysis lives on the conversation page. */
+export async function ConversationsSection({ detail }: { detail: CustomerDetail }) {
+  const [t, tStage, format] = await Promise.all([
     getTranslations("firmaCustomers.conversations"),
     getTranslations("common.taxonomy.stages"),
-    getTranslations("firma.taxonomy.mode"),
-    getTranslations("common.taxonomy.intent"),
-    getTranslations("common.taxonomy.topics"),
-    getTranslations("common.taxonomy.gap"),
     getFormatter(),
   ]);
   return (
-    <Panel
-      title={t("title", { count: detail.conversations.length })}
-      description={t("description")}
-    >
+    <Panel title={t("title", { count: detail.conversations.length })}>
       {detail.conversations.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (
-        <ol className="grid gap-4">
-          {detail.conversations.map((c) => {
-            const analysis = detail.analyses[c.id];
-            return (
-              <li key={c.id} className="grid gap-3 rounded-xl bg-gray-1 p-4">
-                <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
-                  <div className="grid min-w-0 gap-0.5">
-                    <Link
-                      href={`/firma/gespraeche/${c.id}`}
-                      className="font-bold text-fg hover:underline"
-                    >
-                      {c.title ?? t("untitled")}
-                    </Link>
-                    <span className="text-xs text-fg-muted">
-                      {t("meta", {
-                        date: format.dateTime(c.createdAt, dateTime),
-                        mode: tMode(c.mode),
-                        count: c.messageCount,
-                      })}
-                    </span>
-                  </div>
-                  <span className="flex flex-wrap items-center gap-2">
-                    <StageSquares stage={c.stage} label={tStage(c.stage)} />
-                    <span className="text-xs text-fg-muted">{tStage(c.stage)}</span>
-                    <ConversationStatusBadge status={c.status} />
+        <ol className="-my-2 divide-y divide-gray-2">
+          {detail.conversations.map((c) => (
+            <li key={c.id}>
+              <Link
+                href={`/firma/gespraeche/${c.id}`}
+                className="group grid gap-x-4 gap-y-1 py-2.5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center"
+              >
+                <span className="grid min-w-0">
+                  <span className="truncate font-medium group-hover:underline">
+                    {c.title ?? t("untitled")}
                   </span>
-                </div>
-                {analysis ? (
-                  <>
-                    <p>{analysis.summary}</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      <Badge tone="info">{tIntent(analysis.intentStage)}</Badge>
-                      <SentimentBadge sentiment={analysis.sentiment} />
-                      {analysis.topics.map((topic) => (
-                        <Badge key={topic}>{tTopic(topic)}</Badge>
-                      ))}
-                    </div>
-                    {analysis.gaps.length > 0 ? (
-                      <p className="text-fg-muted">
-                        <span className="font-medium text-fg">{t("gaps")}: </span>
-                        {analysis.gaps
-                          .map((g) =>
-                            [
-                              GAP_TYPES.includes(g.gap as GapType) ? tGap(g.gap as GapType) : g.gap,
-                              g.amountAnnual !== null
-                                ? t("perYear", { amount: formatChf(g.amountAnnual, locale) })
-                                : null,
-                            ]
-                              .filter(Boolean)
-                              .join(" "),
-                          )
-                          .join(", ")}
-                      </p>
-                    ) : null}
-                    {analysis.painPoints.length > 0 ? (
-                      <p className="text-fg-muted">
-                        <span className="font-medium text-fg">{t("painPoints")}: </span>
-                        {analysis.painPoints.join("; ")}
-                      </p>
-                    ) : null}
-                    {analysis.nextBestAction ? (
-                      <p className="border-l-2 border-pax-purple pl-3">
-                        <span className="font-medium">{t("nextBestAction")}: </span>
-                        {analysis.nextBestAction}
-                      </p>
-                    ) : null}
-                  </>
-                ) : (
-                  <p className="text-fg-muted">{t("noAnalysis")}</p>
-                )}
-              </li>
-            );
-          })}
+                  <span className="text-xs text-fg-muted tabular-nums">
+                    {format.dateTime(c.lastMessageAt ?? c.createdAt, dateTime)}
+                  </span>
+                </span>
+                <span className="flex items-center gap-2">
+                  <StageSquares stage={c.stage} label={tStage(c.stage)} />
+                  <ConversationStatusBadge status={c.status} />
+                </span>
+              </Link>
+            </li>
+          ))}
         </ol>
       )}
     </Panel>
@@ -130,9 +64,11 @@ export async function ConversationsSection({
 export async function ApplicationsSection({
   detail,
   locale,
+  collapsed,
 }: {
   detail: CustomerDetail;
   locale: string;
+  collapsed?: boolean;
 }) {
   if (detail.applications.length === 0) return null;
   const [t, format] = await Promise.all([
@@ -140,7 +76,12 @@ export async function ApplicationsSection({
     getFormatter(),
   ]);
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={collapsed}
+      meta={detail.applications.length}
+    >
       <ul className="grid gap-2">
         {detail.applications.map((a) => (
           <li
@@ -168,39 +109,54 @@ export async function ApplicationsSection({
   );
 }
 
+/** Phone and email as buttons: the first thing an advisor needs to act on anything here. */
+export async function ContactButtons({ customer }: { customer: CustomerDetail["customer"] }) {
+  const t = await getTranslations("firmaCustomers.communications");
+  if (!customer.phone && !customer.email) return <p className="text-fg-muted">{t("noContact")}</p>;
+  return (
+    <div className="flex min-w-0 flex-wrap gap-2">
+      {customer.phone ? (
+        <a
+          href={`tel:${customer.phone}`}
+          className="inline-flex items-center gap-1.5 rounded-m border border-line px-3 py-1.5 hover:bg-gray-1"
+        >
+          <Phone aria-hidden className="size-4 text-pax-purple" />
+          {customer.phone}
+        </a>
+      ) : null}
+      {customer.email ? (
+        <a
+          href={`mailto:${customer.email}`}
+          className="inline-flex min-w-0 max-w-full items-center gap-1.5 rounded-m border border-line px-3 py-1.5 hover:bg-gray-1"
+        >
+          <Mail aria-hidden className="size-4 shrink-0 text-pax-purple" />
+          <span className="truncate">{customer.email}</span>
+        </a>
+      ) : null}
+    </div>
+  );
+}
+
 /** Emails and calls with the person; also where automated follow-up emails show up. */
-export async function CommunicationsSection({ detail }: { detail: CustomerDetail }) {
+export async function CommunicationsSection({
+  detail,
+  collapsed,
+}: {
+  detail: CustomerDetail;
+  collapsed?: boolean;
+}) {
   const [t, format] = await Promise.all([
     getTranslations("firmaCustomers.communications"),
     getFormatter(),
   ]);
-  const { customer } = detail;
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={collapsed}
+      meta={detail.communications.length}
+    >
       <div className="grid gap-4">
-        <div className="flex flex-wrap gap-2">
-          {customer.phone ? (
-            <a
-              href={`tel:${customer.phone}`}
-              className="inline-flex items-center gap-1.5 rounded-m border border-line px-3 py-1.5 hover:bg-gray-1"
-            >
-              <Phone aria-hidden className="size-4 text-pax-purple" />
-              {customer.phone}
-            </a>
-          ) : null}
-          {customer.email ? (
-            <a
-              href={`mailto:${customer.email}`}
-              className="inline-flex min-w-0 items-center gap-1.5 rounded-m border border-line px-3 py-1.5 hover:bg-gray-1"
-            >
-              <Mail aria-hidden className="size-4 shrink-0 text-pax-purple" />
-              <span className="truncate">{customer.email}</span>
-            </a>
-          ) : null}
-          {!customer.phone && !customer.email ? (
-            <p className="text-fg-muted">{t("noContact")}</p>
-          ) : null}
-        </div>
         {detail.communications.length === 0 ? (
           <p className="rounded-m bg-gray-1 px-3 py-2.5 text-fg-muted">{t("none")}</p>
         ) : (
@@ -249,7 +205,13 @@ const KIND_SQUARE: Record<TimelineKind, string> = {
 };
 
 /** The whole relationship as one chronological rail of squares, grouped by day. */
-export async function TimelineSection({ detail }: { detail: CustomerDetail }) {
+export async function TimelineSection({
+  detail,
+  collapsed,
+}: {
+  detail: CustomerDetail;
+  collapsed?: boolean;
+}) {
   const [t, tKind, tType, tLeadStatus, tHandoverStatus, format] = await Promise.all([
     getTranslations("firmaCustomers.timeline"),
     getTranslations("firmaCustomers.timeline.kind"),
@@ -307,7 +269,12 @@ export async function TimelineSection({ detail }: { detail: CustomerDetail }) {
   }
 
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={collapsed}
+      meta={detail.timeline.length}
+    >
       {detail.timeline.length === 0 ? (
         <p className="text-fg-muted">{t("none")}</p>
       ) : (

@@ -147,7 +147,6 @@
     "banner": "Rule draft from Improvements: “{title}”. Review and adjust it. It only becomes active once you save the new version.",
     "proposed": "Proposed",
     "pending": "Drafts from Improvements",
-    "pendingHelp": "Accepted proposals that are not in any version yet.",
     "openDraft": "Open in the editor"
   }
 }

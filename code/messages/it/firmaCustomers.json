@@ -19,33 +19,8 @@
     "fromConversation": "Dal colloquio «{title}»",
     "openConversation": "Apri colloquio"
   },
-  "overview": {
-    "description": "Dove deve agire adesso: chi vuole parlare con una persona, chi chiamare e, sotto, gli indicatori.",
-    "actNow": "Agire adesso",
-    "figures": "Indicatori",
-    "openConversation": "Apri colloquio",
-    "openLeads": "Lead aperti",
-    "toPipeline": "Alla pipeline",
-    "handovers": {
-      "title": "{count, plural, =0 {Nessun passaggio aperto} one {# passaggio aperto} other {# passaggi aperti}}",
-      "counts": "{urgent} urgenti, {unassigned} senza responsabile",
-      "empty": "Nessuno aspetta uno specialista.",
-      "urgent": "Urgente",
-      "waiting": "In attesa da {time}",
-      "alsoLead": "Anche lead: {type}, punteggio {score}",
-      "all": "Tutti i {count} passaggi aperti"
-    },
-    "leads": {
-      "title": "{count, plural, =0 {Nessun lead caldo} one {# lead caldo} other {# lead caldi}}",
-      "empty": "Nessun lead aperto ad alta priorità.",
-      "score": "Punteggio",
-      "all": "Tutti i lead",
-      "withHandover": "{count, plural, one {# altro lead è legato} other {# altri lead sono legati}} a un passaggio aperto"
-    }
-  },
   "list": {
     "title": "Clienti",
-    "description": "Tutte le persone con un colloquio o un lead. Chi ha un passaggio aperto è in cima.",
     "search": "Cerca",
     "searchPlaceholder": "Nome, e-mail o località",
     "count": "{count, plural, one {# persona} other {# persone}}",
@@ -54,35 +29,19 @@
     "emptyBody": "Le persone compaiono qui non appena parlano con Clara.",
     "openHandovers": "{count, plural, =0 {Nessun passaggio} one {# passaggio} other {# passaggi}}",
     "openLeads": "{count, plural, =0 {Nessun lead} one {# lead} other {# lead}}",
-    "openLeadsScore": "{count, plural, one {# lead} other {# lead}}, punteggio {score}",
-    "conversations": "{count, plural, one {# colloquio} other {# colloqui}}"
+    "openLeadsScore": "{count, plural, one {# lead} other {# lead}}, punteggio {score}"
   },
   "detail": {
     "title": "Vista cliente",
     "open": "Vista cliente",
     "back": "Clientela",
     "age": "{age} anni",
-    "since": "conosciuto/a dal {date}",
-    "facts": {
-      "handovers": "{count, plural, one {passaggio aperto} other {passaggi aperti}}",
-      "leads": "{count, plural, one {lead aperto} other {lead aperti}}",
-      "conversations": "{count, plural, one {colloquio} other {colloqui}}",
-      "lastContact": "Ultimo contatto"
-    },
-    "noLeads": "Dai colloqui di questa persona non è (ancora) nato alcun lead.",
-    "noHandovers": "Finora questa persona non ha chiesto di parlare con un essere umano."
+    "since": "conosciuto/a dal {date}"
   },
   "conversations": {
     "title": "{count, plural, =0 {Colloqui} one {# colloquio} other {# colloqui}}",
-    "description": "I più recenti prima, con l’analisi di ogni colloquio",
     "none": "Ancora nessun colloquio.",
-    "untitled": "Colloquio senza titolo",
-    "meta": "{date}, {mode}, {count, plural, one {# messaggio} other {# messaggi}}",
-    "gaps": "Lacune",
-    "perYear": "{amount} all’anno",
-    "painPoints": "Punti critici",
-    "nextBestAction": "Prossimo passo",
-    "noAnalysis": "Non ancora analizzato."
+    "untitled": "Colloquio senza titolo"
   },
   "applications": {
     "title": "Offerte e proposte",

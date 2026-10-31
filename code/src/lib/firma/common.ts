@@ -29,3 +29,7 @@ export const customerColumns = {
 
 /** Leads that still need sales work (not won or lost). */
 export const OPEN_LEAD_SQL = sql`${schema.leads.status} not in ('won', 'lost')`;
+
+/** A lead is "hot" when it is flagged high/urgent or scores at least this much. */
+export const HOT_SCORE = 70;
+export const HOT_LEAD_SQL = sql`(${schema.leads.priority} in ('urgent', 'high') or ${schema.leads.score} >= ${HOT_SCORE})`;

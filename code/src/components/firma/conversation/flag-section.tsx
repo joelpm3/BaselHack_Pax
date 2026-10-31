@@ -9,8 +9,14 @@ import { FlagConversationForm, ResolveFlagButton } from "./flag-controls";
 export async function FlagSection({ conversationId }: { conversationId: string }) {
   const [t, format] = await Promise.all([getTranslations("learning.flag"), getFormatter()]);
   const flags = listConversationFlags(conversationId);
+  // Collapsed unless a flag is already open, so the form does not compete with the work on top.
   return (
-    <Panel title={t("title")} description={t("description")}>
+    <Panel
+      title={t("title")}
+      description={t("description")}
+      collapsed={!flags.some((f) => f.status === "open")}
+      meta={flags.length || null}
+    >
       <div className="grid gap-4">
         {flags.length > 0 ? (
           <ul className="grid gap-3">

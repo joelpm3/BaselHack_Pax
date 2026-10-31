@@ -1,10 +1,12 @@
-import { Bot, Mail, Phone } from "lucide-react";
+// One job: decide which sales lead to call next, hottest first, and keep its status and owner
+// current. Talking points and the score breakdown live on the conversation page.
+import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense, use } from "react";
-import { LeadTypeBadge, PriorityBadge } from "@/components/firma/badges";
+import { PRIORITY_MARK } from "@/components/firma/badges";
 import { AssignSelect, LeadStatusSelect } from "@/components/firma/controls";
 import { CustomerLink, customerHref } from "@/components/firma/customer-link";
 import { FilterSelect } from "@/components/firma/filter-select";
@@ -13,19 +15,22 @@ import { type KanbanLead, LeadsKanban } from "@/components/firma/leads-kanban";
 import { LiveRefresh } from "@/components/firma/live-events";
 import {
   EmptyState,
+  FilterChip,
   LoadingBlock,
   PageBody,
   PageHeader,
   SegmentedLinks,
+  ShowMore,
 } from "@/components/firma/page-parts";
 import { hrefWith } from "@/components/firma/url";
 import { Link } from "@/i18n/navigation";
 import { LEAD_STATUSES, LEAD_TYPES, TOPICS } from "@/lib/domain/taxonomy";
-import { parseScope, SCOPES } from "@/lib/firma/aggregate";
+import { PAGE_SIZE, parseLimit, parseScope, SCOPES } from "@/lib/firma/aggregate";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { listAdvisors } from "@/lib/firma/conversations";
 import { listLeads, MIN_SCORE_OPTIONS, parseLeadFilters } from "@/lib/firma/leads";
 import { displayName } from "@/lib/firma/names";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -46,11 +51,7 @@ export default function LeadsPage({ params, searchParams }: PageProps<"/[locale]
             {t("title")}
           </span>
         }
-        description={
-          <>
-            {t("description")} <KindDefinition kind="lead" className="mt-1" />
-          </>
-        }
+        description={<KindDefinition kind="lead" />}
       />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <LeadsContent searchParams={searchParams} />
@@ -58,6 +59,8 @@ export default function LeadsPage({ params, searchParams }: PageProps<"/[locale]
     </>
   );
 }
+
+const PATH = "/firma/leads";
 
 async function LeadsContent({
   searchParams,
@@ -70,20 +73,24 @@ async function LeadsContent({
   const scope = parseScope(params.scope);
   const filters = parseLeadFilters(params, scope);
   const view = params.view === "kanban" ? "kanban" : "table";
-  const leads = listLeads(filters);
+  const limit = parseLimit(params.limit);
+  const { rows: leads, total } = listLeads(filters, limit);
   const advisors = listAdvisors();
   const advisorName = new Map(advisors.map((a) => [a.id, a.name]));
 
-  const [t, tKinds, tType, tStatus, tTopic, tScope, tCommon, format] = await Promise.all([
-    getTranslations("firma.leads"),
-    getTranslations("firmaCustomers.kinds"),
-    getTranslations("common.taxonomy.leadType"),
-    getTranslations("common.taxonomy.leadStatus"),
-    getTranslations("common.taxonomy.topics"),
-    getTranslations("firma.scope"),
-    getTranslations("firma.common"),
-    getFormatter(),
-  ]);
+  const [t, tFocus, tKinds, tType, tStatus, tTopic, tScope, tPriority, tCommon] = await Promise.all(
+    [
+      getTranslations("firma.leads"),
+      getTranslations("firmaFocus.leads"),
+      getTranslations("firmaCustomers.kinds"),
+      getTranslations("common.taxonomy.leadType"),
+      getTranslations("common.taxonomy.leadStatus"),
+      getTranslations("common.taxonomy.topics"),
+      getTranslations("firma.scope"),
+      getTranslations("common.taxonomy.priority"),
+      getTranslations("firma.common"),
+    ],
+  );
 
   const current = {
     scope: scope === "all" ? null : scope,
@@ -91,6 +98,7 @@ async function LeadsContent({
     status: filters.status,
     topic: filters.topic,
     minScore: filters.minScore || null,
+    hot: filters.hot ? 1 : null,
     view: view === "table" ? null : view,
   };
   const keep = (omit: keyof typeof current) => ({ ...current, [omit]: null });
@@ -101,7 +109,7 @@ async function LeadsContent({
       <div className="flex flex-wrap items-end gap-3">
         <FilterSelect
           label={t("filter.type")}
-          path="/firma/leads"
+          path={PATH}
           param="type"
           value={filters.type ?? ""}
           params={keep("type")}
@@ -112,7 +120,7 @@ async function LeadsContent({
         />
         <FilterSelect
           label={t("filter.minScore")}
-          path="/firma/leads"
+          path={PATH}
           param="minScore"
           value={String(filters.minScore || "")}
           params={keep("minScore")}
@@ -123,7 +131,7 @@ async function LeadsContent({
         />
         <FilterSelect
           label={t("filter.topic")}
-          path="/firma/leads"
+          path={PATH}
           param="topic"
           value={filters.topic ?? ""}
           params={keep("topic")}
@@ -135,7 +143,7 @@ async function LeadsContent({
         {view === "table" ? (
           <FilterSelect
             label={t("filter.status")}
-            path="/firma/leads"
+            path={PATH}
             param="status"
             value={filters.status ?? ""}
             params={keep("status")}
@@ -147,19 +155,19 @@ async function LeadsContent({
         ) : null}
         <FilterSelect
           label={t("filter.origin")}
-          path="/firma/leads"
+          path={PATH}
           param="scope"
           value={current.scope ?? ""}
           params={keep("scope")}
           options={SCOPES.map((s) => ({ value: s === "all" ? "" : s, label: tScope(s) }))}
         />
-        <div className="ml-auto">
+        <div className="sm:ml-auto">
           <SegmentedLinks
             label={t("view.label")}
             items={(["table", "kanban"] as const).map((v) => ({
               key: v,
               label: t(`view.${v}`),
-              href: hrefWith("/firma/leads", {
+              href: hrefWith(PATH, {
                 ...current,
                 status: v === "kanban" ? null : current.status,
                 view: v === "table" ? null : v,
@@ -170,7 +178,12 @@ async function LeadsContent({
         </div>
       </div>
 
-      <p className="text-fg-muted">{t("count", { count: leads.length })}</p>
+      <div className="flex flex-wrap items-center gap-3">
+        {filters.hot ? (
+          <FilterChip label={tFocus("hot")} clearHref={hrefWith(PATH, keep("hot"))} />
+        ) : null}
+        <p className="text-fg-muted">{t("count", { count: total })}</p>
+      </div>
 
       {leads.length === 0 ? (
         <EmptyState title={t("emptyTitle")}>{t("emptyBody")}</EmptyState>
@@ -186,7 +199,6 @@ async function LeadsContent({
               name: displayName(l) ?? tCommon("anonymous"),
               city: l.city,
               reasonToCall: l.reasonToCall,
-              conversationId: l.conversationId,
               customerId: l.customerId,
               hasOpenHandover: l.openHandovers > 0,
               isSimulated: l.isSimulated,
@@ -195,148 +207,80 @@ async function LeadsContent({
           )}
         />
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-line">
-          <table className="w-full min-w-[60rem] border-collapse">
-            <thead className="bg-gray-1 text-left text-xs text-fg-muted">
-              <tr>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.priority")}
-                </th>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.customer")}
-                </th>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.score")}
-                </th>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.reason")}
-                </th>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.status")}
-                </th>
-                <th scope="col" className="px-3 py-2.5 font-medium">
-                  {t("col.assignee")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {leads.map((l) => (
-                <tr key={l.id} className="border-t border-gray-2 align-top hover:bg-gray-1">
-                  <td className="px-3 py-3">
-                    <div className="grid justify-items-start gap-1.5">
-                      <PriorityBadge priority={l.priority} />
-                      <LeadTypeBadge type={l.type} />
-                    </div>
-                  </td>
-                  <td className="px-3 py-3">
-                    <div className="grid gap-1">
-                      <span className="flex items-center gap-1.5">
-                        <CustomerLink
-                          customerId={l.customerId}
-                          firstName={l.firstName}
-                          lastName={l.lastName}
-                          city={l.city}
-                          section="leads"
-                        />
-                        {l.isSimulated ? (
-                          <Bot
-                            aria-label={tCommon("simulated")}
-                            className="size-3.5 shrink-0 text-fg-muted"
-                          />
-                        ) : null}
-                      </span>
-                      <span className="flex items-center gap-2 text-fg-muted">
-                        {l.phone ? (
-                          <a
-                            href={`tel:${l.phone}`}
-                            className="inline-flex items-center gap-1 hover:text-fg"
-                            title={l.phone}
-                          >
-                            <Phone aria-hidden className="size-3.5" />
-                            <span className="text-xs">{l.phone}</span>
-                          </a>
-                        ) : null}
-                        {l.email ? (
-                          <a
-                            href={`mailto:${l.email}`}
-                            className="inline-flex items-center gap-1 hover:text-fg"
-                            title={l.email}
-                          >
-                            <Mail aria-hidden className="size-3.5" />
-                            <span className="sr-only">{l.email}</span>
-                          </a>
-                        ) : null}
-                        {!l.phone && !l.email ? (
-                          <span className="text-xs">{t("noContact")}</span>
-                        ) : null}
-                      </span>
-                      {l.openHandovers > 0 ? (
-                        <Link
-                          href={customerHref(l.customerId, "handovers")}
-                          className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
-                        >
-                          {tKinds("handover.alsoOpen")}
-                        </Link>
-                      ) : null}
-                    </div>
-                  </td>
-                  <td className="px-3 py-3">
-                    <div className="grid w-20 gap-1">
-                      <span className="text-lg font-bold leading-none tabular-nums">{l.score}</span>
-                      <span className="h-1.5 bg-gray-2">
-                        <span
-                          className="block h-full bg-pax-purple"
-                          style={{ width: `${l.score}%` }}
-                        />
-                      </span>
-                    </div>
-                  </td>
-                  <td className="min-w-56 px-3 py-3">
-                    {l.conversationId ? (
-                      <Link
-                        href={`/firma/gespraeche/${l.conversationId}#lead-${l.id}`}
-                        className="line-clamp-2 hover:underline"
-                      >
-                        {l.reasonToCall}
-                      </Link>
-                    ) : (
-                      <p className="line-clamp-2">{l.reasonToCall}</p>
-                    )}
-                    {l.topics?.length ? (
-                      <p className="mt-1 line-clamp-1 text-xs text-fg-muted">
-                        {l.topics.map((x) => tTopic(x)).join(", ")}
-                      </p>
-                    ) : null}
-                  </td>
-                  <td className="px-3 py-3">
-                    <div className="grid justify-items-start gap-1">
-                      <LeadStatusSelect leadId={l.id} status={l.status} />
-                      <span className="text-xs whitespace-nowrap text-fg-muted tabular-nums">
-                        {t("updatedAt", {
-                          date: format.dateTime(l.updatedAt, {
-                            day: "numeric",
-                            month: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          }),
-                        })}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="px-3 py-3">
-                    <AssignSelect
-                      kind="lead"
-                      id={l.id}
-                      value={l.assignedAdvisorId}
-                      advisors={advisors}
+        <ul className="divide-y divide-gray-2 rounded-xl border border-line">
+          {leads.map((l) => (
+            <li
+              key={l.id}
+              className="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-3 px-4 py-4 lg:grid-cols-[3rem_minmax(0,14rem)_minmax(0,1fr)_auto] lg:items-start"
+            >
+              <span className="grid content-start gap-1">
+                <span className="text-xl leading-none font-bold tabular-nums">{l.score}</span>
+                <span className="h-1 bg-gray-2">
+                  <span className="block h-full bg-pax-purple" style={{ width: `${l.score}%` }} />
+                </span>
+              </span>
+              <span className="grid min-w-0 content-start gap-1">
+                <span className="flex min-w-0 items-center gap-2">
+                  <span
+                    role="img"
+                    aria-label={tPriority(l.priority)}
+                    title={tPriority(l.priority)}
+                    className={cn("size-2.5 shrink-0", PRIORITY_MARK[l.priority])}
+                  />
+                  <CustomerLink
+                    customerId={l.customerId}
+                    firstName={l.firstName}
+                    lastName={l.lastName}
+                    city={null}
+                    section="leads"
+                  />
+                  {l.isSimulated ? (
+                    <Bot
+                      aria-label={tCommon("simulated")}
+                      className="size-3.5 shrink-0 text-fg-muted"
                     />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                  ) : null}
+                </span>
+                <span className="text-xs text-fg-muted">{tType(l.type)}</span>
+              </span>
+              <span className="col-span-2 grid min-w-0 content-start gap-1.5 lg:col-span-1">
+                {l.conversationId ? (
+                  <Link
+                    href={`/firma/gespraeche/${l.conversationId}#lead-${l.id}`}
+                    className="line-clamp-2 hover:underline"
+                  >
+                    {l.reasonToCall}
+                  </Link>
+                ) : (
+                  <p className="line-clamp-2">{l.reasonToCall}</p>
+                )}
+                {l.openHandovers > 0 ? (
+                  <Link
+                    href={customerHref(l.customerId, "handovers")}
+                    className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
+                  >
+                    {tKinds("handover.alsoOpen")}
+                  </Link>
+                ) : null}
+              </span>
+              <span className="col-span-2 flex flex-wrap items-start gap-2 lg:col-span-1 lg:justify-end">
+                <LeadStatusSelect leadId={l.id} status={l.status} />
+                <AssignSelect
+                  kind="lead"
+                  id={l.id}
+                  value={l.assignedAdvisorId}
+                  advisors={advisors}
+                />
+              </span>
+            </li>
+          ))}
+        </ul>
       )}
+      <ShowMore
+        shown={leads.length}
+        total={total}
+        href={hrefWith(PATH, { ...current, limit: limit + PAGE_SIZE })}
+      />
     </PageBody>
   );
 }

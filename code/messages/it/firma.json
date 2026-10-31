@@ -145,7 +145,6 @@
   },
   "live": {
     "title": "Live",
-    "description": "Conversazioni in corso, cambi di fase e nuovi messaggi in tempo reale.",
     "status": {
       "connecting": "Connessione …",
       "open": "Live",
@@ -173,88 +172,16 @@
     }
   },
   "overview": {
-    "title": "Panoramica",
-    "description": "Di cosa parlano i clienti con Clara, dove abbandonano e chi Pax dovrebbe chiamare.",
-    "kpi": {
-      "label": "Indicatori",
-      "conversations": "Conversazioni",
-      "today": "{count} oggi",
-      "live": "Live ora",
-      "openLive": "Guarda live",
-      "leads": "Lead",
-      "handoversOpen": "Passaggi aperti",
-      "openHandovers": "Alla coda",
-      "nps": "NPS",
-      "npsDetail": "Media {average} su {count, plural, one {# valutazione} other {# valutazioni}}",
-      "npsNone": "Ancora nessuna valutazione"
-    },
-    "funnel": {
-      "title": "Avanzamento e abbandoni",
-      "description": "Fin dove arrivano le conversazioni. {abandoned, plural, =0 {Ancora nessun abbandono.} one {# conversazione abbandonata.} other {# conversazioni abbandonate.}}",
-      "caption": "Conversazioni per fase raggiunta",
-      "stage": "Fase",
-      "reached": "Raggiunta",
-      "dropOff": "Perdita",
-      "leftHere": "Uscite qui",
-      "empty": "Ancora nessuna conversazione."
-    },
-    "trend": {
-      "title": "Conversazioni al giorno",
-      "description": "Ultimi 14 giorni"
-    },
-    "sentiment": {
-      "title": "Sentiment",
-      "empty": "Ancora nessuna conversazione analizzata."
-    },
-    "topics": {
-      "title": "Temi principali",
-      "description": "Conversazioni per tema",
-      "empty": "Ancora nessuna conversazione analizzata."
-    },
-    "faq": {
-      "title": "Domande più frequenti",
-      "description": "Domande dei clienti, raggruppate",
-      "empty": "Ancora nessuna domanda registrata."
-    },
-    "painPoints": {
-      "title": "Punti critici",
-      "description": "Cosa ha recentemente preoccupato o infastidito i clienti",
-      "empty": "Ancora nessun punto critico rilevato."
-    },
-    "lifeEvents": {
-      "title": "Eventi della vita",
-      "empty": "Ancora nessun evento della vita rilevato."
-    },
-    "intent": {
-      "title": "Intenzione",
-      "description": "Quanto le conversazioni sono vicine a una decisione",
-      "empty": "Ancora nessuna conversazione analizzata."
-    },
-    "recent": {
-      "title": "Ultime conversazioni",
-      "all": "Tutte le conversazioni",
-      "empty": "Ancora nessuna conversazione."
-    }
+    "title": "Panoramica"
   },
   "conversations": {
     "title": "Conversazioni",
-    "description": "Tutte le conversazioni con Clara, dalla più recente.",
     "statusFilter": "Stato",
     "allStatuses": "Tutte",
     "count": "{count, plural, one {# conversazione} other {# conversazioni}}",
     "emptyTitle": "Nessuna conversazione per questo filtro.",
     "emptyBody": "Modifica il filtro o avvia una simulazione.",
-    "messages": "{count, plural, one {# messaggio} other {# messaggi}}",
-    "notAnalysed": "Non ancora analizzata",
-    "handover": "Passaggio",
-    "col": {
-      "customer": "Cliente",
-      "topic": "Di cosa si tratta",
-      "stage": "Fase",
-      "signals": "Segnali",
-      "status": "Stato",
-      "last": "Ultima attività"
-    }
+    "notAnalysed": "Non ancora analizzata"
   },
   "conversation": {
     "title": "Conversazione",
@@ -473,14 +400,12 @@
   },
   "leads": {
     "title": "Lead",
-    "description": "Chi Pax dovrebbe chiamare ora, in ordine di punteggio e urgenza. Cambia stato e responsabile direttamente qui.",
     "count": "{count, plural, one {# lead} other {# lead}}",
     "emptyTitle": "Nessun lead per questo filtro.",
     "emptyBody": "I lead nascono automaticamente appena una conversazione mostra potenziale.",
     "changeStatus": "Cambia stato",
     "unassigned": "Non assegnato",
     "simulated": "Simulato",
-    "noContact": "Ancora nessun recapito",
     "filter": {
       "type": "Tipo",
       "minScore": "Punteggio",
@@ -495,37 +420,21 @@
       "label": "Vista",
       "table": "Tabella",
       "kanban": "Pipeline"
-    },
-    "col": {
-      "priority": "Priorità",
-      "customer": "Cliente",
-      "score": "Punteggio",
-      "reason": "Motivo della chiamata",
-      "status": "Stato",
-      "assignee": "Responsabile"
-    },
-    "updatedAt": "Aggiornato il {date}"
+    }
   },
   "handovers": {
     "title": "Passaggi",
-    "description": "Conversazioni che uno specialista deve riprendere, attivate da una regola aziendale o dal desiderio del cliente.",
     "statusFilter": "Stato",
     "changeStatus": "Cambia stato",
     "emptyTitle": "Nessun passaggio con stato «{status}».",
     "emptyBody": "I nuovi passaggi compaiono qui automaticamente.",
-    "noContact": "Nessun recapito",
-    "ruleVersion": "Regole v{version}",
-    "unknownRule": "La regola non esiste più",
-    "noRule": "Senza regola: su richiesta del cliente",
     "urgency": {
-      "normal": "Normale",
       "high": "Urgente"
     }
   },
   "rules": {
     "title": "Regole",
     "description": "Quando Clara passa a uno specialista, cosa segnala e quali prodotti non raccomanda. Scritte con parole proprie, valide subito per le nuove conversazioni.",
-    "languages": "Le regole possono essere scritte in tedesco, francese, italiano o inglese.",
     "version": "Versione {version}",
     "activeVersion": "Attiva",
     "archived": "Archiviata",
@@ -553,7 +462,6 @@
     "current": "La versione {version} è attiva.",
     "restore": "Ripristina la versione {version}",
     "history": "Versioni",
-    "historyHelp": "Le versioni precedenti restano: ogni conversazione sa secondo quali regole è stata valutata.",
     "versionStats": "{rules, plural, one {# regola} other {# regole}}, {conversations, plural, one {# conversazione} other {# conversazioni}}"
   },
   "simulation": {

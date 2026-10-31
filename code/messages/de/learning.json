@@ -147,7 +147,6 @@
     "banner": "Regelentwurf aus Verbesserungen: «{title}». Prüfen und passen Sie ihn an. Er wird erst aktiv, wenn Sie die neue Version speichern.",
     "proposed": "Vorgeschlagen",
     "pending": "Entwürfe aus Verbesserungen",
-    "pendingHelp": "Angenommene Vorschläge, die noch in keiner Version stehen.",
     "openDraft": "Im Editor öffnen"
   }
 }

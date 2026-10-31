@@ -1,3 +1,5 @@
+// One job: edit the active rule set (when Clara hands over, flags or blocks a product) and save
+// it as a new version; older versions and accepted drafts are one click away in the side list.
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
@@ -84,7 +86,6 @@ async function RulesContent({
             })}
           </span>
         </div>
-        <p className="text-fg-muted">{t("languages")}</p>
 
         {proposalDraft ? (
           <p className="rounded-m bg-light-purple px-4 py-3 text-deep-purple">
@@ -131,7 +132,6 @@ async function RulesContent({
         {pendingDrafts.length > 0 ? (
           <div className="mb-3 grid gap-2">
             <h2 className="font-bold">{tDraft("pending")}</h2>
-            <p className="text-fg-muted">{tDraft("pendingHelp")}</p>
             <ul className="grid gap-2">
               {pendingDrafts.map((p) => (
                 <li key={p.id}>
@@ -152,7 +152,6 @@ async function RulesContent({
           </div>
         ) : null}
         <h2 className="font-bold">{t("history")}</h2>
-        <p className="text-fg-muted">{t("historyHelp")}</p>
         <ol className="grid gap-px overflow-hidden rounded-xl border border-line bg-gray-2">
           {versions.map((v) => (
             <li key={v.id}>

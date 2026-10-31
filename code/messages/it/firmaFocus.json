@@ -1,0 +1,76 @@
+{
+  "list": {
+    "showMore": "Mostra di più",
+    "shown": "{shown} di {total}",
+    "clearFilter": "Rimuovi filtro",
+    "search": "Cerca",
+    "simulated": "Simulato"
+  },
+  "overview": {
+    "periodLabel": "Periodo",
+    "period": {
+      "7": "7 giorni",
+      "30": "30 giorni",
+      "all": "Totale"
+    },
+    "periodLong": {
+      "7": "Ultimi 7 giorni",
+      "30": "Ultimi 30 giorni",
+      "all": "Dall'inizio"
+    },
+    "noConversations": "Ancora nessun colloquio in questo periodo.",
+    "funnelLabel": "Colloqui per fase raggiunta",
+    "today": {
+      "title": "Da fare oggi",
+      "handovers": "{count, plural, one {passaggio aperto} other {passaggi aperti}}",
+      "oldest": "il più vecchio arrivato {time}",
+      "urgent": "{count, plural, one {# urgente} other {# urgenti}}",
+      "nobodyWaiting": "Nessuno attende uno specialista.",
+      "followUps": "{count, plural, one {promemoria scaduto} other {promemoria scaduti}}",
+      "followUpsNote": "Eventi di vita annunciati che arrivano ora.",
+      "hotLeads": "{count, plural, one {lead caldo} other {lead caldi}}",
+      "hotLeadsNote": "Aperti, priorità alta o punteggio da 70."
+    },
+    "clara": {
+      "title": "Come va Clara: {period}",
+      "conversations": "Colloqui",
+      "finished": "portati a termine",
+      "finishedNote": "conclusi o passati",
+      "nps": "NPS",
+      "npsCount": "{count, plural, one {# valutazione} other {# valutazioni}}",
+      "dropOff": "Abbandono maggiore",
+      "dropOffValue": "Dopo «{stage}»: {count, plural, one {# colloquio si ferma} other {# colloqui si fermano}} qui ({share})",
+      "allConversations": "Vedi i colloqui del periodo"
+    },
+    "moves": {
+      "title": "Cosa preoccupa la clientela",
+      "topics": "Temi principali",
+      "questions": "Domande frequenti",
+      "painPoints": "Ultimi punti critici",
+      "empty": "Ancora niente di rilevato.",
+      "emptyQuestions": "Ancora nessuna domanda registrata."
+    }
+  },
+  "conversations": {
+    "searchPlaceholder": "Titolo o nome",
+    "topic": "Tema: {topic}",
+    "question": "Domanda: {question}"
+  },
+  "handovers": {
+    "waiting": "arrivato {time}"
+  },
+  "leads": {
+    "hot": "Solo lead caldi"
+  },
+  "conversation": {
+    "analysisDetails": "Tutti i dettagli dell'analisi",
+    "activity": "{count, plural, one {# voce nella cronologia} other {# voci nella cronologia}}"
+  },
+  "customer": {
+    "nextStep": "Prossimo passo dall'ultimo colloquio",
+    "nothingOpen": "Nessun passaggio aperto e nessun lead."
+  },
+  "improvements": {
+    "runFigures": "Cifre dell'ultima analisi"
+  }
+}

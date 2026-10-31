@@ -1,4 +1,6 @@
-import { Bot, Search } from "lucide-react";
+// One job: find a person and open their customer page. Whoever has open work (a handover, then a
+// lead) comes first; contact details and history live on the customer page.
+import { Bot } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
 import { useTranslations } from "next-intl";
@@ -8,15 +10,21 @@ import { CustomerLabel } from "@/components/firma/customer-label";
 import { customerHref } from "@/components/firma/customer-link";
 import { KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh } from "@/components/firma/live-events";
-import { EmptyState, LoadingBlock, PageBody, PageHeader } from "@/components/firma/page-parts";
+import {
+  EmptyState,
+  ListSearch,
+  LoadingBlock,
+  PageBody,
+  PageHeader,
+  ShowMore,
+} from "@/components/firma/page-parts";
 import { ScopeSwitch } from "@/components/firma/scope-switch";
-import { Badge } from "@/components/ui/badge";
-import { buttonClasses } from "@/components/ui/button";
-import { Input } from "@/components/ui/field";
+import { hrefWith } from "@/components/firma/url";
 import { Link } from "@/i18n/navigation";
-import { parseScope } from "@/lib/firma/aggregate";
+import { PAGE_SIZE, parseLimit, parseScope } from "@/lib/firma/aggregate";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { listCustomers } from "@/lib/firma/customers";
+import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -36,13 +44,15 @@ export default function CustomersPage({
   const t = useTranslations("firmaCustomers.list");
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} />
+      <PageHeader title={t("title")} />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <CustomersContent searchParams={searchParams} />
       </Suspense>
     </>
   );
 }
+
+const PATH = "/firma/kunden";
 
 async function CustomersContent({
   searchParams,
@@ -54,43 +64,30 @@ async function CustomersContent({
   const params = await searchParams;
   const scope = parseScope(params.scope);
   const query = typeof params.q === "string" ? params.q : "";
-  const rows = listCustomers(scope, query);
-  const [t, tx, tCommon, format] = await Promise.all([
+  const limit = parseLimit(params.limit);
+  const { rows, total } = listCustomers(scope, query, limit);
+  const [t, tFocus, format] = await Promise.all([
     getTranslations("firmaCustomers.list"),
-    getTranslations("firma.taxonomy"),
-    getTranslations("firma.common"),
+    getTranslations("firmaFocus.list"),
     getFormatter(),
   ]);
   const now = new Date();
+  const current = { scope: scope === "all" ? null : scope, q: query || null };
 
   return (
     <PageBody className="grid gap-5">
       <LiveRefresh types={["conversation", "lead", "handover"]} intervalMs={3000} />
       <div className="flex flex-wrap items-end gap-3">
-        <search className="w-full min-w-0 sm:w-auto sm:max-w-md sm:flex-1">
-          <form className="flex items-center gap-2">
-            {scope === "all" ? null : <input type="hidden" name="scope" value={scope} />}
-            <label htmlFor="customer-search" className="sr-only">
-              {t("search")}
-            </label>
-            <Input
-              id="customer-search"
-              type="search"
-              name="q"
-              defaultValue={query}
-              placeholder={t("searchPlaceholder")}
-              className="h-9 min-w-0 flex-1 text-sm"
-            />
-            <button type="submit" className={buttonClasses("secondary", "sm")}>
-              <Search aria-hidden />
-              {t("search")}
-            </button>
-          </form>
-        </search>
-        <ScopeSwitch path="/firma/kunden" scope={scope} extra={{ q: query || null }} />
+        <ListSearch
+          label={t("search")}
+          placeholder={t("searchPlaceholder")}
+          value={query}
+          keep={{ scope: current.scope }}
+        />
+        <ScopeSwitch path={PATH} scope={scope} extra={{ q: current.q }} />
       </div>
 
-      <p className="text-fg-muted">{t("count", { count: rows.length })}</p>
+      <p className="text-fg-muted">{t("count", { count: total })}</p>
 
       {rows.length === 0 ? (
         <EmptyState title={query ? t("emptySearch", { query }) : t("emptyTitle")}>
@@ -102,70 +99,73 @@ async function CustomersContent({
             <li key={c.customerId}>
               <Link
                 href={customerHref(c.customerId)}
-                className="grid grid-cols-2 items-center gap-x-4 gap-y-2 px-4 py-3 hover:bg-gray-1 md:grid-cols-[minmax(0,1fr)_7rem_10.5rem_10rem_8rem]"
+                className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 px-4 py-3 hover:bg-gray-1 sm:grid-cols-[minmax(0,1fr)_auto_8rem]"
               >
-                <span className="col-span-2 grid min-w-0 gap-0.5 md:col-span-1">
-                  <span className="flex min-w-0 items-center gap-2">
-                    <CustomerLabel
-                      firstName={c.firstName}
-                      lastName={c.lastName}
-                      city={c.city}
-                      className="font-medium"
+                <span className="flex min-w-0 items-center gap-2">
+                  <CustomerLabel
+                    firstName={c.firstName}
+                    lastName={c.lastName}
+                    city={c.city}
+                    className="font-medium"
+                  />
+                  {c.isSimulated ? (
+                    <Bot
+                      aria-label={tFocus("simulated")}
+                      className="size-3.5 shrink-0 text-fg-muted"
                     />
-                    {c.isSimulated ? (
-                      <Bot
-                        aria-label={tCommon("simulated")}
-                        className="size-3.5 shrink-0 text-fg-muted"
-                      />
-                    ) : null}
-                  </span>
-                  {c.email || c.phone ? (
-                    <span className="truncate text-xs text-fg-muted">
-                      {[c.phone, c.email].filter(Boolean).join(", ")}
-                    </span>
                   ) : null}
                 </span>
-                <span>
-                  <Badge tone={c.lifecycle === "client" ? "success" : "neutral"}>
-                    {tx(`lifecycle.${c.lifecycle}`)}
-                  </Badge>
+                <span className="flex items-center gap-3">
+                  <OpenWork kind="handover" count={c.openHandovers} />
+                  <OpenWork kind="lead" count={c.openLeads} score={c.topLeadScore} />
                 </span>
-                <span
-                  className={
-                    c.openHandovers > 0
-                      ? "flex items-center gap-2 font-medium"
-                      : "flex items-center gap-2 text-fg-muted"
-                  }
-                >
-                  <KindMark kind="handover" className={c.openHandovers > 0 ? "" : "opacity-40"} />
-                  {t("openHandovers", { count: c.openHandovers })}
-                </span>
-                <span
-                  className={
-                    c.openLeads > 0
-                      ? "flex items-center gap-2 font-medium"
-                      : "flex items-center gap-2 text-fg-muted"
-                  }
-                >
-                  <KindMark kind="lead" className={c.openLeads > 0 ? "" : "opacity-40"} />
-                  {c.openLeads > 0 && c.topLeadScore !== null
-                    ? t("openLeadsScore", { count: c.openLeads, score: c.topLeadScore })
-                    : t("openLeads", { count: c.openLeads })}
-                </span>
-                <span className="text-xs text-fg-muted md:text-right">
-                  {t("conversations", { count: c.conversationCount })}
-                  {c.lastContactAt ? (
-                    <>
-                      <br />
-                      {format.relativeTime(c.lastContactAt, now)}
-                    </>
-                  ) : null}
+                <span className="col-span-2 text-xs text-fg-muted sm:col-span-1 sm:text-right">
+                  {c.lastContactAt ? format.relativeTime(c.lastContactAt, now) : "–"}
                 </span>
               </Link>
             </li>
           ))}
         </ul>
       )}
+      <ShowMore
+        shown={rows.length}
+        total={total}
+        href={hrefWith(PATH, { ...current, limit: limit + PAGE_SIZE })}
+      />
     </PageBody>
+  );
+}
+
+/** A kind tile with its count; faded when nothing is open, so open work stands out in the list. */
+function OpenWork({
+  kind,
+  count,
+  score,
+}: {
+  kind: "handover" | "lead";
+  count: number;
+  score?: number | null;
+}) {
+  const t = useTranslations("firmaCustomers.list");
+  const label =
+    kind === "handover"
+      ? t("openHandovers", { count })
+      : count > 0 && score != null
+        ? t("openLeadsScore", { count, score })
+        : t("openLeads", { count });
+  return (
+    <span
+      title={label}
+      className={cn(
+        "inline-flex items-center gap-1.5 tabular-nums",
+        count > 0 ? "font-medium" : "text-fg-subtle",
+      )}
+    >
+      <span aria-hidden className="contents">
+        <KindMark kind={kind} className={count > 0 ? "" : "opacity-30"} />
+        {count}
+      </span>
+      <span className="sr-only">{label}</span>
+    </span>
   );
 }

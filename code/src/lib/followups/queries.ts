@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, desc, eq, inArray, isNotNull, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import { toIsoDate } from "@/lib/documents/dates";
 import { customerColumns } from "@/lib/firma/common";
@@ -48,20 +48,15 @@ function emailsFor(eventIds: string[]) {
   return map;
 }
 
-/** Open Wiedervorlagen (due), then the ones that ended (responded, lost), newest first. */
-export function listFollowUps(status: "due" | "responded" | "lost") {
+/**
+ * One tab of the Wiedervorlagen list, soonest event first, with the reason to call (from the
+ * linked lead) and the emails Pax sent about it.
+ */
+export function listFollowUps(status: "upcoming" | "due" | "responded" | "lost", limit: number) {
   const rows = db
     .select({
       ...eventColumns,
-      leadStatus: schema.leads.status,
-      leadType: schema.leads.type,
-      priority: schema.leads.priority,
-      score: schema.leads.score,
       reasonToCall: schema.leads.reasonToCall,
-      talkingPoints: schema.leads.talkingPoints,
-      assignedAdvisorId: schema.leads.assignedAdvisorId,
-      email: schema.customers.email,
-      phone: schema.customers.phone,
       ...customerColumns,
     })
     .from(fe)
@@ -71,24 +66,10 @@ export function listFollowUps(status: "due" | "responded" | "lost") {
     .leftJoin(schema.conversations, eq(schema.conversations.id, fe.conversationId))
     .where(and(eq(fe.status, status), eq(schema.customers.isSimulated, false)))
     .orderBy(asc(fe.expectedDate))
-    .limit(200)
+    .limit(limit)
     .all();
   const emails = emailsFor(rows.map((r) => r.id));
   return withFollowUpDate(rows).map((r) => ({ ...r, emails: emails.get(r.id) ?? [] }));
-}
-
-export function listUpcomingEvents() {
-  const rows = db
-    .select({ ...eventColumns, ...customerColumns })
-    .from(fe)
-    .innerJoin(schema.customers, eq(schema.customers.id, fe.customerId))
-    .leftJoin(schema.profiles, eq(schema.profiles.customerId, fe.customerId))
-    .leftJoin(schema.conversations, eq(schema.conversations.id, fe.conversationId))
-    .where(and(eq(fe.status, "upcoming"), eq(schema.customers.isSimulated, false)))
-    .orderBy(asc(fe.expectedDate))
-    .limit(200)
-    .all();
-  return withFollowUpDate(rows);
 }
 
 export function followUpCounts(): Record<"upcoming" | "due" | "responded" | "lost", number> {
@@ -123,44 +104,6 @@ const outboxColumns = {
 export type OutboxRow = {
   [K in keyof typeof outboxColumns]: (typeof schema.outboxEmails.$inferSelect)[K];
 };
-
-export function listOutbox(limit = 50) {
-  return db
-    .select({ ...outboxColumns, ...customerColumns })
-    .from(schema.outboxEmails)
-    .innerJoin(schema.customers, eq(schema.customers.id, schema.outboxEmails.customerId))
-    .leftJoin(schema.profiles, eq(schema.profiles.customerId, schema.outboxEmails.customerId))
-    .orderBy(desc(schema.outboxEmails.sentOn), desc(schema.outboxEmails.createdAt))
-    .limit(limit)
-    .all();
-}
-
-/** Every real customer with an email address: check-in on or off, and when the next one is due. */
-export function listCheckins() {
-  const c = schema.customers;
-  const rows = db
-    .select({
-      ...customerColumns,
-      email: c.email,
-      createdAt: c.createdAt,
-      enabled: schema.contactPreferences.yearlyCheckin,
-      lastSentOn: sql<
-        string | null
-      >`(select max(${schema.outboxEmails.sentOn}) from ${schema.outboxEmails} where ${schema.outboxEmails.customerId} = ${c.id} and ${schema.outboxEmails.kind} = 'yearly_checkin')`,
-    })
-    .from(c)
-    .innerJoin(schema.profiles, eq(schema.profiles.customerId, c.id))
-    .leftJoin(schema.contactPreferences, eq(schema.contactPreferences.customerId, c.id))
-    .where(and(eq(c.isSimulated, false), isNotNull(c.email)))
-    .all();
-  return rows
-    .map((r) => ({
-      ...r,
-      enabled: r.enabled ?? true,
-      nextOn: nextCheckinDate({ lastSentOn: r.lastSentOn, since: toIsoDate(r.createdAt) }),
-    }))
-    .sort((a, b) => a.nextOn.localeCompare(b.nextOn));
-}
 
 /** Everything the follow-up panel of one customer shows. */
 export function customerFollowUps(customerId: string) {

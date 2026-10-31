@@ -1,3 +1,6 @@
+// One job: everything an advisor needs to act on one person: how to reach them, what is open
+// (handover, lead, follow-up) and the latest next step. History, records and the timeline sit
+// collapsed below.
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -16,10 +19,10 @@ import { CustomerFollowUpsSlot } from "@/components/firma/customer/follow-ups-sl
 import {
   ApplicationsSection,
   CommunicationsSection,
+  ContactButtons,
   ConversationsSection,
   TimelineSection,
 } from "@/components/firma/customer/sections";
-import { KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh, LiveStatus } from "@/components/firma/live-events";
 import { LoadingBlock, PageBody } from "@/components/firma/page-parts";
 import { Badge } from "@/components/ui/badge";
@@ -27,7 +30,6 @@ import { Link } from "@/i18n/navigation";
 import { requireAdvisor } from "@/lib/firma/auth";
 import { getCustomerDetail } from "@/lib/firma/customers";
 import { displayName } from "@/lib/firma/names";
-import { cn } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -48,42 +50,12 @@ export default function CustomerPage({ params }: PageProps<"/[locale]/firma/kund
   );
 }
 
-/** Anchored section: the customer view is linked into from leads, handovers and the overview. */
+/** Anchored section: the customer view is linked into from leads, handovers and follow-ups. */
 function Section({ id, children }: { id: string; children: ReactNode }) {
   return (
     <div id={id} className="min-w-0 scroll-mt-20 lg:scroll-mt-6">
       {children}
     </div>
-  );
-}
-
-function Fact({
-  href,
-  kind,
-  label,
-  value,
-  alert = false,
-}: {
-  href: string;
-  kind?: "handover" | "lead";
-  label: string;
-  value: string;
-  alert?: boolean;
-}) {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "flex min-w-0 items-center gap-3 rounded-xl border px-4 py-3 hover:bg-gray-1",
-        alert ? "border-2 border-warning" : "border-line",
-      )}
-    >
-      {kind ? <KindMark kind={kind} /> : null}
-      <span className="grid min-w-0">
-        <span className="text-xl leading-tight font-bold tabular-nums">{value}</span>
-        <span className="leading-tight text-fg-muted">{label}</span>
-      </span>
-    </a>
   );
 }
 
@@ -98,8 +70,9 @@ async function CustomerContent({
   await connection();
   const detail = getCustomerDetail(id);
   if (!detail) notFound();
-  const [t, tx, tCommon, format, locale] = await Promise.all([
+  const [t, tFocus, tx, tCommon, format, locale] = await Promise.all([
     getTranslations("firmaCustomers.detail"),
+    getTranslations("firmaFocus.customer"),
     getTranslations("firma.taxonomy"),
     getTranslations("firma.common"),
     getFormatter(),
@@ -110,12 +83,10 @@ async function CustomerContent({
   const name = displayName(customer) ?? profile.person.firstName ?? tCommon("anonymous");
   const place = [profile.residence.zip, profile.residence.city].filter(Boolean).join(" ");
   const age = profile.person.birthYear ? now.getFullYear() - profile.person.birthYear : null;
-  const openHandovers = detail.handovers.filter((h) => h.status === "open").length;
-  const openLeads = detail.leads.filter((l) => l.status !== "won" && l.status !== "lost").length;
-  const lastContact = detail.conversations[0]
-    ? (detail.conversations[0].lastMessageAt ?? detail.conversations[0].createdAt)
-    : null;
   const titles = Object.fromEntries(detail.conversations.map((c) => [c.id, c.title]));
+  // The newest conversation's suggested next step is what the advisor acts on first.
+  const latest = detail.conversations.find((c) => detail.analyses[c.id]?.nextBestAction);
+  const nextStep = latest ? detail.analyses[latest.id]?.nextBestAction : null;
 
   return (
     <>
@@ -133,8 +104,8 @@ async function CustomerContent({
         types={["conversation", "analysis", "lead", "handover", "document", "policy"]}
         intervalMs={3000}
       />
-      <header className="grid gap-4 border-b border-line px-4 py-5 sm:px-6 lg:px-8">
-        <div className="grid gap-1.5">
+      <header className="flex flex-wrap items-end justify-between gap-4 border-b border-line px-4 py-5 sm:px-6 lg:px-8">
+        <div className="grid min-w-0 gap-1.5">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
             <h1 className="text-2xl leading-tight font-bold">{name}</h1>
             <Badge tone={customer.lifecycle === "client" ? "success" : "neutral"}>
@@ -152,68 +123,51 @@ async function CustomerContent({
               .join(", ")}
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
-          <Fact
-            href="#handovers"
-            kind="handover"
-            value={String(openHandovers)}
-            label={t("facts.handovers", { count: openHandovers })}
-            alert={openHandovers > 0}
-          />
-          <Fact
-            href="#leads"
-            kind="lead"
-            value={String(openLeads)}
-            label={t("facts.leads", { count: openLeads })}
-          />
-          <Fact
-            href="#conversations"
-            value={String(detail.conversations.length)}
-            label={t("facts.conversations", { count: detail.conversations.length })}
-          />
-          <Fact
-            href="#timeline"
-            value={lastContact ? format.relativeTime(lastContact, now) : "–"}
-            label={t("facts.lastContact")}
-          />
-        </div>
+        <ContactButtons customer={customer} />
       </header>
 
       <PageBody className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_24rem] xl:grid-cols-[minmax(0,1fr)_28rem]">
         <div className="grid min-w-0 content-start gap-6">
-          <Section id="handovers">
-            <HandoversSection
-              detail={detail}
-              conversationTitles={titles}
-              emptyLabel={t("noHandovers")}
-            />
-          </Section>
-          <Section id="leads">
-            <LeadsSection
-              detail={detail}
-              locale={locale}
-              conversationTitles={titles}
-              emptyLabel={t("noLeads")}
-            />
-          </Section>
-          <Section id="conversations">
-            <ConversationsSection detail={detail} locale={locale} />
-          </Section>
-          {detail.recommendations.length > 0 ? (
-            <RecommendationsSection detail={detail} locale={locale} />
+          {nextStep && latest ? (
+            <Link
+              href={`/firma/gespraeche/${latest.id}`}
+              className="grid gap-1 rounded-xl border-l-4 border-pax-purple bg-light-purple px-5 py-4 text-deep-purple hover:underline"
+            >
+              <span className="text-xs font-medium">{tFocus("nextStep")}</span>
+              <span className="font-medium">{nextStep}</span>
+            </Link>
           ) : null}
-          <ApplicationsSection detail={detail} locale={locale} />
-          <Section id="timeline">
-            <TimelineSection detail={detail} />
+          {detail.handovers.length > 0 ? (
+            <Section id="handovers">
+              <HandoversSection detail={detail} conversationTitles={titles} />
+            </Section>
+          ) : null}
+          {detail.leads.length > 0 ? (
+            <Section id="leads">
+              <LeadsSection detail={detail} locale={locale} conversationTitles={titles} />
+            </Section>
+          ) : null}
+          {detail.handovers.length === 0 && detail.leads.length === 0 ? (
+            <p className="rounded-xl bg-gray-1 px-5 py-4 text-fg-muted">{tFocus("nothingOpen")}</p>
+          ) : null}
+          <Section id="conversations">
+            <ConversationsSection detail={detail} />
           </Section>
+          <div className="grid gap-3">
+            <TimelineSection detail={detail} collapsed />
+            <CommunicationsSection detail={detail} collapsed />
+            {detail.recommendations.length > 0 ? (
+              <RecommendationsSection detail={detail} locale={locale} collapsed />
+            ) : null}
+            <ApplicationsSection detail={detail} locale={locale} collapsed />
+            <DocumentsSection detail={detail} collapsed />
+          </div>
         </div>
         <div className="grid min-w-0 content-start gap-6">
-          <ProfileSection detail={detail} locale={locale} asOf={now} />
-          <CustomerFollowUpsSlot customerId={customer.id} locale={locale} />
-          <Section id="communications">
-            <CommunicationsSection detail={detail} />
+          <Section id="followups">
+            <CustomerFollowUpsSlot customerId={customer.id} locale={locale} />
           </Section>
-          <DocumentsSection detail={detail} />
+          <ProfileSection detail={detail} locale={locale} asOf={now} />
         </div>
       </PageBody>
     </>

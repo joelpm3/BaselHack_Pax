@@ -19,33 +19,8 @@
     "fromConversation": "From the conversation “{title}”",
     "openConversation": "Open conversation"
   },
-  "overview": {
-    "description": "Where you need to act now: who wants to talk to a person, whom to call, and the figures below.",
-    "actNow": "Act now",
-    "figures": "Figures",
-    "openConversation": "Open conversation",
-    "openLeads": "Open leads",
-    "toPipeline": "Go to pipeline",
-    "handovers": {
-      "title": "{count, plural, =0 {No open handovers} one {# open handover} other {# open handovers}}",
-      "counts": "{urgent} urgent, {unassigned} unassigned",
-      "empty": "Nobody is waiting for a specialist.",
-      "urgent": "Urgent",
-      "waiting": "Waiting since {time}",
-      "alsoLead": "Also a lead: {type}, score {score}",
-      "all": "All {count} open handovers"
-    },
-    "leads": {
-      "title": "{count, plural, =0 {No hot leads} one {# hot lead} other {# hot leads}}",
-      "empty": "No open high-priority leads.",
-      "score": "Score",
-      "all": "All leads",
-      "withHandover": "{count, plural, one {# more lead belongs} other {# more leads belong}} to an open handover"
-    }
-  },
   "list": {
     "title": "Customers",
-    "description": "Everyone with a conversation or a lead. People with an open handover come first.",
     "search": "Search",
     "searchPlaceholder": "Name, email or town",
     "count": "{count, plural, one {# person} other {# people}}",
@@ -54,35 +29,19 @@
     "emptyBody": "People show up here as soon as they talk to Clara.",
     "openHandovers": "{count, plural, =0 {No handover} one {# handover} other {# handovers}}",
     "openLeads": "{count, plural, =0 {No lead} one {# lead} other {# leads}}",
-    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}",
-    "conversations": "{count, plural, one {# conversation} other {# conversations}}"
+    "openLeadsScore": "{count, plural, one {# lead} other {# leads}}, score {score}"
   },
   "detail": {
     "title": "Customer view",
     "open": "Customer view",
     "back": "All customers",
     "age": "{age} years old",
-    "since": "known since {date}",
-    "facts": {
-      "handovers": "{count, plural, one {open handover} other {open handovers}}",
-      "leads": "{count, plural, one {open lead} other {open leads}}",
-      "conversations": "{count, plural, one {conversation} other {conversations}}",
-      "lastContact": "Last contact"
-    },
-    "noLeads": "No lead has come out of this person's conversations (yet).",
-    "noHandovers": "This person has not asked for a human so far."
+    "since": "known since {date}"
   },
   "conversations": {
     "title": "{count, plural, =0 {Conversations} one {# conversation} other {# conversations}}",
-    "description": "Newest first, each with its analysis",
     "none": "No conversations yet.",
-    "untitled": "Untitled conversation",
-    "meta": "{date}, {mode}, {count, plural, one {# message} other {# messages}}",
-    "gaps": "Gaps",
-    "perYear": "{amount} per year",
-    "painPoints": "Pain points",
-    "nextBestAction": "Next step",
-    "noAnalysis": "Not analysed yet."
+    "untitled": "Untitled conversation"
   },
   "applications": {
     "title": "Offers and applications",

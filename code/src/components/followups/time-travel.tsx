@@ -1,6 +1,6 @@
 "use client";
 
-import { RotateCcw } from "lucide-react";
+import { CalendarClock, RotateCcw } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState, useTransition } from "react";
 import {
@@ -34,8 +34,9 @@ const SUMMARY_KEYS: Array<keyof RunSummary> = [
 ];
 
 /**
- * Demo control: pretend today is another day so announced life events become due, then let the
- * follow-up engine write its emails. Each move waits for the engine (LLM emails take a moment).
+ * Demo control, folded into the page header: the button shows the business date, and opens the
+ * moves that pretend today is another day so announced life events become due. Each move waits
+ * for the follow-up engine (LLM emails take a moment).
  */
 export function TimeTravel({ today, simulated }: { today: string; simulated: boolean }) {
   const t = useTranslations("followups.clock");
@@ -60,74 +61,70 @@ export function TimeTravel({ today, simulated }: { today: string; simulated: boo
   };
 
   return (
-    <section
-      aria-label={t("label")}
-      className="grid gap-4 rounded-xl bg-deep-purple p-5 text-white lg:grid-cols-[auto_minmax(0,1fr)] lg:items-center lg:gap-8"
-    >
-      <div className="grid gap-1">
-        <span className="flex items-center gap-2 text-white/70">
-          <span
-            aria-hidden
-            className={cn("size-2.5", simulated ? "bg-pax-green" : "border border-white/60")}
-          />
-          {simulated ? t("simulated") : t("real")}
-        </span>
-        <span className="text-2xl font-bold tabular-nums">
+    <details className="group relative">
+      <summary
+        aria-label={t("label")}
+        className={cn(
+          "flex cursor-pointer list-none items-center gap-2 rounded-m border px-3 py-1.5 hover:bg-gray-1 [&::-webkit-details-marker]:hidden",
+          simulated ? "border-pax-purple text-deep-purple" : "border-line",
+        )}
+      >
+        {pending ? <Spinner /> : <CalendarClock aria-hidden className="size-4" />}
+        <span className="tabular-nums">
           {format.dateTime(new Date(`${today}T12:00:00Z`), {
-            weekday: "short",
             day: "numeric",
-            month: "long",
+            month: "short",
             year: "numeric",
           })}
         </span>
-      </div>
+        {simulated ? (
+          <span aria-hidden className="size-2 bg-pax-green" title={t("simulated")} />
+        ) : null}
+        <span className="sr-only">{simulated ? t("simulated") : t("real")}</span>
+      </summary>
 
-      <div className="grid gap-3">
-        <div className="flex flex-wrap items-center gap-2">
+      <div className="absolute right-0 z-20 mt-2 grid w-[min(22rem,calc(100vw-2rem))] gap-3 rounded-xl border border-line bg-surface p-4">
+        <p className="font-medium">{t("label")}</p>
+        <div className="flex flex-wrap gap-2">
           {STEPS.map((step) => (
             <Button
               key={step.key}
               size="sm"
-              variant="inverse"
+              variant="secondary"
               disabled={pending}
               onClick={() => run(() => travelTo(step.move(today)))}
             >
               {t(step.key)}
             </Button>
           ))}
-          <form
-            className="flex items-center gap-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              run(() => travelTo(target));
-            }}
-          >
-            <label htmlFor="time-travel-date" className="sr-only">
-              {t("jumpTo")}
-            </label>
-            <Input
-              id="time-travel-date"
-              type="date"
-              value={target}
-              onChange={(e) => setTarget(e.target.value)}
-              className="h-9 w-auto border-white/40 bg-white/10 py-0 text-sm text-white [color-scheme:dark]"
-            />
-            <Button
-              type="submit"
-              size="sm"
-              disabled={pending || !target}
-              className="bg-white/12 hover:bg-white/20"
-            >
-              {t("jump")}
-            </Button>
-          </form>
         </div>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-white/80">
+        <form
+          className="flex items-center gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            run(() => travelTo(target));
+          }}
+        >
+          <label htmlFor="time-travel-date" className="sr-only">
+            {t("jumpTo")}
+          </label>
+          <Input
+            id="time-travel-date"
+            type="date"
+            value={target}
+            onChange={(e) => setTarget(e.target.value)}
+            className="h-9 min-w-0 flex-1 py-0 text-sm"
+          />
+          <Button type="submit" size="sm" disabled={pending || !target}>
+            {t("jump")}
+          </Button>
+        </form>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-fg-muted">
           <button
             type="button"
             disabled={pending}
             onClick={() => run(runFollowUpsNow)}
-            className="underline-offset-4 hover:text-white hover:underline disabled:opacity-60"
+            className="underline-offset-4 hover:text-fg hover:underline disabled:opacity-60"
           >
             {t("run")}
           </button>
@@ -136,7 +133,7 @@ export function TimeTravel({ today, simulated }: { today: string; simulated: boo
               type="button"
               disabled={pending}
               onClick={() => run(() => travelTo(null))}
-              className="underline-offset-4 hover:text-white hover:underline disabled:opacity-60"
+              className="underline-offset-4 hover:text-fg hover:underline disabled:opacity-60"
             >
               {t("back")}
             </button>
@@ -151,13 +148,13 @@ export function TimeTravel({ today, simulated }: { today: string; simulated: boo
                 await resetFollowUpDemo();
               });
             }}
-            className="inline-flex items-center gap-1.5 underline-offset-4 hover:text-white hover:underline disabled:opacity-60"
+            className="inline-flex items-center gap-1.5 underline-offset-4 hover:text-fg hover:underline disabled:opacity-60"
           >
             <RotateCcw aria-hidden className="size-3.5" />
             {t("reset")}
           </button>
         </div>
-        <p aria-live="polite" className="min-h-5 text-white/90">
+        <p aria-live="polite">
           {pending ? (
             <span className="inline-flex items-center gap-2">
               <Spinner />
@@ -172,6 +169,6 @@ export function TimeTravel({ today, simulated }: { today: string; simulated: boo
           ) : null}
         </p>
       </div>
-    </section>
+    </details>
   );
 }

@@ -1,3 +1,5 @@
+// One job: watch the conversations running right now (and those of the last 30 minutes) as
+// they move through the stages; open one to read it.
 import { Bot, Handshake, MessageSquare, UserRound } from "lucide-react";
 import type { Metadata } from "next";
 import { connection } from "next/server";
@@ -31,7 +33,7 @@ export default function LivePage({ params, searchParams }: PageProps<"/[locale]/
   const t = useTranslations("firma.live");
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} actions={<LiveStatus />} />
+      <PageHeader title={t("title")} actions={<LiveStatus />} />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <LiveContent searchParams={searchParams} />
       </Suspense>
@@ -119,12 +121,9 @@ async function LiveRow({
   now: Date;
   muted?: boolean;
 }) {
-  const [t, tStage, tTopic, tIntent, tMode, tCommon, format] = await Promise.all([
+  const [t, tStage, tCommon, format] = await Promise.all([
     getTranslations("firma.live"),
     getTranslations("common.taxonomy.stages"),
-    getTranslations("common.taxonomy.topics"),
-    getTranslations("common.taxonomy.intent"),
-    getTranslations("firma.taxonomy.mode"),
     getTranslations("firma.common"),
     getFormatter(),
   ]);
@@ -150,9 +149,6 @@ async function LiveRow({
                 <Bot aria-label={tCommon("simulated")} className="size-4 shrink-0 text-fg-muted" />
               ) : null}
             </span>
-            <span className="text-xs text-fg-muted">
-              {[c.city, tMode(c.mode), c.locale.toUpperCase()].filter(Boolean).join(" · ")}
-            </span>
             <span className="text-xs text-fg-muted tabular-nums">
               {t("messages", { count: c.messageCount })} ·{" "}
               {format.relativeTime(c.lastMessageAt ?? c.createdAt, now)}
@@ -163,7 +159,6 @@ async function LiveRow({
               <StageSquares stage={c.stage} label={tStage(c.stage)} />
               <span className="font-medium">{tStage(c.stage)}</span>
               {muted ? <ConversationStatusBadge status={c.status} /> : null}
-              {c.intentStage ? <Badge tone="info">{tIntent(c.intentStage)}</Badge> : null}
               {c.handoverRequired ? (
                 <Badge tone="warning">
                   <Handshake aria-hidden className="size-3" />
@@ -186,15 +181,6 @@ async function LiveRow({
                 )}
                 <span className="line-clamp-2 min-w-0">{last.text}</span>
               </p>
-            ) : null}
-            {c.topics && c.topics.length > 0 ? (
-              <div className="flex flex-wrap gap-1.5">
-                {c.topics.slice(0, 4).map((topic) => (
-                  <Badge key={topic} tone="neutral">
-                    {tTopic(topic)}
-                  </Badge>
-                ))}
-              </div>
             ) : null}
           </div>
         </Link>

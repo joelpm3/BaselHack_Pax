@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
-  bucketByDay,
+  biggestDropOff,
   buildFunnel,
+  PAGE_SIZE,
+  parseLimit,
+  parsePeriod,
   parseScope,
+  periodStart,
   startOfZurichDay,
   summariseNps,
-  zurichDayKey,
 } from "./aggregate";
 
 describe("buildFunnel", () => {
@@ -15,20 +18,29 @@ describe("buildFunnel", () => {
       { getting_to_know: 2 },
     );
     expect(funnel.map((r) => r.reached)).toEqual([10, 8, 5, 5, 1, 1, 0, 0, 0]);
-    expect(funnel[0]).toMatchObject({ shareOfStarted: 1, dropOff: 0 });
-    expect(funnel[1]).toMatchObject({ stage: "getting_to_know", abandonedHere: 2 });
-    expect(funnel[1].dropOff).toBeCloseTo(0.2);
-    expect(funnel[2].dropOff).toBeCloseTo(0.375);
-    expect(funnel[4].dropOff).toBeCloseTo(0.8);
+    expect(funnel[0]).toMatchObject({ shareOfStarted: 1, stoppedHere: 0 });
+    expect(funnel[1]).toMatchObject({ stage: "getting_to_know", stoppedHere: 2 });
     expect(funnel[4].shareOfStarted).toBeCloseTo(0.1);
-    // Nothing reached the previous stage: no drop-off to report.
-    expect(funnel[7].dropOff).toBe(0);
   });
 
   it("handles an empty dashboard", () => {
     const funnel = buildFunnel({});
     expect(funnel).toHaveLength(9);
     expect(funnel.every((r) => r.reached === 0 && r.shareOfStarted === 0)).toBe(true);
+    expect(biggestDropOff(funnel)).toBeNull();
+  });
+});
+
+describe("biggestDropOff", () => {
+  it("finds the stage most customers left at", () => {
+    const drop = biggestDropOff(
+      buildFunnel({ started: 2, analysis_shown: 5, signed: 3 }, { started: 1, analysis_shown: 5 }),
+    );
+    expect(drop).toEqual({ stage: "analysis_shown", count: 5, share: 0.5 });
+  });
+
+  it("ignores conversations nobody left", () => {
+    expect(biggestDropOff(buildFunnel({ started: 4, signed: 4 }))).toBeNull();
   });
 });
 
@@ -50,33 +62,32 @@ describe("Zurich day helpers", () => {
     expect(startOfZurichDay(new Date("2026-07-15T08:30:00Z")).toISOString()).toBe(
       "2026-07-14T22:00:00.000Z",
     );
-    expect(zurichDayKey(new Date("2026-07-14T22:30:00Z"))).toBe("2026-07-15");
   });
 
-  it("buckets dates into the last n Zurich days", () => {
-    const now = new Date("2026-10-30T10:00:00Z");
-    const buckets = bucketByDay(
-      [
-        new Date("2026-10-30T09:00:00Z"),
-        new Date("2026-10-29T23:30:00Z"), // 00:30 local on the 30th
-        new Date("2026-10-28T12:00:00Z"),
-        new Date("2026-10-01T12:00:00Z"), // outside the window
-      ],
-      3,
-      now,
-    );
-    expect(buckets).toEqual([
-      { day: "2026-10-28", count: 1 },
-      { day: "2026-10-29", count: 0 },
-      { day: "2026-10-30", count: 2 },
-    ]);
+  it("starts a 7-day period six midnights before today", () => {
+    const now = new Date("2026-01-15T08:30:00Z");
+    expect(periodStart("7", now)?.toISOString()).toBe("2026-01-08T23:00:00.000Z");
+    expect(periodStart("all", now)).toBeNull();
   });
 });
 
-describe("misc", () => {
+describe("parsers", () => {
   it("parses scopes", () => {
     expect(parseScope("simulated")).toBe("simulated");
     expect(parseScope("nope")).toBe("all");
     expect(parseScope(undefined)).toBe("all");
+  });
+
+  it("parses periods", () => {
+    expect(parsePeriod("7")).toBe("7");
+    expect(parsePeriod("all")).toBe("all");
+    expect(parsePeriod("12")).toBe("30");
+  });
+
+  it("rounds list limits to whole pages", () => {
+    expect(parseLimit(undefined)).toBe(PAGE_SIZE);
+    expect(parseLimit("-3")).toBe(PAGE_SIZE);
+    expect(parseLimit(String(PAGE_SIZE + 1))).toBe(PAGE_SIZE * 2);
+    expect(parseLimit("1001")).toBe(1050);
   });
 });

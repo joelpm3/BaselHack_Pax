@@ -1,10 +1,15 @@
 import "server-only";
-import { and, asc, desc, eq, gte, inArray, or, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, inArray, like, or, sql } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
-import { CONVERSATION_STATUSES, type ConversationStatus } from "@/lib/domain/taxonomy";
+import {
+  CONVERSATION_STATUSES,
+  type ConversationStatus,
+  TOPICS,
+  type Topic,
+} from "@/lib/domain/taxonomy";
 import { messageText } from "@/lib/insights/transcript";
 import { getProfile } from "@/lib/profile/service";
-import type { Scope } from "./aggregate";
+import { type Period, parsePeriod, parseScope, periodStart, type Scope } from "./aggregate";
 import { customerColumns, scopeWhere } from "./common";
 
 const c = schema.conversations;
@@ -45,17 +50,86 @@ export function parseStatus(value: unknown): ConversationStatus | null {
     : null;
 }
 
-export function listConversations(filters: { scope: Scope; status: ConversationStatus | null }) {
-  return baseList()
-    .where(
-      and(
-        scopeWhere(c.isSimulated, filters.scope),
-        filters.status ? eq(c.status, filters.status) : undefined,
-      ),
-    )
+export interface ConversationFilters {
+  scope: Scope;
+  status: ConversationStatus | null;
+  /** Only conversations the analysis tagged with this topic. */
+  topic: Topic | null;
+  /** Only conversations that asked this (clustered) FAQ question. */
+  faq: string | null;
+  /** Only conversations started since this moment. */
+  since: Date | null;
+  /** Free text: title or customer name. */
+  query: string;
+}
+
+export function parseConversationFilters(
+  params: Record<string, string | string[] | undefined>,
+  now: Date,
+): ConversationFilters & { period: Period | null } {
+  const one = (key: string) => (typeof params[key] === "string" ? params[key] : undefined);
+  const period = one("period") ? parsePeriod(one("period")) : null;
+  return {
+    scope: parseScope(one("scope")),
+    status: parseStatus(one("status")),
+    topic: TOPICS.includes(one("topic") as Topic) ? (one("topic") as Topic) : null,
+    faq: one("faq")?.slice(0, 64) || null,
+    since: period ? periodStart(period, now) : null,
+    period,
+    query: (one("q") ?? "").trim().slice(0, 80),
+  };
+}
+
+export function listConversations(filters: ConversationFilters, limit: number) {
+  const q = filters.query;
+  const where = and(
+    scopeWhere(c.isSimulated, filters.scope),
+    filters.status ? eq(c.status, filters.status) : undefined,
+    filters.since ? gte(c.createdAt, filters.since) : undefined,
+    filters.topic
+      ? sql`exists (select 1 from json_each(${a.topics}) where value = ${filters.topic})`
+      : undefined,
+    filters.faq
+      ? sql`exists (select 1 from ${schema.conversationFaqs} f where f.conversation_id = ${c.id} and f.faq_id = ${filters.faq})`
+      : undefined,
+    q
+      ? or(
+          like(c.title, `%${q}%`),
+          like(
+            sql`coalesce(${schema.customers.firstName}, '') || ' ' || coalesce(${schema.customers.lastName}, '')`,
+            `%${q}%`,
+          ),
+        )
+      : undefined,
+  );
+  const rows = baseList()
+    .where(where)
     .orderBy(desc(sql`coalesce(${c.lastMessageAt}, ${c.createdAt})`))
-    .limit(300)
+    .limit(limit)
     .all();
+  const total =
+    db
+      .select({ count: sql<number>`count(*)` })
+      .from(c)
+      .innerJoin(schema.customers, eq(schema.customers.id, c.customerId))
+      .leftJoin(a, eq(a.conversationId, c.id))
+      .where(where)
+      .get()?.count ?? 0;
+  return { rows, total };
+}
+
+/** The question text behind an FAQ filter, for the filter chip. */
+export function faqQuestion(id: string) {
+  return (
+    db
+      .select({
+        canonicalText: schema.faqQuestions.canonicalText,
+        translations: schema.faqQuestions.translations,
+      })
+      .from(schema.faqQuestions)
+      .where(eq(schema.faqQuestions.id, id))
+      .get() ?? null
+  );
 }
 
 /** Window for the live screen: active conversations and those that just ended. */

@@ -145,7 +145,6 @@
   },
   "live": {
     "title": "En direct",
-    "description": "Conversations en cours, changements d'étape et nouveaux messages en temps réel.",
     "status": {
       "connecting": "Connexion …",
       "open": "En direct",
@@ -173,88 +172,16 @@
     }
   },
   "overview": {
-    "title": "Vue d'ensemble",
-    "description": "Ce dont la clientèle parle avec Clara, où elle décroche et qui Pax devrait appeler.",
-    "kpi": {
-      "label": "Chiffres clés",
-      "conversations": "Conversations",
-      "today": "{count} aujourd'hui",
-      "live": "En direct",
-      "openLive": "Voir en direct",
-      "leads": "Leads",
-      "handoversOpen": "Transferts ouverts",
-      "openHandovers": "Vers la file d'attente",
-      "nps": "NPS",
-      "npsDetail": "Moy. {average} sur {count, plural, one {# évaluation} other {# évaluations}}",
-      "npsNone": "Pas encore d'évaluations"
-    },
-    "funnel": {
-      "title": "Progression et abandons",
-      "description": "Jusqu'où vont les conversations. {abandoned, plural, =0 {Aucun abandon pour l'instant.} one {# conversation abandonnée.} other {# conversations abandonnées.}}",
-      "caption": "Conversations par étape atteinte",
-      "stage": "Étape",
-      "reached": "Atteinte",
-      "dropOff": "Perte",
-      "leftHere": "Quittée ici",
-      "empty": "Pas encore de conversations."
-    },
-    "trend": {
-      "title": "Conversations par jour",
-      "description": "14 derniers jours"
-    },
-    "sentiment": {
-      "title": "Sentiment",
-      "empty": "Pas encore de conversations analysées."
-    },
-    "topics": {
-      "title": "Thèmes principaux",
-      "description": "Conversations par thème",
-      "empty": "Pas encore de conversations analysées."
-    },
-    "faq": {
-      "title": "Questions les plus fréquentes",
-      "description": "Questions de la clientèle, regroupées",
-      "empty": "Aucune question enregistrée."
-    },
-    "painPoints": {
-      "title": "Points de friction",
-      "description": "Ce qui a récemment inquiété ou gêné la clientèle",
-      "empty": "Aucun point de friction détecté."
-    },
-    "lifeEvents": {
-      "title": "Événements de vie",
-      "empty": "Aucun événement de vie détecté."
-    },
-    "intent": {
-      "title": "Intention",
-      "description": "À quel point les conversations sont proches d'une décision",
-      "empty": "Pas encore de conversations analysées."
-    },
-    "recent": {
-      "title": "Dernières conversations",
-      "all": "Toutes les conversations",
-      "empty": "Pas encore de conversations."
-    }
+    "title": "Vue d'ensemble"
   },
   "conversations": {
     "title": "Conversations",
-    "description": "Toutes les conversations avec Clara, les plus récentes d'abord.",
     "statusFilter": "Statut",
     "allStatuses": "Toutes",
     "count": "{count, plural, one {# conversation} other {# conversations}}",
     "emptyTitle": "Aucune conversation pour ce filtre.",
     "emptyBody": "Modifiez le filtre ou lancez une simulation.",
-    "messages": "{count, plural, one {# message} other {# messages}}",
-    "notAnalysed": "Pas encore analysée",
-    "handover": "Transfert",
-    "col": {
-      "customer": "Cliente ou client",
-      "topic": "De quoi il s'agit",
-      "stage": "Étape",
-      "signals": "Signaux",
-      "status": "Statut",
-      "last": "Dernière activité"
-    }
+    "notAnalysed": "Pas encore analysée"
   },
   "conversation": {
     "title": "Conversation",
@@ -473,14 +400,12 @@
   },
   "leads": {
     "title": "Leads",
-    "description": "Qui Pax devrait appeler maintenant, par ordre de score et d'urgence. Modifiez le statut et la responsabilité directement ici.",
     "count": "{count, plural, one {# lead} other {# leads}}",
     "emptyTitle": "Aucun lead pour ce filtre.",
     "emptyBody": "Les leads sont créés automatiquement dès qu'une conversation présente un potentiel.",
     "changeStatus": "Modifier le statut",
     "unassigned": "Non attribué",
     "simulated": "Simulé",
-    "noContact": "Pas encore de coordonnées",
     "filter": {
       "type": "Type",
       "minScore": "Score",
@@ -495,37 +420,21 @@
       "label": "Affichage",
       "table": "Tableau",
       "kanban": "Pipeline"
-    },
-    "col": {
-      "priority": "Priorité",
-      "customer": "Cliente ou client",
-      "score": "Score",
-      "reason": "Raison de l'appel",
-      "status": "Statut",
-      "assignee": "Responsable"
-    },
-    "updatedAt": "Mis à jour le {date}"
+    }
   },
   "handovers": {
     "title": "Transferts",
-    "description": "Conversations qu'un ou une spécialiste doit reprendre, suite à une règle de l'entreprise ou à la demande de la clientèle.",
     "statusFilter": "Statut",
     "changeStatus": "Modifier le statut",
     "emptyTitle": "Aucun transfert avec le statut « {status} ».",
     "emptyBody": "Les nouveaux transferts apparaissent ici automatiquement.",
-    "noContact": "Aucune coordonnée",
-    "ruleVersion": "Règles v{version}",
-    "unknownRule": "La règle n'existe plus",
-    "noRule": "Sans règle : à la demande de la clientèle",
     "urgency": {
-      "normal": "Normal",
       "high": "Urgent"
     }
   },
   "rules": {
     "title": "Règles",
     "description": "Quand Clara transfère à un spécialiste, ce qu'elle signale et quels produits elle ne recommande pas. Formulées avec vos propres mots, valables immédiatement pour les nouvelles conversations.",
-    "languages": "Les règles peuvent être rédigées en allemand, français, italien ou anglais.",
     "version": "Version {version}",
     "activeVersion": "Active",
     "archived": "Archivée",
@@ -553,7 +462,6 @@
     "current": "La version {version} est active.",
     "restore": "Restaurer la version {version}",
     "history": "Versions",
-    "historyHelp": "Les anciennes versions sont conservées : chaque conversation sait selon quelles règles elle a été évaluée.",
     "versionStats": "{rules, plural, one {# règle} other {# règles}}, {conversations, plural, one {# conversation} other {# conversations}}"
   },
   "simulation": {

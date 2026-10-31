@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { CustomerLabel } from "./customer-label";
 
 /** Sections of the customer view that other screens link into. */
-export type CustomerSection = "handovers" | "leads" | "conversations" | "communications";
+export type CustomerSection = "handovers" | "leads" | "followups" | "conversations";
 
 export function customerHref(customerId: string, section?: CustomerSection): string {
   return `/firma/kunden/${customerId}${section ? `#${section}` : ""}`;
