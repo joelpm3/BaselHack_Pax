@@ -42,6 +42,22 @@ function personFields(prefix: "person" | "partner"): Record<string, FieldSpec> {
   };
 }
 
+/** The customer's pension fund (`pillar2`) or the partner's (`partner.pillar2`). */
+function pillar2Fields(prefix: "pillar2" | "partner.pillar2"): Record<string, FieldSpec> {
+  return {
+    [`${prefix}.hasPensionFund`]: { kind: "boolean" },
+    [`${prefix}.insuredSalary`]: chf,
+    [`${prefix}.currentCapital`]: chf,
+    [`${prefix}.projectedCapitalAtRetirement`]: chf,
+    [`${prefix}.projectedPensionAtRetirement`]: chf,
+    [`${prefix}.disabilityPension`]: chf,
+    [`${prefix}.partnerPension`]: chf,
+    [`${prefix}.childPension`]: chf,
+    [`${prefix}.deathLumpSum`]: chf,
+    [`${prefix}.maxBuyIn`]: chf,
+  };
+}
+
 export const EDITABLE_FIELDS: Record<string, FieldSpec> = {
   ...personFields("person"),
   ...personFields("partner"),
@@ -51,16 +67,8 @@ export const EDITABLE_FIELDS: Record<string, FieldSpec> = {
   "assets.mortgage": chf,
   "assets.total": chf,
   "pillar1.contributionGapYears": { kind: "count" },
-  "pillar2.hasPensionFund": { kind: "boolean" },
-  "pillar2.insuredSalary": chf,
-  "pillar2.currentCapital": chf,
-  "pillar2.projectedCapitalAtRetirement": chf,
-  "pillar2.projectedPensionAtRetirement": chf,
-  "pillar2.disabilityPension": chf,
-  "pillar2.partnerPension": chf,
-  "pillar2.childPension": chf,
-  "pillar2.deathLumpSum": chf,
-  "pillar2.maxBuyIn": chf,
+  ...pillar2Fields("pillar2"),
+  ...pillar2Fields("partner.pillar2"),
   "pillar3a.balance": chf,
   "pillar3a.annualContribution": chf,
   desiredRetirementAge: { kind: "age" },

@@ -1,4 +1,5 @@
-import type { LifeSituation, Person } from "@/lib/domain/profile";
+import { subjectOfPolicy } from "@/lib/domain/policy-subject";
+import { type LifeSituation, type Person, pillar2Of } from "@/lib/domain/profile";
 import type { HintSeverity, HintType, PolicyCategory, PolicyStatus } from "@/lib/domain/taxonomy";
 import type { QuoteInput } from "@/lib/pricing/types";
 
@@ -74,20 +75,6 @@ function adultsOf(profile: LifeSituation): Adult[] {
   if (profile.partner)
     adults.push({ subject: "partner", person: profile.partner, name: profile.partner.firstName });
   return adults;
-}
-
-/** Whose policy it is, by the insured person's name. Unnamed policies belong to the customer. */
-export function subjectOfPolicy(
-  policy: Pick<PolicyFacts, "insuredPerson">,
-  profile: LifeSituation,
-): Subject | "other" {
-  if (!policy.insuredPerson) return "self";
-  const insured = fold(policy.insuredPerson);
-  const partnerName = profile.partner?.firstName;
-  const selfName = profile.person.firstName;
-  if (partnerName && insured.includes(fold(partnerName))) return "partner";
-  if (selfName && insured.includes(fold(selfName))) return "self";
-  return selfName ? "other" : "self";
 }
 
 function activePolicies(facts: HintFacts): PolicyFacts[] {
@@ -204,9 +191,7 @@ function deathCoverOf(facts: HintFacts, subject: Subject): number {
   const lumpSum =
     pensionFund.length > 0
       ? pensionFund.reduce((s, p) => s + num(p.details?.deathLumpSum), 0)
-      : subject === "self"
-        ? num(facts.profile.pillar2.deathLumpSum)
-        : 0;
+      : num(pillar2Of(facts.profile, subject).deathLumpSum);
   return risk + lumpSum;
 }
 
@@ -215,7 +200,7 @@ function pensionFundDisabilityOf(facts: HintFacts, subject: Subject): number | u
     (p) => typeof p.details?.disabilityPension === "number",
   );
   if (fund) return num(fund.details?.disabilityPension);
-  return subject === "self" ? facts.profile.pillar2.disabilityPension : undefined;
+  return pillar2Of(facts.profile, subject).disabilityPension;
 }
 
 export function detectCoverageMismatch(facts: HintFacts): DetectedHint[] {
@@ -497,9 +482,7 @@ export function pensionBuyInCandidates(facts: HintFacts): BuyInCandidate[] {
     const maxBuyIn =
       fund !== undefined
         ? num(fund.details?.maxBuyIn)
-        : adult.subject === "self"
-          ? (facts.profile.pillar2.maxBuyIn ?? 0)
-          : 0;
+        : (pillar2Of(facts.profile, adult.subject).maxBuyIn ?? 0);
     const { birthYear, grossIncome, sex } = adult.person;
     if (maxBuyIn < MIN_BUY_IN || !grossIncome || birthYear === undefined) continue;
     if (year - birthYear >= 62) continue;

@@ -18,6 +18,7 @@ import {
   relationshipSinceYear,
   retirementBreakdown,
   riskBreakdown,
+  riskPensionsEstimated,
   withBvg,
   yearsUntilRetirement,
 } from "./mapping";
@@ -185,7 +186,7 @@ describe("requests", () => {
   it("only sends pillar 2 pensions when known", () => {
     expect(buildRiskRequest(single, YEAR).Person1).not.toHaveProperty("Pillar2Pensions");
     const known = profile({ ...single, pillar2: { disabilityPension: 30000 } });
-    const merged = mergeRiskPensions(known, {
+    const merged = mergeRiskPensions(known.pillar2, {
       Disability: 20000,
       DisabilityChildren: 4000,
       Widow: 12000,
@@ -197,6 +198,46 @@ describe("requests", () => {
       Widow: 12000,
       Orphan: 4000,
     });
+  });
+
+  it("uses the partner's own pension certificate for person 2 only", () => {
+    const withCertificate = profile({
+      ...youngFamily,
+      partner: {
+        ...youngFamily.partner,
+        pillar2: {
+          hasPensionFund: true,
+          currentCapital: 185400,
+          projectedPensionAtRetirement: 32934,
+          disabilityPension: 29416,
+        },
+      },
+    });
+    const pensions = { Disability: 29416, DisabilityChildren: 5883, Widow: 17650, Orphan: 5883 };
+    const risk = buildRiskRequest(withCertificate, YEAR, { partnerPillar2Pensions: pensions });
+    expect(risk.Person1).not.toHaveProperty("Pillar2Pensions");
+    expect(risk.Person2).toMatchObject({ WithBVG: true, Pillar2Pensions: pensions });
+
+    const retirement = buildRetirementRequest(withCertificate, YEAR, {
+      person1: 0,
+      person2: 32934,
+    });
+    expect(retirement).toMatchObject({
+      Person1: { WithBVG: false, RetirementPillar2: { Pension: 0, CurrentCapital: 0 } },
+      Person2: { RetirementPillar2: { Pension: 32934, CurrentCapital: 185400 } },
+    });
+  });
+
+  it("calls risk benefits estimated only while a pension fund lacks its certificate", () => {
+    // Jane has no pension fund; May's benefits are unknown → estimated.
+    expect(riskPensionsEstimated(youngFamily)).toBe(true);
+    const known = profile({
+      ...youngFamily,
+      partner: { ...youngFamily.partner, pillar2: { disabilityPension: 29416 } },
+    });
+    expect(riskPensionsEstimated(known)).toBe(false);
+    expect(riskPensionsEstimated(profile({ ...single, pillar2: { childPension: 1 } }))).toBe(false);
+    expect(riskPensionsEstimated(single)).toBe(true);
   });
 
   it("builds tax requests from the household and the tax location", () => {

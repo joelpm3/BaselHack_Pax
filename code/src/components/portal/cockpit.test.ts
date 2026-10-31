@@ -68,6 +68,27 @@ describe("cockpit", () => {
     });
   });
 
+  it("never shows the partner's pension-fund benefits as the customer's own", () => {
+    const mueller = lifeSituationSchema.parse({
+      person: { firstName: "Jane" },
+      partner: { firstName: "May" },
+      pillar2: { hasPensionFund: false },
+    });
+    const figures = keyFigures(
+      [
+        row({
+          category: "pension_fund",
+          isExternal: true,
+          annuityAnnual: 32934,
+          insuredPerson: "May Müller",
+          details: { subject: "partner", deathLumpSum: 50000, disabilityPension: 29416 },
+        }),
+      ],
+      mueller,
+    );
+    expect(figures).toMatchObject({ deathCover: 0, disabilityPension: 0, retirementPension: 0 });
+  });
+
   it("lists upcoming deadlines soonest first and hides cancelled contracts", () => {
     const a = row({ noticeDate: "2027-01-31", endDate: "2049-04-30" });
     const b = row({ endDate: "2027-03-31" });

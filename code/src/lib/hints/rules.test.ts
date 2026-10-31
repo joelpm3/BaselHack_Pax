@@ -11,7 +11,6 @@ import {
   type PolicyFacts,
   pensionBuyInCandidates,
   pensionBuyInHint,
-  subjectOfPolicy,
 } from "./rules";
 
 const TODAY = "2026-10-30";
@@ -78,15 +77,6 @@ const facts = (overrides: Partial<HintFacts>): HintFacts => ({
   today: TODAY,
   limits3a,
   ...overrides,
-});
-
-describe("subjectOfPolicy", () => {
-  it("assigns policies by insured first name", () => {
-    expect(subjectOfPolicy({ insuredPerson: "May Müller" }, muellerProfile)).toBe("partner");
-    expect(subjectOfPolicy({ insuredPerson: "JANE MÜLLER" }, muellerProfile)).toBe("self");
-    expect(subjectOfPolicy({ insuredPerson: null }, muellerProfile)).toBe("self");
-    expect(subjectOfPolicy({ insuredPerson: "Lena Müller" }, muellerProfile)).toBe("other");
-  });
 });
 
 describe("contract_ending", () => {

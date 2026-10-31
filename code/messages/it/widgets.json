@@ -39,7 +39,19 @@
       "workloadPercent": "Grado di occupazione del o della partner",
       "grossIncome": "Reddito annuo del o della partner",
       "occupation": "Professione del o della partner",
-      "smoker": "Partner fumatore/fumatrice"
+      "smoker": "Partner fumatore/fumatrice",
+      "pillar2": {
+        "hasPensionFund": "Cassa pensioni del o della partner",
+        "insuredSalary": "Salario assicurato del o della partner",
+        "currentCapital": "Avere di vecchiaia del o della partner oggi",
+        "projectedCapitalAtRetirement": "Avere di vecchiaia del o della partner a 65 anni",
+        "projectedPensionAtRetirement": "Rendita di vecchiaia annua del o della partner",
+        "disabilityPension": "Rendita d'invalidità annua del o della partner",
+        "partnerPension": "Rendita per partner annua dalla sua cassa pensioni",
+        "childPension": "Rendita per figli annua dalla sua cassa pensioni",
+        "deathLumpSum": "Capitale in caso di decesso del o della partner",
+        "maxBuyIn": "Riscatto possibile del o della partner"
+      }
     },
     "children": "Figli",
     "goals": "Obiettivi",

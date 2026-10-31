@@ -57,10 +57,11 @@ export function applyEdits(
 }
 
 interface ProfileTarget {
-  /** `who` is replaced by `person` or `partner`. */
+  /**
+   * `who` is replaced by `person` or `partner`, `fund` by the subject's pension fund:
+   * `pillar2` for the customer, `partner.pillar2` for the partner.
+   */
   path: string;
-  /** Pension-fund figures exist only for the customer in LifeSituation. */
-  selfOnly?: boolean;
   transform?: (value: FieldValue) => unknown;
 }
 
@@ -72,15 +73,15 @@ export const PROFILE_TARGETS: Record<ExtractableDocumentType, Record<string, Pro
     grossSalary: { path: "who.grossIncome" },
     workloadPercent: { path: "who.workloadPercent" },
     birthDate: { path: "who.birthYear", transform: birthYear },
-    insuredSalary: { path: "pillar2.insuredSalary", selfOnly: true },
-    currentCapital: { path: "pillar2.currentCapital", selfOnly: true },
-    projectedCapitalAtRetirement: { path: "pillar2.projectedCapitalAtRetirement", selfOnly: true },
-    projectedPensionAtRetirement: { path: "pillar2.projectedPensionAtRetirement", selfOnly: true },
-    disabilityPension: { path: "pillar2.disabilityPension", selfOnly: true },
-    partnerPension: { path: "pillar2.partnerPension", selfOnly: true },
-    childPension: { path: "pillar2.childPension", selfOnly: true },
-    deathLumpSum: { path: "pillar2.deathLumpSum", selfOnly: true },
-    maxBuyIn: { path: "pillar2.maxBuyIn", selfOnly: true },
+    insuredSalary: { path: "fund.insuredSalary" },
+    currentCapital: { path: "fund.currentCapital" },
+    projectedCapitalAtRetirement: { path: "fund.projectedCapitalAtRetirement" },
+    projectedPensionAtRetirement: { path: "fund.projectedPensionAtRetirement" },
+    disabilityPension: { path: "fund.disabilityPension" },
+    partnerPension: { path: "fund.partnerPension" },
+    childPension: { path: "fund.childPension" },
+    deathLumpSum: { path: "fund.deathLumpSum" },
+    maxBuyIn: { path: "fund.maxBuyIn" },
   },
   salary_certificate: {
     grossSalary: { path: "who.grossIncome" },
@@ -138,19 +139,20 @@ export function profileChangesFor(
   current: LifeSituation,
 ): ProfileChange[] {
   const who = subject === "self" ? "person" : "partner";
+  const fund = subject === "self" ? "pillar2" : "partner.pillar2";
   const changes: ProfileChange[] = [];
   for (const [key, target] of Object.entries(PROFILE_TARGETS[docType])) {
     if (!(key in values)) continue;
-    if (target.selfOnly && subject !== "self") continue;
     const value = target.transform ? target.transform(values[key]) : values[key];
     if (value === undefined) continue;
-    changes.push({ path: target.path.replace(/^who\./, `${who}.`), value });
+    const path = target.path.replace(/^who\./, `${who}.`).replace(/^fund\./, `${fund}.`);
+    changes.push({ path, value });
   }
   if (docType === "insurance_policy") return changes;
 
   const person = subject === "self" ? current.person : current.partner;
-  if (docType === "pension_certificate" && subject === "self")
-    changes.push({ path: "pillar2.hasPensionFund", value: true });
+  if (docType === "pension_certificate")
+    changes.push({ path: `${fund}.hasPensionFund`, value: true });
   if (!person?.employment) changes.push({ path: `${who}.employment`, value: "employed" });
   const firstName = firstNameOf(nameOnDocument(values));
   if (!person?.firstName && firstName) changes.push({ path: `${who}.firstName`, value: firstName });
@@ -227,11 +229,16 @@ export interface PolicyDraft {
 const str = (v: FieldValue | undefined) => (typeof v === "string" ? v : undefined);
 const num = (v: FieldValue | undefined) => (typeof v === "number" ? v : undefined);
 
-/** Cockpit policy for a confirmed policy or pension certificate; null for salary certificates. */
+/**
+ * Cockpit policy for a confirmed policy or pension certificate; null for salary certificates.
+ * A pension certificate remembers whose it is (`details.subject`), so the cockpit and the hints
+ * never mix up the partner's pension fund with the customer's.
+ */
 export function policyDraftFor(
   docType: ExtractableDocumentType,
   values: FieldValues,
   today: string,
+  subject: Subject = "self",
 ): PolicyDraft | null {
   if (docType === "insurance_policy") {
     const insurer = str(values.insurer) ?? "?";
@@ -281,7 +288,7 @@ export function policyDraftFor(
       sumInsured: num(values.deathLumpSum) ?? null,
       annuityAnnual: num(values.projectedPensionAtRetirement) ?? null,
       insuredPerson: str(values.insuredPerson) ?? null,
-      details: { ...values },
+      details: { ...values, subject },
     };
   }
   return null;

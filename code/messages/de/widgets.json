@@ -39,7 +39,19 @@
       "workloadPercent": "Pensum Partner/in",
       "grossIncome": "Einkommen Partner/in pro Jahr",
       "occupation": "Beruf Partner/in",
-      "smoker": "Partner/in raucht"
+      "smoker": "Partner/in raucht",
+      "pillar2": {
+        "hasPensionFund": "Pensionskasse Partner/in",
+        "insuredSalary": "Versicherter Lohn Partner/in",
+        "currentCapital": "Altersguthaben Partner/in heute",
+        "projectedCapitalAtRetirement": "Altersguthaben Partner/in mit 65",
+        "projectedPensionAtRetirement": "Altersrente Partner/in pro Jahr",
+        "disabilityPension": "Invalidenrente Partner/in pro Jahr",
+        "partnerPension": "Partnerrente aus PK Partner/in pro Jahr",
+        "childPension": "Kinderrente aus PK Partner/in pro Jahr",
+        "deathLumpSum": "Todesfallkapital Partner/in",
+        "maxBuyIn": "Möglicher Einkauf Partner/in"
+      }
     },
     "children": "Kinder",
     "goals": "Ziele",

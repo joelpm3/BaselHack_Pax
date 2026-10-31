@@ -41,6 +41,25 @@ export const personSchema = z.object({
 });
 export type Person = z.infer<typeof personSchema>;
 
+/** Pension-fund (BVG) figures, from the person's pension certificate or their answers. */
+export const pillar2Schema = z.object({
+  hasPensionFund: z.boolean().optional(),
+  insuredSalary: z.number().min(0).optional(),
+  currentCapital: z.number().min(0).optional(),
+  projectedCapitalAtRetirement: z.number().min(0).optional(),
+  projectedPensionAtRetirement: z.number().min(0).optional(),
+  disabilityPension: z.number().min(0).optional(),
+  partnerPension: z.number().min(0).optional(),
+  childPension: z.number().min(0).optional(),
+  deathLumpSum: z.number().min(0).optional(),
+  maxBuyIn: z.number().min(0).optional(),
+});
+export type Pillar2 = z.infer<typeof pillar2Schema>;
+
+/** The partner has their own pension fund; the customer's lives at the top level (`pillar2`). */
+export const partnerSchema = personSchema.extend({ pillar2: pillar2Schema.optional() });
+export type Partner = z.infer<typeof partnerSchema>;
+
 export const childSchema = z.object({
   birthYear: z.number().int().min(1990).max(2035),
   /** Year education ends; orphan's pensions run until then (max. age 25). */
@@ -78,7 +97,7 @@ export type Goal = z.infer<typeof goalSchema>;
 
 export const lifeSituationSchema = z.object({
   person: personSchema.default({}),
-  partner: personSchema.optional(),
+  partner: partnerSchema.optional(),
   children: z.array(childSchema).default([]),
   residence: z
     .object({
@@ -105,20 +124,7 @@ export const lifeSituationSchema = z.object({
       contributionGapYears: z.number().int().min(0).optional(),
     })
     .default({}),
-  pillar2: z
-    .object({
-      hasPensionFund: z.boolean().optional(),
-      insuredSalary: z.number().min(0).optional(),
-      currentCapital: z.number().min(0).optional(),
-      projectedCapitalAtRetirement: z.number().min(0).optional(),
-      projectedPensionAtRetirement: z.number().min(0).optional(),
-      disabilityPension: z.number().min(0).optional(),
-      partnerPension: z.number().min(0).optional(),
-      childPension: z.number().min(0).optional(),
-      deathLumpSum: z.number().min(0).optional(),
-      maxBuyIn: z.number().min(0).optional(),
-    })
-    .default({}),
+  pillar2: pillar2Schema.default({}),
   pillar3a: z
     .object({
       balance: z.number().min(0).optional(),
@@ -156,6 +162,11 @@ const CORE_FIELDS: Array<(p: LifeSituation) => unknown> = [
 export function profileCompleteness(profile: LifeSituation): number {
   const known = CORE_FIELDS.filter((get) => get(profile) !== undefined).length;
   return Math.round((known / CORE_FIELDS.length) * 100);
+}
+
+/** The pension-fund figures of the customer or of their partner (empty when unknown). */
+export function pillar2Of(profile: LifeSituation, subject: "self" | "partner"): Pillar2 {
+  return subject === "self" ? profile.pillar2 : (profile.partner?.pillar2 ?? {});
 }
 
 export function ageInYear(birthYear: number | undefined, year: number): number | undefined {
