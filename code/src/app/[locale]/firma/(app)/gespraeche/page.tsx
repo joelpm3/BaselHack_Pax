@@ -151,7 +151,7 @@ async function ConversationsContent({
             <li key={c.id}>
               <Link
                 href={`/firma/gespraeche/${c.id}`}
-                className="grid gap-x-6 gap-y-2 px-4 py-3 hover:bg-gray-1 md:grid-cols-[minmax(0,1fr)_11rem_9rem_7rem] md:items-center"
+                className="grid gap-x-6 gap-y-2 px-4 py-3 hover:bg-gray-1 md:grid-cols-[minmax(0,1fr)_14rem_8rem_7rem] md:items-center"
               >
                 <span className="grid min-w-0 gap-0.5">
                   <span className="flex min-w-0 items-center gap-2">

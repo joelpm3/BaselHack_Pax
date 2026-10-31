@@ -108,6 +108,7 @@ export function getOverview(scope: Scope, period: Period, now: Date) {
     .limit(10)
     .all()
     .flatMap((r) => r.painPoints.map((text) => ({ text, conversationId: r.conversationId })))
+    .filter((p, i, all) => all.findIndex((q) => q.text === p.text) === i)
     .slice(0, 3);
 
   return {
