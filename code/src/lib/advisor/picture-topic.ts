@@ -119,7 +119,8 @@ const CUES: Record<PictureKind, Cue[]> = {
         `${START}orfan`,
         // en
         `${START}death`,
-        `${START}(?:you|i|they)\\s+(?:were\\s+to\\s+|should\\s+)?die${END}`,
+        // Only after an English subject: German "die" and "dies" are everyday words.
+        `${START}(?:you|i|they|he|she|partner|spouse|wife|husband)\\s+(?:were\\s+to\\s+|should\\s+)?(?:die|dies|died)${END}`,
         `${START}pass(?:es|ed)?\\s+away${END}`,
         `${START}survivor`,
         `${START}widow`,

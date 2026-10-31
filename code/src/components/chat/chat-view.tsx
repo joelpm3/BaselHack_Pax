@@ -67,10 +67,11 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     messages: initialMessages,
     transport,
     throttle: 50,
-    onFinish: ({ message, isError }) => {
+    onFinish: ({ message, isError, isAbort }) => {
       refreshPicture();
-      // Once per finished answer, never on a re-render.
-      if (!isError) dispatchFocus({ type: "advisor", kind: topicOfMessage(message.parts) });
+      // Once per finished answer, never on a re-render; a stopped answer is not finished.
+      if (!isError && !isAbort)
+        dispatchFocus({ type: "advisor", kind: topicOfMessage(message.parts) });
     },
   });
 

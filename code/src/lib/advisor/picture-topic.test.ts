@@ -29,6 +29,7 @@ describe("classifyTopic", () => {
     // en
     ["What if you could no longer work because of a disability?", "disability"],
     ["Would your family manage if you were to die?", "death"],
+    ["Your retirement is covered. What would happen if your partner dies?", "death"],
     ["When would you like to retire?", "retirement"],
   ] as const)("%s → %s", (text, kind) => {
     expect(classifyTopic(text)).toBe(kind);
