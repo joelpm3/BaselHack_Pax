@@ -42,6 +42,7 @@ describe("classifyTopic", () => {
     "Dies ist Ihr Vorsorgebild, und die Zahlen sind gerundet.",
     "Your pension fund statement shows the details.",
     "Haben Sie Kinder?",
+    "Hat Ihr Partner die Police schon gesehen?",
   ])("names no situation: %s", (text) => {
     expect(classifyTopic(text)).toBeNull();
   });

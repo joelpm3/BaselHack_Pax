@@ -120,7 +120,7 @@ const CUES: Record<PictureKind, Cue[]> = {
         // en
         `${START}death`,
         // Only after an English subject: German "die" and "dies" are everyday words.
-        `${START}(?:you|i|they|he|she|partner|spouse|wife|husband)\\s+(?:were\\s+to\\s+|should\\s+)?(?:die|dies|died)${END}`,
+        `${START}(?:you|i|they|he|she|(?:your|their|my)\\s+(?:partner|spouse|wife|husband))\\s+(?:were\\s+to\\s+|should\\s+)?(?:die|dies|died)${END}`,
         `${START}pass(?:es|ed)?\\s+away${END}`,
         `${START}survivor`,
         `${START}widow`,
