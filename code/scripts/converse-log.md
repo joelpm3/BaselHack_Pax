@@ -81,3 +81,37 @@ with Sie; the text lives in `messages/*/chat.json`); the Vorsorgebild side panel
 risk check before the cover question (outside the advisor turn); explanations stay long when the
 customer explicitly asks for one.
 
+## Iteration 4–6: merged main (e18027c), 19 scenarios, Opus fast mode
+
+Reported from an end-to-end run of `persona-8165` on merged main:
+
+| # | Bug | Cause | Fix |
+|---|-----|-------|-----|
+| 24 | Message stops without its question ("… Für die Berechnung brauche ich noch eine letzte Angabe." then nothing) | The nudge only fired when the turn had no text at all. Text written before or around a tool call, then an empty final step. | After any tool call, the next step gets a "continue" note quoting the end of the message whenever the text so far does not end with a question (`replyNudgeFor`, `message-shape.ts`). |
+| 25 | Message cut before a waiting widget ("Beim Rückruf geht es also um diese Punkte:" + askForFeedback) | A waiting widget ended the turn as soon as any text existed. | A waiting widget ends the turn only when the message does not dangle (no closing colon, ellipsis or "brauche ich noch …" without a question: `readyToWait`); otherwise the continue note asks for the rest. Prompt: text before a card stands on its own, never ends with a colon. |
+| 26 | Claimed to have added a point to the callback request, retracted it next turn | No rule against claiming actions; the model did not know that calling requestHandover again updates the open request. | Prompt: only claim what a tool did in this turn; a later topic is visible to the advisor in the conversation anyway, or requestHandover is called again with the full reason (it updates the open request). No new tool. |
+| 27 | Quick replies answering a question that was never asked, under "wählen Sie den Ort in der Karte" | The chat showed the last suggestReplies call whenever the message had text. | The chat shows quick replies only when the final text asks a question; prompt: quick replies only for the question in the final text. |
+
+Harness flags added: `DANGLING_ENDING`, `UNMATCHED_QUICK_REPLIES` (also when the chat hides them),
+`CLAIMED_ACTION` (claim verbs near callback/advisor/e-mail words, with no requestHandover or
+prepareOffer in the turn).
+
+Counts (new flags / turns):
+
+| Run | Code | Turns | DANGLING | UNMATCHED | CLAIMED | NO_TEXT |
+|-----|------|-------|----------|-----------|---------|---------|
+| reported run (persona-8165) | main | 1 conversation | 2 | 1 | 1 | 0 |
+| `iter4` (all 19) | main, before the fix | 150 | 0 | 0 | 0 | 0 |
+| `iter5` + `iter5b` (all 19 + 4 persona reruns) | with the fix | 154 + 28 | 0 | 0 | 0 | 0 |
+| `iter6` (all 19, 3 × persona-8165) | with the fix | 106 completed | 0 | 1* | 0 | 1* |
+
+`iter4` was re-scanned offline (the flags were added during that run). The reported bugs are
+intermittent: they did not show up in 150 turns on main, so the before/after counts mainly show
+that the fix does not introduce new problems; the logic is covered by unit tests
+(`reply-nudge.test.ts`, `message-shape.test.ts`, `quick-replies.test.ts`).
+
+\* `iter6` stopped at the Anthropic API usage limit (resets 2026-11-01 00:00 UTC): 7 turns failed,
+and the one flagged turn is a continue step that the API rejected for the limit, so the turn kept
+only its tool calls. Follow-up: a step that fails after tool calls still ends the turn silently
+(logged, no error shown to the customer).
+

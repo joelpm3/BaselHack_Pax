@@ -74,8 +74,17 @@ describe("quickRepliesOf", () => {
     expect(quickRepliesOf([replies(["Ja", "Nein"]), text("Rauchen Sie?")])).toEqual(["Ja", "Nein"]);
   });
 
-  it("shows no quick replies without a message", () => {
+  it("shows no quick replies without a question in the final text", () => {
     expect(quickRepliesOf([replies(["Ja", "Nein"])])).toEqual([]);
+    expect(
+      quickRepliesOf([
+        text("Wählen Sie Ihren Ort in der Karte."),
+        replies(["Nein, nur die Pax 3a", "Ja, eine andere Versicherung"]),
+      ]),
+    ).toEqual([]);
+    expect(
+      quickRepliesOf([text("Haben Sie Kinder?"), replies(["Ja", "Nein"]), text("Danke.")]),
+    ).toEqual([]);
   });
 
   it("ignores pending calls and filters fake UI actions", () => {
