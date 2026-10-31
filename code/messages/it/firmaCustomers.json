@@ -1,0 +1,153 @@
+{
+  "nav": {
+    "customers": "Clientela",
+    "leadsHint": "Opportunità di vendita",
+    "handoversHint": "Vuole una persona"
+  },
+  "kinds": {
+    "handover": {
+      "name": "Passaggio",
+      "definition": "La persona vuole parlare con un essere umano, oppure una regola aziendale richiede uno specialista. Da gestire per primi.",
+      "alsoOpen": "Passaggio aperto",
+      "contrast": "Le opportunità di vendita senza richiesta di contatto si trovano sotto Lead."
+    },
+    "lead": {
+      "name": "Lead",
+      "definition": "Un’opportunità di vendita che Pax può cogliere. La persona non ha chiesto di essere contattata.",
+      "alsoOpen": "{count, plural, one {# lead aperto} other {# lead aperti}}"
+    },
+    "fromConversation": "Dal colloquio «{title}»",
+    "openConversation": "Apri colloquio"
+  },
+  "overview": {
+    "description": "Dove deve agire adesso: chi vuole parlare con una persona, chi chiamare e, sotto, gli indicatori.",
+    "actNow": "Agire adesso",
+    "figures": "Indicatori",
+    "openConversation": "Apri colloquio",
+    "openLeads": "Lead aperti",
+    "toPipeline": "Alla pipeline",
+    "handovers": {
+      "title": "{count, plural, =0 {Nessun passaggio aperto} one {# passaggio aperto} other {# passaggi aperti}}",
+      "counts": "{urgent} urgenti, {unassigned} senza responsabile",
+      "empty": "Nessuno aspetta uno specialista.",
+      "urgent": "Urgente",
+      "waiting": "In attesa da {time}",
+      "alsoLead": "Anche lead: {type}, punteggio {score}",
+      "all": "Tutti i {count} passaggi aperti"
+    },
+    "leads": {
+      "title": "{count, plural, =0 {Nessun lead caldo} one {# lead caldo} other {# lead caldi}}",
+      "empty": "Nessun lead aperto ad alta priorità.",
+      "score": "Punteggio",
+      "all": "Tutti i lead",
+      "withHandover": "{count, plural, one {# altro lead è legato} other {# altri lead sono legati}} a un passaggio aperto"
+    }
+  },
+  "list": {
+    "title": "Clienti",
+    "description": "Tutte le persone con un colloquio o un lead. Chi ha un passaggio aperto è in cima.",
+    "search": "Cerca",
+    "searchPlaceholder": "Nome, e-mail o località",
+    "count": "{count, plural, one {# persona} other {# persone}}",
+    "emptyTitle": "Ancora nessun cliente.",
+    "emptySearch": "Nessuno corrisponde a «{query}».",
+    "emptyBody": "Le persone compaiono qui non appena parlano con il consulente digitale.",
+    "openHandovers": "{count, plural, =0 {Nessun passaggio} one {# passaggio} other {# passaggi}}",
+    "openLeads": "{count, plural, =0 {Nessun lead} one {# lead} other {# lead}}",
+    "openLeadsScore": "{count, plural, one {# lead} other {# lead}}, punteggio {score}",
+    "conversations": "{count, plural, one {# colloquio} other {# colloqui}}"
+  },
+  "detail": {
+    "title": "Vista cliente",
+    "open": "Vista cliente",
+    "back": "Clientela",
+    "age": "{age} anni",
+    "since": "conosciuto/a dal {date}",
+    "facts": {
+      "handovers": "{count, plural, one {passaggio aperto} other {passaggi aperti}}",
+      "leads": "{count, plural, one {lead aperto} other {lead aperti}}",
+      "conversations": "{count, plural, one {colloquio} other {colloqui}}",
+      "lastContact": "Ultimo contatto"
+    },
+    "noLeads": "Dai colloqui di questa persona non è (ancora) nato alcun lead.",
+    "noHandovers": "Finora questa persona non ha chiesto di parlare con un essere umano."
+  },
+  "conversations": {
+    "title": "{count, plural, =0 {Colloqui} one {# colloquio} other {# colloqui}}",
+    "description": "I più recenti prima, con l’analisi di ogni colloquio",
+    "none": "Ancora nessun colloquio.",
+    "untitled": "Colloquio senza titolo",
+    "meta": "{date}, {mode}, {count, plural, one {# messaggio} other {# messaggi}}",
+    "gaps": "Lacune",
+    "perYear": "{amount} all’anno",
+    "painPoints": "Punti critici",
+    "nextBestAction": "Prossimo passo",
+    "noAnalysis": "Non ancora analizzato."
+  },
+  "applications": {
+    "title": "Offerte e proposte",
+    "description": "Cosa ha richiesto o firmato la persona",
+    "status": {
+      "draft": "Offerta",
+      "signed": "Firmata",
+      "cancelled": "Ritirata"
+    },
+    "premium": "{amount} all’anno"
+  },
+  "communications": {
+    "title": "Comunicazione",
+    "description": "E-mail e telefonate con questa persona, le più recenti prima",
+    "noContact": "Ancora nessun recapito.",
+    "none": "Nessuna e-mail o telefonata registrata. Registri una telefonata o un’e-mail sul lead; anche le e-mail di follow-up automatiche compaiono qui.",
+    "channel": {
+      "email": "E-mail",
+      "call": "Telefonata"
+    },
+    "direction": {
+      "outbound": "inviata",
+      "inbound": "ricevuta"
+    },
+    "system": "Automatico"
+  },
+  "timeline": {
+    "title": "Cronologia",
+    "description": "Tutto ciò che è successo con questa persona, su tutti i colloqui",
+    "none": "Non è ancora successo nulla.",
+    "untitled": "senza titolo",
+    "inConversation": "Nel colloquio «{title}»",
+    "openConversation": "Apri colloquio",
+    "kind": {
+      "conversation": "Colloquio",
+      "handover": "Passaggio",
+      "lead": "Lead",
+      "communication": "Comunicazione",
+      "offer": "Raccomandazione o contratto",
+      "document": "Documento",
+      "feedback": "Valutazione",
+      "other": "Altro"
+    },
+    "event": {
+      "conversationStarted": "Colloquio iniziato",
+      "handoverCreated": "Passaggio a uno specialista attivato",
+      "handoverStatus": "Passaggio impostato su «{status}»",
+      "handoverAssigned": "Passaggio riassegnato",
+      "leadCreated": "Lead rilevato: {type}, punteggio {score}",
+      "leadStatus": "Lead spostato da «{from}» a «{to}»",
+      "leadAssigned": "Lead riassegnato",
+      "leadNote": "Nota sul lead",
+      "call": "Telefonata",
+      "email": "E-mail",
+      "recommendation": "Raccomandazione: {product}",
+      "recommendationDeclined": "Raccomandazione rifiutata",
+      "suitabilityCompleted": "Verifica di adeguatezza completata",
+      "offerPrepared": "Offerta allestita",
+      "applicationSigned": "Proposta firmata: {product}",
+      "policyCreated": "Nuovo contratto: {product}",
+      "documentUploaded": "Documento caricato: {filename}",
+      "documentConfirmed": "Valori del documento confermati",
+      "documentDeleted": "Documento eliminato",
+      "contactSaved": "Recapiti lasciati",
+      "feedback": "Valutazione data: {nps} su 10"
+    }
+  }
+}
