@@ -100,7 +100,7 @@ function rawQuickReplies(tools: ToolCall[]): string[] {
 
 const CLAIM =
   /[^.!?\n]*\b(ergänzt|nachgetragen|hinzugefügt|weitergeleitet|weitergegeben|mitgegeben|geschickt|gesendet|gebucht|ajouté|transmis|envoyé|aggiunto|inoltrato|inviato|added|forwarded|passed on|sent)\b[^.!?\n]*\b(Auftrag|Berater\w*|Rückruf|Übergabe|E-?Mail|Termin|conseill\w*|rappel|demande|consulente|richiesta|advisor|callback|request|e-?mail)\b[^.!?\n]*|[^.!?\n]*\b(Auftrag|Berater\w*|Rückruf|Übergabe|E-?Mail|Termin|conseill\w*|rappel|consulente|advisor|callback)\b[^.!?\n]*\b(ergänzt|nachgetragen|hinzugefügt|weitergeleitet|weitergegeben|mitgegeben|geschickt|gesendet|gebucht|ajouté|transmis|envoyé|aggiunto|inoltrato|inviato|added|forwarded|passed on|sent)\b[^.!?\n]*/i;
-const ACTION_TOOLS = ["requestHandover", "prepareOffer", "askForFeedback"];
+const ACTION_TOOLS = ["requestHandover", "prepareOffer"];
 
 /** A sentence saying something was added, sent or booked for a person, with no such tool call. */
 function claimedAction(text: string, tools: ToolCall[]): string | null {
