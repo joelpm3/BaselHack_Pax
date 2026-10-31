@@ -17,7 +17,7 @@
   },
   "login": {
     "title": "Se connecter au cockpit entreprise",
-    "headline": "Ce que la clientèle demande au conseiller numérique.",
+    "headline": "Ce que la clientèle demande à Clara.",
     "intro": "Toutes les conversations, classées et évaluées : thèmes, questions fréquentes, abandons, leads et transferts à des spécialistes, en temps réel.",
     "advisor": "Qui travaille aujourd'hui ?",
     "chooseAdvisor": "Choisissez une conseillère ou un conseiller.",
@@ -150,11 +150,11 @@
     },
     "runningNow": "{count, plural, one {conversation en cours} other {conversations en cours}}",
     "emptyTitle": "Aucune conversation en cours.",
-    "emptyBody": "Dès que quelqu'un écrit au conseiller, la conversation apparaît ici. Pour une démo, <link>lancez des clients simulés</link>.",
+    "emptyBody": "Dès que quelqu'un écrit à Clara, la conversation apparaît ici. Pour une démo, <link>lancez des clients simulés</link>.",
     "recentTitle": "Au cours des 30 dernières minutes",
     "messages": "{count, plural, one {# message} other {# messages}}",
     "customer": "Client",
-    "advisor": "Conseiller",
+    "advisor": "Clara",
     "handover": "Transfert",
     "feed": {
       "title": "Événements",
@@ -162,7 +162,7 @@
       "started": "Nouvelle conversation",
       "startedSimulated": "Conversation simulée lancée",
       "customer": "Client",
-      "advisor": "Conseiller",
+      "advisor": "Clara",
       "analysis": "Analyse mise à jour",
       "lead": "Lead créé ou réévalué",
       "handover": "Transfert à un spécialiste demandé",
@@ -171,7 +171,7 @@
   },
   "overview": {
     "title": "Vue d'ensemble",
-    "description": "Ce dont la clientèle parle avec le conseiller numérique, où elle décroche et qui Pax devrait appeler.",
+    "description": "Ce dont la clientèle parle avec Clara, où elle décroche et qui Pax devrait appeler.",
     "kpi": {
       "label": "Chiffres clés",
       "conversations": "Conversations",
@@ -235,7 +235,7 @@
   },
   "conversations": {
     "title": "Conversations",
-    "description": "Toutes les conversations avec le conseiller numérique, les plus récentes d'abord.",
+    "description": "Toutes les conversations avec Clara, les plus récentes d'abord.",
     "statusFilter": "Statut",
     "allStatuses": "Toutes",
     "count": "{count, plural, one {# conversation} other {# conversations}}",
@@ -266,7 +266,7 @@
       "description": "{count, plural, one {# message} other {# messages}}, appels d'outils résumés",
       "empty": "Pas encore de messages.",
       "customer": "Client",
-      "advisor": "Conseiller Pax",
+      "advisor": "Clara",
       "voice": "Par la voix",
       "toolDone": "Exécuté",
       "toolFailed": "Erreur",
@@ -512,7 +512,7 @@
   },
   "rules": {
     "title": "Règles",
-    "description": "Quand le conseiller transfère à un spécialiste, ce qu'il signale et quels produits il ne recommande pas. Formulées avec vos propres mots, valables immédiatement pour les nouvelles conversations.",
+    "description": "Quand Clara transfère à un spécialiste, ce qu'elle signale et quels produits elle ne recommande pas. Formulées avec vos propres mots, valables immédiatement pour les nouvelles conversations.",
     "languages": "Les règles peuvent être rédigées en allemand, français, italien ou anglais.",
     "version": "Version {version}",
     "activeVersion": "Active",
@@ -546,7 +546,7 @@
   },
   "simulation": {
     "title": "Simulation",
-    "description": "Des clients simulés parlent avec le vrai conseiller. Le cockpit se remplit ainsi pour les démos et les tests, clairement marqué comme simulé.",
+    "description": "Des clients simulés parlent avec la vraie Clara. Le cockpit se remplit ainsi pour les démos et les tests, clairement marqué comme simulé.",
     "runs": "Exécutions",
     "emptyTitle": "Aucune simulation lancée pour l'instant.",
     "emptyBody": "Lancez une exécution ci-dessus et suivez-la sur la page En direct.",

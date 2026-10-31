@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "Das hat gerade nicht geklappt. Der Berater kann trotzdem weiterhelfen.",
+    "failed": "Das hat gerade nicht geklappt. Clara kann trotzdem weiterhelfen.",
     "yes": "Ja",
     "no": "Nein",
     "cancel": "Abbrechen"
@@ -218,7 +218,7 @@
     "noChange": "Dieses Szenario verändert Ihre Absicherung nicht.",
     "taxSavings": "Steuerersparnis mit diesem Betrag: {amount} pro Jahr.",
     "lostPension": "Der Vorbezug kostet Sie rund {amount} Pensionskassenrente pro Monat.",
-    "discuss": "Mit dem Berater besprechen",
+    "discuss": "Mit Clara besprechen",
     "discussMessage": "Ich habe das Szenario «{scenario}» angeschaut ({params}). Was bedeutet das für mich?",
     "estimated": "Pensionskasse geschätzt.",
     "assumptions": "Szenario mit Logismata gerechnet, unverbindlich. Es ändert Ihr Vorsorgebild nicht.",

@@ -17,7 +17,7 @@
   },
   "login": {
     "title": "Sign in to the company cockpit",
-    "headline": "What customers ask the digital advisor.",
+    "headline": "What customers ask Clara.",
     "intro": "Every conversation, classified and scored: topics, frequent questions, drop-offs, leads and handovers to specialists, in real time.",
     "advisor": "Who is working today?",
     "chooseAdvisor": "Choose an advisor.",
@@ -150,11 +150,11 @@
     },
     "runningNow": "{count, plural, one {conversation running now} other {conversations running now}}",
     "emptyTitle": "No conversation is running right now.",
-    "emptyBody": "As soon as someone writes to the advisor, the conversation appears here. For a demo, <link>start simulated customers</link>.",
+    "emptyBody": "As soon as someone writes to Clara, the conversation appears here. For a demo, <link>start simulated customers</link>.",
     "recentTitle": "In the last 30 minutes",
     "messages": "{count, plural, one {# message} other {# messages}}",
     "customer": "Customer",
-    "advisor": "Advisor",
+    "advisor": "Clara",
     "handover": "Handover",
     "feed": {
       "title": "Events",
@@ -162,7 +162,7 @@
       "started": "New conversation started",
       "startedSimulated": "Simulated conversation started",
       "customer": "Customer",
-      "advisor": "Advisor",
+      "advisor": "Clara",
       "analysis": "Analysis updated",
       "lead": "Lead created or rescored",
       "handover": "Handover to a specialist requested",
@@ -171,7 +171,7 @@
   },
   "overview": {
     "title": "Overview",
-    "description": "What customers discuss with the digital advisor, where they drop off and whom Pax should call.",
+    "description": "What customers discuss with Clara, where they drop off and whom Pax should call.",
     "kpi": {
       "label": "Key figures",
       "conversations": "Conversations",
@@ -235,7 +235,7 @@
   },
   "conversations": {
     "title": "Conversations",
-    "description": "Every conversation with the digital advisor, newest first.",
+    "description": "Every conversation with Clara, newest first.",
     "statusFilter": "Status",
     "allStatuses": "All",
     "count": "{count, plural, one {# conversation} other {# conversations}}",
@@ -266,7 +266,7 @@
       "description": "{count, plural, one {# message} other {# messages}}, tool calls summarised",
       "empty": "No messages yet.",
       "customer": "Customer",
-      "advisor": "Pax advisor",
+      "advisor": "Clara",
       "voice": "By voice",
       "toolDone": "Done",
       "toolFailed": "Error",
@@ -512,7 +512,7 @@
   },
   "rules": {
     "title": "Rules",
-    "description": "When the advisor hands over to a specialist, what it flags and which products it does not recommend. Written in your own words, effective immediately for new conversations.",
+    "description": "When Clara hands over to a specialist, what she flags and which products she does not recommend. Written in your own words, effective immediately for new conversations.",
     "languages": "Rules may be written in German, French, Italian or English.",
     "version": "Version {version}",
     "activeVersion": "Active",
@@ -546,7 +546,7 @@
   },
   "simulation": {
     "title": "Simulation",
-    "description": "Simulated customers talk to the real advisor. This fills the cockpit for demos and tests, clearly marked as simulated.",
+    "description": "Simulated customers talk to the real Clara. This fills the cockpit for demos and tests, clearly marked as simulated.",
     "runs": "Runs",
     "emptyTitle": "No simulation started yet.",
     "emptyBody": "Start a run above and watch it on the live page.",

@@ -1,6 +1,6 @@
 {
   "header": {
-    "home": "Pax Vorsorge-Berater, zur Startseite",
+    "home": "Pax Clara, zur Startseite",
     "portal": "Vorsorge-Cockpit"
   },
   "title": "Wie gut ist Ihr Leben abgesichert?",
@@ -28,7 +28,7 @@
     "unit": "1 Quadrat = CHF 500 pro Monat"
   },
   "points": {
-    "label": "So berät der Pax Vorsorge-Berater",
+    "label": "So berät Pax Clara",
     "life": {
       "title": "Zuerst Ihr Leben",
       "body": "Familie, Arbeit, Pläne und Sorgen. Produkte kommen erst ganz am Schluss."

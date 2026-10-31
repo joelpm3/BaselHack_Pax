@@ -5,7 +5,7 @@
   "greetingAnonymous": "Buongiorno",
   "intro": "Tutte le Sue assicurazioni e i Suoi documenti previdenziali in un unico posto, presso Pax e altrove.",
   "header": {
-    "home": "Consulente previdenziale Pax, pagina iniziale",
+    "home": "Pax Clara, pagina iniziale",
     "navigation": "Navigazione principale",
     "language": "Lingua",
     "toAdvisor": "Alla consulenza"
@@ -61,7 +61,7 @@
     "title": "Aspetti da verificare",
     "loading": "Stiamo verificando i Suoi contratti …",
     "empty": "Al momento non c’è nulla che richieda la Sua attenzione.",
-    "discuss": "Parlarne con il consulente",
+    "discuss": "Parlarne con Clara",
     "dismiss": "Nascondere",
     "restore": "Mostrare di nuovo",
     "dismissedCount": "{count, plural, one {# indicazione nascosta} other {# indicazioni nascoste}}",

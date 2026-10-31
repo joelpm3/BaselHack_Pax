@@ -1,6 +1,6 @@
 {
   "common": {
-    "failed": "That didn't work just now. The advisor can still help you.",
+    "failed": "That didn't work just now. Clara can still help you.",
     "yes": "Yes",
     "no": "No",
     "cancel": "Cancel"
@@ -218,7 +218,7 @@
     "noChange": "This scenario does not change your cover.",
     "taxSavings": "Tax savings with this amount: {amount} per year.",
     "lostPension": "The withdrawal costs you about {amount} of pension fund pension per month.",
-    "discuss": "Discuss with the advisor",
+    "discuss": "Discuss with Clara",
     "discussMessage": "I looked at the scenario “{scenario}” ({params}). What does that mean for me?",
     "estimated": "Pension fund estimated.",
     "assumptions": "Scenario calculated by Logismata, non-binding. It does not change your pension picture.",

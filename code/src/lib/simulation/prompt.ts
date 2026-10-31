@@ -106,12 +106,12 @@ export function customerInstructions(p: SimPersona, currentYear: number): string
       : "If the advisor asks for contact details, politely decline for now.",
     p.wantsHuman
       ? "After a few messages, ask to talk to a real person (a callback)."
-      : "You are fine talking to the digital advisor.",
+      : "You are fine talking to Clara, the digital advisor.",
     p.mode === "existing_customer"
       ? "You are already a Pax customer and logged in, so Pax knows your policies."
       : "You are new to Pax.",
   ];
-  return `You role-play a private customer chatting with the digital pension advisor on the website of Pax, a Swiss life insurer. You are the customer, not an assistant. Stay in character.
+  return `You role-play a private customer chatting with Clara, the AI pension advisor on the website of Pax, a Swiss life insurer. You are the customer, not an assistant. Stay in character.
 
 ## Who you are
 ${personaFacts(p, currentYear)}

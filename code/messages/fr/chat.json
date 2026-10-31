@@ -2,23 +2,23 @@
   "pageTitle": "Conseil",
   "newConversation": "Nouvelle conversation",
   "transcript": "Déroulement de la conversation",
-  "thinking": "Le conseiller écrit",
+  "thinking": "Clara écrit",
   "disclaimer": "Les calculs et les prix sont des valeurs indicatives sans engagement. Seule une offre de Pax est contraignante.",
   "error": {
-    "unavailable": "Le conseiller n'est pas joignable pour le moment. Votre message est enregistré.",
+    "unavailable": "Clara n'est pas joignable pour le moment. Votre message est enregistré.",
     "retry": "Réessayer"
   },
   "greeting": {
-    "default": "Bonjour, je suis ravi que vous soyez là. Je suis votre conseiller prévoyance numérique de Pax. Avant de parler chiffres, j'aimerais faire votre connaissance : qu'est-ce qui vous occupe quand vous pensez à votre avenir ?",
-    "upload": "Bonjour, je suis ravi que vous soyez là. Vous avez vos documents sous la main, très bien : nous les regarderons ensemble tout à l'heure, cela nous évitera beaucoup de questions. Mais d'abord, j'aimerais vous connaître un peu : à quoi ressemble votre vie en ce moment ?",
-    "existing": "Bonjour {name}, ravi de vous revoir. J'ai vos polices Pax sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois, par exemple dans votre famille, au travail ou dans votre logement ?",
-    "existingAnonymous": "Bonjour, ravi de vous revoir. J'ai vos polices Pax sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois ?",
-    "hint": "Bonjour {name}, regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance et vos polices. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?",
-    "hintAnonymous": "Bonjour, regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?"
+    "default": "Bonjour, je suis ravie que vous soyez là. Je suis Clara, la conseillère numérique en prévoyance de Pax. Avant de parler chiffres, j'aimerais faire votre connaissance : qu'est-ce qui vous occupe quand vous pensez à votre avenir ?",
+    "upload": "Bonjour, je suis ravie que vous soyez là. Je suis Clara, la conseillère numérique en prévoyance de Pax. Vous avez vos documents sous la main, très bien : nous les regarderons ensemble tout à l'heure, cela nous évitera beaucoup de questions. Mais d'abord, j'aimerais vous connaître un peu : à quoi ressemble votre vie en ce moment ?",
+    "existing": "Bonjour {name}, ravie de vous revoir. Je suis Clara, la conseillère numérique en prévoyance de Pax, et j'ai vos polices sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois, par exemple dans votre famille, au travail ou dans votre logement ?",
+    "existingAnonymous": "Bonjour, ravie de vous revoir. Je suis Clara, la conseillère numérique en prévoyance de Pax, et j'ai vos polices sous les yeux. Quelque chose a-t-il changé dans votre vie depuis la dernière fois ?",
+    "hint": "Bonjour {name}, je suis Clara, la conseillère numérique en prévoyance de Pax. Regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance et vos polices. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?",
+    "hintAnonymous": "Bonjour, je suis Clara, la conseillère numérique en prévoyance de Pax. Regardons ensemble « {title} ». J'ai sous les yeux la remarque de votre cockpit prévoyance. Pour bien la situer : quelque chose a-t-il changé dans votre vie depuis la conclusion de vos contrats ?"
   },
   "message": {
     "you": "Vous",
-    "advisor": "Conseiller Pax",
+    "advisor": "Pax Clara",
     "voice": "par la voix",
     "upload": "documents téléchargés"
   },

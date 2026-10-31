@@ -8,7 +8,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-# Pax Digital Advisor: working conventions
+# Pax Clara: working conventions
 
 Read `../documentation/ARCHITECTURE.md` for the product and data model. These rules keep the
 codebase consistent:
