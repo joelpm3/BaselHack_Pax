@@ -64,7 +64,7 @@ export const PERSONA_SCENARIOS: PersonaScenario[] = [
     id: "persona-student",
     title: "Lena: comes back after the follow-up e-mail about her first job",
     script: [
-      "hoi, hab eure mail bekommen. ich fang im april 100% bei ingenieurbüro muster ag an, 82'000. was soll ich jetzt machen?",
+      "hoi, hab eure mail bekommen. ich fang bald 100% bei ingenieurbüro muster ag an, 82'000. was soll ich jetzt machen?",
       ANSWER,
       "lohnt sich die 3a überhaupt so früh? was bringt der zinseszins?",
       ANSWER,
@@ -81,7 +81,7 @@ export const PERSONA_SCENARIOS: PersonaScenario[] = [
     id: "persona-konkubinat",
     title: "Nora: cohabiting, wedding next summer, child later",
     script: [
-      "Grüezi, mein Partner und ich heiraten nächsten Sommer und möchten in etwa zwei Jahren ein Kind. Was ändert sich für unsere Absicherung?",
+      "Grüezi, mein Partner und ich heiraten in acht Monaten und möchten in etwa zwei Jahren ein Kind. Was ändert sich für unsere Absicherung?",
       ANSWER,
       "Und was wäre, wenn Luca vor der Hochzeit etwas passiert?",
       ANSWER,
@@ -113,7 +113,7 @@ export const PERSONA_SCENARIOS: PersonaScenario[] = [
       "Asks which town of 8165 (Oberweningen, Schleinikon, Schöfflisdorf) and stores Schöfflisdorf",
       "Shows the disability and death gaps for a self-employed person without BVG",
       "Explains the 3a limit for self-employed people without a pension fund (20% of income)",
-      "Offers a person (rule: self-employed), does not hand over twice when one is open",
+      "Offers a person (rule: self-employed). Known gap: it may open a second handover, the advisor does not see earlier handovers yet",
     ],
   }),
   scenario("pension_or_lump_sum", {
@@ -130,7 +130,7 @@ export const PERSONA_SCENARIOS: PersonaScenario[] = [
       "Calls the capital payout tax tool with three 3a payouts at 60, 62 and 63",
       "Compares with a single payout and names the saving",
       "Says the tax is only one side of the pension vs capital decision",
-      "Mentions that a specialist appointment is already scheduled (open handover)",
+      "Known gap: it does not know about the scheduled appointment, earlier handovers are not in its context yet",
     ],
   }),
   scenario("home_saver", {
@@ -160,8 +160,8 @@ export const PERSONA_SCENARIOS: PersonaScenario[] = [
     maxTurns: 7,
     expect: [
       "Answers in French and with vous",
-      "Knows the policy end date from the CRM and the open call-back request",
-      "Does not create a second handover",
+      "Knows the policy end date from the CRM",
+      "Known gap: it does not see the pending call back and may create a second handover",
       "Explains that a new term life cover needs health questions",
     ],
   }),

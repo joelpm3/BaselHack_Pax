@@ -258,7 +258,7 @@ const PERSONAS: SeedPersona[] = [
           },
           {
             role: "user",
-            text: "ok. nächsten frühling bin ich mit dem master fertig und fange im april 100% bei ingenieurbüro muster ag an. ändert sich dann was?",
+            text: "ok. in fünf monaten bin ich mit dem master fertig und fange gleich danach 100% bei ingenieurbüro muster ag an. ändert sich dann was?",
           },
           {
             role: "assistant",
@@ -275,7 +275,7 @@ const PERSONAS: SeedPersona[] = [
           painPoints: [],
           gaps: [],
           summary:
-            "Studentin (Werkstudentin, CHF 9'600) mit Pax 3a fragt nach der Einzahlungsgrenze. Sie schliesst nächsten Frühling den Master ab und beginnt im April 100 % bei Ingenieurbüro Muster AG (CHF 82'000).",
+            "Studentin (Werkstudentin, CHF 9'600) mit Pax 3a fragt nach der Einzahlungsgrenze. Sie schliesst in fünf Monaten den Master ab und beginnt gleich danach 100 % bei Ingenieurbüro Muster AG (CHF 82'000).",
           nextBestAction:
             "Kurz vor dem Stellenantritt melden: 3a auf das Maximum erhöhen und Erwerbsunfähigkeit besprechen.",
         },
@@ -287,9 +287,9 @@ const PERSONAS: SeedPersona[] = [
         conversation: "student-3a",
         kind: "first_job",
         subject: null,
-        when: { expression: "nächsten Frühling" },
+        when: { expression: "in fünf Monaten" },
         quote:
-          "nächsten frühling bin ich mit dem master fertig und fange im april 100% bei ingenieurbüro muster ag an",
+          "in fünf monaten bin ich mit dem master fertig und fange gleich danach 100% bei ingenieurbüro muster ag an",
         note: "Masterabschluss und Stellenantritt bei Ingenieurbüro Muster AG (100 %, CHF 82'000): Pensionskasse, 3a-Maximum und Erwerbsunfähigkeit besprechen.",
         confidence: 0.9,
       },
@@ -354,7 +354,7 @@ const PERSONAS: SeedPersona[] = [
           },
           {
             role: "user",
-            text: "Ich arbeite 80% als Physiotherapeutin, etwa 72'000, Luca 100% als Grafiker mit 88'000. Wir heiraten nächsten Sommer, und in etwa zwei Jahren hätten wir gern ein Kind. Die Miete ist 2'650 im Monat.",
+            text: "Ich arbeite 80% als Physiotherapeutin, etwa 72'000, Luca 100% als Grafiker mit 88'000. Wir heiraten in acht Monaten, und in etwa zwei Jahren hätten wir gern ein Kind. Die Miete ist 2'650 im Monat.",
           },
           {
             role: "assistant",
@@ -388,7 +388,7 @@ const PERSONAS: SeedPersona[] = [
             },
           ],
           summary:
-            "Unverheiratetes Paar (Konkubinat) in Winterthur, Heirat nächsten Sommer, Kinderwunsch in etwa zwei Jahren. Bei Tod des Partners fehlen rund CHF 24'000 pro Jahr; keine Begünstigung bei den Pensionskassen gemeldet.",
+            "Unverheiratetes Paar (Konkubinat) in Winterthur, Heirat in acht Monaten, Kinderwunsch in etwa zwei Jahren. Bei Tod des Partners fehlen rund CHF 24'000 pro Jahr; keine Begünstigung bei den Pensionskassen gemeldet.",
           nextBestAction:
             "Abends anrufen: Todesfallversicherung mit gegenseitiger Begünstigung offerieren und auf die Meldung bei den Pensionskassen hinweisen.",
         },
@@ -413,7 +413,7 @@ const PERSONAS: SeedPersona[] = [
           reasonToCall:
             "Konkubinatspaar vor der Hochzeit: Lücke von CHF 24'000 pro Jahr bei Tod des Partners, wünscht eine Offerte.",
           talkingPoints: [
-            "Heirat nächsten Sommer, Kind in etwa zwei Jahren",
+            "Heirat in acht Monaten, Kind in etwa zwei Jahren",
             "Gegenseitige Begünstigung, auch nach der Heirat passend",
             "Lebenspartner bei beiden Pensionskassen melden",
             "Lieber abends erreichbar",
@@ -438,8 +438,8 @@ const PERSONAS: SeedPersona[] = [
         conversation: "konkubinat",
         kind: "wedding",
         subject: null,
-        when: { expression: "nächsten Sommer" },
-        quote: "Wir heiraten nächsten Sommer",
+        when: { expression: "in acht Monaten" },
+        quote: "Wir heiraten in acht Monaten",
         note: "Heirat mit Luca Moser: Begünstigungen, Hinterlassenenleistungen und Steuern neu prüfen.",
         confidence: 0.9,
       },
@@ -503,7 +503,7 @@ const PERSONAS: SeedPersona[] = [
           {
             role: "user",
             voice: true,
-            text: "also ich bin ja selbständig gärtner mit eigener firma und wir haben jetzt äh ein altes bauernhaus gekauft in 8165 und im april ziehen wir um mit der ganzen familie mini frau schafft 30 prozent als lehrerin und wir haben zwei kinder und ich frage mich halt was passiert wenn ich krank werde weil dann ist ja öppe alles weg gäll",
+            text: "also ich bin ja selbständig gärtner mit eigener firma und wir haben jetzt äh ein altes bauernhaus gekauft in 8165 und in fünf monaten ziehen wir um mit der ganzen familie mini frau schafft 30 prozent als lehrerin und wir haben zwei kinder und ich frage mich halt was passiert wenn ich krank werde weil dann ist ja öppe alles weg gäll",
           },
           {
             role: "assistant",
@@ -555,7 +555,7 @@ const PERSONAS: SeedPersona[] = [
             },
           ],
           summary:
-            "Selbstständiger Landschaftsgärtner (CHF 105'000) ohne Pensionskasse und ohne Krankentaggeld, verheiratet, zwei Kinder. Hauskauf in 8165, Umzug im April, Hypothek CHF 680'000. Grosse Lücken bei Erwerbsunfähigkeit und Tod. Rückruf abends gewünscht.",
+            "Selbstständiger Landschaftsgärtner (CHF 105'000) ohne Pensionskasse und ohne Krankentaggeld, verheiratet, zwei Kinder. Hauskauf in 8165, Umzug in fünf Monaten, Hypothek CHF 680'000. Grosse Lücken bei Erwerbsunfähigkeit und Tod. Rückruf abends gewünscht.",
           nextBestAction:
             "Abends ab 18 Uhr anrufen: Erwerbsunfähigkeit, Todesfall und 3a für Selbstständige (bis 20 % des Einkommens) besprechen.",
         },
@@ -568,7 +568,7 @@ const PERSONAS: SeedPersona[] = [
           reasonToCall:
             "Selbstständiger ohne Pensionskasse und Krankentaggeld, neues Haus mit CHF 680'000 Hypothek: Lücke von CHF 4'000 pro Monat bei Erwerbsunfähigkeit.",
           talkingPoints: [
-            "Umzug nach 8165 im April",
+            "Umzug nach 8165 in fünf Monaten",
             "Erwerbsunfähigkeitsrente und Todesfallkapital für die Hypothek",
             "3a für Selbstständige: bis 20 % des Nettoeinkommens",
             "Nur abends ab 18 Uhr erreichbar",
@@ -589,8 +589,8 @@ const PERSONAS: SeedPersona[] = [
         conversation: "self-employed-house",
         kind: "home_purchase",
         subject: null,
-        when: { expression: "im April" },
-        quote: "im april ziehen wir um mit der ganzen familie",
+        when: { expression: "in fünf Monaten" },
+        quote: "in fünf monaten ziehen wir um mit der ganzen familie",
         note: "Umzug ins gekaufte Bauernhaus in 8165 Schöfflisdorf, Hypothek CHF 680'000: Adresse aktualisieren, Absicherung der Hypothek prüfen.",
         confidence: 0.85,
       },
@@ -772,7 +772,7 @@ const PERSONAS: SeedPersona[] = [
         subject: null,
         when: { expression: "im Sommer 2030" },
         quote: "Ich bin 59 und möchte mit 63 aufhören, im Sommer 2030.",
-        note: "Frühpensionierung mit 63: Bezug der PK (Rente oder Kapital) bis spätestens drei Monate vorher festlegen, 3a-Bezüge staffeln.",
+        note: "Frühpensionierung mit 63: Anmeldefrist für den Kapitalbezug gemäss PK-Reglement frühzeitig prüfen, 3a-Bezüge staffeln.",
         confidence: 0.95,
       },
     ],

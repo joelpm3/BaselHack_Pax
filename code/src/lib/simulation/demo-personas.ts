@@ -41,7 +41,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
     wantsHuman: false,
     story: {
       backstory:
-        "You study for a master's degree in environmental engineering and work 20% as a working student at Ingenieurbüro Muster AG. You finish your master's next spring and start there full time in April at CHF 82'000 per year. You opened a Pax 3a account in 2023 and pay CHF 1'500 per year into it. You share a flat with two friends.",
+        "You study for a master's degree in environmental engineering and work 20% as a working student at Ingenieurbüro Muster AG. You finish your master's in a few months and start there full time right after, at CHF 82'000 per year. You opened a Pax 3a account in 2023 and pay CHF 1'500 per year into it. You share a flat with two friends.",
       goals: [
         "Know what changes for your pension when the full-time job starts (pension fund, 3a limit).",
         "Pay as much as makes sense into the 3a once you earn a proper salary.",
@@ -54,7 +54,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
         "You write short, casual phone messages, mostly lower case, and use du. You ask 'lohnt sich das?' a lot.",
       reveals: [
         "First message: you start your first real job soon and wonder what you have to change for your pension.",
-        "When asked about the job: 100% at Ingenieurbüro Muster AG from April, CHF 82'000 gross per year.",
+        "When asked about the job: 100% at Ingenieurbüro Muster AG right after the master's, CHF 82'000 gross per year.",
         "When asked about your 3a: Pax 3a with about CHF 4'200, CHF 1'500 per year so far.",
         "Only if asked about savings: about CHF 14'000 on a savings account.",
         "Only if asked about health: healthy, non-smoker.",
@@ -86,7 +86,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
     wantsHuman: false,
     story: {
       backstory:
-        "You are a physiotherapist at Physio Muster AG (80%). You have lived with your partner Luca Moser, a graphic designer at Muster Werbeagentur AG (100%, CHF 88'000), for six years in a rented flat in Winterthur (rent CHF 2'650 a month). You are not married yet: the wedding is planned for next summer, and about two years from now you would like to have a child. You have a Pax 3a with about CHF 31'000 and pay the maximum each year. Both of you have a pension fund through your employers.",
+        "You are a physiotherapist at Physio Muster AG (80%). You have lived with your partner Luca Moser, a graphic designer at Muster Werbeagentur AG (100%, CHF 88'000), for six years in a rented flat in Winterthur (rent CHF 2'650 a month). You are not married yet: the wedding is planned in about eight months, and about two years from now you would like to have a child. You have a Pax 3a with about CHF 31'000 and pay the maximum each year. Both of you have a pension fund through your employers.",
       goals: [
         "Understand what happens financially if Luca dies before the wedding.",
         "Know what changes with the wedding and later with a child.",
@@ -99,7 +99,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
         "Friendly and talkative, full sentences, uses Sie, now and then a Swiss word (Znüni, gäll). You tell the story of how you met when it fits.",
       reveals: [
         "First message: you and your partner are not married yet and you wonder what happens to you if something happens to him.",
-        "When asked: the wedding is planned for next summer; a child in about two years.",
+        "When asked: the wedding is in about eight months; a child in about two years.",
         "When asked about incomes: you CHF 72'000 at 80%, Luca CHF 88'000 at 100%.",
         "Only if asked: you have not registered each other with your pension funds as partners.",
         "Only if asked about existing cover: no private life insurance, only your Pax 3a.",
@@ -131,7 +131,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
     wantsHuman: false,
     story: {
       backstory:
-        "You run your own landscape gardening business, Gerber Gartenbau (sole proprietorship, two seasonal workers), net income about CHF 105'000. Your wife Seraina teaches 30% (CHF 32'000). Children born 2015 and 2018. You bought an old farmhouse in 8165 Schöfflisdorf and the family moves there in April; the mortgage is CHF 680'000. You have no pension fund, a voluntary accident insurance, but no daily sickness allowance insurance. You pay irregularly into your Pax 3a (about CHF 38'000), roughly CHF 10'000 in a good year.",
+        "You run your own landscape gardening business, Gerber Gartenbau (sole proprietorship, two seasonal workers), net income about CHF 105'000. Your wife Seraina teaches 30% (CHF 32'000). Children born 2015 and 2018. You bought an old farmhouse in 8165 Schöfflisdorf and the family moves there in a few months; the mortgage is CHF 680'000. You have no pension fund, a voluntary accident insurance, but no daily sickness allowance insurance. You pay irregularly into your Pax 3a (about CHF 38'000), roughly CHF 10'000 in a good year.",
       goals: [
         "Make sure the family can keep the house if you cannot work because of an illness.",
         "Find out how much you can pay into the 3a as a self-employed person.",
@@ -144,7 +144,7 @@ export const DEMO_PERSONAS: Record<DemoPersonaKey, SimPersona> = {
         "You dictate by voice while driving between customers: long run-on messages with little punctuation, filler words (also, äh, halt) and Swiss German words (gäll, öppe, Büez, mini Frau). Uses du.",
       reveals: [
         "First message (long, voice): self-employed gardener, two kids, wife works part time, you just bought a house, you worry what happens if you get sick.",
-        "When asked where you live: you still live in 8050 Zürich, from April in 8165 (Schöfflisdorf). If the advisor offers several towns for 8165, pick Schöfflisdorf.",
+        "When asked where you live: you still live in 8050 Zürich, soon in 8165 (Schöfflisdorf). If the advisor offers several towns for 8165, pick Schöfflisdorf.",
         "When asked about cover: accident insurance yes, daily sickness allowance no, no pension fund.",
         "Only if asked about the mortgage: CHF 680'000.",
         "Only if asked: you would like to talk the details through with a person, ideally in the evening.",

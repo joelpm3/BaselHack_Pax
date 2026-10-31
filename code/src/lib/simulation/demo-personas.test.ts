@@ -3,7 +3,7 @@ import Database from "better-sqlite3";
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/better-sqlite3";
 import { migrate } from "drizzle-orm/better-sqlite3/migrator";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import * as schema from "@/lib/db/schema";
 import { addDays, addMonths, toIsoDate } from "@/lib/documents/dates";
 import { lifeSituationSchema } from "@/lib/domain/profile";
@@ -203,5 +203,27 @@ describe("seeded pitch personas", () => {
     expect(due.map((c) => c.firstName)).toEqual(["Monika"]);
     expect(prefs.find((p) => p.customerId === byName("Hans-Peter").id)?.yearlyCheckin).toBe(false);
     expect(addDays(lastSent[0].sentOn, 365) <= today).toBe(true);
+  });
+});
+
+describe("seeding on any day", () => {
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it.each([
+    "2026-12-15",
+    "2027-03-31",
+    "2027-06-10",
+  ])("keeps every announced event after the seed day (%s)", async (seedDay) => {
+    vi.useFakeTimers({ toFake: ["Date"] });
+    vi.setSystemTime(new Date(`${seedDay}T12:00:00Z`));
+    vi.resetModules();
+    const { seedPersonas: seedOn } = await import("../../../scripts/seed-personas");
+    const db = seededDb();
+    seedOn(db);
+    const events = db.select().from(schema.futureEvents).all();
+    expect(events.length).toBeGreaterThan(0);
+    for (const event of events) expect(event.expectedDate > seedDay).toBe(true);
   });
 });
