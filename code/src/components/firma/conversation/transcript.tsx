@@ -36,12 +36,21 @@ function toolDetail(tool: ToolSummary, t: Translate, tw: Translate): string {
   if (!summary) return compactJson(tool.output ?? tool.input, 120);
   const chf = (amount: number) => formatChf(Math.round(amount));
   if (summary.changes) {
-    const fields = visibleProfileChanges(summary.changes)
-      .map(
-        (c) =>
-          `${tw(profileFieldLabelKey(c.path))}: ${formatProfileValue(c.path, c.value, tw, chf)}`,
-      )
-      .join(" · ");
+    const changes = visibleProfileChanges(summary.changes);
+    // Like the customer's card: postcode and town read as one place of residence.
+    const place = changes
+      .filter((c) => c.path === "residence.zip" || c.path === "residence.city")
+      .map((c) => String(c.value))
+      .join(" ");
+    const fields = [
+      ...changes
+        .filter((c) => !c.path.startsWith("residence."))
+        .map(
+          (c) =>
+            `${tw(profileFieldLabelKey(c.path))}: ${formatProfileValue(c.path, c.value, tw, chf)}`,
+        ),
+      ...(place ? [`${tw("fields.location")}: ${place}`] : []),
+    ].join(" · ");
     return fields ? t("tools.profile", { fields }) : t("tools.profileEmpty");
   }
   const values: Record<string, string | number> = { ...summary.values };
