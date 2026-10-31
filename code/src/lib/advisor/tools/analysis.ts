@@ -21,8 +21,9 @@ import {
   retirementAge,
   yearsUntilRetirement,
 } from "../logismata/mapping";
-import { policyCoverOf } from "../policies";
+import { hasRiskPolicies, policyCoverOf } from "../policies";
 import { applyPolicyCover } from "../policy-cover";
+import { privateCoverKnown } from "../readiness";
 import { riskResultForModel } from "../risk-model-output";
 import type { PensionOverviewOutput, RiskAnalysisOutput, TaxSavingsOutput } from "../types";
 import type { ToolContext } from "./context";
@@ -77,12 +78,14 @@ export function createAnalysisTools(ctx: ToolContext) {
         "dies, separately for illness and accident, against the need (80% of gross for " +
         "disability, 70% for survivors). Shows a gap chart like the Pax Vorsorgecheck. Active " +
         "death and disability policies (Pax and other insurers) are already counted in the " +
-        "`policies` figure and reduce the gap. The result gives the card's monthly figures; " +
-        "follow its readingGuide.",
+        "`policies` figure and reduce the gap. Needs the answer about existing private cover " +
+        "(privateCover) first. The result gives the card's monthly figures; follow its readingGuide.",
       inputSchema: z.object({}),
       execute: async (_input, { toolCallId }): Promise<RiskAnalysisOutput> => {
         const profile = getProfile(ctx.customerId);
         const missing = missingFor(profile, "risk");
+        if (!privateCoverKnown(profile, { hasRiskPolicies: hasRiskPolicies(ctx.customerId) }))
+          missing.push("privateCover");
         if (missing.length) return { status: "missing", missing };
         const check = await runRiskCheck(profile, callContext(toolCallId));
         const year = currentYear();

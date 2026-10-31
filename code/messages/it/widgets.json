@@ -84,7 +84,10 @@
       "annualContribution": "Versamento 3a annuo"
     },
     "desiredRetirementAge": "Età di pensionamento desiderata",
-    "riskAttitude": "Propensione al rischio"
+    "riskAttitude": "Propensione al rischio",
+    "privateCover": "Assicurazione privata decesso/invalidità",
+    "monthlySpending": "Spese al mese",
+    "existingPolicies": "Assicurazioni esistenti"
   },
   "enums": {
     "sex": {
@@ -132,6 +135,11 @@
       "divorce": "Divorzio",
       "inheritance": "Eredità",
       "other": "Altro"
+    },
+    "privateCover": {
+      "yes": "presente",
+      "no": "nessuna",
+      "unknown": "sconosciuta"
     }
   },
   "breakdown": {

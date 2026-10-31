@@ -10,12 +10,17 @@ import {
   type LifeSituation,
   maritalStatusSchema,
   plannedEventSchema,
+  privateCoverSchema,
   profileCompleteness,
   sexSchema,
 } from "@/lib/domain/profile";
 import { applyProfileChanges, getProfile, type ProfileChange } from "@/lib/profile/service";
 import { resolveTaxLocation } from "../logismata/checks";
-import { missingFor } from "../logismata/mapping";
+import { hasRiskPolicies } from "../policies";
+import { replacedFacts } from "../profile-diff";
+import { type AnalysisReadiness, analysisReadiness } from "../readiness";
+import { saveStatedPolicies } from "../stated-policies";
+import { statedPolicySchema } from "../stated-policy-row";
 import type { UpdateProfileOutput } from "../types";
 import type { ToolContext } from "./context";
 
@@ -48,7 +53,11 @@ const pillar2Input = z.object({
 });
 
 export const updateProfileInput = z.object({
-  person: personInput.optional().describe("The customer"),
+  person: personInput
+    .optional()
+    .describe(
+      "The customer: the person writing to you ('ich', 'mein Lohn'). Never the partner's facts.",
+    ),
   partner: personInput
     .extend({
       pillar2: pillar2Input
@@ -56,7 +65,9 @@ export const updateProfileInput = z.object({
         .describe("The partner's own pension fund, e.g. from their pension certificate"),
     })
     .optional()
-    .describe("Spouse or partner"),
+    .describe(
+      "The customer's spouse or partner ('meine Frau', 'mein Mann', 'sie/er'). Never the customer's own facts.",
+    ),
   removePartner: z.boolean().optional().describe("True after a separation or bereavement"),
   children: z
     .array(childSchema)
@@ -91,6 +102,19 @@ export const updateProfileInput = z.object({
   addPlannedEvents: z.array(plannedEventSchema).optional(),
   riskAttitude: z.enum(["low", "medium", "high"]).optional(),
   desiredRetirementAge: z.number().int().min(55).max(70).optional(),
+  privateCover: privateCoverSchema
+    .optional()
+    .describe(
+      "Does the customer or partner already have private death or disability insurance (Pax or another insurer)? yes / no / unknown (they don't know)",
+    ),
+  addPolicies: z
+    .array(statedPolicySchema)
+    .max(6)
+    .optional()
+    .describe(
+      "Death or disability policies the customer says they or their partner already have and that are not under 'Policies on file'",
+    ),
+  monthlySpending: z.number().min(0).optional().describe("Rough household spending, CHF PER MONTH"),
   contact: z
     .object({
       firstName: z.string().optional(),
@@ -152,6 +176,10 @@ export function toProfileChanges(
   if (input.riskAttitude) changes.push({ path: "riskAttitude", value: input.riskAttitude });
   if (input.desiredRetirementAge)
     changes.push({ path: "desiredRetirementAge", value: input.desiredRetirementAge });
+  const privateCover = input.privateCover ?? (input.addPolicies?.length ? "yes" : undefined);
+  if (privateCover) changes.push({ path: "privateCover", value: privateCover });
+  if (input.monthlySpending !== undefined)
+    changes.push({ path: "monthlySpending", value: input.monthlySpending });
   if (input.contact?.firstName && !input.person?.firstName && !current.person.firstName)
     changes.push({ path: "person.firstName", value: input.contact.firstName });
   return changes;
@@ -176,8 +204,8 @@ function saveContact(customerId: string, contact: NonNullable<UpdateProfileInput
     .run();
 }
 
-export function missingForAnalysis(profile: LifeSituation): string[] {
-  return [...new Set([...missingFor(profile, "risk"), ...missingFor(profile, "tax")])];
+export function readinessFor(customerId: string, profile: LifeSituation): AnalysisReadiness {
+  return analysisReadiness(profile, { hasRiskPolicies: hasRiskPolicies(customerId) });
 }
 
 export function createProfileTools(ctx: ToolContext) {
@@ -185,8 +213,10 @@ export function createProfileTools(ctx: ToolContext) {
     updateProfile: tool({
       description:
         "Store facts the customer just told you about their life and finances (and contact details " +
-        "they volunteer). Call it as soon as you learn something new, before you reply. Never " +
-        "store guesses. Shows the customer a small card with what you noted, which they can correct.",
+        "they volunteer). Call it as soon as you learn something new, before you reply, with ALL " +
+        "new facts of the message in one call. Never store guesses. Shows the customer a small " +
+        "card with what you noted, which they can correct. `replaced` lists stored facts this " +
+        "call overwrote: name each change in your reply.",
       inputSchema: updateProfileInput,
       execute: async (input, { toolCallId }): Promise<UpdateProfileOutput> => {
         const current = getProfile(ctx.customerId);
@@ -216,28 +246,39 @@ export function createProfileTools(ctx: ToolContext) {
         }
         if (input.contact) saveContact(ctx.customerId, input.contact);
         try {
+          const replaced = replacedFacts(changes, current);
           const profile = applyProfileChanges(ctx.customerId, changes, {
             source: "chat",
             conversationId: ctx.conversationId,
             messageId: ctx.assistantMessageId,
           });
+          const policies = input.addPolicies?.length
+            ? saveStatedPolicies(ctx.customerId, input.addPolicies, profile, ctx.locale)
+            : [];
+          const readiness = readinessFor(ctx.customerId, profile);
           return {
             status: "ok",
-            changes,
+            changes: policies.length
+              ? [...changes, { path: "existingPolicies", value: policies }]
+              : changes,
+            replaced,
             completeness: profileCompleteness(profile),
             location,
             locationNotFound,
-            missingForAnalysis: missingForAnalysis(profile),
+            missingForAnalysis: readiness.missing,
+            askBeforeAnalysis: readiness.askFirst,
             error: null,
           };
         } catch (error) {
           return {
             status: "invalid",
             changes: [],
+            replaced: [],
             completeness: profileCompleteness(current),
             location: null,
             locationNotFound,
-            missingForAnalysis: missingForAnalysis(current),
+            missingForAnalysis: readinessFor(ctx.customerId, current).missing,
+            askBeforeAnalysis: [],
             error: error instanceof Error ? error.message.slice(0, 500) : "invalid profile",
           };
         }

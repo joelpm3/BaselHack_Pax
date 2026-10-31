@@ -59,8 +59,12 @@ export interface UpdateProfileOutput {
   location: { zip: string; city: string; canton: string; taxLocationId: number } | null;
   /** The place the customer named but which could not be resolved to a tax location. */
   locationNotFound: string | null;
-  /** Core fields still needed for the analyses (profile paths). */
+  /** Core fields still needed for the analyses (profile paths, plus `privateCover`). */
   missingForAnalysis: string[];
+  /** Worth one question each before the first analysis (savings, 3a, spending). */
+  askBeforeAnalysis: string[];
+  /** Stored facts this call overwrote with a different value. */
+  replaced: Array<{ path: string; previous: string | number | boolean; value: unknown }>;
   error: string | null;
 }
 
