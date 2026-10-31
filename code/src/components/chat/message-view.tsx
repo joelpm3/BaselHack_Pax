@@ -5,6 +5,7 @@ import { Mic, Paperclip } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { memo } from "react";
 import { ToolPartView, WAITING_WIDGETS } from "@/components/widgets/registry";
+import { withoutRepeatedText } from "@/lib/advisor/repeated-text";
 import type { AdvisorMessageMetadata } from "@/lib/advisor/types";
 import { Markdown } from "./markdown";
 import type { ChatMessage } from "./types";
@@ -40,7 +41,7 @@ function UserMessage({ message }: { message: ChatMessage }) {
 
 /** Keeps the transcript order but moves widgets that wait for the customer to the end. */
 function orderParts(parts: ChatMessage["parts"]) {
-  const indexed = parts.map((part, i) => ({ part, i }));
+  const indexed = withoutRepeatedText(parts).map((part, i) => ({ part, i }));
   const waits = ({ part }: (typeof indexed)[number]) =>
     isToolUIPart(part) && WAITING_WIDGETS.has(getToolName(part));
   return [...indexed.filter((p) => !waits(p)), ...indexed.filter(waits)];

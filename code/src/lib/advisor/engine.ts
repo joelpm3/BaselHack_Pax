@@ -37,6 +37,7 @@ import {
   saveUserMessage,
 } from "./conversations";
 import { buildInstructions } from "./prompt";
+import { withoutRepeatedText } from "./repeated-text";
 import { readyToWait, replyNudgeFor, withReplyNudge } from "./reply-nudge";
 import { stageAfterTurn } from "./stage";
 import { createAdvisorTools, WAITS_FOR_CUSTOMER } from "./tools";
@@ -146,7 +147,10 @@ function finishTurn(
 ): boolean {
   const saved = hasContent(response);
   if (saved) {
-    const transcript = { ...response, parts: response.parts.filter(isTranscriptPart) };
+    const transcript = {
+      ...response,
+      parts: withoutRepeatedText(response.parts.filter(isTranscriptPart)),
+    };
     saveAssistantMessage(conversation.id, transcript, {
       model: modelName("chat"),
       ruleSetId: details.ruleSetId,

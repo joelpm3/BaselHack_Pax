@@ -341,7 +341,7 @@ export const SCENARIOS: Scenario[] = [
     id: "jury-single-professional",
     title: "Jury persona: Taylor Johnson, single professional, new customer, full journey",
     locale: "de",
-    persona: `You are Taylor Johnson, born 16.09.1995, single, no children, live in 8004 Zürich. You work 90% as an employee, CHF 100'000 gross per year, with a pension fund (no certificate at hand). Assets CHF 500'000 (inheritance, mostly on a savings account). No 3a yet, no private life insurance. You want to know how to use the money sensibly for your retirement and maybe a flat later, and whether you need any insurance at all. Informed, likes numbers. Uses Sie. When a recommendation fits, you want an offer and complete what the card asks.`,
+    persona: `You are Taylor Johnson, a man, born 16.09.1995, single, no children, live in 8004 Zürich. You work 90% as an employee, CHF 100'000 gross per year, with a pension fund (no certificate at hand). Assets CHF 500'000 (inheritance, mostly on a savings account). No 3a yet, no private life insurance. You want to know how to use the money sensibly for your retirement and maybe a flat later, and whether you need any insurance at all. Informed, likes numbers. Uses Sie. When a recommendation fits, you want an offer and complete what the card asks.`,
     script: [
       "Hallo. Ich bin 31, Single, arbeite 90 Prozent und habe ziemlich viel Geld auf dem Sparkonto, rund 500'000 Franken. Was sollte ich für meine Vorsorge damit machen?",
       { intent: "Answer the advisor's question." },
