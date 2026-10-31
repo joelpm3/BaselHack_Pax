@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
 import { PRODUCTS, type ProductCode } from "@/lib/domain/products";
 import { requireAdvisor } from "@/lib/firma/auth";
+import { STALE_RUN_MS } from "@/lib/improvements/analyze";
 import type { ImprovementStats } from "@/lib/improvements/digest";
 import {
   conversationTitles,
@@ -66,8 +67,10 @@ async function ImprovementsContent() {
     listProposals(["accepted", "applied", "dismissed"]),
     listOpenFlags(),
   ];
+  // A run that outlived the server (restart mid-analysis) no longer blocks a new one.
   const latest = runs[0] ?? null;
-  const running = latest?.status === "running";
+  const running =
+    latest?.status === "running" && Date.now() - latest.startedAt.getTime() < STALE_RUN_MS;
   const titles = conversationTitles(
     [...open, ...decided].flatMap((p) => p.evidence.map((e) => e.conversationId)),
   );
@@ -78,8 +81,8 @@ async function ImprovementsContent() {
       <AutoRefresh active={running} intervalMs={3000} />
       <div className="grid content-start gap-6">
         <section className="grid gap-4 rounded-xl border border-line p-5">
-          <RunAnalysisButtons running={latest?.status === "running" ? latest.window : null} />
-          <RunStatus run={latest} />
+          <RunAnalysisButtons running={running && latest ? latest.window : null} />
+          <RunStatus run={latest} running={running} />
         </section>
 
         <section className="grid gap-3" aria-labelledby="open-proposals">
@@ -142,11 +145,16 @@ async function ImprovementsContent() {
   );
 }
 
-async function RunStatus({ run }: { run: ImprovementRun | null }) {
+async function RunStatus({ run, running }: { run: ImprovementRun | null; running: boolean }) {
   const [t, format] = await Promise.all([getTranslations("learning.improvements"), getFormatter()]);
   if (!run) return <p className="text-fg-muted">{t("noRun")}</p>;
   const window = t(`window.${run.window}`);
-  if (run.status === "running") return <p aria-live="polite">{t("running", { window })}</p>;
+  if (run.status === "running")
+    return running ? (
+      <p aria-live="polite">{t("running", { window })}</p>
+    ) : (
+      <p className="text-error-dark">{t("interrupted")}</p>
+    );
   if (run.status === "failed")
     return <p className="text-error-dark">{t("failed", { error: run.error ?? "" })}</p>;
 

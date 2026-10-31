@@ -78,6 +78,7 @@
     },
     "running": "Die Gespräche der letzten {window} werden analysiert. Das dauert etwa eine Minute.",
     "failed": "Die Analyse ist fehlgeschlagen: {error}",
+    "interrupted": "Die Analyse wurde unterbrochen. Starten Sie sie erneut.",
     "lastRun": "Analyse der letzten {window}, {time}",
     "noRun": "Noch keine Analyse. Starten Sie eine, um Vorschläge zu erhalten.",
     "noConversations": "In diesem Zeitraum gab es keine Gespräche.",

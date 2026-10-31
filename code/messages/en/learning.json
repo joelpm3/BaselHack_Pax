@@ -78,6 +78,7 @@
     },
     "running": "Analysing the conversations of the last {window}. This takes about a minute.",
     "failed": "The analysis failed: {error}",
+    "interrupted": "The analysis was interrupted. Start it again.",
     "lastRun": "Analysis of the last {window}, {time}",
     "noRun": "No analysis yet. Start one to get proposals.",
     "noConversations": "There were no conversations in this period.",

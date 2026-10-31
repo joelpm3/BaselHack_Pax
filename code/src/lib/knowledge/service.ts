@@ -1,5 +1,5 @@
 import "server-only";
-import { and, asc, desc, eq, inArray, ne } from "drizzle-orm";
+import { and, asc, desc, eq, gt, inArray, ne } from "drizzle-orm";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import { MAX_DOCUMENT_BYTES } from "@/lib/documents/constants";
@@ -255,6 +255,18 @@ export async function processKnowledgeDocument(id: string): Promise<void> {
       const current = tx.select({ status: kd.status }).from(kd).where(eq(kd.id, id)).get();
       // Deleted while it was being read: keep it deleted.
       if (current?.status !== "processing") return;
+      // A newer version finished first: this one is history, not the active text.
+      const newer = tx
+        .select({ id: kd.id })
+        .from(kd)
+        .where(
+          and(eq(kd.entryId, doc.entryId), eq(kd.status, "active"), gt(kd.version, doc.version)),
+        )
+        .get();
+      if (newer) {
+        tx.update(kd).set({ status: "superseded", sections, model }).where(eq(kd.id, id)).run();
+        return;
+      }
       tx.update(kd)
         .set({ status: "superseded" })
         .where(and(eq(kd.entryId, doc.entryId), eq(kd.status, "active")))

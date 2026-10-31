@@ -1,6 +1,6 @@
 import "server-only";
 import { generateText, Output } from "ai";
-import { and, asc, desc, eq, gte, inArray } from "drizzle-orm";
+import { and, asc, desc, eq, gte, inArray, or } from "drizzle-orm";
 import { z } from "zod";
 import { getModel, modelName } from "@/lib/ai/models";
 import { audit } from "@/lib/audit";
@@ -34,7 +34,7 @@ const MAX_CONVERSATIONS = 40;
 const TRANSCRIPT_CHARS = 4_000;
 const TIMEOUT_MS = 240_000;
 /** A run older than this is treated as crashed (e.g. server restarted mid-run). */
-const STALE_RUN_MS = 10 * 60 * 1000;
+export const STALE_RUN_MS = 10 * 60 * 1000;
 
 const LANGUAGE: Record<Locale, string> = {
   de: "German (Swiss standard German, ss instead of ß)",
@@ -92,10 +92,15 @@ Rules for you:
 
 function loadDigests(since: Date): ConversationDigest[] {
   const c = schema.conversations;
+  // Open advisor flags count whenever the conversation took place.
+  const flagged = db
+    .selectDistinct({ id: schema.conversationFlags.conversationId })
+    .from(schema.conversationFlags)
+    .where(eq(schema.conversationFlags.status, "open"));
   const conversations = db
     .select()
     .from(c)
-    .where(gte(c.lastMessageAt, since))
+    .where(or(gte(c.lastMessageAt, since), inArray(c.id, flagged)))
     .orderBy(desc(c.lastMessageAt))
     .all()
     .filter((row) => row.messageCount > 0);
