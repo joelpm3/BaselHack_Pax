@@ -2,7 +2,7 @@ import "server-only";
 import { and, desc, eq, inArray, isNull, notLike, or } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import type { LifeSituation } from "@/lib/domain/profile";
-import { LIFE_AND_PENSION_CATEGORIES, type PolicyCategory } from "@/lib/domain/taxonomy";
+import { type PolicyCategory, THIRD_PILLAR_CATEGORIES } from "@/lib/domain/taxonomy";
 import { getProfile } from "@/lib/profile/service";
 import { SCENARIO_SUFFIX } from "./logismata/checks";
 import {
@@ -94,7 +94,7 @@ export function buildVorsorgebild(customerId: string): VorsorgebildModel {
       and(
         eq(schema.policies.customerId, customerId),
         eq(schema.policies.status, "active"),
-        inArray(schema.policies.category, LIFE_AND_PENSION_CATEGORIES as PolicyCategory[]),
+        inArray(schema.policies.category, THIRD_PILLAR_CATEGORIES as PolicyCategory[]),
       ),
     )
     .all();

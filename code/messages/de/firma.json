@@ -355,7 +355,9 @@
       "rescored": "Neu bewertet: Score {from} → {to}",
       "statusChange": "Status von «{from}» auf «{to}» geändert",
       "assigned": "Zugewiesen an {name}",
-      "unassigned": "Zuweisung aufgehoben"
+      "unassigned": "Zuweisung aufgehoben",
+      "retyped": "Lead-Typ geändert: {from} → {to}",
+      "merged": "Mit einem weiteren Gespräch zusammengeführt"
     },
     "handovers": {
       "title": "Übergaben"

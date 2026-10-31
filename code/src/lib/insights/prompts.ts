@@ -85,7 +85,9 @@ export const classificationSchema = z.object({
         .describe("German: what the customer said about it (price, cover, dissatisfaction)."),
     })
     .nullable()
-    .describe("A life or pension policy the customer holds at another insurer, if mentioned."),
+    .describe(
+      "A private life or 3rd-pillar policy the customer holds at another insurer, if mentioned. Never the pension fund (2nd pillar, e.g. an uploaded pension certificate): that cannot be switched.",
+    ),
   reasonToCall: z
     .string()
     .describe(

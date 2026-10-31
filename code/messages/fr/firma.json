@@ -355,7 +355,9 @@
       "rescored": "Réévalué : score {from} → {to}",
       "statusChange": "Statut modifié de « {from} » à « {to} »",
       "assigned": "Attribué à {name}",
-      "unassigned": "Attribution supprimée"
+      "unassigned": "Attribution supprimée",
+      "retyped": "Type de lead modifié : {from} → {to}",
+      "merged": "Fusionné avec un autre entretien"
     },
     "handovers": {
       "title": "Transferts"

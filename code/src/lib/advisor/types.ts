@@ -211,7 +211,7 @@ export interface VorsorgebildModel {
     pensionCapital: number | null;
     pillar3aBalance: number | null;
     pillar3aContribution: number | null;
-    /** Pax and external life/pension policies on file. */
+    /** Pax and external 3rd-pillar policies on file (a pension-fund entry is not one). */
     policies: number;
   };
 }

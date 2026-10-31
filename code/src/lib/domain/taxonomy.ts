@@ -165,6 +165,14 @@ export const LIFE_AND_PENSION_CATEGORIES: readonly PolicyCategory[] = [
   "pension_fund",
 ];
 
+/**
+ * Private (3rd-pillar) life and pension policies: what counts as "a policy" next to the 3a
+ * figures and what Pax can offer to replace. A pension-fund entry (2nd pillar, e.g. from a
+ * pension certificate) is never one of them.
+ */
+export const THIRD_PILLAR_CATEGORIES: readonly PolicyCategory[] =
+  LIFE_AND_PENSION_CATEGORIES.filter((c) => c !== "pension_fund");
+
 export const POLICY_STATUSES = ["offer", "active", "ended", "cancelled"] as const;
 export type PolicyStatus = (typeof POLICY_STATUSES)[number];
 
