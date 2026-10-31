@@ -13,7 +13,8 @@
     "check": "pnpm typecheck && pnpm lint && pnpm test",
     "db:generate": "drizzle-kit generate",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
-    "db:reset": "rm -rf data/pax.db data/pax.db-* && pnpm db:seed"
+    "db:reset": "rm -rf data/pax.db data/pax.db-* && pnpm db:seed",
+    "converse": "tsx --require=./scripts/server-only-stub.cjs --env-file=.env.local scripts/converse.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.92",
