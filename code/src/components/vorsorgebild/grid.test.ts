@@ -1,6 +1,13 @@
 import { describe, expect, it } from "vitest";
 import type { IncomeBreakdown } from "@/lib/advisor/types";
-import { buildSquares, MAX_SQUARES, sourceSquareCounts, squaresFor, summarize } from "./grid";
+import {
+  buildSquares,
+  MAX_SQUARES,
+  sourceSquareCounts,
+  squaresFor,
+  summarize,
+  targetBreakdown,
+} from "./grid";
 
 function breakdown(values: Partial<IncomeBreakdown>): IncomeBreakdown {
   return {
@@ -77,5 +84,20 @@ describe("summarize", () => {
 
   it("treats a zero need as fully covered", () => {
     expect(summarize(breakdown({})).coverage).toBe(1);
+  });
+});
+
+describe("targetBreakdown", () => {
+  it("draws 80% of today's income as open squares", () => {
+    const target = targetBreakdown(100000);
+    expect(target?.need).toBeCloseTo(80000);
+    const squares = target ? buildSquares(target) : [];
+    expect(squares).toHaveLength(13);
+    expect(squares.every((s) => s.kind === "gap")).toBe(true);
+  });
+
+  it("has nothing to draw without an income", () => {
+    expect(targetBreakdown(null)).toBeNull();
+    expect(targetBreakdown(0)).toBeNull();
   });
 });

@@ -1,3 +1,4 @@
+import { NEED_PERCENT } from "@/lib/advisor/logismata/mapping";
 import type { IncomeBreakdown } from "@/lib/advisor/types";
 
 /**
@@ -90,4 +91,27 @@ export function summarize(breakdown: IncomeBreakdown): GridSummary {
 /** Monthly CHF rounded to whole francs for display. */
 export function monthlyChf(annual: number): number {
   return Math.round(monthly(annual));
+}
+
+/**
+ * Before the first calculation: the retirement need (the share of today's gross income the
+ * calculation uses) drawn as open squares, so the customer sees the frame that will fill up
+ * instead of example figures. Null without a known income.
+ */
+export function targetBreakdown(incomeToday: number | null): IncomeBreakdown | null {
+  if (incomeToday === null || incomeToday <= 0) return null;
+  const need = (incomeToday * NEED_PERCENT) / 100;
+  return {
+    grossIncome: incomeToday,
+    need,
+    pillar1: 0,
+    pillar2: 0,
+    other: 0,
+    partner: 0,
+    policies: 0,
+    total: 0,
+    gap: need,
+    surplus: 0,
+    capitalGap: 0,
+  };
 }

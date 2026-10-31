@@ -4,8 +4,8 @@ import { ChevronUp, X } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRef } from "react";
 import type { VorsorgebildModel } from "@/lib/advisor/types";
-import { formatChf } from "@/lib/utils";
-import { monthlyChf } from "./grid";
+import { cn, formatChf } from "@/lib/utils";
+import { monthlyChf, targetBreakdown } from "./grid";
 import { SquareGrid } from "./square-grid";
 import { pickDefault, VorsorgebildPanel } from "./vorsorgebild-panel";
 
@@ -17,6 +17,8 @@ export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
   const kind = pickDefault(model);
   const scenario = model.scenarios.find((s) => s.kind === kind);
   const known = model.facts.filter((f) => f.known).length;
+  // Before the first calculation the strip shows the open need, like the panel.
+  const squares = scenario?.breakdown ?? targetBreakdown(model.pillars.incomeToday);
 
   const summary = scenario
     ? scenario.breakdown.gap > 0
@@ -40,20 +42,24 @@ export function VorsorgebildStrip({ model }: { model: VorsorgebildModel }) {
             <span className="text-paragraph-xs font-bold">{t("title")}</span>
             <span className="truncate text-paragraph-xs text-fg-muted">{summary}</span>
           </span>
-          {scenario ? (
+          {squares ? (
             <SquareGrid
-              key={scenario.calculatedAt}
-              breakdown={scenario.breakdown}
+              key={scenario?.calculatedAt ?? squares.need}
+              breakdown={squares}
               size="xs"
               animate
               className="max-h-[22px] overflow-hidden"
             />
           ) : (
-            <span aria-hidden className="flex gap-0.5">
+            // Facts are circles: squares always stand for money in the Vorsorgebild.
+            <span aria-hidden className="flex gap-1">
               {model.facts.map((fact) => (
                 <span
                   key={fact.key}
-                  className={fact.known ? "size-2 bg-pax-purple" : "size-2 border border-gray-4"}
+                  className={cn(
+                    "size-2 rounded-full",
+                    fact.known ? "bg-pax-purple" : "border border-gray-4",
+                  )}
                 />
               ))}
             </span>

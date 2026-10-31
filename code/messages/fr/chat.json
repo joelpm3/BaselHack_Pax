@@ -32,7 +32,7 @@
   },
   "picture": {
     "title": "Votre image de prévoyance",
-    "unit": "= CHF 500 par mois",
+    "unit": "1 carré = CHF 500 par mois",
     "open": "Ouvrir l'image de prévoyance",
     "close": "Fermer",
     "need": "Vos besoins",
@@ -67,12 +67,16 @@
     },
     "building": {
       "title": "Votre image prend forme",
-      "known": "{count} informations sur {total} connues",
       "factKnown": "connu",
       "factOpen": "encore ouvert",
       "missing": "Il me manque encore : {fields}.",
       "calculating": "Toutes les informations nécessaires sont là. Je calcule maintenant votre image de prévoyance.",
-      "unavailable": "Toutes les informations nécessaires sont là, mais le calcul n'est pas disponible pour le moment. Je réessaierai pendant l'entretien."
+      "unavailable": "Toutes les informations nécessaires sont là, mais le calcul n'est pas disponible pour le moment. Je réessaierai pendant l'entretien.",
+      "target": "Votre besoin à la retraite : environ {amount} par mois",
+      "targetNote": "{percent} % de votre revenu brut actuel. La part couverte par l'AVS, la caisse de pension et le 3e pilier reste encore ouverte.",
+      "situations": "Votre image par situation",
+      "situationPending": "Calcul en cours",
+      "factsTitle": "Vos informations ({count} sur {total})"
     },
     "facts": {
       "age": "Âge",
@@ -91,7 +95,7 @@
       "p1Status": "Prévoyance de base légale pour toutes les personnes qui vivent et travaillent en Suisse",
       "p2": "2e pilier : caisse de pension",
       "p2Yes": "Assuré·e",
-      "p2No": "Pas de caisse de pension",
+      "p2No": "Pas de caisse de pension propre",
       "p2Capital": "Avoir {amount}",
       "p3": "3e pilier : prévoyance privée",
       "p3Balance": "Avoir 3a {amount}",
