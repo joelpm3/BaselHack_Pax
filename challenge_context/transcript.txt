@@ -1,0 +1,314 @@
+Baselhack Hackathon – Transkript der Aufnahmen 2, 3 und 4 (kombinierte Fassung)
+=========================================================================
+
+Entstehung: Drei Spracherkennungsmodelle, Schweizerdeutsch -> Hochdeutsch:
+  - Nemotron 3.5 Transcribe, Swiss-German-Fine-Tune v4-mid (Nebius B200, API mit Wiederholungs-Retry)
+  - Cohere Transcribe, Swiss-German-Fine-Tune (RTX 3070)
+  - Parakeet TDT 0.6B v3, Swiss-German-Fine-Tune (RTX 3070)
+Grundlage ist Nemotron (beste Modell-WER, Zeitmarken). Jede Passage wurde mit Cohere und Parakeet
+abgeglichen; wo zwei Modelle plausibel übereinstimmen, gilt deren Lesart. Zeitmarken [m:ss] sind
+Segmentanfänge (ca. 20–30 s). Nicht gegen das Audio geprüft.
+
+Konventionen:
+  –            Sprecherwechsel (Sprecher nicht identifiziert)
+  [unklar]     unverständlich bzw. alle drei Modelle widersprechen sich
+  [x?]         wahrscheinliche Lesart, unsicher
+  [...]        Passage ausgelassen (Nebengespräch / Lärm, kein verwertbarer Inhalt)
+
+Die Aufnahmen sind Raumaufnahmen mit mehreren Sprechern, Überlappungen und Lärm; Passagen mit
+Durcheinanderreden sind lückenhaft.
+
+
+#############################################################################
+AUFNAHME 2 (5:47) – Teamdiskussion: Idee, Observability, Regulatorik
+#############################################################################
+
+[0:00] – Direkt in die Kamera.
+– Ich denke, Observability wäre auch noch interessant, oder? Wie er das gerne überwachen würde.
+Also, ob sie die Leads dort drin haben wollen. Dass du mit deinem Bot chattest und du nachher als
+Mitarbeiter die einzelnen Kunden siehst.
+
+[0:26] Du siehst schon eigentlich, was sie für Wissen und was sie für Wünsche haben. Und du hast ein
+viel genaueres Profil vom User und kannst dann mit dem zum Kunden gehen und anknüpfen.
+Wenn sie sagen, sie wollen etwas [unklar] – sie wollen das Ganze. Also ich denke, das Beste für sie:
+Sie wollen wahrscheinlich das Ganze, oder? Sie haben ihre Sales-Pipeline irgendwie.
+
+[0:56] Und das Ding macht es, und du hast irgendwie das UI, das du gesehen hast. Das wäre doch nice
+als Pitch. Wir machen einfach so eine Simulation mit hundert Leuten gleichzeitig.
+Was ist für ein Unternehmen relevant? Gewinn machen, oder? Und keine High-Risk-Kunden. Das wäre
+vielleicht noch interessant. Wie wichtig ist das?
+
+[1:19] [unklar] Was auch nachher noch passiert, wäre auch noch relevant: Mit der Zeit siehst du
+wahrscheinlich, wie oft du einem Kunden etwas verkauft hast, das nachher trotzdem [invalid?] wird
+oder was auch immer, und dann halt kostet.
+
+[1:44] Ich glaube, das ist etwas, das sie wollen, aber [unklar].
+– Ja.
+– Es ist schon etwas, das eine Gesellschaft nicht so gut durchschaut.
+– Gut, und vor allem macht das ja die API im Hintergrund, oder? Sie berechnet ja wahrscheinlich den
+Preis. Ich glaube, die API ist [unklar]. Ich habe es gecheckt, aber ich weiss es nicht.
+
+[2:12] – [unklar] Und ob es allgemein so eine Beratung ist [unklar]. Ich weiss nicht, ob es eine
+[FAQ?]-App gibt oder einfach etwas, wo sie konstant Fragen stellen können: «Hey, ich habe das und
+das – bin ich versichert? Bin ich abgedeckt?» Mit den Daten, die sie uns jetzt geben, habe ich eher
+das Gefühl, es ist so der erste Entry:
+
+[2:36] die Berechnung der Sachen, der Pakete, der einzelnen Angebote, die sie haben. Das spricht für
+mich eher für die erste Akquise. Die Frage ist, ob man dann das ganze Ding abdecken kann. Ich
+glaube, wir müssen uns schon auf einen Punkt fokussieren. Wir können nicht alles bauen.
+
+[2:57] Akquise; fragen, ob sie das Produkt schon haben, oder wenn sich irgendetwas in der
+Lebenssituation ändert. Oder wir können einfach alles...
+– [...] Das Recording ist gefuckt.
+– Classified.
+
+[3:17] – Nein, also wenn wir die Sales, also die Beratung machen, und die Beratung, wenn sie
+onboarded sind – das meine ich hier mehr [unklar].
+– Ja, dass eigentlich die ganze Abdeckung über das Tool laufen kann.
+– Es ist einfach eine Plattform mit verschiedenen Channels. Channel 1 ist wie so...
+
+[3:44] [Nebengespräch: «Kennst du das? – Nein. – Willst du spielen? – Nein, nein, nein. – Nein,
+jetzt nicht. – Ich zeig's dir. – Nein, verpiss dich, Alter.»]
+
+[4:13] – Wo waren wir?
+[unklar: Gespräch über die letzten Tage/Wochen, «Ralf», «jetzt ist es wieder sehr schwierig»]
+
+[4:35] – Der ist ein Baby.
+– Ja, so Regulatorik und so – ich weiss nicht, aber das können wir vielleicht einfach recherchieren.
+– Was meinst du mit Regulatorik?
+– Ja, was man darf und was nicht. Darf man wirklich End-to-End-Beratung anbieten? Muss das nochmals
+von Menschen verifiziert werden?
+– Ja, okay. Aber dann haben wir schon ein paar Punkte, die wir mit ihnen [klären können?].
+
+[5:04] – Das Erste ist: Was ist der Channel? Chat, Call oder E-Mail? Geht es kurzfristig nur um die
+Erstberatung mit dem Produkt oder um die ganze Zeit beim Kunden?
+– Ja.
+– Gibt es irgendetwas, wo sie Probleme haben? Kennt ihr schon irgendeine Lösung? Gibt es
+irgendwelche Richtlinien, die man befolgen muss?
+
+[5:30] – Ja. Weil ich vorhin schon geschaut habe: Man muss dann auch einen Disclaimer haben, dass
+die Preise, die angegeben werden, [unklar].
+– Ja, genau.
+
+
+#############################################################################
+AUFNAHME 3 (11:25) – Fragerunde mit dem Case Provider (Versicherung)
+#############################################################################
+
+[0:00] – [unklar] und der Kunde wird dann über einen Voice-Chatbot beraten? Habt ihr euch schon
+Gedanken dazu gemacht? Habt ihr schon etwas in diesem Bereich?
+– Grundsätzlich ist die Form frei. Natürlich ist ein Chat-Interface naheliegend, aber auch Voice
+oder Conversation – das wäre quasi offen.
+
+[0:26] Es kann alternativ auch ganz klassisch ein Formular-Input sein, wo du Sachen abfragst. Ich
+persönlich habe keine grosse Präferenz [unklar]. Es kann auch eine Kombination sein, es kann auch
+sehr spielerisch sein, wo man sagt, das motiviert, die Angaben zu machen, dann ist es attraktiver.
+
+[0:52] – Für uns ist auch noch die Frage, was das Hauptziel ist: eine effizientere Gestaltung des
+ganzen Prozesses, oder ist es auch, mehr Umsatz zu machen, weil man mit mehr Leuten in Kontakt
+treten kann, um ein Produkt zu verkaufen? Wenn man jetzt auswählen müsste, was wäre davon
+wichtiger?
+
+[1:20] – Ich würde den Kunden ins Zentrum stellen und die Bedürfnisse des Kunden, das heisst, seine
+Vorsorgesituation verstehen. Ich meine, wer jung ist, denkt noch nicht so viel an die Rente, aber ich
+muss mir vorstellen: Wenn man das erste Mal einen Job annimmt oder das erste Mal Kinder bekommt,
+dann stellt sich plötzlich die Frage:
+
+[1:43] Ist das Kind abgesichert? Wie macht man die Analyse? Es gibt auch Simulationen: Was ist, wenn
+mir etwas passiert? Was ist, wenn meinem Partner etwas passiert?
+– Also mehr in diese Richtung?
+
+[2:06] – Genau. [unklar] Ich würde sagen, eher Sales [unklar] – und dann sagen: Okay, jetzt haben
+wir das passende Produkt.
+
+[2:28] Also wirklich den Kunden beraten, mehrere Optionen aufzeigen, seine Situation schildern, und
+dann: Okay, das Produkt ist gut für deine Situation. Dass der Kunde dann wirklich entscheiden kann
+und sagt: «Ich will dieses Produkt, weil es mich überzeugt.»
+– Also die Beratung im Fokus.
+– Genau, die Beratung im Fokus.
+
+[2:53] Und es kann auch wirklich vorgelagert sein, sogar noch stärker vorgelagert. Die Beratung im
+Sinne von Szenarien: Was passiert, wenn ich [unklar] in die Säule 3a einzahle? Oder ich möchte ein
+Haus, Wohneigentum – was hat das für Auswirkungen auf meine Rente, wenn ich einen Vorbezug aus der
+3a mache?
+
+[3:17] Und genau, das mit den Produkten ist ein bisschen der Bonus-Teil. [unklar] Ich habe zwar die
+Links bereitgestellt, mit den Offert-Tools, aber das ist dann schon sehr tief in der Materie.
+
+[3:46] – Ich habe gerade zwei Situationen im Kopf: Einmal ein Neukunde, der eine Beratung möchte,
+aber du als Versicherung hast noch gar keine Informationen über ihn. Und die zweite Situation, wo
+der Kunde schon Produkte der Versicherung bezieht, aber noch Nachfragen hat: Reichen die Produkte,
+die ich habe, oder muss ich etwas dazukaufen?
+
+[4:12] – Das ist ein sehr guter Punkt. [unklar] – nur um es in den Kontext zu setzen.
+
+[4:35] Was du ansprichst, ist dann eigentlich weiter hinten in der Customer Journey: Im besten
+Fall hast du eine Police, dann kommt ein Lebensereignis, und dann merkt man: Vielleicht ist das
+Produkt nicht mehr passend, oder ich muss die Abdeckung anpassen, wenn ich jetzt Kinder habe. Ich
+würde eher auf das Erste fokussieren.
+
+[4:59] – [unklar] Und wie wichtig sind regulatorische Sachen? Also wenn wir jetzt zum Beispiel
+OpenAI brauchen würden – wie fest zählt das in die Bewertung rein,
+
+[5:19] ob man ein Modell in der EU nimmt oder irgendwie self-hosted? Wie wichtig ist das für die
+Bewertung?
+– Ich würde sagen, das ist nicht an grosser Stelle, es ist ein Hackathon. Wenn man das wirklich
+produktiv tragen müsste, müsste man sich dessen bewusst sein. Ich glaube, es ist gut, wenn man sich
+bewusst ist, dass das Challenges sind.
+
+[5:42] [unklar] Wenn man das irgendwie festhalten kann, ist das gut.
+
+[6:07] – Ähnlich wie das, was [Name unklar] vorher gesagt hat: Wir müssen schauen, dass die
+Antworten richtig sind, weil man eine Beratung machen möchte, bei der der Kunde richtig beraten
+wird. Das ist auch die grosse Challenge. [unklar] Das ist eher wichtig.
+
+[6:35] – Die Idee ist, dass der digitale Berater eigentlich genauer ist als der Mensch: analytisch,
+ohne Voreingenommenheit bei dem, was er verkauft, sondern einfach neutral. [unklar]
+
+[7:01] – Ja, dass man den Kontext kennt.
+– Genau.
+– Ich habe eine Frage aus eurer Sicht: Was wäre ein Produkt, das für euch gut ist und nicht nur für
+den Kunden? Welche Ansprüche habt ihr zum Beispiel bezüglich Überwachung?
+
+[7:30] Was braucht ihr, damit ihr sehen könnt, was das System macht, was die Outputs sind, was es
+zum Beispiel mit dem Kunden schreibt oder redet?
+– Logging.
+– Genau. Übersicht auch.
+– Ja, genau. Ich würde sagen, ich bin da nicht im Kern [zuständig?]. Ich denke, vor allem aus
+unserer Sicht wäre es cool, wenn du eine Art Logging hast:
+
+[7:57] Was sind zum Beispiel die häufigsten Fragen, die kommen? Dass wir auch etwas lernen über die
+Ideen und die Pain-Points. Natürlich auch ein bisschen weiter denken, in Richtung Sales.
+
+[8:18] Wie viele nutzen das? Wie wird das kategorisiert? Das ist auch spannend.
+– Es sind sehr viele verschiedene Sachen in einem Werk zusammengefasst.
+– Ja, es ist relativ umfassend.
+
+[8:44] Unser Hintergedanke war: Heute sind wir in einer Welt, in der KI relativ viel kann.
+Deshalb ist da eine gewisse Komplexität. Uns ist aber schon bewusst, dass es trotzdem einen Fokus
+braucht.
+
+[9:12] [unklar: Produktkombinationen eins zu eins umsetzen]
+– Habt ihr jetzt schon etwas im Einsatz in diese Richtung?
+– Du kannst dir vorstellen: Wir haben eigentlich das, was auf der Webseite drauf ist, einzelne
+Rechner. Das ist eigentlich das, was wir heute machen.
+
+[9:42] Steuerrechner, Vorsorgerechner, Lückenrechner. Klassisch: ein Formular, das man ausfüllt, und
+dann sieht man das Resultat. Oder dass du siehst, wie sich deine Prämien entwickeln, deine
+Sparquote [?] und solche Sachen.
+
+[10:07] [unklar] Eine Art Conversation mit AI. Es wäre cool, wenn man die Rechner einbaut: Du gibst
+als Kunde Informationen, das Tool wird ausgefüllt, und das Resultat siehst du dann direkt im Chat,
+dass du alles zusammen hast.
+– Das sind so die spannenden Ansätze.
+
+[10:36] – Das ist eher ein Bonus. In meiner Vorstellung [ist es heikel?], wenn ein Chatbot die Daten
+direkt ins Modell gibt: Namen oder persönliche Daten will man nicht unbedingt direkt ins Modell
+geben.
+
+[10:58] – Gut. Wir haben ganz viele Ideen im Kopf, jetzt müssen wir sortieren.
+– [unklar] Ah, ich bin halt Familienvater.
+– Okay, cool. Super, danke fürs Beantworten der Fragen.
+– Danke. Tschüss.
+
+
+#############################################################################
+AUFNAHME 4 (7:18) – Teamdiskussion: Konzept, Benchmark, Anonymisierung, Demo, Pitch
+#############################################################################
+
+[0:00] – Also: Generative UI. Neukunden als Hauptfokus, aber auch Bestandskunden beraten. Aus den
+Conversations Profile erstellen, die die Kundenberater sehen. Und auch eine allgemeine Übersicht,
+was aktuelle Themen sind. Leads:
+
+[0:29] Wenn zum Beispiel ein Kunde viel über ein Produkt redet, dass das ein Lead ist und man ihn
+darauf ansprechen kann. Also Recommendations zum Anrufen.
+– Benchmark meine ich einfach, weil das, was er gesagt hat, wichtig ist: dass die Beratung auch
+richtig ist.
+– Das ist mega schwierig zu benchmarken. [unklar]
+
+[0:53] – Ja, okay, fair enough. Aber ich habe das Gefühl, da müssen wir dann überlegen wegen dem
+Pitch, oder? Wie viele Sachen willst du in einen Pitch von drei Minuten packen? Das kann ja
+eigentlich nur eine Zahl sein, oder? Wir können sagen: Wir haben 100'000 Tests gemacht und
+verifiziert, dass in 99 % der Fälle die richtigen Produkte ausgewählt wurden.
+
+[1:15] Aber dann müssen wir auch wissen, wie wir das machen.
+– Ich glaube, es kann ein kleiner Teil sein, auf einer Folie oder so. Aber wahrscheinlich ein
+Supporting-Argument. Wir müssen den Punkt aufgreifen, dass wir uns Gedanken dazu gemacht haben, weil
+das eine Frage sein wird, hundertprozentig: Was macht ihr bei falscher Beratung?
+
+[1:44] – «Hey, wir haben einen Benchmark.»
+– Was ich mir auch noch gedacht habe, ist eine Anonymisierung der Daten. Also dass du in der Anfrage
+gewisse Sachen rausnimmst, Namen.
+– Ganz ehrlich, ich würde sagen:
+
+[2:09] Wir sagen einfach, es läuft alles lokal, wenn wir ein Open-Source-Modell nehmen, und sagen
+einfach: Ja, man müsste vier DGX Spark kaufen. [unklar]
+– Ich glaube, Anonymisierung ist nicht so schwierig.
+– Ich glaube, Anonymisierung zu 100 % richtig zu machen, ist schwierig. Aber nur schon in die
+Richtung zu gehen, ist, glaube ich,
+
+[2:37] ein richtiger Approach.
+– Ich bin nicht so ein Fan davon. Du versuchst etwas, das du nicht zu 100 % sicherstellen kannst.
+Es gibt immer irgendwelche Sachen, und du willst es zum Teil auch gar nicht: Es kann relevant sein,
+wie alt die Person ist, das genaue Alter zum Beispiel. Das kannst du drin lassen.
+– Ich würde zum Beispiel sagen: «Hey, du gibst deinen Namen ein –»
+
+[3:02] – Der Name ist egal.
+– Ja, der Name ist egal. Aber wenn du zum Beispiel am Anfang sagst: «Lade deine Dokumente hoch, welche
+Produkte du schon hast, damit wir dich besser beraten können», dann müsstest du ja alles
+rausnehmen. Von daher... ja, keine Ahnung.
+– Ich habe etwas kleiner gedacht. Ich habe gedacht: «Hallo, ich bin [Florian/Flurin?].»
+
+[3:30] – Aha, ja, dann schon. Aber ich denke, das Nice ist, wenn es einfach zu machen ist.
+– Okay, fair. [unklar] Und wir sagen, wir sind ein lokales Modell.
+– Ich glaube, eine Voice-Demo wäre halt immer geil.
+– Eine Voice-Demo wäre halt immer geil, in meinen Augen.
+
+[3:51] – Voice-to-Voice?
+– Ja, das wäre am nicesten. Das Zweite wäre: Du kannst einfach nur per Voice reden, und es antwortet
+im UI.
+– Und das versteht Schweizerdeutsch?
+– Ja.
+– Das ist eine Challenge.
+– Dann kommt halt das Generative UI oder einfach die Sprache.
+
+[4:15] Ich meine, das ist heutzutage so. [unklar]
+– Ich glaube, für die Beratung an sich ist es schon wichtig, dass du sprechen kannst, aber was
+antwortet, ist Text oder das UI. Weil wenn ich mit dir rede und dir erkläre, wie du versichert bist,
+verstehst du das gar nicht.
+– Ja, verstehe ich.
+– Oder vielleicht wäre beides zusammen gut.
+– Ja, beides zusammen. Ich denke, es hat so einen Button zum Reden.
+
+[4:44] Und ich glaube, dann ist die coole Demo, dass man halt Schweizerdeutsch spricht.
+– Okay, fair enough. Ja, dann gehen wir für den Pitch nachher [die Punkte?] durch. Was muss ich
+machen? [unklar]
+– Doch, doch, unterbrich mich. Es fühlt sich an, als ob ihr von den Ideen her startet. Ich bin mehr
+beim Jury-Pitch.
+
+[5:14] Wir haben gar nicht mit ihm gesprochen.
+– Mit der Jury oder mit dem Case Provider?
+– Mit dem Case Provider.
+– Aber der ist ja eigentlich auch in der Jury.
+– [unklar] Ja, oder? Wenn ich jetzt in der Jury wäre
+
+[5:37] und der Typ, der es nachher braucht, sagt, es sei ultra geil, dann würde ich nicht sagen:
+«Nein, finde ich scheisse.»
+– Soll ich euch schnell meine Slides zeigen, die ich letztes Mal gezeigt habe?
+– Ja.
+– Wo ist die Liste? [...]
+
+[5:58] [Nebengespräch, grösstenteils unverständlich: «Bro, warte», «Freehand – nur mit Gedanken»,
+«Hast du das schon mal gemacht? – Ja.»]
+
+[6:26] – Ja, eigentlich haben wir schon alles. Ich glaube, das Geile wäre so eine Demo aus seiner
+Sicht, aus der Sicht des Case Providers: Er redet ja am Schluss nicht mit dem Produkt, sondern für
+ihn ist relevant, was er im Hintergrund sieht, was die Leute mit dem Bot reden. Ich glaube, es wäre
+eine geile Demo, mit LLMs die Dinge in Realtime zu zeigen: Wir haben jetzt 20 Conversations
+gleichzeitig,
+
+[6:49] da passieren Status-Updates. Ich kann mir vorstellen, dass das noch nice ist.
+– Ja, stimmt. Man kann einfach alles bauen lassen.
+– So ein Dashboard, wo die ganzen Chats klassifiziert werden.
+– Das stimmt schon, mit diesen Fragen und so, das wäre sicher relevant. So Data-Mining. Weil, ich
+meine, Versicherungen sind ja sehr data-driven.

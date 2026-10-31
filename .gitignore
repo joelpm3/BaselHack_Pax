@@ -1,0 +1,4 @@
+.state/
+transcripts/
+__pycache__/
+.claude/worktrees/

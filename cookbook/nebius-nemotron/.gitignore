@@ -1,0 +1,12 @@
+# Secrets and per-run state never belong in git; the cookbook keeps them in the repo's .state/.
+*authkey*
+*run-token*
+*.key
+*.pem
+.env
+*.json.state
+known_hosts
+kernel-cache/
+*.tar
+transcripts/
+__pycache__/
