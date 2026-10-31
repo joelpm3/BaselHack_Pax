@@ -25,7 +25,7 @@ export default function LoginPage({ params }: PageProps<"/[locale]/firma/login">
   return (
     <div className="grid min-h-dvh text-sm lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
       <section className="flex flex-col justify-between gap-10 bg-deep-purple px-6 py-8 text-white lg:px-12 lg:py-12">
-        <PaxLogo variant="negative" className="h-7" />
+        <PaxLogo variant="negative" className="h-7 self-start" />
         <div className="grid max-w-md gap-4">
           <h1 className="text-[2rem] leading-tight font-bold text-pax-green lg:text-[2.75rem]">
             {t("headline")}
