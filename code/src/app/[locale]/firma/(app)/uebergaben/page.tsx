@@ -6,7 +6,7 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { Suspense, use } from "react";
 import { AssignSelect, HandoverStatusSelect } from "@/components/firma/controls";
 import { CustomerLink, customerHref } from "@/components/firma/customer-link";
-import { KindDefinition, KindMark } from "@/components/firma/kind-mark";
+import { KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh } from "@/components/firma/live-events";
 import {
   EmptyState,
@@ -39,6 +39,7 @@ export default function HandoversPage({
 }: PageProps<"/[locale]/firma/uebergaben">) {
   setRequestLocale(use(params).locale);
   const t = useTranslations("firma.handovers");
+  const tKinds = useTranslations("firmaCustomers.kinds");
   return (
     <>
       <PageHeader
@@ -50,7 +51,8 @@ export default function HandoversPage({
         }
         description={
           <>
-            {t("description")} <KindDefinition kind="handover" className="mt-1" />
+            {t("description")}
+            <span className="mt-1 block">{tKinds("handover.contrast")}</span>
           </>
         }
       />

@@ -1,14 +1,15 @@
 {
   "nav": {
-    "customers": "Clientes et clients",
+    "customers": "Clientèle",
     "leadsHint": "Opportunités de vente",
-    "handoversHint": "Veut parler à une personne"
+    "handoversHint": "Veut une personne"
   },
   "kinds": {
     "handover": {
       "name": "Transfert",
       "definition": "La personne veut parler à un être humain, ou une règle de l’entreprise exige un spécialiste. À traiter en premier.",
-      "alsoOpen": "Transfert ouvert"
+      "alsoOpen": "Transfert ouvert",
+      "contrast": "Les opportunités de vente sans demande de contact se trouvent sous Leads."
     },
     "lead": {
       "name": "Lead",

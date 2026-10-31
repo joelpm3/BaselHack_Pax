@@ -152,7 +152,7 @@ async function CustomerContent({
               .join(", ")}
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">
           <Fact
             href="#handovers"
             kind="handover"
@@ -199,12 +199,10 @@ async function CustomerContent({
           <Section id="conversations">
             <ConversationsSection detail={detail} locale={locale} />
           </Section>
-          <Section id="offers">
-            <div className="grid gap-6">
-              <RecommendationsSection detail={detail} locale={locale} />
-              <ApplicationsSection detail={detail} locale={locale} />
-            </div>
-          </Section>
+          {detail.recommendations.length > 0 ? (
+            <RecommendationsSection detail={detail} locale={locale} />
+          ) : null}
+          <ApplicationsSection detail={detail} locale={locale} />
           <Section id="timeline">
             <TimelineSection detail={detail} />
           </Section>

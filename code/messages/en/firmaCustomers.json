@@ -2,13 +2,14 @@
   "nav": {
     "customers": "Customers",
     "leadsHint": "Sales opportunities",
-    "handoversHint": "Wants to talk to a person"
+    "handoversHint": "Wants a person"
   },
   "kinds": {
     "handover": {
       "name": "Handover",
       "definition": "The person wants to talk to a human, or a company rule requires a specialist. Handle these first.",
-      "alsoOpen": "Handover open"
+      "alsoOpen": "Handover open",
+      "contrast": "Sales opportunities without a request for contact are under Leads."
     },
     "lead": {
       "name": "Lead",

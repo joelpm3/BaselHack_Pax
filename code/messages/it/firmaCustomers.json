@@ -1,14 +1,15 @@
 {
   "nav": {
-    "customers": "Clienti",
+    "customers": "Clientela",
     "leadsHint": "Opportunità di vendita",
-    "handoversHint": "Vuole parlare con una persona"
+    "handoversHint": "Vuole una persona"
   },
   "kinds": {
     "handover": {
       "name": "Passaggio",
       "definition": "La persona vuole parlare con un essere umano, oppure una regola aziendale richiede uno specialista. Da gestire per primi.",
-      "alsoOpen": "Passaggio aperto"
+      "alsoOpen": "Passaggio aperto",
+      "contrast": "Le opportunità di vendita senza richiesta di contatto si trovano sotto Lead."
     },
     "lead": {
       "name": "Lead",

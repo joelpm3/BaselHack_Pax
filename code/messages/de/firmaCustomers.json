@@ -1,14 +1,15 @@
 {
   "nav": {
-    "customers": "Kundinnen und Kunden",
+    "customers": "Kundschaft",
     "leadsHint": "Verkaufschancen",
-    "handoversHint": "Will einen Menschen sprechen"
+    "handoversHint": "Will einen Menschen"
   },
   "kinds": {
     "handover": {
       "name": "Übergabe",
       "definition": "Die Person will mit einem Menschen sprechen oder eine Firmenregel verlangt eine Fachperson. Zuerst bearbeiten.",
-      "alsoOpen": "Übergabe offen"
+      "alsoOpen": "Übergabe offen",
+      "contrast": "Verkaufschancen ohne Kontaktwunsch stehen unter Leads."
     },
     "lead": {
       "name": "Lead",

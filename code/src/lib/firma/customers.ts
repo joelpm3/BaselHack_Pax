@@ -77,7 +77,7 @@ export function getCustomerDetail(id: string) {
       isSimulated: c.isSimulated,
       createdAt: c.createdAt,
       lastMessageAt: c.lastMessageAt,
-      messageCount: sql<number>`(select count(*) from ${schema.messages} m where m.conversation_id = ${c.id})`,
+      messageCount: c.messageCount,
     })
     .from(c)
     .where(eq(c.customerId, id))

@@ -67,7 +67,7 @@ async function CustomersContent({
     <PageBody className="grid gap-5">
       <LiveRefresh types={["conversation", "lead", "handover"]} intervalMs={3000} />
       <div className="flex flex-wrap items-end gap-3">
-        <search className="min-w-0 flex-1 sm:max-w-md">
+        <search className="w-full min-w-0 sm:w-auto sm:max-w-md sm:flex-1">
           <form className="flex items-center gap-2">
             {scope === "all" ? null : <input type="hidden" name="scope" value={scope} />}
             <label htmlFor="customer-search" className="sr-only">
@@ -102,7 +102,7 @@ async function CustomersContent({
             <li key={c.customerId}>
               <Link
                 href={customerHref(c.customerId)}
-                className="grid grid-cols-2 items-center gap-x-4 gap-y-2 px-4 py-3 hover:bg-gray-1 md:grid-cols-[minmax(0,1fr)_7rem_9rem_10rem_8rem]"
+                className="grid grid-cols-2 items-center gap-x-4 gap-y-2 px-4 py-3 hover:bg-gray-1 md:grid-cols-[minmax(0,1fr)_7rem_10.5rem_10rem_8rem]"
               >
                 <span className="col-span-2 grid min-w-0 gap-0.5 md:col-span-1">
                   <span className="flex min-w-0 items-center gap-2">
