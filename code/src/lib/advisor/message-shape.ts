@@ -17,7 +17,7 @@ export function endsWithQuestion(text: string): boolean {
 }
 
 const ANNOUNCES =
-  /(brauche ich noch|fehlt (mir )?noch|benötige ich noch|folgende[n]? (Punkte|Fragen|Angaben)|il me faut encore|il me manque|j'ai encore besoin|mi serve ancora|mi manca|I still need)/i;
+  /((brauche|benötige) ich noch|ich (brauche|benötige) noch|fehlt (mir )?noch|folgende[n]? (Punkte|Fragen|Angaben)|il me faut encore|il me manque|j'ai encore besoin|mi serve ancora|mi manca|I still need)/i;
 
 /** The message stops where it announced more: a colon, an ellipsis, or "brauche ich noch …". */
 export function isDangling(text: string): boolean {

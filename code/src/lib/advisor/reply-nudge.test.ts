@@ -62,6 +62,17 @@ describe("readyToWait", () => {
       readyToWait([step("Beim Rückruf geht es um diese Punkte:", "askForFeedback")], WAITING),
     ).toBe(false);
     expect(readyToWait([step("Kurz notiert.", "updateProfile")], WAITING)).toBe(false);
+    expect(
+      readyToWait(
+        [
+          step(
+            "Ich habe Ihren Wohnort geändert. Ich brauche noch eine letzte Angabe.",
+            "suggestReplies",
+          ),
+        ],
+        WAITING,
+      ),
+    ).toBe(false);
   });
 });
 
