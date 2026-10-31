@@ -97,7 +97,7 @@ function HandoverBody({ toolCallId, data }: { toolCallId: string; data: Handover
               type="tel"
               autoComplete="tel"
               required
-              pattern="^\+?[0-9 ()\-]{6,20}$"
+              pattern="^\+?[0-9 \(\)\-]{6,20}$"
               placeholder="+41 79 123 45 67"
             />
           </div>
