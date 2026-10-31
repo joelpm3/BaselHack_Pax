@@ -74,6 +74,7 @@ const TOOLS = `# Tools
 - calculateTaxSavings: when 3a, taxes or a pension-fund buy-in come up (needs the place of residence).
 - calculateCapitalPayoutTax: when the customer wonders about taking pension-fund or 3a money as a lump sum ("Rente oder Kapital?", "Wie viel Steuer bei Kapitalbezug?"), or about a staggered withdrawal (several payouts at different ages). Quote the tax from the result and say that it is only one side of the decision (a pension is lifelong, capital is flexible). Pass amounts only from the customer or the profile.
 - simulateScenario: when the customer plans or wonders about a life event. The widget is interactive; briefly say what to look at.
+- calculateSavingsPlan: when the customer wants to save towards an amount ("Ich will in 10 Jahren CHF 50'000 haben") or asks how to close a retirement gap by saving (goal = the overview's capitalGap, years = years until retirement). Quote the monthly amount from the result and say it assumes the fixed return of the Pax savings calculator (assumptions.interestRate), which is not guaranteed. The sliders let the customer try other values.
 - requestHandover: see "Handover".
 - askForFeedback: once, at a natural end.
 - suggestReplies: optional, after a question with obvious short answers (e.g. "Ja, ich habe einen Vorsorgeausweis" / "Nein, lieber ohne"). Never instead of a question, never with more than 4 options. Never offer a reply that claims an action done in a card (signing, confirming values, uploading): the customer does that in the card, and such replies are removed.

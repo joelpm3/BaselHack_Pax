@@ -2,6 +2,14 @@ import "server-only";
 import type { LifeSituation } from "@/lib/domain/profile";
 import type { Locale } from "@/lib/domain/taxonomy";
 import { type CallContext, callLogismata, LOGISMATA } from "@/lib/logismata/client";
+import {
+  buildGrowthRequest,
+  buildSavingRequest,
+  type SavingResponse,
+  type SavingsPlanOutput,
+  type SavingsPlanParams,
+  savingsPlanFromResponse,
+} from "../savings-plan";
 import type { IncomeBreakdown, RiskPersonResult } from "../types";
 import {
   buildCapitalTaxRequest,
@@ -254,4 +262,26 @@ export async function searchLocations(
     { Search: text, Language: LOGISMATA.language[locale] },
     ctx,
   );
+}
+
+/**
+ * Monthly saving needed to reach a goal (APICalc_calculateSaving). When the start capital alone
+ * gets there, Logismata returns a negative rate: show how the start capital grows instead.
+ */
+export async function runSaving(
+  params: SavingsPlanParams,
+  ctx: CallContext,
+): Promise<SavingsPlanOutput> {
+  const plan = await callLogismata<SavingResponse>(
+    "APICalc_calculateSaving",
+    buildSavingRequest(params),
+    ctx,
+  );
+  if ((plan.PeriodicInvestment ?? 0) > 0) return savingsPlanFromResponse(params, plan, false);
+  const growth = await callLogismata<SavingResponse>(
+    "APICalc_calculateSaving",
+    buildGrowthRequest(params),
+    ctx,
+  );
+  return savingsPlanFromResponse(params, growth, true);
 }

@@ -10,6 +10,7 @@ import { PensionOverviewWidget } from "./pension-overview";
 import { ProfileCard } from "./profile-card";
 import { RiskAnalysisWidget } from "./risk-analysis";
 import { salesWidgets } from "./sales";
+import { SavingsPlanWidget } from "./savings-plan";
 import { ScenarioWidget } from "./scenario-widget";
 import { TaxSavingsWidget } from "./tax-savings";
 import type { WidgetProps } from "./types";
@@ -26,6 +27,7 @@ export const widgetRegistry: Record<string, ComponentType<WidgetProps>> = {
   reviewDocuments: DocumentReviewWidget,
   requestHandover: HandoverWidget,
   askForFeedback: FeedbackWidget,
+  calculateSavingsPlan: SavingsPlanWidget,
   ...salesWidgets,
 };
 

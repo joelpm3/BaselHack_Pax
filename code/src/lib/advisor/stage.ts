@@ -11,6 +11,7 @@ const TOOL_STAGES: Record<string, FunnelStage> = {
   calculateTaxSavings: "analysis_shown",
   calculateCapitalPayoutTax: "analysis_shown",
   simulateScenario: "scenario_explored",
+  calculateSavingsPlan: "scenario_explored",
   recommendProducts: "recommendation_shown",
   startSuitabilityCheck: "recommendation_shown",
   prepareOffer: "offer_viewed",
