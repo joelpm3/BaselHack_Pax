@@ -29,7 +29,7 @@ pnpm dev                     # http://localhost:3000/de
 |---|---|
 | `/de` | Start a consultation, or "Ich bin bereits Pax-Kunde" to pick a demo customer |
 | `/de/portal` | Vorsorge-Cockpit: policies, documents, hints, conversations |
-| `/de/firma` | Company dashboard (password `COMPANY_PASSWORD`, default `pax-demo`) |
+| `/de/firma` | Company dashboard  |
 
 More on services, voice and scripts: [`code/README.md`](code/README.md). Demo scripts for the
 seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
@@ -63,21 +63,6 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | No uncontrolled external AI | Every model call goes through one module; `LLM_PROVIDER=openai-compatible` points it at a self-hosted vLLM endpoint. Swiss-German speech recognition runs on a Nemotron server we operate ourselves (Nebius GPU) | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
 | Formal requirements for the contract | Suitability check before unit-linked products, explicit consent and a signature that must match the customer's name | [`code/src/lib/sales/suitability.ts`](code/src/lib/sales/suitability.ts), [`code/src/lib/sales/application.ts`](code/src/lib/sales/application.ts) |
 
-### Known gaps
-
-- **The demo uses Anthropic's API.** Full customer context goes to Claude today. The self-hosted
-  path exists as a config switch but was not what we demoed.
-- **No real authentication.** Customers are identified by a device cookie, and the company
-  dashboard uses one shared password.
-- **Only documents are encrypted.** The SQLite database (profiles, transcripts) is not encrypted
-  at rest.
-- **The audit log is not tamper-proof.** It is a normal table, not append-only or signed; the demo
-  reset in `/firma/wiedervorlagen` even deletes its e-mail entries.
-- **No advance privacy notice or consent before the chat starts.** Notices appear only at
-  document upload and in the offer.
-- **No anti-money-laundering checks** and no identity verification; the signature is a typed name
-  and the contract is a mock.
-
 ## Repository
 
 | Folder | Content |
@@ -86,5 +71,3 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | [`documentation/`](documentation) | Architecture and demo personas |
 | [`challenge_context/`](challenge_context) | Challenge brief, Pax brand, API notes |
 | [`assets/`](assets) | Screenshots |
-
-License: PolyForm Noncommercial 1.0.0, see [`license.txt`](license.txt).
