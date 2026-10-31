@@ -10,6 +10,7 @@ function breakdown(values: Partial<IncomeBreakdown>): IncomeBreakdown {
     pillar2: 0,
     other: 0,
     partner: 0,
+    policies: 0,
     total: 0,
     gap: 0,
     surplus: 0,

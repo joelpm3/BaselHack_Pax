@@ -57,6 +57,7 @@
     "sources": {
       "pillar1": "1. Säule: AHV/IV",
       "pillar2": "2. Säule: Pensionskasse",
+      "policies": "Ihre Policen (Pax und andere)",
       "other": "3. Säule und Vermögen",
       "partner": "Einkommen Partnerin/Partner",
       "gap": "Lücke"

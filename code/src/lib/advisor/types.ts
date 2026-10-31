@@ -4,6 +4,7 @@
  */
 
 import type { ContactChannel, DocumentType } from "@/lib/domain/taxonomy";
+import type { DeathSizing } from "@/lib/sales/sizing";
 
 /** Income in one situation (retirement, disability, death) split by source, as Logismata returns it. */
 export interface IncomeBreakdown {
@@ -16,6 +17,11 @@ export interface IncomeBreakdown {
   other: number;
   /** Income of the partner who keeps working. */
   partner: number;
+  /**
+   * Risk: pensions and death capital (as a yearly amount, see PolicyCover) from the person's own
+   * policies at Pax and other insurers. Retirement: always 0.
+   */
+  policies: number;
   total: number;
   gap: number;
   surplus: number;
@@ -97,12 +103,29 @@ export interface RiskPersonResult {
   scenarios: RiskScenarioResult[];
 }
 
+/** Cover from one person's active death and disability policies, counted on top of Logismata. */
+export interface PolicyCover {
+  person: 1 | 2;
+  /** Lump sums paid once on death (term life). */
+  deathCapital: number;
+  /** Survivors' pensions, CHF per year. */
+  deathAnnuity: number;
+  /** Disability pensions, CHF per year. */
+  disabilityAnnuity: number;
+  /** The death capital counts as deathCapital / supportYears per year. */
+  supportYears: number;
+  /** Why that many years: the same period a new death cover is sized over. */
+  supportPeriod: DeathSizing;
+}
+
 export type RiskAnalysisOutput =
   | MissingOutput
   | {
       status: "ok";
       persons: RiskPersonResult[];
       dependentChildren: number;
+      /** Policies already included in the breakdowns (`policies` source). */
+      policyCover: PolicyCover[];
       assumptions: Assumptions;
     };
 
@@ -196,6 +219,8 @@ export interface PictureScenario {
   kind: PictureKind;
   breakdown: IncomeBreakdown;
   calculatedAt: number;
+  /** The customer's policies included in a disability or death breakdown. */
+  policyCover: PolicyCover | null;
 }
 
 export interface VorsorgebildModel {

@@ -131,6 +131,7 @@
     "sources": {
       "pillar1": "AHV/IV",
       "pillar2": "Pension fund/UVG",
+      "policies": "Policies",
       "other": "3rd pillar and savings",
       "partner": "Partner's income",
       "gap": "Gap"
@@ -170,6 +171,16 @@
     },
     "estimated": "The pension fund benefits are estimated; your pension certificate makes them more precise.",
     "assumptions": "Need: {need}% of income if unable to work, {deathNeed}% for the survivors. Long-term view from year 3. Calculated by Logismata, non-binding."
+  },
+  "policyCover": {
+    "death": "Policies: the death capital of {capital} is spread over {years} years ({period}) and counts as {monthly} per month.",
+    "deathAnnuity": "Policies: survivors' pensions of {amount} per month.",
+    "disability": "Policies: disability pensions of {amount} per month.",
+    "period": {
+      "until_youngest_child_25": "until the youngest child is 25",
+      "partner_10_years": "support for the partner",
+      "minimum_5_years": "minimum period"
+    }
   },
   "tax": {
     "title": "Save taxes with pillar 3a",

@@ -1,3 +1,4 @@
+import { type InsuredSubject, subjectOfPolicy } from "@/lib/domain/insured";
 import type { LifeSituation, Person } from "@/lib/domain/profile";
 import type { HintSeverity, HintType, PolicyCategory, PolicyStatus } from "@/lib/domain/taxonomy";
 import type { QuoteInput } from "@/lib/pricing/types";
@@ -52,7 +53,7 @@ export const DISABILITY_NEED_SHARE = 0.8;
 /** Maximum full IV pension (CHF 2'520 per month); real IV pensions are often lower. */
 export const MAX_IV_PENSION = 30_240;
 
-type Subject = "self" | "partner";
+type Subject = InsuredSubject;
 
 interface Adult {
   subject: Subject;
@@ -74,20 +75,6 @@ function adultsOf(profile: LifeSituation): Adult[] {
   if (profile.partner)
     adults.push({ subject: "partner", person: profile.partner, name: profile.partner.firstName });
   return adults;
-}
-
-/** Whose policy it is, by the insured person's name. Unnamed policies belong to the customer. */
-export function subjectOfPolicy(
-  policy: Pick<PolicyFacts, "insuredPerson">,
-  profile: LifeSituation,
-): Subject | "other" {
-  if (!policy.insuredPerson) return "self";
-  const insured = fold(policy.insuredPerson);
-  const partnerName = profile.partner?.firstName;
-  const selfName = profile.person.firstName;
-  if (partnerName && insured.includes(fold(partnerName))) return "partner";
-  if (selfName && insured.includes(fold(selfName))) return "self";
-  return selfName ? "other" : "self";
 }
 
 function activePolicies(facts: HintFacts): PolicyFacts[] {

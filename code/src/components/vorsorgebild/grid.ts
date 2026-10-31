@@ -11,7 +11,7 @@ export const SQUARES_PER_ROW = 10;
 /** Above this the grid stops growing (CHF 50'000 per month) and shows the rest as a number. */
 export const MAX_SQUARES = 100;
 
-export const SOURCES = ["pillar1", "pillar2", "other", "partner"] as const;
+export const SOURCES = ["pillar1", "pillar2", "policies", "other", "partner"] as const;
 export type Source = (typeof SOURCES)[number];
 export type SquareKind = Source | "gap";
 
@@ -34,11 +34,15 @@ export function squaresFor(annual: number): number {
  * total income, even when every single source would round down on its own.
  */
 export function sourceSquareCounts(breakdown: IncomeBreakdown): Record<Source, number> {
-  const counts = { pillar1: 0, pillar2: 0, other: 0, partner: 0 } as Record<Source, number>;
+  const counts = { pillar1: 0, pillar2: 0, policies: 0, other: 0, partner: 0 } as Record<
+    Source,
+    number
+  >;
   let cumulative = 0;
   let previous = 0;
   for (const source of SOURCES) {
-    cumulative += Math.max(0, breakdown[source]);
+    // `|| 0`: tool results stored before a source existed lack that field.
+    cumulative += Math.max(0, breakdown[source] || 0);
     const boundary = squaresFor(cumulative);
     counts[source] = boundary - previous;
     previous = boundary;

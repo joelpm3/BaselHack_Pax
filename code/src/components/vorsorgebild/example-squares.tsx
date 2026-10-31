@@ -12,6 +12,7 @@ const EXAMPLE: IncomeBreakdown = {
   pillar2: 48000,
   other: 12000,
   partner: 0,
+  policies: 0,
   total: 90000,
   gap: 30000,
   surplus: 0,

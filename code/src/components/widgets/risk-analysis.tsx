@@ -6,6 +6,7 @@ import { useState } from "react";
 import type { RiskAnalysisOutput, RiskPersonResult } from "@/lib/advisor/types";
 import { cn } from "@/lib/utils";
 import { BreakdownLegend, BreakdownRow } from "./breakdown-row";
+import { usePolicyCoverText } from "./policy-cover-note";
 import type { WidgetProps } from "./types";
 import { FinePrint, WidgetCard, WidgetFailed, WidgetPending } from "./widget-card";
 
@@ -20,6 +21,7 @@ const ORDER = [
 export function RiskAnalysisWidget({ state, output }: WidgetProps) {
   const t = useTranslations("widgets.risk");
   const [personIndex, setPersonIndex] = useState(0);
+  const policyCoverText = usePolicyCoverText();
   if (state === "output-error") return <WidgetFailed icon={ShieldAlert} title={t("title")} />;
   if (state !== "output-available")
     return <WidgetPending icon={ShieldAlert} label={t("pending")} />;
@@ -29,6 +31,11 @@ export function RiskAnalysisWidget({ state, output }: WidgetProps) {
   const persons = data.persons;
   const person = persons[Math.min(personIndex, persons.length - 1)];
   const name = (p: RiskPersonResult) => p.firstName ?? (p.person === 1 ? t("you") : t("partner"));
+  // Results stored before policies were counted have no policyCover.
+  const cover = Array.isArray(data.policyCover)
+    ? data.policyCover.find((c) => c.person === person.person)
+    : undefined;
+  const coverText = person.retired ? "" : policyCoverText(cover, ["disability", "death"]);
 
   return (
     <WidgetCard icon={ShieldAlert} title={t("title")}>
@@ -82,6 +89,7 @@ export function RiskAnalysisWidget({ state, output }: WidgetProps) {
           need: data.assumptions.needPercent,
           deathNeed: data.assumptions.deathNeedPercent ?? 70,
         })}
+        {coverText ? ` ${coverText}` : ""}
       </FinePrint>
     </WidgetCard>
   );

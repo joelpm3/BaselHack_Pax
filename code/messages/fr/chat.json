@@ -57,6 +57,7 @@
     "sources": {
       "pillar1": "1er pilier : AVS/AI",
       "pillar2": "2e pilier : caisse de pension",
+      "policies": "Vos polices (Pax et autres)",
       "other": "3e pilier et épargne",
       "partner": "Revenu du ou de la partenaire",
       "gap": "Lacune"

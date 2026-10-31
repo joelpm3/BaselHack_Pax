@@ -1,10 +1,9 @@
 import "server-only";
-import { and, desc, eq, inArray, isNull, notLike, or } from "drizzle-orm";
+import { and, desc, eq, isNull, notLike, or } from "drizzle-orm";
 import { db, schema } from "@/lib/db";
 import type { LifeSituation } from "@/lib/domain/profile";
-import { LIFE_AND_PENSION_CATEGORIES, type PolicyCategory } from "@/lib/domain/taxonomy";
 import { getProfile } from "@/lib/profile/service";
-import { SCENARIO_SUFFIX } from "./logismata/checks";
+import { currentYear, SCENARIO_SUFFIX } from "./logismata/checks";
 import {
   describeRiskScenario,
   isJointlyTaxed,
@@ -13,11 +12,14 @@ import {
   retirementBreakdown,
   riskBreakdown,
 } from "./logismata/mapping";
+import { activeLifePolicies } from "./policies";
+import { type CoverPolicy, policyCoverFor, withPolicyCover } from "./policy-cover";
 import type { PictureScenario, VorsorgebildModel } from "./types";
 
 /**
  * The Vorsorgebild is derived, never stored: profile + the latest real (non-scenario)
- * retirement and risk calculations of the customer.
+ * retirement and risk calculations of the customer, with the customer's own death and
+ * disability policies counted on top of the risk figures.
  */
 
 const FACTS: Array<{ key: string; known: (p: LifeSituation) => boolean }> = [
@@ -59,7 +61,11 @@ function latestCalculation(customerId: string, operation: string) {
     .get();
 }
 
-function scenarios(customerId: string): PictureScenario[] {
+function scenarios(
+  customerId: string,
+  profile: LifeSituation,
+  policies: CoverPolicy[],
+): PictureScenario[] {
   const result: PictureScenario[] = [];
   const retirement = latestCalculation(customerId, "APICalc_calculateRetirement");
   if (retirement?.output) {
@@ -67,19 +73,30 @@ function scenarios(customerId: string): PictureScenario[] {
       kind: "retirement",
       breakdown: retirementBreakdown(retirement.output as RetirementResponse),
       calculatedAt: retirement.createdAt.getTime(),
+      policyCover: null,
     });
   }
   const risk = latestCalculation(customerId, "APICalc_calculateRisk");
   const summaries =
     (risk?.output as { RiskScenarioSummaries?: RiskScenarioSummary[] } | null)
       ?.RiskScenarioSummaries ?? [];
+  const year = currentYear();
+  const cover = policyCoverFor(policies, profile, year).find((c) => c.person === 1);
   for (const summary of summaries) {
     const scenario = describeRiskScenario(summary.Scenario ?? 0);
     if (!risk || scenario?.person !== 1 || scenario.cause !== "illness") continue;
+    const breakdown = withPolicyCover(
+      riskBreakdown(summary),
+      scenario.event,
+      cover,
+      profile.person,
+      year,
+    );
     result.push({
       kind: scenario.event,
-      breakdown: riskBreakdown(summary),
+      breakdown,
       calculatedAt: risk.createdAt.getTime(),
+      policyCover: breakdown.policies > 0 ? (cover ?? null) : null,
     });
   }
   return result;
@@ -87,24 +104,14 @@ function scenarios(customerId: string): PictureScenario[] {
 
 export function buildVorsorgebild(customerId: string): VorsorgebildModel {
   const profile = getProfile(customerId);
-  const policies = db
-    .select({ id: schema.policies.id })
-    .from(schema.policies)
-    .where(
-      and(
-        eq(schema.policies.customerId, customerId),
-        eq(schema.policies.status, "active"),
-        inArray(schema.policies.category, LIFE_AND_PENSION_CATEGORIES as PolicyCategory[]),
-      ),
-    )
-    .all();
+  const policies = activeLifePolicies(customerId);
   const own = profile.person.grossIncome;
   const partner = isJointlyTaxed(profile) ? profile.partner?.grossIncome : undefined;
   return {
     firstName: profile.person.firstName ?? null,
     completeness: completenessOf(profile),
     facts: FACTS.map((f) => ({ key: f.key, known: f.known(profile) })),
-    scenarios: scenarios(customerId),
+    scenarios: scenarios(customerId, profile, policies),
     pillars: {
       incomeToday: own === undefined && partner === undefined ? null : (own ?? 0) + (partner ?? 0),
       hasPensionFund: profile.pillar2.hasPensionFund ?? null,

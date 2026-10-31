@@ -2,6 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { usePolicyCoverText } from "@/components/widgets/policy-cover-note";
 import type { PictureKind, PictureScenario, VorsorgebildModel } from "@/lib/advisor/types";
 import { cn, formatChf } from "@/lib/utils";
 import { monthlyChf, SOURCES } from "./grid";
@@ -88,6 +89,9 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
   const { breakdown } = scenario;
   const chf = (annual: number) => formatChf(monthlyChf(annual), locale);
   const sources = SOURCES.filter((s) => breakdown[s] > 0);
+  const policyCoverText = usePolicyCoverText();
+  const coverText =
+    scenario.kind === "retirement" ? "" : policyCoverText(scenario.policyCover, [scenario.kind]);
 
   if (breakdown.need === 0) {
     return <p className="text-paragraph-s text-fg-muted">{t(`noNeed.${scenario.kind}`)}</p>;
@@ -131,6 +135,8 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
           <span className="tabular-nums">{chf(breakdown.need)}</span>
         </li>
       </ul>
+
+      {coverText ? <p className="text-paragraph-xs text-fg-muted">{coverText}</p> : null}
 
       <table className="sr-only">
         <caption>{t("table.caption")}</caption>

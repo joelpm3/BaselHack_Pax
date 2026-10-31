@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { subjectOfPolicy } from "@/lib/domain/insured";
 import { lifeSituationSchema } from "@/lib/domain/profile";
 import {
   cheaperEquivalentCandidates,
@@ -11,7 +12,6 @@ import {
   type PolicyFacts,
   pensionBuyInCandidates,
   pensionBuyInHint,
-  subjectOfPolicy,
 } from "./rules";
 
 const TODAY = "2026-10-30";

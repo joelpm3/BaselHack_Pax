@@ -18,6 +18,8 @@ import {
   NEED_PERCENT,
   REGULAR_RETIREMENT_AGE,
 } from "./logismata/mapping";
+import { activeLifePolicies } from "./policies";
+import { applyPolicyCover, policyCoverFor } from "./policy-cover";
 import type {
   IncomeBreakdown,
   ScenarioComparison,
@@ -164,11 +166,30 @@ export async function computeScenario(
       runRiskCheck(profile, ctx),
       runRiskCheck(profile, ctx, { extraChildren: params.children }),
     ]);
+    // Existing policies count in both; a new child lengthens the period death capital covers.
+    const year = currentYear();
+    const policies = base.customerId ? activeLifePolicies(base.customerId) : [];
+    const withChild: LifeSituation = {
+      ...profile,
+      children: [
+        ...profile.children,
+        ...Array.from({ length: params.children ?? 0 }, () => ({ birthYear: year })),
+      ],
+    };
+    const withCover = (check: RiskCheck, situation: LifeSituation): RiskCheck => ({
+      ...check,
+      persons: applyPolicyCover(
+        check.persons,
+        policyCoverFor(policies, situation, year),
+        situation,
+        year,
+      ),
+    });
     return {
       status: "ok",
       scenario: kind,
       params,
-      comparisons: riskComparisons(before, after),
+      comparisons: riskComparisons(withCover(before, profile), withCover(after, withChild)),
       extra: null,
       limits,
       assumptions: { ...assumptions, pillar2Estimated: before.estimated },
