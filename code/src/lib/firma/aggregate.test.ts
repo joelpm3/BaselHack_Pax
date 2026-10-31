@@ -13,15 +13,13 @@ import {
 
 describe("buildFunnel", () => {
   it("counts every conversation at all stages up to its furthest one", () => {
-    const funnel = buildFunnel({
-      started: 2,
-      getting_to_know: 3,
-      analysis_shown: 4,
-      recommendation_shown: 1,
-    });
+    const funnel = buildFunnel(
+      { started: 2, getting_to_know: 3, analysis_shown: 4, recommendation_shown: 1 },
+      { getting_to_know: 2 },
+    );
     expect(funnel.map((r) => r.reached)).toEqual([10, 8, 5, 5, 1, 1, 0, 0, 0]);
-    expect(funnel[0]).toMatchObject({ shareOfStarted: 1, stoppedHere: 2 });
-    expect(funnel[1]).toMatchObject({ stage: "getting_to_know", stoppedHere: 3 });
+    expect(funnel[0]).toMatchObject({ shareOfStarted: 1, stoppedHere: 0 });
+    expect(funnel[1]).toMatchObject({ stage: "getting_to_know", stoppedHere: 2 });
     expect(funnel[4].shareOfStarted).toBeCloseTo(0.1);
   });
 
@@ -34,13 +32,15 @@ describe("buildFunnel", () => {
 });
 
 describe("biggestDropOff", () => {
-  it("finds the stage most conversations ended at", () => {
-    const drop = biggestDropOff(buildFunnel({ started: 2, analysis_shown: 5, signed: 3 }));
+  it("finds the stage most customers left at", () => {
+    const drop = biggestDropOff(
+      buildFunnel({ started: 2, analysis_shown: 5, signed: 3 }, { started: 1, analysis_shown: 5 }),
+    );
     expect(drop).toEqual({ stage: "analysis_shown", count: 5, share: 0.5 });
   });
 
-  it("never counts the goal stage as a drop-off", () => {
-    expect(biggestDropOff(buildFunnel({ signed: 4 }))).toBeNull();
+  it("ignores conversations nobody left", () => {
+    expect(biggestDropOff(buildFunnel({ started: 4, signed: 4 }))).toBeNull();
   });
 });
 
@@ -88,6 +88,6 @@ describe("parsers", () => {
     expect(parseLimit(undefined)).toBe(PAGE_SIZE);
     expect(parseLimit("-3")).toBe(PAGE_SIZE);
     expect(parseLimit(String(PAGE_SIZE + 1))).toBe(PAGE_SIZE * 2);
-    expect(parseLimit("999999")).toBe(1000);
+    expect(parseLimit("1001")).toBe(1050);
   });
 });

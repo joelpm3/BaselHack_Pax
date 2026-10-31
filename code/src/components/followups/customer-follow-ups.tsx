@@ -53,7 +53,7 @@ export async function CustomerFollowUps({ customerId }: { customerId: string }) 
               {events.map((e) => {
                 // Demo: there is no real inbox, so an advisor records the customer's answer here.
                 const openEmail =
-                  e.status === "due"
+                  e.status === "due" || e.status === "lost"
                     ? emails.find((m) => m.futureEventId === e.id && !m.repliedAt)
                     : undefined;
                 return (

@@ -68,14 +68,19 @@ export function getOverview(scope: Scope, period: Period, now: Date) {
     .all()
     .map((r) => r.nps);
 
-  const stageCounts = Object.fromEntries(
-    db
-      .all<{ key: FunnelStage; count: number }>(
-        sql`select ${c.stage} as key, count(*) as count from ${c} where ${whereSql} group by 1`,
-      )
-      .map((r) => [r.key, r.count]),
+  const countByStage = (extra: SQL) =>
+    Object.fromEntries(
+      db
+        .all<{ key: FunnelStage; count: number }>(
+          sql`select ${c.stage} as key, count(*) as count from ${c} where ${whereSql} ${extra} group by 1`,
+        )
+        .map((r) => [r.key, r.count]),
+    );
+  // Running and handed-over conversations have not been left, so only these count as drop-offs.
+  const funnel = buildFunnel(
+    countByStage(sql``),
+    countByStage(sql`and ${c.status} in ('abandoned', 'idle')`),
   );
-  const funnel = buildFunnel(stageCounts);
 
   const topTopics = db.all<{ key: Topic; count: number }>(sql`
     select je.value as key, count(*) as count
@@ -103,7 +108,7 @@ export function getOverview(scope: Scope, period: Period, now: Date) {
     .select({ conversationId: a.conversationId, painPoints: a.painPoints })
     .from(a)
     .innerJoin(c, eq(c.id, a.conversationId))
-    .where(where)
+    .where(and(where, sql`json_array_length(${a.painPoints}) > 0`))
     .orderBy(desc(a.updatedAt))
     .limit(10)
     .all()

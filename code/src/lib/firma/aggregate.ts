@@ -18,12 +18,11 @@ export function parsePeriod(value: unknown): Period {
 
 /** Lists show this many rows and grow by the same step ("show more"). */
 export const PAGE_SIZE = 50;
-const MAX_ROWS = 1000;
 
 export function parseLimit(value: unknown): number {
   const n = Number(value);
-  if (!Number.isInteger(n) || n <= PAGE_SIZE) return PAGE_SIZE;
-  return Math.min(MAX_ROWS, Math.ceil(n / PAGE_SIZE) * PAGE_SIZE);
+  if (!Number.isSafeInteger(n) || n <= PAGE_SIZE) return PAGE_SIZE;
+  return Math.ceil(n / PAGE_SIZE) * PAGE_SIZE;
 }
 
 export interface FunnelRow {
@@ -32,7 +31,7 @@ export interface FunnelRow {
   reached: number;
   /** Share of all started conversations (0–1). */
   shareOfStarted: number;
-  /** Conversations whose furthest stage is this one (they went no further). */
+  /** Conversations the customer left (abandoned or idle) at exactly this stage. */
   stoppedHere: number;
 }
 
@@ -40,7 +39,10 @@ export interface FunnelRow {
  * A conversation's `stage` is the furthest stage it reached (it only moves forward), so the
  * number that reached stage i is the number whose stage index is ≥ i.
  */
-export function buildFunnel(stageCounts: Partial<Record<FunnelStage, number>>): FunnelRow[] {
+export function buildFunnel(
+  stageCounts: Partial<Record<FunnelStage, number>>,
+  stoppedCounts: Partial<Record<FunnelStage, number>> = {},
+): FunnelRow[] {
   const counts = FUNNEL_STAGES.map((stage) => stageCounts[stage] ?? 0);
   const reached = counts.map((_, i) => counts.slice(i).reduce((sum, n) => sum + n, 0));
   const started = reached[0];
@@ -48,13 +50,13 @@ export function buildFunnel(stageCounts: Partial<Record<FunnelStage, number>>): 
     stage,
     reached: reached[i],
     shareOfStarted: started ? reached[i] / started : 0,
-    stoppedHere: counts[i],
+    stoppedHere: stoppedCounts[stage] ?? 0,
   }));
 }
 
 /**
- * The stage after which most conversations went no further. The last stage (signed) is the goal
- * and never counts as a drop-off. Null when nothing stopped early.
+ * The stage most customers left the conversation at. The last stage (signed) is the goal and
+ * never counts as a drop-off. Null when nobody left early.
  */
 export function biggestDropOff(
   funnel: FunnelRow[],

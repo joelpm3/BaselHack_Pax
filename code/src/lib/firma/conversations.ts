@@ -95,7 +95,10 @@ export function listConversations(filters: ConversationFilters, limit: number) {
     q
       ? or(
           like(c.title, `%${q}%`),
-          like(sql`${schema.customers.firstName} || ' ' || ${schema.customers.lastName}`, `%${q}%`),
+          like(
+            sql`coalesce(${schema.customers.firstName}, '') || ' ' || coalesce(${schema.customers.lastName}, '')`,
+            `%${q}%`,
+          ),
         )
       : undefined,
   );
