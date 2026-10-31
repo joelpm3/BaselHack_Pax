@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Clara">
+  <circle cx="60" cy="60" r="42" fill="#3c0078"/>
+  <g transform-origin="60 57">
+    <rect x="42" y="50" width="10" height="14" rx="5" fill="#fff"/>
+    <rect x="68" y="50" width="10" height="14" rx="5" fill="#fff"/>
+    <animateTransform attributeName="transform" type="scale" values="1 1;1 1;1 0.1;1 1" keyTimes="0;0.94;0.97;1" dur="5.2s" repeatCount="indefinite"/>
+  </g>
+  <path d="M51 74Q60 82 69 74" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="18" y="98" width="84" height="4" rx="2" fill="#8ccd0f"/>
+</svg>

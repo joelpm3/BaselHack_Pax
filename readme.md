@@ -1,19 +1,56 @@
-# Pax Clara: a digital pension advisor that starts with your life, not a product
+<p align="center">
+  <img src="assets/clara.svg" width="110" alt="Clara, a purple face with white eyes and a green line">
+</p>
 
-BaselHack 2026, Pax challenge "AI that makes life insurance simple". Team A4: Joel Müller, Flurin Laim.
+<h1 align="center">Pax Clara</h1>
 
-Clara is a self-service pension advisor for Pax customers. She first gets to know the person
-(family, work, plans, worries), then builds their picture across all three pillars with real
-Swiss calculations (Logismata), lets them play through life scenarios, and only then recommends
-Pax products, with the criteria behind each one and a live Pax premium (Quicksale). The customer
-can sign the offer and find the policy in their Vorsorge-Cockpit. On the other side, Pax gets a
-company dashboard with leads, handovers to human advisors, funnel drop-offs and the full audit
-trail of every conversation.
+<p align="center">
+  <b>A digital pension advisor that starts with your life, not a product.</b><br>
+  BaselHack 2026 · Pax challenge "AI that makes life insurance simple" · Team A4: Joel Müller, Flurin Laim
+</p>
 
-![Clara's start page: the Vorsorgebild shows retirement income square by square, one colour per pillar](assets/clara-home.png)
+<p align="center">
+  DE · FR · IT · EN &nbsp;|&nbsp; Swiss-German voice &nbsp;|&nbsp; real Swiss calculations &nbsp;|&nbsp; runs on our own GPU
+</p>
 
-DE / FR / IT / EN, Swiss-German voice input, an avatar, NPS feedback and product insights are
-included.
+---
+
+## Meet Clara.
+
+<img src="assets/pitch/illustrations/jane-clara.webp" align="right" width="380" alt="Jane at the table in the evening, the baby asleep on her arm, talking to Clara on the laptop">
+
+One evening, Jane asks Clara what would happen to her family if something happened to May.
+In Swiss German.
+
+Clara first gets to know them, then shows the gap across all three pillars, and only then
+recommends a Pax product, with the reasons behind it and a live premium.
+
+The Müllers closed their gap in one conversation: **CHF 741 a year**, about two francs a day.
+
+<br clear="right">
+
+## How it works
+
+| | |
+|---|---|
+| 💬 **Get to know** | Family, work, plans and worries come before any number or product. |
+| 📊 **See the picture** | Logismata calculates retirement, disability and death across all three pillars. |
+| 🔀 **Play it through** | A child, a home, early retirement: what changes? |
+| 🛡️ **Close the gap** | A Pax product with criteria, alternatives and a Quicksale premium, signed in the app. |
+| 🤝 **Hand over** | A human Pax advisor takes over when a rule or the customer asks for it. |
+
+## Two sides
+
+<table>
+  <tr>
+    <td width="50%"><img src="assets/pitch/img/demo-chat.jpeg" alt="The customer chat with a recommendation next to the pension picture"></td>
+    <td width="50%"><img src="assets/pitch/img/demo-firma.jpeg" alt="The company cockpit with handovers, leads and the funnel"></td>
+  </tr>
+  <tr>
+    <td><b>For the customer:</b> a conversation, the Vorsorgebild, and the policy in their Vorsorge-Cockpit.</td>
+    <td><b>For Pax:</b> leads, handovers, funnel drop-offs and the audit trail of every conversation.</td>
+  </tr>
+</table>
 
 ## Run it
 
