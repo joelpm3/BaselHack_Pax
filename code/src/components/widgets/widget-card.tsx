@@ -23,10 +23,7 @@ export function WidgetCard({
 }) {
   return (
     <section
-      className={cn(
-        "rounded-[16px] border border-line bg-surface p-4 sm:p-5 lg:rounded-xl",
-        className,
-      )}
+      className={cn("rounded-xl border border-line bg-surface p-4 sm:p-5 lg:rounded-xl", className)}
     >
       <header className="flex items-center gap-2.5">
         <Icon aria-hidden className="size-5 shrink-0 text-pax-purple" strokeWidth={2} />

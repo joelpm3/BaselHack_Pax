@@ -50,7 +50,7 @@ export async function ProfileSection({
       }
     >
       <div className="mb-3 grid gap-1">
-        <div className="flex justify-between text-xs text-fg-muted">
+        <div className="flex justify-between text-paragraph-xs text-fg-muted">
           <span>{t("completeness")}</span>
           <span className="tabular-nums">{completeness}%</span>
         </div>
@@ -133,7 +133,7 @@ export async function ProfileSection({
 
       {detail.policies.length > 0 ? (
         <div className="mt-4 grid gap-2">
-          <h3 className="text-xs font-medium text-fg-muted">{t("policies")}</h3>
+          <h3 className="text-paragraph-xs font-medium text-fg-muted">{t("policies")}</h3>
           <ul className="grid gap-2">
             {detail.policies.map((policy) => (
               <li key={policy.id} className="grid gap-0.5 rounded-m bg-gray-1 px-3 py-2">
@@ -141,7 +141,7 @@ export async function ProfileSection({
                   <span className="font-medium">{policy.productName}</span>
                   <Badge tone={policy.isExternal ? "warning" : "purple"}>{policy.insurer}</Badge>
                 </span>
-                <span className="text-xs text-fg-muted">
+                <span className="text-paragraph-xs text-fg-muted">
                   {[
                     tx(`policyCategory.${policy.category}`),
                     policy.premiumAnnual

@@ -30,7 +30,7 @@ export function OutboxList({ emails }: { emails: OutboxEmailView[] }) {
         <li key={email.id}>
           <details className="group">
             <summary className="grid cursor-pointer list-none gap-1 px-3 py-2.5 hover:bg-gray-1 [&::-webkit-details-marker]:hidden">
-              <span className="flex flex-wrap items-center gap-2 text-xs text-fg-muted">
+              <span className="flex flex-wrap items-center gap-2 text-paragraph-xs text-fg-muted">
                 <Mail aria-hidden className="size-3.5" />
                 <BusinessDate date={email.sentOn} />
                 <Badge tone={email.kind === "yearly_checkin" ? "neutral" : "info"}>
@@ -39,7 +39,7 @@ export function OutboxList({ emails }: { emails: OutboxEmailView[] }) {
                 {email.repliedAt ? <Badge tone="success">{t("replied")}</Badge> : null}
               </span>
               <span className="font-medium group-open:text-pax-purple">{email.subject}</span>
-              <span className="truncate text-xs text-fg-muted">
+              <span className="truncate text-paragraph-xs text-fg-muted">
                 {t("to", { address: email.toAddress })}
               </span>
             </summary>

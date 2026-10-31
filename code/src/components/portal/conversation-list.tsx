@@ -24,7 +24,7 @@ export async function ConversationList({
       {conversations.length === 0 ? (
         <EmptyNote>{t("empty")}</EmptyNote>
       ) : (
-        <ul className="divide-y divide-line rounded-[16px] border border-line">
+        <ul className="divide-y divide-line rounded-xl border border-line">
           {conversations.map((c) => {
             const last = formatSwissDate(toIsoDate(c.lastMessageAt ?? c.createdAt));
             return (

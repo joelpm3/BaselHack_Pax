@@ -87,7 +87,9 @@ export function RulesEditor({
                 rule.key === PROPOSAL_KEY && "border-pax-purple",
               )}
             >
-              <span className="text-lg font-bold text-fg-muted tabular-nums">{index + 1}</span>
+              <span className="text-paragraph-l font-bold text-fg-muted tabular-nums">
+                {index + 1}
+              </span>
               <div className="grid content-start gap-1">
                 {rule.key === PROPOSAL_KEY ? (
                   <Badge tone="info" className="justify-self-start">
@@ -102,7 +104,7 @@ export function RulesEditor({
                   value={rule.text}
                   onChange={(e) => update(rule.key, { text: e.target.value })}
                   aria-invalid={rule.text.trim().length < 3 || undefined}
-                  className={cn("min-h-20 text-sm", !rule.active && "text-fg-muted")}
+                  className={cn("min-h-20 text-paragraph-s", !rule.active && "text-fg-muted")}
                   placeholder={t("placeholder")}
                 />
               </div>
@@ -111,7 +113,7 @@ export function RulesEditor({
                   aria-label={t("action")}
                   value={rule.action}
                   onChange={(e) => update(rule.key, { action: e.target.value as RuleAction })}
-                  className="h-9 py-0 text-sm"
+                  className="h-9 py-0 text-paragraph-s"
                 >
                   {RULE_ACTIONS.map((a) => (
                     <option key={a} value={a}>
@@ -129,7 +131,7 @@ export function RulesEditor({
                       })
                     }
                     aria-invalid={!rule.productCode || undefined}
-                    className="h-9 py-0 text-sm"
+                    className="h-9 py-0 text-paragraph-s"
                   >
                     <option value="">{t("chooseProduct")}</option>
                     {PRODUCT_CODES.map((code) => (
@@ -218,7 +220,7 @@ export function RulesEditor({
             setResult(null);
             setLeadHints(e.target.value);
           }}
-          className="min-h-28 text-sm"
+          className="min-h-28 text-paragraph-s"
         />
       </div>
 

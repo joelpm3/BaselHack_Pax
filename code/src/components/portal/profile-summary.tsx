@@ -122,7 +122,7 @@ export async function ProfileSummary({
   if (filled.length === 0) return <EmptyNote>{t("empty")}</EmptyNote>;
 
   return (
-    <div className="rounded-[16px] border border-line p-4 lg:p-5">
+    <div className="rounded-xl border border-line p-4 lg:p-5">
       {filled.map((group) => (
         <section key={group.title} className="not-first:mt-4">
           <h3 className="text-paragraph-xs font-medium text-fg-muted">{group.title}</h3>

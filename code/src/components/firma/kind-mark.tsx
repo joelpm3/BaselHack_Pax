@@ -28,11 +28,7 @@ export function KindMark({
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
       <span aria-hidden={withLabel} className={cn("grid size-7 shrink-0 place-items-center", tile)}>
-        <Icon
-          aria-label={withLabel ? undefined : t(`${kind}.name`)}
-          className="size-4"
-          strokeWidth={1.75}
-        />
+        <Icon aria-label={withLabel ? undefined : t(`${kind}.name`)} className="size-4" />
       </span>
       {withLabel ? <span className="font-medium">{t(`${kind}.name`)}</span> : null}
     </span>

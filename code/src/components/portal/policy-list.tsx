@@ -51,8 +51,8 @@ async function PolicyCard({ policy, locale }: { policy: PolicyRow; locale: strin
     <article
       className={
         policy.status === "active"
-          ? "rounded-[16px] border border-line p-4 lg:p-5"
-          : "rounded-[16px] border border-dashed border-line-strong p-4 opacity-80 lg:p-5"
+          ? "rounded-xl border border-line p-4 lg:p-5"
+          : "rounded-xl border border-dashed border-line-strong p-4 opacity-80 lg:p-5"
       }
     >
       <div className="flex items-start justify-between gap-3">

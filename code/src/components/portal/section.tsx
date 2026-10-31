@@ -18,7 +18,7 @@ export function Section({
   return (
     <section aria-labelledby={id} className={cn("flex min-w-0 flex-col gap-4", className)}>
       <div className="flex flex-wrap items-end justify-between gap-3">
-        <h2 id={id} className="text-heading-m font-bold">
+        <h2 id={id} className="text-heading-m font-bold text-contrast-green">
           {title}
         </h2>
         {action}
@@ -30,6 +30,6 @@ export function Section({
 
 export function EmptyNote({ children }: { children: ReactNode }) {
   return (
-    <p className="rounded-[16px] bg-surface-muted p-5 text-paragraph-s text-fg-muted">{children}</p>
+    <p className="rounded-xl bg-surface-muted p-5 text-paragraph-s text-fg-muted">{children}</p>
   );
 }

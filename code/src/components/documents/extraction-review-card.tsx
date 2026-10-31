@@ -109,7 +109,7 @@ export function ExtractionReviewCard({ extractions, embedded }: ExtractionReview
   return (
     <section
       aria-label={t("title")}
-      className="w-full rounded-[16px] border border-line bg-surface p-5 lg:rounded-xl lg:p-6"
+      className="w-full rounded-xl border border-line bg-surface p-5 lg:rounded-xl lg:p-6"
     >
       {embedded ? null : (
         <header className="mb-5">

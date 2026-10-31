@@ -67,7 +67,9 @@ async function RulesContent({
     <PageBody className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
       <div className="grid content-start gap-4">
         <div className="flex flex-wrap items-center gap-3">
-          <h2 className="text-lg font-bold">{t("version", { version: selected.version })}</h2>
+          <h2 className="text-paragraph-l font-bold">
+            {t("version", { version: selected.version })}
+          </h2>
           {selected.isActive ? (
             <Badge tone="success">{t("activeVersion")}</Badge>
           ) : (
@@ -111,7 +113,9 @@ async function RulesContent({
                     !rule.active && "bg-gray-1 text-fg-muted",
                   )}
                 >
-                  <span className="text-lg font-bold text-fg-muted tabular-nums">{i + 1}</span>
+                  <span className="text-paragraph-l font-bold text-fg-muted tabular-nums">
+                    {i + 1}
+                  </span>
                   <p>{rule.text}</p>
                   <div className="flex flex-wrap content-start gap-1.5">
                     <Badge tone="info">{tAction(rule.action)}</Badge>
@@ -144,7 +148,7 @@ async function RulesContent({
                     )}
                   >
                     <span className="font-medium">{p.title}</span>
-                    <span className="text-xs text-fg-muted">{tDraft("openDraft")}</span>
+                    <span className="text-paragraph-xs text-fg-muted">{tDraft("openDraft")}</span>
                   </Link>
                 </li>
               ))}
@@ -167,7 +171,7 @@ async function RulesContent({
                   <span className="font-medium">{t("version", { version: v.version })}</span>
                   {v.isActive ? <Badge tone="success">{t("activeVersion")}</Badge> : null}
                 </span>
-                <span className="text-xs text-fg-muted">
+                <span className="text-paragraph-xs text-fg-muted">
                   {v.createdBy ?? t("system")} ·{" "}
                   {format.dateTime(v.createdAt, {
                     day: "numeric",
@@ -176,7 +180,7 @@ async function RulesContent({
                     minute: "2-digit",
                   })}
                 </span>
-                <span className="text-xs text-fg-muted">
+                <span className="text-paragraph-xs text-fg-muted">
                   {t("versionStats", { rules: v.ruleCount, conversations: v.conversationCount })}
                 </span>
               </Link>

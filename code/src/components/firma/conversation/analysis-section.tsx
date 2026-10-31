@@ -59,7 +59,9 @@ export async function AnalysisSection({
         <p>{analysis.summary}</p>
         {analysis.nextBestAction ? (
           <p className="grid gap-0.5 border-l-2 border-pax-purple pl-3">
-            <span className="text-xs font-medium text-fg-muted">{t("nextBestAction")}</span>
+            <span className="text-paragraph-xs font-medium text-fg-muted">
+              {t("nextBestAction")}
+            </span>
             <span className="font-medium">{analysis.nextBestAction}</span>
           </p>
         ) : null}
@@ -151,7 +153,7 @@ export async function AnalysisSection({
                       <li key={id} className="rounded-m bg-gray-1 px-3 py-2">
                         {rule ? (
                           <>
-                            <span className="text-xs text-fg-muted">
+                            <span className="text-paragraph-xs text-fg-muted">
                               {tAction(rule.action)} · {t("ruleVersion", { version: rule.version })}
                             </span>
                             <p>{rule.text}</p>
@@ -166,7 +168,7 @@ export async function AnalysisSection({
               </Field>
             ) : null}
 
-            <p className="text-xs text-fg-subtle">
+            <p className="text-paragraph-xs text-fg-subtle">
               {facts} ·{" "}
               {t("updated", {
                 time: format.dateTime(analysis.updatedAt, {
@@ -189,7 +191,7 @@ export async function AnalysisSection({
 export function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="grid gap-1">
-      <h3 className="text-xs font-medium text-fg-muted">{label}</h3>
+      <h3 className="text-paragraph-xs font-medium text-fg-muted">{label}</h3>
       <div>{children}</div>
     </div>
   );

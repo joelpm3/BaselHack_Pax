@@ -90,14 +90,16 @@ export async function RecommendationsSection({
                 </p>
               ) : null}
               {r.alternatives && r.alternatives.length > 0 ? (
-                <p className="text-xs text-fg-muted">
+                <p className="text-paragraph-xs text-fg-muted">
                   {t("alternatives")}:{" "}
                   {r.alternatives
                     .map((a) => `${productName(a.productCode)} (${a.reason})`)
                     .join("; ")}
                 </p>
               ) : null}
-              <p className="text-xs text-fg-subtle">{t("model", { model: r.model ?? "–" })}</p>
+              <p className="text-paragraph-xs text-fg-subtle">
+                {t("model", { model: r.model ?? "–" })}
+              </p>
             </li>
           ))}
         </ul>
@@ -150,7 +152,7 @@ export async function CalculationsSection({
                     </Badge>
                   </span>
                 </summary>
-                <div className="grid gap-2 border-t border-line px-3 py-2 text-xs">
+                <div className="grid gap-2 border-t border-line px-3 py-2 text-paragraph-xs">
                   {c.error ? <p className="text-error-dark">{c.error}</p> : null}
                   <p>
                     <span className="font-medium text-fg-muted">{t("input")}: </span>
@@ -210,7 +212,7 @@ export async function DocumentsSection({
                   : t("unknownType")}
               </span>
               <Badge>{tx(`documentStatus.${d.status}`)}</Badge>
-              <span className="ml-auto text-xs text-fg-muted tabular-nums">
+              <span className="ml-auto text-paragraph-xs text-fg-muted tabular-nums">
                 {format.dateTime(d.createdAt, dateTime)}
               </span>
             </li>
@@ -271,7 +273,7 @@ export async function AuditSection({
         <p className="text-fg-muted">{t("none")}</p>
       ) : (
         <div className="max-h-[28rem] overflow-auto">
-          <table className="w-full min-w-[36rem] text-xs">
+          <table className="w-full min-w-[36rem] text-paragraph-xs">
             <thead className="sticky top-0 bg-surface text-left text-fg-muted">
               <tr>
                 <th scope="col" className="py-1.5 pr-3 font-medium">

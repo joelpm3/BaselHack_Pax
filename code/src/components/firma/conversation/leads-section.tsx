@@ -79,7 +79,7 @@ function FromConversation({
   return (
     <Link
       href={`/firma/gespraeche/${conversationId}`}
-      className="justify-self-start text-xs text-contrast-green hover:underline"
+      className="justify-self-start text-paragraph-xs text-contrast-green hover:underline"
     >
       {label(titles[conversationId] ?? "")}
     </Link>
@@ -140,7 +140,7 @@ export async function LeadsSection({
                     <div className="flex flex-wrap items-center gap-2">
                       <LeadTypeBadge type={lead.type} />
                       <PriorityBadge priority={lead.priority} />
-                      <span className="ml-auto text-2xl font-bold">{lead.score}</span>
+                      <span className="ml-auto text-heading-m font-bold">{lead.score}</span>
                     </div>
                     <p className="font-medium">{lead.reasonToCall}</p>
                     <FromConversation
@@ -166,10 +166,10 @@ export async function LeadsSection({
                       </p>
                     ) : null}
                     <details className="rounded-m bg-gray-1 px-3 py-2">
-                      <summary className="cursor-pointer text-xs font-medium">
+                      <summary className="cursor-pointer text-paragraph-xs font-medium">
                         {t("conversation.leads.breakdown")}
                       </summary>
-                      <table className="mt-2 w-full text-xs">
+                      <table className="mt-2 w-full text-paragraph-xs">
                         <tbody>
                           {lead.scoreBreakdown.map((b, i) => (
                             <tr key={b.factor} className="border-t border-gray-2 first:border-t-0">
@@ -199,7 +199,7 @@ export async function LeadsSection({
                     <LeadNoteForm leadId={lead.id} />
                     {activities.length > 0 ? (
                       <details className="group">
-                        <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-xs font-medium [&::-webkit-details-marker]:hidden">
+                        <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 text-paragraph-xs font-medium [&::-webkit-details-marker]:hidden">
                           <ChevronRight
                             aria-hidden
                             className="size-3.5 transition-transform group-open:rotate-90 motion-reduce:transition-none"
@@ -242,7 +242,7 @@ export async function LeadsSection({
                             }
                             return (
                               <li key={a.id} className="grid gap-0.5">
-                                <span className="text-xs text-fg-muted">
+                                <span className="text-paragraph-xs text-fg-muted">
                                   {a.advisorName ?? t("conversation.activity.system")} ·{" "}
                                   {format.dateTime(a.createdAt, {
                                     day: "numeric",
@@ -304,7 +304,7 @@ export async function HandoversSection({
               {h.urgency === "high" ? (
                 <span className="text-error-dark">{t("taxonomy.urgency.high")}</span>
               ) : null}
-              <span className="ml-auto text-xs text-fg-muted">
+              <span className="ml-auto text-paragraph-xs text-fg-muted">
                 {format.dateTime(h.createdAt, {
                   day: "numeric",
                   month: "numeric",

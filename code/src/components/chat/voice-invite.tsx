@@ -13,7 +13,7 @@ export function VoiceInvite() {
     >
       <h2
         id="voice-invite-title"
-        className="flex items-center gap-2 text-heading-s font-bold text-pax-purple"
+        className="flex items-center gap-2 text-heading-s font-bold text-contrast-green"
       >
         <span aria-hidden className="grid size-7 place-items-center rounded-sm bg-pax-purple">
           <Mic className="size-4 text-white" />

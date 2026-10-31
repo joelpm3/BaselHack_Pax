@@ -95,7 +95,7 @@ async function OverviewContent({ searchParams }: { searchParams: SearchParams })
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
     <section aria-labelledby={id} className="grid gap-4">
-      <h2 id={id} className="text-lg font-bold">
+      <h2 id={id} className="text-paragraph-l font-bold">
         {title}
       </h2>
       {children}
@@ -128,9 +128,9 @@ function QueueTile({
       )}
     >
       <span className="hidden md:block">{mark}</span>
-      <span className="text-4xl leading-none font-bold tabular-nums md:hidden">{value}</span>
+      <span className="text-heading-xl leading-none font-bold tabular-nums md:hidden">{value}</span>
       <span className="grid gap-0.5">
-        <span className="hidden text-4xl leading-none font-bold tabular-nums md:block">
+        <span className="hidden text-heading-xl leading-none font-bold tabular-nums md:block">
           {value}
         </span>
         <span className="font-medium group-hover:underline">{label}</span>
@@ -176,7 +176,7 @@ async function TodaySection({
           href="/firma/wiedervorlagen"
           mark={
             <span aria-hidden className="grid size-7 place-items-center bg-gray-1">
-              <CalendarClock className="size-4" strokeWidth={1.75} />
+              <CalendarClock className="size-4" />
             </span>
           }
           value={today.dueFollowUps}
@@ -199,8 +199,8 @@ function Stat({ value, label, note }: { value: string; label: string; note?: str
   return (
     <div className="grid content-start gap-0.5">
       <dt className="order-2 text-fg-muted">{label}</dt>
-      <dd className="order-1 text-3xl leading-tight font-bold tabular-nums">{value}</dd>
-      {note ? <dd className="order-3 text-xs text-fg-muted">{note}</dd> : null}
+      <dd className="order-1 text-heading-m leading-tight font-bold tabular-nums">{value}</dd>
+      {note ? <dd className="order-3 text-paragraph-xs text-fg-muted">{note}</dd> : null}
     </div>
   );
 }

@@ -90,7 +90,7 @@ export async function PillarOverview({
     <section className="bg-pax-purple text-white" aria-labelledby="cockpit-title">
       <div className="mx-auto max-w-6xl px-4 pt-6 pb-8 lg:px-8 lg:pt-10 lg:pb-12">
         <p className="text-paragraph-s text-white/70">{t("title")}</p>
-        <h1 id="cockpit-title" className="mt-1 text-heading-xl font-bold">
+        <h1 id="cockpit-title" className="mt-1 text-heading-xl font-bold text-pax-green">
           {firstName ? t("greeting", { name: firstName }) : t("greetingAnonymous")}
         </h1>
         <p className="mt-2 max-w-xl text-paragraph-m text-white/80">{t("intro")}</p>

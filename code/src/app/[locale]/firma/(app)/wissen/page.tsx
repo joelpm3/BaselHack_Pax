@@ -65,7 +65,7 @@ async function KnowledgeContent() {
           return (
             <li key={code} className="grid gap-3 p-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 className="text-base font-bold">{PRODUCTS[code].name}</h2>
+                <h2 className="text-paragraph-m font-bold">{PRODUCTS[code].name}</h2>
                 {productEntries.length > 0 ? (
                   <span className="text-fg-muted">
                     {t("documentCount", {
@@ -123,7 +123,7 @@ async function EntryRow({ entry }: { entry: KnowledgeEntry }) {
             <Badge>{t("noActive")}</Badge>
           )}
         </div>
-        <p className="text-xs text-fg-muted">
+        <p className="text-paragraph-xs text-fg-muted">
           {t("versionLine", {
             version: shown.version,
             filename: shown.filename,

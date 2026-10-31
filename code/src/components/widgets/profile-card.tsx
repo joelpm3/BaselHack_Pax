@@ -114,7 +114,7 @@ function ProfileCardBody({
   }
 
   return (
-    <section className="rounded-[16px] border border-line bg-surface-muted px-4 py-3 lg:rounded-xl">
+    <section className="rounded-xl border border-line bg-surface-muted px-4 py-3 lg:rounded-xl">
       {noted ? (
         <header className="flex items-center gap-2">
           <NotebookPen aria-hidden className="size-4 shrink-0 text-pax-purple" />

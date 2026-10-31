@@ -11,7 +11,7 @@ export function PortalHeader() {
       actions={
         <Link
           href="/"
-          className="inline-flex h-9 items-center gap-2 rounded-full bg-pax-purple px-3.5 text-paragraph-xs font-medium text-white hover:bg-deep-purple"
+          className="inline-flex h-9 items-center gap-2 rounded-full bg-pax-green px-3.5 text-paragraph-xs font-medium text-ink hover:bg-contrast-green hover:text-white"
         >
           <MessageCircle className="size-4" aria-hidden />
           <span className="max-sm:sr-only">{t("toAdvisor")}</span>

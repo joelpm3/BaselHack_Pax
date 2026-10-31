@@ -71,8 +71,8 @@ async function LiveContent({
       <LiveRefresh types={["conversation", "analysis", "lead", "handover"]} intervalMs={1200} />
       <div className="grid content-start gap-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <p className="text-base">
-            <span className="text-2xl font-bold tabular-nums">{live.length}</span>{" "}
+          <p className="text-paragraph-m">
+            <span className="text-heading-m font-bold tabular-nums">{live.length}</span>{" "}
             {t("runningNow", { count: live.length })}
           </p>
           <ScopeSwitch path="/firma/live" scope={scope} />
@@ -96,7 +96,7 @@ async function LiveContent({
         )}
         {recent.length > 0 ? (
           <section className="grid gap-3">
-            <h2 className="text-base font-bold">{t("recentTitle")}</h2>
+            <h2 className="text-paragraph-m font-bold">{t("recentTitle")}</h2>
             <ul className="grid gap-3">
               {recent.map((c) => (
                 <LiveRow key={c.id} conversation={c} now={now} muted />
@@ -149,7 +149,7 @@ async function LiveRow({
                 <Bot aria-label={tCommon("simulated")} className="size-4 shrink-0 text-fg-muted" />
               ) : null}
             </span>
-            <span className="text-xs text-fg-muted tabular-nums">
+            <span className="text-paragraph-xs text-fg-muted tabular-nums">
               {t("messages", { count: c.messageCount })} ·{" "}
               {format.relativeTime(c.lastMessageAt ?? c.createdAt, now)}
             </span>

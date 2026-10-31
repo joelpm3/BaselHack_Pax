@@ -214,7 +214,9 @@ async function LeadsContent({
               className="grid grid-cols-[3rem_minmax(0,1fr)] gap-x-4 gap-y-3 px-4 py-4 lg:grid-cols-[3rem_minmax(0,14rem)_minmax(0,1fr)_auto] lg:items-start"
             >
               <span className="grid content-start gap-1">
-                <span className="text-xl leading-none font-bold tabular-nums">{l.score}</span>
+                <span className="text-heading-s leading-none font-bold tabular-nums">
+                  {l.score}
+                </span>
                 <span className="h-1 bg-gray-2">
                   <span className="block h-full bg-pax-purple" style={{ width: `${l.score}%` }} />
                 </span>
@@ -241,7 +243,7 @@ async function LeadsContent({
                     />
                   ) : null}
                 </span>
-                <span className="text-xs text-fg-muted">{tType(l.type)}</span>
+                <span className="text-paragraph-xs text-fg-muted">{tType(l.type)}</span>
               </span>
               <span className="col-span-2 grid min-w-0 content-start gap-1.5 lg:col-span-1">
                 {l.conversationId ? (
@@ -257,7 +259,7 @@ async function LeadsContent({
                 {l.openHandovers > 0 ? (
                   <Link
                     href={customerHref(l.customerId, "handovers")}
-                    className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-xs font-medium text-warning-dark hover:underline"
+                    className="justify-self-start rounded-full bg-warning-light px-2 py-0.5 text-paragraph-xs font-medium text-warning-dark hover:underline"
                   >
                     {tKinds("handover.alsoOpen")}
                   </Link>

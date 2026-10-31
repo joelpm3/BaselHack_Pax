@@ -19,7 +19,7 @@ export function PageHeader({
   return (
     <header className="flex flex-wrap items-end justify-between gap-x-6 gap-y-3 border-b border-line px-4 pt-6 pb-5 sm:px-6 lg:px-8">
       <div className="grid min-w-0 gap-1">
-        <h1 className="text-2xl font-bold leading-tight">{title}</h1>
+        <h1 className="text-heading-m font-bold text-contrast-green">{title}</h1>
         {description ? <p className="max-w-2xl text-fg-muted">{description}</p> : null}
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-3">{actions}</div> : null}
@@ -70,7 +70,7 @@ export function Panel({
       {title ? (
         <div className="mb-4 flex items-start justify-between gap-3">
           <div className="grid gap-0.5">
-            <h2 className="text-base font-bold">{title}</h2>
+            <h2 className="text-paragraph-m font-bold">{title}</h2>
             {description ? <p className="text-fg-muted">{description}</p> : null}
           </div>
           {actions}
@@ -97,7 +97,7 @@ export function SegmentedLinks({
           href={item.href}
           aria-current={item.active ? "true" : undefined}
           className={cn(
-            "rounded-[8px] px-3 py-1.5 font-medium transition-colors",
+            "rounded-m px-3 py-1.5 font-medium transition-colors",
             item.active ? "bg-surface text-fg ring-1 ring-line" : "text-fg-muted hover:text-fg",
           )}
         >
@@ -191,7 +191,7 @@ export function ListSearch({
           name="q"
           defaultValue={value}
           placeholder={placeholder}
-          className="h-9 pl-9 text-sm"
+          className="h-9 pl-9 text-paragraph-s"
         />
       </form>
     </search>

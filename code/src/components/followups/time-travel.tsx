@@ -113,7 +113,7 @@ export function TimeTravel({ today, simulated }: { today: string; simulated: boo
             type="date"
             value={target}
             onChange={(e) => setTarget(e.target.value)}
-            className="h-9 min-w-0 flex-1 py-0 text-sm"
+            className="h-9 min-w-0 flex-1 py-0 text-paragraph-s"
           />
           <Button type="submit" size="sm" disabled={pending || !target}>
             {t("jump")}

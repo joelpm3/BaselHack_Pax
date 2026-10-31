@@ -21,7 +21,7 @@ import {
 } from "@/components/firma/conversation/records-section";
 import { Transcript } from "@/components/firma/conversation/transcript";
 import { customerHref } from "@/components/firma/customer-link";
-import { LiveRefresh, LiveStatus } from "@/components/firma/live-events";
+import { LiveRefresh } from "@/components/firma/live-events";
 import { LoadingBlock, PageBody, Panel } from "@/components/firma/page-parts";
 import { StageSquares } from "@/components/firma/stage-squares";
 import { buttonClasses } from "@/components/ui/button";
@@ -85,7 +85,7 @@ async function ConversationContent({
 
   return (
     <>
-      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-3 border-b border-line px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/firma/gespraeche"
           className="inline-flex items-center gap-1.5 text-fg-muted hover:text-fg"
@@ -93,7 +93,6 @@ async function ConversationContent({
           <ArrowLeft aria-hidden className="size-4" />
           {t("back")}
         </Link>
-        <LiveStatus />
       </div>
       <LiveRefresh
         types={["conversation", "analysis", "lead", "handover", "document"]}
@@ -103,7 +102,7 @@ async function ConversationContent({
       <header className="grid gap-3 border-b border-line px-4 py-5 sm:px-6 lg:px-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="grid gap-1">
-            <h1 className="text-2xl font-bold leading-tight">
+            <h1 className="text-heading-m font-bold leading-tight">
               <Link href={customerHref(customer.id)} className="hover:underline">
                 {name}
               </Link>

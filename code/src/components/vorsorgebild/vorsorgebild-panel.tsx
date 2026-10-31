@@ -37,7 +37,7 @@ export function VorsorgebildPanel({ model, focus, onSelect }: VorsorgebildPanelP
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-heading-s font-bold">{t("title")}</h2>
+      <h2 className="text-heading-s font-bold text-contrast-green">{t("title")}</h2>
 
       {kind && model.scenarios.length > 0 ? (
         <>

@@ -28,7 +28,7 @@ export default function ExistingCustomerPage({ params }: PageProps<"/[locale]/ku
     <>
       <SiteHeader />
       <main className="mx-auto w-full max-w-[720px] px-4 pt-10 pb-16 lg:pt-16">
-        <h1 className="text-heading-l font-bold text-pax-purple">{t("title")}</h1>
+        <h1 className="text-heading-l font-bold text-contrast-green">{t("title")}</h1>
         <p className="mt-3 text-paragraph-l text-fg-muted">{t("lead")}</p>
         <p className="mt-6 flex items-start gap-2 rounded-m bg-light-purple px-4 py-3 text-paragraph-s text-deep-purple">
           <Info aria-hidden className="mt-0.5 size-4 shrink-0" />
@@ -86,7 +86,7 @@ async function DemoCustomers({ locale }: { locale: string }) {
               <input type="hidden" name="customerId" value={customer.id} />
               <button
                 type="submit"
-                className="group flex w-full items-center gap-4 rounded-[16px] border border-line bg-surface px-5 py-4 text-left transition-colors hover:border-pax-purple lg:rounded-xl"
+                className="group flex w-full items-center gap-4 rounded-xl border border-line bg-surface px-5 py-4 text-left transition-colors hover:border-pax-purple lg:rounded-xl"
               >
                 <span
                   aria-hidden

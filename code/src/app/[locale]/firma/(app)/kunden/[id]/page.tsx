@@ -1,7 +1,7 @@
 // One job: everything an advisor needs to act on one person: how to reach them, what is open
 // (handover, lead, follow-up) and the latest next step. History, records and the timeline sit
 // collapsed below.
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
@@ -23,7 +23,7 @@ import {
   ConversationsSection,
   TimelineSection,
 } from "@/components/firma/customer/sections";
-import { LiveRefresh, LiveStatus } from "@/components/firma/live-events";
+import { LiveRefresh } from "@/components/firma/live-events";
 import { LoadingBlock, PageBody } from "@/components/firma/page-parts";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "@/i18n/navigation";
@@ -90,7 +90,7 @@ async function CustomerContent({
 
   return (
     <>
-      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-3 border-b border-line px-4 py-3 sm:px-6 lg:px-8">
         <Link
           href="/firma/kunden"
           className="inline-flex items-center gap-1.5 text-fg-muted hover:text-fg"
@@ -98,7 +98,6 @@ async function CustomerContent({
           <ArrowLeft aria-hidden className="size-4" />
           {t("back")}
         </Link>
-        <LiveStatus />
       </div>
       <LiveRefresh
         types={["conversation", "analysis", "lead", "handover", "document", "policy"]}
@@ -107,7 +106,7 @@ async function CustomerContent({
       <header className="flex flex-wrap items-end justify-between gap-4 border-b border-line px-4 py-5 sm:px-6 lg:px-8">
         <div className="grid min-w-0 gap-1.5">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-            <h1 className="text-2xl leading-tight font-bold">{name}</h1>
+            <h1 className="text-heading-m leading-tight font-bold">{name}</h1>
             <Badge tone={customer.lifecycle === "client" ? "success" : "neutral"}>
               {tx(`lifecycle.${customer.lifecycle}`)}
             </Badge>
@@ -131,10 +130,16 @@ async function CustomerContent({
           {nextStep && latest ? (
             <Link
               href={`/firma/gespraeche/${latest.id}`}
-              className="grid gap-1 rounded-xl border-l-4 border-pax-purple bg-light-purple px-5 py-4 text-deep-purple hover:underline"
+              className="group flex items-center gap-4 rounded-xl bg-light-purple px-5 py-4 text-deep-purple"
             >
-              <span className="text-xs font-medium">{tFocus("nextStep")}</span>
-              <span className="font-medium">{nextStep}</span>
+              <span className="grid min-w-0 flex-1 gap-1">
+                <span className="text-paragraph-xs font-medium">{tFocus("nextStep")}</span>
+                <span className="font-medium">{nextStep}</span>
+              </span>
+              <ArrowRight
+                aria-hidden
+                className="size-5 shrink-0 transition-transform group-hover:translate-x-0.5"
+              />
             </Link>
           ) : null}
           {detail.handovers.length > 0 ? (

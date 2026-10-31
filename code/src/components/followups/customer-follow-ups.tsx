@@ -65,7 +65,7 @@ export async function CustomerFollowUps({ customerId }: { customerId: string }) 
                       <Badge tone={STATUS_TONE[e.status]}>{t(`status.${e.status}`)}</Badge>
                     </span>
                     <span className="text-fg-muted">«{e.sourceQuote}»</span>
-                    <span className="flex flex-wrap items-center justify-between gap-2 text-xs text-fg-muted">
+                    <span className="flex flex-wrap items-center justify-between gap-2 text-paragraph-xs text-fg-muted">
                       <span>
                         {t("card.followUpOn")} <BusinessDate date={e.followUpOn} />
                       </span>

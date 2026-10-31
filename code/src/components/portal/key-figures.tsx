@@ -32,7 +32,7 @@ export async function KeyFigures({ figures, locale }: { figures: Figures; locale
   ];
   return (
     <div>
-      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-[16px] border border-line bg-line lg:grid-cols-4 lg:rounded-xl">
+      <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-line bg-line lg:grid-cols-4 lg:rounded-xl">
         {tiles.map(({ key, label, figure, note }) => {
           // A known zero (e.g. no pension fund) reads as a dash with its reason, not "CHF 0".
           const shown = figure && (figure.value > 0 || figure.note !== "noPensionFund");

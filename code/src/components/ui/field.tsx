@@ -13,7 +13,7 @@ export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
 }
 
 export function Select({ className, ...props }: ComponentProps<"select">) {
-  return <select className={cn(control, "h-11 pr-8", className)} {...props} />;
+  return <select className={cn(control, "pax-select h-11 pr-10", className)} {...props} />;
 }
 
 export interface FieldProps {

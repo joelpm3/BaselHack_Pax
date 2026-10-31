@@ -452,7 +452,7 @@ function SignForm({
             autoComplete="name"
             aria-describedby={`${id}-signature-hint`}
             placeholder={expectedName || t("signaturePlaceholder")}
-            className="h-11 w-full min-w-0 bg-transparent text-heading-s italic placeholder:text-gray-4 focus:outline-none"
+            className="h-11 w-full min-w-0 bg-transparent text-heading-s placeholder:text-gray-4 focus:outline-none"
           />
         </div>
         <p id={`${id}-signature-hint`} className="text-paragraph-xs text-fg-muted">

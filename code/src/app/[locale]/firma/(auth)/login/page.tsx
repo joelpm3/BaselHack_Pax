@@ -23,14 +23,12 @@ export default function LoginPage({ params }: PageProps<"/[locale]/firma/login">
   const t = useTranslations("firma.login");
 
   return (
-    <div className="grid min-h-dvh text-sm lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
+    <div className="grid min-h-dvh text-paragraph-s lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
       <section className="flex flex-col justify-between gap-10 bg-deep-purple px-6 py-8 text-white lg:px-12 lg:py-12">
         <PaxLogo variant="negative" className="h-7 self-start" />
         <div className="grid max-w-md gap-4">
-          <h1 className="text-[2rem] leading-tight font-bold text-pax-green lg:text-[2.75rem]">
-            {t("headline")}
-          </h1>
-          <p className="text-base text-white/80">{t("intro")}</p>
+          <h1 className="text-heading-xl font-bold text-pax-green">{t("headline")}</h1>
+          <p className="text-paragraph-m text-white/80">{t("intro")}</p>
         </div>
         <ul aria-hidden className="flex gap-1.5">
           {FUNNEL_STAGES.map((stage, i) => (
@@ -46,7 +44,7 @@ export default function LoginPage({ params }: PageProps<"/[locale]/firma/login">
       </section>
       <section className="flex items-center justify-center px-6 py-10">
         <div className="grid w-full max-w-md gap-8">
-          <h2 className="text-2xl font-bold">{t("title")}</h2>
+          <h2 className="text-heading-m font-bold">{t("title")}</h2>
           <Suspense fallback={<Spinner label={t("title")} />}>
             <AdvisorPicker />
           </Suspense>
