@@ -21,6 +21,8 @@ export function RecommendationWidget({ state, output }: WidgetProps) {
   const data = output as RecommendOutput | undefined;
   if (!data) return null;
   if (data.status === "needs_info") return <NeedsInfo missing={data.missing} />;
+  // The analysis card follows in the same turn; an empty recommendation card would only confuse.
+  if (data.status === "needs_analysis") return null;
   return <Recommendations data={data} />;
 }
 

@@ -70,10 +70,18 @@ export interface ExcludedProduct {
   ruleId?: string;
 }
 
+/** An analysis tool the advisor must run before the named gaps can be priced. */
+export interface AnalysisNeeded {
+  tool: string;
+  gaps: GapType[];
+}
+
 export interface RecommendOutput {
-  status: "ok" | "needs_info";
+  status: "ok" | "needs_info" | "needs_analysis";
   /** Profile fields the advisor must ask for first. */
   missing: string[];
+  /** Set with `needs_analysis`: no stored Logismata result backs these gaps yet. */
+  analysisNeeded?: AnalysisNeeded[];
   recommendations: RecommendationView[];
   excluded: ExcludedProduct[];
   ruleSetVersion: number;

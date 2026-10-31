@@ -239,6 +239,7 @@
         "scenario": "«{scenario}» gerechnet",
         "savingsPlan": "Ziel {goal} in {years} Jahren, {monthly} pro Monat",
         "scenarioMissing": "Angaben fehlen: {fields}",
+        "recommendHeldBack": "Zurückgehalten: zuerst die Analyse",
         "recommend": "{count, plural, =0 {Keine passende Empfehlung} one {# Empfehlung: {products}} other {# Empfehlungen: {products}}}",
         "suitability": "Gestartet für {product}",
         "suitabilityDone": "{product}: {points} Punkte",

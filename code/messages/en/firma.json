@@ -239,6 +239,7 @@
         "scenario": "“{scenario}” calculated",
         "savingsPlan": "Goal {goal} in {years} years, {monthly} a month",
         "scenarioMissing": "Missing details: {fields}",
+        "recommendHeldBack": "Held back: the analysis runs first",
         "recommend": "{count, plural, =0 {No suitable recommendation} one {# recommendation: {products}} other {# recommendations: {products}}}",
         "suitability": "Started for {product}",
         "suitabilityDone": "{product}: {points} points",

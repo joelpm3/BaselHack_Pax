@@ -6,7 +6,8 @@ import { sign, unsign } from "./signing";
 
 /**
  * Company dashboard access: shared password (COMPANY_PASSWORD) + choosing one of the seeded
- * advisors, so notes and status changes have an author. Not real auth; see documentation.
+ * advisors, so notes and status changes have an author. Not real auth: production would put
+ * Pax's SSO in front of this cookie; everything downstream already works per advisor.
  */
 const COOKIE = "pax_advisor";
 const TWELVE_HOURS = 60 * 60 * 12;

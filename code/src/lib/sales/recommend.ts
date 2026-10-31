@@ -2,6 +2,7 @@ import "server-only";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { patchToolOutput } from "@/lib/advisor/conversations";
+import { latestCalculation } from "@/lib/advisor/logismata/latest";
 import { type Pillar3aPolicy, pillar3aContributionIn } from "@/lib/advisor/pillar3a";
 import { pillar3aPolicies } from "@/lib/advisor/policies";
 import type { ToolContext } from "@/lib/advisor/tools/context";
@@ -26,6 +27,7 @@ import {
 } from "./sizing";
 import { advanceConversationStage } from "./stage";
 import type {
+  AnalysisNeeded,
   CoverView,
   Criterion,
   ExcludedProduct,
@@ -202,6 +204,46 @@ function needsFrom(gaps: RecommendInput["gaps"]): Need[] {
   return [...byType.values()];
 }
 
+/**
+ * The analysis each gap must rest on. Products come only after the life situation is calculated
+ * (the challenge's no-go on product-first selling), so this is enforced here, not left to the
+ * prompt: a customer who says "skip the analysis" would otherwise get cover sized from a rule of
+ * thumb. Any earlier successful call for the customer counts, what-if scenarios excluded. Child
+ * and care gaps have no Logismata check of their own. The amounts themselves still come from the
+ * model, read off that result; taking them from the stored calculation is the next step.
+ */
+const ANALYSIS_FOR: Partial<Record<GapType, { tool: string; operations: string[] }>> = {
+  death: { tool: "showRiskAnalysis", operations: ["APICalc_calculateRisk"] },
+  disability: { tool: "showRiskAnalysis", operations: ["APICalc_calculateRisk"] },
+  retirement: { tool: "showPensionOverview", operations: ["APICalc_calculateRetirement"] },
+  payout: {
+    tool: "showPensionOverview",
+    operations: ["APICalc_calculateRetirement", "APICalc_calculateCapitalTax"],
+  },
+  tax: {
+    tool: "calculateTaxSavings",
+    operations: [
+      "APICalc_calculateSaving3a",
+      "APICalc_calculatePurchaseP2",
+      "APICalc_calculateRetirement",
+    ],
+  },
+};
+
+/** The analyses still to run before these needs can be priced, one entry per tool. */
+function analysesMissing(customerId: string, needs: Need[]): AnalysisNeeded[] {
+  const byTool = new Map<string, AnalysisNeeded>();
+  for (const need of needs) {
+    const required = ANALYSIS_FOR[need.gap];
+    if (!required) continue;
+    if (required.operations.some((op) => latestCalculation(customerId, op))) continue;
+    const entry = byTool.get(required.tool) ?? { tool: required.tool, gaps: [] };
+    entry.gaps.push(need.gap);
+    byTool.set(required.tool, entry);
+  }
+  return [...byTool.values()];
+}
+
 function insuredFor(
   who: Who,
   profile: LifeSituation,
@@ -322,6 +364,8 @@ export async function recommendProducts(
         "Allowed: the first of a month from next month up to 12 months ahead.",
     );
   const needs = needsFrom(input.gaps);
+  const analysisNeeded = analysesMissing(ctx.customerId, needs);
+  if (analysisNeeded.length > 0) return { ...base, status: "needs_analysis", analysisNeeded };
   const insuredByWho = new Map<Who, Insured>();
   for (const who of new Set(needs.map((n) => n.who))) {
     const insured = insuredFor(who, profile, customer, startDate, contributionIn);

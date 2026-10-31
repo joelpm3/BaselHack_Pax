@@ -109,6 +109,7 @@ export function summarizeTool(name: string, output: unknown): ToolLine | null {
     }
     case "recommendProducts": {
       const o = output as unknown as RecommendOutput;
+      if (o.status === "needs_analysis") return line("recommendHeldBack");
       if (o.status !== "ok") return missingLine(o);
       return line("recommend", {
         count: o.recommendations.length,
