@@ -7,10 +7,10 @@ import { publish } from "@/lib/events/bus";
 import { getActiveRuleSet } from "@/lib/rules/active";
 import { type GreetingVariant, greetingText } from "./greeting";
 import { detectLanguage } from "./language";
-import type { AdvisorMessageMetadata } from "./types";
+import type { AdvisorDataParts, AdvisorMessageMetadata } from "./types";
 
 export type Conversation = typeof schema.conversations.$inferSelect;
-export type AdvisorUIMessage = UIMessage<AdvisorMessageMetadata>;
+export type AdvisorUIMessage = UIMessage<AdvisorMessageMetadata, AdvisorDataParts>;
 export type InputMode = NonNullable<AdvisorMessageMetadata["inputMode"]>;
 
 export interface CreateConversationInput {

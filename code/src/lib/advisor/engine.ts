@@ -3,6 +3,7 @@ import {
   convertToModelMessages,
   generateText,
   getToolName,
+  type InferUIMessageChunk,
   InvalidToolInputError,
   isStepCount,
   isToolUIPart,
@@ -11,7 +12,6 @@ import {
   streamText,
   type ToolSet,
   toUIMessageStream,
-  type UIMessageChunk,
 } from "ai";
 import { asc, eq } from "drizzle-orm";
 import { getModel, modelName } from "@/lib/ai/models";
@@ -193,7 +193,7 @@ function finishTurn(
 export async function streamAdvisorTurn(
   input: TurnInput,
   onSettled?: (result: TurnResult) => void,
-): Promise<ReadableStream<UIMessageChunk>> {
+): Promise<ReadableStream<InferUIMessageChunk<AdvisorUIMessage>>> {
   const { message } = input;
   const conversation = followCustomerLanguage(input.conversation, message);
   if (input.trigger === "regenerate-message") deleteAnswersAfterLastUserMessage(conversation.id);

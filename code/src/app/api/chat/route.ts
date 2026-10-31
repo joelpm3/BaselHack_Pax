@@ -1,7 +1,9 @@
-import { createUIMessageStreamResponse } from "ai";
+import { createUIMessageStream, createUIMessageStreamResponse } from "ai";
 import { eq } from "drizzle-orm";
-import { getConversation } from "@/lib/advisor/conversations";
-import { streamAdvisorTurn } from "@/lib/advisor/engine";
+import { type AdvisorUIMessage, getConversation, messageText } from "@/lib/advisor/conversations";
+import { ADVISOR_UNAVAILABLE, streamAdvisorTurn } from "@/lib/advisor/engine";
+import type { RequestMood } from "@/lib/advisor/mood";
+import { requestMood } from "@/lib/advisor/request-mood";
 import { chatRequestSchema, sanitizeUserMessage } from "@/lib/advisor/user-message";
 import { getCurrentCustomer } from "@/lib/auth/customer";
 import { db, schema } from "@/lib/db";
@@ -35,7 +37,26 @@ export async function POST(req: Request) {
   // browser reloads or leaves mid-answer; the client branch only mirrors it.
   const [toClient, toServer] = stream.tee();
   void drain(toServer);
-  return createUIMessageStreamResponse({ stream: toClient });
+  return createUIMessageStreamResponse({
+    stream: createUIMessageStream<AdvisorUIMessage>({
+      execute: async ({ writer }) => {
+        writer.merge(toClient);
+        const mood = await moodOf(message);
+        if (mood) writer.write({ type: "data-mood", data: mood, transient: true });
+      },
+      onError: () => ADVISOR_UNAVAILABLE,
+    }),
+  });
+}
+
+/** Clara's face while she thinks: read from what the customer wrote or said, not from uploads. */
+async function moodOf(message: AdvisorUIMessage): Promise<RequestMood | null> {
+  const mode = message.metadata?.inputMode ?? "text";
+  if (mode !== "text" && mode !== "voice") return null;
+  return requestMood(messageText(message)).catch((error) => {
+    console.error("[advisor] request mood failed", error);
+    return null;
+  });
 }
 
 async function drain(stream: ReadableStream<unknown>) {
