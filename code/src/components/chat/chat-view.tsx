@@ -104,8 +104,10 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
   }, [picture.pending, refreshPicture]);
 
   // Follow the transcript while it grows (streaming, widgets loading) unless the person scrolled
-  // up. On open, ignore scroll events until they interact: the router's scroll reset and
-  // widgets settling would otherwise leave a reopened conversation at the greeting.
+  // up, but never past the start of Clara's latest reply: a long answer stays readable from its
+  // first line instead of scrolling it away. On open, ignore scroll events until they interact:
+  // the router's scroll reset and widgets settling would otherwise leave a reopened conversation
+  // at the greeting.
   useEffect(() => {
     const log = logRef.current;
     if (!log) return;
@@ -118,7 +120,17 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
     for (const type of intents) window.addEventListener(type, settle, { passive: true });
     const timer = window.setTimeout(settle, 2000);
 
-    const toBottom = () => window.scrollTo({ top: document.documentElement.scrollHeight });
+    const toBottom = () => {
+      const bottom = document.documentElement.scrollHeight;
+      const items = log.querySelectorAll<HTMLElement>(":scope > li[data-role]");
+      const start = items[items.length - 1];
+      if (start?.dataset.role !== "assistant") return window.scrollTo({ top: bottom });
+      const replyTop =
+        start.getBoundingClientRect().top +
+        window.scrollY -
+        Number.parseFloat(getComputedStyle(start).scrollMarginTop);
+      window.scrollTo({ top: Math.min(bottom, replyTop) });
+    };
     const onScroll = () => {
       if (settling) return;
       const distance = document.documentElement.scrollHeight - window.innerHeight - window.scrollY;
@@ -163,7 +175,13 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-8 lg:px-0 lg:pt-10"
             >
               {messages.map((message) => (
-                <li key={message.id}>
+                // The scroll margin keeps a reply's first line below the header (and the
+                // Vorsorgebild strip on mobile) when the view stops at its start.
+                <li
+                  key={message.id}
+                  data-role={message.role}
+                  className="scroll-mt-32 lg:scroll-mt-24"
+                >
                   <MessageView message={message} />
                 </li>
               ))}
