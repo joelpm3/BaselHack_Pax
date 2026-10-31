@@ -373,6 +373,7 @@ function upsertPolicy(
       ? existing.find(
           (p) =>
             p.category === "pension_fund" &&
+            (p.details?.subject ?? "self") === (draft.details.subject ?? "self") &&
             sameText(p.insurer, draft.insurer) &&
             sameText(p.insuredPerson, draft.insuredPerson),
         )
@@ -437,7 +438,7 @@ export function confirmExtraction(
     throw error;
   }
 
-  const draft = policyDraftFor(docType, values, todayIso());
+  const draft = policyDraftFor(docType, values, todayIso(), subject);
   const policy = draft ? upsertPolicy(customerId, doc.id, draft) : null;
   db.update(schema.extractions)
     .set({ confirmedAt: new Date(), edits: { ...edits, [SUBJECT_EDIT_KEY]: subject } })

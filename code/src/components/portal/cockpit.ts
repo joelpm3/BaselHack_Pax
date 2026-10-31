@@ -1,5 +1,6 @@
 import type { policies } from "@/lib/db/schema";
 import { addMonths } from "@/lib/documents/dates";
+import { subjectOfPolicy } from "@/lib/domain/policy-subject";
 import type { LifeSituation } from "@/lib/domain/profile";
 import { LIFE_AND_PENSION_CATEGORIES } from "@/lib/domain/taxonomy";
 
@@ -44,9 +45,12 @@ export interface KeyFigures {
   contracts: number;
 }
 
+/** Pension-fund benefits are the customer's own: a partner's certificate never counts here. */
 export function keyFigures(policies: PolicyRow[], profile: LifeSituation): KeyFigures {
   const active = policies.filter((p) => p.status === "active");
-  const funds = active.filter((p) => p.category === "pension_fund");
+  const funds = active.filter(
+    (p) => p.category === "pension_fund" && subjectOfPolicy(p, profile) === "self",
+  );
   const fundPension = funds.reduce((s, p) => s + num(p.annuityAnnual), 0);
   const retirementAge = funds.map((p) => num(p.details?.retirementAge)).find((age) => age > 0);
   return {

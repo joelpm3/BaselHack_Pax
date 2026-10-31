@@ -1,4 +1,4 @@
-import type { LifeSituation, Person } from "@/lib/domain/profile";
+import type { LifeSituation, Partner, Person, Pillar2 } from "@/lib/domain/profile";
 import type { IncomeBreakdown, RiskCause } from "../types";
 
 /**
@@ -156,6 +156,17 @@ export interface RetirementPensions {
   person1: number;
   person2?: number;
   capital1?: number;
+  capital2?: number;
+}
+
+/** The partner taken into account by Logismata (person 2), if any. */
+function partnerOf(profile: LifeSituation): Partner | undefined {
+  return hasPartner(profile) ? profile.partner : undefined;
+}
+
+/** Person 2 with the BVG flag from the partner's own pension certificate, if known. */
+function basePartner(partner: Partner) {
+  return basePerson(partner, partner.pillar2?.hasPensionFund);
 }
 
 export function buildRetirementBaseRequest(profile: LifeSituation, year: number) {
@@ -166,10 +177,11 @@ export function buildRetirementBaseRequest(profile: LifeSituation, year: number)
       RetirementPillar2: { Pension: 0, CurrentCapital: profile.pillar2.currentCapital ?? 0 },
     },
   };
-  if (hasPartner(profile) && profile.partner) {
+  const partner = partnerOf(profile);
+  if (partner) {
     request.Person2 = {
-      ...basePerson(profile.partner),
-      RetirementPillar2: { Pension: 0, CurrentCapital: 0 },
+      ...basePartner(partner),
+      RetirementPillar2: { Pension: 0, CurrentCapital: partner.pillar2?.currentCapital ?? 0 },
     };
   }
   return request;
@@ -206,10 +218,15 @@ export function buildRetirementRequest(
     NeedInPcRetirement: true,
     NeedRetirement: NEED_PERCENT,
   };
-  if (hasPartner(profile) && profile.partner) {
+  const partner = partnerOf(profile);
+  if (partner) {
+    const capital = pensions.capital2 ?? partner.pillar2?.currentCapital;
     request.Person2 = {
-      ...basePerson(profile.partner),
-      RetirementPillar2: { Pension: Math.max(0, Math.round(pensions.person2 ?? 0)) },
+      ...basePartner(partner),
+      RetirementPillar2: {
+        Pension: Math.max(0, Math.round(pensions.person2 ?? 0)),
+        ...(capital !== undefined ? { CurrentCapital: capital } : {}),
+      },
     };
   }
   return request;
@@ -223,22 +240,17 @@ export interface Pillar2RiskPensions {
   CoverageCapital?: number;
 }
 
-/** True when the pension certificate gave at least one risk benefit. */
-export function hasKnownRiskPensions(profile: LifeSituation): boolean {
-  const p = profile.pillar2;
+/** True when a pension certificate gave at least one risk benefit. */
+export function hasKnownRiskPensions(p: Pillar2 | undefined): boolean {
   return (
-    p.disabilityPension !== undefined ||
-    p.partnerPension !== undefined ||
-    p.childPension !== undefined
+    p?.disabilityPension !== undefined ||
+    p?.partnerPension !== undefined ||
+    p?.childPension !== undefined
   );
 }
 
 /** Known certificate values on top of Logismata's estimate (RiskBase). */
-export function mergeRiskPensions(
-  profile: LifeSituation,
-  estimate: Pillar2RiskPensions,
-): Pillar2RiskPensions {
-  const p = profile.pillar2;
+export function mergeRiskPensions(p: Pillar2, estimate: Pillar2RiskPensions): Pillar2RiskPensions {
   return {
     ...estimate,
     Disability: p.disabilityPension ?? estimate.Disability,
@@ -248,9 +260,28 @@ export function mergeRiskPensions(
   };
 }
 
+/**
+ * Whether the risk check rests on estimated pension-fund benefits: someone in the household
+ * has (or is assumed to have) a pension fund, but no certificate gave their risk benefits.
+ */
+export function riskPensionsEstimated(profile: LifeSituation): boolean {
+  const ownEstimated =
+    withBvg(profile.person, profile.pillar2.hasPensionFund) &&
+    !hasKnownRiskPensions(profile.pillar2);
+  const partner = partnerOf(profile);
+  const partnerEstimated =
+    partner !== undefined &&
+    withBvg(partner, partner.pillar2?.hasPensionFund) &&
+    !hasKnownRiskPensions(partner.pillar2);
+  return ownEstimated || partnerEstimated;
+}
+
 export interface RiskOverrides {
   extraChildren?: number;
+  /** Pension-fund risk benefits of person 1 (the customer). */
   pillar2Pensions?: Pillar2RiskPensions;
+  /** Pension-fund risk benefits of person 2 (the partner). */
+  partnerPillar2Pensions?: Pillar2RiskPensions;
 }
 
 export function buildRiskRequest(
@@ -259,7 +290,7 @@ export function buildRiskRequest(
   overrides: RiskOverrides = {},
 ) {
   const children = dependentChildren(profile, year) + (overrides.extraChildren ?? 0);
-  const partner = hasPartner(profile) && profile.partner ? profile.partner : undefined;
+  const partner = partnerOf(profile);
   const deathNeed = (dependants: boolean) => (dependants ? DEATH_NEED_PERCENT : 0);
   const needs = (deathPercent: number) => ({
     NeedInPcDisability: true,
@@ -280,8 +311,11 @@ export function buildRiskRequest(
   };
   if (partner) {
     request.Person2 = {
-      ...basePerson(partner),
+      ...basePartner(partner),
       NumberOfChildren: 0,
+      ...(overrides.partnerPillar2Pensions
+        ? { Pillar2Pensions: overrides.partnerPillar2Pensions }
+        : {}),
       ...needs(DEATH_NEED_PERCENT),
     };
   }
@@ -290,7 +324,7 @@ export function buildRiskRequest(
 
 export function buildRiskBaseRequest(profile: LifeSituation, year: number) {
   const children = dependentChildren(profile, year);
-  const partner = hasPartner(profile) && profile.partner ? profile.partner : undefined;
+  const partner = partnerOf(profile);
   return {
     ...relationshipFields(profile, year),
     Person1: {
@@ -298,7 +332,7 @@ export function buildRiskBaseRequest(profile: LifeSituation, year: number) {
       NumberOfChildren: partner ? 0 : children,
     },
     NumberOfChildren: partner ? children : 0,
-    ...(partner ? { Person2: { ...basePerson(partner), NumberOfChildren: 0 } } : {}),
+    ...(partner ? { Person2: { ...basePartner(partner), NumberOfChildren: 0 } } : {}),
   };
 }
 

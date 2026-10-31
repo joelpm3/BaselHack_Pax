@@ -39,7 +39,19 @@
       "workloadPercent": "Partner's workload",
       "grossIncome": "Partner's income per year",
       "occupation": "Partner's occupation",
-      "smoker": "Partner smokes"
+      "smoker": "Partner smokes",
+      "pillar2": {
+        "hasPensionFund": "Partner's pension fund",
+        "insuredSalary": "Partner's insured salary",
+        "currentCapital": "Partner's retirement savings today",
+        "projectedCapitalAtRetirement": "Partner's retirement savings at 65",
+        "projectedPensionAtRetirement": "Partner's retirement pension per year",
+        "disabilityPension": "Partner's disability pension per year",
+        "partnerPension": "Spouse's pension from the partner's fund per year",
+        "childPension": "Child's pension from the partner's fund per year",
+        "deathLumpSum": "Partner's death benefit",
+        "maxBuyIn": "Partner's possible buy-in"
+      }
     },
     "children": "Children",
     "goals": "Goals",

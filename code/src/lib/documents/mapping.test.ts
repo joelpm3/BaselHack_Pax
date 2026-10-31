@@ -112,14 +112,29 @@ describe("profileChangesFor", () => {
     );
   });
 
-  it("maps a partner's certificate to partner fields only", () => {
+  it("maps a partner's certificate to the partner and their pension fund only", () => {
     const changes = profileChangesFor("pension_certificate", certificate, "partner", mueller);
     expect(changes).toEqual([
       { path: "partner.grossIncome", value: 100000 },
       { path: "partner.workloadPercent", value: 100 },
       { path: "partner.birthYear", value: 1984 },
+      { path: "partner.pillar2.insuredSalary", value: 73540 },
+      { path: "partner.pillar2.disabilityPension", value: 29420 },
+      { path: "partner.pillar2.maxBuyIn", value: 86350 },
+      { path: "partner.pillar2.hasPensionFund", value: true },
       { path: "partner.employment", value: "employed" },
     ]);
+    expect(changes.some((c) => c.path.startsWith("pillar2."))).toBe(false);
+    // The paths are valid against the profile schema.
+    const next = lifeSituationSchema.parse({
+      ...mueller,
+      partner: {
+        ...mueller.partner,
+        pillar2: { insuredSalary: 73540, disabilityPension: 29420, hasPensionFund: true },
+      },
+    });
+    expect(next.partner?.pillar2?.disabilityPension).toBe(29420);
+    expect(next.pillar2).toEqual({});
   });
 
   it("maps the gross salary from a salary certificate", () => {
@@ -225,7 +240,15 @@ describe("policies", () => {
       productName: "Vorsorgeausweis 2026",
       sumInsured: 50000,
       premiumAnnual: null,
+      details: { subject: "self" },
     });
+    const partners = policyDraftFor(
+      "pension_certificate",
+      { pensionFund: "Pensionskasse Muster" },
+      "2026-10-30",
+      "partner",
+    );
+    expect(partners?.details).toMatchObject({ subject: "partner" });
     expect(policyDraftFor("salary_certificate", { grossSalary: 1 }, "2026-10-30")).toBeNull();
   });
 });

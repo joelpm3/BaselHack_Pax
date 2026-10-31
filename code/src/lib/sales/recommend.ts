@@ -7,7 +7,7 @@ import { modelName } from "@/lib/ai/models";
 import { audit } from "@/lib/audit";
 import { db, schema } from "@/lib/db";
 import { PRODUCTS, type Product, type ProductCode, productsClosing } from "@/lib/domain/products";
-import type { LifeSituation } from "@/lib/domain/profile";
+import { type LifeSituation, pillar2Of } from "@/lib/domain/profile";
 import { GAP_TYPES, type GapType } from "@/lib/domain/taxonomy";
 import { type Quote, type QuoteInput, quotePremium } from "@/lib/pricing";
 import { contractStartDate, technicalAge } from "@/lib/pricing/limits";
@@ -222,7 +222,7 @@ function insuredFor(
       occupation: person.occupation,
       hasPartner: who === "partner" || Boolean(profile.partner),
       youngestChildBirthYear: youngest,
-      hasPensionFund: who === "self" ? profile.pillar2.hasPensionFund : undefined,
+      hasPensionFund: pillar2Of(profile, who).hasPensionFund,
       pillar3aContribution: who === "self" ? profile.pillar3a.annualContribution : undefined,
       retirementAge: profile.desiredRetirementAge ?? 65,
     },

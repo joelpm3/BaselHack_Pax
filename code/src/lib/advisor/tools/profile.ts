@@ -34,9 +34,29 @@ const personInput = z.object({
   healthNotes: z.string().optional().describe("Only what the customer volunteered"),
 });
 
+const pillar2Input = z.object({
+  hasPensionFund: z.boolean().optional(),
+  insuredSalary: chf("Insured salary").optional(),
+  currentCapital: z.number().min(0).optional().describe("Current retirement savings, CHF"),
+  projectedCapitalAtRetirement: z.number().min(0).optional(),
+  projectedPensionAtRetirement: chf("Projected retirement pension").optional(),
+  disabilityPension: chf("Disability pension").optional(),
+  partnerPension: chf("Spouse/partner pension").optional(),
+  childPension: chf("Child/orphan pension per child").optional(),
+  deathLumpSum: z.number().min(0).optional(),
+  maxBuyIn: z.number().min(0).optional().describe("Maximum possible buy-in, CHF"),
+});
+
 export const updateProfileInput = z.object({
   person: personInput.optional().describe("The customer"),
-  partner: personInput.optional().describe("Spouse or partner"),
+  partner: personInput
+    .extend({
+      pillar2: pillar2Input
+        .optional()
+        .describe("The partner's own pension fund, e.g. from their pension certificate"),
+    })
+    .optional()
+    .describe("Spouse or partner"),
   removePartner: z.boolean().optional().describe("True after a separation or bereavement"),
   children: z
     .array(childSchema)
@@ -56,20 +76,7 @@ export const updateProfileInput = z.object({
     })
     .optional(),
   pillar1: z.object({ contributionGapYears: z.number().int().min(0).optional() }).optional(),
-  pillar2: z
-    .object({
-      hasPensionFund: z.boolean().optional(),
-      insuredSalary: chf("Insured salary").optional(),
-      currentCapital: z.number().min(0).optional().describe("Current retirement savings, CHF"),
-      projectedCapitalAtRetirement: z.number().min(0).optional(),
-      projectedPensionAtRetirement: chf("Projected retirement pension").optional(),
-      disabilityPension: chf("Disability pension").optional(),
-      partnerPension: chf("Spouse/partner pension").optional(),
-      childPension: chf("Child/orphan pension per child").optional(),
-      deathLumpSum: z.number().min(0).optional(),
-      maxBuyIn: z.number().min(0).optional().describe("Maximum possible buy-in, CHF"),
-    })
-    .optional(),
+  pillar2: pillar2Input.optional().describe("The customer's own pension fund"),
   pillar3a: z
     .object({
       balance: z.number().min(0).optional(),
@@ -103,6 +110,13 @@ function flatten(prefix: string, values: Record<string, unknown> | undefined): P
     .map(([key, value]) => ({ path: `${prefix}.${key}`, value }));
 }
 
+/** The partner's pension fund is nested: each figure is its own change, never the whole object. */
+function partnerChanges(partner: UpdateProfileInput["partner"]): ProfileChange[] {
+  if (!partner) return [];
+  const { pillar2, ...person } = partner;
+  return [...flatten("partner", person), ...flatten("partner.pillar2", pillar2)];
+}
+
 function union<T>(existing: T[], added: T[] | undefined, key: (v: T) => string): T[] | undefined {
   if (!added?.length) return undefined;
   const seen = new Set(existing.map(key));
@@ -122,9 +136,7 @@ export function toProfileChanges(
 ): ProfileChange[] {
   const changes: ProfileChange[] = [
     ...flatten("person", input.person),
-    ...(input.removePartner
-      ? [{ path: "partner", value: null }]
-      : flatten("partner", input.partner)),
+    ...(input.removePartner ? [{ path: "partner", value: null }] : partnerChanges(input.partner)),
     ...flatten("assets", input.assets),
     ...flatten("pillar1", input.pillar1),
     ...flatten("pillar2", input.pillar2),

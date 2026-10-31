@@ -24,6 +24,7 @@ import {
   retirementAge,
   retirementBreakdown,
   riskBreakdown,
+  riskPensionsEstimated,
   withBvg,
 } from "./mapping";
 
@@ -53,9 +54,16 @@ export async function retirementPensions(
   const known = profile.pillar2.projectedPensionAtRetirement;
   const needsOwn = known === undefined && withBvg(profile.person, profile.pillar2.hasPensionFund);
   const partner = hasPartner(profile) ? profile.partner : undefined;
-  const needsPartner = withBvg(partner);
+  const partnerKnown = partner?.pillar2?.projectedPensionAtRetirement;
+  const needsPartner =
+    partnerKnown === undefined && withBvg(partner, partner?.pillar2?.hasPensionFund);
   if (!needsOwn && !needsPartner) {
-    return { person1: known ?? 0, person2: 0, estimated: false };
+    return {
+      person1: known ?? 0,
+      person2: partnerKnown ?? 0,
+      capital2: partner?.pillar2?.currentCapital,
+      estimated: false,
+    };
   }
   const base = await callLogismata<BaseResponse>(
     "APICalc_calculateRetirementBase",
@@ -65,8 +73,9 @@ export async function retirementPensions(
   return {
     person1: known ?? base.Person1?.Pension ?? 0,
     capital1: profile.pillar2.currentCapital ?? base.Person1?.CurrentCapital,
-    person2: base.Person2?.Pension ?? 0,
-    estimated: needsOwn,
+    person2: partnerKnown ?? base.Person2?.Pension ?? 0,
+    capital2: partner?.pillar2?.currentCapital,
+    estimated: needsOwn || needsPartner,
   };
 }
 
@@ -104,27 +113,45 @@ export async function runRetirementCheck(
 
 interface RiskBaseResponse {
   Person1?: Partial<Pillar2RiskPensions>;
+  Person2?: Partial<Pillar2RiskPensions>;
 }
 
-async function riskPensions(
-  profile: LifeSituation,
-  ctx: CallContext,
-  year: number,
-): Promise<Pillar2RiskPensions | undefined> {
-  if (!hasKnownRiskPensions(profile)) return undefined;
-  const base = await callLogismata<RiskBaseResponse>(
-    "APICalc_calculateRiskBase",
-    buildRiskBaseRequest(profile, year),
-    ctx,
-  );
-  const p = base.Person1 ?? {};
-  return mergeRiskPensions(profile, {
+function estimateOf(p: Partial<Pillar2RiskPensions> = {}): Pillar2RiskPensions {
+  return {
     Disability: p.Disability ?? 0,
     DisabilityChildren: p.DisabilityChildren ?? 0,
     Widow: p.Widow ?? 0,
     Orphan: p.Orphan ?? 0,
     ...(p.CoverageCapital !== undefined ? { CoverageCapital: p.CoverageCapital } : {}),
-  });
+  };
+}
+
+/**
+ * Pension-fund risk benefits from the certificates on file (customer and partner), completed
+ * with Logismata's estimate for what a certificate does not state.
+ */
+async function riskPensions(
+  profile: LifeSituation,
+  ctx: CallContext,
+  year: number,
+): Promise<Pick<RiskOverrides, "pillar2Pensions" | "partnerPillar2Pensions">> {
+  const partner = hasPartner(profile) ? profile.partner : undefined;
+  const ownKnown = hasKnownRiskPensions(profile.pillar2);
+  const partnerKnown = hasKnownRiskPensions(partner?.pillar2);
+  if (!ownKnown && !partnerKnown) return {};
+  const base = await callLogismata<RiskBaseResponse>(
+    "APICalc_calculateRiskBase",
+    buildRiskBaseRequest(profile, year),
+    ctx,
+  );
+  return {
+    ...(ownKnown
+      ? { pillar2Pensions: mergeRiskPensions(profile.pillar2, estimateOf(base.Person1)) }
+      : {}),
+    ...(partnerKnown && partner?.pillar2
+      ? { partnerPillar2Pensions: mergeRiskPensions(partner.pillar2, estimateOf(base.Person2)) }
+      : {}),
+  };
 }
 
 export interface RiskCheck {
@@ -135,13 +162,13 @@ export interface RiskCheck {
 export async function runRiskCheck(
   profile: LifeSituation,
   ctx: CallContext,
-  overrides: Omit<RiskOverrides, "pillar2Pensions"> = {},
+  overrides: Omit<RiskOverrides, "pillar2Pensions" | "partnerPillar2Pensions"> = {},
 ): Promise<RiskCheck> {
   const year = currentYear();
-  const pillar2Pensions = await riskPensions(profile, ctx, year);
+  const pensions = await riskPensions(profile, ctx, year);
   const response = await callLogismata<{ RiskScenarioSummaries?: RiskScenarioSummary[] }>(
     "APICalc_calculateRisk",
-    buildRiskRequest(profile, year, { ...overrides, pillar2Pensions }),
+    buildRiskRequest(profile, year, { ...overrides, ...pensions }),
     ctx,
   );
   const persons = new Map<1 | 2, RiskPersonResult>();
@@ -169,7 +196,7 @@ export async function runRiskCheck(
   }
   return {
     persons: [...persons.values()].sort((a, b) => a.person - b.person),
-    estimated: !hasKnownRiskPensions(profile),
+    estimated: riskPensionsEstimated(profile),
   };
 }
 
