@@ -16,6 +16,12 @@
   "indicativePrice": "Indicative value based on the Pax tariff, non-binding",
   "estimatedPrice": "Estimated, non-binding",
   "simulated": "Simulated",
+  "notFound": {
+    "title": "This page doesn’t exist",
+    "body": "The link may belong to another conversation, or your session has expired. Start a new consultation or open your pension cockpit.",
+    "start": "New consultation",
+    "portal": "Pension cockpit"
+  },
   "taxonomy": {
     "topics": {
       "retirement": "Retirement planning",

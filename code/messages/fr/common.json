@@ -16,6 +16,12 @@
   "indicativePrice": "Valeur indicative selon le tarif Pax, sans engagement",
   "estimatedPrice": "Estimé, sans engagement",
   "simulated": "Simulé",
+  "notFound": {
+    "title": "Cette page n’existe pas",
+    "body": "Le lien appartient peut-être à un autre entretien ou votre session a expiré. Commencez un nouveau conseil ou ouvrez votre cockpit prévoyance.",
+    "start": "Nouveau conseil",
+    "portal": "Cockpit prévoyance"
+  },
   "taxonomy": {
     "topics": {
       "retirement": "Prévoyance vieillesse",
