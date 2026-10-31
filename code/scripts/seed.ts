@@ -11,6 +11,7 @@ import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import * as schema from "@/lib/db/schema";
 import { type LifeSituation, lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
 import { seedFollowUps } from "./seed-follow-ups";
+import { seedPersonas } from "./seed-personas";
 
 const dataDir = process.env.DATA_DIR ?? "./data";
 mkdirSync(dataDir, { recursive: true });
@@ -262,7 +263,8 @@ for (const { customer, profile, policies } of demo) {
 }
 
 const futureEvents = seedFollowUps(db);
+const personas = seedPersonas(db);
 
 console.log(
-  `Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers, ${futureEvents} future events.`,
+  `Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers, ${futureEvents} future events, ${personas} pitch personas.`,
 );

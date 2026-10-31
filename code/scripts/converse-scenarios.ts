@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/domain/taxonomy";
+import { PERSONA_SCENARIOS } from "./persona-scenarios";
 
 /**
  * Example conversations for scripts/converse.ts. Each scenario is a simulated customer
@@ -14,7 +15,7 @@ export interface Scenario {
   title: string;
   locale: Locale;
   /** Seeded demo client to copy (profile + policies); otherwise a new anonymous customer. */
-  demoClient?: "Jane" | "Lily" | "Taylor";
+  demoClient?: string;
   /** Profile of an anonymous returning visitor (facts from an earlier conversation). */
   knownProfile?: Record<string, unknown>;
   /** Facts and behaviour of the simulated customer (English is fine; it writes in `locale`). */
@@ -217,6 +218,8 @@ export const SCENARIOS: Scenario[] = [
     ],
     maxTurns: 8,
   },
+  // The pitch personas (documentation/DEMO_PERSONAS.md).
+  ...PERSONA_SCENARIOS,
 ];
 
 export function scenarioById(id: string): Scenario | undefined {

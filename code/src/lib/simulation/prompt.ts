@@ -1,6 +1,12 @@
 import { z } from "zod";
 import type { Locale } from "@/lib/domain/taxonomy";
-import { type Concern, personaEmail, type SimPersona, type Style } from "./personas";
+import {
+  type Concern,
+  type PersonaStory,
+  personaEmail,
+  type SimPersona,
+  type Style,
+} from "./personas";
 
 /** What the simulated customer decides each turn. */
 export const customerTurnSchema = z.object({
@@ -68,7 +74,9 @@ export function personaFacts(p: SimPersona, currentYear: number): string {
     `Marital status: ${p.maritalStatus}`,
     p.employment === "homemaker"
       ? "Does not work outside the home"
-      : `${p.employment === "self_employed" ? "Self-employed" : "Employed"} at ${p.workloadPercent}%, gross income ${chf(p.grossIncome)} per year`,
+      : p.employment === "student"
+        ? `Student with a side job at ${p.workloadPercent}%, gross income ${chf(p.grossIncome)} per year`
+        : `${p.employment === "self_employed" ? "Self-employed" : "Employed"} at ${p.workloadPercent}%, gross income ${chf(p.grossIncome)} per year`,
     p.partner
       ? `Partner: ${p.partner.firstName}, born ${p.partner.birthYear}, gross income ${chf(p.partner.grossIncome)} per year`
       : "No partner",
@@ -76,11 +84,12 @@ export function personaFacts(p: SimPersona, currentYear: number): string {
       ? `Children born: ${p.childrenBirthYears.join(", ")}`
       : "No children",
     `Savings and assets: about ${chf(p.assets)}`,
-    p.employment === "self_employed"
-      ? "No pension fund (2nd pillar) since becoming self-employed"
-      : p.employment === "employed"
-        ? "Has a pension fund through the employer but does not know the exact figures"
-        : "No own pension fund",
+    p.story?.pensionFund ??
+      (p.employment === "self_employed"
+        ? "No pension fund (2nd pillar) since becoming self-employed"
+        : p.employment === "employed"
+          ? "Has a pension fund through the employer but does not know the exact figures"
+          : "No own pension fund"),
     p.pillar3aBalance
       ? `Pillar 3a balance: about ${chf(p.pillar3aBalance)}`
       : "No pillar 3a account yet",
@@ -96,7 +105,9 @@ export function personaFacts(p: SimPersona, currentYear: number): string {
 export function customerInstructions(p: SimPersona, currentYear: number): string {
   const rules = [
     "Reveal facts only when asked or when it comes up naturally; never list everything at once.",
-    "You do not know exact pension fund figures. If asked to upload documents, say you do not have them at hand and give rough numbers instead.",
+    p.story?.pensionFund
+      ? "You know the pension fund figures above from your last pension certificate. If asked to upload documents, say you do not have them at hand and give the figures instead."
+      : "You do not know exact pension fund figures. If asked to upload documents, say you do not have them at hand and give rough numbers instead.",
     "When the advisor shows calculations, cards or offers, react to their content in your own words.",
     "Never write like an assistant, never use bullet lists or headings, never mention that you are simulated.",
     "When your question is answered or you have decided (go ahead with an offer, or think about it), say goodbye with action end.",
@@ -115,15 +126,20 @@ export function customerInstructions(p: SimPersona, currentYear: number): string
 
 ## Who you are
 ${personaFacts(p, currentYear)}
-
+${p.story ? `\n${p.story.backstory}\n` : ""}
 ## What is on your mind
-${CONCERN_TEXT[p.concern]}
+${p.story ? storyText(p.story) : CONCERN_TEXT[p.concern]}
 
 ## How you write
-Write only in ${LANGUAGE[p.locale]}. ${STYLE_TEXT[p.style]}
+Write only in ${LANGUAGE[p.locale]}. ${p.story?.speakingStyle ?? STYLE_TEXT[p.style]}
 
 ## Rules
 ${rules.map((r) => `- ${r}`).join("\n")}`;
+}
+
+function storyText(story: PersonaStory): string {
+  const list = (items: string[]) => items.map((i) => `- ${i}`).join("\n");
+  return `Goals:\n${list(story.goals)}\n\nWorries:\n${list(story.worries)}\n\nWhat you reveal and when:\n${list(story.reveals)}`;
 }
 
 export interface SimTurn {
