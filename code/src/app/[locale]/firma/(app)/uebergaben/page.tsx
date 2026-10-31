@@ -5,7 +5,8 @@ import { useTranslations } from "next-intl";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense, use } from "react";
 import { AssignSelect, HandoverStatusSelect } from "@/components/firma/controls";
-import { CustomerLabel } from "@/components/firma/customer-label";
+import { CustomerLink, customerHref } from "@/components/firma/customer-link";
+import { KindDefinition, KindMark } from "@/components/firma/kind-mark";
 import { LiveRefresh } from "@/components/firma/live-events";
 import {
   EmptyState,
@@ -40,7 +41,19 @@ export default function HandoversPage({
   const t = useTranslations("firma.handovers");
   return (
     <>
-      <PageHeader title={t("title")} description={t("description")} />
+      <PageHeader
+        title={
+          <span className="flex items-center gap-3">
+            <KindMark kind="handover" />
+            {t("title")}
+          </span>
+        }
+        description={
+          <>
+            {t("description")} <KindDefinition kind="handover" className="mt-1" />
+          </>
+        }
+      />
       <Suspense fallback={<LoadingBlock label={t("title")} />}>
         <HandoversContent searchParams={searchParams} />
       </Suspense>
@@ -61,8 +74,9 @@ async function HandoversContent({
   const { rows, rules } = listHandovers(status, scope);
   const counts = handoverCounts(scope);
   const advisors = listAdvisors();
-  const [t, tStatus, tStage, tChannel, tAction, tCommon, format] = await Promise.all([
+  const [t, tKinds, tStatus, tStage, tChannel, tAction, tCommon, format] = await Promise.all([
     getTranslations("firma.handovers"),
+    getTranslations("firmaCustomers.kinds"),
     getTranslations("firma.taxonomy.handoverStatus"),
     getTranslations("common.taxonomy.stages"),
     getTranslations("firma.taxonomy.channel"),
@@ -114,17 +128,13 @@ async function HandoversContent({
                   {h.urgency === "high" ? (
                     <span aria-hidden className="size-2 shrink-0 bg-error" />
                   ) : null}
-                  <Link
-                    href={`/firma/gespraeche/${h.conversationId}`}
-                    className="min-w-0 hover:underline"
-                  >
-                    <CustomerLabel
-                      firstName={h.firstName}
-                      lastName={h.lastName}
-                      city={h.city}
-                      className="font-medium"
-                    />
-                  </Link>
+                  <CustomerLink
+                    customerId={h.customerId}
+                    firstName={h.firstName}
+                    lastName={h.lastName}
+                    city={h.city}
+                    section="handovers"
+                  />
                   {h.isSimulated ? (
                     <Bot
                       aria-label={tCommon("simulated")}
@@ -164,6 +174,22 @@ async function HandoversContent({
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
+                </span>
+                <span className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                  <Link
+                    href={`/firma/gespraeche/${h.conversationId}`}
+                    className="text-contrast-green hover:underline"
+                  >
+                    {tKinds("openConversation")}
+                  </Link>
+                  {h.openLeads > 0 ? (
+                    <Link
+                      href={customerHref(h.customerId, "leads")}
+                      className="rounded-full bg-light-purple px-2 py-0.5 text-xs font-medium text-deep-purple hover:underline"
+                    >
+                      {tKinds("lead.alsoOpen", { count: h.openLeads })}
+                    </Link>
+                  ) : null}
                 </span>
               </div>
               <div className="grid min-w-0 content-start gap-2">

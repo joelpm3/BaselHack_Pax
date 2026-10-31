@@ -64,6 +64,8 @@ export function listLeads(filters: LeadFilters) {
       topics: schema.analyses.topics,
       email: schema.customers.email,
       phone: schema.customers.phone,
+      /** Same person also waits for a human: link to the handover instead of duplicating it. */
+      openHandovers: sql<number>`(select count(*) from ${schema.handovers} h where h.customer_id = ${l.customerId} and h.status = 'open')`,
       ...customerColumns,
     })
     .from(l)
