@@ -20,4 +20,4 @@ Illustrations in `illustrations/` were generated with Codex image generation in 
 the originals. Survey figures: Generali, May 2025 (1'016 people).
 
 Screenshots in `img/` come from the jury-persona run (Jane Müller) and the live company cockpit on
-31.10.2026. The portrait of Franz Laim is from Helvetia's public Zürich Nord agency page.
+31.10.2026. The full-body illustration of Franz Laim (`illustrations/franz.png`) was generated with Codex image generation from his portrait (best likeness of three runs) in `img/franz-laim.jpg` (Helvetia's public Zürich Nord agency page), without the lapel pin.
