@@ -4,7 +4,7 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { focusReducer, initialFocus } from "@/components/vorsorgebild/focus";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
@@ -15,6 +15,7 @@ import { quickRepliesOf } from "@/lib/advisor/quick-replies";
 import type { AdvisorMessageMetadata, PictureKind, VorsorgebildModel } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
 import { type ClaraTurn, Composer, useEffectiveInputMode } from "./composer";
+import { DataNotice } from "./data-notice";
 import { MessageView } from "./message-view";
 import { PictureProvider } from "./picture-context";
 import type { ChatMessage } from "./types";
@@ -186,16 +187,20 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               aria-label={t("transcript")}
               className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-8 lg:px-0 lg:pt-10"
             >
-              {messages.map((message) => (
-                // The scroll margin keeps a reply's first line below the header (and the
-                // Vorsorgebild strip on mobile) when the view stops at its start.
-                <li
-                  key={message.id}
-                  data-role={message.role}
-                  className="scroll-mt-32 lg:scroll-mt-24"
-                >
-                  <MessageView message={message} />
-                </li>
+              {messages.map((message, index) => (
+                <Fragment key={message.id}>
+                  {/* The scroll margin keeps a reply's first line below the header (and the
+                      Vorsorgebild strip on mobile) when the view stops at its start. */}
+                  <li data-role={message.role} className="scroll-mt-32 lg:scroll-mt-24">
+                    <MessageView message={message} />
+                  </li>
+                  {/* Every conversation opens with Clara's greeting: the notice sits under it. */}
+                  {index === 0 ? (
+                    <li className="-mt-3">
+                      <DataNotice />
+                    </li>
+                  ) : null}
+                </Fragment>
               ))}
               {!answered && inputMode === "voice" ? (
                 <li>
