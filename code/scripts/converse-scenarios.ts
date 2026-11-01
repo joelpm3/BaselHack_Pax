@@ -158,12 +158,12 @@ export const SCENARIOS: Scenario[] = [
   },
   {
     id: "existing-jane",
-    title: "Existing Pax client Jane mentions a life change (going back to work)",
+    title: "Demo check-in: Jane tells Clara about the baby and that she stopped working",
     locale: "de",
     demoClient: "Jane",
-    persona: `You are Jane Müller, born 1986, married to May (born 1984, employed, CHF 100'000). Baby born 2026. You live in 4053 Basel. You will start working again at 60% from January as a nurse, about CHF 55'000 per year. You have a Pax death cover on May. Friendly, uses Sie.`,
+    persona: `You are Jane Müller, born 01.06.1986, married to May Müller (born 16.09.1984). You live in 4053 Basel. You talked to Clara in autumn 2024: both of you were working then (you 80% as a nurse, CHF 76'000), Clara showed you a disability gap for May and you decided to wait. Since then your son Noah was born (12.05.2026) and you have stopped working. May now earns CHF 100'000 at 100%. You just got the yearly check-in e-mail. You have May's new pension certificate 2026 but cannot upload it in this test; if asked, say you do not have it at hand. Friendly, uses Sie. When Clara recommends a cover for May, you want an offer.`,
     script: [
-      "Hallo, ich fange im Januar wieder an zu arbeiten, 60 Prozent als Pflegefachfrau. Muss ich jetzt etwas anpassen?",
+      "Grüezi Clara, im Mai ist unser Sohn Noah auf die Welt gekommen, und ich arbeite seit der Geburt nicht mehr. Sind wir noch gut abgesichert, wenn May etwas passiert?",
       { intent: "Answer the advisor's question." },
     ],
     maxTurns: 8,
