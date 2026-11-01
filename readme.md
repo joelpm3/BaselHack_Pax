@@ -135,3 +135,20 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | [`documentation/`](documentation) | Architecture, demo personas, GPU cookbook |
 | [`documentation/challenge_context/`](documentation/challenge_context) | Challenge brief, Pax brand, API notes |
 | [`assets/`](assets) | Screenshots |
+
+## Meet the team behind Pax Clara
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/flurin-laim/"><img src="assets/team/flurin-laim.jpg" width="120" alt="Flurin Laim"></a><br>
+      <b>Flurin Laim</b><br>
+      <a href="https://www.linkedin.com/in/flurin-laim/">LinkedIn</a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/joel-m%C3%BCller-19a789a8/"><img src="assets/team/joel-mueller.jpg" width="120" alt="Joel Müller"></a><br>
+      <b>Joel Müller</b><br>
+      <a href="https://www.linkedin.com/in/joel-m%C3%BCller-19a789a8/">LinkedIn</a>
+    </td>
+  </tr>
+</table>
