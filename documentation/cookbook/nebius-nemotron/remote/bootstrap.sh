@@ -45,7 +45,7 @@ env_pid=$!
 (
   if [ ! -f MODEL_READY ]; then
     HF_XET_HIGH_PERFORMANCE=1 timeout 3600 uvx --from 'huggingface_hub[hf_xet]' hf download $MODEL_REPO \
-      --revision $MODEL_REV --local-dir $R/model --exclude 'examples/*' 'figures/*'
+      --revision $MODEL_REV --local-dir $R/model --exclude 'examples/*' --exclude 'figures/*'
     date -u +%FT%TZ > $R/MODEL_READY
   fi
 ) > fetch.log 2>&1 &
