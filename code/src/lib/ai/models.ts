@@ -11,7 +11,7 @@ import { env } from "@/env";
 
 /**
  * Model roles. Each can point at a different model so analysis/simulation can run on a
- * cheaper model than the customer-facing chat. Swap provider via LLM_PROVIDER.
+ * cheaper model than the customer-facing chat. Swap provider via LLM_PROVIDER (self-hosted vLLM by default).
  *
  * - chat: the customer-facing advisor (needs tool calling for generative UI)
  * - analysis: classifier, lead scoring, FAQ normalisation, hint explanations
