@@ -4,6 +4,7 @@
   "transcript": "Gesprächsverlauf",
   "thinking": "Clara schreibt",
   "disclaimer": "Berechnungen und Preise sind unverbindliche Richtwerte. Verbindlich ist erst eine Offerte von Pax.",
+  "dataNotice": "Clara ist eine KI. Ihre Daten liegen im Portal: <link>herunterladen oder löschen</link>",
   "error": {
     "unavailable": "Clara ist im Moment nicht erreichbar. Ihre Nachricht ist gespeichert.",
     "retry": "Erneut versuchen"

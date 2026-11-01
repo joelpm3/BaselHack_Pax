@@ -67,7 +67,7 @@ their policies and focuses on life changes and gaps.
 
 | Concern | Module | Notes |
 |---|---|---|
-| LLM | `lib/ai/models.ts` | `getModel(role)`, roles chat / analysis / extraction / simulation. Anthropic Claude Opus 5.5 in fast mode (Sonnet 5.5 when fast mode is busy), background analysis on Sonnet 5.5; `LLM_PROVIDER=openai-compatible` for self-hosted vLLM on Nebius |
+| LLM | `lib/ai/models.ts` | `getModel(role)`, roles chat / analysis / extraction / simulation. Self-hosted vLLM on Nebius (`LLM_PROVIDER=openai-compatible`, `LLM_BASE_URL` required); `LLM_PROVIDER=anthropic` also works (Opus 5.5 fast mode, Sonnet 5.5 fallback and background analysis) |
 | Calculations | `lib/logismata` | Logismata APICalc (risk, retirement, 3a, buy-in, tax location) |
 | Pricing | `lib/pricing` | Pax Quicksale live tariff (server-side session, one change per request), fitted estimate fallback |
 | Speech | `/api/transcribe` | Proxy to the Swiss-German Nemotron server (`STT_BASE_URL`, OpenAI-style `/v1/audio/transcriptions`) |
@@ -98,8 +98,8 @@ values are only used after the customer confirms them.
 family and figures to advise; pseudonymising it would cost advice quality for little gain. That
 makes the model's location the real decision, so Clara runs on our own model on a rented Nebius
 GPU (`LLM_PROVIDER=openai-compatible`, see "Self-hosted mode" in the README) and customer data does
-not go to an external AI provider. For the hackathon the GPU is in `us-central1` because of the
-price; production rents it in an EU region. Logismata receives only the calculation inputs
+not go to an external AI provider. The region is chosen when the GPU is started (`--region`), so
+it can be kept in Switzerland or the EU. Logismata receives only the calculation inputs
 (birth year, income, marital status, pension figures), Quicksale only the pricing inputs.
 
 **Not production-ready, on purpose.** The company dashboard uses one shared password plus picking a

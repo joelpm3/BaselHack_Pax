@@ -57,7 +57,7 @@ The Müllers closed their gap in one conversation: **CHF 741 a year**, about two
 ```bash
 cd code
 pnpm install
-cp .env.example .env.local   # ANTHROPIC_API_KEY, LOGISMATA_API_TOKEN, SESSION_SECRET, DOCUMENT_ENCRYPTION_KEY
+cp .env.example .env.local   # LLM_BASE_URL, LOGISMATA_API_TOKEN, SESSION_SECRET, DOCUMENT_ENCRYPTION_KEY
 pnpm db:reset                # SQLite in code/data: advisors, rule set v1, demo customers
 pnpm dev                     # http://localhost:3000/de
 ```
@@ -91,10 +91,10 @@ an external AI provider:
 - **Conversation:** Nemotron 3.5 Bolt 74B-A9B (24GB) on an NVIDIA B200.
 - **Speech-to-text:** our fine-tuned Swiss-German model, on the same GPU.
 
-The setting is `LLM_PROVIDER=openai-compatible` with `LLM_BASE_URL` pointing at the endpoint, and
-`STT_BASE_URL` for speech. For the hackathon the GPU runs in Nebius `us-central1`; it can be rented
-in an EU region with `--region` ([`documentation/cookbook/nebius-nemotron`](documentation/cookbook/nebius-nemotron/README.md)),
-which we did not do because of the price. Calculations (Logismata) and pricing (Quicksale) are
+This is the default: `LLM_PROVIDER=openai-compatible`, with the required `LLM_BASE_URL` pointing at
+the vLLM endpoint, and `STT_BASE_URL` for speech. `LLM_PROVIDER=anthropic` also works. The region is chosen when the GPU is started (`--region`,
+[`documentation/cookbook/nebius-nemotron`](documentation/cookbook/nebius-nemotron/README.md)), so it
+can be kept in Switzerland or the EU. Calculations (Logismata) and pricing (Quicksale) are
 external services in either mode.
 
 ## The journey
@@ -123,7 +123,7 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 | Human review stays possible | The advisor hands over when an active company rule applies (it cites the rule ids), when the customer asks, or when the case is complex. Rules are plain language, versioned and edited by Pax | [`code/src/lib/advisor/tools/handover.ts`](code/src/lib/advisor/tools/handover.ts), [`code/src/lib/rules/active.ts`](code/src/lib/rules/active.ts), `/firma/uebergaben`, `/firma/regeln` |
 | Encryption | Uploaded documents are encrypted at rest with AES-256-GCM, the document id bound as authenticated data; the customer can delete them | [`code/src/lib/documents/crypto.ts`](code/src/lib/documents/crypto.ts), [`code/src/app/api/documents/[id]/route.ts`](code/src/app/api/documents/%5Bid%5D/route.ts) |
 | Access protection | Signed HMAC customer cookie; company dashboard behind a password with a constant-time check, server actions re-check the advisor | [`code/src/lib/auth/signing.ts`](code/src/lib/auth/signing.ts), [`code/src/lib/firma/auth.ts`](code/src/lib/firma/auth.ts) |
-| No uncontrolled external AI | Every model call goes through one module. `LLM_PROVIDER=openai-compatible` switches all of them to Nemotron 3.5 Bolt 74B-A9B (24GB), and speech-to-text runs on our fine-tuned Swiss-German model, both on an NVIDIA B200 we rent from Nebius (US region for the hackathon; an EU region is possible) | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
+| No uncontrolled external AI | Every model call goes through one module. `LLM_PROVIDER=openai-compatible` switches all of them to Nemotron 3.5 Bolt 74B-A9B (24GB), and speech-to-text runs on our fine-tuned Swiss-German model, both on an NVIDIA B200 we rent from Nebius in a region chosen at start (`--region`), so it can stay in Switzerland or the EU | [`code/src/lib/ai/models.ts`](code/src/lib/ai/models.ts), [`code/src/app/api/transcribe/route.ts`](code/src/app/api/transcribe/route.ts) |
 | Formal requirements for the contract | Suitability check before unit-linked products, explicit consent and a signature that must match the customer's name | [`code/src/lib/sales/suitability.ts`](code/src/lib/sales/suitability.ts), [`code/src/lib/sales/application.ts`](code/src/lib/sales/application.ts) |
 
 ## Repository

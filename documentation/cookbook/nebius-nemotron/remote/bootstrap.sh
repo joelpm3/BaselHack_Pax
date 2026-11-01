@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Runs on the fresh Nebius VM (Ubuntu 24.04 + CUDA 13.0 image). Builds the inference environment,
-# downloads the model from R2 and starts the API. With BOLT=1 it also serves Nemotron 3.5 Bolt on port 8001
+# downloads the model from Hugging Face and starts the API. With BOLT=1 it also serves Nemotron 3.5 Bolt on port 8001
 # (bolt.sh), sharing the GPU. Idempotent: rerunning skips finished steps.
 # Writes READY when /health answers "ok", FAILED (with the step) on any error. Log: bootstrap.log.
 set -euo pipefail
 R=/workspace/nemotron-ft
-MODEL_NAME=${MODEL_NAME:-v4-mid}
+MODEL_REPO=Flurin17/nemotron-3.5-transcribe-swiss-german
+MODEL_REV=2c02efcabdcfaffdc09fe89fad79f62bf967b51f  # pinned; the repo is public, no token needed
 BOLT=${BOLT:-0}
 # GPU shares: STT weights 67.5 GB (BF16) and Bolt 47.8 GB (NVFP4) on a 183 GB B200; the rest is KV cache.
 if [ "$BOLT" = 1 ]; then STT_GPU_UTIL=${STT_GPU_UTIL:-0.47}; else STT_GPU_UTIL=${STT_GPU_UTIL:-0.85}; fi
@@ -43,7 +44,8 @@ step=env
 env_pid=$!
 (
   if [ ! -f MODEL_READY ]; then
-    BEST_NAME=$MODEL_NAME OUT=$R/model uvx --with requests python fetch_best.py
+    HF_XET_HIGH_PERFORMANCE=1 timeout 3600 uvx --from 'huggingface_hub[hf_xet]' hf download $MODEL_REPO \
+      --revision $MODEL_REV --local-dir $R/model --exclude 'examples/*' 'figures/*'
     date -u +%FT%TZ > $R/MODEL_READY
   fi
 ) > fetch.log 2>&1 &

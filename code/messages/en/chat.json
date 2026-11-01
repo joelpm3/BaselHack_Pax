@@ -4,6 +4,7 @@
   "transcript": "Conversation",
   "thinking": "Clara is writing",
   "disclaimer": "Calculations and prices are non-binding estimates. Only an offer from Pax is binding.",
+  "dataNotice": "Clara is an AI. Your data is saved in your portal: <link>download or delete</link>",
   "error": {
     "unavailable": "Clara cannot be reached right now. Your message has been saved.",
     "retry": "Try again"

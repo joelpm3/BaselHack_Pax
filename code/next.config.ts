@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   serverExternalPackages: ["better-sqlite3"],
+  // Build only. By default `next build` forks one page-data/prerender worker per core minus one
+  // (15 here), each loading every server chunk. On the shared box that pushes the build over the
+  // session's memory.high limit and the kernel throttles it for minutes. Four workers prerender
+  // the ~107 pages just as fast without the memory spike.
+  experimental: { cpus: 4 },
+  // Build only: skip loading server source maps into every prerender worker. They only make
+  // prerender error stacks prettier; use `next build --debug-prerender` when debugging one.
+  enablePrerenderSourceMaps: false,
   turbopack: {
     rules: {
       "*.css": {

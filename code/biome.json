@@ -39,6 +39,12 @@
       "react": "recommended"
     }
   },
+  "overrides": [
+    {
+      "includes": ["tsconfig.json"],
+      "json": { "formatter": { "expand": "always" } }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {

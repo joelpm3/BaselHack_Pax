@@ -371,7 +371,9 @@
       "reviewTitle": "Signé. Votre proposition {number} est maintenant en cours d’examen chez Pax.",
       "reviewBody": "Une conseillère ou un conseiller Pax vérifie les montants et les données et vous contacte si quelque chose doit être adapté. Après validation, votre police commence le {date}. D’ici là, elle apparaît « En examen » dans votre Cockpit prévoyance.",
       "body": "Vous la trouvez maintenant dans votre Cockpit prévoyance, avec vos autres polices.",
-      "portal": "Vers le Cockpit prévoyance"
+      "portal": "Vers le Cockpit prévoyance",
+      "downloadOffer": "Proposition en PDF",
+      "downloadPolicy": "Police en PDF"
     }
   }
 }

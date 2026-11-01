@@ -178,6 +178,11 @@
       "active": "Actif",
       "ended": "Échu",
       "cancelled": "Résilié"
+    },
+    "pdf": {
+      "offer": "Proposition (PDF)",
+      "policy": "Police (PDF)",
+      "product": "pour {product}"
     }
   },
   "documents": {
