@@ -4,7 +4,7 @@
   "transcript": "Déroulement de la conversation",
   "thinking": "Clara écrit",
   "disclaimer": "Les calculs et les prix sont des valeurs indicatives sans engagement. Seule une offre de Pax est contraignante.",
-  "dataNotice": "Clara est une IA. Vos informations sont enregistrées dans votre portail pour vous conseiller. <link>Exporter ou supprimer</link>",
+  "dataNotice": "Clara est une IA. Vos données sont dans le portail : <link>télécharger ou supprimer</link>",
   "error": {
     "unavailable": "Clara n'est pas joignable pour le moment. Votre message est enregistré.",
     "retry": "Réessayer"
