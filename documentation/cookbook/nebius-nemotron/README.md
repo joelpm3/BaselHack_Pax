@@ -1,16 +1,16 @@
 # Cookbook: Nemotron 3.5 Transcribe (Swiss German) + Nemotron 3.5 Bolt on a Nebius B200/B300
 
 One command spawns a single-GPU Nebius VM, installs the inference stack, downloads the fine-tuned
-STT model from R2 and serves it as an HTTP API. With `--bolt` it also serves Nemotron 3.5 Bolt
+STT model from Hugging Face and serves it as an HTTP API. With `--bolt` it also serves Nemotron 3.5 Bolt
 74B-A9B (NVFP4) on the same GPU as an OpenAI-compatible chat API, a self-hosted option for the Pax
 advisor's LLM (the app currently uses Claude Sonnet 5.5). A second command deletes the VM again.
 
-Copied from `swiss-german-stt/cookbook/nebius-nemotron` (2026-10-31); `remote/fetch_best.py` comes from
-that repo's `training/nemotron/finetune/`. Secrets live in this repo's git-ignored `.state/`.
+Copied from `swiss-german-stt/cookbook/nebius-nemotron` (2026-10-31). Secrets live in this repo's git-ignored `.state/`.
 
 Model: the fine-tuned Nemotron 3.5 Transcribe **v4-mid** (17.38% held-out ASGDTS WER; see
-[RESULTS.md](../../reports/nemotron-finetune-20261028-v1/RESULTS.md)), BF16 by default, or
-`--model v4-mid-fp8`. Swiss German speech in, Swiss Standard German text out.
+[RESULTS.md](../../reports/nemotron-finetune-20261028-v1/RESULTS.md)), BF16, downloaded from the public
+[Flurin17/nemotron-3.5-transcribe-swiss-german](https://huggingface.co/Flurin17/nemotron-3.5-transcribe-swiss-german)
+(revision pinned in `remote/bootstrap.sh`, no token needed). Swiss German speech in, Swiss Standard German text out.
 
 ## Prerequisites (on this machine)
 
@@ -19,8 +19,6 @@ Model: the fine-tuned Nemotron 3.5 Transcribe **v4-mid** (17.38% held-out ASGDTS
   in a terminal and finish the login first.
 - SSH key `~/.ssh/id_ed25519_nebius` (+ `.pub`).
 - Optional: Tailscale auth key in `.state/tailscale-authkey` (mode 600, git-ignored), see API below.
-- R2 gateway token `.state/nemotron-ft/run-token` (fetches `best-<model>/` from
-  `training/2026-10-28-nemotron-spc07-hoerstudio-v1/`, checksum-verified).
 
 ## Use
 
@@ -89,7 +87,7 @@ The Pax app can point at it with `LLM_PROVIDER=openai-compatible`, `LLM_BASE_URL
 - STT: BF16 with MTP2 speculative decoding, ReplaySSM, FlashInfer Mamba backend, 192 sequences, 4,096 batched
   tokens. That is the fastest configuration measured on all 5,750 ASGDTS clips
   (swiss-german-stt `reports/nemotron-finetune-20261028-v1/RESULTS.md`): 1,154× real time vs. 520× plain on a
-  B300, same WER. FP8 (`--model v4-mid-fp8`) halves the memory but is slower (937×).
+  B300, same WER. FP8 halves the memory but is slower (937×) and is not on Hugging Face.
 - Bolt: thinking off, prefix caching (with `--mamba-cache-mode align`, required for hybrid Mamba models) so the
   advisor's long static system prompt and the conversation so far are not prefilled again on each turn,
   FP8 KV cache, 64k context, FlashInfer attention and Mamba kernels. No speculative decoding: the DFlash

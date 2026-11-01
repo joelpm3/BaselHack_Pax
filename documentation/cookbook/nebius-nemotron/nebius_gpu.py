@@ -1,7 +1,7 @@
 """Spawn a Nebius B200/B300, serve the fine-tuned Nemotron 3.5 Transcribe (and, with --bolt, Nemotron 3.5 Bolt
 as a chat LLM) as HTTP APIs, and tear it down.
 
-  python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --region <region> [--gpu b200|b300] [--model v4-mid|v4-mid-fp8] [--on-demand] [--bolt]
+  python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --region <region> [--gpu b200|b300] [--on-demand] [--bolt]
                                                     [--idle-minutes 60]
   python documentation/cookbook/nebius-nemotron/nebius_gpu.py transcribe a.m4a b.wav --out transcripts/
   python documentation/cookbook/nebius-nemotron/nebius_gpu.py status | tunnel | ssh | logs | down
@@ -10,7 +10,8 @@ as a chat LLM) as HTTP APIs, and tear it down.
 an SSH tunnel: STT at http://127.0.0.1:8000, with --bolt also Bolt (OpenAI chat API) at http://127.0.0.1:8001/v1.
 `down` saves the compiled-kernel cache, deletes the VM with its boot disk
 and verifies that nothing is left. State lives in .state/nebius-nemotron.json (one instance at a time).
-Needs: ~/.nebius/bin/nebius logged in, ~/.ssh/id_ed25519_nebius, .state/nemotron-ft/run-token (R2 gateway).
+Needs: ~/.nebius/bin/nebius logged in, ~/.ssh/id_ed25519_nebius.
+The STT model comes from huggingface.co/Flurin17/nemotron-3.5-transcribe-swiss-german (public, pinned in bootstrap.sh).
 Optional: .state/tailscale-authkey; the VM then joins the tailnet as <name> and serves the API at http://<name>:8000.
 """
 import argparse
@@ -28,7 +29,6 @@ HERE = pathlib.Path(__file__).resolve().parent
 STATE = REPO / '.state/nebius-nemotron.json'
 KNOWN_HOSTS = REPO / '.state/nebius-nemotron-known_hosts'
 CACHE_DIR = REPO / '.state/nebius-nemotron-kernel-cache'
-TOKEN = REPO / '.state/nemotron-ft/run-token'
 TS_KEY = REPO / '.state/tailscale-authkey'  # optional; when present the VM joins the tailnet
 NEBIUS = os.path.expanduser('~/.nebius/bin/nebius')
 KEY = os.path.expanduser('~/.ssh/id_ed25519_nebius')
@@ -128,7 +128,7 @@ def close_tunnel(state):
 def up(args):
     if load_state():
         sys.exit(f'an instance is already recorded in {STATE}; run `status` or `down` first')
-    for path in (KEY, KEY + '.pub', TOKEN):
+    for path in (KEY, KEY + '.pub'):
         if not os.path.exists(path):
             sys.exit(f'missing {path}')
     platform, preset = GPUS[args.gpu]
@@ -156,7 +156,7 @@ def up(args):
                   '--cloud-init-user-data', cloud_init, timeout=600)
     ip = inst['status']['network_interfaces'][0]['public_ip_address']['address'].split('/')[0]
     state = {'id': inst['metadata']['id'], 'name': name, 'project': project, 'region': region, 'gpu': args.gpu,
-             'ip': ip, 'model': args.model, 'bolt': args.bolt, 'preemptible': not args.on_demand, 'created': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
+             'ip': ip, 'bolt': args.bolt, 'preemptible': not args.on_demand, 'created': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime())}
     save_state(state)
     print(f'instance {state["id"]} at {ip} (billing has started; `down` deletes it)', flush=True)
 
@@ -165,17 +165,15 @@ def up(args):
             break
         time.sleep(10)
     ssh(ip, f'sudo mkdir -p {REMOTE} && sudo chown -R ubuntu /workspace')
-    files = [HERE / 'remote/bootstrap.sh', HERE / 'remote/server.py', HERE / 'remote/bolt.sh',
-             HERE / 'remote/fetch_best.py']
+    files = [HERE / 'remote/bootstrap.sh', HERE / 'remote/server.py', HERE / 'remote/bolt.sh']
     cache = CACHE_DIR / f'{args.gpu}.tar'
     scp(ip, files + ([cache] if cache.exists() else []), REMOTE + '/')
     if cache.exists():
         ssh(ip, f'mv {REMOTE}/{cache.name} {REMOTE}/kernel-cache.tar')
-    for secret, remote_name in ((TOKEN, 'run-token'), (TS_KEY, 'tailscale-authkey')):
-        if secret.exists():  # over stdin, so secrets never appear in a command line
-            with secret.open() as f:
-                subprocess.run(ssh_cmd(ip) + [f'umask 077; cat > {REMOTE}/{remote_name}'], stdin=f, check=True)
-    ssh(ip, f'cd {REMOTE} && chmod +x bootstrap.sh bolt.sh && MODEL_NAME={args.model} BOLT={int(args.bolt)} '
+    if TS_KEY.exists():  # over stdin, so the key never appears in a command line
+        with TS_KEY.open() as f:
+            subprocess.run(ssh_cmd(ip) + [f'umask 077; cat > {REMOTE}/tailscale-authkey'], stdin=f, check=True)
+    ssh(ip, f'cd {REMOTE} && chmod +x bootstrap.sh bolt.sh && BOLT={int(args.bolt)} '
             f'IDLE_MINUTES={args.idle_minutes} '
             f'TS_HOSTNAME={name} nohup ./bootstrap.sh > bootstrap.log 2>&1 &')
     print('bootstrapping: environment + model download (~6 min), then model load and warm-up '
@@ -287,7 +285,6 @@ def main():
     u.add_argument('--gpu', choices=GPUS, default='b200')
     u.add_argument('--region', required=True,
                    help='Nebius region to rent the GPU in (required, no default), e.g. an EU region')
-    u.add_argument('--model', default='v4-mid', help='R2 best-<name>/ prefix: v4-mid (BF16) or v4-mid-fp8')
     u.add_argument('--on-demand', action='store_true',
                    help='regular VM that is never preempted (default: preemptible at the spot price)')
     u.add_argument('--bolt', action='store_true',
