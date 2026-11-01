@@ -14,7 +14,8 @@
     "db:generate": "drizzle-kit generate",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts && tsx --require=./scripts/server-only-stub.cjs --env-file=.env.local scripts/seed-knowledge.ts",
     "db:reset": "rm -rf data/pax.db data/pax.db-* && pnpm db:seed",
-    "converse": "tsx --require=./scripts/server-only-stub.cjs --env-file=.env.local scripts/converse.ts"
+    "converse": "tsx --require=./scripts/server-only-stub.cjs --env-file=.env.local scripts/converse.ts",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.92",
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
+    "@playwright/test": "^1.64.1",
     "@tailwindcss/turbopack": "^4",
     "@types/better-sqlite3": "^9.6.0",
     "@types/node": "^24.19.2",
