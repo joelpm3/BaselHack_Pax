@@ -58,7 +58,7 @@ export const disabilityOffer: OfferDocument = {
     ],
     alternatives: [
       {
-        label: "Pax LifeStar",
+        code: "lifestar",
         reason: "Spart fürs Alter und schützt mit Prämienbefreiung, ersetzt aber kein Einkommen.",
       },
     ],
@@ -133,9 +133,9 @@ export const lifestarOffer: OfferDocument = {
       { criterion: "Spielraum Säule 3a", value: "CHF 7'258 können Sie 2027 einzahlen", met: true },
     ],
     alternatives: [
-      { label: "Pax FondsStar", reason: "Ganz in Fonds, ohne garantierten Teil." },
+      { code: "fondsstar", reason: "Ganz in Fonds, ohne garantierten Teil." },
       {
-        label: "Einkauf in die Pensionskasse",
+        code: "pension_fund_buyin",
         reason: "Spart Steuern, bindet das Geld aber bis zur Pensionierung.",
       },
     ],

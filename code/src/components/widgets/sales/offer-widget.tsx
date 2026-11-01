@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleAlert, CircleCheck, FileText, PenLine } from "lucide-react";
+import { CircleAlert, CircleCheck, Download, FileText, PenLine } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { type FormEvent, useId, useState, useTransition } from "react";
 import { useChatActions } from "@/components/chat/chat-actions";
@@ -488,10 +488,28 @@ function Signed({ signed, date }: { signed: SignedInfo; date: (iso: string) => s
         {t(signed.inReview ? "reviewTitle" : "title", values)}
       </p>
       <p className="text-paragraph-xs">{signed.inReview ? t("reviewBody", values) : t("body")}</p>
-      <div>
+      <div className="flex flex-wrap items-center gap-2">
         <Link href="/portal" className={buttonClasses("primary", "sm")}>
           {t("portal")}
         </Link>
+        <a
+          href={`/api/policies/${signed.policyId}/offer`}
+          download
+          className={buttonClasses("secondary", "sm")}
+        >
+          <Download aria-hidden />
+          {t("downloadOffer")}
+        </a>
+        {signed.inReview ? null : (
+          <a
+            href={`/api/policies/${signed.policyId}/policy`}
+            download
+            className={buttonClasses("secondary", "sm")}
+          >
+            <Download aria-hidden />
+            {t("downloadPolicy")}
+          </a>
+        )}
       </div>
     </div>
   );

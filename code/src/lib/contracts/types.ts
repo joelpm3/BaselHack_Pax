@@ -50,7 +50,8 @@ export interface RecommendationReasons {
   headline: string;
   rationale: string;
   criteria: Criterion[];
-  alternatives: Array<{ label: string; reason: string }>;
+  /** Product code (or a non-product option such as "pension_fund_buyin") and why not. */
+  alternatives: Array<{ code: string; reason: string }>;
 }
 
 interface DocumentBase {

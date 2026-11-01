@@ -1,3 +1,4 @@
+import { PRODUCTS, type ProductCode } from "@/lib/domain/products";
 import type { SuitabilityRecord } from "@/lib/sales/types";
 import type { Translate } from "../i18n";
 import type { OfferDocument, RecommendationReasons } from "../types";
@@ -14,6 +15,17 @@ import {
 import { COLOR, PAGE, TYPE, VALUE_WIDTH, VALUE_X } from "./theme";
 
 const MUTED = { color: COLOR.muted };
+
+/** Labels of the non-product alternatives the recommender suggests (sales.server.alternatives). */
+const OPTION_LABELS: Record<string, string> = {
+  todesfall_decreasing: "sales.server.alternatives.todesfallDecreasingLabel",
+  pension_fund_buyin: "sales.server.alternatives.pensionFundBuyinLabel",
+};
+
+function alternativeLabel(code: string, t: Translate): string {
+  if (code in PRODUCTS) return PRODUCTS[code as ProductCode].name;
+  return OPTION_LABELS[code] ? t(OPTION_LABELS[code]) : code;
+}
 const QUESTIONS = ["goal", "horizon", "knowledge", "drawdown"] as const;
 
 function why(pdf: Pdf, r: RecommendationReasons): void {
@@ -56,7 +68,7 @@ function why(pdf: Pdf, r: RecommendationReasons): void {
     pdf.canvas.y -= 4;
     r.alternatives.forEach((a, i) => {
       row(pdf, i === 0 ? t("contracts.why.alternatives") : "", [
-        { text: a.label, style: { weight: "medium", size: TYPE.small + 0.5 } },
+        { text: alternativeLabel(a.code, t), style: { weight: "medium", size: TYPE.small + 0.5 } },
         { text: a.reason, style: { size: TYPE.small + 0.5 } },
       ]);
     });

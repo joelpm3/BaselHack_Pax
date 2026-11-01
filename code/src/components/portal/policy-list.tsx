@@ -1,6 +1,7 @@
-import { ExternalLink, FileText } from "lucide-react";
+import { Download, ExternalLink, FileText } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Badge } from "@/components/ui/badge";
+import { contractDocumentsFor } from "@/lib/contracts/mapping";
 import { formatSwissDate } from "@/lib/documents/dates";
 import { formatChf } from "@/lib/utils";
 import { groupOf, POLICY_GROUPS, type PolicyRow } from "./cockpit";
@@ -47,6 +48,7 @@ async function PolicyCard({ policy, locale }: { policy: PolicyRow; locale: strin
   const t = await getTranslations("portal.policies");
   const tc = await getTranslations("documents.category");
   const figures = figuresOf(policy, t, locale);
+  const pdfs = contractDocumentsFor(policy);
   return (
     <article
       className={
@@ -97,6 +99,22 @@ async function PolicyCard({ policy, locale }: { policy: PolicyRow; locale: strin
           {t("fromDocument")}
           <ExternalLink className="size-3" aria-hidden />
         </a>
+      ) : null}
+      {pdfs.length > 0 ? (
+        <div className="mt-4 flex flex-wrap gap-x-5 border-t border-line pt-1">
+          {pdfs.map((kind) => (
+            <a
+              key={kind}
+              href={`/api/policies/${policy.id}/${kind}`}
+              download
+              className="inline-flex min-h-10 items-center gap-1.5 text-paragraph-xs font-medium text-contrast-green underline-offset-2 hover:underline"
+            >
+              <Download className="size-3.5" aria-hidden />
+              {t(`pdf.${kind}`)}
+              <span className="sr-only">{` ${t("pdf.product", { product: policy.productName })}`}</span>
+            </a>
+          ))}
+        </div>
       ) : null}
     </article>
   );

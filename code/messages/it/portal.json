@@ -178,6 +178,11 @@
       "active": "Attivo",
       "ended": "Scaduto",
       "cancelled": "Disdetto"
+    },
+    "pdf": {
+      "offer": "Proposta (PDF)",
+      "policy": "Polizza (PDF)",
+      "product": "per {product}"
     }
   },
   "documents": {
