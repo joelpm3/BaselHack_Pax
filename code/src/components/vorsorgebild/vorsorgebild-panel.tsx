@@ -134,6 +134,9 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
         <p id="vorsorgebild-figures" className="mt-1 text-heading-s font-bold">
           {breakdown.gap > 0 ? t("gap", { amount: chf(breakdown.gap) }) : t("covered")}
         </p>
+        {scenario.estimated ? (
+          <p className="mt-1 text-paragraph-xs text-fg-muted">{t("estimated")}</p>
+        ) : null}
       </div>
 
       <div className="flex flex-col gap-2">
@@ -170,6 +173,7 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
       </ul>
 
       {coverText ? <p className="text-paragraph-xs text-fg-muted">{coverText}</p> : null}
+      <SurvivorNote scenario={scenario} />
 
       <table className="sr-only">
         <caption>{t("table.caption")}</caption>
@@ -191,6 +195,33 @@ function ScenarioPicture({ scenario }: { scenario: PictureScenario }) {
         </tbody>
       </table>
     </section>
+  );
+}
+
+/**
+ * Death of one partner: the gap is what the survivors' pensions leave of the deceased's income
+ * (Pax Vorsorgecheck). The survivor's own salary is not counted in it, so it is named here, the
+ * way Clara explains it, and whether AHV and the pension fund pay a survivor's pension at all.
+ */
+function SurvivorNote({ scenario }: { scenario: PictureScenario }) {
+  const t = useTranslations("chat.picture.survivor");
+  const tp = useTranslations("chat.picture");
+  const locale = useLocale();
+  const { survivor, breakdown } = scenario;
+  if (scenario.kind !== "death" || !survivor) return null;
+  const name = survivor.name ?? tp("partnerFallback");
+  const pensions = breakdown.pillar1 + breakdown.pillar2 > 0;
+  return (
+    <p className="rounded-m bg-gray-1 px-3 py-2 text-paragraph-xs text-fg-muted">
+      {pensions
+        ? null
+        : `${t(scenario.person === 2 ? "noPensionPartner" : "noPension", { name })} `}
+      {t(scenario.person === 2 ? "ownIncomePartner" : "ownIncome", {
+        name,
+        amount: formatChf(monthlyChf(survivor.income), locale),
+        deceased: scenario.personName ?? tp("partnerFallback"),
+      })}
+    </p>
   );
 }
 

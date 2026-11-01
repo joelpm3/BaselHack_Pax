@@ -38,6 +38,7 @@
     "need": "Vos besoins",
     "gap": "Il manque {amount} par mois",
     "covered": "Vos besoins sont couverts",
+    "estimated": "Estimation : les prestations de la caisse de pension ne proviennent pas encore de votre certificat de prévoyance.",
     "tabs": {
       "label": "Choisir une situation",
       "retirement": "Retraite",
@@ -107,13 +108,22 @@
       "gap": "{kind} : lacune {amount}/mois",
       "covered": "{kind} : couvert",
       "building": "{count} informations sur {total}",
-      "open": "{kind} : encore ouvert"
+      "open": "{kind} : encore ouvert",
+      "kindOf": "{kind} ({name})",
+      "gapEstimated": "{kind} : lacune env. {amount}/mois (estimation)",
+      "coveredEstimated": "{kind} : couvert (estimation)"
     },
     "partnerContext": {
       "disability": "Si une maladie empêche {name} de travailler",
       "death": "Pour votre famille si {name} décède d'une maladie"
     },
     "partnerFallback": "votre partenaire",
+    "survivor": {
+      "noPension": "L’AVS et la caisse de pension ne versent pas de rente de survivant à {name}.",
+      "noPensionPartner": "L’AVS et la caisse de pension ne vous versent pas de rente de survivant.",
+      "ownIncome": "{name} conserve son propre revenu d’environ {amount} par mois. La lacune montre la part de votre revenu qui disparaît.",
+      "ownIncomePartner": "Vous conservez votre propre revenu d’environ {amount} par mois. La lacune montre la part du revenu de {deceased} qui disparaît."
+    },
     "focus": {
       "discussed": "En discussion",
       "notCalculated": "Rien n'est encore calculé pour cette situation."

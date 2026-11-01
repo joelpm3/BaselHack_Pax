@@ -30,13 +30,20 @@ export function VorsorgebildStrip({ model, focus, onSelect }: VorsorgebildPanelP
     (kind === null || kind === "retirement" ? targetBreakdown(model.pillars.incomeToday) : null);
   const discussed = focus.byAdvisor && focus.kind === kind;
 
+  // Whose gap it is, and whether it rests on estimates or a calculation older than the profile.
+  const scenarioKind = scenario
+    ? scenario.personName && scenario.kind !== "retirement"
+      ? t("strip.kindOf", { kind: t(`tabs.${scenario.kind}`), name: scenario.personName })
+      : t(`tabs.${scenario.kind}`)
+    : "";
+  const provisional = Boolean(scenario?.estimated || model.pending);
   const summary = scenario
     ? scenario.breakdown.gap > 0
-      ? t("strip.gap", {
-          kind: t(`tabs.${scenario.kind}`),
+      ? t(provisional ? "strip.gapEstimated" : "strip.gap", {
+          kind: scenarioKind,
           amount: formatChf(monthlyChf(scenario.breakdown.gap), locale),
         })
-      : t("strip.covered", { kind: t(`tabs.${scenario.kind}`) })
+      : t(provisional ? "strip.coveredEstimated" : "strip.covered", { kind: scenarioKind })
     : kind && focus.kind
       ? t("strip.open", { kind: t(`tabs.${kind}`) })
       : t("strip.building", { count: known, total: model.facts.length });
@@ -50,7 +57,7 @@ export function VorsorgebildStrip({ model, focus, onSelect }: VorsorgebildPanelP
         aria-haspopup="dialog"
       >
         <span className="flex min-w-0 flex-1 flex-col gap-1.5">
-          <span className="flex items-baseline justify-between gap-2">
+          <span className="flex items-start justify-between gap-2">
             <span className="text-paragraph-xs font-bold">{t("title")}</span>
             <span
               // A new situation fades in, so a switch while the sheet is closed gets noticed.
@@ -61,7 +68,7 @@ export function VorsorgebildStrip({ model, focus, onSelect }: VorsorgebildPanelP
               )}
             >
               {discussed ? <DiscussedMark focus={focus} /> : null}
-              <span className="truncate">{summary}</span>
+              <span className="line-clamp-2 text-right">{summary}</span>
             </span>
           </span>
           {squares ? (
