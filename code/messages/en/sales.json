@@ -371,7 +371,9 @@
       "reviewTitle": "Signed. Your application {number} is now being reviewed by Pax.",
       "reviewBody": "A Pax advisor checks the amounts and details and contacts you if anything needs to change. Once released, your policy starts on {date}. Until then it shows as “In review” in your pension cockpit.",
       "body": "You can now find it in your pension cockpit, together with your other policies.",
-      "portal": "Go to pension cockpit"
+      "portal": "Go to pension cockpit",
+      "downloadOffer": "Application as PDF",
+      "downloadPolicy": "Policy as PDF"
     }
   }
 }

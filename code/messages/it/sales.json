@@ -371,7 +371,9 @@
       "reviewTitle": "Firmato. La sua proposta {number} è ora in verifica presso Pax.",
       "reviewBody": "Una consulente o un consulente Pax verifica importi e dati e la contatta se qualcosa va adattato. Dopo l’approvazione la sua polizza inizia il {date}. Fino ad allora la vede nel Cockpit previdenza come «In verifica».",
       "body": "Ora la trova nel suo Cockpit previdenza, insieme alle sue altre polizze.",
-      "portal": "Al Cockpit previdenza"
+      "portal": "Al Cockpit previdenza",
+      "downloadOffer": "Proposta in PDF",
+      "downloadPolicy": "Polizza in PDF"
     }
   }
 }

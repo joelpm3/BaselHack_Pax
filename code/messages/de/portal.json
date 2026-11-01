@@ -178,6 +178,11 @@
       "active": "Aktiv",
       "ended": "Abgelaufen",
       "cancelled": "Gekündigt"
+    },
+    "pdf": {
+      "offer": "Antrag (PDF)",
+      "policy": "Police (PDF)",
+      "product": "für {product}"
     }
   },
   "documents": {

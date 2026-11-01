@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleAlert, CircleCheck, FileText, PenLine } from "lucide-react";
+import { CircleAlert, CircleCheck, Download, FileText, PenLine } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { type FormEvent, useId, useState, useTransition } from "react";
 import { useChatActions } from "@/components/chat/chat-actions";
@@ -9,12 +9,11 @@ import { Button, buttonClasses } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
 import { Link } from "@/i18n/navigation";
 import { saveContactAction, signApplicationAction } from "@/lib/sales/actions";
+import { offerConditionKeys } from "@/lib/sales/conditions";
 import type { ContactPrefill, OfferOutput, OfferView, SignedInfo } from "@/lib/sales/types";
 import type { WidgetProps } from "../types";
 import { WidgetCard, WidgetFailed, WidgetPending } from "../widget-card";
 import { CoverFacts, FactGrid, IssueList, PriceTag, RiderList, ScenarioList } from "./shared";
-
-const UNIT_LINKED = new Set(["lifestar", "fondsstar", "auszahlungsplan"]);
 
 /** Offer summary → contact details → consents → typed-name demo signature → policy. */
 export function OfferWidget({ toolCallId, state, output }: WidgetProps) {
@@ -64,21 +63,13 @@ function OfferBody({
   const [offer, setOffer] = useState(initialOffer);
   const [repriced, setRepriced] = useState(false);
   const date = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
-  const unitLinked = UNIT_LINKED.has(offer.productCode);
   // The policyholder's name can change in the contact step; a partner keeps the offer's name.
   const insuredName =
     offer.insured.who === "self" && contact.firstName
       ? `${contact.firstName} ${contact.lastName}`.trim()
       : (offer.insured.name ?? t("you"));
 
-  const conditions = [
-    "withdrawal",
-    ...(unitLinked ? ["investmentRisk"] : ["premiumGuaranteed"]),
-    ...(offer.productCode === "erwerbsunfaehigkeit" ? ["maximumBenefit", "crisisCoach"] : []),
-    ...(offer.pillar === "3a" ? ["pillar3a"] : []),
-    "health",
-    "cooperative",
-  ];
+  const conditions = offerConditionKeys(offer.productCode, offer.pillar);
 
   return (
     <WidgetCard
@@ -497,10 +488,28 @@ function Signed({ signed, date }: { signed: SignedInfo; date: (iso: string) => s
         {t(signed.inReview ? "reviewTitle" : "title", values)}
       </p>
       <p className="text-paragraph-xs">{signed.inReview ? t("reviewBody", values) : t("body")}</p>
-      <div>
+      <div className="flex flex-wrap items-center gap-2">
         <Link href="/portal" className={buttonClasses("primary", "sm")}>
           {t("portal")}
         </Link>
+        <a
+          href={`/api/policies/${signed.policyId}/offer`}
+          download
+          className={buttonClasses("secondary", "sm")}
+        >
+          <Download aria-hidden />
+          {t("downloadOffer")}
+        </a>
+        {signed.inReview ? null : (
+          <a
+            href={`/api/policies/${signed.policyId}/policy`}
+            download
+            className={buttonClasses("secondary", "sm")}
+          >
+            <Download aria-hidden />
+            {t("downloadPolicy")}
+          </a>
+        )}
       </div>
     </div>
   );

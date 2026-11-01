@@ -371,7 +371,9 @@
       "reviewTitle": "Unterschrieben. Ihr Antrag {number} ist jetzt bei Pax zur Prüfung.",
       "reviewBody": "Eine Pax-Beraterin oder ein Pax-Berater prüft die Beträge und Angaben und meldet sich bei Ihnen, falls etwas angepasst werden muss. Nach der Freigabe beginnt Ihre Police am {date}. Bis dahin sehen Sie sie im Vorsorge-Cockpit als «In Prüfung».",
       "body": "Sie finden sie jetzt in Ihrem Vorsorge-Cockpit, zusammen mit Ihren anderen Policen.",
-      "portal": "Zum Vorsorge-Cockpit"
+      "portal": "Zum Vorsorge-Cockpit",
+      "downloadOffer": "Antrag als PDF",
+      "downloadPolicy": "Police als PDF"
     }
   }
 }

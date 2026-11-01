@@ -178,6 +178,11 @@
       "active": "Active",
       "ended": "Expired",
       "cancelled": "Cancelled"
+    },
+    "pdf": {
+      "offer": "Application (PDF)",
+      "policy": "Policy (PDF)",
+      "product": "for {product}"
     }
   },
   "documents": {
