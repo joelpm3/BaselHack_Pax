@@ -11,7 +11,7 @@ import { env } from "@/env";
 
 /**
  * Model roles. Each can point at a different model so analysis/simulation can run on a
- * cheaper model than the customer-facing chat. Swap provider via LLM_PROVIDER.
+ * cheaper model than the customer-facing chat. Swap provider via LLM_PROVIDER (self-hosted vLLM by default).
  *
  * - chat: the customer-facing advisor (needs tool calling for generative UI)
  * - analysis: classifier, lead scoring, FAQ normalisation, hint explanations
@@ -20,7 +20,7 @@ import { env } from "@/env";
  *
  * The provider decides where customer data goes, because the prompts carry the full context
  * (names, family, figures). `openai-compatible` keeps it on our own model on the Nebius GPU, the
- * self-hosted path; production rents that GPU in an EU region.
+ * self-hosted path. The GPU region is chosen at start (`--region`), so it can stay in Switzerland/EU.
  */
 export type ModelRole = "chat" | "analysis" | "extraction" | "simulation";
 

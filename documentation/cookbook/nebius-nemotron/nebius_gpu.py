@@ -1,7 +1,7 @@
 """Spawn a Nebius B200/B300, serve the fine-tuned Nemotron 3.5 Transcribe (and, with --bolt, Nemotron 3.5 Bolt
 as a chat LLM) as HTTP APIs, and tear it down.
 
-  python documentation/cookbook/nebius-nemotron/nebius_gpu.py up [--gpu b200|b300] [--model v4-mid|v4-mid-fp8] [--on-demand] [--bolt]
+  python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --region <region> [--gpu b200|b300] [--model v4-mid|v4-mid-fp8] [--on-demand] [--bolt]
                                                     [--idle-minutes 60]
   python documentation/cookbook/nebius-nemotron/nebius_gpu.py transcribe a.m4a b.wav --out transcripts/
   python documentation/cookbook/nebius-nemotron/nebius_gpu.py status | tunnel | ssh | logs | down
@@ -35,9 +35,9 @@ KEY = os.path.expanduser('~/.ssh/id_ed25519_nebius')
 REMOTE = '/workspace/nemotron-ft'
 PORT = 8000
 BOLT_PORT = 8001
-# Single-GPU presets and the region that offers them (checked 2026-10-30: us-north1 has only B300).
-GPUS = {'b200': ('gpu-b200-sxm', '1gpu-20vcpu-224gb', 'us-central1'),
-        'b300': ('gpu-b300-sxm', '1gpu-24vcpu-346gb', 'us-north1')}
+# Single-GPU presets. The region has no default: `up --region` must name one that offers the GPU.
+GPUS = {'b200': ('gpu-b200-sxm', '1gpu-20vcpu-224gb'),
+        'b300': ('gpu-b300-sxm', '1gpu-24vcpu-346gb')}
 IMAGE_FAMILY = 'ubuntu24.04-cuda13.0'
 
 
@@ -131,8 +131,8 @@ def up(args):
     for path in (KEY, KEY + '.pub', TOKEN):
         if not os.path.exists(path):
             sys.exit(f'missing {path}')
-    platform, preset, region = GPUS[args.gpu]
-    region = args.region or region
+    platform, preset = GPUS[args.gpu]
+    region = args.region
     project = project_for(region)
     subnet = nebius('vpc', 'subnet', 'list', '--parent-id', project)['items'][0]['metadata']['id']
     # Public images live in project-<region prefix>public-images, e.g. project-u00public-images.
@@ -285,7 +285,8 @@ def main():
     sub = p.add_subparsers(dest='cmd', required=True)
     u = sub.add_parser('up')
     u.add_argument('--gpu', choices=GPUS, default='b200')
-    u.add_argument('--region', help='override the default region for the GPU type')
+    u.add_argument('--region', required=True,
+                   help='Nebius region to rent the GPU in (required, no default), e.g. an EU region')
     u.add_argument('--model', default='v4-mid', help='R2 best-<name>/ prefix: v4-mid (BF16) or v4-mid-fp8')
     u.add_argument('--on-demand', action='store_true',
                    help='regular VM that is never preempted (default: preemptible at the spot price)')

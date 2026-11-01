@@ -25,7 +25,7 @@ Model: the fine-tuned Nemotron 3.5 Transcribe **v4-mid** (17.38% held-out ASGDTS
 ## Use
 
 ```bash
-python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --gpu b200          # or --gpu b300; --on-demand, --bolt
+python documentation/cookbook/nebius-nemotron/nebius_gpu.py up --region <region> --gpu b200   # or --gpu b300; --on-demand, --bolt
 python documentation/cookbook/nebius-nemotron/nebius_gpu.py transcribe rec1.m4a rec2.wav --out transcripts/
 python documentation/cookbook/nebius-nemotron/nebius_gpu.py down
 ```
@@ -34,12 +34,13 @@ python documentation/cookbook/nebius-nemotron/nebius_gpu.py down
 `http://127.0.0.1:8000` (STT) and, with `--bolt`, `http://127.0.0.1:8001/v1` (Bolt). `status`, `logs`, `ssh` and `tunnel` (reopen the tunnel) help in between.
 One instance at a time; its ID and IP are in `.state/nebius-nemotron.json`.
 
-| GPU | Platform / preset | Region (default) |
-|---|---|---|
-| `b200` | `gpu-b200-sxm` / `1gpu-20vcpu-224gb` | us-central1 |
-| `b300` | `gpu-b300-sxm` / `1gpu-24vcpu-346gb` | us-north1 |
+| GPU | Platform / preset |
+|---|---|
+| `b200` | `gpu-b200-sxm` / `1gpu-20vcpu-224gb` |
+| `b300` | `gpu-b300-sxm` / `1gpu-24vcpu-346gb` |
 
-As of 2026-10-30, us-north1 offers only B300 and us-central1 offers B200. Override with `--region`.
+There is no default region: `up` needs `--region`, and the region must offer the chosen GPU. That
+keeps the choice explicit, so the GPU can stay in Switzerland or the EU.
 
 ## API
 

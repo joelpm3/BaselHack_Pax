@@ -4,7 +4,15 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { focusReducer, initialFocus } from "@/components/vorsorgebild/focus";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
@@ -24,6 +32,8 @@ export interface ChatViewProps {
   conversationId: string;
   initialMessages: ChatMessage[];
   initialPicture: VorsorgebildModel;
+  /** Server-rendered line under Clara's greeting (the data notice). */
+  notice?: ReactNode;
 }
 
 function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
@@ -32,7 +42,12 @@ function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
 }
 
 /** The advisor chat with the live Vorsorgebild (side panel on desktop, strip + sheet on mobile). */
-export function ChatView({ conversationId, initialMessages, initialPicture }: ChatViewProps) {
+export function ChatView({
+  conversationId,
+  initialMessages,
+  initialPicture,
+  notice,
+}: ChatViewProps) {
   const t = useTranslations("chat");
   const [picture, setPicture] = useState(initialPicture);
   // The situation the Vorsorgebild shows follows Clara's latest message (see picture-topic).
@@ -186,7 +201,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               aria-label={t("transcript")}
               className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-8 lg:px-0 lg:pt-10"
             >
-              {messages.map((message) => (
+              {messages.map((message, index) => (
                 // The scroll margin keeps a reply's first line below the header (and the
                 // Vorsorgebild strip on mobile) when the view stops at its start.
                 <li
@@ -195,6 +210,8 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
                   className="scroll-mt-32 lg:scroll-mt-24"
                 >
                   <MessageView message={message} />
+                  {/* Every conversation opens with Clara's greeting: the notice belongs to it. */}
+                  {index === 0 ? notice : null}
                 </li>
               ))}
               {!answered && inputMode === "voice" ? (
@@ -237,7 +254,7 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
                 onSend={send}
                 onStop={() => void stop()}
               />
-              <p className="mt-2 text-center text-paragraph-xs text-fg-subtle">{t("disclaimer")}</p>
+              <p className="mt-2 text-center text-paragraph-xs text-fg-muted">{t("disclaimer")}</p>
             </div>
           </div>
           <aside aria-label={t("picture.title")} className="hidden lg:block">
