@@ -85,8 +85,17 @@ h1,h2,h3,p,blockquote{margin:0}
 .expert .who b{color:var(--ink);font-weight:600}
 
 /* 6 Demo */
-.demo .text{position:absolute;left:96px;top:200px;width:560px;display:flex;flex-direction:column;gap:28px}
-.demo .art{position:absolute;right:72px;top:150px;width:820px}
+.demo .text{position:absolute;left:96px;top:170px;width:560px;display:flex;flex-direction:column;gap:28px}
+.demo .art{position:absolute;right:72px;top:96px;width:780px}
+/* The Müllers' history with Pax, as seeded for the live demo; the last stop is where it picks up. */
+.demo .timeline{position:absolute;left:96px;right:96px;top:668px;display:grid;grid-template-columns:repeat(4,1fr);list-style:none;margin:0;padding:0}
+.demo .timeline li{position:relative;padding:34px 40px 0 0;border-top:4px solid var(--line)}
+.demo .timeline li:before{content:"";position:absolute;left:0;top:-12px;width:20px;height:20px;border-radius:50%;background:var(--ink)}
+.demo .timeline b{display:block;font-size:28px;font-weight:700;letter-spacing:-.01em}
+.demo .timeline span{display:block;margin-top:6px;font-size:22px;line-height:1.3;color:var(--muted)}
+.demo .timeline .now{border-top-color:var(--purple)}
+.demo .timeline .now:before{background:var(--purple);box-shadow:0 0 0 8px rgba(60,0,120,.14)}
+.demo .timeline .now b{color:var(--purple)}
 
 /* 7 Rewind */
 .rewind .text{position:absolute;left:96px;top:200px;width:640px;display:flex;flex-direction:column;gap:30px}
@@ -198,6 +207,12 @@ h1,h2,h3,p,blockquote{margin:0}
         <p class="body">One evening, Jane asks Clara what would happen if something happened to May. In Swiss German.</p>
       </div>
       <img class="art" src="illustrations/jane-clara.webp" alt="Jane at the table in the evening, the baby asleep on her arm, talking to Clara on the laptop">
+      <ol class="timeline" aria-label="The Müllers with Pax">
+        <li><b>Oct 2024</b><span>First chat with Clara. She finds May’s gap.</span></li>
+        <li><b>Dec 2025</b><span>Yearly check-in. “We still hope for a child.”</span></li>
+        <li><b>Aug 2026</b><span>Pax asks about the child. “Due in December!”</span></li>
+        <li class="now"><b>Today, Nov 2026</b><span>Jane comes back to Clara.</span></li>
+      </ol>
       <div id="fallback" hidden></div>
     </section>
 
@@ -259,7 +274,7 @@ const notes = {
   scale: ["0:35–0:50", "Joel. 'And they are not the exception.' Three clicks: 6 in 10 have no life insurance, 8 in 10 none if illness stops them working, 3 in 4 think the state covers it. Then: 'There are thousands of Müllers.'"],
   why: ["0:50–1:05", "Joel. 'They weren't careless. Nobody explained it to them.' Click: calculators online. Click: the advisor's office is closed. Click: 'Most people who are covered asked an advisor first (2 in 3). Today that takes an appointment.'"],
   expert: ["1:05–1:15", "Flurin. 'We asked an insurance advisor what good advice takes. He is also my dad.' Read the quote (his words, translated from German). 'That is exactly what we built.'"],
-  demo: ["1:15–2:25", "Flurin. Switch to the browser: Jane's conversation, ask the Swiss German question, the pension picture with the three pillars, the disability gap of CHF 1'239, the recommendation (Erwerbsunfähigkeit, CHF 15'000 a year, CHF 741.40), sign it, the policy in the portal, then the company cockpit. Flip the language switch once (FR/IT/EN). Jane signs the disability cover, not the death cover. Backup: press B or . (clicker black-screen key) or V. The next click ends the backup and moves on."],
+  demo: ["1:15–2:25", "Flurin. Point along the timeline: 'Clara met the Müllers in 2024, checked in last December and asked about the child in the summer. It is due in December. Today Jane comes back.' Switch to the browser: Jane's conversation, ask the Swiss German question, the pension picture with the three pillars, the disability gap of CHF 1'239, the recommendation (Erwerbsunfähigkeit, CHF 15'000 a year, CHF 741.40), sign it, the policy in the portal, then the company cockpit. Flip the language switch once (FR/IT/EN). Jane signs the disability cover, not the death cover. Backup: press B or . (clicker black-screen key) or V. The next click ends the backup and moves on."],
   rewind: ["2:25–2:35", "Joel. 'Rewind. We can't stop May from getting sick.' Click: 'But we can stop it from breaking his family.' Click: 'The Müllers closed their gap in one conversation with Clara.'"],
   side: ["2:35–2:45", "Flurin. 'Clara is on the customer's side.' Click: 'When the Smiths didn't need anything, Clara told them': their CHF 500'000 already covers the gap, so she advised against tying it into a product. Click: every recommendation is explained and logged, so Pax can audit it. Click: complex cases, for example large assets or self-employed, go to a Pax advisor; the rules are written in plain words. Click: it runs on Pax's own servers."],
   cockpit: ["2:45–2:55", "Flurin. 'And Pax sees every customer.' The company cockpit: today's open handovers, follow-ups and hot leads, and how far customers get with Clara. Click: 'Clara knows when to bring in a person. Pax's rules hand complex cases to an advisor, and customers can ask for one any time. Either way the advisor already knows them': Andrin Gerber's page with the next step from his conversation, why he was handed over (self-employed, a Pax rule), his life events and his profile. No customer has to start from zero."],
