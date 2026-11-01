@@ -4,7 +4,15 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport } from "ai";
 import { RotateCcw } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Fragment, useCallback, useEffect, useMemo, useReducer, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { Spinner } from "@/components/ui/spinner";
 import { focusReducer, initialFocus } from "@/components/vorsorgebild/focus";
 import { VorsorgebildPanel } from "@/components/vorsorgebild/vorsorgebild-panel";
@@ -15,7 +23,6 @@ import { quickRepliesOf } from "@/lib/advisor/quick-replies";
 import type { AdvisorMessageMetadata, PictureKind, VorsorgebildModel } from "@/lib/advisor/types";
 import { type ChatActions, ChatActionsProvider } from "./chat-actions";
 import { type ClaraTurn, Composer, useEffectiveInputMode } from "./composer";
-import { DataNotice } from "./data-notice";
 import { MessageView } from "./message-view";
 import { PictureProvider } from "./picture-context";
 import type { ChatMessage } from "./types";
@@ -25,6 +32,8 @@ export interface ChatViewProps {
   conversationId: string;
   initialMessages: ChatMessage[];
   initialPicture: VorsorgebildModel;
+  /** Server-rendered line under Clara's greeting (the data notice). */
+  notice?: ReactNode;
 }
 
 function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
@@ -33,7 +42,12 @@ function quickRepliesOfMessage(message: ChatMessage | undefined): string[] {
 }
 
 /** The advisor chat with the live Vorsorgebild (side panel on desktop, strip + sheet on mobile). */
-export function ChatView({ conversationId, initialMessages, initialPicture }: ChatViewProps) {
+export function ChatView({
+  conversationId,
+  initialMessages,
+  initialPicture,
+  notice,
+}: ChatViewProps) {
   const t = useTranslations("chat");
   const [picture, setPicture] = useState(initialPicture);
   // The situation the Vorsorgebild shows follows Clara's latest message (see picture-topic).
@@ -188,19 +202,17 @@ export function ChatView({ conversationId, initialMessages, initialPicture }: Ch
               className="flex flex-1 flex-col gap-6 px-4 pt-6 pb-8 lg:px-0 lg:pt-10"
             >
               {messages.map((message, index) => (
-                <Fragment key={message.id}>
-                  {/* The scroll margin keeps a reply's first line below the header (and the
-                      Vorsorgebild strip on mobile) when the view stops at its start. */}
-                  <li data-role={message.role} className="scroll-mt-32 lg:scroll-mt-24">
-                    <MessageView message={message} />
-                  </li>
-                  {/* Every conversation opens with Clara's greeting: the notice sits under it. */}
-                  {index === 0 ? (
-                    <li className="-mt-3">
-                      <DataNotice />
-                    </li>
-                  ) : null}
-                </Fragment>
+                // The scroll margin keeps a reply's first line below the header (and the
+                // Vorsorgebild strip on mobile) when the view stops at its start.
+                <li
+                  key={message.id}
+                  data-role={message.role}
+                  className="scroll-mt-32 lg:scroll-mt-24"
+                >
+                  <MessageView message={message} />
+                  {/* Every conversation opens with Clara's greeting: the notice belongs to it. */}
+                  {index === 0 ? notice : null}
+                </li>
               ))}
               {!answered && inputMode === "voice" ? (
                 <li>

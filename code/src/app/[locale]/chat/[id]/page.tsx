@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Suspense } from "react";
 import { ChatView } from "@/components/chat/chat-view";
+import { DataNotice } from "@/components/chat/data-notice";
 import { NewConversationButton } from "@/components/chat/new-conversation-button";
 import type { ChatMessage } from "@/components/chat/types";
 import { SiteHeader } from "@/components/site/site-header";
@@ -49,6 +50,7 @@ async function Chat({
           conversationId={conversation.id}
           initialMessages={loadMessages(conversation.id) as ChatMessage[]}
           initialPicture={buildVorsorgebild(customer.id)}
+          notice={<DataNotice />}
         />
       </main>
     </>
