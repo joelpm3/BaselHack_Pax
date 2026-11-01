@@ -98,8 +98,8 @@ values are only used after the customer confirms them.
 family and figures to advise; pseudonymising it would cost advice quality for little gain. That
 makes the model's location the real decision, so Clara runs on our own model on a rented Nebius
 GPU (`LLM_PROVIDER=openai-compatible`, see "Self-hosted mode" in the README) and customer data does
-not go to an external AI provider. For the hackathon the GPU is in `us-central1` because of the
-price; production rents it in an EU region. Logismata receives only the calculation inputs
+not go to an external AI provider. The region is chosen when the GPU is started (`--region`), so
+it can be kept in Switzerland or the EU. Logismata receives only the calculation inputs
 (birth year, income, marital status, pension figures), Quicksale only the pricing inputs.
 
 **Not production-ready, on purpose.** The company dashboard uses one shared password plus picking a
