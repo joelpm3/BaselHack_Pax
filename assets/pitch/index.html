@@ -75,10 +75,8 @@ h1,h2,h3,p,blockquote{margin:0}
 .why .bottomline{bottom:126px}
 
 /* 5 Expert quote */
-.expert{display:grid;grid-template-columns:470px 1fr;column-gap:72px;align-items:center;padding-top:40px;padding-bottom:40px}
-.expert img{display:block;width:470px;height:auto;mix-blend-mode:multiply;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,transparent,#000 5%,#000 95%,transparent);-webkit-mask-composite:source-in;
-  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent),linear-gradient(180deg,transparent,#000 5%,#000 95%,transparent);mask-composite:intersect}
+.expert{display:grid;grid-template-columns:380px 1fr;column-gap:96px;align-content:center}
+.expert img{width:380px;height:380px;object-fit:cover;border-radius:4px;background:var(--wash)}
 .expert blockquote{font-size:58px;line-height:1.14;font-weight:700;letter-spacing:-.03em;text-wrap:balance}
 .expert blockquote:before{content:"“";display:block;font-size:120px;line-height:.6;color:var(--purple);margin-bottom:12px}
 .expert .who{margin-top:34px;font-size:26px;color:var(--muted)}
@@ -178,7 +176,7 @@ h1,h2,h3,p,blockquote{margin:0}
 
     <!-- 5 · Expert -->
     <section class="slide expert" data-id="expert" aria-label="Quote from Franz Laim">
-      <img src="illustrations/franz.webp" alt="Franz Laim in a suit, smiling, explaining with an open hand">
+      <img src="img/franz-laim.jpg" alt="Portrait of Franz Laim">
       <div>
         <blockquote>Understand what the customer needs. Check the facts against the products. Then make it visual, so the customer understands.</blockquote>
         <p class="who"><b>Franz Laim</b>, insurance advisor</p>
