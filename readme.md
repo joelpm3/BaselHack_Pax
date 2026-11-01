@@ -133,7 +133,6 @@ Architecture, data model and design decisions: [`documentation/ARCHITECTURE.md`]
 |---|---|
 | [`code/`](code) | Next.js app (customer PWA and company dashboard) |
 | [`documentation/`](documentation) | Architecture, demo personas, GPU cookbook |
-| [`documentation/challenge_context/`](documentation/challenge_context) | Challenge brief, Pax brand, API notes |
 | [`assets/`](assets) | Screenshots |
 
 ## Meet the team behind Pax Clara
