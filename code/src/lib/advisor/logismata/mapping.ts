@@ -307,6 +307,38 @@ export function riskPensionsEstimated(profile: LifeSituation): boolean {
   return ownEstimated || partnerEstimated;
 }
 
+/** Whether retirement pensions come from Logismata's estimate: a pension fund without a certificate figure. */
+export function retirementPensionsEstimated(profile: LifeSituation): boolean {
+  const ownEstimated =
+    profile.pillar2.projectedPensionAtRetirement === undefined &&
+    withBvg(profile.person, profile.pillar2.hasPensionFund);
+  const partner = partnerOf(profile);
+  const partnerEstimated =
+    partner !== undefined &&
+    partner.pillar2?.projectedPensionAtRetirement === undefined &&
+    withBvg(partner, partner.pillar2?.hasPensionFund);
+  return ownEstimated || partnerEstimated;
+}
+
+/**
+ * Whether a stored risk request rested on estimated pension-fund benefits: someone with a
+ * pension fund went in without certificate values (no Pillar2Pensions in the request).
+ */
+export function riskInputEstimated(input: unknown, profile: LifeSituation): boolean {
+  const stored = (typeof input === "object" && input !== null ? input : {}) as {
+    Person1?: { Pillar2Pensions?: unknown };
+    Person2?: { Pillar2Pensions?: unknown };
+  };
+  const partner = partnerOf(profile);
+  const ownEstimated =
+    withBvg(profile.person, profile.pillar2.hasPensionFund) && !stored.Person1?.Pillar2Pensions;
+  const partnerEstimated =
+    partner !== undefined &&
+    withBvg(partner, partner.pillar2?.hasPensionFund) &&
+    !stored.Person2?.Pillar2Pensions;
+  return ownEstimated || partnerEstimated;
+}
+
 export interface RiskOverrides {
   extraChildren?: number;
   /** Pension-fund risk benefits of person 1 (the customer). */

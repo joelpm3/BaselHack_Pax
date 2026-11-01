@@ -279,10 +279,19 @@ export interface PictureScenario {
    */
   person: 1 | 2;
   partnerName: string | null;
+  /** First name of the person a disability or death is about; null for retirement or unknown. */
+  personName: string | null;
   breakdown: IncomeBreakdown;
   calculatedAt: number;
   /** The customer's policies included in a disability or death breakdown. */
   policyCover: PolicyCover | null;
+  /** The calculation rests on estimated pension-fund benefits (no certificate values in it). */
+  estimated: boolean;
+  /**
+   * Death: the surviving partner and their own gross income (yearly). As in the Pax
+   * Vorsorgecheck, it is not part of the breakdown; the picture names it beside the gap.
+   */
+  survivor: { name: string | null; income: number } | null;
 }
 
 export interface VorsorgebildModel {
