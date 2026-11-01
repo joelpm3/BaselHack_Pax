@@ -1,0 +1,5507 @@
+{
+  "refs": {
+    "ruleSet": "95573900-99da-4b3c-86a5-2915be6face1",
+    "rules": {
+      "4de49513-1f96-4d0e-a816-f2b7a5a1d81e": 6
+    }
+  },
+  "customer": {
+    "id": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+    "lifecycle": "prospect",
+    "firstName": "Jane",
+    "lastName": "Müller",
+    "email": "jane.mueller@example.ch",
+    "phone": null,
+    "birthDate": null,
+    "locale": "de",
+    "isSimulated": false,
+    "isDemo": false,
+    "createdAt": {
+      "$at": -1
+    },
+    "updatedAt": {
+      "$at": 378027
+    },
+    "lastSeenAt": {
+      "$at": 376810
+    }
+  },
+  "profile": {
+    "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+    "data": {
+      "person": {
+        "firstName": "Jane",
+        "birthYear": 1986,
+        "sex": "female",
+        "maritalStatus": "married",
+        "employment": "employed",
+        "workloadPercent": 80,
+        "grossIncome": 76000,
+        "occupation": "Pflegefachfrau"
+      },
+      "partner": {
+        "firstName": "May",
+        "birthYear": 1984,
+        "sex": "male",
+        "maritalStatus": "married",
+        "employment": "employed",
+        "workloadPercent": 100,
+        "grossIncome": 95000,
+        "occupation": "Logistik",
+        "pillar2": {
+          "hasPensionFund": true,
+          "insuredSalary": 69275,
+          "currentCapital": 166830,
+          "projectedCapitalAtRetirement": 543884.7,
+          "projectedPensionAtRetirement": 32633.1,
+          "disabilityPension": 20830,
+          "partnerPension": 12498,
+          "childPension": 4166,
+          "deathLumpSum": 50000,
+          "maxBuyIn": 92400
+        }
+      },
+      "children": [],
+      "residence": {
+        "city": "Basel",
+        "canton": "BS",
+        "taxLocationId": 400000000
+      },
+      "assets": {
+        "liquid": 20000
+      },
+      "pillar1": {},
+      "pillar2": {
+        "hasPensionFund": true,
+        "insuredSalary": 55420,
+        "currentCapital": 62400,
+        "projectedCapitalAtRetirement": 351204.2,
+        "projectedPensionAtRetirement": 21072.25,
+        "disabilityPension": 22168,
+        "partnerPension": 13300.8,
+        "childPension": 4433.6,
+        "deathLumpSum": 0,
+        "maxBuyIn": 58000
+      },
+      "pillar3a": {
+        "balance": 0,
+        "annualContribution": 0
+      },
+      "goals": ["protect_family"],
+      "plannedEvents": [
+        {
+          "type": "child",
+          "note": "Kinderwunsch, Zeitpunkt offen"
+        }
+      ],
+      "concerns": [],
+      "privateCover": "no"
+    },
+    "completeness": 100,
+    "updatedAt": {
+      "$at": 183232
+    }
+  },
+  "conversation": {
+    "id": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+    "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+    "locale": "de",
+    "mode": "new_business",
+    "status": "completed",
+    "stage": "recommendation_shown",
+    "title": "Vorsorgecheck für Ehepaar in Basel",
+    "isSimulated": false,
+    "simulationRunId": null,
+    "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1",
+    "messageCount": 23,
+    "createdAt": {
+      "$at": 0
+    },
+    "lastMessageAt": {
+      "$at": 380802
+    }
+  },
+  "messages": [
+    {
+      "id": "f30defc3-5518-4ab8-8036-155578cd77e2",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Grüezi, schön, dass Sie da sind. Ich bin Clara, die digitale Vorsorgeberaterin der Pax. Sie haben Unterlagen zur Hand, sehr gut: Die schauen wir uns gleich gemeinsam an und ersparen uns so viele Fragen. Zuerst möchte ich Sie aber kurz kennenlernen: Wie sieht Ihr Leben im Moment aus?"
+        }
+      ],
+      "metadata": {
+        "kind": "greeting",
+        "variant": "upload",
+        "createdAt": 1793525469941
+      },
+      "inputMode": null,
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 0
+      }
+    },
+    {
+      "id": "VGEihqNReG9ERk0A",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Grüezi Clara. Mein Mann May und ich möchten wissen, ob wir gut abgesichert sind. Ich bin Jahrgang 1986 und arbeite 80 Prozent als Pflegefachfrau, May ist Jahrgang 1984 und arbeitet 100 Prozent bei einer Logistikfirma. Wir sind verheiratet und wohnen in Basel. Kinder haben wir noch keine, aber wir wünschen uns welche."
+        }
+      ],
+      "metadata": {
+        "inputMode": "text",
+        "createdAt": 1793525484084
+      },
+      "inputMode": "text",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 14143
+      }
+    },
+    {
+      "id": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-updateProfile",
+          "toolCallId": "toolu_01LFQXmwsEkcicrprqVDz4rU",
+          "state": "output-available",
+          "input": {
+            "person": {
+              "birthYear": 1986,
+              "sex": "female",
+              "maritalStatus": "married",
+              "employment": "employed",
+              "workloadPercent": 80,
+              "occupation": "Pflegefachfrau"
+            },
+            "partner": {
+              "firstName": "May",
+              "birthYear": 1984,
+              "sex": "male",
+              "maritalStatus": "married",
+              "employment": "employed",
+              "workloadPercent": 100,
+              "occupation": "Logistik"
+            },
+            "residence": {
+              "city": "Basel"
+            },
+            "addGoals": ["protect_family"],
+            "addPlannedEvents": [
+              {
+                "type": "child",
+                "note": "Kinderwunsch, Zeitpunkt offen"
+              }
+            ]
+          },
+          "output": {
+            "status": "ok",
+            "changes": [
+              {
+                "path": "person.birthYear",
+                "value": 1986
+              },
+              {
+                "path": "person.sex",
+                "value": "female"
+              },
+              {
+                "path": "person.maritalStatus",
+                "value": "married"
+              },
+              {
+                "path": "person.employment",
+                "value": "employed"
+              },
+              {
+                "path": "person.workloadPercent",
+                "value": 80
+              },
+              {
+                "path": "person.occupation",
+                "value": "Pflegefachfrau"
+              },
+              {
+                "path": "partner.firstName",
+                "value": "May"
+              },
+              {
+                "path": "partner.birthYear",
+                "value": 1984
+              },
+              {
+                "path": "partner.sex",
+                "value": "male"
+              },
+              {
+                "path": "partner.maritalStatus",
+                "value": "married"
+              },
+              {
+                "path": "partner.employment",
+                "value": "employed"
+              },
+              {
+                "path": "partner.workloadPercent",
+                "value": 100
+              },
+              {
+                "path": "partner.occupation",
+                "value": "Logistik"
+              },
+              {
+                "path": "goals",
+                "value": ["protect_family"]
+              },
+              {
+                "path": "plannedEvents",
+                "value": [
+                  {
+                    "type": "child",
+                    "note": "Kinderwunsch, Zeitpunkt offen"
+                  }
+                ]
+              },
+              {
+                "path": "residence.city",
+                "value": "Basel"
+              },
+              {
+                "path": "residence.canton",
+                "value": "BS"
+              },
+              {
+                "path": "residence.taxLocationId",
+                "value": 400000000
+              }
+            ],
+            "replaced": [],
+            "completeness": 60,
+            "location": {
+              "zip": null,
+              "city": "Basel",
+              "canton": "BS",
+              "taxLocationId": 400000000
+            },
+            "locationNotFound": null,
+            "locationOptions": null,
+            "missingForAnalysis": ["person.grossIncome", "partner.grossIncome", "privateCover"],
+            "askBeforeAnalysis": ["assets.liquid", "pillar3a", "monthlySpending"],
+            "error": null
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "tool-suggestDocumentUpload",
+          "toolCallId": "toolu_01PiTYTDw11dQtytEnA6Vxrz",
+          "state": "output-available",
+          "input": {
+            "documentTypes": ["salary_certificate", "pension_certificate", "insurance_policy"]
+          },
+          "output": {
+            "documentTypes": ["salary_certificate", "pension_certificate", "insurance_policy"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Danke für die Angaben, Sie sind 1986 geboren und arbeiten 80 Prozent, Ihr Mann ist 1984 geboren und arbeitet 100 Prozent. Damit kann ich schon einiges einordnen. Für eine verlässliche Rechnung brauche ich noch Ihre Einkommen, am schnellsten geht das über den Lohnausweis und den Vorsorgeausweis, die Sie oben hochladen können. Haben Sie diese Unterlagen gerade zur Hand?",
+          "state": "done"
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525484089,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 54588,
+      "outputTokens": 1414,
+      "createdAt": {
+        "$at": 22320
+      }
+    },
+    {
+      "id": "EJtWrVRYZtORAADN",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Ja, ich lade Ihnen unsere Lohnausweise und Vorsorgeausweise hoch. Eine private Todesfall- oder Invaliditätsversicherung haben wir übrigens nicht."
+        }
+      ],
+      "metadata": {
+        "inputMode": "text",
+        "createdAt": 1793525520130
+      },
+      "inputMode": "text",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 50189
+      }
+    },
+    {
+      "id": "c24cff4c-6ae1-4feb-8432-ddf138cc3641",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-updateProfile",
+          "toolCallId": "toolu_01D6jCdgkmcrQzmvFeZhz5LZ",
+          "state": "output-available",
+          "input": {
+            "privateCover": "no"
+          },
+          "output": {
+            "status": "ok",
+            "changes": [
+              {
+                "path": "privateCover",
+                "value": "no"
+              }
+            ],
+            "replaced": [],
+            "completeness": 60,
+            "location": null,
+            "locationNotFound": null,
+            "locationOptions": null,
+            "missingForAnalysis": ["person.grossIncome", "partner.grossIncome"],
+            "askBeforeAnalysis": ["assets.liquid", "pillar3a", "monthlySpending"],
+            "error": null
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Danke, dann notiere ich, dass weder Sie noch Ihr Mann eine private Todesfall- oder Invaliditätsversicherung haben. Sobald die Lohnausweise und Vorsorgeausweise bei mir eingegangen sind, prüfe ich sie zusammen mit Ihnen. Haben Sie ungefähr einen Betrag auf Sparkonten, den Sie mir nennen können?",
+          "state": "done"
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525520137,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 56380,
+      "outputTokens": 441,
+      "createdAt": {
+        "$at": 53778
+      }
+    },
+    {
+      "id": "MghyDaHn4NeYvg5S",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Ich habe 4 Dokumente hochgeladen: lohnausweis-2023-may-mueller.pdf, lohnausweis-2023-jane-mueller.pdf, vorsorgeausweis-2024-may-mueller.pdf, vorsorgeausweis-2024-jane-mueller.pdf"
+        }
+      ],
+      "metadata": {
+        "inputMode": "upload",
+        "createdAt": 1793525536196,
+        "documentIds": [
+          "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+          "8b86d467-b97a-403b-b3cb-40008418e756",
+          "774f5d72-86de-4858-a412-ec833a2cd6b0",
+          "20641a4a-8fd9-45ec-a756-2739c5d14406"
+        ]
+      },
+      "inputMode": "upload",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 66255
+      }
+    },
+    {
+      "id": "efba777f-a378-4b47-a062-bfed0478c326",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-reviewDocuments",
+          "toolCallId": "toolu_012TaXKLZGtJTu5wG6Kfbiac",
+          "state": "output-available",
+          "input": {
+            "documentIds": [
+              "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+              "8b86d467-b97a-403b-b3cb-40008418e756",
+              "774f5d72-86de-4858-a412-ec833a2cd6b0",
+              "20641a4a-8fd9-45ec-a756-2739c5d14406"
+            ]
+          },
+          "output": {
+            "extractions": [
+              {
+                "documentId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+                "filename": "lohnausweis-2023-may-mueller.pdf",
+                "status": "extracted",
+                "docType": "salary_certificate",
+                "fields": [
+                  {
+                    "path": "employer",
+                    "value": "Muster Logistik AG",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Muster Logistik AG"
+                  },
+                  {
+                    "path": "employeeName",
+                    "value": "May Müller",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Herr May Müller"
+                  },
+                  {
+                    "path": "year",
+                    "value": 2023,
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "D Jahr 2023 E von 01.01.2023 bis 31.12.2023"
+                  },
+                  {
+                    "path": "grossSalary",
+                    "value": 95000,
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "8. Bruttolohn total / Rente = 95'000"
+                  },
+                  {
+                    "path": "netSalary",
+                    "value": 84288,
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "11. Nettolohn / Rente (in die Steuererklärung übertragen) = 84'288"
+                  },
+                  {
+                    "path": "pensionContributions",
+                    "value": 4157,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "10.1 Ordentliche Beiträge – 4'157"
+                  }
+                ],
+                "description": "Swiss Lohnausweis (Form 11) for May Müller issued by Muster Logistik AG for the 2023 tax year.",
+                "error": null,
+                "confirmedAt": null,
+                "subject": "partner",
+                "names": {
+                  "partner": "May"
+                }
+              },
+              {
+                "documentId": "8b86d467-b97a-403b-b3cb-40008418e756",
+                "filename": "lohnausweis-2023-jane-mueller.pdf",
+                "status": "extracted",
+                "docType": "salary_certificate",
+                "fields": [
+                  {
+                    "path": "employer",
+                    "value": "Gesundheitszentrum Muster AG",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Gesundheitszentrum Muster AG"
+                  },
+                  {
+                    "path": "employeeName",
+                    "value": "Jane Müller",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Jane Müller"
+                  },
+                  {
+                    "path": "year",
+                    "value": 2023,
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "D Jahr 2023 E von 01.01.2023 bis 31.12.2023"
+                  },
+                  {
+                    "path": "grossSalary",
+                    "value": 76000,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "8. Bruttolohn total / Rente = 76'000"
+                  },
+                  {
+                    "path": "netSalary",
+                    "value": 67431,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "11. Nettolohn / Rente (in die Steuererklärung übertragen) = 67'431"
+                  },
+                  {
+                    "path": "pensionContributions",
+                    "value": 3325,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "10.1 Ordentliche Beiträge – 3'325"
+                  }
+                ],
+                "description": "Swiss Lohnausweis (Form 11) issued by Gesundheitszentrum Muster AG for Jane Müller, covering the 2023 tax year.",
+                "error": null,
+                "confirmedAt": null,
+                "subject": "self",
+                "names": {
+                  "partner": "May"
+                }
+              },
+              {
+                "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+                "filename": "vorsorgeausweis-2024-may-mueller.pdf",
+                "status": "extracted",
+                "docType": "pension_certificate",
+                "fields": [
+                  {
+                    "path": "pensionFund",
+                    "value": "Pensionkasse Muster",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Pensionskasse Muster Sammelstiftung für die berufliche Vorsorge"
+                  },
+                  {
+                    "path": "employer",
+                    "value": "Muster Logistik AG, Basel",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Arbeitgeber Muster Logistik AG, Basel"
+                  },
+                  {
+                    "path": "insuredPerson",
+                    "value": "May Müller",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Name Herr May Müller Versicherten-Nr. PKM-104-2231"
+                  },
+                  {
+                    "path": "birthDate",
+                    "value": "1984-09-16",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Geburtsdatum 16.09.1984 AHV-Nr. 756.1234.5678.97"
+                  },
+                  {
+                    "path": "certificateDate",
+                    "value": "2024-01-01",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Vorsorgeausweis per 1. Januar 2024"
+                  },
+                  {
+                    "path": "workloadPercent",
+                    "value": 100,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Beschäftigungsgrad 100 %"
+                  },
+                  {
+                    "path": "grossSalary",
+                    "value": 95000,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Massgebender Jahreslohn (AHV-Lohn) 95'000.00"
+                  },
+                  {
+                    "path": "insuredSalary",
+                    "value": 69275,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Versicherter Lohn 69'275.00"
+                  },
+                  {
+                    "path": "currentCapital",
+                    "value": 166830,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Altersguthaben per 01.01.2024 166'830.00"
+                  },
+                  {
+                    "path": "projectedCapitalAtRetirement",
+                    "value": 543884.7,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projiziertes Altersguthaben mit 65 (30.09.2049) 543'884.70"
+                  },
+                  {
+                    "path": "projectedPensionAtRetirement",
+                    "value": 32633.1,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projizierte jährliche Altersrente mit 65 32'633.10"
+                  },
+                  {
+                    "path": "retirementAge",
+                    "value": 65,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projizierte jährliche Altersrente mit 65 32'633.10"
+                  },
+                  {
+                    "path": "disabilityPension",
+                    "value": 20830,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Invalidenrente 20'830.00 nach einer Wartefrist von 24 Monaten"
+                  },
+                  {
+                    "path": "partnerPension",
+                    "value": 12498,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Ehegatten- oder Lebenspartnerrente 12'498.00"
+                  },
+                  {
+                    "path": "childPension",
+                    "value": 4166,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Waisenrente je Kind 4'166.00"
+                  },
+                  {
+                    "path": "deathLumpSum",
+                    "value": 50000,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Zusätzliches Todesfallkapital 50'000.00 an die Begünstigten gemäss Reglement"
+                  },
+                  {
+                    "path": "maxBuyIn",
+                    "value": 92400,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Maximal möglicher Einkauf per 01.01.2024 92'400.00"
+                  },
+                  {
+                    "path": "employeeContribution",
+                    "value": 4156.5,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Total Beiträge pro Jahr 4'156.50 5'195.65 9'352.15"
+                  },
+                  {
+                    "path": "employerContribution",
+                    "value": 5195.65,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Total Beiträge pro Jahr 4'156.50 5'195.65 9'352.15"
+                  }
+                ],
+                "description": "Pension fund (Pensionskasse Muster) 2nd pillar certificate for May Müller as of 1 January 2024, issued January 2024.",
+                "error": null,
+                "confirmedAt": null,
+                "subject": "partner",
+                "names": {
+                  "partner": "May"
+                }
+              },
+              {
+                "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+                "filename": "vorsorgeausweis-2024-jane-mueller.pdf",
+                "status": "extracted",
+                "docType": "pension_certificate",
+                "fields": [
+                  {
+                    "path": "pensionFund",
+                    "value": "Pensionskasse Muster",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Pensionskasse Muster Sammelstiftung für die berufliche Vorsorge"
+                  },
+                  {
+                    "path": "employer",
+                    "value": "Gesundheitszentrum Muster AG, Basel",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Arbeitgeber Gesundheitszentrum Muster AG, Basel"
+                  },
+                  {
+                    "path": "insuredPerson",
+                    "value": "Jane Müller",
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Frau Jane Müller"
+                  },
+                  {
+                    "path": "birthDate",
+                    "value": "1986-06-01",
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "Geburtsdatum 01.06.1986"
+                  },
+                  {
+                    "path": "certificateDate",
+                    "value": "2024-01-01",
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "Vorsorgeausweis per 1. Januar 2024"
+                  },
+                  {
+                    "path": "workloadPercent",
+                    "value": 80,
+                    "confidence": 0.97,
+                    "page": 1,
+                    "quote": "Beschäftigungsgrad 80 %"
+                  },
+                  {
+                    "path": "grossSalary",
+                    "value": 76000,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Massgebender Jahreslohn (AHV-Lohn) 76'000.00"
+                  },
+                  {
+                    "path": "insuredSalary",
+                    "value": 55420,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Versicherter Lohn 55'420.00"
+                  },
+                  {
+                    "path": "currentCapital",
+                    "value": 62400,
+                    "confidence": 0.95,
+                    "page": 1,
+                    "quote": "Altersguthaben per 01.01.2024 62'400.00"
+                  },
+                  {
+                    "path": "projectedCapitalAtRetirement",
+                    "value": 351204.2,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projiziertes Altersguthaben mit 65 (30.06.2051) 351'204.20"
+                  },
+                  {
+                    "path": "projectedPensionAtRetirement",
+                    "value": 21072.25,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projizierte jährliche Altersrente mit 65 21'072.25"
+                  },
+                  {
+                    "path": "retirementAge",
+                    "value": 65,
+                    "confidence": 0.9,
+                    "page": 1,
+                    "quote": "Projizierte jährliche Altersrente mit 65 21'072.25"
+                  },
+                  {
+                    "path": "disabilityPension",
+                    "value": 22168,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Invalidenrente 22'168.00"
+                  },
+                  {
+                    "path": "partnerPension",
+                    "value": 13300.8,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Ehegatten- oder Lebenspartnerrente 13'300.80"
+                  },
+                  {
+                    "path": "childPension",
+                    "value": 4433.6,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Jährliche Waisenrente je Kind 4'433.60"
+                  },
+                  {
+                    "path": "deathLumpSum",
+                    "value": 0,
+                    "confidence": 0.9,
+                    "page": 2,
+                    "quote": "Zusätzliches Todesfallkapital keines"
+                  },
+                  {
+                    "path": "maxBuyIn",
+                    "value": 58000,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Maximal möglicher Einkauf per 01.01.2024 58'000.00"
+                  },
+                  {
+                    "path": "employeeContribution",
+                    "value": 3325.2,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Total Beiträge pro Jahr 3'325.20 4'156.50 7'481.70"
+                  },
+                  {
+                    "path": "employerContribution",
+                    "value": 4156.5,
+                    "confidence": 0.95,
+                    "page": 2,
+                    "quote": "Total Beiträge pro Jahr 3'325.20 4'156.50 7'481.70"
+                  }
+                ],
+                "description": "Swiss 2nd-pillar pension fund certificate (Vorsorgeausweis) from Pensionskasse Muster for Jane Müller, effective 1 January 2024.",
+                "error": null,
+                "confirmedAt": null,
+                "subject": "self",
+                "names": {
+                  "partner": "May"
+                }
+              }
+            ]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Ich habe die vier Dokumente gelesen. Die Werte stehen in der Karte, bitte prüfen Sie sie und bestätigen Sie sie dort. Erst danach fliessen sie in die Rechnung ein. Passen die Angaben zu Ihrem Lohn und Ihrem Vorsorgeguthaben?",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_017UWnpGTUuCqzYvoUUw395g",
+          "state": "output-available",
+          "input": {
+            "options": ["Ja, die Werte stimmen", "Nein, ein Wert ist falsch"]
+          },
+          "output": {
+            "options": ["Ja, die Werte stimmen", "Nein, ein Wert ist falsch"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525536201,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 61101,
+      "outputTokens": 667,
+      "createdAt": {
+        "$at": 79330
+      }
+    },
+    {
+      "id": "pSLZP8GlXcSZZmk2",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Ich habe die Angaben aus meinen Dokumenten geprüft und bestätigt: Lohnausweis, Lohnausweis, Vorsorgeausweis und Vorsorgeausweis."
+        }
+      ],
+      "metadata": {
+        "inputMode": "widget",
+        "createdAt": 1793525579885,
+        "documentIds": [
+          "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+          "8b86d467-b97a-403b-b3cb-40008418e756",
+          "774f5d72-86de-4858-a412-ec833a2cd6b0",
+          "20641a4a-8fd9-45ec-a756-2739c5d14406"
+        ]
+      },
+      "inputMode": "widget",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 109944
+      }
+    },
+    {
+      "id": "a4ccab05-bf0d-4aaf-ac75-3186b92f0586",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Danke, Ihre Angaben sind bestätigt und fliessen in die Rechnung ein. Bevor ich die Absicherung prüfe, brauche ich noch eine Angabe: Wie viel liegt ungefähr auf Ihren Sparkonten? Wenn Sie das lieber nicht nennen möchten, sagen Sie es einfach, dann rechne ich ohne.",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_0128P3MFfsL2TeRuSkyw6Svx",
+          "state": "output-available",
+          "input": {
+            "options": ["Rund CHF 20'000 auf dem Sparkonto", "Lieber nicht nennen"]
+          },
+          "output": {
+            "options": ["Rund CHF 20'000 auf dem Sparkonto", "Lieber nicht nennen"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525579895,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 34587,
+      "outputTokens": 519,
+      "createdAt": {
+        "$at": 113069
+      }
+    },
+    {
+      "id": "gSjNNB1sE48N4oOq",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Rund CHF 20'000 auf dem Sparkonto"
+        }
+      ],
+      "metadata": {
+        "inputMode": "widget",
+        "createdAt": 1793525612423
+      },
+      "inputMode": "widget",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 142482
+      }
+    },
+    {
+      "id": "399ef75e-3005-4ce6-80cb-2807845d7d63",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-updateProfile",
+          "toolCallId": "toolu_01WrVmyx7d5rPKjZkzDgfRRW",
+          "state": "output-available",
+          "input": {
+            "assets": {
+              "liquid": 20000
+            }
+          },
+          "output": {
+            "status": "ok",
+            "changes": [
+              {
+                "path": "assets.liquid",
+                "value": 20000
+              }
+            ],
+            "replaced": [],
+            "completeness": 90,
+            "location": null,
+            "locationNotFound": null,
+            "locationOptions": null,
+            "missingForAnalysis": [],
+            "askBeforeAnalysis": ["pillar3a", "monthlySpending"],
+            "error": null
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Danke, Ihr Sparguthaben ist notiert. Bevor ich die Absicherung rechne, möchte ich noch wissen, ob Sie beide in die Säule 3a einzahlen. Das ist die steuerbegünstigte Vorsorge neben der Pensionskasse, und sie beeinflusst, wie viel Ihnen im Ernstfall bleibt.",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_01DL6CXPV8Q4yFNjvMyjwG1W",
+          "state": "output-available",
+          "input": {
+            "options": ["Ja, ich zahle in die 3a ein", "Nein, wir zahlen nicht in die 3a"]
+          },
+          "output": {
+            "options": ["Ja, ich zahle in die 3a ein", "Nein, wir zahlen nicht in die 3a"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525612432,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 72048,
+      "outputTokens": 413,
+      "createdAt": {
+        "$at": 146191
+      }
+    },
+    {
+      "id": "mMiqSUuikQoJYC5i",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Nein, eine 3a haben wir beide noch nicht. Lohnt sich das für uns? Und wie viel macht der Zinseszins aus, wenn wir jedes Jahr einzahlen?"
+        }
+      ],
+      "metadata": {
+        "inputMode": "text",
+        "createdAt": 1793525648927
+      },
+      "inputMode": "text",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 178987
+      }
+    },
+    {
+      "id": "221b893d-b16a-4acb-8d35-eea0c5892639",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-updateProfile",
+          "toolCallId": "toolu_01V8ZES1q41JDL6XZLa1D1do",
+          "state": "output-available",
+          "input": {
+            "person": {},
+            "pillar3a": {
+              "balance": 0,
+              "annualContribution": 0
+            }
+          },
+          "output": {
+            "status": "ok",
+            "changes": [
+              {
+                "path": "pillar3a.balance",
+                "value": 0
+              },
+              {
+                "path": "pillar3a.annualContribution",
+                "value": 0
+              }
+            ],
+            "replaced": [],
+            "completeness": 100,
+            "location": null,
+            "locationNotFound": null,
+            "locationOptions": null,
+            "missingForAnalysis": [],
+            "askBeforeAnalysis": ["monthlySpending"],
+            "error": null
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "tool-calculateTaxSavings",
+          "toolCallId": "toolu_018FCreL7fsoidMve5uQfwq6",
+          "state": "output-available",
+          "input": {},
+          "output": {
+            "status": "ok",
+            "saving3a": {
+              "yearlyAmount": 7258,
+              "max3a": 7258,
+              "duration": 25,
+              "yearlyTaxSavings": 2155,
+              "overallTaxSavings": 53875,
+              "grossCapital": 207039,
+              "netCapital": 191171,
+              "capitalTax": 15868
+            },
+            "buyIn": {
+              "amount": 58000,
+              "years": 1,
+              "taxSavings": 15684,
+              "netInvestment": 42316,
+              "additionalPension": 4463,
+              "additionalCapital": 74381
+            },
+            "assumptions": {
+              "needPercent": 80,
+              "interestRate": 1,
+              "retirementAge": 65,
+              "pillar2Estimated": false
+            }
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "tool-explainCompoundInterest",
+          "toolCallId": "toolu_018wo8C5nTP8mvejZGdBs9eR",
+          "state": "output-available",
+          "input": {
+            "startAmount": 0,
+            "monthlySaving": 605,
+            "years": 25
+          },
+          "output": {
+            "status": "ok",
+            "params": {
+              "startAmount": 0,
+              "monthlySaving": 605,
+              "ratePercent": 2,
+              "years": 25
+            },
+            "sources": {
+              "startAmount": "customer",
+              "monthlySaving": "customer",
+              "ratePercent": "example",
+              "years": "customer"
+            },
+            "basis": "own",
+            "account": "savings",
+            "summary": {
+              "params": {
+                "startAmount": 0,
+                "monthlySaving": 605,
+                "ratePercent": 2,
+                "years": 25
+              },
+              "deposits": 181500,
+              "interest": 45114,
+              "interestOnInterest": 8437,
+              "total": 235052,
+              "interestOnInterestShare": 0.03589576870359291
+            }
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Ja, für Sie beide kann sich eine 3a lohnen, weil Sie der Pensionskasse angeschlossen sind und jährlich bis CHF 7'258 einzahlen dürfen. Das Geld wird vom steuerbaren Einkommen abgezogen: Bei dem Maximum sparen Sie rund CHF 2'155 Steuern pro Jahr. Das gilt pro Person, Sie können also beide einzahlen.\n\nMit dem Zinseszins zeigt das Beispiel: Bei CHF 605 pro Monat über 25 Jahre und einem angenommenen Zins von 2 % wächst das Guthaben auf rund CHF 235'000. Davon sind CHF 181'500 Ihre Einzahlungen, der Rest ist Zins. Der Zins ist eine Annahme, keine Zusage, und die Rendite einer 3a ist nicht garantiert.\n\nSollen wir zuerst prüfen, wie Sie abgesichert sind, bevor wir über die 3a entscheiden?",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_01ARPkyAqEC1Y4q5WC2YtoZV",
+          "state": "output-available",
+          "input": {
+            "options": ["Ja, zuerst die Absicherung", "Erst die 3a anschauen"]
+          },
+          "output": {
+            "options": ["Ja, zuerst die Absicherung", "Erst die 3a anschauen"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525648938,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 74446,
+      "outputTokens": 1740,
+      "createdAt": {
+        "$at": 187834
+      }
+    },
+    {
+      "id": "yTT7UYViOGIRuMaD",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Ja, zuerst die Absicherung"
+        }
+      ],
+      "metadata": {
+        "inputMode": "widget",
+        "createdAt": 1793525691338
+      },
+      "inputMode": "widget",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 221397
+      }
+    },
+    {
+      "id": "72acbaee-8cfa-4607-832e-f334fa48aded",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-showRiskAnalysis",
+          "toolCallId": "toolu_01S2447qR8SHAr2tusj5Jk4v",
+          "state": "output-available",
+          "input": {},
+          "output": {
+            "status": "ok",
+            "persons": [
+              {
+                "person": 1,
+                "firstName": "Jane",
+                "retired": false,
+                "scenarios": [
+                  {
+                    "event": "disability",
+                    "cause": "illness",
+                    "breakdown": {
+                      "grossIncome": 76000,
+                      "need": 60800,
+                      "pillar1": 25404,
+                      "pillar2": 22168,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 47572,
+                      "gap": 13228,
+                      "surplus": 0,
+                      "capitalGap": 310090
+                    }
+                  },
+                  {
+                    "event": "disability",
+                    "cause": "accident",
+                    "breakdown": {
+                      "grossIncome": 76000,
+                      "need": 60800,
+                      "pillar1": 25404,
+                      "pillar2": 42996,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 68400,
+                      "gap": 0,
+                      "surplus": 7600,
+                      "capitalGap": 0
+                    }
+                  },
+                  {
+                    "event": "death",
+                    "cause": "illness",
+                    "breakdown": {
+                      "grossIncome": 76000,
+                      "need": 53200,
+                      "pillar1": 0,
+                      "pillar2": 0,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 0,
+                      "gap": 53200,
+                      "surplus": 0,
+                      "capitalGap": 1223600
+                    }
+                  },
+                  {
+                    "event": "death",
+                    "cause": "accident",
+                    "breakdown": {
+                      "grossIncome": 76000,
+                      "need": 53200,
+                      "pillar1": 0,
+                      "pillar2": 0,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 0,
+                      "gap": 53200,
+                      "surplus": 0,
+                      "capitalGap": 1223600
+                    }
+                  }
+                ]
+              },
+              {
+                "person": 2,
+                "firstName": "May",
+                "retired": false,
+                "scenarios": [
+                  {
+                    "event": "disability",
+                    "cause": "illness",
+                    "breakdown": {
+                      "grossIncome": 95000,
+                      "need": 76000,
+                      "pillar1": 27096,
+                      "pillar2": 20830,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 47926,
+                      "gap": 28074,
+                      "surplus": 0,
+                      "capitalGap": 589554
+                    }
+                  },
+                  {
+                    "event": "disability",
+                    "cause": "accident",
+                    "breakdown": {
+                      "grossIncome": 95000,
+                      "need": 76000,
+                      "pillar1": 27096,
+                      "pillar2": 58404,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 85500,
+                      "gap": 0,
+                      "surplus": 9500,
+                      "capitalGap": 0
+                    }
+                  },
+                  {
+                    "event": "death",
+                    "cause": "illness",
+                    "breakdown": {
+                      "grossIncome": 95000,
+                      "need": 66500,
+                      "pillar1": 0,
+                      "pillar2": 0,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 0,
+                      "gap": 66500,
+                      "surplus": 0,
+                      "capitalGap": 1662500
+                    }
+                  },
+                  {
+                    "event": "death",
+                    "cause": "accident",
+                    "breakdown": {
+                      "grossIncome": 95000,
+                      "need": 66500,
+                      "pillar1": 0,
+                      "pillar2": 0,
+                      "other": 0,
+                      "partner": 0,
+                      "policies": 0,
+                      "total": 0,
+                      "gap": 66500,
+                      "surplus": 0,
+                      "capitalGap": 1472500
+                    }
+                  }
+                ]
+              }
+            ],
+            "dependentChildren": 0,
+            "policyCover": [],
+            "coverEnding": [],
+            "assumptions": {
+              "needPercent": 80,
+              "deathNeedPercent": 70,
+              "interestRate": 1,
+              "pillar2Estimated": false
+            }
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "tool-showPensionOverview",
+          "toolCallId": "toolu_016ZrJSUXPR6VgpC7BmLizw8",
+          "state": "output-available",
+          "input": {},
+          "output": {
+            "status": "ok",
+            "household": true,
+            "retirementAge": 65,
+            "retirementYear": 2051,
+            "breakdown": {
+              "grossIncome": 171000,
+              "need": 136800,
+              "pillar1": 49140,
+              "pillar2": 53705,
+              "other": 1107,
+              "partner": 0,
+              "policies": 0,
+              "total": 103952,
+              "gap": 32848,
+              "surplus": 0,
+              "capitalGap": 659445
+            },
+            "availableFortune": 25143,
+            "capitalNeed": 684588,
+            "pillar3a": {
+              "balance": 0,
+              "annualContribution": 0,
+              "countedAsSaving": 0,
+              "note": null
+            },
+            "assumptions": {
+              "needPercent": 80,
+              "interestRate": 1,
+              "retirementAge": 65,
+              "pillar2Estimated": false
+            }
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Am stärksten trifft es Sie, wenn May wegen Krankheit nicht mehr arbeiten kann: Dann fehlen Ihnen **CHF 2'340 pro Monat**. Bei Ihnen wären es CHF 1'102. Bei Unfall sind Sie beide gut abgesichert, dank UVG und Pensionskasse.\n\nIm Todesfall fehlt ohne Kinder das Einkommen des Partners, AHV und Pensionskasse zahlen dann keine Hinterlassenenrente. Sobald ein Kind unterwegs ist, rechnen wir das neu.\n\nFürs Alter zeigt die Rechnung eine Lücke von rund CHF 2'700 pro Monat ab 65, da könnte die 3a helfen.\n\nWelche Lücke sollen wir zuerst anschauen?",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_012AfmfejxqtMungXupSaK4u",
+          "state": "output-available",
+          "input": {
+            "options": ["Todesfall zuerst", "Krankheit zuerst", "Zuerst die Altersvorsorge"]
+          },
+          "output": {
+            "options": ["Todesfall zuerst", "Krankheit zuerst", "Zuerst die Altersvorsorge"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525691346,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 77290,
+      "outputTokens": 893,
+      "createdAt": {
+        "$at": 227281
+      }
+    },
+    {
+      "id": "yq1na1DaCZ4PwGEo",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Krankheit zuerst"
+        }
+      ],
+      "metadata": {
+        "inputMode": "widget",
+        "createdAt": 1793525733290
+      },
+      "inputMode": "widget",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 263349
+      }
+    },
+    {
+      "id": "7e39b3ce-a3df-4090-abc1-612aad2535db",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Bei Krankheit fehlt Jane monatlich CHF 1'102 und May CHF 2'340, bezogen auf 80 % des heutigen Einkommens. Die IV zahlt erst ab einem Invaliditätsgrad von 40 % und nach einem Wartejahr. Die Pensionskasse zahlt laut Vorsorgeausweis erst nach 24 Monaten, deshalb entsteht die Lücke vor allem in den ersten Jahren.\n\nEine Erwerbsunfähigkeitsversicherung ersetzt Einkommen, nicht nur Sparbeiträge. Eine Prämienbefreiung dagegen hält nur Ihre Sparprämien am Laufen und schliesst die Einkommenslücke nicht. Wollen wir uns anschauen, wie Sie diese Lücke schliessen könnten?",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_017H6FrWSedg9Ve8hCnwzVD4",
+          "state": "output-available",
+          "input": {
+            "options": ["Ja, Lösungen anschauen", "Erst die Todesfall-Lücke"]
+          },
+          "output": {
+            "options": ["Ja, Lösungen anschauen", "Erst die Todesfall-Lücke"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525733299,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 39815,
+      "outputTokens": 726,
+      "createdAt": {
+        "$at": 267598
+      }
+    },
+    {
+      "id": "VLNrf09ih5Q0DsHs",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Ja, Lösungen anschauen"
+        }
+      ],
+      "metadata": {
+        "inputMode": "widget",
+        "createdAt": 1793525770971
+      },
+      "inputMode": "widget",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 301030
+      }
+    },
+    {
+      "id": "3bbd9cff-6a29-4590-b0f5-5f44e7c3d817",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "tool-recommendProducts",
+          "toolCallId": "toolu_01XTUYrshuq59L7Qs7A6bBtD",
+          "state": "output-available",
+          "input": {
+            "gaps": [
+              {
+                "type": "disability",
+                "annualAmount": 13224,
+                "person": "self",
+                "note": "Krankheit, Erwerbsunfähigkeit Jane, Lücke 1'102 pro Monat"
+              },
+              {
+                "type": "disability",
+                "annualAmount": 28080,
+                "person": "partner",
+                "note": "Krankheit, Erwerbsunfähigkeit May, Lücke 2'340 pro Monat"
+              }
+            ],
+            "preferences": {}
+          },
+          "output": {
+            "status": "ok",
+            "missing": [],
+            "recommendations": [
+              {
+                "productCode": "erwerbsunfaehigkeit",
+                "productName": "Pax Erwerbsunfähigkeitsversicherung",
+                "pillar": "3b",
+                "gap": "disability",
+                "alsoCloses": [],
+                "headline": "Ihr Einkommen bei Krankheit sichern",
+                "rationale": "Werden Sie wegen Krankheit erwerbsunfähig, fehlen Ihnen nach Lohnfortzahlung und Taggeld rund CHF 28'080 pro Jahr. Eine Rente von CHF 29'000 pro Jahr ab dem 24. Monat schliesst diese Lücke bis Alter 65.",
+                "criteria": [
+                  {
+                    "criterion": "Lücke",
+                    "value": "Erwerbsunfähigkeit: CHF 28'080 pro Jahr",
+                    "met": true
+                  },
+                  {
+                    "criterion": "Eintrittsalter",
+                    "value": "41 Jahre (möglich 15 bis 60)",
+                    "met": true
+                  },
+                  {
+                    "criterion": "Rente bei Erwerbsunfähigkeit",
+                    "value": "CHF 29'000 pro Jahr bis Alter 65",
+                    "met": true
+                  },
+                  {
+                    "criterion": "Wartefrist",
+                    "value": "24 Monate: vorher zahlen Lohnfortzahlung und Krankentaggeld",
+                    "met": true
+                  },
+                  {
+                    "criterion": "Berufsgruppe",
+                    "value": "Gruppe 3 (Pflegefachfrau)",
+                    "met": true
+                  },
+                  {
+                    "criterion": "Pax-Regeln",
+                    "value": "Geprüft, keine Sperre (Regelwerk Version 1)",
+                    "met": true
+                  }
+                ],
+                "cover": {
+                  "annualPension": 29000,
+                  "endAge": 65,
+                  "durationYears": 24,
+                  "waitingPeriodMonths": 24,
+                  "occupationGroup": 3
+                },
+                "price": {
+                  "annualGross": 2053.2,
+                  "annualNet": 1759.2,
+                  "source": "quicksale",
+                  "riders": [
+                    {
+                      "code": "I",
+                      "name": "Prämienbefreiung bei Erwerbsunfähigkeit",
+                      "premiumAnnual": 0
+                    }
+                  ],
+                  "startDate": "2026-12-01",
+                  "durationYears": 24,
+                  "issues": []
+                },
+                "requiresSuitability": false,
+                "alternatives": [],
+                "flags": [],
+                "url": "https://www.pax.ch/de/private-vorsorge/produkte/pax-erwerbsunfaehigkeitsversicherung",
+                "id": "b8d3ea2b-9dd7-4178-9256-7755ed6b387a"
+              }
+            ],
+            "excluded": [],
+            "ruleSetVersion": 1,
+            "notes": []
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Die Karte zeigt eine Erwerbsunfähigkeitsversicherung für May: Sie zahlt ab dem 24. Monat, also nach Lohnfortzahlung und Taggeld, eine Rente von CHF 29'000 pro Jahr bis 65. Der Preis liegt indikativ bei rund **CHF 2'050 pro Jahr**. Das ist unverbindlich, bis Pax den Antrag angenommen hat.\n\nDie Alternative ist, vorerst nichts abzuschliessen und eine lange Krankheit mit Ihren CHF 20'000 Erspartem zu überbrücken. Das reicht bei dieser Lücke für rund acht Monate.\n\nMöchten Sie die Offerte ansehen, oder lieber noch abwarten?",
+          "state": "done"
+        },
+        {
+          "type": "tool-suggestReplies",
+          "toolCallId": "toolu_0148tbNUiZK4QU4tHDzkTr4Q",
+          "state": "output-available",
+          "input": {
+            "options": ["Offerte ansehen", "Wir möchten noch abwarten"]
+          },
+          "output": {
+            "options": ["Offerte ansehen", "Wir möchten noch abwarten"]
+          },
+          "callProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          },
+          "resultProviderMetadata": {
+            "anthropic": {
+              "caller": {
+                "type": "direct"
+              }
+            }
+          }
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525770980,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 81801,
+      "outputTokens": 926,
+      "createdAt": {
+        "$at": 306961
+      }
+    },
+    {
+      "id": "hcwL3xg8lwD7dpQ6",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Danke, das ist sehr klar erklärt. Wir möchten aber noch warten, bis wir wissen, wie es mit der Familie weitergeht. Wenn ein Kind unterwegs ist, schauen wir das nochmals an. Melden Sie sich dann wieder bei uns?"
+        }
+      ],
+      "metadata": {
+        "inputMode": "text",
+        "createdAt": 1793525815030
+      },
+      "inputMode": "text",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 345090
+      }
+    },
+    {
+      "id": "7ee26091-b0c1-4ba6-a899-e602345fa77d",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Ja, gern. Pax bleibt mit Ihnen in Kontakt: Einmal im Jahr fragen wir per E-Mail nach, ob sich bei Ihnen etwas verändert hat. Wenn ein Kind unterwegs ist, rechnen wir alles mit Ihrer neuen Situation neu, auch die Absicherung für May. Dafür brauche ich Ihre E-Mail-Adresse. Wie lautet sie?",
+          "state": "done"
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525815044,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 41865,
+      "outputTokens": 503,
+      "createdAt": {
+        "$at": 348776
+      }
+    },
+    {
+      "id": "xfcrTekPapsiaqnN",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "user",
+      "parts": [
+        {
+          "type": "text",
+          "text": "Gerne: Jane Müller, jane.mueller@example.ch."
+        }
+      ],
+      "metadata": {
+        "inputMode": "text",
+        "createdAt": 1793525846751
+      },
+      "inputMode": "text",
+      "model": null,
+      "inputTokens": null,
+      "outputTokens": null,
+      "createdAt": {
+        "$at": 376810
+      }
+    },
+    {
+      "id": "2435d6dc-95b2-4764-9e22-36cdaab767af",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "role": "assistant",
+      "parts": [
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "step-start"
+        },
+        {
+          "type": "text",
+          "text": "Danke, Frau Müller, Ihre Adresse ist hinterlegt. Sie werden benachrichtigt: Einmal im Jahr fragt Pax per E-Mail nach, ob sich etwas verändert hat. Schreiben Sie mir gern auch vorher, sobald ein Kind unterwegs ist. Dann schauen wir die Absicherung für May gemeinsam neu an.",
+          "state": "done"
+        }
+      ],
+      "metadata": {
+        "createdAt": 1793525846762,
+        "model": "anthropic:claude-haiku-5-5",
+        "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1"
+      },
+      "inputMode": null,
+      "model": "anthropic:claude-haiku-5-5",
+      "inputTokens": 84453,
+      "outputTokens": 527,
+      "createdAt": {
+        "$at": 380801
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "filename": "lohnausweis-2023-may-mueller.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 5015,
+      "sha256": "8e5d455899f56038d7041882baae00a68edaaf6f2d456e83896a6dc68bfa03c9",
+      "storagePath": "uploads/87bc230c-6dd0-4156-b3e6-2d970d019d52/df2f4e23-68b5-493a-ba0c-4e9d216ce36d.bin",
+      "docType": "salary_certificate",
+      "status": "confirmed",
+      "error": null,
+      "pageCount": 1,
+      "createdAt": {
+        "$at": 66234
+      },
+      "deletedAt": null
+    },
+    {
+      "id": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "filename": "lohnausweis-2023-jane-mueller.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 5025,
+      "sha256": "b52e899b46205e3ba95d370b8ec02c0f4bcb694d44c3c51ebb7dab149b182b5a",
+      "storagePath": "uploads/87bc230c-6dd0-4156-b3e6-2d970d019d52/8b86d467-b97a-403b-b3cb-40008418e756.bin",
+      "docType": "salary_certificate",
+      "status": "confirmed",
+      "error": null,
+      "pageCount": 1,
+      "createdAt": {
+        "$at": 66236
+      },
+      "deletedAt": null
+    },
+    {
+      "id": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "filename": "vorsorgeausweis-2024-may-mueller.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 7142,
+      "sha256": "3b661daf3b8b350c431ff683d97487a2a96757f52ec3ada1adefe80870d73141",
+      "storagePath": "uploads/87bc230c-6dd0-4156-b3e6-2d970d019d52/774f5d72-86de-4858-a412-ec833a2cd6b0.bin",
+      "docType": "pension_certificate",
+      "status": "confirmed",
+      "error": null,
+      "pageCount": 2,
+      "createdAt": {
+        "$at": 66239
+      },
+      "deletedAt": null
+    },
+    {
+      "id": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "filename": "vorsorgeausweis-2024-jane-mueller.pdf",
+      "mimeType": "application/pdf",
+      "sizeBytes": 7201,
+      "sha256": "ae5e7190872159db2d5456288cdcbd71716e250558848e2839b3dd925593183b",
+      "storagePath": "uploads/87bc230c-6dd0-4156-b3e6-2d970d019d52/20641a4a-8fd9-45ec-a756-2739c5d14406.bin",
+      "docType": "pension_certificate",
+      "status": "confirmed",
+      "error": null,
+      "pageCount": 2,
+      "createdAt": {
+        "$at": 66241
+      },
+      "deletedAt": null
+    }
+  ],
+  "extractions": [
+    {
+      "id": "56abb7e4-01a6-41d3-a3da-3f948524261f",
+      "documentId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "docType": "salary_certificate",
+      "schemaVersion": 1,
+      "fields": [
+        {
+          "path": "description",
+          "value": "Swiss Lohnausweis (Form 11) issued by Gesundheitszentrum Muster AG for Jane Müller, covering the 2023 tax year.",
+          "confidence": 0.98,
+          "page": null,
+          "quote": null
+        },
+        {
+          "path": "employer",
+          "value": "Gesundheitszentrum Muster AG",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Gesundheitszentrum Muster AG"
+        },
+        {
+          "path": "employeeName",
+          "value": "Jane Müller",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Jane Müller"
+        },
+        {
+          "path": "year",
+          "value": 2023,
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "D Jahr 2023 E von 01.01.2023 bis 31.12.2023"
+        },
+        {
+          "path": "grossSalary",
+          "value": 76000,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "8. Bruttolohn total / Rente = 76'000"
+        },
+        {
+          "path": "netSalary",
+          "value": 67431,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "11. Nettolohn / Rente (in die Steuererklärung übertragen) = 67'431"
+        },
+        {
+          "path": "pensionContributions",
+          "value": 3325,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "10.1 Ordentliche Beiträge – 3'325"
+        }
+      ],
+      "edits": {
+        "_subject": "self"
+      },
+      "model": "anthropic:claude-haiku-5-5",
+      "confirmedAt": {
+        "$at": 103892
+      },
+      "createdAt": {
+        "$at": 72229
+      }
+    },
+    {
+      "id": "e096054f-3850-41ca-a4d2-7db51fb82476",
+      "documentId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "docType": "salary_certificate",
+      "schemaVersion": 1,
+      "fields": [
+        {
+          "path": "description",
+          "value": "Swiss Lohnausweis (Form 11) for May Müller issued by Muster Logistik AG for the 2023 tax year.",
+          "confidence": 0.98,
+          "page": null,
+          "quote": null
+        },
+        {
+          "path": "employer",
+          "value": "Muster Logistik AG",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Muster Logistik AG"
+        },
+        {
+          "path": "employeeName",
+          "value": "May Müller",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Herr May Müller"
+        },
+        {
+          "path": "year",
+          "value": 2023,
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "D Jahr 2023 E von 01.01.2023 bis 31.12.2023"
+        },
+        {
+          "path": "grossSalary",
+          "value": 95000,
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "8. Bruttolohn total / Rente = 95'000"
+        },
+        {
+          "path": "netSalary",
+          "value": 84288,
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "11. Nettolohn / Rente (in die Steuererklärung übertragen) = 84'288"
+        },
+        {
+          "path": "pensionContributions",
+          "value": 4157,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "10.1 Ordentliche Beiträge – 4'157"
+        }
+      ],
+      "edits": {
+        "_subject": "partner"
+      },
+      "model": "anthropic:claude-haiku-5-5",
+      "confirmedAt": {
+        "$at": 100877
+      },
+      "createdAt": {
+        "$at": 72671
+      }
+    },
+    {
+      "id": "2f760069-79ea-4bdf-94ba-779d3ddd2873",
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "docType": "pension_certificate",
+      "schemaVersion": 1,
+      "fields": [
+        {
+          "path": "description",
+          "value": "Swiss 2nd-pillar pension fund certificate (Vorsorgeausweis) from Pensionskasse Muster for Jane Müller, effective 1 January 2024.",
+          "confidence": 0.98,
+          "page": null,
+          "quote": null
+        },
+        {
+          "path": "pensionFund",
+          "value": "Pensionskasse Muster",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Pensionskasse Muster Sammelstiftung für die berufliche Vorsorge"
+        },
+        {
+          "path": "employer",
+          "value": "Gesundheitszentrum Muster AG, Basel",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Arbeitgeber Gesundheitszentrum Muster AG, Basel"
+        },
+        {
+          "path": "insuredPerson",
+          "value": "Jane Müller",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Frau Jane Müller"
+        },
+        {
+          "path": "birthDate",
+          "value": "1986-06-01",
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "Geburtsdatum 01.06.1986"
+        },
+        {
+          "path": "certificateDate",
+          "value": "2024-01-01",
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "Vorsorgeausweis per 1. Januar 2024"
+        },
+        {
+          "path": "workloadPercent",
+          "value": 80,
+          "confidence": 0.97,
+          "page": 1,
+          "quote": "Beschäftigungsgrad 80 %"
+        },
+        {
+          "path": "grossSalary",
+          "value": 76000,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Massgebender Jahreslohn (AHV-Lohn) 76'000.00"
+        },
+        {
+          "path": "insuredSalary",
+          "value": 55420,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Versicherter Lohn 55'420.00"
+        },
+        {
+          "path": "currentCapital",
+          "value": 62400,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Altersguthaben per 01.01.2024 62'400.00"
+        },
+        {
+          "path": "projectedCapitalAtRetirement",
+          "value": 351204.2,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projiziertes Altersguthaben mit 65 (30.06.2051) 351'204.20"
+        },
+        {
+          "path": "projectedPensionAtRetirement",
+          "value": 21072.25,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projizierte jährliche Altersrente mit 65 21'072.25"
+        },
+        {
+          "path": "retirementAge",
+          "value": 65,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projizierte jährliche Altersrente mit 65 21'072.25"
+        },
+        {
+          "path": "disabilityPension",
+          "value": 22168,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Invalidenrente 22'168.00"
+        },
+        {
+          "path": "partnerPension",
+          "value": 13300.8,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Ehegatten- oder Lebenspartnerrente 13'300.80"
+        },
+        {
+          "path": "childPension",
+          "value": 4433.6,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Waisenrente je Kind 4'433.60"
+        },
+        {
+          "path": "deathLumpSum",
+          "value": 0,
+          "confidence": 0.9,
+          "page": 2,
+          "quote": "Zusätzliches Todesfallkapital keines"
+        },
+        {
+          "path": "maxBuyIn",
+          "value": 58000,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Maximal möglicher Einkauf per 01.01.2024 58'000.00"
+        },
+        {
+          "path": "employeeContribution",
+          "value": 3325.2,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Total Beiträge pro Jahr 3'325.20 4'156.50 7'481.70"
+        },
+        {
+          "path": "employerContribution",
+          "value": 4156.5,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Total Beiträge pro Jahr 3'325.20 4'156.50 7'481.70"
+        }
+      ],
+      "edits": {
+        "_subject": "self"
+      },
+      "model": "anthropic:claude-haiku-5-5",
+      "confirmedAt": {
+        "$at": 109934
+      },
+      "createdAt": {
+        "$at": 76208
+      }
+    },
+    {
+      "id": "2a97ea0c-90d5-4d3c-bd3f-3bc6b1adfbb7",
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "docType": "pension_certificate",
+      "schemaVersion": 1,
+      "fields": [
+        {
+          "path": "description",
+          "value": "Pension fund (Pensionskasse Muster) 2nd pillar certificate for May Müller as of 1 January 2024, issued January 2024.",
+          "confidence": 0.98,
+          "page": null,
+          "quote": null
+        },
+        {
+          "path": "pensionFund",
+          "value": "Pensionkasse Muster",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Pensionskasse Muster Sammelstiftung für die berufliche Vorsorge"
+        },
+        {
+          "path": "employer",
+          "value": "Muster Logistik AG, Basel",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Arbeitgeber Muster Logistik AG, Basel"
+        },
+        {
+          "path": "insuredPerson",
+          "value": "May Müller",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Name Herr May Müller Versicherten-Nr. PKM-104-2231"
+        },
+        {
+          "path": "birthDate",
+          "value": "1984-09-16",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Geburtsdatum 16.09.1984 AHV-Nr. 756.1234.5678.97"
+        },
+        {
+          "path": "certificateDate",
+          "value": "2024-01-01",
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Vorsorgeausweis per 1. Januar 2024"
+        },
+        {
+          "path": "workloadPercent",
+          "value": 100,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Beschäftigungsgrad 100 %"
+        },
+        {
+          "path": "grossSalary",
+          "value": 95000,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Massgebender Jahreslohn (AHV-Lohn) 95'000.00"
+        },
+        {
+          "path": "insuredSalary",
+          "value": 69275,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Versicherter Lohn 69'275.00"
+        },
+        {
+          "path": "currentCapital",
+          "value": 166830,
+          "confidence": 0.95,
+          "page": 1,
+          "quote": "Altersguthaben per 01.01.2024 166'830.00"
+        },
+        {
+          "path": "projectedCapitalAtRetirement",
+          "value": 543884.7,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projiziertes Altersguthaben mit 65 (30.09.2049) 543'884.70"
+        },
+        {
+          "path": "projectedPensionAtRetirement",
+          "value": 32633.1,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projizierte jährliche Altersrente mit 65 32'633.10"
+        },
+        {
+          "path": "retirementAge",
+          "value": 65,
+          "confidence": 0.9,
+          "page": 1,
+          "quote": "Projizierte jährliche Altersrente mit 65 32'633.10"
+        },
+        {
+          "path": "disabilityPension",
+          "value": 20830,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Invalidenrente 20'830.00 nach einer Wartefrist von 24 Monaten"
+        },
+        {
+          "path": "partnerPension",
+          "value": 12498,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Ehegatten- oder Lebenspartnerrente 12'498.00"
+        },
+        {
+          "path": "childPension",
+          "value": 4166,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Jährliche Waisenrente je Kind 4'166.00"
+        },
+        {
+          "path": "deathLumpSum",
+          "value": 50000,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Zusätzliches Todesfallkapital 50'000.00 an die Begünstigten gemäss Reglement"
+        },
+        {
+          "path": "maxBuyIn",
+          "value": 92400,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Maximal möglicher Einkauf per 01.01.2024 92'400.00"
+        },
+        {
+          "path": "employeeContribution",
+          "value": 4156.5,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Total Beiträge pro Jahr 4'156.50 5'195.65 9'352.15"
+        },
+        {
+          "path": "employerContribution",
+          "value": 5195.65,
+          "confidence": 0.95,
+          "page": 2,
+          "quote": "Total Beiträge pro Jahr 4'156.50 5'195.65 9'352.15"
+        }
+      ],
+      "edits": {
+        "_subject": "partner"
+      },
+      "model": "anthropic:claude-haiku-5-5",
+      "confirmedAt": {
+        "$at": 106917
+      },
+      "createdAt": {
+        "$at": 76351
+      }
+    }
+  ],
+  "profileEvents": [
+    {
+      "id": "8863fbda-9752-4a4e-bce9-cc0aa8aff38c",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.birthYear",
+      "oldValue": null,
+      "newValue": 1986,
+      "source": "chat",
+      "createdAt": {
+        "$at": 20297
+      }
+    },
+    {
+      "id": "92b15b2f-bdce-4eda-bd96-7b29b721fb14",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.sex",
+      "oldValue": null,
+      "newValue": "female",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20297
+      }
+    },
+    {
+      "id": "5f5ef351-dbb5-4d7c-9504-dde1942b4ad1",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.maritalStatus",
+      "oldValue": null,
+      "newValue": "married",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20297
+      }
+    },
+    {
+      "id": "ff603872-5315-4b6a-8aac-29a44af93575",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.employment",
+      "oldValue": null,
+      "newValue": "employed",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20297
+      }
+    },
+    {
+      "id": "17bf58aa-7b22-439e-a870-2d174d4161cf",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.workloadPercent",
+      "oldValue": null,
+      "newValue": 80,
+      "source": "chat",
+      "createdAt": {
+        "$at": 20297
+      }
+    },
+    {
+      "id": "026f3956-42ce-4756-8963-ed30376eb246",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "person.occupation",
+      "oldValue": null,
+      "newValue": "Pflegefachfrau",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "139f3650-6c3f-4b48-8fc9-210862e019c1",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.firstName",
+      "oldValue": null,
+      "newValue": "May",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "f339c11b-2126-4aac-a4d6-70fca092567b",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.birthYear",
+      "oldValue": null,
+      "newValue": 1984,
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "9a76b68a-9fcb-4491-b234-9b9a0c3c8e51",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.sex",
+      "oldValue": null,
+      "newValue": "male",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "193e48af-278a-421a-abde-2b18300a2f5f",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.maritalStatus",
+      "oldValue": null,
+      "newValue": "married",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "f6377610-67cd-40f1-a832-2cd59412dba5",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.employment",
+      "oldValue": null,
+      "newValue": "employed",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "70ca051a-2006-48f0-865b-54e66da8de42",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.workloadPercent",
+      "oldValue": null,
+      "newValue": 100,
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "a490be24-fc22-460b-ae59-c362d517af91",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "partner.occupation",
+      "oldValue": null,
+      "newValue": "Logistik",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "269229b4-71b2-4823-9816-5b2fea7c2278",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "goals",
+      "oldValue": [],
+      "newValue": ["protect_family"],
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "3eb69a4f-8deb-41b1-9b26-f5bfb8863194",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "plannedEvents",
+      "oldValue": [],
+      "newValue": [
+        {
+          "type": "child",
+          "note": "Kinderwunsch, Zeitpunkt offen"
+        }
+      ],
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "b40e9054-184e-4ca8-b241-399d9f5a0ef5",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "residence.city",
+      "oldValue": null,
+      "newValue": "Basel",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "f73da0ff-444d-48d9-b849-3586936b8086",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "residence.canton",
+      "oldValue": null,
+      "newValue": "BS",
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "827bae6a-e227-4d89-af50-b32f9eef7a5c",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "e5f6d90a-ae9f-45ea-9c0d-9b4dd5dfa463",
+      "documentId": null,
+      "path": "residence.taxLocationId",
+      "oldValue": null,
+      "newValue": 400000000,
+      "source": "chat",
+      "createdAt": {
+        "$at": 20298
+      }
+    },
+    {
+      "id": "19fe280c-0f53-499b-ab2c-e8ef64dafeda",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "c24cff4c-6ae1-4feb-8432-ddf138cc3641",
+      "documentId": null,
+      "path": "privateCover",
+      "oldValue": null,
+      "newValue": "no",
+      "source": "chat",
+      "createdAt": {
+        "$at": 52375
+      }
+    },
+    {
+      "id": "ef5ef92f-60d1-4e9e-9833-eb0319c4b7b5",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "path": "partner.grossIncome",
+      "oldValue": null,
+      "newValue": 95000,
+      "source": "document",
+      "createdAt": {
+        "$at": 100877
+      }
+    },
+    {
+      "id": "7a23caa9-a06a-47cc-a6c1-f8a76dfc647f",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "path": "person.grossIncome",
+      "oldValue": null,
+      "newValue": 76000,
+      "source": "document",
+      "createdAt": {
+        "$at": 103891
+      }
+    },
+    {
+      "id": "64d08b57-b673-4e2d-aee2-a029ce3ac0ec",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "path": "person.firstName",
+      "oldValue": null,
+      "newValue": "Jane",
+      "source": "document",
+      "createdAt": {
+        "$at": 103891
+      }
+    },
+    {
+      "id": "ddfe53e5-f746-48c4-8fe3-fd51bdca7738",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.insuredSalary",
+      "oldValue": null,
+      "newValue": 69275,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "b3a1c3d9-0bfd-4aa3-8132-bf3580cac66a",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.currentCapital",
+      "oldValue": null,
+      "newValue": 166830,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "37a5105f-65f4-42ad-8019-efdf704014bd",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.projectedCapitalAtRetirement",
+      "oldValue": null,
+      "newValue": 543884.7,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "a8152443-1cd1-4652-965d-8d2a16534226",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.projectedPensionAtRetirement",
+      "oldValue": null,
+      "newValue": 32633.1,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "84555fd7-2ae6-48a1-9784-bd7c9b844974",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.disabilityPension",
+      "oldValue": null,
+      "newValue": 20830,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "f2f31ba7-e8db-487c-9f8c-7d60e996985a",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.partnerPension",
+      "oldValue": null,
+      "newValue": 12498,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "137f8685-8a31-43a9-a2f8-2675bd8816db",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.childPension",
+      "oldValue": null,
+      "newValue": 4166,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "70b933e9-1d53-41b2-8cd1-f6a67d7584d7",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.deathLumpSum",
+      "oldValue": null,
+      "newValue": 50000,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "8427e56d-f744-4e70-9b75-b79df357eb2a",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.maxBuyIn",
+      "oldValue": null,
+      "newValue": 92400,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "c0368fb1-e73c-441d-95fb-22b05f5ea9f5",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "path": "partner.pillar2.hasPensionFund",
+      "oldValue": null,
+      "newValue": true,
+      "source": "document",
+      "createdAt": {
+        "$at": 106916
+      }
+    },
+    {
+      "id": "34884e6e-ab1d-4917-aaee-f563de8e0a67",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.insuredSalary",
+      "oldValue": null,
+      "newValue": 55420,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "ad54751f-fe13-4edb-b804-6f0ae0567178",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.currentCapital",
+      "oldValue": null,
+      "newValue": 62400,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "1994f48e-a995-4ace-9481-46ca5d09babd",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.projectedCapitalAtRetirement",
+      "oldValue": null,
+      "newValue": 351204.2,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "8a1b5c46-08e7-4a7d-85be-614ecd520b50",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.projectedPensionAtRetirement",
+      "oldValue": null,
+      "newValue": 21072.25,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "6a1bb408-fe4d-47cc-ad18-c433bc0b614d",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.disabilityPension",
+      "oldValue": null,
+      "newValue": 22168,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "50bf932b-086c-48a6-a041-397cb55ed75f",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.partnerPension",
+      "oldValue": null,
+      "newValue": 13300.8,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "aca124ca-11c3-472f-b46d-b69602f87fd4",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.childPension",
+      "oldValue": null,
+      "newValue": 4433.6,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "28092360-6618-4683-9cb3-139d110cf742",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.deathLumpSum",
+      "oldValue": null,
+      "newValue": 0,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "d4463314-3ab6-41c9-aff2-8d1c2e0f186f",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.maxBuyIn",
+      "oldValue": null,
+      "newValue": 58000,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "61c5c784-11e1-4044-a081-89274d692f16",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": null,
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "path": "pillar2.hasPensionFund",
+      "oldValue": null,
+      "newValue": true,
+      "source": "document",
+      "createdAt": {
+        "$at": 109934
+      }
+    },
+    {
+      "id": "8c4d735e-a7c6-4214-b2fd-63e1f5fc7fe4",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "399ef75e-3005-4ce6-80cb-2807845d7d63",
+      "documentId": null,
+      "path": "assets.liquid",
+      "oldValue": null,
+      "newValue": 20000,
+      "source": "chat",
+      "createdAt": {
+        "$at": 143972
+      }
+    },
+    {
+      "id": "f6ef7d61-7bdd-4c74-a1e2-08ed05c1342c",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "221b893d-b16a-4acb-8d35-eea0c5892639",
+      "documentId": null,
+      "path": "pillar3a.balance",
+      "oldValue": null,
+      "newValue": 0,
+      "source": "chat",
+      "createdAt": {
+        "$at": 183234
+      }
+    },
+    {
+      "id": "bed639ff-29c3-44c9-8060-eee28f0d560d",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "messageId": "221b893d-b16a-4acb-8d35-eea0c5892639",
+      "documentId": null,
+      "path": "pillar3a.annualContribution",
+      "oldValue": null,
+      "newValue": 0,
+      "source": "chat",
+      "createdAt": {
+        "$at": 183234
+      }
+    }
+  ],
+  "policies": [
+    {
+      "id": "d8e29d50-f8c9-4bf2-991d-b7cad302d0f9",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "policyNumber": null,
+      "insurer": "Pensionkasse Muster",
+      "isExternal": true,
+      "category": "pension_fund",
+      "productCode": null,
+      "productName": "Vorsorgeausweis 2024",
+      "pillar": null,
+      "status": "active",
+      "startDate": null,
+      "endDate": null,
+      "noticeDate": null,
+      "premiumAnnual": null,
+      "sumInsured": 50000,
+      "annuityAnnual": 32633.1,
+      "insuredPerson": "May Müller",
+      "details": {
+        "pensionFund": "Pensionkasse Muster",
+        "employer": "Muster Logistik AG, Basel",
+        "insuredPerson": "May Müller",
+        "birthDate": "1984-09-16",
+        "certificateDate": "2024-01-01",
+        "workloadPercent": 100,
+        "grossSalary": 95000,
+        "insuredSalary": 69275,
+        "currentCapital": 166830,
+        "projectedCapitalAtRetirement": 543884.7,
+        "projectedPensionAtRetirement": 32633.1,
+        "retirementAge": 65,
+        "disabilityPension": 20830,
+        "partnerPension": 12498,
+        "childPension": 4166,
+        "deathLumpSum": 50000,
+        "maxBuyIn": 92400,
+        "employeeContribution": 4156.5,
+        "employerContribution": 5195.65,
+        "subject": "partner"
+      },
+      "source": "document",
+      "documentId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "applicationId": null,
+      "createdAt": {
+        "$at": 106917
+      },
+      "updatedAt": {
+        "$at": 106917
+      }
+    },
+    {
+      "id": "7a7efb81-4220-4822-a9a7-d053a7bf3073",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "policyNumber": null,
+      "insurer": "Pensionskasse Muster",
+      "isExternal": true,
+      "category": "pension_fund",
+      "productCode": null,
+      "productName": "Vorsorgeausweis 2024",
+      "pillar": null,
+      "status": "active",
+      "startDate": null,
+      "endDate": null,
+      "noticeDate": null,
+      "premiumAnnual": null,
+      "sumInsured": 0,
+      "annuityAnnual": 21072.25,
+      "insuredPerson": "Jane Müller",
+      "details": {
+        "pensionFund": "Pensionskasse Muster",
+        "employer": "Gesundheitszentrum Muster AG, Basel",
+        "insuredPerson": "Jane Müller",
+        "birthDate": "1986-06-01",
+        "certificateDate": "2024-01-01",
+        "workloadPercent": 80,
+        "grossSalary": 76000,
+        "insuredSalary": 55420,
+        "currentCapital": 62400,
+        "projectedCapitalAtRetirement": 351204.2,
+        "projectedPensionAtRetirement": 21072.25,
+        "retirementAge": 65,
+        "disabilityPension": 22168,
+        "partnerPension": 13300.8,
+        "childPension": 4433.6,
+        "deathLumpSum": 0,
+        "maxBuyIn": 58000,
+        "employeeContribution": 3325.2,
+        "employerContribution": 4156.5,
+        "subject": "self"
+      },
+      "source": "document",
+      "documentId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "applicationId": null,
+      "createdAt": {
+        "$at": 109934
+      },
+      "updatedAt": {
+        "$at": 109934
+      }
+    }
+  ],
+  "calculations": [
+    {
+      "id": "bfb476aa-06a4-479a-8145-53d40c02b409",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_01LFQXmwsEkcicrprqVDz4rU",
+      "provider": "logismata",
+      "operation": "APICalc_searchLocation",
+      "input": {
+        "Search": "Basel",
+        "Language": 1
+      },
+      "output": [
+        {
+          "LocationID": 400000000,
+          "ZipCode": "4000",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4000 Basel"
+        },
+        {
+          "LocationID": 400100000,
+          "ZipCode": "4001",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4001 Basel"
+        },
+        {
+          "LocationID": 400200000,
+          "ZipCode": "4002",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4002 Basel"
+        },
+        {
+          "LocationID": 400300000,
+          "ZipCode": "4003",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4003 Basel"
+        },
+        {
+          "LocationID": 400400000,
+          "ZipCode": "4004",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4004 Basel"
+        },
+        {
+          "LocationID": 400500000,
+          "ZipCode": "4005",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4005 Basel"
+        },
+        {
+          "LocationID": 400600000,
+          "ZipCode": "4006",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4006 Basel"
+        },
+        {
+          "LocationID": 400700000,
+          "ZipCode": "4007",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4007 Basel"
+        },
+        {
+          "LocationID": 400800000,
+          "ZipCode": "4008",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4008 Basel"
+        },
+        {
+          "LocationID": 400900000,
+          "ZipCode": "4009",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4009 Basel"
+        },
+        {
+          "LocationID": 401000000,
+          "ZipCode": "4010",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4010 Basel"
+        },
+        {
+          "LocationID": 401100000,
+          "ZipCode": "4011",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4011 Basel"
+        },
+        {
+          "LocationID": 401200000,
+          "ZipCode": "4012",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4012 Basel"
+        },
+        {
+          "LocationID": 401300000,
+          "ZipCode": "4013",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4013 Basel"
+        },
+        {
+          "LocationID": 401500000,
+          "ZipCode": "4015",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4015 Basel"
+        },
+        {
+          "LocationID": 401600000,
+          "ZipCode": "4016",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4016 Basel"
+        },
+        {
+          "LocationID": 401700000,
+          "ZipCode": "4017",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4017 Basel"
+        },
+        {
+          "LocationID": 401800000,
+          "ZipCode": "4018",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4018 Basel"
+        },
+        {
+          "LocationID": 401900000,
+          "ZipCode": "4019",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4019 Basel"
+        },
+        {
+          "LocationID": 402000000,
+          "ZipCode": "4020",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4020 Basel"
+        },
+        {
+          "LocationID": 402100000,
+          "ZipCode": "4021",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4021 Basel"
+        },
+        {
+          "LocationID": 402300000,
+          "ZipCode": "4023",
+          "City": "Basel",
+          "Canton": "BL",
+          "Location": "4023 Basel"
+        },
+        {
+          "LocationID": 402400000,
+          "ZipCode": "4024",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4024 Basel"
+        },
+        {
+          "LocationID": 402500000,
+          "ZipCode": "4025",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4025 Basel"
+        },
+        {
+          "LocationID": 402700000,
+          "ZipCode": "4027",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4027 Basel"
+        },
+        {
+          "LocationID": 402800000,
+          "ZipCode": "4028",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4028 Basel"
+        },
+        {
+          "LocationID": 403000000,
+          "ZipCode": "4030",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4030 Basel"
+        },
+        {
+          "LocationID": 403100000,
+          "ZipCode": "4031",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4031 Basel"
+        },
+        {
+          "LocationID": 403200000,
+          "ZipCode": "4032",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4032 Basel"
+        },
+        {
+          "LocationID": 403900000,
+          "ZipCode": "4039",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4039 Basel"
+        },
+        {
+          "LocationID": 404002000,
+          "ZipCode": "4040",
+          "City": "Basel",
+          "Canton": "BL",
+          "Location": "4040 Basel"
+        },
+        {
+          "LocationID": 405100000,
+          "ZipCode": "4051",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4051 Basel"
+        },
+        {
+          "LocationID": 405200000,
+          "ZipCode": "4052",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4052 Basel"
+        },
+        {
+          "LocationID": 405300000,
+          "ZipCode": "4053",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4053 Basel"
+        },
+        {
+          "LocationID": 405400000,
+          "ZipCode": "4054",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4054 Basel"
+        },
+        {
+          "LocationID": 405500000,
+          "ZipCode": "4055",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4055 Basel"
+        },
+        {
+          "LocationID": 405600000,
+          "ZipCode": "4056",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4056 Basel"
+        },
+        {
+          "LocationID": 405700000,
+          "ZipCode": "4057",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4057 Basel"
+        },
+        {
+          "LocationID": 405800000,
+          "ZipCode": "4058",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4058 Basel"
+        },
+        {
+          "LocationID": 405900000,
+          "ZipCode": "4059",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4059 Basel"
+        },
+        {
+          "LocationID": 407000000,
+          "ZipCode": "4070",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4070 Basel"
+        },
+        {
+          "LocationID": 407500000,
+          "ZipCode": "4075",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4075 Basel"
+        },
+        {
+          "LocationID": 408000000,
+          "ZipCode": "4080",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4080 Basel"
+        },
+        {
+          "LocationID": 408300000,
+          "ZipCode": "4083",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4083 Basel"
+        },
+        {
+          "LocationID": 408400000,
+          "ZipCode": "4084",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4084 Basel"
+        },
+        {
+          "LocationID": 408500000,
+          "ZipCode": "4085",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4085 Basel"
+        },
+        {
+          "LocationID": 408600000,
+          "ZipCode": "4086",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4086 Basel"
+        },
+        {
+          "LocationID": 408700000,
+          "ZipCode": "4087",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4087 Basel"
+        },
+        {
+          "LocationID": 408800000,
+          "ZipCode": "4088",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4088 Basel"
+        },
+        {
+          "LocationID": 409100000,
+          "ZipCode": "4091",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4091 Basel"
+        },
+        {
+          "LocationID": 430200001,
+          "ZipCode": "4302",
+          "City": "Baselaugst",
+          "Canton": "BL",
+          "Location": "4302 Baselaugst"
+        }
+      ],
+      "status": "ok",
+      "error": null,
+      "durationMs": 68,
+      "createdAt": {
+        "$at": 20296
+      }
+    },
+    {
+      "id": "49d613fd-7b12-4e4d-9c64-3a89d32a4033",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": null,
+      "toolCallId": null,
+      "provider": "logismata",
+      "operation": "APICalc_calculatePurchaseP2",
+      "input": {
+        "Investment": 92400,
+        "PaymentDuration": 3,
+        "InterestRate": 1.25,
+        "IncomeType": 1,
+        "Income": 171000,
+        "TaxLocationID": 400000000,
+        "Relationship": 2,
+        "Confession1": 4,
+        "Confession2": 4,
+        "NumberOfChildren": 0,
+        "Sex": 1,
+        "BirthYear": 1984
+      },
+      "output": {
+        "TaxSavings": 26070,
+        "NetInvestment": 66330,
+        "TaxSavingsPercentage": 28.21,
+        "YearsToRetirement": 23,
+        "AdditionalCapital": 121447,
+        "AdditionalPension": 8258,
+        "NetYield": 2.5100000000000002,
+        "ConversionRate": 6.8,
+        "DetailsCapital": {
+          "Periods": 23,
+          "Data1": [
+            30800, 61985, 93560, 94729, 95913, 97112, 98326, 99555, 100800, 102060, 103336, 104627,
+            105935, 107259, 108600, 109957, 111332, 112724, 114133, 115559, 117004, 118466, 119947
+          ],
+          "Data2": [
+            31185, 62760, 94729, 95913, 97112, 98326, 99555, 100800, 102060, 103336, 104627, 105935,
+            107259, 108600, 109957, 111332, 112724, 114133, 115559, 117004, 118466, 119947, 121447
+          ]
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 48,
+      "createdAt": {
+        "$at": 106968
+      }
+    },
+    {
+      "id": "aa355b2e-f69a-4461-9aff-95caa06f4e21",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRiskBase",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        },
+        "NumberOfChildren": 0,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        }
+      },
+      "output": {
+        "Person1": {
+          "CoverageCapital": 46364,
+          "Disability": 16890,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        },
+        "Person2": {
+          "CoverageCapital": 73605,
+          "Disability": 21960,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 60,
+      "createdAt": {
+        "$at": 113143
+      }
+    },
+    {
+      "id": "bb5cf351-8d0e-4318-898c-2881bb18f563",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRetirement",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 21072,
+            "CurrentCapital": 62400
+          }
+        },
+        "CurrentFortune": 0,
+        "InterestRate": 1,
+        "Saving": 0,
+        "NeedInPcRetirement": true,
+        "NeedRetirement": 80,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 32633,
+            "CurrentCapital": 166830
+          }
+        }
+      },
+      "output": {
+        "ErrorCode": 1,
+        "GrossIncome": 171000,
+        "IncomeNeed": 136800,
+        "IncomeGap": 33955,
+        "IncomeTotal": 102845,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 53705,
+        "IncomeWithdrawal": 0,
+        "AvailableFortune": 0,
+        "CapitalNeed": 684587,
+        "CapitalGap": 684587
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 68,
+      "createdAt": {
+        "$at": 113152
+      }
+    },
+    {
+      "id": "9c649de3-5a24-4f9d-86d9-c1bb55914a5d",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRisk",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 22168,
+            "DisabilityChildren": 4433.6,
+            "Widow": 13300.8,
+            "Orphan": 4433.6,
+            "CoverageCapital": 46364
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        },
+        "NumberOfChildren": 0,
+        "WithChildren": false,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 20830,
+            "DisabilityChildren": 4166,
+            "Widow": 12498,
+            "Orphan": 4166,
+            "CoverageCapital": 73605
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        }
+      },
+      "output": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 13228,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47572,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 22168,
+            "IncomePartner": 0,
+            "CapitalGap": 310090
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 0,
+            "IncomeSurplus": 7600,
+            "IncomeTotal": 68400,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 42996,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 28074,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47926,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 20830,
+            "IncomePartner": 0,
+            "CapitalGap": 589554
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 9500,
+            "IncomeTotal": 85500,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 58404,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1662500
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1472500
+          }
+        ]
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 52,
+      "createdAt": {
+        "$at": 113195
+      }
+    },
+    {
+      "id": "8568155a-8a0d-4508-a4a9-922848d04461",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": null,
+      "toolCallId": null,
+      "provider": "logismata",
+      "operation": "APICalc_calculatePurchaseP2",
+      "input": {
+        "Investment": 58000,
+        "PaymentDuration": 3,
+        "InterestRate": 1.25,
+        "IncomeType": 1,
+        "Income": 171000,
+        "TaxLocationID": 400000000,
+        "Relationship": 2,
+        "Confession1": 4,
+        "Confession2": 4,
+        "NumberOfChildren": 0,
+        "Sex": 2,
+        "BirthYear": 1986
+      },
+      "output": {
+        "TaxSavings": 16767,
+        "NetInvestment": 41233,
+        "TaxSavingsPercentage": 28.91,
+        "YearsToRetirement": 25,
+        "AdditionalCapital": 78150,
+        "AdditionalPension": 5314,
+        "NetYield": 2.5,
+        "ConversionRate": 6.8,
+        "DetailsCapital": {
+          "Periods": 25,
+          "Data1": [
+            19333, 38908, 58728, 59462, 60205, 60958, 61720, 62491, 63273, 64063, 64864, 65675,
+            66496, 67327, 68169, 69021, 69884, 70757, 71642, 72537, 73444, 74362, 75292, 76233,
+            77186
+          ],
+          "Data2": [
+            19575, 39395, 59462, 60205, 60958, 61720, 62491, 63273, 64063, 64864, 65675, 66496,
+            67327, 68169, 69021, 69884, 70757, 71642, 72537, 73444, 74362, 75292, 76233, 77186,
+            78150
+          ]
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 23,
+      "createdAt": {
+        "$at": 115691
+      }
+    },
+    {
+      "id": "4cdf4a69-0eb7-4b97-8510-4a29e83c9595",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRetirement",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 21072,
+            "CurrentCapital": 62400
+          }
+        },
+        "CurrentFortune": 20000,
+        "InterestRate": 1,
+        "Saving": 0,
+        "NeedInPcRetirement": true,
+        "NeedRetirement": 80,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 32633,
+            "CurrentCapital": 166830
+          }
+        }
+      },
+      "output": {
+        "ErrorCode": 1,
+        "GrossIncome": 171000,
+        "IncomeNeed": 136800,
+        "IncomeGap": 32848,
+        "IncomeTotal": 103952,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 53705,
+        "IncomeWithdrawal": 1107,
+        "AvailableFortune": 25143,
+        "CapitalNeed": 684588,
+        "CapitalGap": 659445
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 68,
+      "createdAt": {
+        "$at": 146271
+      }
+    },
+    {
+      "id": "29e0edcc-eda2-4daa-b2cb-9c484cce2f91",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRiskBase",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        },
+        "NumberOfChildren": 0,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        }
+      },
+      "output": {
+        "Person1": {
+          "CoverageCapital": 46364,
+          "Disability": 16890,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        },
+        "Person2": {
+          "CoverageCapital": 73605,
+          "Disability": 21960,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 73,
+      "createdAt": {
+        "$at": 146276
+      }
+    },
+    {
+      "id": "a86d0667-2315-403d-8e8d-e27e78ade65a",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRisk",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 22168,
+            "DisabilityChildren": 4433.6,
+            "Widow": 13300.8,
+            "Orphan": 4433.6,
+            "CoverageCapital": 46364
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        },
+        "NumberOfChildren": 0,
+        "WithChildren": false,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 20830,
+            "DisabilityChildren": 4166,
+            "Widow": 12498,
+            "Orphan": 4166,
+            "CoverageCapital": 73605
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        }
+      },
+      "output": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 13228,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47572,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 22168,
+            "IncomePartner": 0,
+            "CapitalGap": 310090
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 0,
+            "IncomeSurplus": 7600,
+            "IncomeTotal": 68400,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 42996,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 28074,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47926,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 20830,
+            "IncomePartner": 0,
+            "CapitalGap": 589554
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 9500,
+            "IncomeTotal": 85500,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 58404,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1662500
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1472500
+          }
+        ]
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 20,
+      "createdAt": {
+        "$at": 146296
+      }
+    },
+    {
+      "id": "52c7b320-aa00-45c8-a171-da3552b44311",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_018FCreL7fsoidMve5uQfwq6",
+      "provider": "logismata",
+      "operation": "APICalc_calculatePurchaseP2",
+      "input": {
+        "Investment": 58000,
+        "PaymentDuration": 1,
+        "InterestRate": 1,
+        "ConversionRate": 6,
+        "IncomeType": 1,
+        "Income": 171000,
+        "TaxLocationID": 400000000,
+        "Relationship": 2,
+        "Confession1": 4,
+        "Confession2": 4,
+        "NumberOfChildren": 0,
+        "Sex": 2,
+        "BirthYear": 1986
+      },
+      "output": {
+        "TaxSavings": 15684,
+        "NetInvestment": 42316,
+        "TaxSavingsPercentage": 27.04,
+        "YearsToRetirement": 25,
+        "AdditionalCapital": 74381,
+        "AdditionalPension": 4463,
+        "NetYield": 2.09,
+        "ConversionRate": 6,
+        "DetailsCapital": {
+          "Periods": 25,
+          "Data1": [
+            58000, 58580, 59166, 59757, 60355, 60959, 61568, 62184, 62806, 63434, 64068, 64709,
+            65356, 66009, 66670, 67336, 68010, 68690, 69377, 70070, 70771, 71479, 72194, 72915,
+            73645
+          ],
+          "Data2": [
+            58580, 59166, 59757, 60355, 60959, 61568, 62184, 62806, 63434, 64068, 64709, 65356,
+            66009, 66670, 67336, 68010, 68690, 69377, 70070, 70771, 71479, 72194, 72915, 73645,
+            74381
+          ]
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 57,
+      "createdAt": {
+        "$at": 183293
+      }
+    },
+    {
+      "id": "ea278569-2bda-4fd3-a8b6-a5bf788f4fbe",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_018FCreL7fsoidMve5uQfwq6",
+      "provider": "logismata",
+      "operation": "APICalc_calculateSaving3a",
+      "input": {
+        "Duration": 25,
+        "InitialInvestment": 0,
+        "YearlyInvestment": 7258,
+        "InterestRate": 1,
+        "IncomeType": 1,
+        "Income": 171000,
+        "TaxLocationID": 400000000,
+        "Relationship": 2,
+        "Confession1": 4,
+        "Confession2": 4,
+        "NumberOfChildren": 0,
+        "Sex": 2,
+        "BirthYear": 1986
+      },
+      "output": {
+        "YearlyTaxBefore": 26103,
+        "YearlyTaxAfter": 23948,
+        "YearlyTaxSavings": 2155,
+        "OverallTaxSavings": 53875,
+        "Deposits": 181450,
+        "Interest": 25589,
+        "GrossCapital": 207039,
+        "CapitalTax": 15868,
+        "NetCapital": 191171,
+        "NetYield": 2.98,
+        "AlternativeGrossYield": 4.24,
+        "DetailsDeposits": {
+          "Periods": 25,
+          "Data1": [
+            0, 7258, 14516, 21774, 29032, 36290, 43548, 50806, 58064, 65322, 72580, 79838, 87096,
+            94354, 101612, 108870, 116128, 123386, 130644, 137902, 145160, 152418, 159676, 166934,
+            174192
+          ],
+          "Data2": [
+            7258, 14516, 21774, 29032, 36290, 43548, 50806, 58064, 65322, 72580, 79838, 87096,
+            94354, 101612, 108870, 116128, 123386, 130644, 137902, 145160, 152418, 159676, 166934,
+            174192, 181450
+          ]
+        },
+        "DetailsInterest": {
+          "Periods": 25,
+          "Data1": [
+            0, 73, 218, 438, 733, 1103, 1550, 2073, 2675, 3355, 4114, 4954, 5874, 6876, 7961, 9130,
+            10382, 11720, 13143, 14654, 16252, 17939, 19715, 21581, 23539
+          ],
+          "Data2": [
+            73, 218, 438, 733, 1103, 1550, 2073, 2675, 3355, 4114, 4954, 5874, 6876, 7961, 9130,
+            10382, 11720, 13143, 14654, 16252, 17939, 19715, 21581, 23539, 25589
+          ]
+        },
+        "DetailsTaxSaving": {
+          "Periods": 25,
+          "Data1": [
+            0, 2155, 4310, 6465, 8620, 10775, 12930, 15085, 17240, 19395, 21550, 23705, 25860,
+            28015, 30170, 32325, 34480, 36635, 38790, 40945, 43100, 45255, 47410, 49565, 51720
+          ],
+          "Data2": [
+            2155, 4310, 6465, 8620, 10775, 12930, 15085, 17240, 19395, 21550, 23705, 25860, 28015,
+            30170, 32325, 34480, 36635, 38790, 40945, 43100, 45255, 47410, 49565, 51720, 53875
+          ]
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 59,
+      "createdAt": {
+        "$at": 183295
+      }
+    },
+    {
+      "id": "7eec1b2e-cb7c-4168-ac2c-bd3d3144d38b",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRetirement",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 21072,
+            "CurrentCapital": 62400
+          }
+        },
+        "CurrentFortune": 20000,
+        "InterestRate": 1,
+        "Saving": 0,
+        "NeedInPcRetirement": true,
+        "NeedRetirement": 80,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 32633,
+            "CurrentCapital": 166830
+          }
+        }
+      },
+      "output": {
+        "ErrorCode": 1,
+        "GrossIncome": 171000,
+        "IncomeNeed": 136800,
+        "IncomeGap": 32848,
+        "IncomeTotal": 103952,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 53705,
+        "IncomeWithdrawal": 1107,
+        "AvailableFortune": 25143,
+        "CapitalNeed": 684588,
+        "CapitalGap": 659445
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 49,
+      "createdAt": {
+        "$at": 187898
+      }
+    },
+    {
+      "id": "ced6df04-014d-4a61-b320-1dc24d2afb36",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRiskBase",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        },
+        "NumberOfChildren": 0,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        }
+      },
+      "output": {
+        "Person1": {
+          "CoverageCapital": 46364,
+          "Disability": 16890,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        },
+        "Person2": {
+          "CoverageCapital": 73605,
+          "Disability": 21960,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 55,
+      "createdAt": {
+        "$at": 187904
+      }
+    },
+    {
+      "id": "7362c1e1-6550-42c7-81da-1e89f7045a27",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "vorsorgebild",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRisk",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 22168,
+            "DisabilityChildren": 4433.6,
+            "Widow": 13300.8,
+            "Orphan": 4433.6,
+            "CoverageCapital": 46364
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        },
+        "NumberOfChildren": 0,
+        "WithChildren": false,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 20830,
+            "DisabilityChildren": 4166,
+            "Widow": 12498,
+            "Orphan": 4166,
+            "CoverageCapital": 73605
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        }
+      },
+      "output": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 13228,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47572,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 22168,
+            "IncomePartner": 0,
+            "CapitalGap": 310090
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 0,
+            "IncomeSurplus": 7600,
+            "IncomeTotal": 68400,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 42996,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 28074,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47926,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 20830,
+            "IncomePartner": 0,
+            "CapitalGap": 589554
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 9500,
+            "IncomeTotal": 85500,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 58404,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1662500
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1472500
+          }
+        ]
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 24,
+      "createdAt": {
+        "$at": 187928
+      }
+    },
+    {
+      "id": "1b87a874-57a4-451c-a968-d97656e203e7",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_016ZrJSUXPR6VgpC7BmLizw8",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRetirement",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 21072,
+            "CurrentCapital": 62400
+          }
+        },
+        "CurrentFortune": 20000,
+        "InterestRate": 1,
+        "Saving": 0,
+        "NeedInPcRetirement": true,
+        "NeedRetirement": 80,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "RetirementPillar2": {
+            "Pension": 32633,
+            "CurrentCapital": 166830
+          }
+        }
+      },
+      "output": {
+        "ErrorCode": 1,
+        "GrossIncome": 171000,
+        "IncomeNeed": 136800,
+        "IncomeGap": 32848,
+        "IncomeTotal": 103952,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 53705,
+        "IncomeWithdrawal": 1107,
+        "AvailableFortune": 25143,
+        "CapitalNeed": 684588,
+        "CapitalGap": 659445
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 55,
+      "createdAt": {
+        "$at": 222900
+      }
+    },
+    {
+      "id": "0878a65f-7a70-4c7a-baec-18bb860a3fe2",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_01S2447qR8SHAr2tusj5Jk4v",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRiskBase",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        },
+        "NumberOfChildren": 0,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0
+        }
+      },
+      "output": {
+        "Person1": {
+          "CoverageCapital": 46364,
+          "Disability": 16890,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        },
+        "Person2": {
+          "CoverageCapital": 73605,
+          "Disability": 21960,
+          "DisabilityChildren": 0,
+          "Widow": 0,
+          "Orphan": 0
+        }
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 59,
+      "createdAt": {
+        "$at": 222902
+      }
+    },
+    {
+      "id": "b0caf63c-d19e-4614-99f2-959d0499d796",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_01S2447qR8SHAr2tusj5Jk4v",
+      "provider": "logismata",
+      "operation": "APICalc_calculateRisk",
+      "input": {
+        "Relationship": 2,
+        "RelationshipSinceYear": 2021,
+        "Person1": {
+          "Sex": 2,
+          "BirthYear": 1986,
+          "GrossIncome": 76000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 22168,
+            "DisabilityChildren": 4433.6,
+            "Widow": 13300.8,
+            "Orphan": 4433.6,
+            "CoverageCapital": 46364
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        },
+        "NumberOfChildren": 0,
+        "WithChildren": false,
+        "Person2": {
+          "Sex": 1,
+          "BirthYear": 1984,
+          "GrossIncome": 95000,
+          "WithBVG": true,
+          "NumberOfChildren": 0,
+          "Pillar2Pensions": {
+            "Disability": 20830,
+            "DisabilityChildren": 4166,
+            "Widow": 12498,
+            "Orphan": 4166,
+            "CoverageCapital": 73605
+          },
+          "NeedInPcDisability": true,
+          "NeedDisability": 80,
+          "NeedInPcDeath": true,
+          "NeedDeath": 70
+        }
+      },
+      "output": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 13228,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47572,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 22168,
+            "IncomePartner": 0,
+            "CapitalGap": 310090
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 60800,
+            "IncomeGap": 0,
+            "IncomeSurplus": 7600,
+            "IncomeTotal": 68400,
+            "IncomePillar1": 25404,
+            "IncomePillar2": 42996,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 76000,
+            "IncomeNeed": 53200,
+            "IncomeGap": 53200,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1223600
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 28074,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 47926,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 20830,
+            "IncomePartner": 0,
+            "CapitalGap": 589554
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 76000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 9500,
+            "IncomeTotal": 85500,
+            "IncomePillar1": 27096,
+            "IncomePillar2": 58404,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1662500
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 95000,
+            "IncomeNeed": 66500,
+            "IncomeGap": 66500,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 1472500
+          }
+        ]
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 33,
+      "createdAt": {
+        "$at": 222935
+      }
+    },
+    {
+      "id": "d8f610ab-5e1a-4500-a360-ff6e59605aae",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "toolCallId": "toolu_01XTUYrshuq59L7Qs7A6bBtD",
+      "provider": "quicksale",
+      "operation": "quote.erwerbsunfaehigkeit",
+      "input": {
+        "productCode": "erwerbsunfaehigkeit",
+        "pillar": "3b",
+        "birthDate": "1986-01-01",
+        "sex": "female",
+        "smoker": false,
+        "annualPension": 29000,
+        "waitingPeriodMonths": 24,
+        "occupationGroup": 3,
+        "endAge": 65,
+        "premiumWaiver": true
+      },
+      "output": {
+        "productCode": "erwerbsunfaehigkeit",
+        "premiumAnnualGross": 2053.2,
+        "premiumAnnualNet": 1759.2,
+        "riders": [
+          {
+            "code": "I",
+            "name": "Prämienbefreiung bei Erwerbsunfähigkeit",
+            "premiumAnnual": 0
+          }
+        ],
+        "startDate": "2026-12-01",
+        "durationYears": 24,
+        "annualPension": 29000,
+        "source": "quicksale",
+        "issues": [],
+        "warnings": [],
+        "inputs": {
+          "productCode": "erwerbsunfaehigkeit",
+          "pillar": "3b",
+          "birthDate": "1986-01-01",
+          "sex": "female",
+          "smoker": false,
+          "annualPension": 29000,
+          "waitingPeriodMonths": 24,
+          "occupationGroup": 3,
+          "endAge": 65,
+          "premiumWaiver": true
+        },
+        "cached": true
+      },
+      "status": "ok",
+      "error": null,
+      "durationMs": 0,
+      "createdAt": {
+        "$at": 303383
+      }
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "b8d3ea2b-9dd7-4178-9256-7755ed6b387a",
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "customerId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "productCode": "erwerbsunfaehigkeit",
+      "pillar": "3b",
+      "gap": "disability",
+      "headline": "Ihr Einkommen bei Krankheit sichern",
+      "rationale": "Werden Sie wegen Krankheit erwerbsunfähig, fehlen Ihnen nach Lohnfortzahlung und Taggeld rund CHF 28'080 pro Jahr. Eine Rente von CHF 29'000 pro Jahr ab dem 24. Monat schliesst diese Lücke bis Alter 65.",
+      "criteria": [
+        {
+          "criterion": "Lücke",
+          "value": "Erwerbsunfähigkeit: CHF 28'080 pro Jahr",
+          "met": true
+        },
+        {
+          "criterion": "Eintrittsalter",
+          "value": "41 Jahre (möglich 15 bis 60)",
+          "met": true
+        },
+        {
+          "criterion": "Rente bei Erwerbsunfähigkeit",
+          "value": "CHF 29'000 pro Jahr bis Alter 65",
+          "met": true
+        },
+        {
+          "criterion": "Wartefrist",
+          "value": "24 Monate: vorher zahlen Lohnfortzahlung und Krankentaggeld",
+          "met": true
+        },
+        {
+          "criterion": "Berufsgruppe",
+          "value": "Gruppe 3 (Pflegefachfrau)",
+          "met": true
+        },
+        {
+          "criterion": "Pax-Regeln",
+          "value": "Geprüft, keine Sperre (Regelwerk Version 1)",
+          "met": true
+        }
+      ],
+      "parameters": {
+        "quoteInput": {
+          "productCode": "erwerbsunfaehigkeit",
+          "pillar": "3b",
+          "birthDate": "1986-01-01",
+          "sex": "female",
+          "smoker": false,
+          "annualPension": 29000,
+          "waitingPeriodMonths": 24,
+          "occupationGroup": 3,
+          "endAge": 65,
+          "premiumWaiver": true
+        },
+        "insured": {
+          "who": "self",
+          "name": "Jane",
+          "birthDateAssumed": true,
+          "smokerAssumed": true
+        },
+        "cover": {
+          "annualPension": 29000,
+          "endAge": 65,
+          "durationYears": 24,
+          "waitingPeriodMonths": 24,
+          "occupationGroup": 3
+        },
+        "price": {
+          "annualGross": 2053.2,
+          "annualNet": 1759.2,
+          "source": "quicksale",
+          "riders": [
+            {
+              "code": "I",
+              "name": "Prämienbefreiung bei Erwerbsunfähigkeit",
+              "premiumAnnual": 0
+            }
+          ],
+          "startDate": "2026-12-01",
+          "durationYears": 24,
+          "issues": []
+        },
+        "alsoCloses": [],
+        "gapAnnual": 28080,
+        "note": "Krankheit, Erwerbsunfähigkeit Jane, Lücke 1'102 pro Monat",
+        "flags": [],
+        "toolCallId": "toolu_01XTUYrshuq59L7Qs7A6bBtD"
+      },
+      "premiumAnnual": 2053.2,
+      "premiumSource": "quicksale",
+      "alternatives": [],
+      "status": "shown",
+      "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1",
+      "model": "anthropic:claude-haiku-5-5",
+      "createdAt": {
+        "$at": 303383
+      }
+    }
+  ],
+  "analyses": [
+    {
+      "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774",
+      "topics": [
+        "disability_cover",
+        "death_cover",
+        "pillar3a",
+        "retirement",
+        "taxes",
+        "family_children",
+        "pension_fund"
+      ],
+      "lifeEvents": ["child_birth"],
+      "productInterest": [
+        {
+          "productCode": "erwerbsunfaehigkeit",
+          "strength": "medium"
+        },
+        {
+          "productCode": "pax3a",
+          "strength": "medium"
+        },
+        {
+          "productCode": "todesfall",
+          "strength": "low"
+        }
+      ],
+      "intentStage": "exploring",
+      "sentiment": "positive",
+      "painPoints": ["Unsicherheit wegen offenem Kinderwunsch", "Wollen mit Entscheid noch warten"],
+      "gaps": [
+        {
+          "gap": "death",
+          "amountAnnual": 53196,
+          "note": "Todesfall Jane durch Krankheit: CHF 4'433 pro Monat fehlen, keine Hinterlassenenrente ohne Kinder"
+        },
+        {
+          "gap": "death",
+          "amountAnnual": 66504,
+          "note": "Todesfall May durch Krankheit: CHF 5'542 pro Monat fehlen"
+        },
+        {
+          "gap": "disability",
+          "amountAnnual": 13224,
+          "note": "Krankheit Jane: CHF 1'102 pro Monat"
+        },
+        {
+          "gap": "disability",
+          "amountAnnual": 28080,
+          "note": "Krankheit May: CHF 2'340 pro Monat, Angebot Erwerbsunfähigkeit gezeigt"
+        },
+        {
+          "gap": "retirement",
+          "amountAnnual": 32848,
+          "note": "Haushaltslücke ab 65 von rund CHF 2'700 pro Monat, keine 3a vorhanden"
+        },
+        {
+          "gap": "tax",
+          "amountAnnual": null,
+          "note": "Beide ohne 3a, Steuerersparnis bis ca. CHF 2'155 pro Jahr möglich"
+        }
+      ],
+      "handover": {
+        "required": false,
+        "ruleIds": ["4de49513-1f96-4d0e-a816-f2b7a5a1d81e"],
+        "reason": null
+      },
+      "summary": "Jane (1986, Pflegefachfrau 80 %, CHF 76'000) und May (1984, Logistik 100 %, CHF 95'000), verheiratet, noch keine Kinder, Kinderwunsch. Lohn- und Vorsorgeausweise hochgeladen und bestätigt. Grösste Lücke: Erwerbsunfähigkeit von May durch Krankheit, CHF 2'340 pro Monat; Erwerbsunfähigkeitsversicherung CHF 29'000 pro Jahr für rund CHF 2'050 gezeigt. Das Paar wartet, bis ein Kind unterwegs ist. E-Mail-Adresse hinterlegt.",
+      "nextBestAction": "Beim jährlichen Check-in nach der Familienplanung fragen. Mit einem Kind die Erwerbsunfähigkeit von May und den Todesfall neu rechnen.",
+      "model": "anthropic:claude-sonnet-5-5",
+      "ruleSetId": "95573900-99da-4b3c-86a5-2915be6face1",
+      "messageCountAnalyzed": 23,
+      "updatedAt": {
+        "$at": 399288
+      }
+    }
+  ],
+  "auditLog": [
+    {
+      "id": "d684abb5-829a-4bd9-a624-f5ca6408e408",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.uploaded",
+      "entityType": "document",
+      "entityId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "data": {
+        "filename": "lohnausweis-2023-may-mueller.pdf",
+        "mimeType": "application/pdf",
+        "sizeBytes": 5015,
+        "pageCount": 1,
+        "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774"
+      },
+      "createdAt": {
+        "$at": 66234
+      }
+    },
+    {
+      "id": "548c6570-b475-44cb-82e2-87ba8330ee3c",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.uploaded",
+      "entityType": "document",
+      "entityId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "data": {
+        "filename": "lohnausweis-2023-jane-mueller.pdf",
+        "mimeType": "application/pdf",
+        "sizeBytes": 5025,
+        "pageCount": 1,
+        "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774"
+      },
+      "createdAt": {
+        "$at": 66236
+      }
+    },
+    {
+      "id": "ce1d93c5-ea30-442c-9c94-9fbe2a5372b5",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.uploaded",
+      "entityType": "document",
+      "entityId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "data": {
+        "filename": "vorsorgeausweis-2024-may-mueller.pdf",
+        "mimeType": "application/pdf",
+        "sizeBytes": 7142,
+        "pageCount": 2,
+        "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774"
+      },
+      "createdAt": {
+        "$at": 66239
+      }
+    },
+    {
+      "id": "947c2f39-cb97-467c-831b-ea088582d098",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.uploaded",
+      "entityType": "document",
+      "entityId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "data": {
+        "filename": "vorsorgeausweis-2024-jane-mueller.pdf",
+        "mimeType": "application/pdf",
+        "sizeBytes": 7201,
+        "pageCount": 2,
+        "conversationId": "e4f2544f-2e73-44de-8ed1-0162c549d774"
+      },
+      "createdAt": {
+        "$at": 66242
+      }
+    },
+    {
+      "id": "1a5041ea-890a-4e54-a88d-d25cba1258ee",
+      "actorType": "ai",
+      "actorId": null,
+      "action": "document.extracted",
+      "entityType": "document",
+      "entityId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "data": {
+        "docType": "salary_certificate",
+        "fieldCount": 6,
+        "model": "anthropic:claude-haiku-5-5"
+      },
+      "createdAt": {
+        "$at": 72230
+      }
+    },
+    {
+      "id": "1ac40aa9-f5a4-444e-ae5b-3bb8507f0f59",
+      "actorType": "ai",
+      "actorId": null,
+      "action": "document.extracted",
+      "entityType": "document",
+      "entityId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "data": {
+        "docType": "salary_certificate",
+        "fieldCount": 6,
+        "model": "anthropic:claude-haiku-5-5"
+      },
+      "createdAt": {
+        "$at": 72672
+      }
+    },
+    {
+      "id": "18e0bb59-9446-4afc-899e-ae6fe45a879d",
+      "actorType": "ai",
+      "actorId": null,
+      "action": "document.extracted",
+      "entityType": "document",
+      "entityId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "data": {
+        "docType": "pension_certificate",
+        "fieldCount": 19,
+        "model": "anthropic:claude-haiku-5-5"
+      },
+      "createdAt": {
+        "$at": 76209
+      }
+    },
+    {
+      "id": "8ffcfdbe-ec3a-4c9b-b734-9f34d1d3c686",
+      "actorType": "ai",
+      "actorId": null,
+      "action": "document.extracted",
+      "entityType": "document",
+      "entityId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "data": {
+        "docType": "pension_certificate",
+        "fieldCount": 19,
+        "model": "anthropic:claude-haiku-5-5"
+      },
+      "createdAt": {
+        "$at": 76351
+      }
+    },
+    {
+      "id": "008940db-b960-4f52-8bb9-c9d52919e9e4",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.confirmed",
+      "entityType": "document",
+      "entityId": "df2f4e23-68b5-493a-ba0c-4e9d216ce36d",
+      "data": {
+        "docType": "salary_certificate",
+        "subject": "partner",
+        "changedPaths": ["partner.grossIncome"],
+        "editedPaths": [],
+        "policyId": null
+      },
+      "createdAt": {
+        "$at": 100877
+      }
+    },
+    {
+      "id": "0059c2b8-6aa3-40d1-9517-e90a0642cb98",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.confirmed",
+      "entityType": "document",
+      "entityId": "8b86d467-b97a-403b-b3cb-40008418e756",
+      "data": {
+        "docType": "salary_certificate",
+        "subject": "self",
+        "changedPaths": ["person.grossIncome", "person.firstName"],
+        "editedPaths": [],
+        "policyId": null
+      },
+      "createdAt": {
+        "$at": 103892
+      }
+    },
+    {
+      "id": "8dd8511e-acdf-47da-a369-a5094ea3b772",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.confirmed",
+      "entityType": "document",
+      "entityId": "774f5d72-86de-4858-a412-ec833a2cd6b0",
+      "data": {
+        "docType": "pension_certificate",
+        "subject": "partner",
+        "changedPaths": [
+          "partner.grossIncome",
+          "partner.workloadPercent",
+          "partner.birthYear",
+          "partner.pillar2.insuredSalary",
+          "partner.pillar2.currentCapital",
+          "partner.pillar2.projectedCapitalAtRetirement",
+          "partner.pillar2.projectedPensionAtRetirement",
+          "partner.pillar2.disabilityPension",
+          "partner.pillar2.partnerPension",
+          "partner.pillar2.childPension",
+          "partner.pillar2.deathLumpSum",
+          "partner.pillar2.maxBuyIn",
+          "partner.pillar2.hasPensionFund"
+        ],
+        "editedPaths": [],
+        "policyId": "d8e29d50-f8c9-4bf2-991d-b7cad302d0f9"
+      },
+      "createdAt": {
+        "$at": 106917
+      }
+    },
+    {
+      "id": "2492f780-a629-4505-9ac2-ca1b218a3d85",
+      "actorType": "customer",
+      "actorId": "87bc230c-6dd0-4156-b3e6-2d970d019d52",
+      "action": "document.confirmed",
+      "entityType": "document",
+      "entityId": "20641a4a-8fd9-45ec-a756-2739c5d14406",
+      "data": {
+        "docType": "pension_certificate",
+        "subject": "self",
+        "changedPaths": [
+          "person.grossIncome",
+          "person.workloadPercent",
+          "person.birthYear",
+          "pillar2.insuredSalary",
+          "pillar2.currentCapital",
+          "pillar2.projectedCapitalAtRetirement",
+          "pillar2.projectedPensionAtRetirement",
+          "pillar2.disabilityPension",
+          "pillar2.partnerPension",
+          "pillar2.childPension",
+          "pillar2.deathLumpSum",
+          "pillar2.maxBuyIn",
+          "pillar2.hasPensionFund"
+        ],
+        "editedPaths": [],
+        "policyId": "7a7efb81-4220-4822-a9a7-d053a7bf3073"
+      },
+      "createdAt": {
+        "$at": 109935
+      }
+    }
+  ]
+}

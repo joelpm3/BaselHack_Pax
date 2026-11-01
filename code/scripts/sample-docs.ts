@@ -3,7 +3,10 @@
  * May Müller (born 16.09.1984, married to the seeded demo customer Jane Müller, one child born
  * 2026, Basel 4053) works full time at Muster Logistik AG for CHF 100'000 a year. His salary
  * certificate, pension fund certificate and an older term life policy agree with each other
- * and with the seed. A second pension certificate belongs to the seeded Taylor Johnson.
+ * and with the seed. The 2023/2024 set is from the Müllers' first conversation in autumn 2024,
+ * when Jane still worked at 80 % (CHF 76'000); the 2025/2026 set and the health policy with
+ * Noah (born 12.05.2026) are for the yearly check-in in October 2026. See
+ * documentation/DEMO_JOURNEY.md. A second pension certificate belongs to the seeded Taylor Johnson.
  * Every company and person is invented; each page carries a "Muster" watermark and footer.
  * Run: pnpm exec tsx scripts/sample-docs.ts
  */
@@ -190,6 +193,26 @@ const EMPLOYER = {
   phone: "061 000 00 00",
 };
 
+const JANE = {
+  name: "Jane Müller",
+  salutation: "Frau",
+  street: MAY.street,
+  town: MAY.town,
+  birthDate: "01.06.1986",
+  ahv: "756.2345.6789.01",
+};
+
+/** Jane worked as a nurse at 80 % until the baby came in May 2026. */
+const JANE_EMPLOYER = {
+  name: "Gesundheitszentrum Muster AG",
+  street: "Spitalweg 3",
+  town: "4056 Basel",
+  phone: "061 000 00 20",
+};
+
+/** BVG coordination deduction per year (CHF 25'725 for 2023/2024, CHF 26'460 from 2025). */
+const COORDINATION: Record<number, number> = { 2023: 25725, 2024: 25725, 2025: 26460, 2026: 26460 };
+
 /** Salary 2025: AHV/IV/EO 5.3%, ALV 1.1%, NBUV 0.5%; BVG employee share from the fund plan. */
 const SALARY_2025 = {
   gross: 100000,
@@ -198,11 +221,36 @@ const SALARY_2025 = {
   pension: 4412,
 };
 
+interface SalaryCertificate {
+  file: string;
+  person: typeof MAY;
+  employer: typeof EMPLOYER;
+  year: number;
+  workload: number;
+  gross: number;
+  social: number;
+  pension: number;
+  insuranceNumber: string;
+  /** Place and date of issue, e.g. "Basel, 20.01.2026". */
+  issued: string;
+}
+
+/** Social 6.9 % of gross; pension 6 % (half the 10 % savings credit plus 1 %) of the insured salary. */
+function salaryFigures(year: number, gross: number, workload: number) {
+  const insured = gross - round05(COORDINATION[year] * (workload / 100));
+  return {
+    insured,
+    social: Math.round(gross * 0.069),
+    pension: Math.round(insured * 0.06),
+  };
+}
+
 // ─── Lohnausweis (Formular 11) ──────────────────────────────────────────────
 
-async function salaryCertificate() {
+async function salaryCertificate(s: SalaryCertificate) {
+  const insured = s.gross - round05(COORDINATION[s.year] * (s.workload / 100));
   const { pdf, addPage } = await newDocument(
-    "Lohnausweis 2025 May Müller",
+    `Lohnausweis ${s.year} ${s.person.name}`,
     "Lohnausweis Formular 11, Muster",
   );
   const c = addPage();
@@ -227,16 +275,16 @@ async function salaryCertificate() {
   y += 22;
   c.text("C", L, y, { bold: true });
   c.text("AHV-Nr.", L + 14, y, { color: MUTED, size: 8 });
-  c.text(MAY.ahv, L + 60, y, { size: 10 });
+  c.text(s.person.ahv, L + 60, y, { size: 10 });
   y += 20;
   c.text("D", L, y, { bold: true });
   c.text("Jahr", L + 14, y, { color: MUTED, size: 8 });
-  c.text("2025", L + 60, y, { size: 10 });
+  c.text(String(s.year), L + 60, y, { size: 10 });
   c.text("E", L + 110, y, { bold: true });
   c.text("von", L + 124, y, { color: MUTED, size: 8 });
-  c.text("01.01.2025", L + 142, y, { size: 10 });
+  c.text(`01.01.${s.year}`, L + 142, y, { size: 10 });
   c.text("bis", L + 204, y, { color: MUTED, size: 8 });
-  c.text("31.12.2025", L + 220, y, { size: 10 });
+  c.text(`31.12.${s.year}`, L + 220, y, { size: 10 });
   y += 24;
   c.checkbox(L, y, false);
   c.text("F", L + 14, y, { bold: true });
@@ -249,7 +297,7 @@ async function salaryCertificate() {
   // H: employee address in the envelope window
   c.text("H", 330, 80, { bold: true });
   c.rect(344, 76, R - 344, 86, { border: RULE });
-  [MAY.salutation, MAY.name, MAY.street, MAY.town].forEach((line, i) => {
+  [s.person.salutation, s.person.name, s.person.street, s.person.town].forEach((line, i) => {
     c.text(line, 356, 90 + i * 14, { size: 10 });
   });
 
@@ -266,7 +314,7 @@ async function salaryCertificate() {
     {
       no: "1.",
       label: "Lohn soweit nicht unter Ziffer 2–7 aufzuführen / Rente",
-      value: SALARY_2025.gross,
+      value: s.gross,
     },
     { no: "2.", label: "Gehaltsnebenleistungen" },
     { no: "2.1", label: "Verpflegung, Unterkunft", sub: true },
@@ -281,18 +329,18 @@ async function salaryCertificate() {
       no: "8.",
       label: "Bruttolohn total / Rente",
       sign: "=",
-      value: SALARY_2025.gross,
+      value: s.gross,
       bold: true,
     },
-    { no: "9.", label: "Beiträge AHV/IV/EO/ALV/NBUV", sign: "–", value: SALARY_2025.social },
+    { no: "9.", label: "Beiträge AHV/IV/EO/ALV/NBUV", sign: "–", value: s.social },
     { no: "10.", label: "Berufliche Vorsorge 2. Säule" },
-    { no: "10.1", label: "Ordentliche Beiträge", sign: "–", value: SALARY_2025.pension, sub: true },
+    { no: "10.1", label: "Ordentliche Beiträge", sign: "–", value: s.pension, sub: true },
     { no: "10.2", label: "Beiträge für den Einkauf", sign: "–", sub: true },
     {
       no: "11.",
       label: "Nettolohn / Rente (in die Steuererklärung übertragen)",
       sign: "=",
-      value: SALARY_2025.gross - SALARY_2025.social - SALARY_2025.pension,
+      value: s.gross - s.social - s.pension,
       bold: true,
     },
     { no: "12.", label: "Quellensteuerabzug" },
@@ -336,7 +384,7 @@ async function salaryCertificate() {
   c.text("Bemerkungen", colLabel, y + 2, { size: 8.5, bold: true });
   c.rect(colLabel, y + 16, R - colLabel, 42, { border: RULE });
   c.paragraph(
-    "Beschäftigungsgrad 100 %. Versicherter Lohn berufliche Vorsorge CHF 73'540. Pensionskasse Muster, Versicherten-Nr. PKM-104-2231.",
+    `Beschäftigungsgrad ${s.workload} %. Versicherter Lohn berufliche Vorsorge CHF ${amount(insured, 0)}. Pensionskasse Muster, Versicherten-Nr. ${s.insuranceNumber}.`,
     colLabel + 8,
     y + 23,
     R - colLabel - 16,
@@ -347,7 +395,7 @@ async function salaryCertificate() {
   y += 76;
   c.text("I", L, y, { bold: true });
   c.text("Ort und Datum", colLabel, y, { size: 7.5, color: MUTED });
-  c.text("Basel, 20.01.2026", colLabel, y + 12, { size: 10 });
+  c.text(s.issued, colLabel, y + 12, { size: 10 });
   const confirm = c.paragraph(
     "Die richtige und vollständige Angabe bestätigt, inkl. genauer Adresse und Telefonnummer des Arbeitgebers",
     250,
@@ -356,16 +404,16 @@ async function salaryCertificate() {
     { size: 7.5, color: MUTED },
   );
   [
-    EMPLOYER.name,
-    `${EMPLOYER.street}, ${EMPLOYER.town}`,
-    `Telefon ${EMPLOYER.phone}, Personalabteilung`,
+    s.employer.name,
+    `${s.employer.street}, ${s.employer.town}`,
+    `Telefon ${s.employer.phone}, Personalabteilung`,
   ].forEach((line, i) => {
     c.text(line, 250, y + confirm + 2 + i * 12, { size: 9, bold: i === 0 });
   });
   c.line(250, y + confirm + 70, R, y + confirm + 70, 0.5, INK);
   c.text("Unterschrift", 250, y + confirm + 74, { size: 7, color: MUTED });
 
-  await save(pdf, "lohnausweis-2025-may-mueller.pdf");
+  await save(pdf, s.file);
 }
 
 // ─── Vorsorgeausweis ────────────────────────────────────────────────────────
@@ -375,7 +423,6 @@ async function salaryCertificate() {
  * insured salary, risk 3.0% and costs 0.5%; the employee pays half the savings credit plus 1%.
  */
 const PLAN = {
-  coordination: 26460,
   interest: 0.0125,
   risk: 0.03,
   costs: 0.005,
@@ -415,6 +462,12 @@ interface PensionPerson {
   bvgCapital: number;
   deathLumpSum: number;
   maxBuyIn: number;
+  /** Year of the certificate (per 1 January); 2026 unless set. */
+  year?: number;
+  /** Plan name; "Basis" insures less on disability and death than "Standard". */
+  plan?: string;
+  /** Yearly disability pension when the plan does not use the standard 40 % of the insured salary. */
+  disabilityPension?: number;
 }
 
 const birth = (p: PensionPerson) => {
@@ -422,11 +475,11 @@ const birth = (p: PensionPerson) => {
   return { month, year };
 };
 
-/** Projected capital at the end of the month the person reaches `age`, from 01.01.2026. */
+/** Projected capital at the end of the month the person reaches `age`, from 1 January of the certificate year. */
 function projectedCapital(p: PensionPerson, insured: number, age: number): number {
   const { month, year } = birth(p);
   let capital = p.capital;
-  for (let y = 2026; y <= year + age; y++) {
+  for (let y = p.year ?? 2026; y <= year + age; y++) {
     const share = y === year + age ? month / 12 : 1;
     capital = capital * (1 + PLAN.interest * share) + savingsRate(y - year) * insured * share;
   }
@@ -486,16 +539,17 @@ function letterHelpers(accent: RGB) {
 
 async function pensionCertificate(p: PensionPerson) {
   const { pdf, addPage } = await newDocument(
-    `Vorsorgeausweis 2026 ${p.name}`,
+    `Vorsorgeausweis ${p.year ?? 2026} ${p.name}`,
     "Vorsorgeausweis Pensionskasse Muster, Muster",
   );
   const ACCENT = rgb(0.11, 0.33, 0.52);
   const { section, rows, grid } = letterHelpers(ACCENT);
-  const coordination = round05(PLAN.coordination * (p.workload / 100));
+  const statementYear = p.year ?? 2026;
+  const coordination = round05(COORDINATION[statementYear] * (p.workload / 100));
   const insured = p.salary - coordination;
   const { month, year } = birth(p);
-  const savings = savingsRate(2026 - year);
-  const disability = round05(insured * PLAN.disabilityShare);
+  const savings = savingsRate(statementYear - year);
+  const disability = p.disabilityPension ?? round05(insured * PLAN.disabilityShare);
   const retirementDate = `${lastDay(month, year + 65)}.${pad(month)}.${year + 65}`;
 
   // Page 1
@@ -514,9 +568,12 @@ async function pensionCertificate(p: PensionPerson) {
     c.text(line, 330, 120 + i * 13, { size: i === 0 ? 8 : 10, bold: i === 0 });
   });
 
-  c.text("Basel, 15. Januar 2026", L, 210, { size: 9 });
-  c.text("Vorsorgeausweis per 1. Januar 2026", L, 232, { size: 16, bold: true });
-  c.text("Vorsorgeplan Standard. Alle Beträge in CHF.", L, 253, { size: 9, color: MUTED });
+  c.text(`Basel, 15. Januar ${statementYear}`, L, 210, { size: 9 });
+  c.text(`Vorsorgeausweis per 1. Januar ${statementYear}`, L, 232, { size: 16, bold: true });
+  c.text(`Vorsorgeplan ${p.plan ?? "Standard"}. Alle Beträge in CHF.`, L, 253, {
+    size: 9,
+    color: MUTED,
+  });
 
   let y = section(c, "Persönliche Daten", 276);
   y = grid(c, y, [
@@ -546,7 +603,7 @@ async function pensionCertificate(p: PensionPerson) {
   const at65 = projectedCapital(p, insured, 65);
   const pension65 = round05(at65 * PLAN.conversion[65]);
   y = rows(c, y, [
-    ["Altersguthaben per 01.01.2026", amount(p.capital), { bold: true }],
+    [`Altersguthaben per 01.01.${statementYear}`, amount(p.capital), { bold: true }],
     ["davon Altersguthaben nach BVG (Obligatorium)", amount(p.bvgCapital)],
     [`Projiziertes Altersguthaben mit 65 (${retirementDate})`, amount(at65)],
     ["Projizierte jährliche Altersrente mit 65", amount(pension65), { bold: true }],
@@ -592,7 +649,7 @@ async function pensionCertificate(p: PensionPerson) {
   // Page 2
   const d = addPage();
   d.specimen("Seite 2 von 2");
-  d.text(`Vorsorgeausweis per 1. Januar 2026, ${p.name}, ${p.insuranceNumber}`, L, 40, {
+  d.text(`Vorsorgeausweis per 1. Januar ${statementYear}, ${p.name}, ${p.insuranceNumber}`, L, 40, {
     size: 8,
     color: MUTED,
   });
@@ -656,11 +713,11 @@ async function pensionCertificate(p: PensionPerson) {
   y = section(d, "Einkauf und Wohneigentum", y);
   y = rows(d, y, [
     [
-      "Maximal möglicher Einkauf per 01.01.2026",
+      `Maximal möglicher Einkauf per 01.01.${statementYear}`,
       amount(p.maxBuyIn),
       { note: "Einkäufe sind vom steuerbaren Einkommen abziehbar." },
     ],
-    ["Möglicher Vorbezug für Wohneigentum per 01.01.2026", amount(p.capital)],
+    [`Möglicher Vorbezug für Wohneigentum per 01.01.${statementYear}`, amount(p.capital)],
   ]);
 
   y += 4;
@@ -884,10 +941,173 @@ async function healthPolicy() {
   await save(pdf, "police-css-2026-adrian-hofstetter.pdf");
 }
 
+/**
+ * The Müllers' health insurance after Noah's birth (May 2026): basic cover for all three, with a
+ * note that it pays nothing on loss of income or death, the misconception Clara corrects.
+ */
+async function muellerHealthPolicy() {
+  const { pdf, addPage } = await newDocument(
+    "Versicherungspolice 2026 Familie Müller",
+    "Krankenversicherung Krankenkasse Muster, Muster",
+  );
+  const ACCENT = rgb(0.2, 0.45, 0.4);
+  const { section, rows, grid } = letterHelpers(ACCENT);
+
+  const c = addPage();
+  c.specimen("Seite 1 von 1");
+  c.rect(L, 40, 16, 16, { fill: ACCENT });
+  c.text("Krankenkasse Muster", L + 24, 41, { size: 14, bold: true });
+  c.text("Kranken- und Unfallversicherung", L + 24, 60, { size: 8, color: MUTED });
+  c.text("Beispielplatz 4, 4051 Basel", L + 24, 71, { size: 8, color: MUTED });
+
+  [MAY.salutation, MAY.name, MAY.street, MAY.town].forEach((line, i) => {
+    c.text(line, 330, 120 + i * 13, { size: 10 });
+  });
+
+  c.text("Basel, 26. Mai 2026", L, 210, { size: 9 });
+  c.text("Versicherungspolice 2026, Nachtrag 1", L, 232, { size: 16, bold: true });
+  c.text(
+    "Police Nr. 40531187, gültig ab 12.05.2026 bis 31.12.2026. Ersetzt die Police vom 20.10.2025. Beträge in CHF.",
+    L,
+    253,
+    { size: 9, color: MUTED },
+  );
+
+  let y = section(c, "Versicherungsnehmer", 276);
+  y = grid(c, y, [
+    ["Name", `${MAY.salutation} ${MAY.name}`],
+    ["Kundennummer", "KKM-4053-40531"],
+    ["Adresse", `${MAY.street}, ${MAY.town}`],
+    ["Prämienregion", "BS, Region 0"],
+    ["Änderung", "Aufnahme Noah Müller per Geburt"],
+  ]);
+
+  y = section(c, "Versicherte Personen und Deckungen", y);
+  const cols = [L + 10, L + 150, R - 120, R - 6];
+  ["Person", "Deckung", "Franchise", "Prämie pro Monat"].forEach((h, i) => {
+    c.text(h, cols[i], y, { size: 7.5, color: MUTED, align: i >= 2 ? "right" : "left" });
+  });
+  y += 12;
+  c.line(L, y - 2, R, y - 2, 0.6, INK);
+  const lines: Array<[string, string, string, number]> = [
+    [`May Müller, ${MAY.birthDate}`, "Grundversicherung KVG, Hausarztmodell", "2'500", 436.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 24.5],
+    [`Jane Müller, ${JANE.birthDate}`, "Grundversicherung KVG, Hausarztmodell", "1'500", 478.0],
+    ["", "Ambulante Zusatzversicherung (VVG)", "", 24.5],
+    ["Noah Müller, 12.05.2026", "Grundversicherung KVG, Hausarztmodell, neu", "0", 126.0],
+    ["", "Ambulante Zusatzversicherung (VVG), neu", "", 9.8],
+  ];
+  let monthly = 0;
+  for (const [person, cover, deductible, premium] of lines) {
+    monthly += premium;
+    [person, cover, deductible, amount(premium)].forEach((cell, i) => {
+      c.text(cell, cols[i], y + 2, { size: 8.5, align: i >= 2 ? "right" : "left" });
+    });
+    y += 14;
+    c.line(L, y - 1, R, y - 1, 0.3);
+  }
+  ["Total pro Monat", "", "", amount(monthly)].forEach((cell, i) => {
+    c.text(cell, cols[i], y + 2, { size: 8.5, bold: true, align: i >= 2 ? "right" : "left" });
+  });
+  y += 24;
+
+  y = section(c, "Prämie", y);
+  y = rows(c, y, [
+    ["Prämie pro Monat ab 12.05.2026", amount(monthly), { bold: true }],
+    ["Zahlungsweise", "monatlich, eBill"],
+  ]);
+
+  y = section(c, "Hinweise", y);
+  y += c.paragraph(
+    "Noah Müller ist ab Geburt ohne Vorbehalt versichert, da die Anmeldung vor der Geburt eingegangen ist. Unfall ist bei May Müller über den Arbeitgeber nach UVG versichert und in seiner Grundversicherung ausgeschlossen; Jane und Noah Müller sind mit Unfalldeckung versichert.",
+    L + 10,
+    y,
+    R - L - 20,
+    { size: 9 },
+  );
+  y += 12;
+  c.paragraph(
+    "Diese Police enthält keine Leistungen bei Erwerbsunfähigkeit oder Tod (kein Krankentaggeld, keine Invalidenrente, kein Todesfallkapital).",
+    L,
+    y,
+    R - L,
+    { size: 8, color: MUTED },
+  );
+
+  await save(pdf, "police-krankenkasse-2026-familie-mueller.pdf");
+}
+
 async function main() {
   mkdirSync(OUT_DIR, { recursive: true });
   console.log(`Writing demo documents to ${OUT_DIR}`);
-  await salaryCertificate();
+  // Autumn 2024, the Müllers' first conversation: two incomes, no child yet.
+  await salaryCertificate({
+    file: "lohnausweis-2023-may-mueller.pdf",
+    person: MAY,
+    employer: EMPLOYER,
+    year: 2023,
+    workload: 100,
+    gross: 95000,
+    ...salaryFigures(2023, 95000, 100),
+    insuranceNumber: "PKM-104-2231",
+    issued: "Basel, 22.01.2024",
+  });
+  await salaryCertificate({
+    file: "lohnausweis-2023-jane-mueller.pdf",
+    person: JANE,
+    employer: JANE_EMPLOYER,
+    year: 2023,
+    workload: 80,
+    gross: 76000,
+    ...salaryFigures(2023, 76000, 80),
+    insuranceNumber: "PKM-215-0912",
+    issued: "Basel, 24.01.2024",
+  });
+  await pensionCertificate({
+    file: "vorsorgeausweis-2024-may-mueller.pdf",
+    ...MAY,
+    year: 2024,
+    plan: "Basis",
+    civilStatus: "verheiratet",
+    insuranceNumber: "PKM-104-2231",
+    employer: `${EMPLOYER.name}, Basel`,
+    entry: "01.03.2014",
+    workload: 100,
+    salary: 95000,
+    capital: 166830,
+    bvgCapital: 118100,
+    disabilityPension: 20830,
+    deathLumpSum: 50000,
+    maxBuyIn: 92400,
+  });
+  await pensionCertificate({
+    file: "vorsorgeausweis-2024-jane-mueller.pdf",
+    ...JANE,
+    year: 2024,
+    civilStatus: "verheiratet",
+    insuranceNumber: "PKM-215-0912",
+    employer: `${JANE_EMPLOYER.name}, Basel`,
+    entry: "01.04.2016",
+    workload: 80,
+    salary: 76000,
+    capital: 62400,
+    bvgCapital: 44800,
+    deathLumpSum: 0,
+    maxBuyIn: 58000,
+  });
+
+  // October 2026, the yearly check-in: Noah is five months old, Jane stopped working.
+  await salaryCertificate({
+    file: "lohnausweis-2025-may-mueller.pdf",
+    person: MAY,
+    employer: EMPLOYER,
+    year: 2025,
+    workload: 100,
+    ...SALARY_2025,
+    insuranceNumber: "PKM-104-2231",
+    issued: "Basel, 20.01.2026",
+  });
+  await muellerHealthPolicy();
   await pensionCertificate({
     file: "vorsorgeausweis-2026-may-mueller.pdf",
     salutation: MAY.salutation,
@@ -902,8 +1122,11 @@ async function main() {
     entry: "01.03.2014",
     workload: 100,
     salary: SALARY_2025.gross,
+    plan: "Basis",
     capital: 185400,
     bvgCapital: 131250,
+    /** With the 20 % child pension this is CHF 26'532 a year, Clara's 2nd-pillar figure behind the CHF 1'239 gap. */
+    disabilityPension: 22110,
     deathLumpSum: 50000,
     maxBuyIn: 86350,
   });

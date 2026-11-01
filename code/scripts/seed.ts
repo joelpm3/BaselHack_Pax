@@ -1,6 +1,7 @@
 /**
  * Seeds advisors, the first company rule set and the demo existing customers (personas from
- * documentation/challenge_context/material/personas.pdf). Idempotent: does nothing if advisors exist.
+ * documentation/challenge_context/material/personas.pdf; Jane Müller and her history come from
+ * seed-mueller.ts). Idempotent: does nothing if advisors exist.
  * Run: pnpm db:seed   (or pnpm db:reset to start from an empty database)
  */
 import { mkdirSync } from "node:fs";
@@ -11,6 +12,7 @@ import { migrate } from "drizzle-orm/better-sqlite3/migrator";
 import * as schema from "@/lib/db/schema";
 import { type LifeSituation, lifeSituationSchema, profileCompleteness } from "@/lib/domain/profile";
 import { seedFollowUps } from "./seed-follow-ups";
+import { seedMueller } from "./seed-mueller";
 import { seedPersonas } from "./seed-personas";
 
 const dataDir = process.env.DATA_DIR ?? "./data";
@@ -93,58 +95,6 @@ interface DemoCustomer {
 }
 
 const demo: DemoCustomer[] = [
-  {
-    customer: {
-      lifecycle: "client",
-      firstName: "Jane",
-      lastName: "Müller",
-      email: "jane.mueller@example.ch",
-      phone: "+41 79 000 00 01",
-      birthDate: "1986-06-01",
-      isDemo: true,
-    },
-    profile: lifeSituationSchema.parse({
-      person: {
-        firstName: "Jane",
-        birthYear: 1986,
-        sex: "female",
-        maritalStatus: "married",
-        employment: "homemaker",
-        workloadPercent: 0,
-        grossIncome: 0,
-      },
-      partner: {
-        firstName: "May",
-        birthYear: 1984,
-        sex: "male",
-        maritalStatus: "married",
-        employment: "employed",
-        workloadPercent: 100,
-        grossIncome: 100000,
-      },
-      children: [{ birthYear: 2026 }],
-      residence: { zip: "4053", city: "Basel", canton: "BS", taxLocationId: 405300000 },
-      assets: { total: 20000 },
-      pillar2: { hasPensionFund: false },
-      goals: ["protect_family"],
-      concerns: [],
-    }),
-    policies: [
-      {
-        policyNumber: "PAX-TF-2024-118734",
-        category: "risk_death",
-        productCode: "todesfall",
-        productName: "Pax Todesfallversicherung",
-        pillar: "3b",
-        insuredPerson: "May Müller",
-        startDate: "2024-01-01",
-        endDate: "2049-09-30",
-        premiumAnnual: 1384.8,
-        sumInsured: 150000,
-        source: "seed",
-      },
-    ],
-  },
   {
     customer: {
       lifecycle: "client",
@@ -252,6 +202,9 @@ const demo: DemoCustomer[] = [
   },
 ];
 
+// First, so Jane heads the demo customer list in /kunde.
+const mueller = seedMueller(db);
+
 for (const { customer, profile, policies } of demo) {
   const [row] = db.insert(schema.customers).values(customer).returning().all();
   db.insert(schema.profiles)
@@ -266,5 +219,5 @@ const futureEvents = seedFollowUps(db);
 const personas = seedPersonas(db);
 
 console.log(
-  `Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers, ${futureEvents} future events, ${personas} pitch personas.`,
+  `Seeded ${advisors.length} advisors, rule set v1, ${demo.length} demo customers, ${futureEvents} future events, ${personas + mueller} pitch personas.`,
 );

@@ -56,21 +56,6 @@ const conversations: SeedConversation[] = [
       confidence: 0.9,
     },
   },
-  {
-    email: "jane.mueller@example.ch",
-    daysAgo: 21,
-    title: "Wiedereinstieg nach der Babypause",
-    user: "In zwei Jahren kommt unser Sohn in die Kita, dann möchte ich wieder 60 Prozent arbeiten.",
-    assistant:
-      "Danke, das ist gut zu wissen. Mit einem eigenen Einkommen ändern sich auch Ihre Pensionskasse und Ihre Möglichkeiten in der Säule 3a.",
-    event: {
-      kind: "job_change",
-      subject: null,
-      expression: "in zwei Jahren",
-      note: "Wiedereinstieg ins Berufsleben mit 60 Prozent.",
-      confidence: 0.7,
-    },
-  },
 ];
 
 export function seedFollowUps(db: BetterSQLite3Database<typeof schema>): number {

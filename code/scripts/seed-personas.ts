@@ -93,7 +93,7 @@ interface SeedHandover {
   email?: { afterDays: number; advisor: AdvisorKey; subject: string; body: string };
 }
 
-interface SeedConversation {
+export interface SeedConversation {
   key: string;
   daysAgo: number;
   /** UTC; Swiss local time is one or two hours later. */
@@ -138,7 +138,7 @@ interface SeedEvent {
   confidence: number;
 }
 
-interface SeedPersona {
+export interface SeedPersona {
   key: DemoPersonaKey;
   phone: string;
   birthDate: string;
@@ -157,11 +157,11 @@ type LifeSituationInput = z.input<typeof lifeSituationSchema>;
 // ─── Dates ──────────────────────────────────────────────────────────────────
 
 const today = toIsoDate(new Date());
-const day = (daysAgo: number) => addDays(today, -daysAgo);
+export const day = (daysAgo: number) => addDays(today, -daysAgo);
 const monthStart = (iso: string) => `${iso.slice(0, 7)}-01`;
 /** Last day of the month `months` after this one. */
 const monthEnd = (months: number) => addDays(addMonths(monthStart(today), months + 1), -1);
-const stamp = (daysAgo: number, hour: number, minutes = 0) =>
+export const stamp = (daysAgo: number, hour: number, minutes = 0) =>
   new Date(
     new Date(`${day(daysAgo)}T${String(hour).padStart(2, "0")}:00:00Z`).getTime() +
       minutes * 60_000,
@@ -1236,7 +1236,7 @@ const PERSONAS: SeedPersona[] = [
 
 // ─── Writing ────────────────────────────────────────────────────────────────
 
-function insertConversation(
+export function insertConversation(
   db: Db,
   ctx: { customerId: string; email: string; ruleSetId: string; ruleIds: string[] },
   advisorId: (key: AdvisorKey) => string,
@@ -1517,6 +1517,62 @@ function insertEvent(
     .run();
 }
 
+/** A past yearly check-in e-mail and the customer's reply, as the engine would have stored them. */
+export function insertCheckin(
+  db: Db,
+  ctx: { customerId: string; email: string; locale: Locale },
+  c: NonNullable<SeedPersona["lastCheckin"]>,
+): void {
+  const sentAt = stamp(c.daysAgo, 7);
+  const [outbox] = db
+    .insert(schema.outboxEmails)
+    .values({
+      customerId: ctx.customerId,
+      kind: "yearly_checkin",
+      toAddress: ctx.email,
+      locale: ctx.locale,
+      subject: c.subject,
+      body: c.body,
+      sentOn: day(c.daysAgo),
+      repliedAt: stamp(c.daysAgo - 1, 17),
+      model: "seed",
+      createdAt: sentAt,
+    })
+    .returning()
+    .all();
+  // Shown in the customer view's contact log, like the engine's own check-in e-mails.
+  db.insert(schema.auditLog)
+    .values([
+      {
+        actorType: "system",
+        action: "email.sent",
+        entityType: "customer",
+        entityId: ctx.customerId,
+        data: {
+          subject: c.subject,
+          body: c.body,
+          to: ctx.email,
+          direction: "outbound",
+          outboxId: outbox.id,
+          sequence: 1,
+          sentOn: day(c.daysAgo),
+          kind: "yearly_checkin",
+        },
+        createdAt: sentAt,
+      },
+      {
+        actorType: "customer",
+        actorId: ctx.customerId,
+        action: "email.received",
+        entityType: "customer",
+        entityId: ctx.customerId,
+        data: { subject: `AW: ${c.subject}`, body: c.reply, direction: "inbound" },
+        createdAt: stamp(c.daysAgo - 1, 17),
+      },
+    ])
+    .run();
+}
+
 /** Returns the number of personas seeded; skips any whose e-mail address already exists. */
 export function seedPersonas(db: Db): number {
   const advisors = db.select().from(schema.advisors).all();
@@ -1608,57 +1664,12 @@ export function seedPersonas(db: Db): number {
           .run();
       }
 
-      if (persona.lastCheckin) {
-        const c = persona.lastCheckin;
-        const sentAt = stamp(c.daysAgo, 7);
-        const [outbox] = tx
-          .insert(schema.outboxEmails)
-          .values({
-            customerId: customer.id,
-            kind: "yearly_checkin",
-            toAddress: email,
-            locale: sim.locale,
-            subject: c.subject,
-            body: c.body,
-            sentOn: day(c.daysAgo),
-            repliedAt: stamp(c.daysAgo - 1, 17),
-            model: "seed",
-            createdAt: sentAt,
-          })
-          .returning()
-          .all();
-        // Shown in the customer view's contact log, like the engine's own check-in e-mails.
-        tx.insert(schema.auditLog)
-          .values([
-            {
-              actorType: "system",
-              action: "email.sent",
-              entityType: "customer",
-              entityId: customer.id,
-              data: {
-                subject: c.subject,
-                body: c.body,
-                to: email,
-                direction: "outbound",
-                outboxId: outbox.id,
-                sequence: 1,
-                sentOn: day(c.daysAgo),
-                kind: "yearly_checkin",
-              },
-              createdAt: sentAt,
-            },
-            {
-              actorType: "customer",
-              actorId: customer.id,
-              action: "email.received",
-              entityType: "customer",
-              entityId: customer.id,
-              data: { subject: `AW: ${c.subject}`, body: c.reply, direction: "inbound" },
-              createdAt: stamp(c.daysAgo - 1, 17),
-            },
-          ])
-          .run();
-      }
+      if (persona.lastCheckin)
+        insertCheckin(
+          tx,
+          { customerId: customer.id, email, locale: sim.locale },
+          persona.lastCheckin,
+        );
     });
     seeded++;
   }
