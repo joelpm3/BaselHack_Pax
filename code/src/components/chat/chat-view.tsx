@@ -254,7 +254,7 @@ export function ChatView({
                 onSend={send}
                 onStop={() => void stop()}
               />
-              <p className="mt-2 text-center text-paragraph-xs text-fg-subtle">{t("disclaimer")}</p>
+              <p className="mt-2 text-center text-paragraph-xs text-fg-muted">{t("disclaimer")}</p>
             </div>
           </div>
           <aside aria-label={t("picture.title")} className="hidden lg:block">
