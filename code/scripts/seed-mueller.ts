@@ -2,10 +2,11 @@
  * The Müller family for the pitch demo (documentation/DEMO_JOURNEY.md), in the state Pax knows
  * before the demo: Jane and May met Clara in autumn 2024 with two incomes and no children,
  * uploaded their salary and pension certificates, saw May's disability gap and decided to wait
- * until a child is on the way. In December 2025 Jane answered the yearly check-in: they expect a
- * child in May. Pax noted the birth and wrote again shortly before it; Jane replied that Noah was
- * born on 12 May and that she would come back to Clara. The demo starts with that chat: Jane has
- * stopped working, and May's disability gap is CHF 1'239 a month.
+ * until a child is on the way. In December 2025 Jane answered the yearly check-in: nothing new,
+ * but they still hope for a child next year. In August 2026 Pax asked about it; Jane replied that
+ * their first child is due in December, that she will stop working after the birth and that she
+ * would come back to Clara. The demo starts with that chat in November 2026, and May's disability
+ * gap is CHF 1'239 a month.
  *
  * The 2024 conversation is a real recording (fixtures/mueller-2024-chat.json): messages with
  * their widgets, the uploaded documents and their confirmed extractions, the Logismata
@@ -46,29 +47,30 @@ interface Fixture {
   auditLog: Array<typeof schema.auditLog.$inferInsert>;
 }
 
-// Day offsets for a seed run in early November 2026: check-in early December 2025, the baby
-// outreach a week before the expected month (May 2026), Jane's reply after the birth.
+// Day offsets for a seed run in early November 2026: check-in early December 2025, Pax's e-mail
+// about the child in late August 2026 and Jane's reply two days later. The birth is due in
+// December 2026, a month after the demo.
 const CHECKIN_DAYS_AGO = 330;
-const EXPECTED_DAYS_AGO = 184;
-const OUTREACH_DAYS_AGO = 191;
-const OUTREACH_REPLY_DAYS_AGO = 165;
+const OUTREACH_DAYS_AGO = 73;
+const OUTREACH_REPLY_DAYS_AGO = 71;
+const EXPECTED_DAYS_AHEAD = 40;
 
 const lastCheckin: NonNullable<SeedPersona["lastCheckin"]> = {
   daysAgo: CHECKIN_DAYS_AGO,
   subject: "Ihr jährlicher Vorsorge-Check: Hat sich etwas verändert?",
   body: "Grüezi Frau Müller\n\nVor gut einem Jahr haben wir zusammen Ihre Vorsorge angeschaut. Hat sich bei Ihnen oder May etwas verändert, zum Beispiel in der Familie, bei der Arbeit oder beim Lohn? Sie hatten damals erwähnt, dass Sie sich Kinder wünschen. Antworten Sie einfach auf diese E-Mail oder schreiben Sie Clara im Chat.\n\nDiese jährliche E-Mail können Sie in Ihrem Vorsorge-Cockpit jederzeit abschalten.\n\nFreundliche Grüsse\nIhr Pax-Team",
   reply:
-    "Grüezi, danke der Nachfrage. Wir erwarten im Mai unser erstes Kind! Freundliche Grüsse, Jane Müller",
+    "Grüezi, danke der Nachfrage. Bei uns ist alles beim Alten. Wir wünschen uns aber nach wie vor ein Kind, vielleicht klappt es nächstes Jahr. Freundliche Grüsse, Jane Müller",
 };
 
 const babyOutreach = {
-  subject: "Bald zu dritt: Ihre Vorsorge mit Kind",
-  body: "Grüezi Frau Müller\n\nIm Dezember haben Sie uns geschrieben, dass Sie im Mai Ihr erstes Kind erwarten. Wir wünschen Ihnen und May alles Gute für die Geburt!\n\nMit einem Kind ändert sich Ihre Vorsorge. Im Herbst 2024 hat Clara gezeigt, dass Ihnen Geld fehlt, wenn May wegen Krankheit nicht mehr arbeiten kann. Mit Kind, und wenn sich Ihr Pensum ändert, sieht diese Rechnung anders aus. Wenn Sie etwas Ruhe haben, schreiben Sie Clara im Chat oder antworten Sie auf diese E-Mail. Dann rechnen wir Ihre Absicherung neu.\n\nFreundliche Grüsse\nIhr Pax-Team",
+  subject: "Ihre Vorsorge, wenn Sie Familie planen",
+  body: "Grüezi Frau Müller\n\nIm Dezember haben Sie uns geschrieben, dass Sie sich ein Kind wünschen. Darum melden wir uns heute kurz.\n\nMit einem Kind ändert sich Ihre Vorsorge. Im Herbst 2024 hat Clara gezeigt, dass Ihnen Geld fehlt, wenn May wegen Krankheit nicht mehr arbeiten kann. Mit Kind, und wenn sich Ihr Pensum ändert, sieht diese Rechnung anders aus. Wenn es bei Ihnen so weit ist, schreiben Sie Clara im Chat oder antworten Sie auf diese E-Mail. Dann rechnen wir Ihre Absicherung neu.\n\nFreundliche Grüsse\nIhr Pax-Team",
   reply:
-    "Danke für die lieben Wünsche! Noah ist am 12. Mai gesund auf die Welt gekommen. Sobald wir uns eingelebt haben, melde ich mich bei Clara. Liebe Grüsse, Jane Müller",
+    "Danke für die Nachricht, sie kommt genau richtig: Wir erwarten unser erstes Kind im Dezember! Nach der Geburt bleibe ich zu Hause. Ich melde mich bei Clara, damit wir alles neu rechnen. Liebe Grüsse, Jane Müller",
 };
 
-/** The birth Jane announced in the check-in reply, Pax's e-mail before it and her answer. */
+/** Pax's e-mail about the child Jane hoped for, her answer and the birth it announces. */
 function insertBabyOutreach(db: Db, customerId: string): void {
   const [event] = db
     .insert(schema.futureEvents)
@@ -76,13 +78,13 @@ function insertBabyOutreach(db: Db, customerId: string): void {
       customerId,
       kind: "child_birth",
       subject: "Erstes Kind",
-      expectedDate: `${day(EXPECTED_DAYS_AGO).slice(0, 7)}-01`,
+      expectedDate: `${day(-EXPECTED_DAYS_AHEAD).slice(0, 7)}-01`,
       precision: "month",
       confidence: 0.9,
-      sourceQuote: "Wir erwarten im Mai unser erstes Kind!",
-      note: "Geburt des ersten Kindes: Absicherung bei Tod und Erwerbsunfähigkeit von May neu rechnen.",
+      sourceQuote: "Wir erwarten unser erstes Kind im Dezember!",
+      note: "Geburt des ersten Kindes, Jane hört danach auf zu arbeiten: Absicherung bei Tod und Erwerbsunfähigkeit von May neu rechnen.",
       status: "responded",
-      createdAt: stamp(CHECKIN_DAYS_AGO - 1, 18),
+      createdAt: stamp(OUTREACH_REPLY_DAYS_AGO, 19),
       updatedAt: stamp(OUTREACH_REPLY_DAYS_AGO, 19),
     })
     .returning()
