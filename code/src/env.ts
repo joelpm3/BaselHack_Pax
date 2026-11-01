@@ -2,7 +2,7 @@ import "server-only";
 import { z } from "zod";
 
 /**
- * Server environment, validated once at import. Every model and external service is
+ * Server environment, validated once on first read. Every model and external service is
  * configured here so the stack can move to self-hosted models (Nebius) by env change only.
  */
 const schema = z
@@ -55,5 +55,18 @@ const schema = z
       });
   });
 
-export const env = schema.parse(process.env);
-export type Env = typeof env;
+export type Env = z.infer<typeof schema>;
+
+let parsed: Env | undefined;
+
+/**
+ * Parsed on first property read rather than at import: `next build` imports every route module
+ * to collect page data, and validating there would make the build depend on runtime secrets.
+ * A missing or invalid variable still throws the same ZodError, on first use.
+ */
+export const env: Env = new Proxy({} as Env, {
+  get(_target, key) {
+    parsed ??= schema.parse(process.env);
+    return parsed[key as keyof Env];
+  },
+});

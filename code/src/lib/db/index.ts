@@ -22,7 +22,22 @@ export type Db = ReturnType<typeof open>;
 
 // One connection per server process; survives dev hot reloads.
 const globalForDb = globalThis as unknown as { paxDb?: Db };
-export const db: Db = globalForDb.paxDb ?? open();
-globalForDb.paxDb = db;
+
+/**
+ * Opened (and migrated) on first use rather than at import: `next build` imports every route
+ * module in its page-data workers, and must neither need the runtime env nor open and migrate
+ * the database a running server is using. Methods run with `this` = the proxy, whose reads
+ * forward to the real instance, so drizzle's entity checks and query builders work unchanged.
+ */
+export const db: Db = new Proxy({} as Db, {
+  get(_target, key) {
+    globalForDb.paxDb ??= open();
+    return Reflect.get(globalForDb.paxDb, key);
+  },
+  has(_target, key) {
+    globalForDb.paxDb ??= open();
+    return Reflect.has(globalForDb.paxDb, key);
+  },
+});
 
 export { schema };
