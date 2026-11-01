@@ -111,6 +111,8 @@ export function getModel(role: ModelRole): LanguageModel {
     name: "self-hosted",
     baseURL: env.LLM_BASE_URL,
     apiKey: env.LLM_API_KEY,
+    // vLLM enforces JSON schemas (guided decoding), so analysis/extraction get structured output.
+    supportsStructuredOutputs: true,
   });
   return selfHosted.chatModel(modelId);
 }

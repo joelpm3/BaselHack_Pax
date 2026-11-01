@@ -10,5 +10,7 @@ process.env.DATA_DIR = dataDir;
 process.env.COMPANY_PASSWORD = "test-password";
 process.env.SESSION_SECRET = "test-session-secret-0123456789abcdef";
 process.env.DOCUMENT_ENCRYPTION_KEY = "0123456789abcdef0123456789abcdef";
+// Required by the self-hosted default; no test calls the model.
+process.env.LLM_BASE_URL = "http://127.0.0.1:8001/v1";
 
 afterAll(() => rmSync(dataDir, { recursive: true, force: true }));
