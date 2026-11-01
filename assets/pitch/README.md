@@ -1,6 +1,6 @@
 # Pax Clara pitch deck
 
-3-minute pitch, 9 slides, live demo inside. Open `present.html` in a browser (works offline: font and
+3-minute pitch, 10 slides, live demo inside. Open `present.html` in a browser (works offline: font and
 images are in this folder). `index.html` is the source; after editing it, run `./build-present.sh`.
 
 | Key | Action |
@@ -20,4 +20,4 @@ Illustrations in `illustrations/` were generated with Codex image generation in 
 the originals. Survey figures: Generali, May 2025 (1'016 people).
 
 Screenshots in `img/` come from the jury-persona run (Jane Müller) and the live company cockpit on
-31.10.2026. The full-body illustration of Franz Laim (`illustrations/franz.png`) was generated with Codex image generation from his portrait (best likeness of three runs) in `img/franz-laim.jpg` (Helvetia's public Zürich Nord agency page), without the lapel pin.
+31.10.2026 (the customer page `cockpit-customer.jpeg`: 1.11.2026). The full-body illustration of Franz Laim (`illustrations/franz.png`) was generated with Codex image generation from his portrait (best likeness of three runs) in `img/franz-laim.jpg` (Helvetia's public Zürich Nord agency page), without the lapel pin.
