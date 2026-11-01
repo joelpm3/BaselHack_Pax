@@ -11,6 +11,8 @@ import {
   type RetirementResponse,
   type RiskScenarioSummary,
   retirementBreakdown,
+  retirementPensionsEstimated,
+  riskInputEstimated,
 } from "./logismata/mapping";
 import { outdatedChecks, PICTURE_CALCULATIONS } from "./picture-refresh";
 import { activeLifePolicies } from "./policies";
@@ -59,9 +61,12 @@ function scenarios(
       kind: "retirement",
       person: 1,
       partnerName: null,
+      personName: null,
       breakdown: retirementBreakdown(retirement.output as RetirementResponse),
       calculatedAt: retirement.createdAt.getTime(),
       policyCover: null,
+      estimated: retirementPensionsEstimated(profile),
+      survivor: null,
     });
   }
   const risk = latestCalculation(customerId, PICTURE_CALCULATIONS.risk);
@@ -71,17 +76,26 @@ function scenarios(
       ?.RiskScenarioSummaries ?? [];
   const year = currentYear();
   const covers = policyCoverFor(policies, profile, year);
+  const estimated = riskInputEstimated(risk.input, profile);
+  const couple = hasPartner(profile) && profile.partner !== undefined;
   for (const scenario of householdRiskScenarios(summaries)) {
     const cover = covers.find((c) => c.person === scenario.person);
     const insured = scenario.person === 1 ? profile.person : profile.partner;
+    const survivor = scenario.person === 1 ? profile.partner : profile.person;
     const breakdown = withPolicyCover(scenario.breakdown, scenario.event, cover, insured, year);
     result.push({
       kind: scenario.event,
       person: scenario.person,
       partnerName: scenario.person === 2 ? (profile.partner?.firstName ?? null) : null,
+      personName: insured?.firstName ?? null,
       breakdown,
       calculatedAt: risk.createdAt.getTime(),
       policyCover: breakdown.policies > 0 ? (cover ?? null) : null,
+      estimated,
+      survivor:
+        scenario.event === "death" && couple && (survivor?.grossIncome ?? 0) > 0
+          ? { name: survivor?.firstName ?? null, income: survivor?.grossIncome ?? 0 }
+          : null,
     });
   }
   return result;

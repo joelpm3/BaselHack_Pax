@@ -39,6 +39,7 @@
     "need": "What you need",
     "gap": "{amount} per month missing",
     "covered": "Your need is covered",
+    "estimated": "Estimated: the pension fund benefits are not yet taken from your pension certificate.",
     "tabs": {
       "label": "Choose a situation",
       "retirement": "Retirement",
@@ -108,13 +109,22 @@
       "gap": "{kind}: gap {amount}/month",
       "covered": "{kind}: covered",
       "building": "{count} of {total} facts",
-      "open": "{kind}: still open"
+      "open": "{kind}: still open",
+      "kindOf": "{kind} ({name})",
+      "gapEstimated": "{kind}: gap approx. {amount}/mo. (estimated)",
+      "coveredEstimated": "{kind}: covered (estimated)"
     },
     "partnerContext": {
       "disability": "If illness stops {name} from working",
       "death": "For your family if {name} dies of an illness"
     },
     "partnerFallback": "your partner",
+    "survivor": {
+      "noPension": "AHV and the pension fund pay {name} no survivor’s pension.",
+      "noPensionPartner": "AHV and the pension fund pay you no survivor’s pension.",
+      "ownIncome": "{name} keeps their own income of about {amount} a month. The gap shows how much of your income is lost.",
+      "ownIncomePartner": "You keep your own income of about {amount} a month. The gap shows how much of {deceased}’s income is lost."
+    },
     "focus": {
       "discussed": "Being discussed",
       "notCalculated": "Nothing has been calculated for this situation yet."

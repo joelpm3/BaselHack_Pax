@@ -39,6 +39,7 @@
     "need": "Il suo fabbisogno",
     "gap": "Mancano {amount} al mese",
     "covered": "Il suo fabbisogno è coperto",
+    "estimated": "Stima: le prestazioni della cassa pensione non sono ancora riprese dal suo certificato di previdenza.",
     "tabs": {
       "label": "Scegliere una situazione",
       "retirement": "Pensione",
@@ -108,13 +109,22 @@
       "gap": "{kind}: lacuna {amount}/mese",
       "covered": "{kind}: coperto",
       "building": "{count} dati su {total}",
-      "open": "{kind}: ancora aperto"
+      "open": "{kind}: ancora aperto",
+      "kindOf": "{kind} ({name})",
+      "gapEstimated": "{kind}: lacuna ca. {amount}/mese (stima)",
+      "coveredEstimated": "{kind}: coperto (stima)"
     },
     "partnerContext": {
       "disability": "Se a causa di una malattia {name} non può più lavorare",
       "death": "Per la sua famiglia, se {name} muore a causa di una malattia"
     },
     "partnerFallback": "la sua o il suo partner",
+    "survivor": {
+      "noPension": "L’AVS e la cassa pensione non versano a {name} una rendita per superstiti.",
+      "noPensionPartner": "L’AVS e la cassa pensione non le versano una rendita per superstiti.",
+      "ownIncome": "{name} mantiene il proprio reddito di circa {amount} al mese. La lacuna mostra quanto del suo reddito viene a mancare.",
+      "ownIncomePartner": "Lei mantiene il proprio reddito di circa {amount} al mese. La lacuna mostra quanto del reddito di {deceased} viene a mancare."
+    },
     "focus": {
       "discussed": "In discussione",
       "notCalculated": "Per questa situazione non è ancora stato calcolato nulla."

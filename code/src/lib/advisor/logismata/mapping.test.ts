@@ -21,7 +21,9 @@ import {
   relationshipCode,
   relationshipSinceYear,
   retirementBreakdown,
+  retirementPensionsEstimated,
   riskBreakdown,
+  riskInputEstimated,
   riskPensionsEstimated,
   riskPersons,
   riskRequestMatches,
@@ -295,6 +297,31 @@ describe("requests", () => {
     expect(riskPensionsEstimated(known)).toBe(false);
     expect(riskPensionsEstimated(profile({ ...single, pillar2: { childPension: 1 } }))).toBe(false);
     expect(riskPensionsEstimated(single)).toBe(true);
+  });
+
+  it("reads from a stored risk request whether it ran on estimated benefits", () => {
+    const pensions = { Disability: 29416, DisabilityChildren: 0, Widow: 0, Orphan: 0 };
+    // Before the certificate is confirmed the request has no Pillar2Pensions for May.
+    expect(riskInputEstimated(buildRiskRequest(youngFamily, YEAR), youngFamily)).toBe(true);
+    const confirmed = buildRiskRequest(youngFamily, YEAR, { partnerPillar2Pensions: pensions });
+    expect(riskInputEstimated(confirmed, youngFamily)).toBe(false);
+    // A newer certificate on file does not make an old, estimated result exact.
+    const known = profile({
+      ...youngFamily,
+      partner: { ...youngFamily.partner, pillar2: { disabilityPension: 29416 } },
+    });
+    expect(riskInputEstimated(buildRiskRequest(youngFamily, YEAR), known)).toBe(true);
+    expect(riskInputEstimated(null, single)).toBe(true);
+  });
+
+  it("calls retirement pensions estimated while a fund has no projected pension", () => {
+    expect(retirementPensionsEstimated(single)).toBe(true);
+    expect(
+      retirementPensionsEstimated(
+        profile({ ...single, pillar2: { projectedPensionAtRetirement: 24000 } }),
+      ),
+    ).toBe(false);
+    expect(retirementPensionsEstimated(youngFamily)).toBe(true);
   });
 
   it("builds tax requests from the household and the tax location", () => {

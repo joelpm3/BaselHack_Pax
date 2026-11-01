@@ -69,6 +69,7 @@ pnpm dev                     # http://localhost:3000/de
 | `/de/firma` | Company dashboard  |
 
 Demo scripts for the seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
+Flow charts, sequence diagrams and the customer and Pax views: [`documentation/DIAGRAMS.md`](documentation/DIAGRAMS.md).
 
 ### Browser tests
 

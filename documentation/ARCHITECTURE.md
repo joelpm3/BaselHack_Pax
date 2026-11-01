@@ -1,6 +1,7 @@
 # Pax Clara: architecture
 
 BaselHack 2026, Pax challenge "AI that makes life insurance simple". Team A4.
+Diagrams of the flows and both views: [`DIAGRAMS.md`](DIAGRAMS.md).
 
 ## Product in one paragraph
 
