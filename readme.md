@@ -57,7 +57,7 @@ The Müllers closed their gap in one conversation: **CHF 741 a year**, about two
 ```bash
 cd code
 pnpm install
-cp .env.example .env.local   # ANTHROPIC_API_KEY, LOGISMATA_API_TOKEN, SESSION_SECRET, DOCUMENT_ENCRYPTION_KEY
+cp .env.example .env.local   # LLM_BASE_URL, LOGISMATA_API_TOKEN, SESSION_SECRET, DOCUMENT_ENCRYPTION_KEY
 pnpm db:reset                # SQLite in code/data: advisors, rule set v1, demo customers
 pnpm dev                     # http://localhost:3000/de
 ```
@@ -78,8 +78,8 @@ an external AI provider:
 - **Conversation:** Nemotron 3.5 Bolt 74B-A9B (24GB) on an NVIDIA B200.
 - **Speech-to-text:** our fine-tuned Swiss-German model, on the same GPU.
 
-The setting is `LLM_PROVIDER=openai-compatible` with `LLM_BASE_URL` pointing at the endpoint, and
-`STT_BASE_URL` for speech. The region is chosen when the GPU is started (`--region`,
+This is the default: `LLM_PROVIDER=openai-compatible`, with the required `LLM_BASE_URL` pointing at
+the vLLM endpoint, and `STT_BASE_URL` for speech. `LLM_PROVIDER=anthropic` also works. The region is chosen when the GPU is started (`--region`,
 [`documentation/cookbook/nebius-nemotron`](documentation/cookbook/nebius-nemotron/README.md)), so it
 can be kept in Switzerland or the EU. Calculations (Logismata) and pricing (Quicksale) are
 external services in either mode.
