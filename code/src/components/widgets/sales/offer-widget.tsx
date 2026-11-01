@@ -9,12 +9,11 @@ import { Button, buttonClasses } from "@/components/ui/button";
 import { Field, Input, Select } from "@/components/ui/field";
 import { Link } from "@/i18n/navigation";
 import { saveContactAction, signApplicationAction } from "@/lib/sales/actions";
+import { offerConditionKeys } from "@/lib/sales/conditions";
 import type { ContactPrefill, OfferOutput, OfferView, SignedInfo } from "@/lib/sales/types";
 import type { WidgetProps } from "../types";
 import { WidgetCard, WidgetFailed, WidgetPending } from "../widget-card";
 import { CoverFacts, FactGrid, IssueList, PriceTag, RiderList, ScenarioList } from "./shared";
-
-const UNIT_LINKED = new Set(["lifestar", "fondsstar", "auszahlungsplan"]);
 
 /** Offer summary → contact details → consents → typed-name demo signature → policy. */
 export function OfferWidget({ toolCallId, state, output }: WidgetProps) {
@@ -64,21 +63,13 @@ function OfferBody({
   const [offer, setOffer] = useState(initialOffer);
   const [repriced, setRepriced] = useState(false);
   const date = (iso: string) => format.dateTime(new Date(iso), { dateStyle: "long" });
-  const unitLinked = UNIT_LINKED.has(offer.productCode);
   // The policyholder's name can change in the contact step; a partner keeps the offer's name.
   const insuredName =
     offer.insured.who === "self" && contact.firstName
       ? `${contact.firstName} ${contact.lastName}`.trim()
       : (offer.insured.name ?? t("you"));
 
-  const conditions = [
-    "withdrawal",
-    ...(unitLinked ? ["investmentRisk"] : ["premiumGuaranteed"]),
-    ...(offer.productCode === "erwerbsunfaehigkeit" ? ["maximumBenefit", "crisisCoach"] : []),
-    ...(offer.pillar === "3a" ? ["pillar3a"] : []),
-    "health",
-    "cooperative",
-  ];
+  const conditions = offerConditionKeys(offer.productCode, offer.pillar);
 
   return (
     <WidgetCard

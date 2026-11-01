@@ -1,0 +1,155 @@
+{
+  "demo": {
+    "badge": "Demo",
+    "notice": "Demo-Dokument aus dem Prototyp: Die Unterschrift ist eine Demo-Unterschrift, es entsteht kein rechtsgültiger Vertrag."
+  },
+  "page": "Seite {page} von {total}",
+  "offer": {
+    "title": "Ihr Antrag",
+    "number": "Antrag Nr.",
+    "signedOn": "Unterschrieben am",
+    "status": "Status",
+    "statusValue": {
+      "offer": "In Prüfung bei Pax",
+      "active": "Von Pax freigegeben",
+      "ended": "Abgelaufen",
+      "cancelled": "Gekündigt"
+    },
+    "intro": "Guten Tag {name}. Hier ist Ihr unterschriebener Antrag: was versichert ist, was es kostet, warum wir es Ihnen empfehlen und was Sie vor dem Vertragsabschluss wissen müssen.",
+    "approved": "Pax hat Ihren Antrag geprüft und freigegeben. Ihre Police beginnt am {date}.",
+    "filename": "Pax-Antrag-{number}.pdf"
+  },
+  "policy": {
+    "title": "Ihre Police",
+    "number": "Police Nr.",
+    "validFrom": "Gültig ab",
+    "status": "Status",
+    "statusValue": {
+      "offer": "In Prüfung",
+      "active": "Aktiv",
+      "ended": "Abgelaufen",
+      "cancelled": "Gekündigt"
+    },
+    "intro": "Guten Tag {name}. Ihre Police bestätigt den Versicherungsschutz, den Sie mit Pax vereinbart haben.",
+    "filename": "Pax-Police-{number}.pdf"
+  },
+  "sections": {
+    "parties": "Vertragsparteien",
+    "cover": "Leistungen",
+    "premium": "Prämie",
+    "term": "Vertragsdauer",
+    "why": "Warum wir Ihnen diese Lösung empfehlen",
+    "suitability": "Angemessenheitsprüfung",
+    "information": "Informationen vor Vertragsabschluss",
+    "conditions": "Wichtige Bedingungen",
+    "signature": "Ihre Unterschrift",
+    "beneficiaries": "Begünstigte",
+    "approval": "Prüfung und Freigabe"
+  },
+  "parties": {
+    "policyholder": "Versicherungsnehmer/in",
+    "insured": "Versicherte Person",
+    "insurer": "Versicherer",
+    "born": "geboren am {date}",
+    "smoker": "{smoker, select, yes {Raucher/in} other {Nichtraucher/in}}"
+  },
+  "cover": {
+    "benefit": "Leistung",
+    "due": "Details",
+    "amount": "Betrag",
+    "product": "Produkt",
+    "deathCapital": "Todesfallkapital",
+    "deathDue": "bei Tod vor dem {date}",
+    "pension": "Rente bei Erwerbsunfähigkeit",
+    "pensionDue": "nach {months} Monaten Wartefrist, längstens bis {date}",
+    "pensionDueNoWaiting": "längstens bis {date}",
+    "sumInsured": "Versicherungssumme",
+    "annuity": "Rente",
+    "perYear": "{amount} pro Jahr",
+    "maturity": "Kapital bei Ablauf",
+    "maturityDue": "am {date}",
+    "payout": "Auszahlung pro Jahr",
+    "payoutDue": "bis {date}",
+    "rider": "Zusatzversicherung",
+    "included": "inbegriffen",
+    "fund": "Fonds",
+    "guaranteedShare": "Garantierter Teil der Prämie"
+  },
+  "premium": {
+    "label": "Ihre Prämie",
+    "perYear": "pro Jahr",
+    "frequency": "Zahlungsweise",
+    "annually": "jährlich",
+    "once": "einmalig",
+    "net": "Mit dem aktuellen Überschuss",
+    "netValue": "{amount} pro Jahr (nicht garantiert)",
+    "source": "Berechnung"
+  },
+  "term": {
+    "start": "Beginn",
+    "end": "Ablauf",
+    "duration": "Laufzeit",
+    "years": "{years} Jahre",
+    "yearsToAge": "{years} Jahre, bis Alter {endAge}"
+  },
+  "why": {
+    "gap": "Ihre Lücke",
+    "gapValue": "{gap}: {amount} pro Jahr",
+    "alsoCloses": "Schliesst auch",
+    "reason": "Begründung",
+    "criteria": "Geprüfte Kriterien",
+    "open": "offen",
+    "alternatives": "Geprüfte Alternativen"
+  },
+  "suitability": {
+    "profile": "Anlageprofil",
+    "profileValue": "{profile}, {total} von 120 Punkten",
+    "fund": "Gewählter Fonds",
+    "affordability": "Tragbarkeit",
+    "completedOn": "Durchgeführt am",
+    "answerPoints": "{answer} ({points} Punkte)"
+  },
+  "information": {
+    "intro": "Diese Angaben schuldet Ihnen Pax vor dem Vertragsabschluss (Art. 3 Versicherungsvertragsgesetz, VVG).",
+    "insurer": "Versicherer",
+    "insurerValue": "Pax, Schweizerische Lebensversicherungs-Gesellschaft AG, Aktiengesellschaft mit Sitz in Basel, Aeschenplatz 13, 4002 Basel, www.pax.ch",
+    "risks": "Versicherte Risiken",
+    "risk": {
+      "todesfall": "Hinterbliebenenschutz (Todesfall): Stirbt die versicherte Person vor Vertragsablauf, zahlt Pax das vereinbarte Todesfallkapital.",
+      "erwerbsunfaehigkeit": "Einkommensschutz (Erwerbsunfähigkeit): Ist die versicherte Person erwerbsunfähig, zahlt Pax nach der Wartefrist die vereinbarte Rente, je nach Grad der Erwerbsunfähigkeit, längstens bis Vertragsablauf.",
+      "lifestar": "Vorsorgesparen mit Fondsanlage, dazu Hinterbliebenenschutz (Todesfall) und Einkommensschutz (Erwerbsunfähigkeit) gemäss den Leistungen oben.",
+      "fondsstar": "Vorsorgesparen mit Fondsanlage, dazu Hinterbliebenenschutz (Todesfall) und Einkommensschutz (Erwerbsunfähigkeit) gemäss den Leistungen oben.",
+      "pax3a": "Vorsorgesparen in der Säule 3a gemäss den Leistungen oben.",
+      "auszahlungsplan": "Zeitrente: Pax zahlt das angelegte Kapital in regelmässigen Beträgen bis Vertragsablauf aus.",
+      "kinderversicherung": "Vorsorge für Ihr Kind gemäss den Leistungen oben.",
+      "care": "Soforthilfe im Todesfall: Pax zahlt das vereinbarte Kapital rasch an die Angehörigen aus.",
+      "other": "Gemäss den Leistungen oben."
+    },
+    "scope": "Umfang des Schutzes",
+    "scopeValue": "Die versicherten Leistungen und Beträge stehen oben unter «Leistungen».",
+    "premium": "Prämie",
+    "premiumAnnual": "{amount} pro Jahr, jährlich zahlbar.",
+    "premiumSingle": "{amount} einmalig.",
+    "duration": "Vertragsdauer",
+    "durationValue": "Vom {start} bis zum {end}.",
+    "withdrawal": "Widerrufsrecht",
+    "withdrawalValue": "Sie können Ihren Antrag innerhalb von 14 Tagen widerrufen, schriftlich oder in einer anderen Form, die den Nachweis durch Text ermöglicht, zum Beispiel per E-Mail (Art. 2a VVG). Die Frist beginnt mit Ihrer Unterschrift am {signed} und läuft bis und mit {deadline}. Es genügt, wenn Sie den Widerruf an diesem Tag Pax mitteilen oder der Post übergeben.",
+    "data": "Datenbearbeitung",
+    "dataValue": "Pax bearbeitet Ihre Personendaten für Beratung, Antrag und Vertrag nach dem Schweizer Datenschutzgesetz; mehr dazu unter www.pax.ch/datenschutz. In diesem Prototyp können Sie Ihre Daten im Vorsorge-Cockpit jederzeit herunterladen oder löschen."
+  },
+  "signature": {
+    "signedAt": "Datum und Zeit",
+    "signedAtValue": "{date}, {time} Uhr",
+    "methodValue": "Demo-Unterschrift: vollständigen Namen getippt",
+    "confirmed": "Bestätigt"
+  },
+  "approval": {
+    "inReview": "Eine Pax-Beraterin oder ein Pax-Berater prüft Ihren Antrag und meldet sich, falls etwas angepasst werden muss. Nach der Freigabe beginnt Ihre Police am {date}.",
+    "approved": "Freigegeben",
+    "approvedValue": "von {name}, Pax, am {date}",
+    "approvedValueNoName": "von Pax am {date}",
+    "signed": "Antrag unterschrieben",
+    "signedValue": "von {name} am {date} (Demo-Unterschrift)",
+    "issued": "Ausgestellt am"
+  }
+}

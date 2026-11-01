@@ -1,0 +1,155 @@
+{
+  "demo": {
+    "badge": "Demo",
+    "notice": "Demo document from the prototype: the signature is a demo signature and no legally binding contract is concluded."
+  },
+  "page": "Page {page} of {total}",
+  "offer": {
+    "title": "Your application",
+    "number": "Application no.",
+    "signedOn": "Signed on",
+    "status": "Status",
+    "statusValue": {
+      "offer": "In review at Pax",
+      "active": "Released by Pax",
+      "ended": "Expired",
+      "cancelled": "Cancelled"
+    },
+    "intro": "Hello {name}. This is your signed application: what is insured, what it costs, why we recommend it and what you need to know before the contract is concluded.",
+    "approved": "Pax has reviewed and released your application. Your policy starts on {date}.",
+    "filename": "Pax-application-{number}.pdf"
+  },
+  "policy": {
+    "title": "Your policy",
+    "number": "Policy no.",
+    "validFrom": "Valid from",
+    "status": "Status",
+    "statusValue": {
+      "offer": "In review",
+      "active": "Active",
+      "ended": "Expired",
+      "cancelled": "Cancelled"
+    },
+    "intro": "Hello {name}. Your policy confirms the insurance cover you agreed with Pax.",
+    "filename": "Pax-policy-{number}.pdf"
+  },
+  "sections": {
+    "parties": "Parties to the contract",
+    "cover": "Benefits",
+    "premium": "Premium",
+    "term": "Contract term",
+    "why": "Why we recommend this solution",
+    "suitability": "Suitability check",
+    "information": "Information before the contract is concluded",
+    "conditions": "Key conditions",
+    "signature": "Your signature",
+    "beneficiaries": "Beneficiaries",
+    "approval": "Review and release"
+  },
+  "parties": {
+    "policyholder": "Policyholder",
+    "insured": "Insured person",
+    "insurer": "Insurer",
+    "born": "born {date}",
+    "smoker": "{smoker, select, yes {smoker} other {non-smoker}}"
+  },
+  "cover": {
+    "benefit": "Benefit",
+    "due": "Details",
+    "amount": "Amount",
+    "product": "Product",
+    "deathCapital": "Death benefit",
+    "deathDue": "on death before {date}",
+    "pension": "Disability pension",
+    "pensionDue": "after a {months}-month waiting period, until {date} at the latest",
+    "pensionDueNoWaiting": "until {date} at the latest",
+    "sumInsured": "Sum insured",
+    "annuity": "Pension",
+    "perYear": "{amount} per year",
+    "maturity": "Capital at maturity",
+    "maturityDue": "on {date}",
+    "payout": "Annual payout",
+    "payoutDue": "until {date}",
+    "rider": "Supplementary cover",
+    "included": "included",
+    "fund": "Fund",
+    "guaranteedShare": "Guaranteed share of the premium"
+  },
+  "premium": {
+    "label": "Your premium",
+    "perYear": "per year",
+    "frequency": "Payment",
+    "annually": "annually",
+    "once": "one-off",
+    "net": "With the current surplus",
+    "netValue": "{amount} per year (not guaranteed)",
+    "source": "Calculation"
+  },
+  "term": {
+    "start": "Start",
+    "end": "End",
+    "duration": "Term",
+    "years": "{years} years",
+    "yearsToAge": "{years} years, until age {endAge}"
+  },
+  "why": {
+    "gap": "Your gap",
+    "gapValue": "{gap}: {amount} per year",
+    "alsoCloses": "Also closes",
+    "reason": "Reasoning",
+    "criteria": "Criteria checked",
+    "open": "open",
+    "alternatives": "Alternatives considered"
+  },
+  "suitability": {
+    "profile": "Investment profile",
+    "profileValue": "{profile}, {total} of 120 points",
+    "fund": "Chosen fund",
+    "affordability": "Affordability",
+    "completedOn": "Completed on",
+    "answerPoints": "{answer} ({points} points)"
+  },
+  "information": {
+    "intro": "Pax owes you this information before the contract is concluded (Art. 3 of the Swiss Insurance Contract Act, VVG).",
+    "insurer": "Insurer",
+    "insurerValue": "Pax, Schweizerische Lebensversicherungs-Gesellschaft AG, a company limited by shares with its registered office in Basel, Aeschenplatz 13, 4002 Basel, www.pax.ch",
+    "risks": "Insured risks",
+    "risk": {
+      "todesfall": "Survivors' protection (death): if the insured person dies before the contract ends, Pax pays the agreed death benefit.",
+      "erwerbsunfaehigkeit": "Income protection (disability): if the insured person is unable to work, Pax pays the agreed pension after the waiting period, depending on the degree of disability, until the contract ends at the latest.",
+      "lifestar": "Pension savings with a fund investment, plus survivors' protection (death) and income protection (disability) as set out in the benefits above.",
+      "fondsstar": "Pension savings with a fund investment, plus survivors' protection (death) and income protection (disability) as set out in the benefits above.",
+      "pax3a": "Pension savings in pillar 3a as set out in the benefits above.",
+      "auszahlungsplan": "Temporary annuity: Pax pays out the invested capital in regular amounts until the contract ends.",
+      "kinderversicherung": "Provision for your child as set out in the benefits above.",
+      "care": "Immediate help on death: Pax pays the agreed capital to your family quickly.",
+      "other": "As set out in the benefits above."
+    },
+    "scope": "Scope of cover",
+    "scopeValue": "The insured benefits and amounts are listed above under “Benefits”.",
+    "premium": "Premium",
+    "premiumAnnual": "{amount} per year, payable annually.",
+    "premiumSingle": "{amount} as a one-off premium.",
+    "duration": "Contract term",
+    "durationValue": "From {start} to {end}.",
+    "withdrawal": "Right of withdrawal",
+    "withdrawalValue": "You can withdraw your application within 14 days, in writing or in any other form that allows proof by text, for example by e-mail (Art. 2a VVG). The period starts with your signature on {signed} and runs until and including {deadline}. It is enough to notify Pax of the withdrawal or hand it to the post office on that day.",
+    "data": "Data processing",
+    "dataValue": "Pax processes your personal data for advice, the application and the contract in line with the Swiss Data Protection Act; more at www.pax.ch/datenschutz. In this prototype you can download or delete your data at any time in your pension cockpit."
+  },
+  "signature": {
+    "signedAt": "Date and time",
+    "signedAtValue": "{date}, {time}",
+    "methodValue": "Demo signature: full name typed",
+    "confirmed": "Confirmed"
+  },
+  "approval": {
+    "inReview": "A Pax advisor reviews your application and contacts you if anything needs to change. Once released, your policy starts on {date}.",
+    "approved": "Released",
+    "approvedValue": "by {name}, Pax, on {date}",
+    "approvedValueNoName": "by Pax on {date}",
+    "signed": "Application signed",
+    "signedValue": "by {name} on {date} (demo signature)",
+    "issued": "Issued on"
+  }
+}

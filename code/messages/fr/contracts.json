@@ -1,0 +1,155 @@
+{
+  "demo": {
+    "badge": "Démo",
+    "notice": "Document de démonstration issu du prototype : la signature est une signature de démo, aucun contrat juridiquement valable n'est conclu."
+  },
+  "page": "Page {page} sur {total}",
+  "offer": {
+    "title": "Votre proposition",
+    "number": "Proposition n°",
+    "signedOn": "Signée le",
+    "status": "Statut",
+    "statusValue": {
+      "offer": "En examen chez Pax",
+      "active": "Validée par Pax",
+      "ended": "Échue",
+      "cancelled": "Résiliée"
+    },
+    "intro": "Bonjour {name}. Voici votre proposition signée : ce qui est assuré, ce que cela coûte, pourquoi nous vous la recommandons et ce que vous devez savoir avant la conclusion du contrat.",
+    "approved": "Pax a examiné et validé votre proposition. Votre police commence le {date}.",
+    "filename": "Pax-proposition-{number}.pdf"
+  },
+  "policy": {
+    "title": "Votre police",
+    "number": "Police n°",
+    "validFrom": "Valable dès le",
+    "status": "Statut",
+    "statusValue": {
+      "offer": "En examen",
+      "active": "Active",
+      "ended": "Échue",
+      "cancelled": "Résiliée"
+    },
+    "intro": "Bonjour {name}. Votre police confirme la couverture d'assurance convenue avec Pax.",
+    "filename": "Pax-police-{number}.pdf"
+  },
+  "sections": {
+    "parties": "Parties au contrat",
+    "cover": "Prestations",
+    "premium": "Prime",
+    "term": "Durée du contrat",
+    "why": "Pourquoi nous vous recommandons cette solution",
+    "suitability": "Test d'adéquation",
+    "information": "Informations avant la conclusion du contrat",
+    "conditions": "Conditions importantes",
+    "signature": "Votre signature",
+    "beneficiaries": "Bénéficiaires",
+    "approval": "Examen et validation"
+  },
+  "parties": {
+    "policyholder": "Preneur·se d'assurance",
+    "insured": "Personne assurée",
+    "insurer": "Assureur",
+    "born": "né·e le {date}",
+    "smoker": "{smoker, select, yes {fumeur·se} other {non-fumeur·se}}"
+  },
+  "cover": {
+    "benefit": "Prestation",
+    "due": "Précisions",
+    "amount": "Montant",
+    "product": "Produit",
+    "deathCapital": "Capital décès",
+    "deathDue": "en cas de décès avant le {date}",
+    "pension": "Rente en cas d'incapacité de gain",
+    "pensionDue": "après un délai d'attente de {months} mois, au plus tard jusqu'au {date}",
+    "pensionDueNoWaiting": "au plus tard jusqu'au {date}",
+    "sumInsured": "Somme assurée",
+    "annuity": "Rente",
+    "perYear": "{amount} par an",
+    "maturity": "Capital à l'échéance",
+    "maturityDue": "le {date}",
+    "payout": "Versement annuel",
+    "payoutDue": "jusqu'au {date}",
+    "rider": "Assurance complémentaire",
+    "included": "incluse",
+    "fund": "Fonds",
+    "guaranteedShare": "Part garantie de la prime"
+  },
+  "premium": {
+    "label": "Votre prime",
+    "perYear": "par an",
+    "frequency": "Mode de paiement",
+    "annually": "annuel",
+    "once": "unique",
+    "net": "Avec l'excédent actuel",
+    "netValue": "{amount} par an (non garanti)",
+    "source": "Calcul"
+  },
+  "term": {
+    "start": "Début",
+    "end": "Échéance",
+    "duration": "Durée",
+    "years": "{years} ans",
+    "yearsToAge": "{years} ans, jusqu'à {endAge} ans"
+  },
+  "why": {
+    "gap": "Votre lacune",
+    "gapValue": "{gap} : {amount} par an",
+    "alsoCloses": "Couvre aussi",
+    "reason": "Justification",
+    "criteria": "Critères examinés",
+    "open": "ouvert",
+    "alternatives": "Alternatives examinées"
+  },
+  "suitability": {
+    "profile": "Profil d'investissement",
+    "profileValue": "{profile}, {total} points sur 120",
+    "fund": "Fonds choisi",
+    "affordability": "Capacité financière",
+    "completedOn": "Effectué le",
+    "answerPoints": "{answer} ({points} points)"
+  },
+  "information": {
+    "intro": "Pax vous doit ces informations avant la conclusion du contrat (art. 3 de la loi sur le contrat d'assurance, LCA).",
+    "insurer": "Assureur",
+    "insurerValue": "Pax, Schweizerische Lebensversicherungs-Gesellschaft AG, société anonyme dont le siège est à Bâle, Aeschenplatz 13, 4002 Bâle, www.pax.ch",
+    "risks": "Risques assurés",
+    "risk": {
+      "todesfall": "Protection des survivants (décès) : si la personne assurée décède avant l'échéance du contrat, Pax verse le capital décès convenu.",
+      "erwerbsunfaehigkeit": "Protection du revenu (incapacité de gain) : si la personne assurée est en incapacité de gain, Pax verse la rente convenue après le délai d'attente, selon le degré d'incapacité de gain, au plus tard jusqu'à l'échéance du contrat.",
+      "lifestar": "Épargne-prévoyance avec placement en fonds, ainsi que protection des survivants (décès) et protection du revenu (incapacité de gain) selon les prestations ci-dessus.",
+      "fondsstar": "Épargne-prévoyance avec placement en fonds, ainsi que protection des survivants (décès) et protection du revenu (incapacité de gain) selon les prestations ci-dessus.",
+      "pax3a": "Épargne-prévoyance dans le pilier 3a selon les prestations ci-dessus.",
+      "auszahlungsplan": "Rente temporaire : Pax verse le capital placé en montants réguliers jusqu'à l'échéance du contrat.",
+      "kinderversicherung": "Prévoyance pour votre enfant selon les prestations ci-dessus.",
+      "care": "Aide immédiate en cas de décès : Pax verse rapidement le capital convenu à vos proches.",
+      "other": "Selon les prestations ci-dessus."
+    },
+    "scope": "Étendue de la couverture",
+    "scopeValue": "Les prestations et montants assurés figurent ci-dessus sous « Prestations ».",
+    "premium": "Prime",
+    "premiumAnnual": "{amount} par an, payable annuellement.",
+    "premiumSingle": "{amount} en prime unique.",
+    "duration": "Durée du contrat",
+    "durationValue": "Du {start} au {end}.",
+    "withdrawal": "Droit de révocation",
+    "withdrawalValue": "Vous pouvez révoquer votre proposition dans un délai de 14 jours, par écrit ou par tout autre moyen permettant d'en établir la preuve par un texte, par exemple par e-mail (art. 2a LCA). Le délai commence avec votre signature le {signed} et court jusqu'au {deadline} inclus. Il suffit de communiquer la révocation à Pax ou de la remettre à la poste ce jour-là.",
+    "data": "Traitement des données",
+    "dataValue": "Pax traite vos données personnelles pour le conseil, la proposition et le contrat conformément à la loi suisse sur la protection des données ; plus d'informations sur www.pax.ch/datenschutz. Dans ce prototype, vous pouvez télécharger ou supprimer vos données à tout moment dans votre Cockpit prévoyance."
+  },
+  "signature": {
+    "signedAt": "Date et heure",
+    "signedAtValue": "{date}, {time}",
+    "methodValue": "Signature de démo : nom complet saisi",
+    "confirmed": "Confirmé"
+  },
+  "approval": {
+    "inReview": "Une conseillère ou un conseiller Pax examine votre proposition et vous contacte si quelque chose doit être adapté. Après validation, votre police commence le {date}.",
+    "approved": "Validée",
+    "approvedValue": "par {name}, Pax, le {date}",
+    "approvedValueNoName": "par Pax le {date}",
+    "signed": "Proposition signée",
+    "signedValue": "par {name} le {date} (signature de démo)",
+    "issued": "Établie le"
+  }
+}
