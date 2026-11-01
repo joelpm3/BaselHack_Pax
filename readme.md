@@ -70,6 +70,19 @@ pnpm dev                     # http://localhost:3000/de
 
 Demo scripts for the seeded personas: [`documentation/DEMO_PERSONAS.md`](documentation/DEMO_PERSONAS.md).
 
+### Browser tests
+
+```bash
+pnpm exec playwright install chromium   # once
+pnpm test:e2e                           # E2E_SKIP_BUILD=1 reuses the last e2e build
+```
+
+The official personas walk from the first typed message to the policy in the portal: needs
+analysis before any product, calculated gaps, several options, offer, consents, demo signature,
+release by a Pax advisor. No API key needed: a mock LLM replays the scripts in `code/e2e/personas`,
+Logismata and Quicksale answers come from `code/e2e/fixtures` (`E2E_RECORD=1` records them again
+with the token in `.env.local`). Own build (`.next-e2e`), database (`.e2e-data`) and port 3240.
+
 ## Self-hosted mode
 
 One setting switches all model calls to a GPU we rent from Nebius, so customer data does not go to

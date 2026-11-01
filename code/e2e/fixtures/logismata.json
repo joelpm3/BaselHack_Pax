@@ -1,0 +1,1110 @@
+[
+  {
+    "operation": "APICalc_calculateRetirementBase",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      },
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "Person1": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        },
+        "Person2": {
+          "Pension": 26423,
+          "CurrentCapital": 82239
+        }
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRisk",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      },
+      "NumberOfChildren": 1,
+      "WithChildren": true,
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 21168,
+            "IncomeTotal": 21168,
+            "IncomePillar1": 21168,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 21168,
+            "IncomeTotal": 21168,
+            "IncomePillar1": 21168,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 18144,
+            "IncomeTotal": 18144,
+            "IncomePillar1": 18144,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 18144,
+            "IncomeTotal": 18144,
+            "IncomePillar1": 18144,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 14866,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 65134,
+            "IncomePillar1": 38604,
+            "IncomePillar2": 26530,
+            "IncomePartner": 0,
+            "CapitalGap": 419035
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 10000,
+            "IncomeTotal": 90000,
+            "IncomePillar1": 38604,
+            "IncomePillar2": 51396,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 70000,
+            "IncomeGap": 18350,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 51650,
+            "IncomePillar1": 33960,
+            "IncomePillar2": 17690,
+            "IncomePartner": 0,
+            "CapitalGap": 599063
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 70000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 20000,
+            "IncomeTotal": 90000,
+            "IncomePillar1": 33960,
+            "IncomePillar2": 56040,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirement",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      },
+      "CurrentFortune": 20000,
+      "InterestRate": 1,
+      "Saving": 0,
+      "NeedInPcRetirement": true,
+      "NeedRetirement": 80,
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 26423
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 100000,
+        "IncomeNeed": 80000,
+        "IncomeGap": 5100,
+        "IncomeTotal": 74900,
+        "IncomePillar1": 48477,
+        "IncomePillar2": 26423,
+        "IncomeWithdrawal": 0,
+        "AvailableFortune": 25143,
+        "CapitalNeed": 145101,
+        "CapitalGap": 119958
+      }
+    }
+  },
+  {
+    "operation": "APICalc_getSaving3aLimits",
+    "request": {},
+    "status": 200,
+    "response": {
+      "response": {
+        "Max3aSaving": 7258,
+        "Max3aSavingWithoutP2": 36288
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirementBase",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      },
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "Person1": {
+          "Pension": 21013,
+          "CurrentCapital": 122078
+        },
+        "Person2": {
+          "Pension": 26301,
+          "CurrentCapital": 277500
+        }
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRisk",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      },
+      "NumberOfChildren": 0,
+      "WithChildren": false,
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 64000,
+            "IncomeGap": 19876,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 44124,
+            "IncomePillar1": 25884,
+            "IncomePillar2": 18240,
+            "IncomePartner": 0,
+            "CapitalGap": 292246
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 64000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 8000,
+            "IncomeTotal": 72000,
+            "IncomePillar1": 25884,
+            "IncomePillar2": 46116,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 56000,
+            "IncomeGap": 45060,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 10940,
+            "IncomePillar1": 0,
+            "IncomePillar2": 10940,
+            "IncomePartner": 0,
+            "CapitalGap": 270360
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 56000,
+            "IncomeGap": 45056,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 10944,
+            "IncomePillar1": 0,
+            "IncomePillar2": 10944,
+            "IncomePartner": 0,
+            "CapitalGap": 270336
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 160000,
+            "IncomeGap": 105380,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 54620,
+            "IncomePillar1": 30240,
+            "IncomePillar2": 24380,
+            "IncomePartner": 0,
+            "CapitalGap": 421520
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 160000,
+            "IncomeGap": 2244,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 157756,
+            "IncomePillar1": 30240,
+            "IncomePillar2": 127516,
+            "IncomePartner": 0,
+            "CapitalGap": 8976
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 140000,
+            "IncomeGap": 101178,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 38822,
+            "IncomePillar1": 24192,
+            "IncomePillar2": 14630,
+            "IncomePartner": 0,
+            "CapitalGap": 1517670
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 140000,
+            "IncomeGap": 41902,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 98098,
+            "IncomePillar1": 24192,
+            "IncomePillar2": 73906,
+            "IncomePartner": 0,
+            "CapitalGap": 628530
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirement",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 21013,
+          "CurrentCapital": 122078
+        }
+      },
+      "CurrentFortune": 500000,
+      "InterestRate": 1,
+      "Saving": 7258,
+      "NeedInPcRetirement": true,
+      "NeedRetirement": 80,
+      "Person2": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 26301
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 280000,
+        "IncomeNeed": 224000,
+        "IncomeGap": 127546,
+        "IncomeTotal": 96454,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 47314,
+        "IncomeWithdrawal": 0,
+        "AvailableFortune": 583640,
+        "CapitalNeed": 3130024,
+        "CapitalGap": 2546384
+      }
+    }
+  },
+  {
+    "operation": "APICalc_searchLocation",
+    "request": {
+      "Search": "4053 Basel",
+      "Language": 1
+    },
+    "status": 200,
+    "response": {
+      "response": [
+        {
+          "LocationID": 405300000,
+          "ZipCode": "4053",
+          "City": "Basel",
+          "Canton": "BS",
+          "Location": "4053 Basel"
+        }
+      ]
+    }
+  },
+  {
+    "operation": "APICalc_calculateRisk",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      },
+      "NumberOfChildren": 1,
+      "WithChildren": true,
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 14866,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 65134,
+            "IncomePillar1": 38604,
+            "IncomePillar2": 26530,
+            "IncomePartner": 0,
+            "CapitalGap": 419035
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 10000,
+            "IncomeTotal": 90000,
+            "IncomePillar1": 38604,
+            "IncomePillar2": 51396,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 70000,
+            "IncomeGap": 18350,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 51650,
+            "IncomePillar1": 33960,
+            "IncomePillar2": 17690,
+            "IncomePartner": 0,
+            "CapitalGap": 599063
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 70000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 20000,
+            "IncomeTotal": 90000,
+            "IncomePillar1": 33960,
+            "IncomePillar2": 56040,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 21168,
+            "IncomeTotal": 21168,
+            "IncomePillar1": 21168,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 21168,
+            "IncomeTotal": 21168,
+            "IncomePillar1": 21168,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 18144,
+            "IncomeTotal": 18144,
+            "IncomePillar1": 18144,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 0,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 18144,
+            "IncomeTotal": 18144,
+            "IncomePillar1": 18144,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirementBase",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      },
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "Person1": {
+          "Pension": 26423,
+          "CurrentCapital": 82239
+        },
+        "Person2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirement",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1984,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 26423,
+          "CurrentCapital": 82239
+        }
+      },
+      "CurrentFortune": 20000,
+      "InterestRate": 1,
+      "Saving": 0,
+      "NeedInPcRetirement": true,
+      "NeedRetirement": 80,
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1986,
+        "GrossIncome": 0,
+        "WithBVG": false,
+        "RetirementPillar2": {
+          "Pension": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 100000,
+        "IncomeNeed": 80000,
+        "IncomeGap": 5100,
+        "IncomeTotal": 74900,
+        "IncomePillar1": 48477,
+        "IncomePillar2": 26423,
+        "IncomeWithdrawal": 0,
+        "AvailableFortune": 25143,
+        "CapitalNeed": 145101,
+        "CapitalGap": 119958
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRisk",
+    "request": {
+      "Relationship": 1,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1995,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 0
+      },
+      "NumberOfChildren": 0,
+      "WithChildren": false
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 31276,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 48724,
+            "IncomePillar1": 26364,
+            "IncomePillar2": 22360,
+            "IncomePartner": 0,
+            "CapitalGap": 1000832
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 80000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 10000,
+            "IncomeTotal": 90000,
+            "IncomePillar1": 26364,
+            "IncomePillar2": 63636,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 100000,
+            "IncomeNeed": 0,
+            "IncomeGap": 0,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 0,
+            "IncomePillar1": 0,
+            "IncomePillar2": 0,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirementBase",
+    "request": {
+      "Relationship": 1,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1995,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "Person1": {
+          "Pension": 27405,
+          "CurrentCapital": 22903
+        }
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirement",
+    "request": {
+      "Relationship": 1,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1995,
+        "GrossIncome": 100000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 27405,
+          "CurrentCapital": 22903
+        }
+      },
+      "CurrentFortune": 545000,
+      "InterestRate": 1,
+      "Saving": 7258,
+      "NeedInPcRetirement": true,
+      "NeedRetirement": 80
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 100000,
+        "IncomeNeed": 80000,
+        "IncomeGap": 0,
+        "IncomeTotal": 80000,
+        "IncomePillar1": 32760,
+        "IncomePillar2": 27405,
+        "IncomeWithdrawal": 19835,
+        "AvailableFortune": 1069798,
+        "CapitalNeed": 237733,
+        "CapitalGap": 0
+      }
+    }
+  },
+  {
+    "operation": "APICalc_searchLocation",
+    "request": {
+      "Search": "4125 Riehen",
+      "Language": 1
+    },
+    "status": 200,
+    "response": {
+      "response": [
+        {
+          "LocationID": 412500000,
+          "ZipCode": "4125",
+          "City": "Riehen",
+          "Canton": "BS",
+          "Location": "4125 Riehen"
+        }
+      ]
+    }
+  },
+  {
+    "operation": "APICalc_calculateRisk",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      },
+      "NumberOfChildren": 0,
+      "WithChildren": false,
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "NumberOfChildren": 0,
+        "NeedInPcDisability": true,
+        "NeedDisability": 80,
+        "NeedInPcDeath": true,
+        "NeedDeath": 70
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "RiskScenarioSummaries": [
+          {
+            "Scenario": 1,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 160000,
+            "IncomeGap": 105380,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 54620,
+            "IncomePillar1": 30240,
+            "IncomePillar2": 24380,
+            "IncomePartner": 0,
+            "CapitalGap": 421520
+          },
+          {
+            "Scenario": 2,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 160000,
+            "IncomeGap": 2244,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 157756,
+            "IncomePillar1": 30240,
+            "IncomePillar2": 127516,
+            "IncomePartner": 0,
+            "CapitalGap": 8976
+          },
+          {
+            "Scenario": 3,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 140000,
+            "IncomeGap": 101178,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 38822,
+            "IncomePillar1": 24192,
+            "IncomePillar2": 14630,
+            "IncomePartner": 0,
+            "CapitalGap": 1517670
+          },
+          {
+            "Scenario": 4,
+            "ErrorCode": 0,
+            "GrossIncome": 200000,
+            "IncomeNeed": 140000,
+            "IncomeGap": 41902,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 98098,
+            "IncomePillar1": 24192,
+            "IncomePillar2": 73906,
+            "IncomePartner": 0,
+            "CapitalGap": 628530
+          },
+          {
+            "Scenario": 5,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 64000,
+            "IncomeGap": 19876,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 44124,
+            "IncomePillar1": 25884,
+            "IncomePillar2": 18240,
+            "IncomePartner": 0,
+            "CapitalGap": 292246
+          },
+          {
+            "Scenario": 6,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 64000,
+            "IncomeGap": 0,
+            "IncomeSurplus": 8000,
+            "IncomeTotal": 72000,
+            "IncomePillar1": 25884,
+            "IncomePillar2": 46116,
+            "IncomePartner": 0,
+            "CapitalGap": 0
+          },
+          {
+            "Scenario": 7,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 56000,
+            "IncomeGap": 45060,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 10940,
+            "IncomePillar1": 0,
+            "IncomePillar2": 10940,
+            "IncomePartner": 0,
+            "CapitalGap": 270360
+          },
+          {
+            "Scenario": 8,
+            "ErrorCode": 0,
+            "GrossIncome": 80000,
+            "IncomeNeed": 56000,
+            "IncomeGap": 45056,
+            "IncomeSurplus": 0,
+            "IncomeTotal": 10944,
+            "IncomePillar1": 0,
+            "IncomePillar2": 10944,
+            "IncomePartner": 0,
+            "CapitalGap": 270336
+          }
+        ]
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirementBase",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      },
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 0,
+          "CurrentCapital": 0
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "Person1": {
+          "Pension": 26301,
+          "CurrentCapital": 277500
+        },
+        "Person2": {
+          "Pension": 21013,
+          "CurrentCapital": 122078
+        }
+      }
+    }
+  },
+  {
+    "operation": "APICalc_calculateRetirement",
+    "request": {
+      "Relationship": 2,
+      "RelationshipSinceYear": 2021,
+      "Person1": {
+        "Sex": 1,
+        "BirthYear": 1967,
+        "GrossIncome": 200000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 26301,
+          "CurrentCapital": 277500
+        }
+      },
+      "CurrentFortune": 500000,
+      "InterestRate": 1,
+      "Saving": 0,
+      "NeedInPcRetirement": true,
+      "NeedRetirement": 80,
+      "Person2": {
+        "Sex": 2,
+        "BirthYear": 1976,
+        "GrossIncome": 80000,
+        "WithBVG": true,
+        "RetirementPillar2": {
+          "Pension": 21013
+        }
+      }
+    },
+    "status": 200,
+    "response": {
+      "response": {
+        "ErrorCode": 1,
+        "GrossIncome": 280000,
+        "IncomeNeed": 224000,
+        "IncomeGap": 127546,
+        "IncomeTotal": 96454,
+        "IncomePillar1": 49140,
+        "IncomePillar2": 47314,
+        "IncomeWithdrawal": 0,
+        "AvailableFortune": 530761,
+        "CapitalNeed": 3130024,
+        "CapitalGap": 2599263
+      }
+    }
+  }
+]
